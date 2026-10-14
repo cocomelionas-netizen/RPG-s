@@ -1,0 +1,71 @@
+# Builds the browser (WebGL) version on every push to main and publishes it to GitHub Pages.
+# One-time setup (repository Settings):
+#   - Pages > Build and deployment > Source: GitHub Actions
+#   - Secrets and variables > Actions > New repository secret:
+#       UNITY_LICENSE  = contents of C:\ProgramData\Unity\Unity_lic.ulf
+#       UNITY_EMAIL    = Unity account email
+#       UNITY_PASSWORD = Unity account password
+name: WebGL build
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: webgl-pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: Free disk space for the Unity image
+        uses: jlumbroso/free-disk-space@v1.3.1
+        with:
+          tool-cache: false
+
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      - uses: actions/cache@v4
+        with:
+          path: Library
+          key: Library-WebGL-${{ hashFiles('Packages/packages-lock.json', 'ProjectSettings/ProjectVersion.txt') }}-${{ github.sha }}
+          restore-keys: |
+            Library-WebGL-${{ hashFiles('Packages/packages-lock.json', 'ProjectSettings/ProjectVersion.txt') }}-
+            Library-WebGL-
+
+      - name: Build WebGL
+        uses: game-ci/unity-builder@v4
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+        with:
+          targetPlatform: WebGL
+          buildMethod: RPG.EditorTools.BuildMenu.BuildWebGLFromCommandLine
+
+      - name: Add .nojekyll
+        run: sudo touch Builds/WebGL/.nojekyll
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: Builds/WebGL
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

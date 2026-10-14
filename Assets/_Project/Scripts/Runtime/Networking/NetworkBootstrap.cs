@@ -7,7 +7,7 @@ namespace RPG.Networking
     /// <summary>
     /// Starts the game as server, host or client and decides where players spawn.
     /// Reads the command line on start (see <see cref="NetworkLaunchOptions"/>); a batch mode
-    /// build with no mode given starts as a dedicated server.
+    /// build with no mode given starts as a dedicated server, and a browser (WebGL) build starts offline.
     /// Connection approval is the place where login checks will go (Stage 8).
     /// </summary>
     [RequireComponent(typeof(NetworkManager), typeof(UnityTransport))]
@@ -21,8 +21,15 @@ namespace RPG.Networking
 
         private NetworkManager network;
         private UnityTransport transport;
+        private OfflineTransport offlineTransport;
 
         public NetworkManager Network => network;
+
+        /// <summary>True while running a single-player session with <see cref="OfflineTransport"/>.</summary>
+        public bool IsOffline => network.IsListening && network.NetworkConfig.NetworkTransport == offlineTransport;
+
+        /// <summary>Browsers cannot host or run servers, only play offline or join a server over WebSockets.</summary>
+        public static bool IsBrowser => Application.platform == RuntimePlatform.WebGLPlayer;
 
         /// <summary>Message from the last failed or closed connection, shown by the connection panel.</summary>
         public string LastDisconnectReason { get; private set; }
@@ -31,6 +38,8 @@ namespace RPG.Networking
         {
             network = GetComponent<NetworkManager>();
             transport = GetComponent<UnityTransport>();
+            offlineTransport = GetComponent<OfflineTransport>();
+            if (offlineTransport == null) offlineTransport = gameObject.AddComponent<OfflineTransport>();
 
             // Servers and clients must keep running while their window is in the background.
             Application.runInBackground = true;
@@ -56,6 +65,12 @@ namespace RPG.Networking
             if (mode == NetworkLaunchMode.None && Application.isBatchMode)
                 mode = NetworkLaunchMode.Server;
 
+            if (mode == NetworkLaunchMode.None && IsBrowser)
+            {
+                StartOffline();
+                return;
+            }
+
             switch (mode)
             {
                 case NetworkLaunchMode.Server: StartServer(options.Port); break;
@@ -64,8 +79,18 @@ namespace RPG.Networking
             }
         }
 
+        /// <summary>Single player: a host with no network, so it works anywhere, including in a browser.</summary>
+        public bool StartOffline()
+        {
+            network.NetworkConfig.NetworkTransport = offlineTransport;
+            bool started = network.StartHost();
+            Debug.Log(started ? "[Offline] Started single-player session." : "[Offline] Failed to start.");
+            return started;
+        }
+
         public bool StartServer(ushort port)
         {
+            UseNetworkTransport();
             SetConnectionData(NetworkLaunchOptions.DefaultAddress, port, "0.0.0.0");
             Application.targetFrameRate = serverFrameRate;
             bool started = network.StartServer();
@@ -75,6 +100,7 @@ namespace RPG.Networking
 
         public bool StartHost(ushort port)
         {
+            UseNetworkTransport();
             SetConnectionData(NetworkLaunchOptions.DefaultAddress, port, "0.0.0.0");
             bool started = network.StartHost();
             Debug.Log(started ? $"[Host] Hosting on port {port}." : $"[Host] Failed to host on port {port}.");
@@ -84,10 +110,18 @@ namespace RPG.Networking
         public bool StartClient(string address, ushort port)
         {
             LastDisconnectReason = null;
+            UseNetworkTransport();
             SetConnectionData(address, port, null);
             bool started = network.StartClient();
             Debug.Log(started ? $"[Client] Connecting to {address}:{port}..." : "[Client] Failed to start.");
             return started;
+        }
+
+        private void UseNetworkTransport()
+        {
+            network.NetworkConfig.NetworkTransport = transport;
+            // Browsers can only open WebSocket connections; a server must also listen with WebSockets to accept them.
+            transport.UseWebSockets = IsBrowser;
         }
 
         private void SetConnectionData(string address, ushort port, string listenAddress)

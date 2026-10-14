@@ -8,14 +8,16 @@ using Debug = UnityEngine.Debug;
 namespace RPG.EditorTools
 {
     /// <summary>
-    /// Build and run shortcuts for network testing.
+    /// Build and run shortcuts.
     /// RPG > Build > Windows Player builds one executable that runs as client, host or server
     /// depending on its command line. RPG > Run starts that build as a local server or client.
+    /// RPG > Build > WebGL builds the browser version (also built by GitHub Actions on every push to main).
     /// </summary>
     public static class BuildMenu
     {
         private const string PlayerExe = "Builds/Windows/RPG-s.exe";
         private const string ServerExe = "Builds/WindowsServer/RPG-s-Server.exe";
+        public const string WebGLFolder = "Builds/WebGL";
 
         [MenuItem("RPG/Build/Windows Player")]
         public static void BuildWindowsPlayer()
@@ -34,6 +36,29 @@ namespace RPG.EditorTools
                 return;
             }
             Build(ServerExe, StandaloneBuildSubtarget.Server);
+        }
+
+        [MenuItem("RPG/Build/WebGL (browser)")]
+        public static void BuildWebGL()
+        {
+            ConfigureWebGL();
+            Build(WebGLFolder, BuildTarget.WebGL, 0, BuildOptions.None);
+        }
+
+        /// <summary>Batch mode / CI entry: Unity.exe -batchmode -projectPath . -executeMethod RPG.EditorTools.BuildMenu.BuildWebGLFromCommandLine -quit</summary>
+        public static void BuildWebGLFromCommandLine()
+        {
+            ConfigureWebGL();
+            if (!Build(WebGLFolder, BuildTarget.WebGL, 0, BuildOptions.None))
+                EditorApplication.Exit(1);
+        }
+
+        private static void ConfigureWebGL()
+        {
+            // Gzip with a JavaScript fallback works on any static host (GitHub Pages cannot set compression headers).
+            PlayerSettings.WebGL.compressionFormat = WebGLCompressionFormat.Gzip;
+            PlayerSettings.WebGL.decompressionFallback = true;
+            PlayerSettings.WebGL.dataCaching = true;
         }
 
         [MenuItem("RPG/Run/Local Server (last Windows Player build)")]
@@ -56,22 +81,27 @@ namespace RPG.EditorTools
 
         public static bool Build(string outputPath, StandaloneBuildSubtarget subtarget)
         {
+            return Build(outputPath, BuildTarget.StandaloneWindows64, (int)subtarget, BuildOptions.Development);
+        }
+
+        public static bool Build(string outputPath, BuildTarget target, int subtarget, BuildOptions buildOptions)
+        {
             string[] scenes = EditorBuildSettings.scenes.Where(s => s.enabled).Select(s => s.path).ToArray();
             var options = new BuildPlayerOptions
             {
                 scenes = scenes,
                 locationPathName = outputPath,
-                target = BuildTarget.StandaloneWindows64,
-                subtarget = (int)subtarget,
-                options = BuildOptions.Development,
+                target = target,
+                subtarget = subtarget,
+                options = buildOptions,
             };
 
             BuildReport report = BuildPipeline.BuildPlayer(options);
             bool succeeded = report.summary.result == BuildResult.Succeeded;
             if (succeeded)
-                Debug.Log($"[Build] {subtarget} build finished: {outputPath} ({report.summary.totalTime.TotalSeconds:0}s).");
+                Debug.Log($"[Build] {target} build finished: {outputPath} ({report.summary.totalTime.TotalSeconds:0}s).");
             else
-                Debug.LogError($"[Build] {subtarget} build failed: {report.summary.result}, {report.summary.totalErrors} errors.");
+                Debug.LogError($"[Build] {target} build failed: {report.summary.result}, {report.summary.totalErrors} errors.");
             return succeeded;
         }
 

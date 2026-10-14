@@ -86,6 +86,24 @@ namespace RPG.Tests
             Assert.AreEqual(0, networkMovement.CorrectionCount, "The host's own movement is never corrected.");
         }
 
+        [UnityTest]
+        public IEnumerator Offline_SpawnsPlayer_WithoutNetwork()
+        {
+            Assert.IsTrue(bootstrap.StartOffline());
+            yield return WaitForLocalPlayer();
+
+            Assert.IsTrue(bootstrap.IsOffline);
+            Assert.IsInstanceOf<OfflineTransport>(network.NetworkConfig.NetworkTransport);
+            NetworkObject player = network.LocalClient.PlayerObject;
+            Assert.IsNotNull(player, "Offline mode should spawn the local player.");
+            Assert.IsTrue(player.IsOwner);
+
+            // The offline session must also switch back to the real transport afterwards.
+            yield return ShutdownNetwork();
+            Assert.IsTrue(bootstrap.StartHost(RandomPort()));
+            Assert.IsInstanceOf<UnityTransport>(network.NetworkConfig.NetworkTransport);
+        }
+
         private IEnumerator WaitForLocalPlayer()
         {
             float end = Time.realtimeSinceStartup + 5f;
