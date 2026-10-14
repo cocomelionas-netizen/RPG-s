@@ -1,5 +1,83 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4384525223122573724
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 68175730150503497}
+  - component: {fileID: 6520162637972938101}
+  m_Layer: 0
+  m_Name: Hitbox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &68175730150503497
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4384525223122573724}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6180102976044889509}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &6520162637972938101
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4384525223122573724}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0.34}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 0.36, y: 0.62}
+  m_EdgeRadius: 0
 --- !u!1 &4455562802883493941
 GameObject:
   m_ObjectHideFlags: 0
@@ -17,6 +95,11 @@ GameObject:
   - component: {fileID: 3262352295627561672}
   - component: {fileID: 8555798132690638902}
   - component: {fileID: 4041374300206589006}
+  - component: {fileID: 379844217195263069}
+  - component: {fileID: 2162212954763707132}
+  - component: {fileID: 6325825251776631861}
+  - component: {fileID: 1192377579958495832}
+  - component: {fileID: 8215790676358303326}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -36,7 +119,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 68175730150503497}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6127499580983485403
@@ -250,3 +334,84 @@ MonoBehaviour:
   interpolationDelay: 0.15
   speedTolerance: 1.25
   collisionRadiusScale: 0.8
+--- !u!114 &379844217195263069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4455562802883493941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a9ce073fb0fd034c9bbcb653aa3dcf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: RPG.Runtime::RPG.Combat.Health
+  ShowTopMostFoldoutHeaderGroup: 1
+  defaultName: Player
+  appendOwnerId: 1
+  faction: 0
+  maxHealth: 100
+--- !u!114 &2162212954763707132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4455562802883493941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b7f90fbc164cb24da5b914eb715a8c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: RPG.Runtime::RPG.Combat.AutoAttack
+  ShowTopMostFoldoutHeaderGroup: 1
+  minDamage: 8
+  maxDamage: 12
+  attackInterval: 1.5
+  range: 0.9
+  critChance: 0.1
+  rangeTolerance: 0.35
+--- !u!114 &6325825251776631861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4455562802883493941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5761fc9bd7a405243881aa8fcdd1f26c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: RPG.Runtime::RPG.Combat.PlayerTargeting
+  ShowTopMostFoldoutHeaderGroup: 1
+  tabTargetRange: 10
+--- !u!114 &1192377579958495832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4455562802883493941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a27bdef844b543643b79d1d89571cd19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: RPG.Runtime::RPG.Combat.PlayerRespawn
+  ShowTopMostFoldoutHeaderGroup: 1
+  respawnDelay: 5
+--- !u!114 &8215790676358303326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4455562802883493941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1a18ea9c1e505549a7490aa0bc0790e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: RPG.Runtime::RPG.Combat.HealthPresenter
+  body: {fileID: 6127499580983485403}
+  barSprite: {fileID: 21300000, guid: 693c320e785fb2b4d87a53fd760699fc, type: 3}
+  barHeightAboveFeet: 0.85
+  barSize: {x: 0.5, y: 0.06}
+  damageNumberHeight: 0.90000004

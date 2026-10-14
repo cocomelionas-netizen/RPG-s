@@ -66,3 +66,29 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 3887f47542849f54b9bd996f013e7e74, type: 3}
     - {fileID: 21300000, guid: 4b4b3d2b9e2ed444ebdfb0757dce1588, type: 3}
     - {fileID: 21300000, guid: 5cb20ef4592d2fc44b54202fd32793c4, type: 3}
+  - id: Attack
+    framesPerSecond: 10
+    loop: 0
+    east:
+    - {fileID: 21300000, guid: a04f9fb00ee524f4898fd8a8c4b65268, type: 3}
+    - {fileID: 21300000, guid: 4ff5fd9dd367fc446a62682e4d3b361c, type: 3}
+    - {fileID: 21300000, guid: 7b907e9bc7c647741bbcefecdc8d628b, type: 3}
+    northEast:
+    - {fileID: 21300000, guid: 21da809f13db74642922fe4c37ce5aa8, type: 3}
+    - {fileID: 21300000, guid: 601ecd7b2bd7f5149a4c29d15576edca, type: 3}
+    - {fileID: 21300000, guid: a951b5a09a8c5ee42be64d015bc2d2f2, type: 3}
+    north:
+    - {fileID: 21300000, guid: 69b6bc03f2e86e84096ac885cea6a616, type: 3}
+    - {fileID: 21300000, guid: 97f7fb493fe85fa4fb3cab25242ce816, type: 3}
+    - {fileID: 21300000, guid: c2814ce5840b6d944b6fe48b0c5d351c, type: 3}
+    northWest: []
+    west: []
+    southWest: []
+    south:
+    - {fileID: 21300000, guid: 4eaf30be92065134c981330fcdff1d66, type: 3}
+    - {fileID: 21300000, guid: 0a3026fd05cd70046822ed55b1651a8e, type: 3}
+    - {fileID: 21300000, guid: c6e953f326cd57740a8473d78834150d, type: 3}
+    southEast:
+    - {fileID: 21300000, guid: 698eedef733716545bd77c35a5c35229, type: 3}
+    - {fileID: 21300000, guid: b3887d8dd04bdfb4e9e61cd78bc0e6d4, type: 3}
+    - {fileID: 21300000, guid: f01cbbc961b5c4f409650cb716c8d09c, type: 3}

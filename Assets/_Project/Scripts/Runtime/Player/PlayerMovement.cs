@@ -29,6 +29,7 @@ namespace RPG.Player
         private Vector2 lastFixedPosition;
         private Vector2 lastRequestedVelocity;
         private float blockedTimer;
+        private bool clickMoveSuppressed;
 
         /// <summary>Last non-zero movement direction. Drives 8-direction animations.</summary>
         public Vector2 FacingDirection { get; private set; } = Vector2.down;
@@ -57,7 +58,10 @@ namespace RPG.Player
             }
             else
             {
-                if (input.MoveClickHeld && !input.IsPointerOverUI)
+                if (clickMoveSuppressed && !input.MoveClickHeld)
+                    clickMoveSuppressed = false;
+
+                if (input.MoveClickHeld && !clickMoveSuppressed && !input.IsPointerOverUI)
                     SetDestination(ScreenToWorld(input.PointerPosition));
 
                 moveDirection = destination.HasValue ? DirectionToDestination() : Vector2.zero;
@@ -99,6 +103,22 @@ namespace RPG.Player
             if (!destination.HasValue)
                 blockedTimer = 0f;
             destination = worldPosition;
+        }
+
+        /// <summary>
+        /// The current mouse press was used for something else (for example selecting a target),
+        /// so it must not also move the player until the button is released.
+        /// </summary>
+        public void SuppressClickMoveUntilRelease()
+        {
+            clickMoveSuppressed = true;
+        }
+
+        /// <summary>Turns the player to face a direction without moving (for example towards a target).</summary>
+        public void FaceTowards(Vector2 direction)
+        {
+            if (direction.sqrMagnitude > 0.0001f)
+                FacingDirection = direction.normalized;
         }
 
         public void Stop()

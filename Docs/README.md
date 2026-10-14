@@ -29,9 +29,11 @@ Assets/_Project/
     Runtime/           žaidimo kodas (assembly RPG.Runtime, namespace RPG.*)
       CameraSystem/    CameraFollow
       Characters/      Direction8, CharacterAnimationSet, CharacterAnimator
+      Combat/          Health, AutoAttack, PlayerTargeting, PlayerRespawn, TrainingDummy
       Controls/        PlayerInputReader
       Networking/      NetworkBootstrap, PlayerNetworkMovement, MovementValidator, DevConnectionPanel, DevBot
       Player/          PlayerMovement
+      UI/              UnitFrame, CombatTextLayer
       World/           ClickMarker
       Core/            rezervuota kitiems etapams
     Editor/            redaktoriaus įrankiai (RPG meniu), grafikos importo taisyklės, build meniu
@@ -55,7 +57,7 @@ Principai:
 | 1 | Projekto struktūra, izometrinis žemėlapis, kamera, judėjimas pele ir WASD | ✅ [Stage1.md](Stage1.md) |
 | 2 | Veikėjo pateikimas: 8 krypčių animacijos, paspaudimo žymeklis, aukštų objektų rūšiavimas, HD tapytos grafikos importo taisyklės | ✅ [Stage2.md](Stage2.md) |
 | 3 | Multiplayer pagrindas: dedikuotas serveris, serverio autoritetas judėjimui, prisijungimas | ✅ [Stage3.md](Stage3.md) |
-| 4 | Taikinio pasirinkimas ir realaus laiko kova (HP, žala, auto-attack) | ⏳ |
+| 4 | Taikinio pasirinkimas ir realaus laiko kova (HP, žala, auto-attack) | ✅ [Stage4.md](Stage4.md) |
 | 5 | Monstrai ir jų AI (spawn, aggro, kelio paieška tilemap'e) | ⏳ |
 | 6 | Gebėjimai, klasės, lygiai ir patirtis | ⏳ |
 | 7 | Inventorius, ginklai, šarvai, loot | ⏳ |
