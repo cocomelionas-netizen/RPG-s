@@ -1,3 +1,4 @@
+using RPG.Characters;
 using RPG.Controls;
 using UnityEngine;
 
@@ -9,7 +10,7 @@ namespace RPG.Player
     /// Keyboard input always cancels the current click destination.
     /// </summary>
     [RequireComponent(typeof(Rigidbody2D))]
-    public class PlayerMovement : MonoBehaviour
+    public class PlayerMovement : MonoBehaviour, ICharacterMotionSource
     {
         [SerializeField] private PlayerInputReader input;
         [Tooltip("Camera used to convert mouse clicks to world positions. Defaults to Camera.main.")]
@@ -26,9 +27,10 @@ namespace RPG.Player
         private Vector2 moveDirection;
         private Vector2? destination;
         private Vector2 lastFixedPosition;
+        private Vector2 lastRequestedVelocity;
         private float blockedTimer;
 
-        /// <summary>Last non-zero movement direction. Will drive 8-direction animations.</summary>
+        /// <summary>Last non-zero movement direction. Drives 8-direction animations.</summary>
         public Vector2 FacingDirection { get; private set; } = Vector2.down;
 
         public bool IsMoving => moveDirection.sqrMagnitude > 0f;
@@ -65,6 +67,13 @@ namespace RPG.Player
 
         private void FixedUpdate()
         {
+            // Several physics steps can run before the next Update after a frame hitch,
+            // so click-to-move steers here too instead of waiting for Update.
+            if (destination.HasValue)
+                moveDirection = DirectionToDestination();
+            if (IsMoving)
+                FacingDirection = moveDirection.normalized;
+
             Vector2 velocity = moveDirection * moveSpeed;
 
             if (destination.HasValue)
@@ -79,6 +88,7 @@ namespace RPG.Player
 
             body.linearVelocity = velocity;
             lastFixedPosition = body.position;
+            lastRequestedVelocity = velocity;
         }
 
         /// <summary>Starts click-to-move towards a world position.</summary>
@@ -109,7 +119,11 @@ namespace RPG.Player
 
         private void UpdateBlockedCheck()
         {
-            float expectedStep = moveSpeed * Time.fixedDeltaTime;
+            // Compare against what the previous step asked for: a step that requested no movement
+            // (for example the first step after a new click) must not count as being blocked.
+            float expectedStep = lastRequestedVelocity.magnitude * Time.fixedDeltaTime;
+            if (expectedStep <= 0.0001f) return;
+
             float actualStep = (body.position - lastFixedPosition).magnitude;
 
             blockedTimer = actualStep < expectedStep * 0.1f ? blockedTimer + Time.fixedDeltaTime : 0f;

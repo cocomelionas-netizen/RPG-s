@@ -77,6 +77,29 @@ namespace RPG.Tests
         }
 
         [UnityTest]
+        public IEnumerator SetDestination_SurvivesFrameHitches()
+        {
+            // 0.3 s frames: about 15 physics steps run before each Update,
+            // which used to look like being blocked and cancelled the click.
+            Time.captureDeltaTime = 0.3f;
+            try
+            {
+                Vector2 start = player.transform.position;
+                movement.SetDestination(start + new Vector2(-4f, 0f));
+
+                for (int i = 0; i < 3; i++)
+                    yield return null;
+
+                Assert.Less(player.transform.position.x, start.x - 1f, "Player should be walking despite slow frames.");
+                Assert.Less(movement.FacingDirection.x, -0.9f, "Facing should follow the walk even without an Update in between.");
+            }
+            finally
+            {
+                Time.captureDeltaTime = 0f;
+            }
+        }
+
+        [UnityTest]
         public IEnumerator Stop_ClearsDestination()
         {
             movement.SetDestination(new Vector2(5f, 0f));
