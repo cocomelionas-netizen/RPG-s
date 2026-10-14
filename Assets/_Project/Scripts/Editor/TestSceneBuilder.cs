@@ -4,8 +4,11 @@ using System.Linq;
 using RPG.CameraSystem;
 using RPG.Characters;
 using RPG.Controls;
+using RPG.Networking;
 using RPG.Player;
 using RPG.World;
+using Unity.Netcode;
+using Unity.Netcode.Transports.UTP;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
@@ -74,13 +77,14 @@ namespace RPG.EditorTools
             CreateGlobalLight();
             CreateEventSystem();
 
+            // Players are not placed in the scene: the server spawns one per connection at the spawn point.
             GameObject playerPrefab = CreatePlayerPrefab(playerAnimations);
-            var player = (GameObject)PrefabUtility.InstantiatePrefab(playerPrefab);
-            Vector3Int center = new Vector3Int(MapSize / 2, MapSize / 2, 0);
-            player.transform.position = grid.GetCellCenterWorld(center);
+            var spawnPoint = new GameObject("Player Spawn").transform;
+            spawnPoint.position = grid.GetCellCenterWorld(new Vector3Int(MapSize / 2, MapSize / 2, 0));
 
-            CreateCamera(player.transform);
-            CreateClickMarker(markerSprite, player.GetComponent<PlayerMovement>());
+            CreateNetworkManager(playerPrefab, spawnPoint);
+            CreateCamera(spawnPoint);
+            CreateClickMarker(markerSprite, null);
 
             EditorSceneManager.SaveScene(EditorSceneManager.GetActiveScene(), ScenePath);
             AddSceneToBuildSettings();
@@ -229,6 +233,8 @@ namespace RPG.EditorTools
             player.AddComponent<PlayerInputReader>();
             player.AddComponent<PlayerMovement>();
             player.AddComponent<CharacterAnimator>().AnimationSet = animations;
+            player.AddComponent<NetworkObject>();
+            player.AddComponent<PlayerNetworkMovement>();
 
             Directory.CreateDirectory(Path.GetDirectoryName(PlayerPrefabPath));
             GameObject prefab = PrefabUtility.SaveAsPrefabAsset(player, PlayerPrefabPath);
@@ -352,6 +358,27 @@ namespace RPG.EditorTools
             markerObject.FindProperty("movement").objectReferenceValue = movement;
             markerObject.FindProperty("markerRenderer").objectReferenceValue = spriteRenderer;
             markerObject.ApplyModifiedPropertiesWithoutUndo();
+        }
+
+        private static void CreateNetworkManager(GameObject playerPrefab, Transform spawnPoint)
+        {
+            var go = new GameObject("NetworkManager");
+            var network = go.AddComponent<NetworkManager>();
+            var transport = go.AddComponent<UnityTransport>();
+            network.NetworkConfig = new NetworkConfig
+            {
+                NetworkTransport = transport,
+                PlayerPrefab = playerPrefab,
+                ConnectionApproval = true,
+            };
+
+            var bootstrap = go.AddComponent<NetworkBootstrap>();
+            var bootstrapObject = new SerializedObject(bootstrap);
+            bootstrapObject.FindProperty("spawnPoint").objectReferenceValue = spawnPoint;
+            bootstrapObject.ApplyModifiedPropertiesWithoutUndo();
+
+            go.AddComponent<DevConnectionPanel>();
+            go.AddComponent<DevBot>();
         }
 
         private static void CreateCamera(Transform target)

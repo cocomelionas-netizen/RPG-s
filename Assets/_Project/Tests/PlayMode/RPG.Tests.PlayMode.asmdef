@@ -3,6 +3,7 @@
     "rootNamespace": "RPG.Tests",
     "references": [
         "RPG.Runtime",
+        "Unity.Netcode.Runtime",
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner"
     ],

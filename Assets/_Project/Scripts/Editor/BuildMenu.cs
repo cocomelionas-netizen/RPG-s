@@ -1,0 +1,109 @@
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using UnityEditor;
+using UnityEditor.Build.Reporting;
+using Debug = UnityEngine.Debug;
+
+namespace RPG.EditorTools
+{
+    /// <summary>
+    /// Build and run shortcuts for network testing.
+    /// RPG > Build > Windows Player builds one executable that runs as client, host or server
+    /// depending on its command line. RPG > Run starts that build as a local server or client.
+    /// </summary>
+    public static class BuildMenu
+    {
+        private const string PlayerExe = "Builds/Windows/RPG-s.exe";
+        private const string ServerExe = "Builds/WindowsServer/RPG-s-Server.exe";
+
+        [MenuItem("RPG/Build/Windows Player")]
+        public static void BuildWindowsPlayer()
+        {
+            Build(PlayerExe, StandaloneBuildSubtarget.Player);
+        }
+
+        [MenuItem("RPG/Build/Windows Dedicated Server")]
+        public static void BuildWindowsServer()
+        {
+            if (!IsDedicatedServerModuleInstalled())
+            {
+                Debug.LogError("[Build] The Windows Dedicated Server module is not installed. " +
+                               "Add it in Unity Hub (Installs > 6000.6.4f1 > Add modules > Windows Dedicated Server Build Support), " +
+                               "or use RPG > Build > Windows Player and start it with -batchmode -nographics -server.");
+                return;
+            }
+            Build(ServerExe, StandaloneBuildSubtarget.Server);
+        }
+
+        [MenuItem("RPG/Run/Local Server (last Windows Player build)")]
+        public static void RunLocalServer()
+        {
+            Launch("-batchmode -nographics -server -logFile Builds/Windows/server.log");
+        }
+
+        [MenuItem("RPG/Run/Local Client (last Windows Player build)")]
+        public static void RunLocalClient()
+        {
+            Launch("-client -ip 127.0.0.1 -screen-fullscreen 0 -screen-width 1280 -screen-height 720");
+        }
+
+        [MenuItem("RPG/Run/Local Bot Client (last Windows Player build)")]
+        public static void RunLocalBotClient()
+        {
+            Launch("-client -ip 127.0.0.1 -bot -screen-fullscreen 0 -screen-width 960 -screen-height 540");
+        }
+
+        public static bool Build(string outputPath, StandaloneBuildSubtarget subtarget)
+        {
+            string[] scenes = EditorBuildSettings.scenes.Where(s => s.enabled).Select(s => s.path).ToArray();
+            var options = new BuildPlayerOptions
+            {
+                scenes = scenes,
+                locationPathName = outputPath,
+                target = BuildTarget.StandaloneWindows64,
+                subtarget = (int)subtarget,
+                options = BuildOptions.Development,
+            };
+
+            BuildReport report = BuildPipeline.BuildPlayer(options);
+            bool succeeded = report.summary.result == BuildResult.Succeeded;
+            if (succeeded)
+                Debug.Log($"[Build] {subtarget} build finished: {outputPath} ({report.summary.totalTime.TotalSeconds:0}s).");
+            else
+                Debug.LogError($"[Build] {subtarget} build failed: {report.summary.result}, {report.summary.totalErrors} errors.");
+            return succeeded;
+        }
+
+        /// <summary>Batch mode entry: Unity.exe -batchmode -projectPath . -executeMethod RPG.EditorTools.BuildMenu.BuildWindowsPlayerFromCommandLine -quit</summary>
+        public static void BuildWindowsPlayerFromCommandLine()
+        {
+            if (!Build(PlayerExe, StandaloneBuildSubtarget.Player))
+                EditorApplication.Exit(1);
+        }
+
+        private static bool IsDedicatedServerModuleInstalled()
+        {
+            string engine = BuildPipeline.GetPlaybackEngineDirectory(BuildTarget.StandaloneWindows64, BuildOptions.None);
+            return Directory.Exists(Path.Combine(engine, "Variations", "win64_server_development_mono"))
+                   || Directory.Exists(Path.Combine(engine, "Variations", "win64_server_nondevelopment_mono"));
+        }
+
+        private static void Launch(string arguments)
+        {
+            string exe = Path.GetFullPath(PlayerExe);
+            if (!File.Exists(exe))
+            {
+                Debug.LogError($"[Run] {PlayerExe} not found. Build it first with RPG > Build > Windows Player.");
+                return;
+            }
+
+            Process.Start(new ProcessStartInfo(exe, arguments)
+            {
+                WorkingDirectory = Path.GetFullPath("."),
+                UseShellExecute = false,
+            });
+            Debug.Log($"[Run] Started {PlayerExe} {arguments}");
+        }
+    }
+}

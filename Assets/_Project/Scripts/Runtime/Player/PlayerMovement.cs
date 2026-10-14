@@ -35,6 +35,8 @@ namespace RPG.Player
 
         public bool IsMoving => moveDirection.sqrMagnitude > 0f;
 
+        public float MoveSpeed => moveSpeed;
+
         /// <summary>Current click-to-move target, or null when moving with the keyboard or idle.</summary>
         public Vector2? Destination => destination;
 
@@ -104,6 +106,15 @@ namespace RPG.Player
             destination = null;
             moveDirection = Vector2.zero;
             body.linearVelocity = Vector2.zero;
+        }
+
+        /// <summary>Stops and instantly moves the player (for example when the server corrects its position).</summary>
+        public void Teleport(Vector2 worldPosition)
+        {
+            Stop();
+            body.position = worldPosition;
+            transform.position = new Vector3(worldPosition.x, worldPosition.y, transform.position.z);
+            lastFixedPosition = worldPosition;
         }
 
         private Vector2 DirectionToDestination()
