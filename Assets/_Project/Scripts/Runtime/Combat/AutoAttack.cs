@@ -127,7 +127,7 @@ namespace RPG.Combat
             int damage = Random.Range(minDamage, maxDamage + 1) * (critical ? 2 : 1);
             nextAttackTime = now + attackInterval;
 
-            serverTarget.ApplyDamage(damage, critical);
+            serverTarget.ApplyDamage(damage, critical, health);
             PlayAttackRpc(to - from);
         }
 

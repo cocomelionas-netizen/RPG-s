@@ -5,6 +5,8 @@ using RPG.CameraSystem;
 using RPG.Characters;
 using RPG.Combat;
 using RPG.Controls;
+using RPG.Monsters;
+using RPG.Navigation;
 using RPG.Networking;
 using RPG.Player;
 using RPG.UI;
@@ -35,9 +37,12 @@ namespace RPG.EditorTools
         private const string PlayerPrefabPath = "Assets/_Project/Prefabs/Characters/Player.prefab";
         private const string TreePrefabPath = "Assets/_Project/Prefabs/World/Tree.prefab";
         private const string DummyPrefabPath = "Assets/_Project/Prefabs/World/TrainingDummy.prefab";
+        private const string GoblinPrefabPath = "Assets/_Project/Prefabs/Monsters/Goblin.prefab";
         private const string NetworkPrefabsListPath = "Assets/DefaultNetworkPrefabs.asset";
         private const string PlayerAnimationSetPath = "Assets/_Project/Data/Characters/Player_AnimationSet.asset";
         private const string PlayerArtFolder = PlaceholderArtGenerator.Folder + "/Player";
+        private const string GoblinAnimationSetPath = "Assets/_Project/Data/Characters/Goblin_AnimationSet.asset";
+        private const string GoblinArtFolder = PlaceholderArtGenerator.Folder + "/Goblin";
         private const string Renderer2DPath = "Assets/_Project/Settings/Rendering/Renderer2D.asset";
         private static readonly string[] PipelineAssetPaths =
         {
@@ -68,11 +73,14 @@ namespace RPG.EditorTools
             Tile rockTile = CreateTile("Rock", PlaceholderArtGenerator.Rock("Rock", 5), Tile.ColliderType.Grid);
             Sprite treeSprite = PlaceholderArtGenerator.Tree("Tree", 6);
             Sprite markerSprite = PlaceholderArtGenerator.GroundRing("ClickMarker", new Color(1f, 0.85f, 0.4f, 0.9f));
-            CharacterAnimationSet playerAnimations = CreatePlayerAnimationSet(new Color(0.2f, 0.32f, 0.62f));
+            CharacterAnimationSet playerAnimations = CreateCharacterAnimationSet("Player", PlayerArtFolder, PlayerAnimationSetPath, new Color(0.2f, 0.32f, 0.62f), null);
+            CharacterAnimationSet goblinAnimations = CreateCharacterAnimationSet("Goblin", GoblinArtFolder, GoblinAnimationSetPath,
+                new Color(0.42f, 0.27f, 0.16f), new Color(0.45f, 0.62f, 0.27f));
             GameObject treePrefab = CreateTreePrefab(treeSprite);
             Sprite barSprite = PlaceholderArtGenerator.BarPixel("BarPixel");
             Sprite targetRingSprite = PlaceholderArtGenerator.GroundRing("TargetRing", new Color(0.95f, 0.2f, 0.15f, 0.9f));
             GameObject dummyPrefab = CreateDummyPrefab(PlaceholderArtGenerator.TrainingDummy("TrainingDummy"), barSprite);
+            GameObject goblinPrefab = CreateGoblinPrefab(goblinAnimations, barSprite);
 
             EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
 
@@ -82,6 +90,7 @@ namespace RPG.EditorTools
             obstacles.gameObject.AddComponent<TilemapCollider2D>();
             PaintTestMap(ground, obstacles, grassTiles, pathTile, rockTile);
             PlaceTrees(grid, obstacles, treePrefab);
+            grid.gameObject.AddComponent<WorldNavigation>().Configure(grid, ground, obstacles);
 
             CreateGlobalLight();
             CreateEventSystem();
@@ -96,6 +105,7 @@ namespace RPG.EditorTools
             CreateClickMarker(markerSprite, null);
             CreateTargetIndicator(targetRingSprite);
             PlaceDummies(grid, dummyPrefab);
+            PlaceMonsterCamps(grid, goblinPrefab);
             CreateHud();
 
             EditorSceneManager.SaveScene(EditorSceneManager.GetActiveScene(), ScenePath);
@@ -249,6 +259,7 @@ namespace RPG.EditorTools
             player.AddComponent<PlayerNetworkMovement>();
 
             AddHealth(player, "Player", true, Faction.Player, 100);
+            player.AddComponent<HealthRegeneration>();
             player.AddComponent<AutoAttack>();
             player.AddComponent<PlayerTargeting>();
             player.AddComponent<PlayerRespawn>();
@@ -271,7 +282,7 @@ namespace RPG.EditorTools
             (Direction8.South, new Vector2(0f, -1f)),
         };
 
-        private static CharacterAnimationSet CreatePlayerAnimationSet(Color cloakColor)
+        private static CharacterAnimationSet CreateCharacterAnimationSet(string prefix, string artFolder, string assetPath, Color cloakColor, Color? skinColor)
         {
             float[] idleBob = { 0f, 1.5f };
             float[] walkBob = { 0f, 3f, 0f, 3f };
@@ -286,27 +297,27 @@ namespace RPG.EditorTools
             {
                 var idleFrames = new Sprite[idleBob.Length];
                 for (int i = 0; i < idleFrames.Length; i++)
-                    idleFrames[i] = PlaceholderArtGenerator.CharacterFrame(PlayerArtFolder, $"Player_Idle_{direction}_{i}", cloakColor, facing, idleBob[i], 0f);
+                    idleFrames[i] = PlaceholderArtGenerator.CharacterFrame(artFolder, $"{prefix}_Idle_{direction}_{i}", cloakColor, facing, idleBob[i], 0f, null, skinColor);
 
                 var walkFrames = new Sprite[walkBob.Length];
                 for (int i = 0; i < walkFrames.Length; i++)
-                    walkFrames[i] = PlaceholderArtGenerator.CharacterFrame(PlayerArtFolder, $"Player_Walk_{direction}_{i}", cloakColor, facing, walkBob[i], walkStride[i]);
+                    walkFrames[i] = PlaceholderArtGenerator.CharacterFrame(artFolder, $"{prefix}_Walk_{direction}_{i}", cloakColor, facing, walkBob[i], walkStride[i], null, skinColor);
 
                 var attackFrames = new Sprite[attackSwing.Length];
                 for (int i = 0; i < attackFrames.Length; i++)
-                    attackFrames[i] = PlaceholderArtGenerator.CharacterFrame(PlayerArtFolder, $"Player_Attack_{direction}_{i}", cloakColor, facing, 1f, 0f, attackSwing[i]);
+                    attackFrames[i] = PlaceholderArtGenerator.CharacterFrame(artFolder, $"{prefix}_Attack_{direction}_{i}", cloakColor, facing, 1f, 0f, attackSwing[i], skinColor);
 
                 SetFrames(idle, direction, idleFrames);
                 SetFrames(walk, direction, walkFrames);
                 SetFrames(attack, direction, attackFrames);
             }
 
-            Directory.CreateDirectory(Path.GetDirectoryName(PlayerAnimationSetPath));
-            var set = AssetDatabase.LoadAssetAtPath<CharacterAnimationSet>(PlayerAnimationSetPath);
+            Directory.CreateDirectory(Path.GetDirectoryName(assetPath));
+            var set = AssetDatabase.LoadAssetAtPath<CharacterAnimationSet>(assetPath);
             if (set == null)
             {
                 set = ScriptableObject.CreateInstance<CharacterAnimationSet>();
-                AssetDatabase.CreateAsset(set, PlayerAnimationSetPath);
+                AssetDatabase.CreateAsset(set, assetPath);
             }
             set.MirrorWestFromEast = true;
             set.Clips = new[] { idle, walk, attack };
@@ -465,6 +476,81 @@ namespace RPG.EditorTools
             GameObject prefab = PrefabUtility.SaveAsPrefabAsset(dummy, DummyPrefabPath);
             UnityEngine.Object.DestroyImmediate(dummy);
             return prefab;
+        }
+
+        private static GameObject CreateGoblinPrefab(CharacterAnimationSet animations, Sprite barSprite)
+        {
+            var goblin = new GameObject("Goblin");
+            // Smaller than the player.
+            goblin.transform.localScale = new Vector3(0.85f, 0.85f, 1f);
+
+            var spriteRenderer = goblin.AddComponent<SpriteRenderer>();
+            spriteRenderer.sprite = animations.FindClip(CharacterAnimationSet.IdleClip).south[0];
+            spriteRenderer.spriteSortPoint = SpriteSortPoint.Pivot;
+
+            // Moved by the server, not by physics; no solid collider, so players and monsters pass through each other.
+            var body = goblin.AddComponent<Rigidbody2D>();
+            body.bodyType = RigidbodyType2D.Kinematic;
+
+            goblin.AddComponent<NetworkObject>();
+            goblin.AddComponent<MonsterMotion>();
+            goblin.AddComponent<CharacterAnimator>().AnimationSet = animations;
+
+            AddHealth(goblin, "Goblin", false, Faction.Monster, 45);
+            var autoAttack = goblin.AddComponent<AutoAttack>();
+            var attackObject = new SerializedObject(autoAttack);
+            attackObject.FindProperty("minDamage").intValue = 3;
+            attackObject.FindProperty("maxDamage").intValue = 5;
+            attackObject.FindProperty("attackInterval").floatValue = 2f;
+            attackObject.FindProperty("range").floatValue = 0.7f;
+            attackObject.FindProperty("critChance").floatValue = 0.05f;
+            attackObject.ApplyModifiedPropertiesWithoutUndo();
+
+            goblin.AddComponent<MonsterAI>();
+            AddHealthPresenter(goblin, barSprite, 0.85f);
+            AddHitbox(goblin, new Vector2(0.4f, 0.65f), new Vector2(0f, 0.34f));
+
+            Directory.CreateDirectory(Path.GetDirectoryName(GoblinPrefabPath));
+            GameObject prefab = PrefabUtility.SaveAsPrefabAsset(goblin, GoblinPrefabPath);
+            UnityEngine.Object.DestroyImmediate(goblin);
+            RegisterNetworkPrefab(prefab);
+            return prefab;
+        }
+
+        /// <summary>Prefabs spawned at runtime must be in the network prefab list on server and clients.</summary>
+        private static void RegisterNetworkPrefab(GameObject prefab)
+        {
+            var prefabsList = AssetDatabase.LoadAssetAtPath<NetworkPrefabsList>(NetworkPrefabsListPath);
+            if (prefabsList == null)
+            {
+                Debug.LogWarning($"[TestScene] {NetworkPrefabsListPath} not found; {prefab.name} is not registered as a network prefab.");
+                return;
+            }
+            if (prefabsList.Contains(prefab)) return;
+
+            prefabsList.Add(new NetworkPrefab { Prefab = prefab });
+            EditorUtility.SetDirty(prefabsList);
+        }
+
+        private static void PlaceMonsterCamps(Grid grid, GameObject monsterPrefab)
+        {
+            int center = MapSize / 2;
+            // Away from the spawn so new players are not attacked right away (5-7 units from it).
+            var camps = new[]
+            {
+                new Vector3Int(center + 12, center + 6, 0),
+                new Vector3Int(center - 10, center + 4, 0),
+                new Vector3Int(center + 4, center - 10, 0),
+            };
+
+            var parent = new GameObject("Monster Camps").transform;
+            for (int i = 0; i < camps.Length; i++)
+            {
+                var camp = new GameObject($"Goblin Camp {i + 1}");
+                camp.transform.SetParent(parent, false);
+                camp.transform.position = grid.GetCellCenterWorld(camps[i]);
+                camp.AddComponent<MonsterSpawner>().Configure(monsterPrefab, 3, 1.2f, 20f);
+            }
         }
 
         private static void PlaceDummies(Grid grid, GameObject dummyPrefab)

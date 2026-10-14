@@ -90,13 +90,15 @@ namespace RPG.EditorTools
         /// <param name="bob">Vertical body offset in pixels.</param>
         /// <param name="stride">Foot offset along the facing direction, -1..1.</param>
         /// <param name="swingDegrees">When set, draws a sword swung this many degrees from the facing direction (attack frames).</param>
-        public static Sprite CharacterFrame(string folder, string name, Color cloakColor, Vector2 facing, float bob, float stride, float? swingDegrees = null)
+        /// <param name="skinColor">Face color; defaults to a human skin tone.</param>
+        public static Sprite CharacterFrame(string folder, string name, Color cloakColor, Vector2 facing, float bob, float stride,
+            float? swingDegrees = null, Color? skinColor = null)
         {
             const int width = 128;
             const int height = 192;
             const float feetY = 14f;
             var texture = new Texture2D(width, height, TextureFormat.RGBA32, false);
-            var skin = new Color(0.93f, 0.78f, 0.64f);
+            Color skin = skinColor ?? new Color(0.93f, 0.78f, 0.64f);
             var hood = cloakColor * 0.7f;
             var dark = new Color(0.12f, 0.1f, 0.1f);
             var gold = new Color(0.95f, 0.78f, 0.3f);
