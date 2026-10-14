@@ -15,12 +15,27 @@ namespace RPG.Controls
         private InputAction moveClickAction;
         private InputAction pointAction;
         private InputAction zoomAction;
+        private InputAction targetNextAction;
+        private InputAction attackAction;
+        private InputAction cancelAction;
 
         /// <summary>Keyboard movement in screen space, each axis in [-1, 1].</summary>
         public Vector2 MoveInput => moveAction.ReadValue<Vector2>();
 
         /// <summary>True while the move mouse button is held.</summary>
         public bool MoveClickHeld => moveClickAction.IsPressed();
+
+        /// <summary>True on the frame the move mouse button went down.</summary>
+        public bool MoveClickPressed => moveClickAction.WasPressedThisFrame();
+
+        /// <summary>Tab: select the next target.</summary>
+        public bool TargetNextPressed => targetNextAction.WasPressedThisFrame();
+
+        /// <summary>F: attack the selected target.</summary>
+        public bool AttackPressed => attackAction.WasPressedThisFrame();
+
+        /// <summary>Esc: clear the target / cancel.</summary>
+        public bool CancelPressed => cancelAction.WasPressedThisFrame();
 
         /// <summary>Pointer position in screen pixels.</summary>
         public Vector2 PointerPosition => pointAction.ReadValue<Vector2>();
@@ -55,6 +70,9 @@ namespace RPG.Controls
             moveClickAction = new InputAction("MoveClick", InputActionType.Button, "<Mouse>/leftButton");
             pointAction = new InputAction("Point", InputActionType.Value, "<Pointer>/position");
             zoomAction = new InputAction("Zoom", InputActionType.Value, "<Mouse>/scroll/y");
+            targetNextAction = new InputAction("TargetNext", InputActionType.Button, "<Keyboard>/tab");
+            attackAction = new InputAction("Attack", InputActionType.Button, "<Keyboard>/f");
+            cancelAction = new InputAction("Cancel", InputActionType.Button, "<Keyboard>/escape");
         }
 
         private void OnEnable()
@@ -63,6 +81,9 @@ namespace RPG.Controls
             moveClickAction.Enable();
             pointAction.Enable();
             zoomAction.Enable();
+            targetNextAction.Enable();
+            attackAction.Enable();
+            cancelAction.Enable();
         }
 
         private void OnDisable()
@@ -71,6 +92,9 @@ namespace RPG.Controls
             moveClickAction.Disable();
             pointAction.Disable();
             zoomAction.Disable();
+            targetNextAction.Disable();
+            attackAction.Disable();
+            cancelAction.Disable();
         }
 
         private void OnDestroy()
@@ -79,6 +103,9 @@ namespace RPG.Controls
             moveClickAction.Dispose();
             pointAction.Dispose();
             zoomAction.Dispose();
+            targetNextAction.Dispose();
+            attackAction.Dispose();
+            cancelAction.Dispose();
         }
     }
 }

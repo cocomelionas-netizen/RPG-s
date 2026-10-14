@@ -106,12 +106,13 @@ namespace RPG.Networking
         {
             response.Approved = true;
             response.CreatePlayerObject = true;
-            response.Position = SpawnPosition();
+            response.Position = GetSpawnPosition();
             response.Rotation = Quaternion.identity;
             response.Pending = false;
         }
 
-        private Vector3 SpawnPosition()
+        /// <summary>A spawn position near the spawn point (also used for respawning).</summary>
+        public Vector3 GetSpawnPosition()
         {
             Vector3 center = spawnPoint != null ? spawnPoint.position : Vector3.zero;
             Vector2 offset = Random.insideUnitCircle * spawnRadius;

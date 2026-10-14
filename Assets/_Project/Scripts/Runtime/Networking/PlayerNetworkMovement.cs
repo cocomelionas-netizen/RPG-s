@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using RPG.CameraSystem;
 using RPG.Characters;
+using RPG.Combat;
 using RPG.Controls;
 using RPG.Player;
 using RPG.World;
@@ -40,6 +41,7 @@ namespace RPG.Networking
         private Rigidbody2D body;
         private CircleCollider2D feet;
         private CharacterAnimator characterAnimator;
+        private Health health;
 
         // Owner.
         private float sendTimer;
@@ -73,6 +75,7 @@ namespace RPG.Networking
             body = GetComponent<Rigidbody2D>();
             feet = GetComponent<CircleCollider2D>();
             characterAnimator = GetComponent<CharacterAnimator>();
+            health = GetComponent<Health>();
         }
 
         public override void OnNetworkSpawn()
@@ -133,6 +136,18 @@ namespace RPG.Networking
 
         private void UpdateOwner()
         {
+            // Dead players cannot move until the server respawns them.
+            bool dead = health != null && health.IsDead;
+            if (dead && movement.enabled)
+            {
+                movement.Stop();
+                movement.enabled = false;
+            }
+            else if (!dead && !movement.enabled)
+            {
+                movement.enabled = true;
+            }
+
             sendTimer += Time.deltaTime;
             if (sendTimer < 1f / sendRate) return;
             sendTimer = 0f;
@@ -178,6 +193,7 @@ namespace RPG.Networking
             // Only the owner may move its player, and reports sent before the last correction are stale.
             if (rpcParams.Receive.SenderClientId != OwnerClientId) return;
             if (correctionId != correctionCount) return;
+            if (health != null && health.IsDead) return;
 
             if (!IsFinite(position) || !IsFinite(facing))
             {
@@ -200,6 +216,27 @@ namespace RPG.Networking
 
             serverPosition = position;
             WriteState(position, facing.sqrMagnitude > 0.0001f ? facing.normalized : state.Value.Facing, isMoving);
+        }
+
+        /// <summary>Server only: moves the player somewhere new (for example respawning) and tells its owner.</summary>
+        public void ServerTeleport(Vector2 position)
+        {
+            if (!IsServer) return;
+
+            serverPosition = position;
+            validator.Reset(Now);
+            WriteState(position, state.Value.Facing, false);
+
+            if (IsOwner)
+            {
+                movement.Teleport(position);
+                lastSent = new MotionState { Position = position, Facing = movement.FacingDirection };
+            }
+            else
+            {
+                correctionCount++;
+                ApplyCorrectionRpc(position, correctionCount);
+            }
         }
 
         private void Correct(string reason)

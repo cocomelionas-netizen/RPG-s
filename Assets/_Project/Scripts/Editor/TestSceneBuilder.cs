@@ -3,9 +3,11 @@ using System.IO;
 using System.Linq;
 using RPG.CameraSystem;
 using RPG.Characters;
+using RPG.Combat;
 using RPG.Controls;
 using RPG.Networking;
 using RPG.Player;
+using RPG.UI;
 using RPG.World;
 using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
@@ -17,6 +19,7 @@ using UnityEngine.InputSystem.UI;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.Tilemaps;
+using UnityEngine.UI;
 
 namespace RPG.EditorTools
 {
@@ -31,6 +34,8 @@ namespace RPG.EditorTools
         private const string TilesFolder = "Assets/_Project/Tiles";
         private const string PlayerPrefabPath = "Assets/_Project/Prefabs/Characters/Player.prefab";
         private const string TreePrefabPath = "Assets/_Project/Prefabs/World/Tree.prefab";
+        private const string DummyPrefabPath = "Assets/_Project/Prefabs/World/TrainingDummy.prefab";
+        private const string NetworkPrefabsListPath = "Assets/DefaultNetworkPrefabs.asset";
         private const string PlayerAnimationSetPath = "Assets/_Project/Data/Characters/Player_AnimationSet.asset";
         private const string PlayerArtFolder = PlaceholderArtGenerator.Folder + "/Player";
         private const string Renderer2DPath = "Assets/_Project/Settings/Rendering/Renderer2D.asset";
@@ -64,6 +69,9 @@ namespace RPG.EditorTools
             Sprite markerSprite = PlaceholderArtGenerator.GroundRing("ClickMarker", new Color(1f, 0.85f, 0.4f, 0.9f));
             CharacterAnimationSet playerAnimations = CreatePlayerAnimationSet(new Color(0.2f, 0.32f, 0.62f));
             GameObject treePrefab = CreateTreePrefab(treeSprite);
+            Sprite barSprite = PlaceholderArtGenerator.BarPixel("BarPixel");
+            Sprite targetRingSprite = PlaceholderArtGenerator.GroundRing("TargetRing", new Color(0.95f, 0.2f, 0.15f, 0.9f));
+            GameObject dummyPrefab = CreateDummyPrefab(PlaceholderArtGenerator.TrainingDummy("TrainingDummy"), barSprite);
 
             EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
 
@@ -78,13 +86,16 @@ namespace RPG.EditorTools
             CreateEventSystem();
 
             // Players are not placed in the scene: the server spawns one per connection at the spawn point.
-            GameObject playerPrefab = CreatePlayerPrefab(playerAnimations);
+            GameObject playerPrefab = CreatePlayerPrefab(playerAnimations, barSprite);
             var spawnPoint = new GameObject("Player Spawn").transform;
             spawnPoint.position = grid.GetCellCenterWorld(new Vector3Int(MapSize / 2, MapSize / 2, 0));
 
             CreateNetworkManager(playerPrefab, spawnPoint);
             CreateCamera(spawnPoint);
             CreateClickMarker(markerSprite, null);
+            CreateTargetIndicator(targetRingSprite);
+            PlaceDummies(grid, dummyPrefab);
+            CreateHud();
 
             EditorSceneManager.SaveScene(EditorSceneManager.GetActiveScene(), ScenePath);
             AddSceneToBuildSettings();
@@ -211,7 +222,7 @@ namespace RPG.EditorTools
             go.AddComponent<InputSystemUIInputModule>();
         }
 
-        private static GameObject CreatePlayerPrefab(CharacterAnimationSet animations)
+        private static GameObject CreatePlayerPrefab(CharacterAnimationSet animations, Sprite barSprite)
         {
             var player = new GameObject("Player");
 
@@ -235,6 +246,13 @@ namespace RPG.EditorTools
             player.AddComponent<CharacterAnimator>().AnimationSet = animations;
             player.AddComponent<NetworkObject>();
             player.AddComponent<PlayerNetworkMovement>();
+
+            AddHealth(player, "Player", true, Faction.Player, 100);
+            player.AddComponent<AutoAttack>();
+            player.AddComponent<PlayerTargeting>();
+            player.AddComponent<PlayerRespawn>();
+            AddHealthPresenter(player, barSprite, 0.85f);
+            AddHitbox(player, new Vector2(0.36f, 0.62f), new Vector2(0f, 0.34f));
 
             Directory.CreateDirectory(Path.GetDirectoryName(PlayerPrefabPath));
             GameObject prefab = PrefabUtility.SaveAsPrefabAsset(player, PlayerPrefabPath);
@@ -260,6 +278,8 @@ namespace RPG.EditorTools
 
             var idle = new DirectionalClip { id = CharacterAnimationSet.IdleClip, framesPerSecond = 2f, loop = true };
             var walk = new DirectionalClip { id = CharacterAnimationSet.WalkClip, framesPerSecond = 8f, loop = true };
+            var attack = new DirectionalClip { id = AutoAttack.AttackClip, framesPerSecond = 10f, loop = false };
+            float[] attackSwing = { -70f, -10f, 50f };
 
             foreach ((Direction8 direction, Vector2 facing) in DrawnDirections)
             {
@@ -271,8 +291,13 @@ namespace RPG.EditorTools
                 for (int i = 0; i < walkFrames.Length; i++)
                     walkFrames[i] = PlaceholderArtGenerator.CharacterFrame(PlayerArtFolder, $"Player_Walk_{direction}_{i}", cloakColor, facing, walkBob[i], walkStride[i]);
 
+                var attackFrames = new Sprite[attackSwing.Length];
+                for (int i = 0; i < attackFrames.Length; i++)
+                    attackFrames[i] = PlaceholderArtGenerator.CharacterFrame(PlayerArtFolder, $"Player_Attack_{direction}_{i}", cloakColor, facing, 1f, 0f, attackSwing[i]);
+
                 SetFrames(idle, direction, idleFrames);
                 SetFrames(walk, direction, walkFrames);
+                SetFrames(attack, direction, attackFrames);
             }
 
             Directory.CreateDirectory(Path.GetDirectoryName(PlayerAnimationSetPath));
@@ -283,7 +308,7 @@ namespace RPG.EditorTools
                 AssetDatabase.CreateAsset(set, PlayerAnimationSetPath);
             }
             set.MirrorWestFromEast = true;
-            set.Clips = new[] { idle, walk };
+            set.Clips = new[] { idle, walk, attack };
             EditorUtility.SetDirty(set);
             return set;
         }
@@ -371,6 +396,9 @@ namespace RPG.EditorTools
                 PlayerPrefab = playerPrefab,
                 ConnectionApproval = true,
             };
+            var prefabsList = AssetDatabase.LoadAssetAtPath<NetworkPrefabsList>(NetworkPrefabsListPath);
+            if (prefabsList != null)
+                network.NetworkConfig.Prefabs.NetworkPrefabsLists.Add(prefabsList);
 
             var bootstrap = go.AddComponent<NetworkBootstrap>();
             var bootstrapObject = new SerializedObject(bootstrap);
@@ -379,6 +407,185 @@ namespace RPG.EditorTools
 
             go.AddComponent<DevConnectionPanel>();
             go.AddComponent<DevBot>();
+        }
+
+        private static Health AddHealth(GameObject go, string unitName, bool appendOwnerId, Faction faction, int maxHealth)
+        {
+            var health = go.AddComponent<Health>();
+            var healthObject = new SerializedObject(health);
+            healthObject.FindProperty("defaultName").stringValue = unitName;
+            healthObject.FindProperty("appendOwnerId").boolValue = appendOwnerId;
+            healthObject.FindProperty("faction").enumValueIndex = (int)faction;
+            healthObject.FindProperty("maxHealth").intValue = maxHealth;
+            healthObject.ApplyModifiedPropertiesWithoutUndo();
+            return health;
+        }
+
+        private static void AddHealthPresenter(GameObject go, Sprite barSprite, float barHeight)
+        {
+            var presenter = go.AddComponent<HealthPresenter>();
+            var presenterObject = new SerializedObject(presenter);
+            presenterObject.FindProperty("body").objectReferenceValue = go.GetComponent<SpriteRenderer>();
+            presenterObject.FindProperty("barSprite").objectReferenceValue = barSprite;
+            presenterObject.FindProperty("barHeightAboveFeet").floatValue = barHeight;
+            presenterObject.FindProperty("damageNumberHeight").floatValue = barHeight + 0.05f;
+            presenterObject.ApplyModifiedPropertiesWithoutUndo();
+        }
+
+        /// <summary>A trigger around the body for mouse selection; it does not block movement.</summary>
+        private static void AddHitbox(GameObject go, Vector2 size, Vector2 offset)
+        {
+            var hitbox = new GameObject("Hitbox");
+            hitbox.transform.SetParent(go.transform, false);
+            var box = hitbox.AddComponent<BoxCollider2D>();
+            box.isTrigger = true;
+            box.size = size;
+            box.offset = offset;
+        }
+
+        private static GameObject CreateDummyPrefab(Sprite sprite, Sprite barSprite)
+        {
+            var dummy = new GameObject("Training Dummy");
+            var spriteRenderer = dummy.AddComponent<SpriteRenderer>();
+            spriteRenderer.sprite = sprite;
+            spriteRenderer.spriteSortPoint = SpriteSortPoint.Pivot;
+
+            var post = dummy.AddComponent<CircleCollider2D>();
+            post.radius = 0.08f;
+            post.offset = new Vector2(0f, 0.03f);
+
+            dummy.AddComponent<NetworkObject>();
+            AddHealth(dummy, "Training Dummy", false, Faction.Monster, 200);
+            dummy.AddComponent<TrainingDummy>();
+            AddHealthPresenter(dummy, barSprite, 1.2f);
+            AddHitbox(dummy, new Vector2(0.4f, 0.95f), new Vector2(0f, 0.5f));
+
+            Directory.CreateDirectory(Path.GetDirectoryName(DummyPrefabPath));
+            GameObject prefab = PrefabUtility.SaveAsPrefabAsset(dummy, DummyPrefabPath);
+            UnityEngine.Object.DestroyImmediate(dummy);
+            return prefab;
+        }
+
+        private static void PlaceDummies(Grid grid, GameObject dummyPrefab)
+        {
+            int center = MapSize / 2;
+            // Right and left of the spawn, on grass inside the cleared spawn area.
+            var cells = new[] { new Vector3Int(center + 2, center - 2, 0), new Vector3Int(center - 3, center - 1, 0) };
+            var parent = new GameObject("Training Dummies").transform;
+            foreach (Vector3Int cell in cells)
+            {
+                var dummy = (GameObject)PrefabUtility.InstantiatePrefab(dummyPrefab, parent);
+                dummy.transform.position = grid.GetCellCenterWorld(cell);
+            }
+        }
+
+        private static void CreateTargetIndicator(Sprite ringSprite)
+        {
+            var go = new GameObject("Target Indicator");
+            var ring = go.AddComponent<SpriteRenderer>();
+            ring.sprite = ringSprite;
+            ring.sortingOrder = -49;
+            ring.enabled = false;
+            var indicator = go.AddComponent<TargetIndicator>();
+            var indicatorObject = new SerializedObject(indicator);
+            indicatorObject.FindProperty("ring").objectReferenceValue = ring;
+            indicatorObject.ApplyModifiedPropertiesWithoutUndo();
+        }
+
+        private static void CreateHud()
+        {
+            var canvasObject = new GameObject("HUD", typeof(RectTransform));
+            var canvas = canvasObject.AddComponent<Canvas>();
+            canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+            var scaler = canvasObject.AddComponent<UnityEngine.UI.CanvasScaler>();
+            scaler.uiScaleMode = UnityEngine.UI.CanvasScaler.ScaleMode.ScaleWithScreenSize;
+            scaler.referenceResolution = new Vector2(1920f, 1080f);
+            scaler.matchWidthOrHeight = 0.5f;
+            canvasObject.AddComponent<UnityEngine.UI.GraphicRaycaster>();
+
+            var combatText = new GameObject("Combat Text", typeof(RectTransform));
+            combatText.transform.SetParent(canvasObject.transform, false);
+            Stretch((RectTransform)combatText.transform);
+            combatText.AddComponent<CombatTextLayer>();
+
+            CreateUnitFrame(canvasObject.transform, "Player Frame", UnitFrameRole.LocalPlayer, new Vector2(0.5f, 0f), new Vector2(0f, 40f));
+            CreateUnitFrame(canvasObject.transform, "Target Frame", UnitFrameRole.Target, new Vector2(0.5f, 1f), new Vector2(0f, -30f));
+        }
+
+        private static void CreateUnitFrame(Transform canvas, string frameName, UnitFrameRole role, Vector2 anchor, Vector2 offset)
+        {
+            Font font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+
+            var holder = new GameObject(frameName, typeof(RectTransform));
+            holder.transform.SetParent(canvas, false);
+            var holderRect = (RectTransform)holder.transform;
+            holderRect.anchorMin = holderRect.anchorMax = holderRect.pivot = anchor;
+            holderRect.anchoredPosition = offset;
+            holderRect.sizeDelta = new Vector2(380f, 70f);
+
+            var panel = CreateImage("Panel", holder.transform, new Color(0.08f, 0.07f, 0.06f, 0.85f));
+            Stretch(panel.rectTransform);
+
+            Text nameText = CreateText("Name", panel.transform, font, 22, TextAnchor.UpperLeft);
+            nameText.rectTransform.anchorMin = new Vector2(0f, 0.5f);
+            nameText.rectTransform.anchorMax = new Vector2(1f, 1f);
+            nameText.rectTransform.offsetMin = new Vector2(12f, 0f);
+            nameText.rectTransform.offsetMax = new Vector2(-12f, -6f);
+
+            var barBackground = CreateImage("Bar", panel.transform, new Color(0f, 0f, 0f, 0.8f));
+            barBackground.rectTransform.anchorMin = new Vector2(0f, 0f);
+            barBackground.rectTransform.anchorMax = new Vector2(1f, 0.5f);
+            barBackground.rectTransform.offsetMin = new Vector2(12f, 10f);
+            barBackground.rectTransform.offsetMax = new Vector2(-12f, -2f);
+
+            var fill = CreateImage("Fill", barBackground.transform, Color.red);
+            Stretch(fill.rectTransform);
+
+            Text valueText = CreateText("Value", barBackground.transform, font, 16, TextAnchor.MiddleCenter);
+            Stretch(valueText.rectTransform);
+
+            var frame = holder.AddComponent<UnitFrame>();
+            var frameObject = new SerializedObject(frame);
+            frameObject.FindProperty("role").enumValueIndex = (int)role;
+            frameObject.FindProperty("panel").objectReferenceValue = panel.gameObject;
+            frameObject.FindProperty("nameText").objectReferenceValue = nameText;
+            frameObject.FindProperty("fill").objectReferenceValue = fill.rectTransform;
+            frameObject.FindProperty("fillImage").objectReferenceValue = fill;
+            frameObject.FindProperty("valueText").objectReferenceValue = valueText;
+            frameObject.ApplyModifiedPropertiesWithoutUndo();
+
+            panel.gameObject.SetActive(false);
+        }
+
+        private static UnityEngine.UI.Image CreateImage(string imageName, Transform parent, Color color)
+        {
+            var go = new GameObject(imageName, typeof(RectTransform));
+            go.transform.SetParent(parent, false);
+            var image = go.AddComponent<UnityEngine.UI.Image>();
+            image.color = color;
+            return image;
+        }
+
+        private static Text CreateText(string textName, Transform parent, Font font, int size, TextAnchor alignment)
+        {
+            var go = new GameObject(textName, typeof(RectTransform));
+            go.transform.SetParent(parent, false);
+            var text = go.AddComponent<Text>();
+            text.font = font;
+            text.fontSize = size;
+            text.alignment = alignment;
+            text.color = Color.white;
+            text.raycastTarget = false;
+            go.AddComponent<UnityEngine.UI.Outline>().effectColor = new Color(0f, 0f, 0f, 0.8f);
+            return text;
+        }
+
+        private static void Stretch(RectTransform rect)
+        {
+            rect.anchorMin = Vector2.zero;
+            rect.anchorMax = Vector2.one;
+            rect.offsetMin = Vector2.zero;
+            rect.offsetMax = Vector2.zero;
         }
 
         private static void CreateCamera(Transform target)

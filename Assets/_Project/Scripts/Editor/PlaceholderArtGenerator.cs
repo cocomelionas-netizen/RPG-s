@@ -89,7 +89,8 @@ namespace RPG.EditorTools
         /// <param name="facing">Normalized screen-space facing direction.</param>
         /// <param name="bob">Vertical body offset in pixels.</param>
         /// <param name="stride">Foot offset along the facing direction, -1..1.</param>
-        public static Sprite CharacterFrame(string folder, string name, Color cloakColor, Vector2 facing, float bob, float stride)
+        /// <param name="swingDegrees">When set, draws a sword swung this many degrees from the facing direction (attack frames).</param>
+        public static Sprite CharacterFrame(string folder, string name, Color cloakColor, Vector2 facing, float bob, float stride, float? swingDegrees = null)
         {
             const int width = 128;
             const int height = 192;
@@ -107,6 +108,15 @@ namespace RPG.EditorTools
             var eyeCenter = headCenter + new Vector2(facing.x * 11f, -3f);
             float eyeSpread = Mathf.Lerp(7f, 2.5f, Mathf.Abs(facing.x));
             var buckle = new Vector2(facing.x * 13f, 70f + bob);
+            var steel = new Color(0.85f, 0.87f, 0.9f);
+            var hand = new Vector2(facing.x * 18f, 92f + bob + facing.y * 6f);
+            Vector2 swordTip = hand;
+            if (swingDegrees.HasValue)
+            {
+                float angle = (Mathf.Atan2(facing.y, facing.x) * Mathf.Rad2Deg + swingDegrees.Value) * Mathf.Deg2Rad;
+                // Screen-space sword, foreshortened vertically like the isometric ground.
+                swordTip = hand + new Vector2(Mathf.Cos(angle), Mathf.Sin(angle) * 0.6f + 0.35f) * 52f;
+            }
 
             for (int y = 0; y < height; y++)
             for (int x = 0; x < width; x++)
@@ -149,11 +159,61 @@ namespace RPG.EditorTools
                         color = dark;
                 }
 
+                if (swingDegrees.HasValue && DistanceToSegment(p, hand, swordTip) <= 2.5f)
+                    color = steel;
+
                 texture.SetPixel(x, y, color);
             }
 
             // Pivot at the feet: position = where the character stands.
             return SaveSprite(texture, folder, name, new Vector2(0.5f, feetY / height));
+        }
+
+        public static Sprite TrainingDummy(string name)
+        {
+            const int width = 160;
+            const int height = 288;
+            const float baseY = 20f;
+            var texture = new Texture2D(width, height, TextureFormat.RGBA32, false);
+            var wood = new Color(0.45f, 0.3f, 0.17f);
+            var straw = new Color(0.82f, 0.7f, 0.38f);
+            var rope = new Color(0.55f, 0.42f, 0.25f);
+
+            for (int y = 0; y < height; y++)
+            for (int x = 0; x < width; x++)
+            {
+                var p = new Vector2(x + 0.5f - width * 0.5f, y + 0.5f);
+                Color color = Color.clear;
+
+                float shadow = Mathf.Clamp01(1f - new Vector2(p.x / 40f, (p.y - baseY) / 12f).magnitude) * 0.4f;
+                if (shadow > 0f) color = new Color(0f, 0f, 0f, shadow);
+
+                // Post and cross beam.
+                if (p.y >= baseY && p.y <= 250f && Mathf.Abs(p.x) <= 7f) color = wood * Mathf.Lerp(1.15f, 0.75f, (p.x + 7f) / 14f);
+                if (p.y >= 170f && p.y <= 182f && Mathf.Abs(p.x) <= 62f) color = wood * 0.95f;
+
+                // Straw body and head with a little noise.
+                float grain = Mathf.PerlinNoise(x * 0.3f, y * 0.08f) * 0.3f;
+                if (Ellipse(p, new Vector2(0f, 140f), 34f, 52f)) { color = straw * (0.85f + grain); color.a = 1f; }
+                if (Ellipse(p, new Vector2(0f, 220f), 24f, 26f)) { color = straw * (0.9f + grain); color.a = 1f; }
+                if (Mathf.Abs(p.y - 120f) < 3f && Mathf.Abs(p.x) < 33f) color = rope;
+                if (Mathf.Abs(p.y - 196f) < 3f && Mathf.Abs(p.x) < 14f) color = rope;
+
+                texture.SetPixel(x, y, color);
+            }
+
+            return SaveSprite(texture, Folder, name, new Vector2(0.5f, baseY / height));
+        }
+
+        /// <summary>A small white sprite, 1 world unit wide, pivot on the left edge: for bars that fill from the left.</summary>
+        public static Sprite BarPixel(string name)
+        {
+            const int size = 4;
+            var texture = new Texture2D(size, size, TextureFormat.RGBA32, false);
+            for (int y = 0; y < size; y++)
+            for (int x = 0; x < size; x++)
+                texture.SetPixel(x, y, Color.white);
+            return SaveSprite(texture, Folder, name, new Vector2(0f, 0.5f), size, FilterMode.Point);
         }
 
         public static Sprite Tree(string name, int seed)
@@ -224,6 +284,13 @@ namespace RPG.EditorTools
             return SaveSprite(texture, Folder, name, new Vector2(0.5f, 0.5f));
         }
 
+        private static float DistanceToSegment(Vector2 p, Vector2 a, Vector2 b)
+        {
+            Vector2 ab = b - a;
+            float t = ab.sqrMagnitude > 0f ? Mathf.Clamp01(Vector2.Dot(p - a, ab) / ab.sqrMagnitude) : 0f;
+            return Vector2.Distance(p, a + ab * t);
+        }
+
         private static bool Ellipse(Vector2 p, Vector2 center, float radiusX, float radiusY)
         {
             return new Vector2((p.x - center.x) / radiusX, (p.y - center.y) / radiusY).sqrMagnitude <= 1f;
@@ -234,7 +301,8 @@ namespace RPG.EditorTools
             return SaveSprite(texture, Folder, name, pivot);
         }
 
-        private static Sprite SaveSprite(Texture2D texture, string folder, string name, Vector2 pivot)
+        private static Sprite SaveSprite(Texture2D texture, string folder, string name, Vector2 pivot,
+            int pixelsPerUnit = PixelsPerUnit, FilterMode filterMode = FilterMode.Bilinear)
         {
             texture.Apply();
             Directory.CreateDirectory(folder);
@@ -246,10 +314,10 @@ namespace RPG.EditorTools
             var importer = (TextureImporter)AssetImporter.GetAtPath(path);
             importer.textureType = TextureImporterType.Sprite;
             importer.spriteImportMode = SpriteImportMode.Single;
-            importer.spritePixelsPerUnit = PixelsPerUnit;
+            importer.spritePixelsPerUnit = pixelsPerUnit;
             importer.mipmapEnabled = false;
             importer.alphaIsTransparency = true;
-            importer.filterMode = FilterMode.Bilinear;
+            importer.filterMode = filterMode;
             importer.textureCompression = TextureImporterCompression.Uncompressed;
 
             var settings = new TextureImporterSettings();
