@@ -23,7 +23,7 @@
 | `Assets/_Project/Scripts/Runtime/Player/PlayerMovement.cs` | WASD ir click-to-move judėjimas per `Rigidbody2D` |
 | `Assets/_Project/Scripts/Runtime/CameraSystem/CameraFollow.cs` | Kameros sekimas ir priartinimas |
 | `Assets/_Project/Scripts/Runtime/RPG.Runtime.asmdef` | Runtime kodo assembly |
-| `Assets/_Project/Scripts/Editor/Stage1SceneBuilder.cs` | Meniu `RPG > Stage 1 > Build Test Scene`: sukuria 2D Renderer nustatymus, tile'us, prefab'ą ir sceną |
+| `Assets/_Project/Scripts/Editor/TestSceneBuilder.cs` | Meniu `RPG > Build Test Scene`: sukuria 2D Renderer nustatymus, tile'us, prefab'ą ir sceną (2 etape pervadintas iš `Stage1SceneBuilder`) |
 | `Assets/_Project/Scripts/Editor/PlaceholderArtGenerator.cs` | Generuoja laikinus sprite'us |
 | `Assets/_Project/Tests/PlayMode/*.cs` | Automatiniai judėjimo ir kameros testai |
 | `Assets/_Project/Scenes/World_Test.unity` | Testinė scena |
@@ -41,12 +41,12 @@
 8. **Console** – neturi būti raudonų klaidų. Pranešimas „GPUResidentDrawer Disabled…“ yra normalus su 2D Renderer.
 
 ### Automatiniai testai
-`Window > General > Test Runner` → skirtukas **PlayMode** → **Run All**. Turi praeiti 6 testai:
+`Window > General > Test Runner` → skirtukas **PlayMode** → **Run All**. 1 etapo pabaigoje buvo 6 testai (2 etape jų 24):
 - `PlayerMovementTests`: nueina į tikslą, atnaujina žiūrėjimo kryptį, nepraeina pro sieną ir atšaukia tikslą, `Stop()` sustabdo;
 - `CameraFollowTests`: kamera pasiveja taikinį ir išlaiko Z gylį, `Follow(..., snap: true)` peršoka iškart.
 
 ### Scenos atkūrimas
-Jei scena sugadinta: `RPG > Stage 1 > Build Test Scene`. Įrankis viską sugeneruos iš naujo (žemėlapis kaskart toks pats, seed 12345).
+Jei scena sugadinta: `RPG > Build Test Scene`. Įrankis viską sugeneruos iš naujo (žemėlapis kaskart toks pats, seed 12345).
 
 ## Tikros grafikos keitimas
 
@@ -57,6 +57,6 @@ Placeholder'iai jau paruošti HD tapytai grafikai, todėl tikrus failus galima t
 - **veikėjas** – pivot ties kojomis (`SpriteSortPoint.Pivot`).
 
 ## Žinomi apribojimai (spręsime vėliau)
-- Veikėjas be animacijų (2 etapas).
+- ~~Veikėjas be animacijų~~ – padaryta 2 etape.
 - Click-to-move eina tiesia linija, kelio paieškos dar nėra (5 etapas, kartu su monstrų AI).
 - Viskas veikia tik lokaliai, be tinklo (3 etapas).

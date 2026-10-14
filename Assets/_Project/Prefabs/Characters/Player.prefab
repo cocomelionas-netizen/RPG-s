@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3398930451530350073}
   - component: {fileID: 7378069218867280028}
   - component: {fileID: 5937208823369157367}
+  - component: {fileID: 3262352295627561672}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -85,7 +86,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: 10837c2fd237093439630e17235ccf49, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 37a574620a896dd479d376f67ea1fca2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -188,3 +189,18 @@ MonoBehaviour:
   moveSpeed: 3
   stopDistance: 0.05
   blockedTimeout: 0.25
+--- !u!114 &3262352295627561672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4455562802883493941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c69ec4f0299fb1f42bfdfa245612a97c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: RPG.Runtime::RPG.Characters.CharacterAnimator
+  animationSet: {fileID: 11400000, guid: f8d5cfc9155092946b898d8c44a5fe2f, type: 2}
+  idleClip: Idle
+  walkClip: Walk

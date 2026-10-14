@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83075961a6cc8204eb6226e23388f01a, type: 3}
+  m_Name: Player_AnimationSet
+  m_EditorClassIdentifier: RPG.Runtime::RPG.Characters.CharacterAnimationSet
+  mirrorWestFromEast: 1
+  clips:
+  - id: Idle
+    framesPerSecond: 2
+    loop: 1
+    east:
+    - {fileID: 21300000, guid: 96a9221604c2e3749994f0d34964bcab, type: 3}
+    - {fileID: 21300000, guid: 9ec9c7242d5c85c4ba29e62a57272943, type: 3}
+    northEast:
+    - {fileID: 21300000, guid: 3e1511e0258c6d645b6dec2bb6bd5562, type: 3}
+    - {fileID: 21300000, guid: 0f5804c963f49db4b9aab4f8d32ba845, type: 3}
+    north:
+    - {fileID: 21300000, guid: 412f29d9e88b4194b943f0daf8899ba2, type: 3}
+    - {fileID: 21300000, guid: b4584a4eb0d5660468505da65c012200, type: 3}
+    northWest: []
+    west: []
+    southWest: []
+    south:
+    - {fileID: 21300000, guid: 37a574620a896dd479d376f67ea1fca2, type: 3}
+    - {fileID: 21300000, guid: 4bcf6c81f788e09439b7ecb66a45db4c, type: 3}
+    southEast:
+    - {fileID: 21300000, guid: 8ce8eb44c005e53438366de1ba08cdaa, type: 3}
+    - {fileID: 21300000, guid: 2275f19ce715fa64abd2373a738cc2fb, type: 3}
+  - id: Walk
+    framesPerSecond: 8
+    loop: 1
+    east:
+    - {fileID: 21300000, guid: 033ba9c53b27ea744a934bec4181601f, type: 3}
+    - {fileID: 21300000, guid: 906f1daca8fe5e74282a48d8c8137582, type: 3}
+    - {fileID: 21300000, guid: dd8b2efa6e498a549883513638be312f, type: 3}
+    - {fileID: 21300000, guid: 054cc29596f1f4446ad8e7999021f1cf, type: 3}
+    northEast:
+    - {fileID: 21300000, guid: dc0f785cb8605e14988ad1e11488df4c, type: 3}
+    - {fileID: 21300000, guid: e66fb541697441e41a49088355143b3d, type: 3}
+    - {fileID: 21300000, guid: 0f6b18f7442bd8e4fa45282828118954, type: 3}
+    - {fileID: 21300000, guid: 6648260d3d6a171498cdaa132bc22491, type: 3}
+    north:
+    - {fileID: 21300000, guid: 7190b1a56d764f54b9c4646721dae4dc, type: 3}
+    - {fileID: 21300000, guid: 192975eddd5d9fd4881ab8a81a5bdeee, type: 3}
+    - {fileID: 21300000, guid: 49888e9d7b79dae4181827a60f615e7a, type: 3}
+    - {fileID: 21300000, guid: b8e194571babf8945bc40791679d8676, type: 3}
+    northWest: []
+    west: []
+    southWest: []
+    south:
+    - {fileID: 21300000, guid: e7f8b7b66cf247b418a836f84c87751e, type: 3}
+    - {fileID: 21300000, guid: fbc34c846eca4884fa842597068ed67f, type: 3}
+    - {fileID: 21300000, guid: 6245e5c05e1d75b448f87886c7859752, type: 3}
+    - {fileID: 21300000, guid: 8b2e2a07ed486dc41bdd180c189015eb, type: 3}
+    southEast:
+    - {fileID: 21300000, guid: b7180793d52e6264db4787146589e2c1, type: 3}
+    - {fileID: 21300000, guid: 3887f47542849f54b9bd996f013e7e74, type: 3}
+    - {fileID: 21300000, guid: 4b4b3d2b9e2ed444ebdfb0757dce1588, type: 3}
+    - {fileID: 21300000, guid: 5cb20ef4592d2fc44b54202fd32793c4, type: 3}

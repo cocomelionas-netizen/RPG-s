@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 10837c2fd237093439630e17235ccf49
+guid: 5cb20ef4592d2fc44b54202fd32793c4
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3912490384911331326
-    second: Player_Placeholder_0
+      213: 7761528190736534681
+    second: Player_Walk_SouthEast_3_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -115,13 +115,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Player_Placeholder_0
+      name: Player_Walk_SouthEast_3_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 128
-        height: 192
+        x: 19
+        y: 1
+        width: 90
+        height: 169
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -130,8 +130,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: eff65cb9645fb4630800000000000000
-      internalID: 3912490384911331326
+      spriteID: 99c080364cc76bb60800000000000000
+      internalID: 7761528190736534681
       vertices: []
       indices: 
       edges: []
@@ -149,7 +149,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Player_Walk_SouthEast_3_0: 7761528190736534681
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -82,52 +82,163 @@ namespace RPG.EditorTools
             return SaveSprite(texture, name, new Vector2(0.5f, 0.2f));
         }
 
-        public static Sprite Character(string name, Color cloakColor)
+        /// <summary>
+        /// One animation frame of the placeholder character facing a screen direction.
+        /// Eyes and a chest buckle show which way it faces; feet and a body bob show walking.
+        /// </summary>
+        /// <param name="facing">Normalized screen-space facing direction.</param>
+        /// <param name="bob">Vertical body offset in pixels.</param>
+        /// <param name="stride">Foot offset along the facing direction, -1..1.</param>
+        public static Sprite CharacterFrame(string folder, string name, Color cloakColor, Vector2 facing, float bob, float stride)
         {
             const int width = 128;
             const int height = 192;
+            const float feetY = 14f;
             var texture = new Texture2D(width, height, TextureFormat.RGBA32, false);
             var skin = new Color(0.93f, 0.78f, 0.64f);
+            var hood = cloakColor * 0.7f;
+            var dark = new Color(0.12f, 0.1f, 0.1f);
+            var gold = new Color(0.95f, 0.78f, 0.3f);
+
+            bool facesCamera = facing.y < 0.35f;
+            var leftFoot = new Vector2(-11f, feetY + 3f) + new Vector2(facing.x * 9f, facing.y * 4f) * stride;
+            var rightFoot = new Vector2(11f, feetY + 3f) - new Vector2(facing.x * 9f, facing.y * 4f) * stride;
+            var headCenter = new Vector2(0f, 144f + bob);
+            var eyeCenter = headCenter + new Vector2(facing.x * 11f, -3f);
+            float eyeSpread = Mathf.Lerp(7f, 2.5f, Mathf.Abs(facing.x));
+            var buckle = new Vector2(facing.x * 13f, 70f + bob);
 
             for (int y = 0; y < height; y++)
             for (int x = 0; x < width; x++)
             {
-                float cx = x + 0.5f - width * 0.5f;
+                var p = new Vector2(x + 0.5f - width * 0.5f, y + 0.5f);
                 Color color = Color.clear;
 
                 // Ground shadow.
-                float shadow = Mathf.Clamp01(1f - new Vector2(cx / 44f, (y - 14f) / 12f).magnitude) * 0.4f;
+                float shadow = Mathf.Clamp01(1f - new Vector2(p.x / 44f, (p.y - feetY) / 12f).magnitude) * 0.4f;
                 if (shadow > 0f) color = new Color(0f, 0f, 0f, shadow);
 
+                // Feet.
+                if (Ellipse(p, leftFoot, 9f, 5f) || Ellipse(p, rightFoot, 9f, 5f))
+                    color = dark;
+
                 // Cloak: a rounded cone from the feet to the shoulders.
-                float bodyHalfWidth = Mathf.Lerp(34f, 22f, Mathf.InverseLerp(14f, 120f, y));
-                if (y >= 14 && y <= 124 && Mathf.Abs(cx) <= bodyHalfWidth)
+                float bodyBottom = feetY + 6f + bob;
+                float bodyTop = 124f + bob;
+                float bodyHalfWidth = Mathf.Lerp(34f, 22f, Mathf.InverseLerp(bodyBottom, bodyTop, p.y));
+                if (p.y >= bodyBottom && p.y <= bodyTop && Mathf.Abs(p.x) <= bodyHalfWidth)
                 {
-                    float side = cx / bodyHalfWidth;
+                    float side = p.x / bodyHalfWidth;
                     color = cloakColor * Mathf.Lerp(1.15f, 0.65f, (side + 1f) * 0.5f);
                     color.a = 1f;
                 }
 
-                // Head.
-                float head = new Vector2(cx, y - 144f).magnitude;
-                if (head <= 22f)
+                if (facesCamera && (p - buckle).magnitude <= 5f)
+                    color = gold;
+
+                // Head: face when looking towards the camera, hood when looking away.
+                if ((p - headCenter).magnitude <= 22f)
                 {
-                    color = skin * Mathf.Lerp(1.05f, 0.75f, Mathf.Clamp01((cx + 10f) / 32f));
+                    float light = Mathf.Lerp(1.05f, 0.75f, Mathf.Clamp01((p.x + 10f) / 32f));
+                    color = (facesCamera ? skin : hood) * light;
                     color.a = 1f;
+
+                    if (facesCamera &&
+                        ((p - (eyeCenter + Vector2.left * eyeSpread)).magnitude <= 2.6f ||
+                         (p - (eyeCenter + Vector2.right * eyeSpread)).magnitude <= 2.6f))
+                        color = dark;
                 }
 
                 texture.SetPixel(x, y, color);
             }
 
             // Pivot at the feet: position = where the character stands.
-            return SaveSprite(texture, name, new Vector2(0.5f, 14f / height));
+            return SaveSprite(texture, folder, name, new Vector2(0.5f, feetY / height));
+        }
+
+        public static Sprite Tree(string name, int seed)
+        {
+            const int width = 256;
+            const int height = 448;
+            const float baseY = 36f;
+            var texture = new Texture2D(width, height, TextureFormat.RGBA32, false);
+            var light = new Vector2(-0.6f, 0.8f).normalized;
+            var leafDark = new Color(0.12f, 0.26f, 0.12f);
+            var leafLight = new Color(0.36f, 0.56f, 0.24f);
+            Vector2[] blobs = { new Vector2(0f, 300f), new Vector2(-52f, 250f), new Vector2(54f, 246f), new Vector2(0f, 370f) };
+            float[] blobRadius = { 92f, 64f, 62f, 58f };
+
+            for (int y = 0; y < height; y++)
+            for (int x = 0; x < width; x++)
+            {
+                var p = new Vector2(x + 0.5f - width * 0.5f, y + 0.5f);
+                Color color = Color.clear;
+
+                float shadow = Mathf.Clamp01(1f - new Vector2(p.x / 90f, (p.y - baseY) / 24f).magnitude) * 0.45f;
+                if (shadow > 0f) color = new Color(0f, 0f, 0f, shadow);
+
+                // Trunk, slightly wider at the base.
+                float trunkHalfWidth = Mathf.Lerp(20f, 12f, Mathf.InverseLerp(baseY, 240f, p.y));
+                if (p.y >= baseY && p.y <= 260f && Mathf.Abs(p.x) <= trunkHalfWidth)
+                {
+                    color = new Color(0.36f, 0.24f, 0.15f) * Mathf.Lerp(1.15f, 0.7f, (p.x / trunkHalfWidth + 1f) * 0.5f);
+                    color.a = 1f;
+                }
+
+                // Canopy: overlapping noisy circles shaded from the top-left.
+                for (int i = 0; i < blobs.Length; i++)
+                {
+                    Vector2 local = (p - blobs[i]) / blobRadius[i];
+                    float wobble = (Mathf.PerlinNoise(seed + x * 0.05f, seed + y * 0.05f) - 0.5f) * 0.3f;
+                    if (local.magnitude + wobble > 1f) continue;
+
+                    float shade = Mathf.Clamp01(0.5f + Vector2.Dot(local, light) * 0.5f);
+                    float grain = Mathf.PerlinNoise(seed * 3f + x * 0.18f, y * 0.18f) * 0.25f;
+                    color = Color.Lerp(leafDark, leafLight, shade * 0.8f + grain);
+                    color.a = 1f;
+                }
+
+                texture.SetPixel(x, y, color);
+            }
+
+            // Pivot at the trunk base so characters sort in front of / behind the tree correctly.
+            return SaveSprite(texture, Folder, name, new Vector2(0.5f, baseY / height));
+        }
+
+        /// <summary>A flat isometric ring for ground markers (click destination, target circles).</summary>
+        public static Sprite GroundRing(string name, Color color)
+        {
+            const int width = 128;
+            const int height = 64;
+            var texture = new Texture2D(width, height, TextureFormat.RGBA32, false);
+
+            for (int y = 0; y < height; y++)
+            for (int x = 0; x < width; x++)
+            {
+                float d = new Vector2((x + 0.5f - width * 0.5f) / (width * 0.5f), (y + 0.5f - height * 0.5f) / (height * 0.5f)).magnitude;
+                // Soft ring between 70% and 95% of the radius.
+                float alpha = Mathf.Clamp01(1f - Mathf.Abs(d - 0.82f) / 0.13f);
+                texture.SetPixel(x, y, new Color(color.r, color.g, color.b, alpha * color.a));
+            }
+
+            return SaveSprite(texture, Folder, name, new Vector2(0.5f, 0.5f));
+        }
+
+        private static bool Ellipse(Vector2 p, Vector2 center, float radiusX, float radiusY)
+        {
+            return new Vector2((p.x - center.x) / radiusX, (p.y - center.y) / radiusY).sqrMagnitude <= 1f;
         }
 
         private static Sprite SaveSprite(Texture2D texture, string name, Vector2 pivot)
         {
+            return SaveSprite(texture, Folder, name, pivot);
+        }
+
+        private static Sprite SaveSprite(Texture2D texture, string folder, string name, Vector2 pivot)
+        {
             texture.Apply();
-            Directory.CreateDirectory(Folder);
-            string path = $"{Folder}/{name}.png";
+            Directory.CreateDirectory(folder);
+            string path = $"{folder}/{name}.png";
             File.WriteAllBytes(path, texture.EncodeToPNG());
             Object.DestroyImmediate(texture);
 

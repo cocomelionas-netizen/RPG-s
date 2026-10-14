@@ -21,15 +21,19 @@ Assets/_Project/
     Characters/        Player.prefab ir kt.
     World/             pasaulio objektai
   Scenes/              World_Test.unity
+  Data/
+    Characters/        animacijų rinkiniai (CharacterAnimationSet)
   Settings/Rendering/  Renderer2D.asset (2D Renderer, izometrinis rūšiavimas)
   Tiles/               Tile asset'ai tilemap'ams
   Scripts/
     Runtime/           žaidimo kodas (assembly RPG.Runtime, namespace RPG.*)
       CameraSystem/    CameraFollow
+      Characters/      Direction8, CharacterAnimationSet, CharacterAnimator
       Controls/        PlayerInputReader
       Player/          PlayerMovement
-      Core/, World/    rezervuota kitiems etapams
-    Editor/            redaktoriaus įrankiai (RPG meniu)
+      World/           ClickMarker
+      Core/            rezervuota kitiems etapams
+    Editor/            redaktoriaus įrankiai (RPG meniu), grafikos importo taisyklės
   Tests/
     PlayMode/          automatiniai testai (assembly RPG.Tests.PlayMode)
 Docs/                  ši dokumentacija (Unity jos neimportuoja)
@@ -38,14 +42,15 @@ Docs/                  ši dokumentacija (Unity jos neimportuoja)
 Principai:
 - **Input atskirtas nuo logikos.** Įvestį skaito tik `PlayerInputReader`. Vėliau jį bus galima pakeisti tinklo komandomis arba klavišų perskyrimu.
 - **Runtime kodas turi savo assembly** (`RPG.Runtime.asmdef`). Taip greičiau kompiliuojasi, o vėliau lengviau atskirti serverio ir kliento kodą.
-- **Scena generuojama įrankiu** (`RPG > Stage 1 > Build Test Scene`), todėl bet kada ją galima atkurti nuo nulio.
+- **Scena generuojama įrankiu** (`RPG > Build Test Scene`), todėl bet kada ją galima atkurti nuo nulio.
+- **Pateikimas atskirtas nuo judėjimo.** `CharacterAnimator` skaito sąsają `ICharacterMotionSource`, todėl tas pats komponentas tiks žaidėjui, monstrams ir tinklo veikėjams.
 
 ## Etapų planas
 
 | # | Etapas | Būsena |
 |---|--------|--------|
 | 1 | Projekto struktūra, izometrinis žemėlapis, kamera, judėjimas pele ir WASD | ✅ [Stage1.md](Stage1.md) |
-| 2 | Veikėjo pateikimas: 8 krypčių animacijos, paspaudimo žymeklis, aukštų objektų rūšiavimas, HD tapytos grafikos importo taisyklės | ⏳ |
+| 2 | Veikėjo pateikimas: 8 krypčių animacijos, paspaudimo žymeklis, aukštų objektų rūšiavimas, HD tapytos grafikos importo taisyklės | ✅ [Stage2.md](Stage2.md) |
 | 3 | Multiplayer pagrindas: dedikuotas serveris, serverio autoritetas judėjimui, prisijungimas | ⏳ |
 | 4 | Taikinio pasirinkimas ir realaus laiko kova (HP, žala, auto-attack) | ⏳ |
 | 5 | Monstrai ir jų AI (spawn, aggro, kelio paieška tilemap'e) | ⏳ |
