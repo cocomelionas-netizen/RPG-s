@@ -1,5 +1,7 @@
+using System.Collections.Generic;
 using RPG.Characters;
 using RPG.Controls;
+using RPG.Navigation;
 using UnityEngine;
 
 namespace RPG.Player
@@ -8,6 +10,7 @@ namespace RPG.Player
     /// Moves the player on the isometric map with WASD (screen-relative)
     /// or click-to-move (click or hold the left mouse button).
     /// Keyboard input always cancels the current click destination.
+    /// Click-to-move walks around rocks and trees when the scene has a <see cref="WorldNavigation"/>.
     /// </summary>
     [RequireComponent(typeof(Rigidbody2D))]
     public class PlayerMovement : MonoBehaviour, ICharacterMotionSource
@@ -22,6 +25,11 @@ namespace RPG.Player
         [SerializeField, Min(0.01f)] private float stopDistance = 0.05f;
         [Tooltip("Click-to-move is cancelled when the player is blocked for this many seconds.")]
         [SerializeField, Min(0f)] private float blockedTimeout = 0.25f;
+        [Tooltip("While the destination keeps changing (holding the mouse button, following a target), the route is planned at most this often.")]
+        [SerializeField, Min(0f)] private float repathInterval = 0.15f;
+
+        private const float WaypointReachedDistance = 0.1f;
+        private const float ReplanImmediatelyDistance = 1f;
 
         private Rigidbody2D body;
         private Vector2 moveDirection;
@@ -30,6 +38,14 @@ namespace RPG.Player
         private Vector2 lastRequestedVelocity;
         private float blockedTimer;
         private bool clickMoveSuppressed;
+
+        // Route to the destination; empty when walking straight to it.
+        private readonly List<Vector2> waypoints = new List<Vector2>();
+        private int waypointIndex;
+        private Vector2 plannedDestination;
+        private bool routeOutdated;
+        private bool routeEndsAtDestination;
+        private float repathTimer;
 
         /// <summary>Last non-zero movement direction. Drives 8-direction animations.</summary>
         public Vector2 FacingDirection { get; private set; } = Vector2.down;
@@ -50,6 +66,10 @@ namespace RPG.Player
 
         private void Update()
         {
+            repathTimer -= Time.deltaTime;
+            if (routeOutdated && destination.HasValue && repathTimer <= 0f)
+                PlanRoute();
+
             Vector2 keyboard = input.MoveInput;
             if (keyboard.sqrMagnitude > 0.01f)
             {
@@ -84,10 +104,13 @@ namespace RPG.Player
 
             if (destination.HasValue)
             {
-                // Do not overshoot the destination on the last physics step.
-                Vector2 toDestination = destination.Value - body.position;
-                if (toDestination.magnitude <= moveSpeed * Time.fixedDeltaTime)
-                    velocity = toDestination / Time.fixedDeltaTime;
+                // Do not overshoot the end of the route on the last physics step.
+                if (IsOnLastLeg)
+                {
+                    Vector2 toTarget = SteeringTarget - body.position;
+                    if (toTarget.magnitude <= moveSpeed * Time.fixedDeltaTime)
+                        velocity = toTarget / Time.fixedDeltaTime;
+                }
 
                 UpdateBlockedCheck();
             }
@@ -100,9 +123,15 @@ namespace RPG.Player
         /// <summary>Starts click-to-move towards a world position.</summary>
         public void SetDestination(Vector2 worldPosition)
         {
-            if (!destination.HasValue)
+            bool isNew = !destination.HasValue;
+            if (isNew)
                 blockedTimer = 0f;
             destination = worldPosition;
+
+            if (isNew || (worldPosition - plannedDestination).sqrMagnitude > ReplanImmediatelyDistance * ReplanImmediatelyDistance)
+                PlanRoute();
+            else if (worldPosition != plannedDestination)
+                routeOutdated = true;
         }
 
         /// <summary>
@@ -124,6 +153,7 @@ namespace RPG.Player
         public void Stop()
         {
             destination = null;
+            ClearRoute();
             moveDirection = Vector2.zero;
             body.linearVelocity = Vector2.zero;
         }
@@ -139,13 +169,51 @@ namespace RPG.Player
 
         private Vector2 DirectionToDestination()
         {
-            Vector2 toDestination = destination.Value - body.position;
-            if (toDestination.magnitude <= stopDistance)
+            // Pass intermediate waypoints without slowing down.
+            while (!IsOnLastLeg && (SteeringTarget - body.position).magnitude <= Mathf.Max(stopDistance, WaypointReachedDistance))
+                waypointIndex++;
+
+            Vector2 toTarget = SteeringTarget - body.position;
+            if (toTarget.magnitude <= stopDistance)
             {
                 destination = null;
+                ClearRoute();
                 return Vector2.zero;
             }
-            return toDestination.normalized;
+            return toTarget.normalized;
+        }
+
+        /// <summary>
+        /// The next point to walk to: a waypoint of the route, or the destination itself on the last leg
+        /// (so a destination that keeps moving is followed between re-plans).
+        /// </summary>
+        private Vector2 SteeringTarget =>
+            waypointIndex < waypoints.Count && (!IsOnLastLeg || !routeEndsAtDestination) ? waypoints[waypointIndex] : destination.Value;
+
+        /// <summary>
+        /// True when walking to the final point. A route around obstacles ends at its last waypoint
+        /// (the nearest walkable spot when the destination itself is blocked).
+        /// </summary>
+        private bool IsOnLastLeg => waypoints.Count == 0 || waypointIndex >= waypoints.Count - 1;
+
+        private void PlanRoute()
+        {
+            ClearRoute();
+            plannedDestination = destination.Value;
+            repathTimer = repathInterval;
+
+            // Without navigation (or without a route) walk straight; being blocked then cancels the move.
+            WorldNavigation navigation = WorldNavigation.Instance;
+            if (navigation != null && !navigation.FindPath(body.position, destination.Value, waypoints))
+                waypoints.Clear();
+            routeEndsAtDestination = waypoints.Count == 0 || waypoints[waypoints.Count - 1] == plannedDestination;
+        }
+
+        private void ClearRoute()
+        {
+            waypoints.Clear();
+            waypointIndex = 0;
+            routeOutdated = false;
         }
 
         private void UpdateBlockedCheck()

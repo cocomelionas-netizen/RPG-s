@@ -58,5 +58,5 @@ Placeholder'iai jau paruošti HD tapytai grafikai, todėl tikrus failus galima t
 
 ## Žinomi apribojimai (spręsime vėliau)
 - ~~Veikėjas be animacijų~~ – padaryta 2 etape.
-- Click-to-move eina tiesia linija, kelio paieškos dar nėra (5 etapas, kartu su monstrų AI).
+- ~~Click-to-move eina tiesia linija~~ – kelio paieška padaryta 5 etape.
 - Viskas veikia tik lokaliai, be tinklo (3 etapas).

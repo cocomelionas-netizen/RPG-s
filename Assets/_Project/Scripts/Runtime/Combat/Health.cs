@@ -31,6 +31,9 @@ namespace RPG.Combat
         /// <summary>Server only: health reached zero.</summary>
         public event Action Died;
 
+        /// <summary>Server only: damage landed: (attacker, or null when unknown; amount).</summary>
+        public event Action<Health, int> DamageTaken;
+
         public int Current => current.Value;
         public int Max => max.Value;
         public float Fraction => max.Value > 0 ? (float)current.Value / max.Value : 0f;
@@ -40,6 +43,9 @@ namespace RPG.Combat
 
         /// <summary>Server only: <see cref="Time.time"/> of the last damage taken.</summary>
         public float LastDamageTime { get; private set; } = float.NegativeInfinity;
+
+        /// <summary>Server only: ignores all damage while set (for example a monster walking back home).</summary>
+        public bool ServerInvulnerable { get; set; }
 
         public override void OnNetworkSpawn()
         {
@@ -55,17 +61,26 @@ namespace RPG.Combat
             return other != null && other != this && other.faction != faction;
         }
 
-        /// <summary>Server only. Ignored for dead units and non-positive amounts.</summary>
-        public void ApplyDamage(int amount, bool critical)
+        /// <summary>Server only. Ignored for dead or invulnerable units and non-positive amounts.</summary>
+        /// <param name="attacker">Who dealt the damage (monsters turn on their attackers); null when unknown.</param>
+        public void ApplyDamage(int amount, bool critical, Health attacker = null)
         {
-            if (!IsServer || IsDead || amount <= 0) return;
+            if (!IsServer || IsDead || ServerInvulnerable || amount <= 0) return;
 
             current.Value = Mathf.Max(0, current.Value - amount);
             LastDamageTime = Time.time;
             DamagedRpc(amount, critical);
+            DamageTaken?.Invoke(attacker, amount);
 
             if (current.Value == 0)
                 Died?.Invoke();
+        }
+
+        /// <summary>Server only: restores some health. Ignored for dead units.</summary>
+        public void Heal(int amount)
+        {
+            if (!IsServer || IsDead || amount <= 0) return;
+            current.Value = Mathf.Min(max.Value, current.Value + amount);
         }
 
         /// <summary>Server only: back to full health (respawn, out-of-combat reset).</summary>

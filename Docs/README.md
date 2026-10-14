@@ -19,6 +19,7 @@ Assets/_Project/
   Audio/
   Prefabs/
     Characters/        Player.prefab ir kt.
+    Monsters/          Goblin.prefab ir kt.
     World/             pasaulio objektai
   Scenes/              World_Test.unity
   Data/
@@ -29,7 +30,9 @@ Assets/_Project/
     Runtime/           žaidimo kodas (assembly RPG.Runtime, namespace RPG.*)
       CameraSystem/    CameraFollow
       Characters/      Direction8, CharacterAnimationSet, CharacterAnimator
-      Combat/          Health, AutoAttack, PlayerTargeting, PlayerRespawn, TrainingDummy
+      Combat/          Health, HealthRegeneration, AutoAttack, PlayerTargeting, PlayerRespawn, TrainingDummy
+      Monsters/        MonsterAI, MonsterMotion, MonsterSpawner
+      Navigation/      NavGrid (A*), WorldNavigation (kelio paieška tilemap'e)
       Controls/        PlayerInputReader
       Networking/      NetworkBootstrap, PlayerNetworkMovement, MovementValidator, OfflineTransport, DevConnectionPanel, DevBot
       Player/          PlayerMovement
@@ -63,7 +66,7 @@ Naujausia versija po kiekvieno push'o į `main` automatiškai sukuriama ir paske
 | 2 | Veikėjo pateikimas: 8 krypčių animacijos, paspaudimo žymeklis, aukštų objektų rūšiavimas, HD tapytos grafikos importo taisyklės | ✅ [Stage2.md](Stage2.md) |
 | 3 | Multiplayer pagrindas: dedikuotas serveris, serverio autoritetas judėjimui, prisijungimas | ✅ [Stage3.md](Stage3.md) |
 | 4 | Taikinio pasirinkimas ir realaus laiko kova (HP, žala, auto-attack) | ✅ [Stage4.md](Stage4.md) |
-| 5 | Monstrai ir jų AI (spawn, aggro, kelio paieška tilemap'e) | ⏳ |
+| 5 | Monstrai ir jų AI (spawn, aggro, kelio paieška tilemap'e) | ✅ [Stage5.md](Stage5.md) |
 | 6 | Gebėjimai, klasės, lygiai ir patirtis | ⏳ |
 | 7 | Inventorius, ginklai, šarvai, loot | ⏳ |
 | 8 | Saugus progreso išsaugojimas serveryje (paskyros, duomenų bazė) | ⏳ |
