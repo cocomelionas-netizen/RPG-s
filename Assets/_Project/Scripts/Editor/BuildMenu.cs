@@ -2,6 +2,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using UnityEditor;
+using UnityEditor.Build;
 using UnityEditor.Build.Reporting;
 using Debug = UnityEngine.Debug;
 
@@ -59,6 +60,29 @@ namespace RPG.EditorTools
             PlayerSettings.WebGL.compressionFormat = WebGLCompressionFormat.Gzip;
             PlayerSettings.WebGL.decompressionFallback = true;
             PlayerSettings.WebGL.dataCaching = true;
+
+            // Build speed over peak runtime speed: this is a small 2D game and builds run on every push.
+            PlayerSettings.SetIl2CppCodeGeneration(NamedBuildTarget.WebGL, Il2CppCodeGeneration.OptimizeSize);
+            SetWasmCodeOptimizationForBuildTimes();
+        }
+
+        /// <summary>
+        /// WebGL "Code Optimization: Shorter Build Time". It lives in the WebGL module's editor assembly and is
+        /// stored per machine, not in the project, so set it before every build (reflection keeps this file
+        /// compiling where the WebGL module is not installed).
+        /// </summary>
+        private static void SetWasmCodeOptimizationForBuildTimes()
+        {
+            foreach (System.Reflection.Assembly assembly in System.AppDomain.CurrentDomain.GetAssemblies())
+            {
+                System.Type settings = assembly.GetType("UnityEditor.WebGL.UserBuildSettings");
+                System.Type optimization = assembly.GetType("UnityEditor.WebGL.WasmCodeOptimization");
+                if (settings == null || optimization == null) continue;
+
+                settings.GetProperty("codeOptimization")?.SetValue(null, System.Enum.Parse(optimization, "BuildTimes"));
+                return;
+            }
+            Debug.LogWarning("[Build] WebGL code optimization setting not found; using the default.");
         }
 
         [MenuItem("RPG/Run/Local Server (last Windows Player build)")]

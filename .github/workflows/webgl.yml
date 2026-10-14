@@ -29,7 +29,11 @@ jobs:
       - name: Free disk space for the Unity image
         uses: jlumbroso/free-disk-space@v1.3.1
         with:
+          # Only the fast deletions; uninstalling apt packages and docker images took most of the 2+ minutes.
           tool-cache: false
+          large-packages: false
+          docker-images: false
+          swap-storage: false
 
       - uses: actions/checkout@v4
         with:
