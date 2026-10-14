@@ -3,7 +3,7 @@
 ## Kaip tai veikia
 
 1. Kiekvienas push'as į `main` (mano iš šio kompiuterio arba debesų sesijos, kai kompiuteris išjungtas) paleidžia **GitHub Actions**.
-2. Actions su Unity 6000.6.4f1 sukuria **WebGL** versiją ir paskelbia ją **GitHub Pages**. Tai užtrunka maždaug 15–25 min; pirmą kartą ilgiau.
+2. Actions su Unity 6000.6.4f1 pirmiausia iš naujo sugeneruoja sceną ir prefab'us (`TestSceneBuilder`, tas pats kaip `RPG > Build Test Scene`), tada sukuria **WebGL** versiją ir paskelbia ją **GitHub Pages**. Tai užtrunka maždaug 15–25 min; pirmą kartą ilgiau.
 3. Žaidimą atsidarai bet kuriame kompiuteryje: **https://cocomelionas-netizen.github.io/RPG-s/**
 4. Jei kodas nesikompiliuoja, build'as nepavyksta ir senoji versija lieka. Klaidą matysi GitHub → **Actions** skiltyje.
 
