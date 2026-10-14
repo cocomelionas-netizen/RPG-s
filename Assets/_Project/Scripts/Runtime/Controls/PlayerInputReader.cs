@@ -1,0 +1,84 @@
+using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
+
+namespace RPG.Controls
+{
+    /// <summary>
+    /// Reads raw player input (WASD / arrows, mouse click, pointer, scroll)
+    /// and exposes it as simple values. Gameplay scripts never read devices directly,
+    /// so input can later be replaced by network commands or rebinding.
+    /// </summary>
+    public class PlayerInputReader : MonoBehaviour
+    {
+        private InputAction moveAction;
+        private InputAction moveClickAction;
+        private InputAction pointAction;
+        private InputAction zoomAction;
+
+        /// <summary>Keyboard movement in screen space, each axis in [-1, 1].</summary>
+        public Vector2 MoveInput => moveAction.ReadValue<Vector2>();
+
+        /// <summary>True while the move mouse button is held.</summary>
+        public bool MoveClickHeld => moveClickAction.IsPressed();
+
+        /// <summary>Pointer position in screen pixels.</summary>
+        public Vector2 PointerPosition => pointAction.ReadValue<Vector2>();
+
+        /// <summary>Scroll this frame: positive = zoom in, negative = zoom out, 0 = none.</summary>
+        public float ZoomDelta
+        {
+            get
+            {
+                float scroll = zoomAction.ReadValue<float>();
+                return Mathf.Approximately(scroll, 0f) ? 0f : Mathf.Sign(scroll);
+            }
+        }
+
+        /// <summary>True when the pointer is over a UI element, so world clicks should be ignored.</summary>
+        public bool IsPointerOverUI => EventSystem.current != null && EventSystem.current.IsPointerOverGameObject();
+
+        private void Awake()
+        {
+            moveAction = new InputAction("Move", InputActionType.Value);
+            moveAction.AddCompositeBinding("2DVector")
+                .With("Up", "<Keyboard>/w")
+                .With("Down", "<Keyboard>/s")
+                .With("Left", "<Keyboard>/a")
+                .With("Right", "<Keyboard>/d");
+            moveAction.AddCompositeBinding("2DVector")
+                .With("Up", "<Keyboard>/upArrow")
+                .With("Down", "<Keyboard>/downArrow")
+                .With("Left", "<Keyboard>/leftArrow")
+                .With("Right", "<Keyboard>/rightArrow");
+
+            moveClickAction = new InputAction("MoveClick", InputActionType.Button, "<Mouse>/leftButton");
+            pointAction = new InputAction("Point", InputActionType.Value, "<Pointer>/position");
+            zoomAction = new InputAction("Zoom", InputActionType.Value, "<Mouse>/scroll/y");
+        }
+
+        private void OnEnable()
+        {
+            moveAction.Enable();
+            moveClickAction.Enable();
+            pointAction.Enable();
+            zoomAction.Enable();
+        }
+
+        private void OnDisable()
+        {
+            moveAction.Disable();
+            moveClickAction.Disable();
+            pointAction.Disable();
+            zoomAction.Disable();
+        }
+
+        private void OnDestroy()
+        {
+            moveAction.Dispose();
+            moveClickAction.Dispose();
+            pointAction.Dispose();
+            zoomAction.Dispose();
+        }
+    }
+}
