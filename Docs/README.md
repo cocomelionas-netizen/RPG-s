@@ -1,0 +1,59 @@
+# RPG-s – 2D izometrinis fantasy MMORPG
+
+Unity 6 (6000.6.4f1), URP su 2D Renderer, C#, Input System.
+Grafika: detali, tapyta HD 2D (ne pixel art, ne 3D). Kol kas naudojami sugeneruoti placeholder'iai.
+
+Kalbos taisyklė: dokumentacija lietuviškai, o visas kodas, failų, klasių ir kintamųjų pavadinimai bei komentarai – angliškai.
+
+## Projekto struktūra
+
+Visas mūsų turinys yra `Assets/_Project/`. Kiti `Assets/` aplankai (`Settings`, `TutorialInfo`, `Scenes`, `Readme.asset`) liko iš Unity šablono.
+
+```
+Assets/_Project/
+  Art/
+    Characters/        tapyti veikėjų sprite'ai (būsimi)
+    Environment/       tapyti žemės tile'ai, uolos, medžiai (būsimi)
+    Placeholder/       laikini sugeneruoti sprite'ai (keisime tikrais)
+    UI/                UI grafika
+  Audio/
+  Prefabs/
+    Characters/        Player.prefab ir kt.
+    World/             pasaulio objektai
+  Scenes/              World_Test.unity
+  Settings/Rendering/  Renderer2D.asset (2D Renderer, izometrinis rūšiavimas)
+  Tiles/               Tile asset'ai tilemap'ams
+  Scripts/
+    Runtime/           žaidimo kodas (assembly RPG.Runtime, namespace RPG.*)
+      CameraSystem/    CameraFollow
+      Controls/        PlayerInputReader
+      Player/          PlayerMovement
+      Core/, World/    rezervuota kitiems etapams
+    Editor/            redaktoriaus įrankiai (RPG meniu)
+  Tests/
+    PlayMode/          automatiniai testai (assembly RPG.Tests.PlayMode)
+Docs/                  ši dokumentacija (Unity jos neimportuoja)
+```
+
+Principai:
+- **Input atskirtas nuo logikos.** Įvestį skaito tik `PlayerInputReader`. Vėliau jį bus galima pakeisti tinklo komandomis arba klavišų perskyrimu.
+- **Runtime kodas turi savo assembly** (`RPG.Runtime.asmdef`). Taip greičiau kompiliuojasi, o vėliau lengviau atskirti serverio ir kliento kodą.
+- **Scena generuojama įrankiu** (`RPG > Stage 1 > Build Test Scene`), todėl bet kada ją galima atkurti nuo nulio.
+
+## Etapų planas
+
+| # | Etapas | Būsena |
+|---|--------|--------|
+| 1 | Projekto struktūra, izometrinis žemėlapis, kamera, judėjimas pele ir WASD | ✅ [Stage1.md](Stage1.md) |
+| 2 | Veikėjo pateikimas: 8 krypčių animacijos, paspaudimo žymeklis, aukštų objektų rūšiavimas, HD tapytos grafikos importo taisyklės | ⏳ |
+| 3 | Multiplayer pagrindas: dedikuotas serveris, serverio autoritetas judėjimui, prisijungimas | ⏳ |
+| 4 | Taikinio pasirinkimas ir realaus laiko kova (HP, žala, auto-attack) | ⏳ |
+| 5 | Monstrai ir jų AI (spawn, aggro, kelio paieška tilemap'e) | ⏳ |
+| 6 | Gebėjimai, klasės, lygiai ir patirtis | ⏳ |
+| 7 | Inventorius, ginklai, šarvai, loot | ⏳ |
+| 8 | Saugus progreso išsaugojimas serveryje (paskyros, duomenų bazė) | ⏳ |
+| 9 | Užduotys ir NPC | ⏳ |
+| 10 | Požemiai (instancijos) | ⏳ |
+| 11 | PvP | ⏳ |
+
+Multiplayer'is planuojamas anksti (3 etapas) sąmoningai. Kovą, monstrus ir daiktus iškart rašysime serverio autoriteto principu, kad vėliau nereikėtų jų perrašinėti.
