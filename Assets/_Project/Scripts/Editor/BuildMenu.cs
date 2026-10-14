@@ -46,9 +46,22 @@ namespace RPG.EditorTools
             Build(WebGLFolder, BuildTarget.WebGL, 0, BuildOptions.None);
         }
 
-        /// <summary>Batch mode / CI entry: Unity.exe -batchmode -projectPath . -executeMethod RPG.EditorTools.BuildMenu.BuildWebGLFromCommandLine -quit</summary>
+        /// <summary>Batch mode / CI entry (rebuilds the test scene first): Unity.exe -batchmode -projectPath . -executeMethod RPG.EditorTools.BuildMenu.BuildWebGLFromCommandLine -quit</summary>
         public static void BuildWebGLFromCommandLine()
         {
+            // Regenerate the scene and prefabs so TestSceneBuilder changes reach the browser build
+            // without anyone opening the editor to run RPG > Build Test Scene.
+            try
+            {
+                TestSceneBuilder.Build();
+            }
+            catch (System.Exception exception)
+            {
+                Debug.LogException(exception);
+                EditorApplication.Exit(1);
+                return;
+            }
+
             ConfigureWebGL();
             if (!Build(WebGLFolder, BuildTarget.WebGL, 0, BuildOptions.None))
                 EditorApplication.Exit(1);

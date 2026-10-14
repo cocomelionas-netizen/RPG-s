@@ -52,7 +52,8 @@ namespace RPG.EditorTools
         [MenuItem("RPG/Build Test Scene")]
         public static void Build()
         {
-            if (!EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo())
+            // Batch mode (CI builds) has no user to ask and nothing open worth saving.
+            if (!Application.isBatchMode && !EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo())
                 return;
 
             Setup2DRendering();
