@@ -31,7 +31,7 @@ Assets/_Project/
       Characters/      Direction8, CharacterAnimationSet, CharacterAnimator
       Combat/          Health, AutoAttack, PlayerTargeting, PlayerRespawn, TrainingDummy
       Controls/        PlayerInputReader
-      Networking/      NetworkBootstrap, PlayerNetworkMovement, MovementValidator, DevConnectionPanel, DevBot
+      Networking/      NetworkBootstrap, PlayerNetworkMovement, MovementValidator, OfflineTransport, DevConnectionPanel, DevBot
       Player/          PlayerMovement
       UI/              UnitFrame, CombatTextLayer
       World/           ClickMarker
@@ -39,6 +39,7 @@ Assets/_Project/
     Editor/            redaktoriaus įrankiai (RPG meniu), grafikos importo taisyklės, build meniu
   Tests/
     PlayMode/          automatiniai testai (assembly RPG.Tests.PlayMode)
+.github/workflows/     GitHub Actions: WebGL build'as ir paskelbimas GitHub Pages
 Docs/                  ši dokumentacija (Unity jos neimportuoja)
 Builds/                build'ai (git'e ignoruojama)
 ```
@@ -49,6 +50,10 @@ Principai:
 - **Scena generuojama įrankiu** (`RPG > Build Test Scene`), todėl bet kada ją galima atkurti nuo nulio.
 - **Serveris turi paskutinį žodį.** Klientas prognozuoja savo judėjimą, bet serveris jį tikrina ir taiso. Taip pat bus daroma su kova, daiktais ir progresu.
 - **Pateikimas atskirtas nuo judėjimo.** `CharacterAnimator` skaito sąsają `ICharacterMotionSource`, todėl tas pats komponentas tiks žaidėjui, monstrams ir tinklo veikėjams.
+
+## Žaidimas naršyklėje
+
+Naujausia versija po kiekvieno push'o į `main` automatiškai sukuriama ir paskelbiama: **https://cocomelionas-netizen.github.io/RPG-s/** (Offline režimas). Kaip tai paruošti: [WebGL.md](WebGL.md).
 
 ## Etapų planas
 

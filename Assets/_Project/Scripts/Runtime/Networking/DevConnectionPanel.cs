@@ -4,7 +4,8 @@ using UnityEngine;
 namespace RPG.Networking
 {
     /// <summary>
-    /// Developer connection panel (IMGUI) for testing: Host / Client / Server buttons, address and port.
+    /// Developer connection panel (IMGUI) for testing: Offline / Host / Client / Server buttons, address and port.
+    /// In a browser only Offline and Client are offered (browsers cannot host).
     /// Collapses to a status line once connected. The real login screen replaces it in Stage 8.
     /// F1 toggles it.
     /// </summary>
@@ -36,7 +37,7 @@ namespace RPG.Networking
             NetworkManager network = bootstrap.Network;
             bool running = network.IsListening || network.ShutdownInProgress;
 
-            GUILayout.BeginArea(new Rect(10f, 10f, 240f, running ? 70f : 170f), GUI.skin.box);
+            GUILayout.BeginArea(new Rect(10f, 10f, 260f, running ? 70f : 195f), GUI.skin.box);
             if (running)
                 DrawStatus(network);
             else
@@ -57,10 +58,11 @@ namespace RPG.Networking
             GUILayout.EndHorizontal();
 
             ushort portNumber = ushort.TryParse(port, out ushort parsed) ? parsed : NetworkLaunchOptions.DefaultPort;
+            if (GUILayout.Button("Offline (single player)")) bootstrap.StartOffline();
             GUILayout.BeginHorizontal();
-            if (GUILayout.Button("Host")) bootstrap.StartHost(portNumber);
+            if (!NetworkBootstrap.IsBrowser && GUILayout.Button("Host")) bootstrap.StartHost(portNumber);
             if (GUILayout.Button("Client")) bootstrap.StartClient(address, portNumber);
-            if (GUILayout.Button("Server")) bootstrap.StartServer(portNumber);
+            if (!NetworkBootstrap.IsBrowser && GUILayout.Button("Server")) bootstrap.StartServer(portNumber);
             GUILayout.EndHorizontal();
 
             if (!string.IsNullOrEmpty(bootstrap.LastDisconnectReason))
@@ -71,6 +73,7 @@ namespace RPG.Networking
         {
             string status;
             if (network.ShutdownInProgress) status = "Shutting down...";
+            else if (bootstrap.IsOffline) status = "Offline - single player";
             else if (network.IsHost) status = $"Host - players online: {network.ConnectedClientsIds.Count}";
             else if (network.IsServer) status = $"Server - players online: {network.ConnectedClientsIds.Count}";
             else if (network.IsConnectedClient) status = $"Client - connected (id {network.LocalClientId})";
