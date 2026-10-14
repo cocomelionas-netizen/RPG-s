@@ -29,10 +29,20 @@ namespace RPG.Characters
             set => animationSet = value;
         }
 
+        /// <summary>
+        /// What drives the animation. Defaults to the first <see cref="ICharacterMotionSource"/> on this object;
+        /// set it when several exist (for example local movement vs. network replication).
+        /// </summary>
+        public ICharacterMotionSource MotionSource
+        {
+            get => motion;
+            set => motion = value;
+        }
+
         private void Awake()
         {
             spriteRenderer = GetComponent<SpriteRenderer>();
-            motion = GetComponent<ICharacterMotionSource>();
+            if (motion == null) motion = GetComponent<ICharacterMotionSource>();
         }
 
         /// <summary>Plays a non-looping clip once, then returns to Idle/Walk.</summary>
