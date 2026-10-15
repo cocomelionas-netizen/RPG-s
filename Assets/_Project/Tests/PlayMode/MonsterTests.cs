@@ -162,6 +162,31 @@ namespace RPG.Tests
         }
 
         [UnityTest]
+        public IEnumerator Monster_GivingUpMidChase_StillReachesHomeAndHeals()
+        {
+            // Chasing: it has just planned a route towards the player when it has to give up.
+            MonsterAI goblin = SpawnGoblin(new Vector2(2.5f, 0f));
+            goblin.AggroRadius = 3f;
+            var goblinHealth = goblin.GetComponent<Health>();
+            yield return null;
+            goblinHealth.ApplyDamage(10, false, playerHealth);
+            yield return new WaitForSeconds(0.3f);
+            Assert.AreEqual(MonsterState.Chase, goblin.State);
+
+            Vector2 home = (Vector2)goblin.transform.position + new Vector2(2f, 0f);
+            goblin.LeashRadius = 1f;
+            goblin.Home = home;
+
+            float end = Time.time + 4f;
+            while (goblin.State != MonsterState.Idle && Time.time < end)
+                yield return null;
+
+            Assert.AreEqual(MonsterState.Idle, goblin.State, "Reached home instead of stopping on the old route.");
+            Assert.Less(Vector2.Distance(goblin.transform.position, home), 0.2f);
+            Assert.AreEqual(goblinHealth.Max, goblinHealth.Current);
+        }
+
+        [UnityTest]
         public IEnumerator Monster_DiesAndIsRemoved()
         {
             MonsterAI goblin = SpawnGoblin(new Vector2(5f, 0f));

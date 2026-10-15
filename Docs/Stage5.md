@@ -12,7 +12,7 @@
   |--------|-----------|
   | **Ramybė** | Lėtai vaikšto aplink savo vietą (iki 1.2 vieneto), stabteli 3–8 s. |
   | **Kova** | Žaidėjas priartėja per 3 vienetus arba smogia goblinui. Goblinas eina prie jo ir muša. Netoliese ramiai stovintys goblinai (iki 2.5 vieneto) prisijungia. |
-  | **Grįžimas** | Goblinas grįžta namo ir atgauna visą HP. Grįždamas jis nekreipia dėmesio į smūgius ir jų nejaučia. |
+  | **Grįžimas** | Goblinas grįžta namo ir atgauna visą HP. Grįždamas jis nekreipia dėmesio į smūgius ir jų nejaučia. Jei kelyje kažkur užstringa ilgiau nei 10 s, perkeliamas namo. |
   | **Mirtis** | Pilkas kūnas guli 3 s ir dingsta. Po 20 s stovykla atsiunčia naują gobliną. |
 
   Goblinas grįžta namo, kai:

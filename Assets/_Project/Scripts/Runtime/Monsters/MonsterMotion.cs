@@ -23,6 +23,8 @@ namespace RPG.Monsters
         [SerializeField, Min(0.05f)] private float repathInterval = 0.4f;
 
         private const float RepathDistance = 0.25f;
+        // A goal this far from the planned one (for example home instead of a player) is planned at once.
+        private const float NewGoalDistance = 1f;
 
         private readonly NetworkVariable<MotionState> state = new NetworkVariable<MotionState>(
             default, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
@@ -68,19 +70,24 @@ namespace RPG.Monsters
 
         // ---------- Server ----------
 
-        /// <summary>Server only: walks towards a world position. Calling it every frame with a moving goal is fine.</summary>
+        /// <summary>
+        /// Server only: walks towards a world position. Calling it every frame with a moving goal is fine:
+        /// small goal changes are re-planned at most every repath interval, a new goal far from the old one at once.
+        /// </summary>
         public void ServerMoveTo(Vector2 goal, float speedMultiplier = 1f)
         {
             if (!IsServer) return;
 
             speedScale = Mathf.Max(0.01f, speedMultiplier);
             bool pathUsedUp = pathIndex >= path.Count;
-            bool goalMoved = (goal - pathGoal).sqrMagnitude > RepathDistance * RepathDistance;
+            float goalShift = (goal - pathGoal).sqrMagnitude;
+            bool goalMoved = goalShift > RepathDistance * RepathDistance;
+            bool newGoal = goalShift > NewGoalDistance * NewGoalDistance;
             destination = goal;
 
             // A failed search is not retried every frame: it may have searched the whole map.
             bool mayRepath = repathTimer <= 0f || !PathFailed;
-            if ((pathUsedUp && mayRepath) || (goalMoved && repathTimer <= 0f))
+            if ((pathUsedUp && mayRepath) || (goalMoved && repathTimer <= 0f) || (newGoal && !PathFailed))
                 Repath();
         }
 
