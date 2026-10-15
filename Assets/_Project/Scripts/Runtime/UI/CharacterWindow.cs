@@ -113,7 +113,7 @@ namespace RPG.UI
             if (input != null && input.enabled && input.CharacterPressed) Toggle();
             if (!window.activeSelf) return;
 
-            title.text = $"Level {progress.Level} {progress.ClassName}";
+            title.text = $"Level {progress.Level} {progress.ClassName}  <size=15><color=#ffd973>{LevelCurve.RankName(progress.Level)}</color></size>";
             points.text = progress.UnspentPoints > 0 ? $"{progress.UnspentPoints} points to spend" : "Level up to earn attribute points";
 
             AttributeSet total = progress.TotalAttributes;

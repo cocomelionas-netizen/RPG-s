@@ -12,7 +12,7 @@ namespace RPG.UI
 {
     /// <summary>
     /// The zone name and a square map around the local player: walkable ground, obstacles, and dots for
-    /// players, monsters, vendors, portals and waystones. Each map's picture is drawn once from its navigation grid.
+    /// players, monsters, vendors, portals, waystones and chests. Each map's picture is drawn once from its navigation grid.
     /// Builds its own UI; place it on a RectTransform about 240 x 270 in the top right of the HUD canvas.
     /// </summary>
     [RequireComponent(typeof(RectTransform))]
@@ -33,6 +33,7 @@ namespace RPG.UI
         private static readonly Color VendorColor = new Color(1f, 0.85f, 0.3f);
         private static readonly Color PortalColor = new Color(0.75f, 0.45f, 1f);
         private static readonly Color WaystoneColor = new Color(0.3f, 0.95f, 0.9f);
+        private static readonly Color ChestColor = new Color(0.85f, 0.6f, 0.3f);
 
         private readonly Dictionary<WorldNavigation, Texture2D> pictures = new Dictionary<WorldNavigation, Texture2D>();
         private readonly List<Image> dots = new List<Image>();
@@ -103,6 +104,8 @@ namespace RPG.UI
                 if (vendor != null) Dot(vendor.transform.position, center, scale, VendorColor, 8f);
             foreach (Waystone stone in Waystone.All)
                 if (stone != null) Dot(stone.transform.position, center, scale, WaystoneColor, 9f);
+            foreach (LootChest chest in LootChest.All)
+                if (chest != null) Dot(chest.transform.position, center, scale, ChestColor, 6f);
             foreach (Health unit in Health.Spawned)
             {
                 if (unit == null || unit == self || unit.IsDead) continue;

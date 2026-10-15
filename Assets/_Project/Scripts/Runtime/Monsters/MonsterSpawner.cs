@@ -16,6 +16,8 @@ namespace RPG.Monsters
         [SerializeField, Min(0)] private int count = 3;
         [SerializeField, Min(0f)] private float radius = 1.2f;
         [SerializeField, Min(0f)] private float respawnSeconds = 20f;
+        [Tooltip("Chance that a spawned monster is an elite (tougher, better rewards).")]
+        [SerializeField, Range(0f, 1f)] private float eliteChance = 0.08f;
 
         private readonly List<NetworkObject> alive = new List<NetworkObject>();
         private readonly List<float> respawnTimes = new List<float>();
@@ -23,6 +25,12 @@ namespace RPG.Monsters
 
         /// <summary>Server only: the monsters of this camp that are currently spawned.</summary>
         public IReadOnlyList<NetworkObject> Alive => alive;
+
+        public float EliteChance
+        {
+            get => eliteChance;
+            set => eliteChance = Mathf.Clamp01(value);
+        }
 
         public float RespawnSeconds
         {
@@ -98,6 +106,7 @@ namespace RPG.Monsters
 
             var networkObject = monster.GetComponent<NetworkObject>();
             networkObject.Spawn(destroyWithScene: true);
+            if (ai != null && Random.value < eliteChance) ai.ServerMakeElite();
             alive.Add(networkObject);
         }
     }

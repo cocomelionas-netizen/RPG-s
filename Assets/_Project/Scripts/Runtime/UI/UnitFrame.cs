@@ -128,7 +128,9 @@ namespace RPG.UI
 
         private static string Subtitle(Health unit)
         {
-            return unit.TryGetComponent(out CharacterProgress progress) ? $"  <size=14>{progress.ClassName}</size>" : "";
+            if (unit.TryGetComponent(out CharacterProgress progress))
+                return $"  <size=14>{progress.ClassName} · {LevelCurve.RankName(progress.Level)}</size>";
+            return unit.TryGetComponent(out MonsterAI monster) && monster.IsElite ? "  <size=14><color=#ffbf33>Elite</color></size>" : "";
         }
 
         private void LateUpdate()
