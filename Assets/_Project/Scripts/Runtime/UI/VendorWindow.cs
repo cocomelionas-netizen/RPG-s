@@ -138,7 +138,12 @@ namespace RPG.UI
             for (int i = 0; i < stock.Length; i++)
                 rows.Add(CreateRow(i));
 
-            combineButton.gameObject.SetActive(definition != null && definition.combinesGems);
+            bool combines = definition != null && (definition.combinesGems || definition.combinesPotions);
+            combineButton.gameObject.SetActive(combines);
+            if (combines)
+                combineButton.GetComponentInChildren<Text>().text = definition.combinesGems
+                    ? "Combine gems (3 of a kind = 1 better)"
+                    : "Combine potions (5 of a kind = 1 stronger)";
             shownRecipes.Clear();
             shownRecipes.Add(-1); // Forces the craft rows to be laid out.
             window.SetActive(true);
@@ -235,7 +240,9 @@ namespace RPG.UI
         private void CombineGems()
         {
             Inventory inventory = UIFactory.LocalPlayer<Inventory>();
-            if (inventory != null && shown != null) inventory.RequestCombineGems(shown);
+            if (inventory == null || shown == null) return;
+            if (shown.Definition.combinesGems) inventory.RequestCombineGems(shown);
+            else inventory.RequestCombinePotions(shown);
         }
 
         private void Buy(int index)
@@ -320,8 +327,17 @@ namespace RPG.UI
             if (item.manaBonus > 0) parts.Add($"+{item.manaBonus} mana");
             if (!item.attributes.IsZero) parts.Add(item.attributes.Describe("  "));
             if (item.isGem) parts.Add("gem: set into a socket");
-            if (item.use == ItemUse.Heal) parts.Add($"heals {Mathf.RoundToInt(item.healFraction * 100f)}%");
-            if (item.use == ItemUse.RestoreMana) parts.Add($"restores {Mathf.RoundToInt(item.healFraction * 100f)}% mana");
+            if (item.use != ItemUse.None)
+            {
+                string pool = item.use == ItemUse.Heal ? "health" : "mana";
+                string amount = item.restoreAmount > 0 ? $"{item.restoreAmount} {pool}" : $"{Mathf.RoundToInt(item.healFraction * 100f)}% {pool}";
+                parts.Add(item.restoreSeconds > 0f ? $"{amount} over {item.restoreSeconds:0}s" : amount);
+                if (item.itemLevel > 1)
+                {
+                    bool usable = progress == null || item.CanBeUsedAtLevel(progress.Level);
+                    parts.Add(usable ? $"level {item.itemLevel}" : $"<color=#ff6655>level {item.itemLevel}</color>");
+                }
+            }
             string className = ClassName(item, progress);
             if (className != null)
             {

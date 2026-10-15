@@ -43,6 +43,16 @@ namespace RPG.Progression
         }
 
         /// <summary>What killing a monster of <paramref name="monsterLevel"/> is worth (before the outlevelling cut).</summary>
+        /// <summary>
+        /// How a class's health and mana grow, from Dreadmyst's <c>player_class_stats</c>: the level-1 value times the
+        /// level, and half again from level 21 (a warrior: 75, 150 ... 1500 at 20, then 2362.5 at 21, 2812.5 at 25).
+        /// </summary>
+        public static float HealthGrowth(int level)
+        {
+            level = Mathf.Clamp(level, 1, MaxLevel);
+            return level > 20 ? level * 1.5f : level;
+        }
+
         public static int KillExperienceFor(int monsterLevel) => KillExperienceTable[Mathf.Clamp(monsterLevel, 1, MaxLevel) - 1];
 
         /// <summary>

@@ -59,21 +59,29 @@ namespace RPG.Items
         [Min(0)] public int price = 10;
         [Tooltip("Index of the class (in the class catalog) that may equip it; -1 for every class.")]
         public int requiredClass = -1;
-        [Tooltip("The item's level: monsters drop gear around their own level, and a player needs this level to wear it.")]
+        [Tooltip("The item's level: monsters drop gear around their own level, and a player needs this level to wear (or drink) it.")]
         [Range(1, 25)] public int itemLevel = 1;
         [Tooltip("How often it drops among the gear of its level, like Dreadmyst's material chance; 0: never drops by level (only from loot tables and vendors).")]
         [Min(0f)] public float dropWeight = 1f;
 
         [Header("Use")]
         public ItemUse use = ItemUse.None;
+        [Tooltip("Share of max health or mana restored, when Restore Amount is 0.")]
         [Range(0f, 1f)] public float healFraction = 0.35f;
+        [Tooltip("Health or mana restored in all (Dreadmyst potions and serums); 0 uses Heal Fraction instead.")]
+        [Min(0)] public int restoreAmount;
+        [Tooltip("Seconds the restoring takes, a share every 2 seconds (Dreadmyst potions: 20); 0: all at once (serums).")]
+        [Min(0f)] public float restoreSeconds;
         [Min(1)] public int maxStack = 1;
+        [Tooltip("A stronger version that sometimes drops in its place (a serum for a potion).")]
+        public ItemDefinition strongerVariant;
 
         [Header("Gem")]
         [Tooltip("A gem: clicking it sets it into an empty socket of worn gear, where its attributes count.")]
         public bool isGem;
-        [Tooltip("A jeweler turns three of this gem into one of these.")]
+        [Tooltip("A vendor turns Combine Count of this (a gem at a jeweler, a potion at a class vendor) into one of these. For potions also the next tier that drops at its level.")]
         public ItemDefinition combinesInto;
+        [Min(2)] public int combineCount = 3;
 
         [Header("Crafting")]
         [Tooltip("Crafted by a vendor from this material (null: cannot be crafted). Also what drops instead of the piece: monsters drop materials, not gear.")]
@@ -88,6 +96,18 @@ namespace RPG.Items
         public bool IsEquippable => slot != ItemSlot.None;
 
         public bool IsCraftable => craftMaterial != null;
+
+        /// <summary>Whether a player of <paramref name="playerLevel"/> may drink it (potions have a level like gear).</summary>
+        public bool CanBeUsedAtLevel(int playerLevel) => use == ItemUse.None || playerLevel >= itemLevel;
+
+        /// <summary>Seconds between restoring ticks of potions that work over time.</summary>
+        public const float RestoreInterval = 2f;
+
+        /// <summary>How many ticks a potion restores over (1 when it works at once).</summary>
+        public int RestoreTicks => restoreSeconds > 0f ? Mathf.Max(1, Mathf.RoundToInt(restoreSeconds / RestoreInterval)) : 1;
+
+        /// <summary>What one use restores of a pool of <paramref name="max"/>: the fixed amount, or the share of max.</summary>
+        public int RestoreTotal(int max) => restoreAmount > 0 ? restoreAmount : Mathf.Max(1, Mathf.RoundToInt(max * healFraction));
 
         public static Color RarityColor(ItemRarity rarity)
         {
@@ -155,9 +175,15 @@ namespace RPG.Items
             if (!totalAttributes.IsZero) text.AppendLine(totalAttributes.Describe("\n"));
             if (!string.IsNullOrEmpty(socketLine)) text.AppendLine(socketLine);
             if (isGem) text.AppendLine("Set into gear with an empty socket");
-            if (isGem && combinesInto != null) text.AppendLine($"3 combine into {combinesInto.displayName} at a jeweler");
-            if (use == ItemUse.Heal) text.AppendLine($"Use: restores {Mathf.RoundToInt(healFraction * 100f)}% health");
-            if (use == ItemUse.RestoreMana) text.AppendLine($"Use: restores {Mathf.RoundToInt(healFraction * 100f)}% mana");
+            if (isGem && combinesInto != null) text.AppendLine($"{combineCount} combine into {combinesInto.displayName} at a jeweler");
+            if (use != ItemUse.None)
+            {
+                string pool = use == ItemUse.Heal ? "health" : "mana";
+                string amount = restoreAmount > 0 ? $"{restoreAmount} {pool}" : $"{Mathf.RoundToInt(healFraction * 100f)}% {pool}";
+                text.AppendLine(restoreSeconds > 0f ? $"Use: restores {amount} over {restoreSeconds:0} sec" : $"Use: restores {amount}");
+                if (itemLevel > 1) text.AppendLine($"Requires level {itemLevel}");
+                if (combinesInto != null) text.AppendLine($"{combineCount} combine into {combinesInto.displayName} at a vendor");
+            }
             if (maxStack > 1) text.AppendLine($"Stacks up to {maxStack}");
             if (!string.IsNullOrEmpty(className)) text.AppendLine($"{className} only");
             if (IsEquippable) text.AppendLine($"Requires level {itemLevel}");

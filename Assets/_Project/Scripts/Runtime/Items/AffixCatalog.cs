@@ -45,7 +45,7 @@ namespace RPG.Items
             float total = 0f;
             foreach (AffixDefinition affix in affixes)
             {
-                if (affix == null || monsterLevel < affix.minLevel || monsterLevel > affix.maxLevel) continue;
+                if (affix == null || affix.retired || monsterLevel < affix.minLevel || monsterLevel > affix.maxLevel) continue;
                 candidates.Add(affix);
                 total += Weight(affix.quality);
             }
@@ -62,23 +62,28 @@ namespace RPG.Items
 
         /// <summary>
         /// An affix of exactly <paramref name="quality"/> for a guaranteed drop (Dreadmyst's bosses always drop a gold
-        /// item, for example). Prefers affixes meant for <paramref name="monsterLevel"/>, otherwise takes any of that
-        /// quality, otherwise the best quality there is.
+        /// item, for example). Prefers affixes meant for <paramref name="monsterLevel"/>, otherwise those of that quality
+        /// closest to the level, otherwise the best quality there is.
         /// </summary>
         public int RollQuality(ItemDefinition item, int monsterLevel, ItemRarity quality)
         {
             if (item == null || !item.IsEquippable || !item.canHaveAffix) return 0;
 
             candidates.Clear();
+            int closest = int.MaxValue;
             foreach (AffixDefinition affix in affixes)
-                if (affix != null && affix.quality == quality && monsterLevel >= affix.minLevel && monsterLevel <= affix.maxLevel)
-                    candidates.Add(affix);
+            {
+                if (affix == null || affix.retired || affix.quality != quality) continue;
+                int distance = monsterLevel < affix.minLevel ? affix.minLevel - monsterLevel
+                    : monsterLevel > affix.maxLevel ? monsterLevel - affix.maxLevel : 0;
+                if (distance > closest) continue;
+                if (distance < closest) candidates.Clear();
+                closest = distance;
+                candidates.Add(affix);
+            }
             if (candidates.Count == 0)
                 foreach (AffixDefinition affix in affixes)
-                    if (affix != null && affix.quality == quality) candidates.Add(affix);
-            if (candidates.Count == 0)
-                foreach (AffixDefinition affix in affixes)
-                    if (affix != null && (candidates.Count == 0 || affix.quality > candidates[0].quality))
+                    if (affix != null && !affix.retired && (candidates.Count == 0 || affix.quality > candidates[0].quality))
                     {
                         candidates.Clear();
                         candidates.Add(affix);

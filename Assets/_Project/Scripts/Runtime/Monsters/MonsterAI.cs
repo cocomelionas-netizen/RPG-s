@@ -147,16 +147,16 @@ namespace RPG.Monsters
             experienceReward = LevelCurve.KillExperienceFor(level);
         }
 
-        // How much tougher a monster gets per level, roughly as fast as a player grows.
+        // How much tougher a monster gets per level. Its damage grows as fast as players' health does
+        // (LevelCurve.HealthGrowth, Dreadmyst's), so a monster of your level is as dangerous at 25 as at 1.
         private const float HealthPerLevel = 0.15f;
-        private const float DamagePerLevel = 0.12f;
 
         /// <summary>How much more health a monster of <paramref name="toLevel"/> has than the same monster of <paramref name="fromLevel"/>.</summary>
         public static float HealthScaleBetween(int fromLevel, int toLevel) =>
             (1f + HealthPerLevel * (toLevel - 1)) / (1f + HealthPerLevel * (fromLevel - 1));
 
         public static float DamageScaleBetween(int fromLevel, int toLevel) =>
-            (1f + DamagePerLevel * (toLevel - 1)) / (1f + DamagePerLevel * (fromLevel - 1));
+            LevelCurve.HealthGrowth(toLevel) / LevelCurve.HealthGrowth(fromLevel);
 
         protected override void OnNetworkPostSpawn()
         {

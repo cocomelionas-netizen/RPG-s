@@ -28,6 +28,11 @@ Asmeninis bandomasis projektas: išdėstymas ir balanso skaičiai paimti iš Dre
 | Elitiniai: daugiau medžiagų; bosas: garantuotas auksinis (Rare) + 25 % violetinis (Epic) | `npc_template` loot tikimybės | `MonsterAI`, `LootDrop`, `AffixCatalog.RollQuality` |
 | Prekeiviai: Rare 1 vnt., Uncommon 3 vnt., atsinaujina kas 60 s | `npc_vendor` | `VendorDefinition` |
 | Atributų kainos XP | `Dreadmyst.exe` | `AttributeRules.PointCost` |
+| Klasių atributai ir HP/mana 1 lygyje (karys 75/30, šaulys 60/45, magas 40/70 — pas mus pusė, kitą dalį duoda atributai) | `player_class_stats` | `CharacterClassDefinition` |
+| HP ir mana auga × lygis, nuo 21 lygio dar ×1,5 | `player_class_stats` | `LevelCurve.HealthGrowth` |
+| Monstrų žala auga taip pat, kaip žaidėjų HP (savo lygio monstras vienodai pavojingas 1 ir 25 lygyje) | — | `MonsterAI.DamageScaleBetween` |
+| Afiksai: 685 Dreadmyst afiksai („of the Novice“, „of Magical Vim“...) su jų lygių ribomis ir statais | `affix_template` | `DreadmystAffixes`, `AffixCatalog` |
+| Gėrimai: Minor/Lesser/–/Greater/Major Life ir Mana Potion (1, 5, 12, 18, 24 lygis, per 20 s) ir Serum (iš karto), 60 s bendras laukimas, 5 → 1 jungimas | `item_template`, `spell_template`, `crafting_recipes` | `TestSceneBuilder.CreatePotions`, `Inventory` |
 
 Paprastų monstrų numatytosios drop tikimybės yra Dreadmyst serveryje, todėl jų nėra nei `game.db`, nei kliente —
 naudojame savo, laiptuotas kaip jų bosų.
@@ -63,3 +68,22 @@ naudojame savo, laiptuotas kaip jų bosų.
   - Seni rankų darbo daiktai lieka tik prekeiviams (retieji) ir senuose išsaugojimuose.
 - Spalvos kaip Dreadmyst: žalia → mėlyna → **auksinė** (Epic) → **violetinė** (Legendary, aukščiausia).
   Bosas — garantuotas auksinis + 25 % violetinis.
+
+## Afiksai
+
+- Visi Dreadmyst afiksai yra priesagos: „Steel Sword of the Novice“, „Aspen Bow of Magical Vim“. Imami tie 685, kurių
+  status turime (mana, HP, šarvai, Str, Agi, Int, Courage → Vitality).
+- Dreadmyst afikso vertė — daugiklis (1,7–3,0), kurį serveris paverčia skaičiumi pagal lygį (formulės kliente nėra).
+  Pas mus: atributas = daugiklis × (lygis + 2) / 2 afikso lygių viduryje (Novice, 1–5 lyg.: +5; Elder, 20–25: +34),
+  HP ir mana — 3 kartus tiek, šarvai — tiek pat.
+- Kokybė pagal statų skaičių: 1 — žalias, 2 — mėlynas, 3+ — auksinis; tik 25 lygio — violetiniai.
+- Seni mūsų afiksai lieka daiktams, kurie juos jau turi, bet nebekrenta.
+
+## Gėrimai
+
+- 5 pakopos: Minor (1 lyg.), Lesser (5), – (12), Greater (18), Major (24). Gerti galima tik nuo to lygio;
+  5 ir 6 klavišai išgeria geriausią, kurį gali.
+- Potion gydo per 20 s (kas 2 s), Serum (žalias) — iš karto ir daugiau. Visi gėrimai turi bendrą 60 s laukimą, kaip Dreadmyst.
+- Kiekiai — pusė Dreadmyst (kaip ir mūsų HP): Minor Life Potion 45, Major 200; Minor Life Serum 68, Major 300.
+- Monstrai meta gėrimus pagal savo lygį, 15 % — Serum vietoj Potion. Klasių prekeiviai sujungia 5 vienodus į kitą pakopą
+  (5 Major Potion → Major Serum).

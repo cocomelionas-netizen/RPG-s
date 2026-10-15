@@ -233,6 +233,24 @@ namespace RPG.Tests
         }
 
         [Test]
+        public void AffixRoll_UsesDreadmystAffixesOfTheLevel()
+        {
+            ItemDefinition sword = Item("Dreadmyst/BronzeSword_L03");
+            int rolled = 0;
+            for (int i = 0; i < 200; i++)
+            {
+                AffixDefinition affix = affixes.Get(affixes.Roll(sword, 3));
+                if (affix == null) continue;
+                rolled++;
+                Assert.IsFalse(affix.retired, affix.displayName);
+                Assert.LessOrEqual(affix.minLevel, 3, affix.displayName);
+                Assert.GreaterOrEqual(affix.maxLevel, 3, affix.displayName);
+                StringAssert.StartsWith("of ", affix.displayName);
+            }
+            Assert.Greater(rolled, 0);
+        }
+
+        [Test]
         public void AffixRoll_NeverForPotionsOrJunk()
         {
             for (int i = 0; i < 50; i++)

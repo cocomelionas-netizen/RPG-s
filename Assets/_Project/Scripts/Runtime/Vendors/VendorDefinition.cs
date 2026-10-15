@@ -18,6 +18,8 @@ namespace RPG.Vendors
         [Min(10f)] public float restockSeconds = 300f;
         [Tooltip("A jeweler: combines three of the same gem into a better one.")]
         public bool combinesGems;
+        [Tooltip("Combines five of the same potion into one of the next tier (Dreadmyst's potion recipes).")]
+        public bool combinesPotions;
         [Tooltip("Gear this vendor crafts from materials (each piece's craftMaterial and craftCount).")]
         public ItemDefinition[] crafts = Array.Empty<ItemDefinition>();
 

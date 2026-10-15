@@ -24,5 +24,7 @@ namespace RPG.Items
         [Min(0)] public int armor;
         [Min(0)] public int manaBonus;
         [Min(1f)] public float priceMultiplier = 1.5f;
+        [Tooltip("No longer rolled (kept so items that have it keep it).")]
+        public bool retired;
     }
 }

@@ -34,6 +34,16 @@ namespace RPG.Tests
         }
 
         [Test]
+        public void HealthGrowth_IsTheLevel_AndHalfAgainFrom21_LikeDreadmyst()
+        {
+            // Dreadmyst warrior: 75, 150 ... 1500 at 20, 2362.5 at 21, 2812.5 at 25.
+            Assert.AreEqual(1f, LevelCurve.HealthGrowth(1));
+            Assert.AreEqual(20f, LevelCurve.HealthGrowth(20));
+            Assert.AreEqual(31.5f, LevelCurve.HealthGrowth(21));
+            Assert.AreEqual(2812.5f, 75f * LevelCurve.HealthGrowth(25));
+        }
+
+        [Test]
         public void LevelCurve_GainCanLevelUpSeveralTimes()
         {
             int level = 1;
