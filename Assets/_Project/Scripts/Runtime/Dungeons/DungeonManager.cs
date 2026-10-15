@@ -86,7 +86,9 @@ namespace RPG.Dungeons
                 }
             }
             walls.gameObject.AddComponent<TilemapCollider2D>();
-            root.AddComponent<WorldNavigation>().Configure(grid, floor, walls);
+            var navigation = root.AddComponent<WorldNavigation>();
+            navigation.Configure(grid, floor, walls);
+            if (definition != null) navigation.ZoneName = definition.displayName;
 
             CreateExit(root.transform, grid, DungeonLayout.EntranceExit, instance, false);
             CreateExit(root.transform, grid, DungeonLayout.BossExit, instance, true);

@@ -4,7 +4,7 @@ using UnityEngine;
 namespace RPG.Combat
 {
     /// <summary>
-    /// Client-side look of a <see cref="Health"/>: an overhead health bar (shown when hurt or targeted),
+    /// Client-side look of a <see cref="Health"/>: an overhead health bar (always on enemies; on players when hurt or targeted),
     /// a red flash and a damage number on every hit, and a faded grey body while dead.
     /// </summary>
     [RequireComponent(typeof(Health))]
@@ -29,6 +29,9 @@ namespace RPG.Combat
         private Transform barRoot;
         private SpriteRenderer barFill;
         private float flashTimer;
+
+        /// <summary>Where an overhead name goes: just above the health bar.</summary>
+        public Vector3 NameplatePosition => transform.position + Vector3.up * ((barHeightAboveFeet + barSize.y) * transform.lossyScale.y + 0.04f);
 
         private void Awake()
         {
@@ -83,7 +86,7 @@ namespace RPG.Combat
 
             if (barRoot != null)
             {
-                bool show = spawned && !dead && (fraction < 1f || PlayerTargeting.LocalTarget == health);
+                bool show = spawned && !dead && (fraction < 1f || health.Faction != Faction.Player || PlayerTargeting.LocalTarget == health);
                 barRoot.gameObject.SetActive(show);
                 if (show)
                 {

@@ -21,9 +21,13 @@ namespace RPG.Controls
         private InputAction inventoryAction;
         private InputAction characterAction;
         private readonly InputAction[] abilityActions = new InputAction[AbilityKeyCount];
+        private readonly InputAction[] potionActions = new InputAction[PotionKeyCount];
 
         /// <summary>Number of ability keys (1, 2, 3...).</summary>
-        public const int AbilityKeyCount = 5;
+        public const int AbilityKeyCount = 4;
+
+        /// <summary>Number of potion keys, right after the ability keys (5: healing, 6: mana).</summary>
+        public const int PotionKeyCount = 2;
 
         /// <summary>Keyboard movement in screen space, each axis in [-1, 1].</summary>
         public Vector2 MoveInput => moveAction.ReadValue<Vector2>();
@@ -53,6 +57,12 @@ namespace RPG.Controls
         public bool AbilityPressed(int slot)
         {
             return slot >= 0 && slot < abilityActions.Length && abilityActions[slot].WasPressedThisFrame();
+        }
+
+        /// <summary>True on the frame a potion key went down; 0 is key 5 (healing), 1 is key 6 (mana).</summary>
+        public bool PotionPressed(int index)
+        {
+            return index >= 0 && index < potionActions.Length && potionActions[index].WasPressedThisFrame();
         }
 
         /// <summary>Pointer position in screen pixels.</summary>
@@ -96,6 +106,8 @@ namespace RPG.Controls
             characterAction = new InputAction("Character", InputActionType.Button, "<Keyboard>/c");
             for (int i = 0; i < abilityActions.Length; i++)
                 abilityActions[i] = new InputAction($"Ability{i + 1}", InputActionType.Button, $"<Keyboard>/{i + 1}");
+            for (int i = 0; i < potionActions.Length; i++)
+                potionActions[i] = new InputAction($"Potion{i + 1}", InputActionType.Button, $"<Keyboard>/{AbilityKeyCount + i + 1}");
         }
 
         private void OnEnable()
@@ -110,6 +122,7 @@ namespace RPG.Controls
             inventoryAction.Enable();
             characterAction.Enable();
             foreach (InputAction action in abilityActions) action.Enable();
+            foreach (InputAction action in potionActions) action.Enable();
         }
 
         private void OnDisable()
@@ -124,6 +137,7 @@ namespace RPG.Controls
             inventoryAction.Disable();
             characterAction.Disable();
             foreach (InputAction action in abilityActions) action.Disable();
+            foreach (InputAction action in potionActions) action.Disable();
         }
 
         private void OnDestroy()
@@ -138,6 +152,7 @@ namespace RPG.Controls
             inventoryAction.Dispose();
             characterAction.Dispose();
             foreach (InputAction action in abilityActions) action.Dispose();
+            foreach (InputAction action in potionActions) action.Dispose();
         }
     }
 }
