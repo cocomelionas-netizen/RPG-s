@@ -191,6 +191,17 @@ namespace RPG.Items
             return item.strongerVariant != null && Random.value < SerumChance ? item.strongerVariant : item;
         }
 
+        /// <summary>Server: spawns a loot bag with these items (null when there is no prefab or nothing to put in).</summary>
+        public static LootBag SpawnBag(GameObject bagPrefab, Vector2 position, List<LootItem> items)
+        {
+            if (bagPrefab == null || items == null || items.Count == 0) return null;
+            GameObject bag = Object.Instantiate(bagPrefab, position, Quaternion.identity);
+            var loot = bag.GetComponent<LootBag>();
+            loot.ServerSetContents(items);
+            bag.GetComponent<NetworkObject>().Spawn(destroyWithScene: true);
+            return loot;
+        }
+
         private static void RollMaterials(ItemCatalog gear, int level)
         {
             if (Random.value >= MaterialChance || !PickMaterial(gear, level, out ItemDefinition material)) return;

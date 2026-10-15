@@ -108,3 +108,18 @@ spalvos), todėl atsparumai turi prasmę.
 - Kiekiai — pusė Dreadmyst (kaip ir mūsų HP): Minor Life Potion 45, Major 200; Minor Life Serum 68, Major 300.
 - Monstrai meta gėrimus pagal savo lygį, 15 % — Serum vietoj Potion. Klasių prekeiviai sujungia 5 vienodus į kitą pakopą
   (5 Major Potion → Major Serum).
+
+## Skrynios
+
+Dreadmyst konteineriai (`gameobject_template`, laukų pavadinimai — iš `Dreadmyst.exe`):
+
+| Kas | Užrakinta | Viduje |
+|---|---|---|
+| Dėžės ir statinės (Crate, Barrel) | ne | tik auksas (lygis × 2–4) |
+| Skrynios (Chest) | taip: Lockpicking ≥ 2 × lygis | daiktas: žalias 100 %, vietoj jo mėlynas 12 %, auksinis 5 %, violetinis 1 %; gėrimas 75 %; brangakmenis 75 %; auksas × 2 |
+| Strongbox (toliau pasaulyje) | taip | dar 2 garantuoti daiktai, gėrimas ir brangakmenis 100 %, auksas × 3 |
+
+- Paspaudus užrakintą skrynią: jei Lockpicking per mažas — „Lockpicking not high enough“ (kiek reikia ir kiek turi);
+  jei pakanka — 2 s rakinama (Pick Lock), tada atsidaro grobio langas su tuo, kas viduje. Nuėjus šalin — nutrūksta.
+- Virš užrakintos skrynios parašyta „Locked (Lockpicking N)“. Lockpicking keliamas C lange, Combat puslapyje (2x + 1 XP).
+- Skrynios — antras (po bosų) gatavų daiktų šaltinis; visa kita gaminama iš medžiagų.

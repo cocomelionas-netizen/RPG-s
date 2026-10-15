@@ -57,10 +57,12 @@ namespace RPG.UI
                 if (!chestPlates.TryGetValue(chest, out Text plate))
                 {
                     plate = UIFactory.CreateText(chest.name, transform, 14, TextAnchor.LowerCenter);
-                    plate.rectTransform.sizeDelta = new Vector2(200f, 22f);
+                    plate.rectTransform.sizeDelta = new Vector2(220f, 40f);
                     plate.rectTransform.pivot = new Vector2(0.5f, 0f);
                     plate.color = ChestColor;
-                    plate.text = chest.Label;
+                    plate.text = chest.Locked
+                        ? $"{chest.Label}\n<size=12><color=#b5a07a>Locked (Lockpicking {chest.RequiredLockpicking})</color></size>"
+                        : chest.Label;
                     chestPlates[chest] = plate;
                 }
 

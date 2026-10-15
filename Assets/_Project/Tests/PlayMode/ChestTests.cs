@@ -19,6 +19,7 @@ namespace RPG.Tests
     {
         private const string PlayerPrefabPath = "Assets/_Project/Prefabs/Characters/Player.prefab";
         private const string CratePrefabPath = "Assets/_Project/Prefabs/World/WoodenCrate.prefab";
+        private const string ChestPrefabPath = "Assets/_Project/Prefabs/World/OakChest.prefab";
         private const string LootBagPrefabPath = "Assets/_Project/Prefabs/World/LootBag.prefab";
         private const string GoblinPrefabPath = "Assets/_Project/Prefabs/Monsters/Goblin.prefab";
 
@@ -27,6 +28,7 @@ namespace RPG.Tests
         private GameObject spawnerObject;
         private NetworkManager network;
         private GameObject cratePrefab;
+        private GameObject chestPrefab;
         private GameObject goblinPrefab;
         private NetworkObject player;
         private Inventory inventory;
@@ -39,6 +41,7 @@ namespace RPG.Tests
 
             cratePrefab = AssetDatabase.LoadAssetAtPath<GameObject>(CratePrefabPath);
             goblinPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(GoblinPrefabPath);
+            chestPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(ChestPrefabPath);
             Assert.IsNotNull(cratePrefab, "Run RPG > Build Test Scene first.");
 
             networkObject = new GameObject("Test NetworkManager");
@@ -51,6 +54,7 @@ namespace RPG.Tests
                 ConnectionApproval = true,
             };
             network.NetworkConfig.Prefabs.Add(new NetworkPrefab { Prefab = cratePrefab });
+            network.NetworkConfig.Prefabs.Add(new NetworkPrefab { Prefab = chestPrefab });
             network.NetworkConfig.Prefabs.Add(new NetworkPrefab { Prefab = goblinPrefab });
             network.NetworkConfig.Prefabs.Add(new NetworkPrefab { Prefab = AssetDatabase.LoadAssetAtPath<GameObject>(LootBagPrefabPath) });
             var bootstrap = networkObject.AddComponent<NetworkBootstrap>();
@@ -103,6 +107,56 @@ namespace RPG.Tests
 
             Assert.Greater(inventory.Gold, goldBefore);
             Assert.IsNull(spawner.Current, "Opened chests disappear.");
+        }
+
+        private LootChest PlaceLockedChest()
+        {
+            spawnerObject = new GameObject("Test Chest Spot");
+            spawnerObject.transform.position = player.transform.position + new Vector3(0.5f, 0f, 0f);
+            var spawner = spawnerObject.AddComponent<ChestSpawner>();
+            spawner.Configure(chestPrefab, 60f);
+            return null;
+        }
+
+        [UnityTest]
+        public IEnumerator LockedChest_NeedsLockpicking()
+        {
+            PlaceLockedChest();
+            yield return null;
+            yield return null;
+            var chest = spawnerObject.GetComponent<ChestSpawner>().Current.GetComponent<LootChest>();
+            Assert.IsTrue(chest.Locked);
+            Assert.AreEqual(chest.Level * LootChest.LockpickingPerLevel, chest.RequiredLockpicking);
+
+            Assert.IsFalse(chest.ServerOpen(player.GetComponent<Health>()), "No Lockpicking: it stays shut.");
+            yield return null;
+            Assert.IsNotNull(spawnerObject.GetComponent<ChestSpawner>().Current);
+        }
+
+        [UnityTest]
+        public IEnumerator PickedChest_OpensIntoALootBagWithGear()
+        {
+            PlaceLockedChest();
+            yield return null;
+            yield return null;
+            ChestSpawner spawner = spawnerObject.GetComponent<ChestSpawner>();
+            var chest = spawner.Current.GetComponent<LootChest>();
+            var spent = new RPG.Progression.AttributeSet { lockpicking = chest.RequiredLockpicking };
+            player.GetComponent<RPG.Progression.CharacterProgress>().ServerLoad(0, 1, 0, spent, 0);
+            int goldBefore = inventory.Gold;
+
+            Assert.IsTrue(chest.ServerOpen(player.GetComponent<Health>()));
+            yield return null;
+            Assert.IsNotNull(spawner.Current, "Picking the lock takes a moment.");
+            yield return new WaitForSeconds(LootChest.PickSeconds + 0.3f);
+
+            Assert.IsNull(spawner.Current, "Opened.");
+            Assert.Greater(inventory.Gold, goldBefore);
+            LootBag bag = Object.FindAnyObjectByType<LootBag>();
+            Assert.IsNotNull(bag, "What it held waits in a loot bag.");
+            bool hasGear = false;
+            foreach (LootItem item in bag.Contents) hasGear |= item.Item.IsEquippable;
+            Assert.IsTrue(hasGear, "A Dreadmyst chest always holds a piece of gear.");
         }
 
         [UnityTest]
