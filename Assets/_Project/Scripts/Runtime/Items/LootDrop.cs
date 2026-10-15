@@ -151,9 +151,10 @@ namespace RPG.Items
                     foreach (LootEntry entry in entries)
                     {
                         if (entry.item == null || Random.value >= entry.chance) continue;
-                        int affix = affixes != null ? affixes.Roll(entry.item, level) : 0;
-                        int socket = entry.item.IsEquippable && Random.value < socketChance ? ItemStack.EmptySocket : 0;
-                        Drops.Add(new LootItem(entry.item, affix, socket));
+                        ItemDefinition item = PotionForLevel(entry.item, level);
+                        int affix = affixes != null ? affixes.Roll(item, level) : 0;
+                        int socket = item.IsEquippable && Random.value < socketChance ? ItemStack.EmptySocket : 0;
+                        Drops.Add(new LootItem(item, affix, socket));
                     }
                 }
                 RollMaterials(gear, level);
@@ -172,6 +173,22 @@ namespace RPG.Items
             bag.GetComponent<LootBag>().ServerSetContents(Drops);
             bag.GetComponent<NetworkObject>().Spawn(destroyWithScene: true);
             return true;
+        }
+
+        /// <summary>Chance that a potion drops as its serum (the stronger, instant version).</summary>
+        public const float SerumChance = 0.15f;
+
+        /// <summary>
+        /// Like Source's world loot: a potion in a loot table drops as the highest tier the dropper's level allows
+        /// (Minor, Lesser, plain, Greater, Major), sometimes as its serum. Anything else is returned as it is.
+        /// </summary>
+        public static ItemDefinition PotionForLevel(ItemDefinition item, int level)
+        {
+            if (item == null || item.use == ItemUse.None) return item;
+            while (item.combinesInto != null && item.combinesInto.use == item.use && item.combinesInto.rarity == item.rarity
+                   && item.combinesInto.itemLevel <= level)
+                item = item.combinesInto;
+            return item.strongerVariant != null && Random.value < SerumChance ? item.strongerVariant : item;
         }
 
         private static void RollMaterials(ItemCatalog gear, int level)

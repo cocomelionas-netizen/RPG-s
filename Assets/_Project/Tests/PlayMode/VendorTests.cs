@@ -147,6 +147,48 @@ namespace RPG.Tests
             Assert.AreEqual(Vendor.Unlimited, vendor.ServerRemaining(vendor.Definition.stock.Length - 1), "Potions never run out.");
         }
 
+        [UnityTest]
+        public IEnumerator FivePotions_CombineIntoTheNextTier()
+        {
+            ItemDefinition minor = Item("HealingPotion");
+            Assert.IsNotNull(minor.combinesInto, "Minor Life Potion combines into Lesser Life Potion.");
+            int before = inventory.CountOf(minor);
+            inventory.ServerAddItem(minor, 5 - before % 5, false);
+            int expected = inventory.CountOf(minor) / 5;
+
+            Assert.AreEqual(expected, inventory.ServerCombinePotions(vendor));
+            yield return null;
+            Assert.AreEqual(0, inventory.CountOf(minor));
+            Assert.AreEqual(expected, inventory.CountOf(minor.combinesInto));
+        }
+
+        [UnityTest]
+        public IEnumerator PotionAboveYourLevel_CannotBeUsed()
+        {
+            ItemDefinition lesser = Item("HealingPotion").combinesInto;
+            Assert.Greater(lesser.itemLevel, 1);
+            inventory.ServerAddItem(lesser, 1, false);
+            yield return null;
+
+            Assert.IsFalse(inventory.ServerUse(FindInBag(lesser)));
+            Assert.AreEqual(1, inventory.CountOf(lesser));
+            Assert.AreNotEqual(FindInBag(lesser), inventory.FindUsable(ItemUse.Heal), "Keys 5 and 6 skip it.");
+        }
+
+        [Test]
+        public void PotionDrops_FollowTheDroppersLevel()
+        {
+            ItemDefinition minor = Item("HealingPotion");
+            for (int i = 0; i < 50; i++)
+            {
+                ItemDefinition low = LootDrop.PotionForLevel(minor, 1);
+                Assert.AreEqual(1, low.itemLevel, low.displayName);
+                ItemDefinition high = LootDrop.PotionForLevel(minor, 25);
+                Assert.AreEqual(24, high.itemLevel, high.displayName);
+                StringAssert.StartsWith("Major Life", high.displayName);
+            }
+        }
+
         private int FirstLevelCraft()
         {
             ItemDefinition[] crafts = vendor.Definition.crafts;

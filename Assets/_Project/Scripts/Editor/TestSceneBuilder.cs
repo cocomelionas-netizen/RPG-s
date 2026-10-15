@@ -629,23 +629,24 @@ namespace RPG.EditorTools
             var frost = new Color(0.5f, 0.85f, 1f);
             var heal = new Color(0.4f, 1f, 0.5f);
 
-            // Base health is lowered by what the level-1 attributes add, so totals stay as before attributes.
-            CharacterClassDefinition warrior = CreateClass("Warrior", warriorLook, 35, 11, 5, 9, 1f, 1.5f, 0.9f, 0.06f, Color.clear,
-                new AttributeSet(15, 10, 5, 15), RPG.Progression.Attribute.Strength, 20, 4, new[]
+            // Attributes, and health and mana at level 1 (half of Source's player_class_stats, as the attributes add
+            // the rest), are Source's: warrior 75/30, ranger 60/45, mage 40/70. Both grow with LevelCurve.HealthGrowth.
+            CharacterClassDefinition warrior = CreateClass("Warrior", warriorLook, 38, 5, 9, 1f, 1.5f, 0.9f, 0.06f, Color.clear,
+                new AttributeSet(15, 10, 5, 15), RPG.Progression.Attribute.Strength, 15, new[]
             {
                 CreateAbility("Warrior_HeavyStrike", "Heavy Strike", AbilityKind.TargetDamage, 6f, 10, 1f, 0f, 2.2f, 0f, steel),
                 CreateAbility("Warrior_Whirlwind", "Whirlwind", AbilityKind.SelfArea, 10f, 15, 0f, 1.4f, 1.3f, 0f, steel),
                 CreateAbility("Warrior_SecondWind", "Second Wind", AbilityKind.SelfHeal, 30f, 20, 0f, 0f, 0f, 0.3f, heal),
             });
-            CharacterClassDefinition ranger = CreateClass("Ranger", rangerLook, 40, 9, 3, 6, 0.8f, 1.7f, 5f, 0.09f, new Color(0.85f, 0.75f, 0.45f),
-                new AttributeSet(10, 15, 10, 10), RPG.Progression.Attribute.Agility, 20, 6, new[]
+            CharacterClassDefinition ranger = CreateClass("Ranger", rangerLook, 30, 3, 6, 0.8f, 1.7f, 5f, 0.09f, new Color(0.85f, 0.75f, 0.45f),
+                new AttributeSet(10, 15, 10, 10), RPG.Progression.Attribute.Agility, 23, new[]
             {
                 CreateAbility("Ranger_AimedShot", "Aimed Shot", AbilityKind.TargetDamage, 7f, 12, 6f, 0f, 2.2f, 0f, green),
                 CreateAbility("Ranger_Volley", "Volley", AbilityKind.TargetArea, 10f, 18, 6f, 1.3f, 1.2f, 0f, green),
                 CreateAbility("Ranger_Mend", "Mend", AbilityKind.SelfHeal, 30f, 20, 0f, 0f, 0f, 0.25f, heal),
             });
-            CharacterClassDefinition mage = CreateClass("Mage", mageLook, 35, 8, 0, 3, 0.8f, 1.8f, 4.5f, 0.08f, new Color(0.7f, 0.5f, 1f),
-                new AttributeSet(5, 5, 20, 10), RPG.Progression.Attribute.Intelligence, 20, 10, new[]
+            CharacterClassDefinition mage = CreateClass("Mage", mageLook, 20, 0, 3, 0.8f, 1.8f, 4.5f, 0.08f, new Color(0.7f, 0.5f, 1f),
+                new AttributeSet(5, 5, 20, 10), RPG.Progression.Attribute.Intelligence, 35, new[]
             {
                 CreateAbility("Mage_Fireball", "Fireball", AbilityKind.TargetDamage, 5f, 15, 5.5f, 0f, 2.8f, 0f, fire),
                 CreateAbility("Mage_Flamestrike", "Flamestrike", AbilityKind.TargetArea, 12f, 25, 5.5f, 1.4f, 1.8f, 0f, fire),
@@ -659,16 +660,15 @@ namespace RPG.EditorTools
             return catalog;
         }
 
-        private static CharacterClassDefinition CreateClass(string className, CharacterAnimationSet look, int baseHealth, int healthPerLevel,
+        private static CharacterClassDefinition CreateClass(string className, CharacterAnimationSet look, int baseHealth,
             int minDamage, int maxDamage, float damagePerLevel, float attackInterval, float attackRange, float critChance,
-            Color projectileColor, AttributeSet attributes, RPG.Progression.Attribute primaryAttribute, int baseMana, int manaPerLevel,
+            Color projectileColor, AttributeSet attributes, RPG.Progression.Attribute primaryAttribute, int baseMana,
             AbilityDefinition[] abilities)
         {
             var definition = LoadOrCreateAsset<CharacterClassDefinition>($"{ClassesFolder}/{className}.asset");
             definition.displayName = className;
             definition.animations = look;
             definition.baseHealth = baseHealth;
-            definition.healthPerLevel = healthPerLevel;
             definition.minDamage = minDamage;
             definition.maxDamage = maxDamage;
             definition.damagePerLevel = damagePerLevel;
@@ -679,7 +679,6 @@ namespace RPG.EditorTools
             definition.baseAttributes = attributes;
             definition.primaryAttribute = primaryAttribute;
             definition.baseMana = baseMana;
-            definition.manaPerLevel = manaPerLevel;
             definition.abilities = abilities;
             EditorUtility.SetDirty(definition);
             return definition;
@@ -839,6 +838,7 @@ namespace RPG.EditorTools
                 vendor.stockLimits = limits;
                 vendor.restockSeconds = 60f;
                 vendor.combinesGems = false;
+                vendor.combinesPotions = false;
                 vendor.crafts = Array.Empty<ItemDefinition>();
                 EditorUtility.SetDirty(vendor);
                 return vendor;
@@ -876,6 +876,7 @@ namespace RPG.EditorTools
                 if (classWeapon || armor) crafts.Add(item);
             }
             vendor.crafts = crafts.ToArray();
+            vendor.combinesPotions = true;
             EditorUtility.SetDirty(vendor);
             return vendor;
         }
@@ -1001,25 +1002,9 @@ namespace RPG.EditorTools
             var cloth = new Color(0.55f, 0.4f, 0.7f);
             var arcane = new Color(0.45f, 0.35f, 0.9f);
 
-            potion = LoadOrCreateAsset<ItemDefinition>($"{ItemsFolder}/HealingPotion.asset");
-            potion.displayName = "Healing Potion";
-            potion.slot = ItemSlot.None;
-            potion.rarity = ItemRarity.Common;
-            potion.damageBonus = potion.healthBonus = potion.armor = 0;
-            potion.use = ItemUse.Heal;
-            potion.healFraction = 0.35f;
-            potion.maxStack = 10;
-            potion.price = 10;
-            potion.requiredClass = -1;
-            potion.iconColor = new Color(0.85f, 0.15f, 0.2f);
-            potion.canHaveAffix = false;
-            EditorUtility.SetDirty(potion);
-
-            manaPotion = CreateItem("ManaPotion", "Mana Potion", ItemSlot.None, ItemRarity.Common, 0, 0, 0, new Color(0.2f, 0.35f, 0.95f), 10);
-            manaPotion.use = ItemUse.RestoreMana;
-            manaPotion.healFraction = 0.4f;
-            manaPotion.maxStack = 10;
-            manaPotion.canHaveAffix = false;
+            // The first tier of Source's potions keeps the old files (and so the ids in saved bags).
+            potion = CreateItem("HealingPotion", "Minor Life Potion", ItemSlot.None, ItemRarity.Common, 0, 0, 0, LifeColor, 10);
+            manaPotion = CreateItem("ManaPotion", "Minor Mana Potion", ItemSlot.None, ItemRarity.Common, 0, 0, 0, ManaColor, 10);
 
             var catalog = LoadOrCreateAsset<ItemCatalog>($"{ItemsFolder}/ItemCatalog.asset");
             // Players will store item ids (catalog index + 1): only ever append to this list.
@@ -1095,6 +1080,7 @@ namespace RPG.EditorTools
             all.AddRange(gems);
             all.AddRange(CreateSourceGear(out List<ItemDefinition> materials));
             all.AddRange(materials);
+            all.AddRange(CreatePotions(potion, manaPotion));
             catalog.items = all.ToArray();
             EditorUtility.SetDirty(catalog);
             return catalog;
@@ -1239,6 +1225,65 @@ namespace RPG.EditorTools
             return gear;
         }
 
+        private static readonly Color LifeColor = new Color(0.85f, 0.15f, 0.2f);
+        private static readonly Color ManaColor = new Color(0.2f, 0.35f, 0.95f);
+
+        /// <summary>
+        /// Source's potions (item_template and their spells): Minor, Lesser, plain, Greater and Major Life and Mana
+        /// Potions (levels 1, 5, 12, 18, 24) restore over 20 seconds; their Serums (green) restore at once. Amounts are
+        /// half of Source's, like our health. Five of a kind combine into the next tier, a Major Potion into its
+        /// Serum (Source's crafting recipes). Fills in the given Minor potions and returns the new ones.
+        /// </summary>
+        private static List<ItemDefinition> CreatePotions(ItemDefinition minorLife, ItemDefinition minorMana)
+        {
+            string[] tiers = { "Minor", "Lesser", "", "Greater", "Major" };
+            int[] levels = { 1, 5, 12, 18, 24 };
+            int[] lifePotion = { 45, 70, 100, 150, 200 };
+            int[] lifeSerum = { 68, 109, 150, 225, 300 };
+            int[] manaPotion = { 55, 90, 125, 185, 250 };
+            int[] manaSerum = { 81, 136, 188, 270, 360 };
+            int[] potionPrice = { 10, 50, 120, 180, 240 };
+            int[] serumPrice = { 14, 74, 180, 270, 360 };
+            var created = new List<ItemDefinition>();
+
+            void Chain(string kind, ItemUse use, int[] potionAmounts, int[] serumAmounts, Color color, ItemDefinition minor)
+            {
+                ItemDefinition previousPotion = null, previousSerum = null;
+                for (int tier = 0; tier < tiers.Length; tier++)
+                {
+                    string prefix = tiers[tier].Length > 0 ? tiers[tier] + " " : "";
+                    ItemDefinition potion = tier == 0 ? minor
+                        : CreateItem($"{tiers[tier]}{kind}Potion", $"{prefix}{kind} Potion", ItemSlot.None, ItemRarity.Common, 0, 0, 0,
+                            color * (1f + tier * 0.06f), potionPrice[tier]);
+                    ItemDefinition serum = CreateItem($"{tiers[tier]}{kind}Serum", $"{prefix}{kind} Serum", ItemSlot.None, ItemRarity.Uncommon,
+                        0, 0, 0, Color.Lerp(color, Color.white, 0.3f), serumPrice[tier]);
+                    foreach ((ItemDefinition item, int amount, float seconds) in new[] { (potion, potionAmounts[tier], 20f), (serum, serumAmounts[tier], 0f) })
+                    {
+                        item.use = use;
+                        item.restoreAmount = amount;
+                        item.restoreSeconds = seconds;
+                        item.itemLevel = levels[tier];
+                        item.maxStack = 10;
+                        item.canHaveAffix = false;
+                        item.combineCount = 5;
+                    }
+                    potion.strongerVariant = serum;
+                    if (previousPotion != null) previousPotion.combinesInto = potion;
+                    if (previousSerum != null) previousSerum.combinesInto = serum;
+                    previousPotion = potion;
+                    previousSerum = serum;
+                    if (tier > 0) created.Add(potion);
+                    created.Add(serum);
+                }
+                // Five Major Potions make a Major Serum.
+                previousPotion.combinesInto = previousSerum;
+            }
+
+            Chain("Life", ItemUse.Heal, lifePotion, lifeSerum, LifeColor, minorLife);
+            Chain("Mana", ItemUse.RestoreMana, manaPotion, manaSerum, ManaColor, minorMana);
+            return created;
+        }
+
         /// <summary>Loot entries by item asset file name.</summary>
         private static LootEntry[] Loot(ItemCatalog catalog, params (string fileName, float chance)[] drops)
         {
@@ -1273,7 +1318,14 @@ namespace RPG.EditorTools
             item.canHaveAffix = true;
             item.isGem = false;
             item.combinesInto = null;
+            item.combineCount = 3;
             item.dropWeight = 1f;
+            item.healFraction = 0.35f;
+            item.restoreAmount = 0;
+            item.restoreSeconds = 0f;
+            item.strongerVariant = null;
+            item.craftMaterial = null;
+            item.craftCount = 1;
             EditorUtility.SetDirty(item);
             return item;
         }
@@ -1324,6 +1376,7 @@ namespace RPG.EditorTools
                 affix.healthBonus = health;
                 affix.armor = armor;
                 affix.manaBonus = mana;
+                affix.retired = false;
                 affix.priceMultiplier = quality switch
                 {
                     ItemRarity.Uncommon => 1.5f,
@@ -1354,6 +1407,45 @@ namespace RPG.EditorTools
                 Affix("OfTheGuardian", "of the Guardian", false, ItemRarity.Epic, 5, 99, new AttributeSet(0, 0, 0, 8), health: 20, armor: 6),
                 Affix("Kingslayer", "Kingslayer's", true, ItemRarity.Legendary, 7, 99, new AttributeSet(6, 6, 6, 6), damage: 6, armor: 5),
             };
+            // Our first affixes stay for items that have them; only Source's roll now.
+            foreach (AffixDefinition old in catalog.affixes) old.retired = true;
+
+            // Source's affixes (all suffixes: "Steel Sword of the Novice", "of Magical Vim"). Its values are
+            // multipliers (1.7-3.0) of a level-based amount the server works out; here an attribute gets
+            // multiplier x (level + 2) / 2 at the middle of the affix's levels (Novice, levels 1-5: +5), health and mana
+            // three times that, armor the same. More stats make it rarer: 1 green, 2 blue, 3+ gold; level 25 ones purple.
+            var all = new List<AffixDefinition>(catalog.affixes);
+            for (int i = 0; i < SourceAffixes.All.Length; i++)
+            {
+                (string name, bool singleNoun, int minLevel, int maxLevel, string stats) = SourceAffixes.All[i];
+                float middle = (minLevel + maxLevel) / 2f;
+                var attributes = new AttributeSet();
+                int health = 0, mana = 0, armor = 0, count = 0;
+                foreach (string stat in stats.Split(','))
+                {
+                    string[] pair = stat.Split(':');
+                    int type = int.Parse(pair[0]);
+                    float multiplier = float.Parse(pair[1], System.Globalization.CultureInfo.InvariantCulture);
+                    int points = Mathf.Max(1, Mathf.RoundToInt(multiplier * (middle + 2f) / 2f));
+                    count++;
+                    switch (type)
+                    {
+                        case SourceAffixes.Mana: mana += points * 3; break;
+                        case SourceAffixes.Health: health += points * 3; break;
+                        case SourceAffixes.Armor: armor += points; break;
+                        case SourceAffixes.Strength: attributes.strength += points; break;
+                        case SourceAffixes.Agility: attributes.agility += points; break;
+                        case SourceAffixes.Intellect: attributes.intelligence += points; break;
+                        case SourceAffixes.Courage: attributes.vitality += points; break;
+                    }
+                }
+                ItemRarity quality = minLevel >= 25 ? ItemRarity.Legendary
+                    : count >= 3 ? ItemRarity.Epic : count == 2 ? ItemRarity.Rare : ItemRarity.Uncommon;
+                string fileName = $"Source/{i:000}_{new string(name.Where(char.IsLetterOrDigit).ToArray())}";
+                all.Add(Affix(fileName, singleNoun ? $"of the {name}" : $"of {name}", false, quality, minLevel, maxLevel,
+                    attributes, health: health, armor: armor, mana: mana));
+            }
+            catalog.affixes = all.ToArray();
             catalog.affixChance = 0.6f;
             EditorUtility.SetDirty(catalog);
             return catalog;

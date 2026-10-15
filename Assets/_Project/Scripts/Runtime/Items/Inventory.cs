@@ -27,7 +27,8 @@ namespace RPG.Items
         [SerializeField, Min(1)] private int bagSize = 20;
         [Tooltip("Given to every new character.")]
         [SerializeField] private ItemDefinition[] startingItems = Array.Empty<ItemDefinition>();
-        [SerializeField, Min(0f)] private float potionCooldown = 5f;
+        [Tooltip("Seconds between potions (shared by all of them); Source: 60.")]
+        [SerializeField, Min(0f)] private float potionCooldown = 60f;
         [Tooltip("How close the player must be to pick up loot (the server allows a little more).")]
         [SerializeField, Min(0.1f)] private float pickupRange = 1.2f;
         [SerializeField, Min(0)] private int startingGold = 20;
@@ -192,23 +193,43 @@ namespace RPG.Items
         public int ServerCombineGems(Vendor jeweler)
         {
             if (!IsServer || health.IsDead || !IsNear(jeweler) || !jeweler.Definition.combinesGems) return 0;
+            int made = Combine(item => item.isGem);
+            MessageRpc(made > 0 ? InventoryMessage.GemsCombined : InventoryMessage.NothingToCombine, made, 0);
+            return made;
+        }
+
+        /// <summary>
+        /// Server: at a vendor that does it, turns every five of the same potion into one of the next tier (Source's
+        /// recipes: 5 Minor Life Potions make a Lesser Life Potion, and so on). Returns how many were made.
+        /// </summary>
+        public int ServerCombinePotions(Vendor vendor)
+        {
+            if (!IsServer || health.IsDead || !IsNear(vendor) || !vendor.Definition.combinesPotions) return 0;
+            int made = Combine(item => item.use != ItemUse.None);
+            MessageRpc(made > 0 ? InventoryMessage.PotionsCombined : InventoryMessage.NothingToCombinePotions, made, 0);
+            return made;
+        }
+
+        /// <summary>Turns every Combine Count of the chosen items into what they combine into; how many were made.</summary>
+        private int Combine(Predicate<ItemDefinition> which)
+        {
             int made = 0;
-            foreach (ItemDefinition gem in catalog.items)
+            foreach (ItemDefinition item in catalog.items)
             {
-                if (gem == null || !gem.isGem || gem.combinesInto == null) continue;
-                while (CountOf(gem) >= 3 && ServerRemoveItem(gem, 3))
+                if (item == null || item.combinesInto == null || !which(item)) continue;
+                int count = item.combineCount;
+                while (CountOf(item) >= count && ServerRemoveItem(item, count))
                 {
-                    if (ServerAddItem(gem.combinesInto, 1, true) > 0)
+                    if (ServerAddItem(item.combinesInto, 1, true) > 0)
                     {
                         made++;
                         continue;
                     }
-                    // No room for the result: give the three back and stop.
-                    ServerAddItem(gem, 3, false);
+                    // No room for the result: give them back and stop.
+                    ServerAddItem(item, count, false);
                     break;
                 }
             }
-            MessageRpc(made > 0 ? InventoryMessage.GemsCombined : InventoryMessage.NothingToCombine, made, 0);
             return made;
         }
 
@@ -235,15 +256,27 @@ namespace RPG.Items
         /// <summary>Share of the potion cooldown still to wait, 1 right after drinking.</summary>
         public float PotionCooldownFraction => potionCooldown > 0f ? Mathf.Clamp01(PotionCooldownRemaining / potionCooldown) : 0f;
 
-        /// <summary>The first bag slot holding an item used this way (-1 when there is none).</summary>
+        /// <summary>
+        /// The bag slot of the best item used this way that the player's level allows: the highest tier, a serum
+        /// before a potion of the same tier (-1 when there is none).
+        /// </summary>
         public int FindUsable(ItemUse use)
         {
+            int level = progress != null ? progress.Level : int.MaxValue;
+            int best = -1;
+            ItemDefinition bestItem = null;
             for (int i = 0; i < bag.Count; i++)
             {
                 ItemDefinition item = Definition(bag[i]);
-                if (item != null && item.use == use) return i;
+                if (item == null || item.use != use || !item.CanBeUsedAtLevel(level)) continue;
+                if (bestItem == null || item.itemLevel > bestItem.itemLevel
+                    || (item.itemLevel == bestItem.itemLevel && item.rarity > bestItem.rarity))
+                {
+                    best = i;
+                    bestItem = item;
+                }
             }
-            return -1;
+            return best;
         }
 
         /// <summary>The potion keys: 5 drinks a healing potion, 6 a mana potion.</summary>
@@ -393,6 +426,17 @@ namespace RPG.Items
             if (IsOwner && jeweler != null) CombineGemsRpc(jeweler.Index);
         }
 
+        public void RequestCombinePotions(Vendor vendor)
+        {
+            if (IsOwner && vendor != null) CombinePotionsRpc(vendor.Index);
+        }
+
+        [Rpc(SendTo.Server)]
+        private void CombinePotionsRpc(int vendorIndex, RpcParams rpcParams = default)
+        {
+            if (rpcParams.Receive.SenderClientId == OwnerClientId) ServerCombinePotions(Vendor.Get(vendorIndex));
+        }
+
         [Rpc(SendTo.Server)]
         private void SocketGemRpc(int gemBagIndex, bool intoEquipment, int targetIndex, RpcParams rpcParams = default)
         {
@@ -535,9 +579,16 @@ namespace RPG.Items
                 case InventoryMessage.NothingToCombine:
                     MessageLog.Add("You need 3 of the same gem to combine them.", MessageLog.WarningColor);
                     break;
+                case InventoryMessage.PotionsCombined:
+                    MessageLog.Add($"You combined your potions into {itemId} stronger one(s).", GoldColor);
+                    break;
+                case InventoryMessage.NothingToCombinePotions:
+                    MessageLog.Add("You need 5 of the same potion to combine them.", MessageLog.WarningColor);
+                    break;
                 case InventoryMessage.LevelTooLow:
                     CombatTextLayer.ShowText(above, "Your level is too low", new Color(1f, 0.4f, 0.3f), 0.8f);
-                    if (item != null) MessageLog.Add($"You need level {item.itemLevel} to wear [{item.displayName}].", MessageLog.WarningColor);
+                    if (item != null)
+                        MessageLog.Add($"You need level {item.itemLevel} to {(item.IsEquippable ? "wear" : "use")} [{item.displayName}].", MessageLog.WarningColor);
                     break;
                 case InventoryMessage.SoldOut:
                     CombatTextLayer.ShowText(above, "Sold out", new Color(1f, 0.4f, 0.3f), 0.8f);
@@ -648,6 +699,12 @@ namespace RPG.Items
             ItemStack stack = bag[bagIndex];
             ItemDefinition item = Definition(stack);
             if (item == null || item.use == ItemUse.None) return false;
+            if (item.use == ItemUse.RestoreMana && mana == null) return false;
+            if (progress != null && !item.CanBeUsedAtLevel(progress.Level))
+            {
+                MessageRpc(InventoryMessage.LevelTooLow, stack.ItemId, 0);
+                return false;
+            }
 
             double now = NetworkManager.ServerTime.Time;
             if (now < potionReadyAt.Value)
@@ -656,20 +713,34 @@ namespace RPG.Items
                 return false;
             }
 
-            switch (item.use)
-            {
-                case ItemUse.Heal:
-                    health.Heal(Mathf.Max(1, Mathf.RoundToInt(health.Max * item.healFraction)), true);
-                    break;
-                case ItemUse.RestoreMana:
-                    if (mana == null) return false;
-                    mana.ServerRestore(Mathf.Max(1, Mathf.RoundToInt(mana.Max * item.healFraction)));
-                    break;
-            }
+            // A serum restores it all at once; a potion a share now and the rest every 2 seconds.
+            int total = item.RestoreTotal(item.use == ItemUse.Heal ? health.Max : mana.Max);
+            int ticks = item.RestoreTicks;
+            int perTick = Mathf.Max(1, Mathf.CeilToInt(total / (float)ticks));
+            Restore(item.use, perTick);
+            if (ticks > 1) StartCoroutine(RestoreOverTime(item.use, perTick, ticks - 1));
             potionReadyAt.Value = now + potionCooldown;
 
             bag[bagIndex] = stack.Count > 1 ? stack.WithCount(stack.Count - 1) : ItemStack.Empty;
             return true;
+        }
+
+        private void Restore(ItemUse use, int amount)
+        {
+            if (use == ItemUse.Heal) health.Heal(amount, true);
+            else if (mana != null) mana.ServerRestore(amount);
+        }
+
+        private System.Collections.IEnumerator RestoreOverTime(ItemUse use, int perTick, int ticks)
+        {
+            var wait = new WaitForSeconds(ItemDefinition.RestoreInterval);
+            for (int i = 0; i < ticks; i++)
+            {
+                yield return wait;
+                // Dying ends it, like any effect.
+                if (!IsSpawned || health.IsDead) yield break;
+                Restore(use, perTick);
+            }
         }
 
         /// <summary>Server: adds (or with a negative amount removes) gold. Shows gains to the owner.</summary>
@@ -808,6 +879,9 @@ namespace RPG.Items
             Crafted,
             /// <summary>Too few materials: the material travels in the item id field, how many are needed in the affix field.</summary>
             NotEnoughMaterials,
+            /// <summary>Potions combined; how many new potions travels in the item id field.</summary>
+            PotionsCombined,
+            NothingToCombinePotions,
         }
     }
 }
