@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using RPG.Combat;
 using RPG.UI;
 using Unity.Netcode;
@@ -111,6 +112,43 @@ namespace RPG.Items
             DamageBonus = damage;
             HealthBonus = healthBonus;
             Armor = armor;
+        }
+
+        /// <summary>Server: replaces the bag and equipment with saved ones (unknown items are dropped).</summary>
+        public void ServerLoad(IReadOnlyList<ItemStack> savedBag, IReadOnlyList<ItemStack> savedEquipment)
+        {
+            if (!IsServer) return;
+            for (int i = 0; i < bag.Count; i++)
+                bag[i] = savedBag != null && i < savedBag.Count && IsKnown(savedBag[i]) ? savedBag[i] : ItemStack.Empty;
+            for (int i = 0; i < equipment.Count; i++)
+            {
+                ItemStack stack = savedEquipment != null && i < savedEquipment.Count ? savedEquipment[i] : ItemStack.Empty;
+                ItemDefinition item = Definition(stack);
+                // Only something that belongs in this slot.
+                equipment[i] = item != null && (int)item.slot - 1 == i ? new ItemStack(stack.ItemId, 1) : ItemStack.Empty;
+            }
+        }
+
+        private bool IsKnown(ItemStack stack)
+        {
+            ItemDefinition item = Definition(stack);
+            return item != null && stack.Count <= item.maxStack;
+        }
+
+        /// <summary>The bag's contents, slot by slot.</summary>
+        public ItemStack[] BagSnapshot()
+        {
+            var copy = new ItemStack[bag.Count];
+            for (int i = 0; i < copy.Length; i++) copy[i] = bag[i];
+            return copy;
+        }
+
+        /// <summary>The worn items, in slot order (Weapon, Head, Chest, Feet).</summary>
+        public ItemStack[] EquipmentSnapshot()
+        {
+            var copy = new ItemStack[equipment.Count];
+            for (int i = 0; i < copy.Length; i++) copy[i] = equipment[i];
+            return copy;
         }
 
         // ---------- Owner ----------

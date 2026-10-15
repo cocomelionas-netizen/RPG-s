@@ -102,6 +102,13 @@ namespace RPG.Combat
                 Died?.Invoke();
         }
 
+        /// <summary>Server only: the name shown on frames (for example the account name of a player).</summary>
+        public void ServerSetDisplayName(string unitName)
+        {
+            if (!IsServer || string.IsNullOrEmpty(unitName)) return;
+            displayName.Value = unitName.Length > 29 ? unitName.Substring(0, 29) : unitName;
+        }
+
         /// <summary>Server only: restores some health. Ignored for dead units.</summary>
         /// <param name="announce">Show the heal to everyone (a green number); off for quiet regeneration.</param>
         public void Heal(int amount, bool announce = false)

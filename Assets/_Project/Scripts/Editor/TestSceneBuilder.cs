@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Linq;
 using RPG.CameraSystem;
+using RPG.Accounts;
 using RPG.Characters;
 using RPG.Combat;
 using RPG.Controls;
@@ -326,6 +327,7 @@ namespace RPG.EditorTools
                 startingItems.GetArrayElementAtIndex(i).objectReferenceValue = startingPotion;
             inventoryObject.ApplyModifiedPropertiesWithoutUndo();
             player.AddComponent<LootPicker>();
+            player.AddComponent<CharacterPersistence>();
             AddHealthPresenter(player, barSprite, 0.85f);
             AddHitbox(player, new Vector2(0.36f, 0.62f), new Vector2(0f, 0.34f));
 
@@ -475,6 +477,8 @@ namespace RPG.EditorTools
             if (prefabsList != null)
                 network.NetworkConfig.Prefabs.NetworkPrefabsLists.Add(prefabsList);
 
+            // Before the bootstrap, which looks for it when it wakes up.
+            go.AddComponent<AccountService>();
             var bootstrap = go.AddComponent<NetworkBootstrap>();
             var bootstrapObject = new SerializedObject(bootstrap);
             bootstrapObject.FindProperty("spawnPoint").objectReferenceValue = spawnPoint;
@@ -867,7 +871,6 @@ namespace RPG.EditorTools
             inventoryWindow.transform.SetParent(canvasObject.transform, false);
             Stretch((RectTransform)inventoryWindow.transform);
             inventoryWindow.AddComponent<InventoryWindow>();
-            CreateHudElement<ClassPicker>(canvasObject.transform, "Class Picker", new Vector2(1f, 1f), new Vector2(1f, 1f), new Vector2(-150f, -60f), new Vector2(130f, 140f));
         }
 
         private static void CreateHudElement<T>(Transform canvas, string elementName, Vector2 anchor, Vector2 pivot, Vector2 position, Vector2 size) where T : Component

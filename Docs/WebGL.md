@@ -7,7 +7,7 @@
 3. Žaidimą atsidarai bet kuriame kompiuteryje: **https://cocomelionas-netizen.github.io/RPG-s/**
 4. Jei kodas nesikompiliuoja, build'as nepavyksta ir senoji versija lieka. Klaidą matysi GitHub → **Actions** skiltyje.
 
-Naršyklėje žaidimas pasileidžia **Offline** režimu: serveris ir tavo veikėjas veikia toje pačioje naršyklėje, todėl išorinio serverio nereikia. Taip gali bandyti judėjimą, kovą ir manekenus. Multiplayer'iui naršyklėje reikės viešo serverio – žr. toliau.
+Naršyklėje pirmiausia prisijungi (vardas ir slaptažodis, žr. [Stage8.md](Stage8.md)), tada spaudi **Play offline**. Žaidimas veikia **Offline** režimu: serveris ir tavo veikėjas veikia toje pačioje naršyklėje, todėl išorinio serverio nereikia. Taip gali bandyti judėjimą, kovą ir manekenus. Multiplayer'iui naršyklėje reikės viešo serverio – žr. toliau.
 
 ## Vienkartinis paruošimas (tai padaryti turi tu)
 
@@ -49,7 +49,7 @@ python -m http.server 8080
 Tada atsidaryk http://localhost:8080.
 
 ## Valdymas naršyklėje
-Toks pat kaip kompiuteryje: WASD / pelė, Tab, F, Esc, pelės ratukas. Esc naršyklėje taip pat išjungia pilno ekrano režimą. Prisijungimo langas (viršuje kairėje, F1) rodo tik **Offline** ir **Client**, nes naršyklė negali būti serveriu.
+Toks pat kaip kompiuteryje: WASD / pelė, Tab, F, Esc, pelės ratukas. Esc naršyklėje taip pat išjungia pilno ekrano režimą. Prisijungimo langas (ekrano viduryje, F1) rodo tik **Play offline** ir **Join**, nes naršyklė negali būti serveriu.
 
 ## Multiplayer naršyklėje (vėliau)
 Naršyklė gali jungtis tik per **WebSocket**, o žaidimo puslapis yra `https`, todėl serveriui reikės:
