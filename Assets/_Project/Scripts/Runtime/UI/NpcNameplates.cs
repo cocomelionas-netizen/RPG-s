@@ -6,10 +6,12 @@ using UnityEngine.UI;
 namespace RPG.UI
 {
     /// <summary>Names (and what they sell) above the vendor NPCs, drawn on the HUD canvas.</summary>
+    // After the camera has moved this frame; otherwise the plates use last frame's camera and drift while walking.
+    [DefaultExecutionOrder(1000)]
     [RequireComponent(typeof(RectTransform))]
     public class NpcNameplates : MonoBehaviour
     {
-        [SerializeField] private float heightAboveFeet = 1.05f;
+        [SerializeField] private float heightAboveFeet = 0.85f;
         [Tooltip("Plates of NPCs further than this from the camera's center are hidden.")]
         [SerializeField, Min(1f)] private float visibleDistance = 12f;
 
