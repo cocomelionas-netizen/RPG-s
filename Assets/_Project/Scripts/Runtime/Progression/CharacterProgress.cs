@@ -13,7 +13,8 @@ namespace RPG.Progression
     /// (max health, auto-attack damage, range, speed, plus equipment bonuses) and the look from them, so the owner also knows
     /// how close it must walk to attack.
     /// Experience comes from monster kills (<see cref="ServerAddExperience"/>); levelling up raises stats and heals fully.
-    /// For now the class can be changed at any time (testing); a character's class becomes fixed with accounts (Stage 8).
+    /// The class is chosen when the character is created and restored with the rest of the character by
+    /// <see cref="RPG.Accounts.CharacterPersistence"/>.
     /// </summary>
     [RequireComponent(typeof(Health), typeof(AutoAttack))]
     public class CharacterProgress : NetworkBehaviour
@@ -119,17 +120,14 @@ namespace RPG.Progression
             return true;
         }
 
-        /// <summary>Owner: asks the server to switch class.</summary>
-        public void RequestClass(int index)
+        /// <summary>Server only: restores a saved character (class, level and progress into the level).</summary>
+        public void ServerLoad(int savedClass, int savedLevel, int savedExperience)
         {
-            if (IsOwner) RequestClassRpc(index);
-        }
-
-        [Rpc(SendTo.Server)]
-        private void RequestClassRpc(int index, RpcParams rpcParams = default)
-        {
-            if (rpcParams.Receive.SenderClientId != OwnerClientId || health.IsDead) return;
-            ServerSetClass(index);
+            if (!IsServer) return;
+            if (catalog != null && catalog.Get(savedClass) != null) classIndex.Value = savedClass;
+            level.Value = Mathf.Clamp(savedLevel, 1, LevelCurve.MaxLevel);
+            experience.Value = Mathf.Clamp(savedExperience, 0, Mathf.Max(0, LevelCurve.ExperienceToNext(level.Value) - 1));
+            ApplyClassAndLevel(true);
         }
 
         [Rpc(SendTo.Owner)]

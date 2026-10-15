@@ -39,9 +39,10 @@ Assets/_Project/
       Navigation/      NavGrid (A*), WorldNavigation (kelio paieška tilemap'e)
       Progression/     klasės, gebėjimai, lygiai ir patirtis (CharacterProgress, AbilityCaster, LevelCurve)
       Controls/        PlayerInputReader
+      Accounts/        paskyros, prisijungimas, veikėjo išsaugojimas (AccountService, CharacterPersistence)
       Networking/      NetworkBootstrap, PlayerNetworkMovement, MovementValidator, OfflineTransport, DevConnectionPanel, DevBot
       Player/          PlayerMovement
-      UI/              UnitFrame, CombatTextLayer, AbilityBar, ExperienceBar, ClassPicker, InventoryWindow
+      UI/              UnitFrame, CombatTextLayer, AbilityBar, ExperienceBar, InventoryWindow
       World/           ClickMarker
       Core/            rezervuota kitiems etapams
     Editor/            redaktoriaus įrankiai (RPG meniu), grafikos importo taisyklės, build meniu
@@ -74,7 +75,7 @@ Naujausia versija po kiekvieno push'o į `main` automatiškai sukuriama ir paske
 | 5 | Monstrai ir jų AI (spawn, aggro, kelio paieška tilemap'e) | ✅ [Stage5.md](Stage5.md) |
 | 6 | Gebėjimai, klasės, lygiai ir patirtis | ✅ [Stage6.md](Stage6.md) |
 | 7 | Inventorius, ginklai, šarvai, loot | ✅ [Stage7.md](Stage7.md) |
-| 8 | Saugus progreso išsaugojimas serveryje (paskyros, duomenų bazė) | ⏳ |
+| 8 | Saugus progreso išsaugojimas serveryje (paskyros, duomenų bazė) | ✅ [Stage8.md](Stage8.md) |
 | ~~9~~ | ~~Užduotys ir NPC~~ | ✖ atsisakyta |
 | 10 | Požemiai (instancijos) | ⏳ |
 | ~~11~~ | ~~PvP~~ | ✖ atsisakyta |

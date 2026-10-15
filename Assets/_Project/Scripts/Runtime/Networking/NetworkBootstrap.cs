@@ -1,3 +1,4 @@
+using RPG.Accounts;
 using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
 using UnityEngine;
@@ -7,8 +8,9 @@ namespace RPG.Networking
     /// <summary>
     /// Starts the game as server, host or client and decides where players spawn.
     /// Reads the command line on start (see <see cref="NetworkLaunchOptions"/>); a batch mode
-    /// build with no mode given starts as a dedicated server, and a browser (WebGL) build starts offline.
-    /// Connection approval is the place where login checks will go (Stage 8).
+    /// build with no mode given starts as a dedicated server. Other builds wait for the player to log in.
+    /// With an <see cref="AccountService"/> on this object every connection must carry a valid login
+    /// (<see cref="SetLogin"/>); without one (tests) everyone is let in as a guest.
     /// </summary>
     [RequireComponent(typeof(NetworkManager), typeof(UnityTransport))]
     public class NetworkBootstrap : MonoBehaviour
@@ -22,6 +24,7 @@ namespace RPG.Networking
         private NetworkManager network;
         private UnityTransport transport;
         private OfflineTransport offlineTransport;
+        private AccountService accounts;
 
         public NetworkManager Network => network;
 
@@ -39,6 +42,7 @@ namespace RPG.Networking
             network = GetComponent<NetworkManager>();
             transport = GetComponent<UnityTransport>();
             offlineTransport = GetComponent<OfflineTransport>();
+            accounts = GetComponent<AccountService>();
             if (offlineTransport == null) offlineTransport = gameObject.AddComponent<OfflineTransport>();
 
             // Servers and clients must keep running while their window is in the background.
@@ -48,6 +52,7 @@ namespace RPG.Networking
             network.ConnectionApprovalCallback = ApproveConnection;
             network.OnClientConnectedCallback += OnClientConnected;
             network.OnClientDisconnectCallback += OnClientDisconnected;
+            network.OnServerStopped += OnServerStopped;
         }
 
         private void OnDestroy()
@@ -56,6 +61,7 @@ namespace RPG.Networking
             network.ConnectionApprovalCallback = null;
             network.OnClientConnectedCallback -= OnClientConnected;
             network.OnClientDisconnectCallback -= OnClientDisconnected;
+            network.OnServerStopped -= OnServerStopped;
         }
 
         private void Start()
@@ -65,11 +71,14 @@ namespace RPG.Networking
             if (mode == NetworkLaunchMode.None && Application.isBatchMode)
                 mode = NetworkLaunchMode.Server;
 
-            if (mode == NetworkLaunchMode.None && IsBrowser)
-            {
-                StartOffline();
-                return;
-            }
+            // Started from the command line (for example the test bot): play as a new throwaway character.
+            if (mode != NetworkLaunchMode.None && mode != NetworkLaunchMode.Server && accounts != null)
+                SetLogin(new LoginRequest
+                {
+                    username = "Bot" + Random.Range(10000, 99999),
+                    password = System.Guid.NewGuid().ToString("N"),
+                    createCharacter = true,
+                });
 
             switch (mode)
             {
@@ -79,9 +88,33 @@ namespace RPG.Networking
             }
         }
 
+        /// <summary>Accounts (null when every connection is let in as a guest).</summary>
+        public AccountService Accounts => accounts;
+
+        /// <summary>The login sent with the next connection (or used for the local player of a host).</summary>
+        public void SetLogin(LoginRequest login)
+        {
+            network.NetworkConfig.ConnectionData = login != null ? login.ToBytes() : System.Array.Empty<byte>();
+        }
+
+        /// <summary>
+        /// A host's own player logs in locally: check it before starting, so a wrong password is reported
+        /// instead of starting a server without a player.
+        /// </summary>
+        private bool CheckLocalLogin()
+        {
+            if (accounts == null) return true;
+            string error = accounts.Check(LoginRequest.FromBytes(network.NetworkConfig.ConnectionData));
+            if (error == null) return true;
+            LastDisconnectReason = error;
+            return false;
+        }
+
         /// <summary>Single player: a host with no network, so it works anywhere, including in a browser.</summary>
         public bool StartOffline()
         {
+            LastDisconnectReason = null;
+            if (!CheckLocalLogin()) return false;
             network.NetworkConfig.NetworkTransport = offlineTransport;
             bool started = network.StartHost();
             Debug.Log(started ? "[Offline] Started single-player session." : "[Offline] Failed to start.");
@@ -100,6 +133,8 @@ namespace RPG.Networking
 
         public bool StartHost(ushort port)
         {
+            LastDisconnectReason = null;
+            if (!CheckLocalLogin()) return false;
             UseNetworkTransport();
             SetConnectionData(NetworkLaunchOptions.DefaultAddress, port, "0.0.0.0");
             bool started = network.StartHost();
@@ -138,6 +173,19 @@ namespace RPG.Networking
 
         private void ApproveConnection(NetworkManager.ConnectionApprovalRequest request, NetworkManager.ConnectionApprovalResponse response)
         {
+            if (accounts != null)
+            {
+                string error = accounts.LogIn(LoginRequest.FromBytes(request.Payload), request.ClientNetworkId);
+                if (error != null)
+                {
+                    response.Approved = false;
+                    response.Reason = error;
+                    response.Pending = false;
+                    Debug.Log($"[Server] Login refused for client {request.ClientNetworkId}: {error}");
+                    return;
+                }
+            }
+
             response.Approved = true;
             response.CreatePlayerObject = true;
             response.Position = GetSpawnPosition();
@@ -154,6 +202,11 @@ namespace RPG.Networking
             return center + new Vector3(offset.x, offset.y * 0.5f, 0f);
         }
 
+        private void OnServerStopped(bool wasHost)
+        {
+            if (accounts != null) accounts.LogOutEveryone();
+        }
+
         private void OnClientConnected(ulong clientId)
         {
             if (network.IsServer)
@@ -166,6 +219,7 @@ namespace RPG.Networking
         {
             if (network.IsServer)
             {
+                if (accounts != null) accounts.LogOut(clientId);
                 Debug.Log($"[Server] Client {clientId} disconnected.");
                 return;
             }
