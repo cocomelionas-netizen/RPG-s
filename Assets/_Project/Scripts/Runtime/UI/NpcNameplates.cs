@@ -20,7 +20,8 @@ namespace RPG.UI
         private readonly Dictionary<Vendor, Text> plates = new Dictionary<Vendor, Text>();
         private readonly Dictionary<LootChest, Text> chestPlates = new Dictionary<LootChest, Text>();
         private readonly List<LootChest> goneChests = new List<LootChest>();
-        private static readonly Color ChestColor = new Color(0.92f, 0.9f, 0.85f);
+        // Off-white, as Source writes container names.
+        private static readonly Color ChestColor = new Color32(0xE8, 0xED, 0xE1, 0xFF);
         private const float ChestNameHeight = 0.55f;
         private Canvas canvas;
 
