@@ -133,7 +133,7 @@ namespace RPG.Tests
                     experience = 10,
                     gold = 77,
                     spentPoints = new AttributeSet(1, 0, 0, 2),
-                    unspentPoints = 7,
+                    experienceToSpend = 40,
                     waystones = 0b101,
                     bag = new[] { new ItemRecord(catalog.IdOf(sword), 1, 3) },
                     hasBeenSaved = true,
@@ -153,7 +153,7 @@ namespace RPG.Tests
             Assert.AreEqual(1, player.GetComponent<Inventory>().CountOf(sword));
             Assert.AreEqual(77, player.GetComponent<Inventory>().Gold);
             Assert.AreEqual(new AttributeSet(1, 0, 0, 2), progress.SpentPoints);
-            Assert.AreEqual(7, progress.UnspentPoints, "Level 3 gave 10 points, 3 are spent.");
+            Assert.AreEqual(40, progress.ExperienceToSpend);
             Assert.AreEqual(0b101, player.GetComponent<WaystoneTraveller>().DiscoveredMask);
 
             progress.ServerAddExperience(LevelCurve.ExperienceToNext(3));
@@ -162,7 +162,7 @@ namespace RPG.Tests
             Assert.IsTrue(store.TryLoad("hero", out AccountRecord saved));
             Assert.AreEqual(4, saved.character.level);
             Assert.AreEqual(1, saved.character.classIndex);
-            Assert.AreEqual(7 + AttributeRules.PointsPerLevel, saved.character.unspentPoints);
+            Assert.AreEqual(40 + LevelCurve.ExperienceToNext(3), saved.character.experienceToSpend, "Earned experience is also there to spend.");
             Assert.AreEqual(3, saved.character.bag[0].affix, "The affix is saved with the item.");
             Assert.AreEqual(0b101, saved.character.waystones);
         }

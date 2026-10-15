@@ -137,23 +137,45 @@ namespace RPG.Tests
 
         // ---------- Attributes ----------
 
-        [UnityTest]
-        public IEnumerator LevelUp_GivesPoints_ThatRaiseStats()
+        [Test]
+        public void PointCosts_GrowWithEveryPoint_LikeSource()
         {
-            Assert.AreEqual(0, progress.UnspentPoints);
-            progress.ServerAddExperience(LevelCurve.ExperienceToNext(1));
+            // Attributes: x^1.5 + 5 for the next point after x.
+            Assert.AreEqual(5, AttributeRules.PointCost(Attribute.Strength, 0));
+            Assert.AreEqual(6, AttributeRules.PointCost(Attribute.Strength, 1));
+            Assert.AreEqual(36, AttributeRules.PointCost(Attribute.Strength, 10));
+            // Health and mana: x^(x/1500), at least 1, cheap for a long time.
+            Assert.AreEqual(1, AttributeRules.PointCost(Attribute.Health, 0));
+            Assert.AreEqual(1, AttributeRules.PointCost(Attribute.Mana, 100));
+            Assert.AreEqual(1500, AttributeRules.PointCost(Attribute.Health, 1500));
+        }
+
+        [UnityTest]
+        public IEnumerator Experience_BuysPoints_ThatRaiseStats()
+        {
+            Assert.AreEqual(0, progress.ExperienceToSpend);
+            int gained = LevelCurve.ExperienceToNext(1);
+            progress.ServerAddExperience(gained);
             yield return null;
-            Assert.AreEqual(AttributeRules.PointsPerLevel, progress.UnspentPoints);
+            Assert.AreEqual(2, progress.Level, "Spending experience does not take levels away.");
+            Assert.AreEqual(gained, progress.ExperienceToSpend);
 
             int healthBefore = playerHealth.Max;
-            for (int i = 0; i < AttributeRules.PointsPerLevel; i++)
+            int expected = gained;
+            int bought = 0;
+            while (progress.CanAfford(Attribute.Vitality))
+            {
+                expected -= progress.PointCost(Attribute.Vitality);
                 Assert.IsTrue(progress.ServerSpendPoint(Attribute.Vitality));
-            Assert.IsFalse(progress.ServerSpendPoint(Attribute.Vitality), "No points left.");
+                bought++;
+            }
+            Assert.IsFalse(progress.ServerSpendPoint(Attribute.Vitality), "Not enough experience left.");
             yield return null;
 
-            Assert.AreEqual(0, progress.UnspentPoints);
-            Assert.AreEqual(AttributeRules.PointsPerLevel, progress.SpentPoints.vitality);
-            Assert.AreEqual(healthBefore + AttributeRules.PointsPerLevel * AttributeRules.HealthPerVitality, playerHealth.Max);
+            Assert.Greater(bought, 0);
+            Assert.AreEqual(expected, progress.ExperienceToSpend);
+            Assert.AreEqual(bought, progress.SpentPoints.vitality);
+            Assert.AreEqual(healthBefore + bought * AttributeRules.HealthPerVitality, playerHealth.Max);
         }
 
         [UnityTest]

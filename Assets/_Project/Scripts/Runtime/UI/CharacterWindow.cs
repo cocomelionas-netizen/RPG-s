@@ -36,14 +36,16 @@ namespace RPG.UI
         private static readonly Color TooltipColor = new Color32(0x0D, 0x15, 0x1A, 0xF5);
         private static readonly Color TooltipBorder = new Color32(0x2B, 0x3A, 0x40, 0xFF);
         private const string TooltipHeaderHex = "d3c370";
-        private const string CostHex = "c040c8";
+        // The exact colour Source's client draws the "5xp" price in (181, 0, 175).
+        private const string CostHex = "b500af";
+        private const string TooExpensiveHex = "7a6a7a";
 
         private enum Stat { Health, Mana, Armor, Strength, Agility, Intelligence, Vitality, Damage, Critical }
 
         private static readonly Dictionary<Stat, string> Descriptions = new Dictionary<Stat, string>
         {
-            { Stat.Health, "The damage you can take before you fall. Grows with points put into it (+5 each), Vitality, Strength, levels and gear." },
-            { Stat.Mana, "Spent on abilities and slowly regained. Grows with points put into it (+5 each), Intelligence, levels and gear." },
+            { Stat.Health, "The damage you can take before you fall. Grows with points bought with experience (+1 each), Vitality, Strength, levels and gear." },
+            { Stat.Mana, "Spent on abilities and slowly regained. Grows with points bought with experience (+1 each), Intelligence, levels and gear." },
             { Stat.Armor, "Reduces the damage of every hit you take. Comes from gear." },
             { Stat.Strength, "+1 health per point. Warriors deal a quarter of their Strength as extra damage." },
             { Stat.Agility, "+0.4% critical chance per point. Rangers deal a quarter of their Agility as extra damage." },
@@ -58,7 +60,6 @@ namespace RPG.UI
         private Text title;
         private Text points;
         private readonly Dictionary<Stat, Text> values = new Dictionary<Stat, Text>();
-        private readonly GameObject[] plusButtons = new GameObject[AttributeSet.Count];
         private RectTransform tooltip;
         private Text tooltipText;
         private System.Func<string> tooltipContent;
@@ -88,9 +89,9 @@ namespace RPG.UI
             close.onClick.AddListener(Toggle);
 
             float y = -66f;
-            plusButtons[(int)Attribute.Health] = AddPlus(rect, Attribute.Health, y);
+            AddPlus(rect, Attribute.Health, y);
             AddRow(rect, Stat.Health, "Health:", ref y);
-            plusButtons[(int)Attribute.Mana] = AddPlus(rect, Attribute.Mana, y);
+            AddPlus(rect, Attribute.Mana, y);
             AddRow(rect, Stat.Mana, "Mana:", ref y);
             AddRow(rect, Stat.Armor, "Armor Value:", ref y);
             y -= 12f;
@@ -99,7 +100,7 @@ namespace RPG.UI
                 var attribute = (Attribute)i;
                 float rowY = y;
                 AddRow(rect, Stat.Strength + i, $"{attribute}:", ref y);
-                plusButtons[i] = AddPlus(rect, attribute, rowY);
+                AddPlus(rect, attribute, rowY);
             }
             y -= 12f;
             AddRow(rect, Stat.Damage, "Damage:", ref y);
@@ -130,7 +131,7 @@ namespace RPG.UI
             y -= RowHeight;
         }
 
-        private GameObject AddPlus(RectTransform parent, Attribute attribute, float y)
+        private void AddPlus(RectTransform parent, Attribute attribute, float y)
         {
             Button plus = UIFactory.CreateButton("Plus", parent, PlusColor, "+", 15);
             UIFactory.Place((RectTransform)plus.transform, new Vector2(0f, 1f), new Vector2(PlusX, y - 4f), new Vector2(17f, 17f));
@@ -141,7 +142,6 @@ namespace RPG.UI
             HoverArea hover = plus.gameObject.AddComponent<HoverArea>();
             hover.Entered += _ => ShowTooltip(() => PointTooltip(attribute));
             hover.Exited += _ => HideTooltip();
-            return plus.gameObject;
         }
 
         private string PointTooltip(Attribute attribute)
@@ -150,7 +150,9 @@ namespace RPG.UI
             string gain = attribute == Attribute.Health ? $"+{AttributeRules.HealthPerPoint} Health"
                 : attribute == Attribute.Mana ? $"+{AttributeRules.ManaPerPoint} Mana"
                 : $"+1 {attribute}";
-            string header = $"<color=#{TooltipHeaderHex}>{gain}:</color> <color=#{CostHex}>1 point</color>";
+            int cost = progress != null ? progress.PointCost(attribute) : AttributeRules.PointCost(attribute, 0);
+            bool affordable = progress != null && progress.CanAfford(attribute);
+            string header = $"<color=#{TooltipHeaderHex}>{gain}:</color> <color=#{(affordable ? CostHex : TooExpensiveHex)}>{cost}xp</color>";
             string spent = invested > 0 ? $"You have invested {invested} point{(invested == 1 ? "" : "s")}." : "You haven't invested anything.";
             return $"{header}\n{spent}";
         }
@@ -193,7 +195,9 @@ namespace RPG.UI
 
         private void Spend(Attribute attribute)
         {
-            if (progress != null) progress.RequestSpendPoint(attribute);
+            if (progress == null) return;
+            if (progress.CanAfford(attribute)) progress.RequestSpendPoint(attribute);
+            else MessageLog.Add($"You need {progress.PointCost(attribute)} experience to raise {attribute}.", MessageLog.WarningColor);
         }
 
         private void Update()
@@ -236,11 +240,9 @@ namespace RPG.UI
                     ? $"{total[attribute]} <size=13><color=#7fbf6a>(+{fromItems[attribute]})</color></size>"
                     : total[attribute].ToString();
             }
-            foreach (GameObject plus in plusButtons)
-                if (plus != null) plus.SetActive(progress.UnspentPoints > 0);
             values[Stat.Damage].text = $"{attack.MinDamage} - {attack.MaxDamage}";
             values[Stat.Critical].text = $"{Mathf.RoundToInt(progress.CritChance * 1000f) / 10f}%";
-            points.text = progress.UnspentPoints > 0 ? $"Unspent points: {progress.UnspentPoints}" : "Level up to earn attribute points.";
+            points.text = $"Experience to spend: <color=#{CostHex}>{progress.ExperienceToSpend}xp</color>";
 
             UpdateTooltip();
         }

@@ -84,7 +84,7 @@ namespace RPG.Accounts
         private void Load(CharacterRecord saved)
         {
             health.ServerSetDisplayName(account.username);
-            progress.ServerLoad(saved.classIndex, saved.level, saved.experience, saved.spentPoints);
+            progress.ServerLoad(saved.classIndex, saved.level, saved.experience, saved.spentPoints, saved.experienceToSpend);
             if (!saved.hasBeenSaved) return;
 
             inventory.ServerLoad(ToStacks(saved.bag), ToStacks(saved.equipment));
@@ -109,7 +109,7 @@ namespace RPG.Accounts
             record.experience = progress.Experience;
             record.gold = inventory.Gold;
             record.spentPoints = progress.SpentPoints;
-            record.unspentPoints = progress.UnspentPoints;
+            record.experienceToSpend = progress.ExperienceToSpend;
             record.bag = ToRecords(inventory.BagSnapshot());
             record.equipment = ToRecords(inventory.EquipmentSnapshot());
             if (waystones != null) record.waystones = waystones.DiscoveredMask;
