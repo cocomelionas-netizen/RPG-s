@@ -12,7 +12,11 @@
 
   Žala didėja +1 (Ranger ir Mage +0.8) už kiekvieną lygį. Nuotolinės klasės šaudo spalvotą sviedinį.
 - **Klasės pasirinkimas.** Dešinėje viršuje yra mygtukai **Warrior / Ranger / Mage**. Kol kas klasę galima keisti bet kada, kad būtų patogu testuoti. Lygis ir patirtis išlieka. Kai 8 etape atsiras paskyros, klasė bus renkama kuriant veikėją.
-- **Gebėjimai:** klavišai **1, 2, 3** arba mygtukai apačioje. Mygtuke matyti:
+- **Veiksmų juosta** (pataisyta pagal tavo pastabą):
+  - paspaudus ant monstro, jis tik **pažymimas** – veikėjas nepuola;
+  - **1 – Attack:** veikėjas pribėga prie pažymėto priešo ir muša. Be taikinio rodoma „No enemy target“. **F** veikia taip pat;
+  - **2, 3, 4 – gebėjimai.** Jei taikinys per toli, veikėjas pats pribėga į gebėjimo atstumą ir tada jį panaudoja. Mygtukas tuo metu paryškintas auksu. Bėgimą nutraukia WASD, paspaudimas ant žemės, Esc arba kito taikinio pasirinkimas.
+- **Gebėjimų mygtukuose** matyti:
   - pavadinimas;
   - tamsėjantis cooldown sluoksnis su sekundėmis;
   - pranešimai „Out of range“, „No enemy target“, „... is not ready“.
@@ -76,11 +80,12 @@ https://cocomelionas-netizen.github.io/RPG-s/ (jei rodo seną versiją, perkrauk
 
 1. **HUD.** Apačioje turi būti patirties juosta „Level 1 Warrior – 0 / 60 XP“, virš tavo rėmelio – 3 gebėjimų mygtukai, o dešinėje viršuje – klasių mygtukai.
 2. **Warrior.** Prieik prie manekeno ir pažymėk jį:
-   - **1** (Heavy Strike) – didelis skaičius ir 6 s cooldown ant mygtuko;
-   - **2** (Whirlwind) – žiedas aplink tave, pataiko visiems arti;
-   - **3** (Second Wind) – žalias „+N“ po to, kai gavai žalos.
-3. **Klaidos.** Spausk **1** be taikinio („No enemy target“) ir toli nuo jo („Out of range“).
-4. **Ranger.** Pasirink jį dešinėje viršuje: veikėjas tampa žalias, HP pasikeičia, o atakuojama iš toli su sviediniais. Išbandyk **1** ir **2**.
+   - **1** (Attack) – veikėjas pribėga ir muša;
+   - **2** (Heavy Strike) – didelis skaičius ir 6 s cooldown ant mygtuko;
+   - **3** (Whirlwind) – žiedas aplink tave, pataiko visiems arti;
+   - **4** (Second Wind) – žalias „+N“ po to, kai gavai žalos.
+3. **Taikinys ir atstumas.** Spausk **1** be taikinio – parašoma „No enemy target“. Pažymėk toli esantį gobliną ir spausk **2** – veikėjas pribėga ir smogia.
+4. **Ranger.** Pasirink jį dešinėje viršuje: veikėjas tampa žalias, HP pasikeičia, o atakuojama iš toli su sviediniais. Išbandyk **2** ir **3**.
 5. **Mage.** Pasirink jį: veikėjas tampa violetinis. Išbandyk Fireball, Flamestrike ir Frost Nova.
 6. **Lygiai.** Numušk 3 goblinus: kiekvienas duoda „+20 XP“, o po trečio pasirodo „Level 2!“. HP padidėja ir užsipildo.
 

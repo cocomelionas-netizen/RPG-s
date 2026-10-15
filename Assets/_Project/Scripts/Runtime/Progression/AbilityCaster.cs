@@ -19,16 +19,23 @@ namespace RPG.Progression
     }
 
     /// <summary>
-    /// Uses the abilities of the player's class (keys 1, 2, 3). The owner asks; the server checks that the caster
+    /// Uses the abilities of the player's class (keys 2, 3, 4; key 1 is Attack, see <see cref="PlayerTargeting"/>).
+    /// When the target is too far, the owner first walks into range and then uses the ability.
+    /// The owner asks; the server checks that the caster
     /// is alive, the ability is ready (its own cooldown and a short global cooldown), and the target is a living
     /// enemy in range, then applies damage or healing and tells everyone to show it.
     /// Cooldowns shown to the owner start when the server confirms the cast.
     /// </summary>
+    // Before PlayerMovement, so cancelling a walk into range never cancels the click that cancelled it.
+    [DefaultExecutionOrder(-40)]
     [RequireComponent(typeof(CharacterProgress), typeof(Health), typeof(AutoAttack))]
     public class AbilityCaster : NetworkBehaviour
     {
         public const float GlobalCooldown = 1f;
+        /// <summary>Key 1 is Attack; abilities start at key 2.</summary>
+        public const int FirstAbilityKey = 1;
         private const int MaxSlots = 8;
+        private const float ApproachRangeFactor = 0.9f;
 
         private CharacterProgress progress;
         private Health health;
@@ -42,6 +49,13 @@ namespace RPG.Progression
         private readonly double[] cooldownStartedAt = new double[MaxSlots];
         private double globalReadyAt;
         private readonly List<Health> areaTargets = new List<Health>();
+
+        // Owner: an ability waiting until the player has walked into range.
+        private int pendingSlot = -1;
+        private Health pendingTarget;
+
+        /// <summary>Owner only: the slot of the ability the player is walking into range for (-1 when none).</summary>
+        public int PendingSlot => pendingSlot;
 
         /// <summary>Owner only: the server refused a cast or the client could not ask: (slot, reason).</summary>
         public event Action<int, CastFailure> CastFailed;
@@ -67,8 +81,43 @@ namespace RPG.Progression
         private void Update()
         {
             if (!IsSpawned || !IsOwner || input == null || !input.enabled) return;
-            for (int slot = 0; slot < PlayerInputReader.AbilityKeyCount; slot++)
-                if (input.AbilityPressed(slot)) TryCast(slot);
+            for (int key = FirstAbilityKey; key < PlayerInputReader.AbilityKeyCount; key++)
+                if (input.AbilityPressed(key)) TryCast(key - FirstAbilityKey);
+
+            if (pendingSlot >= 0) UpdateApproach();
+        }
+
+        private void UpdateApproach()
+        {
+            AbilityDefinition ability = GetAbility(pendingSlot);
+            bool cancelled = ability == null || health.IsDead
+                             || pendingTarget == null || !pendingTarget.IsSpawned || pendingTarget.IsDead
+                             || PlayerTargeting.LocalTarget != pendingTarget
+                             || input.MoveInput.sqrMagnitude > 0.01f || input.CancelPressed
+                             || (input.MoveClickPressed && !input.IsPointerOverUI);
+            if (cancelled)
+            {
+                CancelApproach();
+                return;
+            }
+
+            Vector2 target = pendingTarget.transform.position;
+            if (Vector2.Distance(transform.position, target) > ability.range * ApproachRangeFactor)
+            {
+                if (movement != null) movement.SetDestination(target);
+                return;
+            }
+
+            int slot = pendingSlot;
+            CancelApproach();
+            TryCast(slot);
+        }
+
+        private void CancelApproach()
+        {
+            if (pendingSlot >= 0 && movement != null && movement.Destination.HasValue) movement.Stop();
+            pendingSlot = -1;
+            pendingTarget = null;
         }
 
         public AbilityDefinition GetAbility(int slot)
@@ -106,6 +155,7 @@ namespace RPG.Progression
 
             AbilityDefinition ability = GetAbility(slot);
             if (ability == null) return;
+            if (pendingSlot >= 0 && pendingSlot != slot) CancelApproach();
             if (health.IsDead)
             {
                 CastFailed?.Invoke(slot, CastFailure.Dead);
@@ -131,7 +181,15 @@ namespace RPG.Progression
             }
             if (Vector2.Distance(transform.position, target.transform.position) > ability.range)
             {
-                CastFailed?.Invoke(slot, CastFailure.OutOfRange);
+                if (movement == null)
+                {
+                    CastFailed?.Invoke(slot, CastFailure.OutOfRange);
+                    return;
+                }
+                // Walk into range first; UpdateApproach uses the ability on arrival.
+                pendingSlot = slot;
+                pendingTarget = target;
+                movement.SetDestination(target.transform.position);
                 return;
             }
 
