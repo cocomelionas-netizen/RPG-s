@@ -37,7 +37,7 @@ namespace RPG.Progression
         private CharacterAnimator characterAnimator;
         private Inventory inventory;
 
-        /// <summary>Raised on every peer when the level goes up: new level.</summary>
+        /// <summary>Raised on every peer when the level goes up by gaining experience (not when a saved character is loaded).</summary>
         public event Action<int> LevelledUp;
 
         /// <summary>Raised on every peer when class or level changed (stats were re-applied).</summary>
@@ -107,6 +107,7 @@ namespace RPG.Progression
             if (newLevel != level.Value)
             {
                 level.Value = newLevel;
+                LevelUpRpc(newLevel);
                 Debug.Log($"[Server] {health.DisplayName} reached level {newLevel}.");
             }
         }
@@ -145,12 +146,16 @@ namespace RPG.Progression
 
         private void OnLevelChanged(int previous, int current)
         {
+            // Restoring a saved character also changes the level; only LevelUpRpc celebrates a real level up.
             ApplyClassAndLevel(current > previous);
-            if (current <= previous) return;
+        }
 
+        [Rpc(SendTo.Everyone)]
+        private void LevelUpRpc(int newLevel)
+        {
             CombatEffects.Ring(transform.position, 0.9f, LevelUpColor);
-            CombatTextLayer.ShowText(transform.position + Vector3.up * 1.2f, $"Level {current}!", LevelUpColor, 1.3f);
-            LevelledUp?.Invoke(current);
+            CombatTextLayer.ShowText(transform.position + Vector3.up * 1.2f, $"Level {newLevel}!", LevelUpColor, 1.3f);
+            LevelledUp?.Invoke(newLevel);
         }
 
         /// <summary>Applies the stats and look of the current class at the current level.</summary>
