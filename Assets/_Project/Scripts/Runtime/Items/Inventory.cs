@@ -159,26 +159,32 @@ namespace RPG.Items
         }
 
         /// <summary>
-        /// Server: sets a gem from the bag into the first worn item (weapon, head, chest, feet) with an empty socket.
+        /// Server: sets a gem from the bag into the chosen item: a worn one (<paramref name="intoEquipment"/>, index in
+        /// slot order Weapon, Head, Chest, Feet) or one in the bag. Only works when that item has an empty socket.
         /// Gems stay there for good.
         /// </summary>
-        public bool ServerSocketGem(int bagIndex)
+        public bool ServerSocketGem(int gemBagIndex, bool intoEquipment, int targetIndex)
         {
-            if (!IsServer || bagIndex < 0 || bagIndex >= bag.Count || health.IsDead) return false;
-            ItemStack gemStack = bag[bagIndex];
+            if (!IsServer || gemBagIndex < 0 || gemBagIndex >= bag.Count || health.IsDead) return false;
+            ItemStack gemStack = bag[gemBagIndex];
             ItemDefinition gem = Definition(gemStack);
             if (gem == null || !gem.isGem) return false;
 
-            for (int i = 0; i < equipment.Count; i++)
+            NetworkList<ItemStack> list = intoEquipment ? equipment : bag;
+            if (targetIndex < 0 || targetIndex >= list.Count || (!intoEquipment && targetIndex == gemBagIndex)) return false;
+            ItemStack target = list[targetIndex];
+            if (target.IsEmpty) return false;
+            if (target.Socket != ItemStack.EmptySocket)
             {
-                if (equipment[i].IsEmpty || equipment[i].Socket != ItemStack.EmptySocket) continue;
-                equipment[i] = equipment[i].WithSocket(gemStack.ItemId);
-                bag[bagIndex] = gemStack.Count > 1 ? gemStack.WithCount(gemStack.Count - 1) : ItemStack.Empty;
-                MessageRpc(InventoryMessage.GemSocketed, gemStack.ItemId, 0);
-                return true;
+                MessageRpc(InventoryMessage.NoEmptySocket, target.ItemId, 0);
+                return false;
             }
-            MessageRpc(InventoryMessage.NoEmptySocket, 0, 0);
-            return false;
+
+            list[targetIndex] = target.WithSocket(gemStack.ItemId);
+            bag[gemBagIndex] = gemStack.Count > 1 ? gemStack.WithCount(gemStack.Count - 1) : ItemStack.Empty;
+            // The item the gem went into travels in the affix field.
+            MessageRpc(InventoryMessage.GemSocketed, gemStack.ItemId, target.ItemId);
+            return true;
         }
 
         /// <summary>Server: at a jeweler, turns every three of the same gem into one better gem. Returns how many were made.</summary>
@@ -354,7 +360,6 @@ namespace RPG.Items
             if (item == null) return;
             if (item.IsEquippable) RequestEquip(bagIndex);
             else if (item.use != ItemUse.None) RequestUse(bagIndex);
-            else if (item.isGem) RequestSocketGem(bagIndex);
         }
 
         public void RequestBuy(Vendor vendor, int stockIndex)
@@ -362,7 +367,11 @@ namespace RPG.Items
             if (IsOwner && vendor != null) BuyRpc(vendor.Index, stockIndex);
         }
 
-        public void RequestSocketGem(int bagIndex) { if (IsOwner) SocketGemRpc(bagIndex); }
+        /// <summary>Owner: sets the gem in a bag slot into a worn item (<paramref name="intoEquipment"/>, index in slot order) or a bag item.</summary>
+        public void RequestSocketGem(int gemBagIndex, bool intoEquipment, int targetIndex)
+        {
+            if (IsOwner) SocketGemRpc(gemBagIndex, intoEquipment, targetIndex);
+        }
 
         public void RequestCombineGems(Vendor jeweler)
         {
@@ -370,9 +379,9 @@ namespace RPG.Items
         }
 
         [Rpc(SendTo.Server)]
-        private void SocketGemRpc(int bagIndex, RpcParams rpcParams = default)
+        private void SocketGemRpc(int gemBagIndex, bool intoEquipment, int targetIndex, RpcParams rpcParams = default)
         {
-            if (rpcParams.Receive.SenderClientId == OwnerClientId) ServerSocketGem(bagIndex);
+            if (rpcParams.Receive.SenderClientId == OwnerClientId) ServerSocketGem(gemBagIndex, intoEquipment, targetIndex);
         }
 
         [Rpc(SendTo.Server)]
@@ -480,13 +489,18 @@ namespace RPG.Items
                     MessageLog.Add("Not enough gold.", MessageLog.WarningColor);
                     break;
                 case InventoryMessage.GemSocketed:
+                {
                     if (item == null) break;
+                    ItemDefinition target = catalog != null ? catalog.Get(affixId) : null;
                     CombatTextLayer.ShowText(above, $"{item.displayName} set", ItemDefinition.RarityColor(item.rarity), 0.8f);
-                    MessageLog.Add($"You set [{item.displayName}] into your gear.", ItemDefinition.RarityColor(item.rarity));
+                    MessageLog.Add($"You set [{item.displayName}] into [{(target != null ? target.displayName : "your gear")}].",
+                        ItemDefinition.RarityColor(item.rarity));
                     break;
+                }
                 case InventoryMessage.NoEmptySocket:
-                    CombatTextLayer.ShowText(above, "No empty socket", new Color(1f, 0.4f, 0.3f), 0.8f);
-                    MessageLog.Add("None of your worn gear has an empty socket.", MessageLog.WarningColor);
+                    CombatTextLayer.ShowText(above, "No empty socket there", new Color(1f, 0.4f, 0.3f), 0.8f);
+                    MessageLog.Add(item != null ? $"[{item.displayName}] has no empty socket." : "That item has no empty socket.",
+                        MessageLog.WarningColor);
                     break;
                 case InventoryMessage.GemsCombined:
                     MessageLog.Add($"The jeweler made {itemId} better gem(s) for you.", GoldColor);
@@ -691,8 +705,9 @@ namespace RPG.Items
             /// <summary>Gold gained; the amount travels in the item id field.</summary>
             Gold,
             SoldOut,
-            /// <summary>A gem was set; the gem travels in the item id field.</summary>
+            /// <summary>A gem was set; the gem travels in the item id field, the item it went into in the affix field.</summary>
             GemSocketed,
+            /// <summary>The chosen item has no empty socket; it travels in the item id field.</summary>
             NoEmptySocket,
             /// <summary>Gems combined; how many new gems travels in the item id field.</summary>
             GemsCombined,

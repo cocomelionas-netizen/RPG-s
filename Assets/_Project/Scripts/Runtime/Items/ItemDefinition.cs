@@ -138,14 +138,14 @@ namespace RPG.Items
             if (totalArmor > 0) text.AppendLine($"+{totalArmor} armor");
             if (!totalAttributes.IsZero) text.AppendLine(totalAttributes.Describe("\n"));
             if (!string.IsNullOrEmpty(socketLine)) text.AppendLine(socketLine);
-            if (isGem) text.AppendLine("Set into an empty socket of worn gear");
+            if (isGem) text.AppendLine("Set into gear with an empty socket");
             if (isGem && combinesInto != null) text.AppendLine($"3 combine into {combinesInto.displayName} at a jeweler");
             if (use == ItemUse.Heal) text.AppendLine($"Use: restores {Mathf.RoundToInt(healFraction * 100f)}% health");
             if (use == ItemUse.RestoreMana) text.AppendLine($"Use: restores {Mathf.RoundToInt(healFraction * 100f)}% mana");
             if (maxStack > 1) text.AppendLine($"Stacks up to {maxStack}");
             if (!string.IsNullOrEmpty(className)) text.AppendLine($"{className} only");
             if (price > 0) text.AppendLine($"Sells for {(sellPrice >= 0 ? sellPrice : SellPriceWith(affix))} gold");
-            text.Append(IsEquippable ? "Click to equip" : use != ItemUse.None ? "Click to use" : isGem ? "Click to set into a socket" : "");
+            text.Append(IsEquippable ? "Click to equip" : use != ItemUse.None ? "Click to use" : isGem ? "Click, then click the item to set it into" : "");
             return text.ToString().TrimEnd();
         }
     }

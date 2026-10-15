@@ -11,6 +11,7 @@ namespace RPG.UI
     /// <summary>
     /// The local player's inventory (I or B, or the Bag button): worn equipment, the bag and the resulting stats.
     /// Click a bag item to equip or use it, click worn equipment to take it off; hover for details.
+    /// A gem is set by clicking it and then the item (worn or in the bag) to put it into.
     /// Builds its own UI; place it on a RectTransform that fills the HUD canvas.
     /// </summary>
     [RequireComponent(typeof(RectTransform))]
@@ -33,6 +34,9 @@ namespace RPG.UI
         private readonly List<ItemSlotView> equipmentSlots = new List<ItemSlotView>();
         private ItemSlotView hovered;
         private Inventory inventory;
+        // Bag slot of the gem waiting for the item to go into (-1 when none).
+        private int pendingGem = -1;
+        private static readonly Color PendingGemBorder = new Color(1f, 1f, 0.4f);
 
         private void Awake()
         {
@@ -180,19 +184,50 @@ namespace RPG.UI
         private void Toggle()
         {
             window.SetActive(!window.activeSelf);
-            if (!window.activeSelf) hovered = null;
+            if (!window.activeSelf)
+            {
+                hovered = null;
+                pendingGem = -1;
+            }
         }
 
         private void OnBagClicked(int index)
         {
             if (inventory == null) return;
-            if (VendorWindow.CurrentVendor != null) inventory.RequestSell(VendorWindow.CurrentVendor, index);
-            else inventory.RequestActivate(index);
+            if (VendorWindow.CurrentVendor != null)
+            {
+                pendingGem = -1;
+                inventory.RequestSell(VendorWindow.CurrentVendor, index);
+                return;
+            }
+            if (pendingGem >= 0)
+            {
+                // Clicking the gem again cancels; anything else is where it should go.
+                if (index != pendingGem) inventory.RequestSocketGem(pendingGem, false, index);
+                pendingGem = -1;
+                return;
+            }
+
+            ItemDefinition item = inventory.Definition(inventory.GetBagSlot(index));
+            if (item != null && item.isGem)
+            {
+                pendingGem = index;
+                MessageLog.Add($"Click the item to set [{item.displayName}] into (Esc to cancel).", ItemDefinition.RarityColor(item.rarity));
+                return;
+            }
+            inventory.RequestActivate(index);
         }
 
         private void OnEquipmentClicked(ItemSlot slot)
         {
-            if (inventory != null) inventory.RequestUnequip(slot);
+            if (inventory == null) return;
+            if (pendingGem >= 0)
+            {
+                inventory.RequestSocketGem(pendingGem, true, (int)slot - 1);
+                pendingGem = -1;
+                return;
+            }
+            inventory.RequestUnequip(slot);
         }
 
         private void Update()
@@ -215,9 +250,19 @@ namespace RPG.UI
                 return;
             }
 
+            // The chosen gem moved or was used up, or Esc: stop waiting for a target.
+            if (pendingGem >= 0)
+            {
+                ItemDefinition gem = inventory.Definition(inventory.GetBagSlot(pendingGem));
+                if (gem == null || !gem.isGem || (input != null && input.CancelPressed)) pendingGem = -1;
+            }
+
             EnsureBagSlots(inventory.BagSize);
             for (int i = 0; i < bagSlots.Count; i++)
+            {
                 Show(bagSlots[i], inventory.GetBagSlot(i));
+                if (i == pendingGem) bagSlots[i].Border.effectColor = PendingGemBorder;
+            }
             for (int i = 0; i < equipmentSlots.Count; i++)
                 Show(equipmentSlots[i], inventory.GetEquipped(EquipmentOrder[i]));
 
@@ -254,7 +299,10 @@ namespace RPG.UI
             var health = inventory.GetComponent<Health>();
             string damage = attack != null ? $"{attack.MinDamage}-{attack.MaxDamage}" : "-";
             string maxHealth = health != null ? health.Max.ToString() : "-";
-            statsText.text = $"Damage {damage}   Health {maxHealth}   Armor {inventory.Armor}   Gold {inventory.Gold}";
+            ItemDefinition gem = pendingGem >= 0 ? inventory.Definition(inventory.GetBagSlot(pendingGem)) : null;
+            statsText.text = gem != null
+                ? $"<color=#ffff66>Click the item to set {gem.displayName} into (Esc to cancel)</color>"
+                : $"Damage {damage}   Health {maxHealth}   Armor {inventory.Armor}   Gold {inventory.Gold}";
         }
 
         private void ShowTooltip()
@@ -274,7 +322,7 @@ namespace RPG.UI
                 if (item != null && equipIndex >= 0)
                     tooltipText.text = description.Replace("Click to equip", "Click to take off");
                 else if (item != null && VendorWindow.CurrentVendor != null)
-                    tooltipText.text = description.Replace("Click to equip", "").Replace("Click to use", "").Replace("Click to set into a socket", "").TrimEnd()
+                    tooltipText.text = description.Replace("Click to equip", "").Replace("Click to use", "").Replace("Click, then click the item to set it into", "").TrimEnd()
                                        + $"\nClick to sell for {inventory.SellPrice(stack)} gold";
                 else if (item != null)
                     tooltipText.text = description;
