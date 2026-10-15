@@ -16,6 +16,7 @@
   | **Mirtis** | Pilkas kūnas guli 3 s ir dingsta. Po 20 s stovykla atsiunčia naują gobliną. |
 
   Goblinas grįžta namo, kai:
+  - **12 s nepataiko** į savo taikinį (žaidėjas bėga ir goblinas jo nepasiveja);
   - nubėga daugiau nei 25 vienetus nuo vietos, kur prasidėjo kova. Kiekvienas goblino smūgis tau perkelia šią vietą ten, kur jis smogė, todėl kol goblinas tave pasiveja ir muša, jis seka toliau (pakeista pagal tavo pastabą, anksčiau buvo 9 vienetai nuo namų);
   - visi, su kuriais kovojo, mirė arba pabėgo;
   - 3 s neranda kelio iki taikinio.
