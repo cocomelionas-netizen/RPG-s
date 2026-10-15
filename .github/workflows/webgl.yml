@@ -43,8 +43,7 @@ jobs:
         with:
           lfs: true
 
-      # Imported assets are cached; compiled scripts and the Unity Data Store are not. With Unity 6000.6 a
-      # restored Library that still had them made the editor get killed (exit code 137) right after it started.
+      # Imported assets are cached; compiled scripts and the Unity Data Store are not.
       - uses: actions/cache@v4
         with:
           path: |
@@ -60,7 +59,8 @@ jobs:
 
       - name: Build WebGL
         id: build
-        # If the cached Library breaks the editor, the next steps build again from a clean one.
+        # With Unity 6000.6 the editor is sometimes killed (exit code 137) right after it starts, with or without
+        # a cache; it is random, so the next step simply tries once more.
         continue-on-error: true
         uses: game-ci/unity-builder@v4
         env:
@@ -71,11 +71,11 @@ jobs:
           targetPlatform: WebGL
           buildMethod: RPG.EditorTools.BuildMenu.BuildWebGLFromCommandLine
 
-      - name: Remove the cached Library after a failed build
+      - name: Remove a partial build
         if: steps.build.outcome == 'failure'
-        run: sudo rm -rf Library Builds
+        run: sudo rm -rf Builds
 
-      - name: Build WebGL again from a clean Library
+      - name: Build WebGL again
         if: steps.build.outcome == 'failure'
         uses: game-ci/unity-builder@v4
         env:
