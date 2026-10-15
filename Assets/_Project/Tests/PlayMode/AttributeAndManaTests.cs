@@ -203,6 +203,8 @@ namespace RPG.Tests
             ItemDefinition sword = Item("IronSword");
             AffixDefinition bear = Affix("OfTheBear");
             inventory.ServerAddItem(sword, 1, false, affixes.IdOf(bear));
+            // High enough to wear the sword.
+            progress.ServerLoad(0, sword.itemLevel, 0, default, 0);
             yield return null;
 
             int index = FindInBag(sword);

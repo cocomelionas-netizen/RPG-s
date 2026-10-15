@@ -48,13 +48,15 @@ namespace RPG.Monsters
         [SerializeField] private GameObject lootBagPrefab;
         [Tooltip("Rolls random affixes on dropped weapons and armor (none when empty).")]
         [SerializeField] private AffixCatalog affixes;
+        [Tooltip("Gear dropped by level: weapons and armor from here around the monster's level (none when empty).")]
+        [SerializeField] private ItemCatalog gear;
         [Tooltip("Chance that a dropped weapon or armor piece has a socket for a gem.")]
         [SerializeField, Range(0f, 1f)] private float socketChance = 0.25f;
         [Tooltip("Bosses: pieces of gear always dropped, with an affix of the quality below (Source's bosses always drop gold).")]
         [SerializeField, Min(0)] private int guaranteedGear;
         [SerializeField] private ItemRarity guaranteedQuality = ItemRarity.Rare;
-        [Tooltip("Bosses: chance of one more piece of epic (purple) gear.")]
-        [SerializeField, Range(0f, 1f)] private float epicChance;
+        [Tooltip("Bosses: chance of one more piece of the top quality (Source's purple: legendary).")]
+        [SerializeField, Range(0f, 1f)] private float purpleChance;
 
         [Header("Aggro")]
         [SerializeField, Min(0f)] private float aggroRadius = 3f;
@@ -127,8 +129,22 @@ namespace RPG.Monsters
             }
         }
 
-        /// <summary>Shown on the target frame and used to scale experience.</summary>
-        public int Level => level;
+        // The level every peer sees (a spawn spot can give a monster another level than its prefab's).
+        private readonly NetworkVariable<int> networkLevel = new NetworkVariable<int>(
+            0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+
+        /// <summary>Shown on the target frame and nameplate; sets the experience it gives and the level of its gear drops.</summary>
+        public int Level => IsSpawned && networkLevel.Value > 0 ? networkLevel.Value : level;
+
+        /// <summary>
+        /// Server, before spawning: gives this monster another level (a Source spawn spot's), with the experience
+        /// a kill of that level is worth.
+        /// </summary>
+        public void ServerOverrideLevel(int newLevel)
+        {
+            level = Mathf.Clamp(newLevel, 1, LevelCurve.MaxLevel);
+            experienceReward = LevelCurve.KillExperienceFor(level);
+        }
 
         // ---------- Elites ----------
 
@@ -173,11 +189,12 @@ namespace RPG.Monsters
         }
 
         /// <summary>Sets the drops (used by the scene builder and tests).</summary>
-        public void ConfigureLoot(GameObject bagPrefab, LootEntry[] entries, AffixCatalog affixCatalog = null)
+        public void ConfigureLoot(GameObject bagPrefab, LootEntry[] entries, AffixCatalog affixCatalog = null, ItemCatalog gearCatalog = null)
         {
             lootBagPrefab = bagPrefab;
             loot = entries ?? System.Array.Empty<LootEntry>();
             if (affixCatalog != null) affixes = affixCatalog;
+            if (gearCatalog != null) gear = gearCatalog;
         }
 
         public float AggroRadius
@@ -222,6 +239,7 @@ namespace RPG.Monsters
             elite.OnValueChanged += OnEliteChanged;
             ApplyEliteLook();
             if (!IsServer) return;
+            networkLevel.Value = level;
 
             if (!hasHome) Home = transform.position;
             health.Died += OnDied;
@@ -373,21 +391,21 @@ namespace RPG.Monsters
 
         private void DropLoot()
         {
-            // Like Source: elites roll their table twice and always drop a green or blue piece; bosses always drop
-            // their guaranteed gear and sometimes an epic one on top.
+            // Like Source: elites roll twice and always drop a green or blue piece; bosses always drop their
+            // guaranteed gear (gold) and sometimes a purple one on top. All gear comes from around the monster's level.
             var guaranteed = new List<ItemRarity>();
             for (int i = 0; i < guaranteedGear; i++) guaranteed.Add(guaranteedQuality);
             if (IsElite) guaranteed.Add(Random.value < 0.5f ? ItemRarity.Uncommon : ItemRarity.Rare);
-            if (epicChance > 0f && Random.value < epicChance) guaranteed.Add(ItemRarity.Epic);
-            LootDrop.Spawn(lootBagPrefab, transform.position, loot, affixes, level, socketChance, IsElite ? 2 : 1, guaranteed.ToArray());
+            if (purpleChance > 0f && Random.value < purpleChance) guaranteed.Add(ItemRarity.Legendary);
+            LootDrop.Spawn(lootBagPrefab, transform.position, loot, gear, affixes, level, socketChance, IsElite ? 2 : 1, 0, guaranteed.ToArray());
         }
 
         /// <summary>Sets the gear a boss always drops (used by the scene builder).</summary>
-        public void ConfigureGuaranteedLoot(int pieces, ItemRarity quality, float extraEpicChance)
+        public void ConfigureGuaranteedLoot(int pieces, ItemRarity quality, float extraPurpleChance)
         {
             guaranteedGear = Mathf.Max(0, pieces);
             guaranteedQuality = quality;
-            epicChance = Mathf.Clamp01(extraEpicChance);
+            purpleChance = Mathf.Clamp01(extraPurpleChance);
         }
 
         private void AwardExperience()

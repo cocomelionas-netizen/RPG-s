@@ -11,6 +11,8 @@ namespace RPG.World
     {
         [SerializeField] private GameObject chestPrefab;
         [SerializeField, Min(0f)] private float respawnSeconds = 180f;
+        [Tooltip("The level of the chest at this spot (0 keeps the prefab's).")]
+        [SerializeField, Min(0)] private int level;
 
         private NetworkObject current;
         private float respawnAt = -1f;
@@ -19,10 +21,11 @@ namespace RPG.World
         /// <summary>Server only: the chest standing here now (null while it is waiting to come back).</summary>
         public NetworkObject Current => current != null && current.IsSpawned ? current : null;
 
-        public void Configure(GameObject prefab, float respawnDelay)
+        public void Configure(GameObject prefab, float respawnDelay, int chestLevel = 0)
         {
             chestPrefab = prefab;
             respawnSeconds = Mathf.Max(0f, respawnDelay);
+            level = Mathf.Max(0, chestLevel);
         }
 
         private void Update()
@@ -62,6 +65,7 @@ namespace RPG.World
             respawnAt = -1f;
             if (chestPrefab == null) return;
             GameObject chest = Instantiate(chestPrefab, transform.position, Quaternion.identity);
+            if (level > 0 && chest.TryGetComponent(out LootChest lootChest)) lootChest.ServerOverrideLevel(level);
             current = chest.GetComponent<NetworkObject>();
             current.Spawn(destroyWithScene: true);
         }
