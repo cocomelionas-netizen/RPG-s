@@ -21,6 +21,7 @@
 
 - Didžiausias lygis — 25. Kiekvienas lygis turi laipsnį: Recruit, Private, Lance Corporal, … General,
   Field Marshal, Knight, Baron, Count, Earl, Champion (`LevelCurve.RankName`).
-- Laipsnis rodomas žaidėjo rėmelyje, veikėjo lange (C), virš kitų žaidėjų ir žinutėje pakilus lygiu.
+- Virš kiekvieno žaidėjo galvos (ir tavo) — vardas, o po juo laipsnis, pvz. „<Corporal>“; tavo vardas žalias, kitų — mėlynas.
+- Laipsnis rodomas ir rėmelyje, veikėjo lange (C) bei žinutėje pakilus lygiu.
 
 Testai: `ChestTests.cs` (skrynios ir elitai), `LevelCurveTests.cs` (laipsniai).
