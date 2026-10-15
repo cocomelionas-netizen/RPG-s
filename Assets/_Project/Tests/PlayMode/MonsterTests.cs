@@ -204,6 +204,28 @@ namespace RPG.Tests
         }
 
         [UnityTest]
+        public IEnumerator Monster_GivesUpWhenItCannotHitForAWhile()
+        {
+            // Far from the player: it chases but cannot land a hit before its patience runs out.
+            MonsterAI goblin = SpawnGoblin(new Vector2(6f, 0f));
+            goblin.AggroRadius = 0f;
+            goblin.ChaseTimeout = 1f;
+            var goblinHealth = goblin.GetComponent<Health>();
+            yield return null;
+
+            goblinHealth.ApplyDamage(5, false, playerHealth);
+            yield return null;
+            Assert.AreEqual(MonsterState.Chase, goblin.State);
+
+            float end = Time.time + 2.5f;
+            while (goblin.State == MonsterState.Chase && Time.time < end)
+                yield return null;
+
+            Assert.AreNotEqual(MonsterState.Chase, goblin.State, "Gave up and went home.");
+            Assert.AreEqual(playerHealth.Max, playerHealth.Current);
+        }
+
+        [UnityTest]
         public IEnumerator Monster_DiesAndIsRemoved()
         {
             MonsterAI goblin = SpawnGoblin(new Vector2(5f, 0f));
