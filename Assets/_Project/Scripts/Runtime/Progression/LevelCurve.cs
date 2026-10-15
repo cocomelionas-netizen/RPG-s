@@ -2,10 +2,24 @@ using UnityEngine;
 
 namespace RPG.Progression
 {
-    /// <summary>How much experience each level needs, and what gaining experience does to level and progress.</summary>
+    /// <summary>
+    /// How much experience each level needs, what gaining experience does to level and progress,
+    /// and the rank that goes with each level.
+    /// </summary>
     public static class LevelCurve
     {
-        public const int MaxLevel = 20;
+        public const int MaxLevel = 25;
+
+        private static readonly string[] Ranks =
+        {
+            "Recruit", "Private", "Lance Corporal", "Corporal", "Sergeant", "Staff Sergeant", "Master Sergeant",
+            "First Sergeant", "Sergeant Major", "Second Lieutenant", "First Lieutenant", "Captain", "Major",
+            "Lieutenant Colonel", "Colonel", "Brigadier", "Major General", "Lieutenant General", "General",
+            "Field Marshal", "Knight", "Baron", "Count", "Earl", "Champion",
+        };
+
+        /// <summary>The rank title of a level, from Recruit (1) to Champion (25).</summary>
+        public static string RankName(int level) => Ranks[Mathf.Clamp(level, 1, MaxLevel) - 1];
 
         /// <summary>Experience needed to go from <paramref name="level"/> to the next one (0 at max level).</summary>
         public static int ExperienceToNext(int level)

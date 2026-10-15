@@ -125,6 +125,37 @@ namespace RPG.Monsters
         /// <summary>Shown on the target frame and used to scale experience.</summary>
         public int Level => level;
 
+        // ---------- Elites ----------
+
+        public const float EliteHealthScale = 2.5f;
+        public const float EliteDamageScale = 1.5f;
+        public const int EliteRewardScale = 3;
+        private const float EliteSizeScale = 1.25f;
+
+        private readonly NetworkVariable<bool> elite = new NetworkVariable<bool>(
+            false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+        private Vector3 normalScale;
+
+        /// <summary>A rare, stronger version of the monster: bigger, tougher, hits harder, rewards more.</summary>
+        public bool IsElite => elite.Value;
+
+        /// <summary>Server, after spawning: turns this monster into an elite.</summary>
+        public void ServerMakeElite()
+        {
+            if (!IsServer || !IsSpawned || elite.Value) return;
+            elite.Value = true;
+            health.ServerSetDisplayName($"Elite {health.DisplayName}");
+            health.ServerSetMaxHealth(Mathf.RoundToInt(health.Max * EliteHealthScale), true);
+            autoAttack.DamageScale = EliteDamageScale;
+        }
+
+        private void OnEliteChanged(bool previous, bool current) => ApplyEliteLook();
+
+        private void ApplyEliteLook()
+        {
+            transform.localScale = normalScale * (elite.Value ? EliteSizeScale : 1f);
+        }
+
         public int ExperienceReward => experienceReward;
 
         public IReadOnlyList<LootEntry> Loot => loot;
@@ -177,10 +208,13 @@ namespace RPG.Monsters
             health = GetComponent<Health>();
             autoAttack = GetComponent<AutoAttack>();
             motion = GetComponent<MonsterMotion>();
+            normalScale = transform.localScale;
         }
 
         public override void OnNetworkSpawn()
         {
+            elite.OnValueChanged += OnEliteChanged;
+            ApplyEliteLook();
             if (!IsServer) return;
 
             if (!hasHome) Home = transform.position;
@@ -193,6 +227,7 @@ namespace RPG.Monsters
 
         public override void OnNetworkDespawn()
         {
+            elite.OnValueChanged -= OnEliteChanged;
             if (!IsServer) return;
 
             health.Died -= OnDied;
@@ -330,21 +365,10 @@ namespace RPG.Monsters
             return best;
         }
 
-        private readonly List<LootItem> drops = new List<LootItem>();
-
         private void DropLoot()
         {
-            if (lootBagPrefab == null) return;
-            drops.Clear();
-            foreach (LootEntry entry in loot)
-                if (entry.item != null && Random.value < entry.chance)
-                    drops.Add(new LootItem(entry.item, affixes != null ? affixes.Roll(entry.item, level) : 0,
-                        entry.item.IsEquippable && Random.value < socketChance ? ItemStack.EmptySocket : 0));
-            if (drops.Count == 0) return;
-
-            GameObject bag = Instantiate(lootBagPrefab, transform.position, Quaternion.identity);
-            bag.GetComponent<LootBag>().ServerSetContents(drops);
-            bag.GetComponent<NetworkObject>().Spawn(destroyWithScene: true);
+            // Elites roll their loot table twice.
+            LootDrop.Spawn(lootBagPrefab, transform.position, loot, affixes, level, socketChance, IsElite ? 2 : 1);
         }
 
         private void AwardExperience()
@@ -352,10 +376,11 @@ namespace RPG.Monsters
             foreach (Health fighter in threat.Keys)
             {
                 if (fighter == null || !fighter.IsSpawned || fighter.IsDead) continue;
+                int rewardScale = IsElite ? EliteRewardScale : 1;
                 if (experienceReward > 0 && fighter.TryGetComponent(out CharacterProgress progress))
-                    progress.ServerAddExperience(LevelCurve.KillExperience(experienceReward, level, progress.Level));
+                    progress.ServerAddExperience(LevelCurve.KillExperience(experienceReward * rewardScale, level, progress.Level));
                 if (goldReward.y > 0 && fighter.TryGetComponent(out Inventory inventory))
-                    inventory.ServerAddGold(Random.Range(goldReward.x, goldReward.y + 1));
+                    inventory.ServerAddGold(Random.Range(goldReward.x, goldReward.y + 1) * rewardScale);
             }
         }
 

@@ -233,7 +233,9 @@ namespace RPG.Progression
         {
             CombatEffects.Ring(transform.position, 0.9f, LevelUpColor);
             CombatTextLayer.ShowText(transform.position + Vector3.up * 1.2f, $"Level {newLevel}!", LevelUpColor, 1.3f);
-            if (IsOwner) MessageLog.Add($"You reached level {newLevel}! You have {AttributeRules.PointsPerLevel} new attribute points (C).", LevelUpColor);
+            if (IsOwner)
+                MessageLog.Add($"You reached level {newLevel} and the rank of {LevelCurve.RankName(newLevel)}! " +
+                               $"You have {AttributeRules.PointsPerLevel} new attribute points (C).", LevelUpColor);
             LevelledUp?.Invoke(newLevel);
         }
 

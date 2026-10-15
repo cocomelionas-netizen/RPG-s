@@ -3,6 +3,21 @@ using RPG.Progression;
 
 namespace RPG.Tests
 {
+    /// <summary>Every level has its own rank.</summary>
+    public class RankTests
+    {
+        [Test]
+        public void EveryLevelHasARank_FromRecruitToChampion()
+        {
+            Assert.AreEqual(25, LevelCurve.MaxLevel);
+            Assert.AreEqual("Recruit", LevelCurve.RankName(1));
+            Assert.AreEqual("Champion", LevelCurve.RankName(LevelCurve.MaxLevel));
+            var seen = new System.Collections.Generic.HashSet<string>();
+            for (int level = 1; level <= LevelCurve.MaxLevel; level++)
+                Assert.IsTrue(seen.Add(LevelCurve.RankName(level)), $"Rank of level {level} repeats.");
+        }
+    }
+
     /// <summary>Experience needed per level and experience from kills.</summary>
     public class LevelCurveTests
     {

@@ -71,11 +71,14 @@ namespace RPG.Combat
             projectileColor = newProjectileColor;
         }
 
+        /// <summary>Server: scales all damage this unit deals (elite monsters hit harder).</summary>
+        public float DamageScale { get; set; } = 1f;
+
         /// <summary>Server: one damage roll (auto-attack damage times <paramref name="multiplier"/>, critical hits double it).</summary>
         public int RollDamage(float multiplier, out bool critical)
         {
             critical = Random.value < critChance;
-            int damage = Mathf.RoundToInt(Random.Range(minDamage, maxDamage + 1) * multiplier);
+            int damage = Mathf.RoundToInt(Random.Range(minDamage, maxDamage + 1) * multiplier * DamageScale);
             return Mathf.Max(1, damage) * (critical ? 2 : 1);
         }
 

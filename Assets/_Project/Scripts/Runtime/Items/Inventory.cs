@@ -5,6 +5,7 @@ using RPG.Controls;
 using RPG.Progression;
 using RPG.UI;
 using RPG.Vendors;
+using RPG.World;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -365,6 +366,20 @@ namespace RPG.Items
         public void RequestBuy(Vendor vendor, int stockIndex)
         {
             if (IsOwner && vendor != null) BuyRpc(vendor.Index, stockIndex);
+        }
+
+        /// <summary>Owner: opens a chest the player stands next to.</summary>
+        public void RequestOpenChest(LootChest chest)
+        {
+            if (IsOwner && chest != null && chest.IsSpawned) OpenChestRpc(chest.NetworkObject);
+        }
+
+        [Rpc(SendTo.Server)]
+        private void OpenChestRpc(NetworkObjectReference chestReference, RpcParams rpcParams = default)
+        {
+            if (rpcParams.Receive.SenderClientId != OwnerClientId) return;
+            if (chestReference.TryGet(out NetworkObject chestObject) && chestObject.TryGetComponent(out LootChest chest))
+                chest.ServerOpen(health);
         }
 
         /// <summary>Owner: sets the gem in a bag slot into a worn item (<paramref name="intoEquipment"/>, index in slot order) or a bag item.</summary>

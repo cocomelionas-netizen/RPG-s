@@ -87,5 +87,6 @@ Naujausia versija po kiekvieno push'o į `main` automatiškai sukuriama ir paske
 | + | Požemio raktas ir lygio reikalavimas, grupės dydis, ribotos prekeivių atsargos (įkvėpta Source) | ✅ [Stage10.md](Stage10.md#įėjimo-sąlygos) |
 | + | Pavadintos zonos ir teleportų akmenys (Waystones) (įkvėpta Source) | ✅ [Waystones.md](Waystones.md) |
 | + | Brangakmeniai: lizdai, įstatymas, juvelyras ir jungimas (įkvėpta Source) | ✅ [Gems.md](Gems.md) |
+| + | Skrynios pasaulyje, elitiniai monstrai, laipsniai ir 25 lygiai (įkvėpta Source) | ✅ [Chests.md](Chests.md) |
 
 Multiplayer'is planuojamas anksti (3 etapas) sąmoningai. Kovą, monstrus ir daiktus iškart rašysime serverio autoriteto principu, kad vėliau nereikėtų jų perrašinėti.

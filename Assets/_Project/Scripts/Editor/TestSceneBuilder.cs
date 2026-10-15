@@ -45,6 +45,7 @@ namespace RPG.EditorTools
         private const string DummyPrefabPath = "Assets/_Project/Prefabs/World/TrainingDummy.prefab";
         private const string MonstersFolder = "Assets/_Project/Prefabs/Monsters";
         private const string LootBagPrefabPath = "Assets/_Project/Prefabs/World/LootBag.prefab";
+        private const string ChestPrefabFolder = "Assets/_Project/Prefabs/World";
         private const string ItemsFolder = "Assets/_Project/Data/Items";
         private const string AffixesFolder = "Assets/_Project/Data/Items/Affixes";
         private const string DungeonInstancePrefabPath = "Assets/_Project/Prefabs/World/DungeonInstance.prefab";
@@ -151,6 +152,7 @@ namespace RPG.EditorTools
                     ("OrcSkullHelm", 0.4f), ("GoblinCleaver", 0.4f)),
             }, barSprite, lootBagPrefab, affixes, boss => boss.AddComponent<BossMechanics>());
             DungeonDefinition dungeon = CreateDungeon(brutePrefab, orcPrefab, kingPrefab);
+            ChestPrefabs chests = CreateChestPrefabs(items, affixes, lootBagPrefab);
             CharacterAnimationSet rangerAnimations = CreateCharacterAnimationSet("Ranger", RangerArtFolder, RangerAnimationSetPath, new Color(0.2f, 0.45f, 0.22f), null);
             CharacterAnimationSet mageAnimations = CreateCharacterAnimationSet("Mage", MageArtFolder, MageAnimationSetPath, new Color(0.45f, 0.22f, 0.62f), null);
             ClassCatalog classes = CreateClasses(playerAnimations, rangerAnimations, mageAnimations);
@@ -184,6 +186,7 @@ namespace RPG.EditorTools
             new GameObject("Combat Effects").AddComponent<CombatEffects>().Configure(projectileSprite, effectRingSprite, GroundRingRadius);
             PlaceDummies(grid, dummyPrefab);
             PlaceMonsterCamps(grid, goblinPrefab, brutePrefab, orcPrefab);
+            PlaceChests(grid, obstacles, chests);
             PlaceDungeon(grid, dungeon);
             PlaceVendors(grid, CreateVendors(items, potion, manaPotion));
             PlaceZonesAndWaystones(grid, PlaceholderArtGenerator.Waystone("Waystone"));
@@ -460,10 +463,28 @@ namespace RPG.EditorTools
             return prefab;
         }
 
+        // Cells with a tree trunk, so chests are not put inside one.
+        private static readonly HashSet<Vector3Int> TreeCells = new HashSet<Vector3Int>();
+
+        /// <summary>The free cell (no rock, no tree) nearest to <paramref name="cell"/>, searching a few cells around it.</summary>
+        private static Vector3Int OpenCellNear(Tilemap obstacles, Vector3Int cell)
+        {
+            for (int radius = 0; radius <= 4; radius++)
+            for (int dx = -radius; dx <= radius; dx++)
+            for (int dy = -radius; dy <= radius; dy++)
+            {
+                if (Mathf.Max(Mathf.Abs(dx), Mathf.Abs(dy)) != radius) continue;
+                var candidate = new Vector3Int(cell.x + dx, cell.y + dy, 0);
+                if (!obstacles.HasTile(candidate) && !TreeCells.Contains(candidate)) return candidate;
+            }
+            return cell;
+        }
+
         private static void PlaceTrees(Grid grid, Tilemap obstacles, GameObject treePrefab)
         {
             var random = new System.Random(TreeSeed);
             var props = new GameObject("Props").transform;
+            TreeCells.Clear();
             int center = MapSize / 2;
 
             for (int x = 2; x < MapSize - 2; x++)
@@ -477,6 +498,7 @@ namespace RPG.EditorTools
 
                 var tree = (GameObject)PrefabUtility.InstantiatePrefab(treePrefab, props);
                 tree.transform.position = grid.GetCellCenterWorld(cell);
+                TreeCells.Add(cell);
             }
 
             // One tree right next to the spawn to test walking behind and in front of tall objects.
@@ -1193,6 +1215,89 @@ namespace RPG.EditorTools
                 camp.transform.SetParent(parent, false);
                 camp.transform.position = grid.GetCellCenterWorld(cell);
                 camp.AddComponent<MonsterSpawner>().Configure(prefab, count, 1.2f, prefab == goblin ? 20f : 40f);
+            }
+        }
+
+        private struct ChestPrefabs
+        {
+            public GameObject Crate;
+            public GameObject Chest;
+            public GameObject Strongbox;
+        }
+
+        private static ChestPrefabs CreateChestPrefabs(ItemCatalog items, AffixCatalog affixes, GameObject lootBagPrefab)
+        {
+            var wood = new Color(0.55f, 0.38f, 0.22f);
+            var darkWood = new Color(0.42f, 0.26f, 0.14f);
+            var iron = new Color(0.45f, 0.47f, 0.52f);
+            var gold = new Color(0.95f, 0.78f, 0.3f);
+            return new ChestPrefabs
+            {
+                Crate = CreateChestPrefab("WoodenCrate", "Wooden Crate", 2, new Vector2Int(3, 8),
+                    PlaceholderArtGenerator.Container("WoodenCrate", wood, darkWood, darkWood, 52f, 34f, false), lootBagPrefab, affixes,
+                    Loot(items, ("GoblinEar", 0.5f), ("HealingPotion", 0.5f), ("ManaPotion", 0.4f), ("RustySword", 0.1f),
+                        ("LeatherCap", 0.1f), ("WornBoots", 0.1f), ("PaddedVest", 0.08f))),
+                Chest = CreateChestPrefab("OakChest", "Oak Chest", 4, new Vector2Int(10, 25),
+                    PlaceholderArtGenerator.Container("OakChest", darkWood, iron, gold, 60f, 32f, true), lootBagPrefab, affixes,
+                    Loot(items, ("HealingPotion", 0.7f), ("ManaPotion", 0.6f), ("IronSword", 0.2f), ("IronHelm", 0.2f),
+                        ("Chainmail", 0.15f), ("IronBoots", 0.2f), ("DenKey", 0.15f), ("ChippedRuby", 0.1f), ("ChippedTopaz", 0.1f),
+                        ("ChippedSapphire", 0.1f), ("ChippedEmerald", 0.1f))),
+                Strongbox = CreateChestPrefab("IronStrongbox", "Iron Strongbox", 6, new Vector2Int(30, 60),
+                    PlaceholderArtGenerator.Container("IronStrongbox", iron, new Color(0.3f, 0.31f, 0.35f), gold, 56f, 36f, false), lootBagPrefab, affixes,
+                    Loot(items, ("GoblinCleaver", 0.25f), ("OrcSkullHelm", 0.2f), ("OrcishPlate", 0.08f), ("OrcishGreataxe", 0.08f),
+                        ("DenKey", 0.3f), ("ChippedRuby", 0.25f), ("ChippedTopaz", 0.25f), ("ChippedSapphire", 0.25f), ("ChippedEmerald", 0.25f),
+                        ("Ruby", 0.05f), ("Emerald", 0.05f))),
+            };
+        }
+
+        private static GameObject CreateChestPrefab(string fileName, string chestName, int level, Vector2Int gold, Sprite sprite,
+            GameObject lootBagPrefab, AffixCatalog affixes, LootEntry[] loot)
+        {
+            var chest = new GameObject(chestName);
+            var spriteRenderer = chest.AddComponent<SpriteRenderer>();
+            spriteRenderer.sprite = sprite;
+            spriteRenderer.spriteSortPoint = SpriteSortPoint.Pivot;
+            chest.AddComponent<NetworkObject>();
+            chest.AddComponent<LootChest>().Configure(chestName, level, loot, gold, lootBagPrefab, affixes);
+            // Clicked to open; does not block walking.
+            AddHitbox(chest, new Vector2(0.45f, 0.35f), new Vector2(0f, 0.15f));
+
+            string path = $"{ChestPrefabFolder}/{fileName}.prefab";
+            Directory.CreateDirectory(ChestPrefabFolder);
+            GameObject prefab = PrefabUtility.SaveAsPrefabAsset(chest, path);
+            UnityEngine.Object.DestroyImmediate(chest);
+            RegisterNetworkPrefab(prefab);
+            return prefab;
+        }
+
+        /// <summary>Crates by the goblin camps and around town, chests by the brutes, strongboxes by the orcs.</summary>
+        private static void PlaceChests(Grid grid, Tilemap obstacles, ChestPrefabs chests)
+        {
+            int c = MapSize / 2;
+            var spots = new (Vector3Int cell, GameObject prefab, float respawn)[]
+            {
+                (new Vector3Int(c + 14, c + 4, 0), chests.Crate, 120f),
+                (new Vector3Int(c - 8, c + 2, 0), chests.Crate, 120f),
+                (new Vector3Int(c + 6, c - 12, 0), chests.Crate, 120f),
+                (new Vector3Int(c + 20, c + 16, 0), chests.Crate, 120f),
+                (new Vector3Int(c - 16, c - 8, 0), chests.Crate, 120f),
+                (new Vector3Int(c + 9, c - 3, 0), chests.Crate, 120f),
+                (new Vector3Int(c - 8, c - 8, 0), chests.Crate, 120f),
+                (new Vector3Int(c - 4, c + 11, 0), chests.Crate, 120f),
+                (new Vector3Int(c + 26, c - 2, 0), chests.Chest, 240f),
+                (new Vector3Int(c + 8, c + 28, 0), chests.Chest, 240f),
+                (new Vector3Int(c - 26, c + 10, 0), chests.Strongbox, 420f),
+                (new Vector3Int(c - 14, c - 28, 0), chests.Strongbox, 420f),
+            };
+
+            var parent = new GameObject("Chests").transform;
+            for (int i = 0; i < spots.Length; i++)
+            {
+                Vector3Int cell = OpenCellNear(obstacles, spots[i].cell);
+                var spawner = new GameObject($"Chest Spot {i + 1}");
+                spawner.transform.SetParent(parent, false);
+                spawner.transform.position = grid.GetCellCenterWorld(cell);
+                spawner.AddComponent<ChestSpawner>().Configure(spots[i].prefab, spots[i].respawn);
             }
         }
 
