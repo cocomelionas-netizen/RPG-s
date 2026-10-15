@@ -122,6 +122,8 @@ namespace RPG.UI
             float height = 92f + stock.Length * (rowHeight + 4f) + 40f;
             ((RectTransform)window.transform).sizeDelta = new Vector2(width, height);
             window.SetActive(true);
+            Inventory inventory = UIFactory.LocalPlayer<Inventory>();
+            if (inventory != null) inventory.RequestVendorStock(vendor);
             Opened?.Invoke();
         }
 
@@ -180,11 +182,14 @@ namespace RPG.UI
                 ItemDefinition item = stock[i];
                 Row row = rows[i];
                 if (item == null) continue;
-                row.Name.text = item.displayName;
+                int left = shown.KnownRemaining(i);
+                row.Name.text = left == Vendor.Unlimited ? item.displayName
+                    : left > 0 ? $"{item.displayName}  <size=13><color=#bbbbbb>({left} left)</color></size>"
+                    : $"{item.displayName}  <size=13><color=#ff6655>(sold out)</color></size>";
                 row.Name.color = ItemDefinition.RarityColor(item.rarity);
                 row.Details.text = Summary(item, progress);
                 row.Price.text = $"{item.price} g";
-                row.Price.color = inventory.Gold >= item.price ? GoldColor : Unaffordable;
+                row.Price.color = inventory.Gold >= item.price && left != 0 ? GoldColor : Unaffordable;
             }
         }
 

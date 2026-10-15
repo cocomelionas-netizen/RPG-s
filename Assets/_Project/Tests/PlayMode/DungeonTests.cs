@@ -3,9 +3,11 @@ using System.Collections;
 using NUnit.Framework;
 using RPG.Combat;
 using RPG.Dungeons;
+using RPG.Items;
 using RPG.Monsters;
 using RPG.Navigation;
 using RPG.Networking;
+using RPG.Progression;
 using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
 using UnityEditor;
@@ -30,6 +32,7 @@ namespace RPG.Tests
         private DungeonManager manager;
         private NetworkObject player;
         private Health playerHealth;
+        private Inventory inventory;
 
         [UnitySetUp]
         public IEnumerator SetUp()
@@ -73,6 +76,14 @@ namespace RPG.Tests
             player = network.LocalClient.PlayerObject;
             Assert.IsNotNull(player);
             playerHealth = player.GetComponent<Health>();
+            inventory = player.GetComponent<Inventory>();
+
+            // Meet the entry requirements: the minimum level and keys.
+            var progress = player.GetComponent<CharacterProgress>();
+            while (progress.Level < dungeon.minLevel)
+                progress.ServerAddExperience(LevelCurve.ExperienceToNext(progress.Level));
+            Assert.IsNotNull(dungeon.key, "The dungeon needs a key.");
+            inventory.ServerAddItem(dungeon.key, 3, false);
 
             // An entrance right next to the player.
             entranceObject = new GameObject("Test Entrance");
@@ -114,6 +125,39 @@ namespace RPG.Tests
             Assert.IsTrue(instance.Monsters.Exists(m => m.GetComponent<BossMechanics>() != null));
             foreach (NetworkObject monster in instance.Monsters)
                 Assert.IsTrue(instance.Contains(monster.transform.position));
+        }
+
+        [UnityTest]
+        public IEnumerator Entering_UsesUpOneKey()
+        {
+            int keys = inventory.CountOf(dungeon.key);
+            Assert.IsTrue(manager.ServerUsePortal(playerHealth));
+            yield return null;
+            Assert.AreEqual(keys - 1, inventory.CountOf(dungeon.key));
+        }
+
+        [UnityTest]
+        public IEnumerator Entering_WithoutAKey_IsRefused()
+        {
+            Assert.IsTrue(inventory.ServerRemoveItem(dungeon.key, inventory.CountOf(dungeon.key)));
+            yield return null;
+
+            Assert.IsFalse(manager.ServerUsePortal(playerHealth));
+            Assert.AreEqual(0, manager.Instances.Count);
+            Assert.IsNotNull(manager.EntryRefusal(playerHealth, true));
+        }
+
+        [UnityTest]
+        public IEnumerator Entering_BelowTheMinimumLevel_IsRefused()
+        {
+            Assert.Greater(dungeon.minLevel, 1, "The dungeon has a level requirement.");
+            player.GetComponent<CharacterProgress>().ServerLoad(0, 1, 0, default);
+            yield return null;
+
+            int keys = inventory.CountOf(dungeon.key);
+            Assert.IsFalse(manager.ServerUsePortal(playerHealth));
+            Assert.AreEqual(0, manager.Instances.Count);
+            Assert.AreEqual(keys, inventory.CountOf(dungeon.key), "No key is used when refused.");
         }
 
         [UnityTest]

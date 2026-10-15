@@ -1,4 +1,5 @@
 using System;
+using RPG.Items;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -35,6 +36,14 @@ namespace RPG.Dungeons
 
         public MonsterPack[] packs = Array.Empty<MonsterPack>();
         public GameObject bossPrefab;
+
+        [Header("Entry")]
+        [Tooltip("Players below this level cannot enter.")]
+        [Min(1)] public int minLevel = 1;
+        [Tooltip("The player who opens an instance must carry one; it is used up. Leave empty for no key.")]
+        public ItemDefinition key;
+        [Tooltip("Most players one instance takes in.")]
+        [Min(1)] public int maxPlayers = 4;
 
         [Tooltip("Monsters in the dungeon attack players who come this close (unlike the outdoor ones for now).")]
         [Min(0f)] public float monsterAggroRadius = 3.5f;

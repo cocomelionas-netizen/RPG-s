@@ -131,6 +131,22 @@ namespace RPG.Items
             return count;
         }
 
+        /// <summary>Server: takes items out of the bag (keys, quest items). False, and nothing taken, when there are not enough.</summary>
+        public bool ServerRemoveItem(ItemDefinition item, int count)
+        {
+            if (!IsServer || item == null || count <= 0 || CountOf(item) < count) return false;
+            int id = catalog.IdOf(item);
+            for (int i = bag.Count - 1; i >= 0 && count > 0; i--)
+            {
+                ItemStack stack = bag[i];
+                if (stack.ItemId != id || stack.IsEmpty) continue;
+                int taken = Mathf.Min(count, stack.Count);
+                bag[i] = stack.Count > taken ? stack.WithCount(stack.Count - taken) : ItemStack.Empty;
+                count -= taken;
+            }
+            return true;
+        }
+
         /// <summary>Seconds until potions can be used again (0 when ready).</summary>
         public float PotionCooldownRemaining =>
             IsSpawned ? Mathf.Max(0f, (float)(potionReadyAt.Value - NetworkManager.ServerTime.Time)) : 0f;
@@ -259,6 +275,27 @@ namespace RPG.Items
             if (IsOwner && vendor != null) BuyRpc(vendor.Index, stockIndex);
         }
 
+        /// <summary>Owner: asks how many of each item a vendor has left (the answer updates <see cref="Vendor.KnownRemaining"/>).</summary>
+        public void RequestVendorStock(Vendor vendor)
+        {
+            if (IsOwner && vendor != null) VendorStockRequestRpc(vendor.Index);
+        }
+
+        [Rpc(SendTo.Server)]
+        private void VendorStockRequestRpc(int vendorIndex, RpcParams rpcParams = default)
+        {
+            Vendor vendor = Vendor.Get(vendorIndex);
+            if (rpcParams.Receive.SenderClientId == OwnerClientId && vendor != null && vendor.Definition != null)
+                VendorStockRpc(vendorIndex, vendor.ServerStockSnapshot());
+        }
+
+        [Rpc(SendTo.Owner)]
+        private void VendorStockRpc(int vendorIndex, int[] counts)
+        {
+            Vendor vendor = Vendor.Get(vendorIndex);
+            if (vendor != null) vendor.SetKnownStock(counts);
+        }
+
         public void RequestSell(Vendor vendor, int bagIndex)
         {
             if (IsOwner && vendor != null) SellRpc(vendor.Index, bagIndex);
@@ -335,6 +372,10 @@ namespace RPG.Items
                 case InventoryMessage.NotEnoughGold:
                     CombatTextLayer.ShowText(above, "Not enough gold", new Color(1f, 0.4f, 0.3f), 0.8f);
                     MessageLog.Add("Not enough gold.", MessageLog.WarningColor);
+                    break;
+                case InventoryMessage.SoldOut:
+                    CombatTextLayer.ShowText(above, "Sold out", new Color(1f, 0.4f, 0.3f), 0.8f);
+                    MessageLog.Add("That item is sold out. Vendors restock every few minutes.", MessageLog.WarningColor);
                     break;
                 case InventoryMessage.Gold:
                     CombatTextLayer.ShowText(above, $"+{itemId} gold", GoldColor, 0.8f);
@@ -476,6 +517,12 @@ namespace RPG.Items
             if (stockIndex < 0 || stockIndex >= stock.Length || stock[stockIndex] == null) return false;
 
             ItemDefinition item = stock[stockIndex];
+            if (vendor.ServerRemaining(stockIndex) == 0)
+            {
+                MessageRpc(InventoryMessage.SoldOut, 0, 0);
+                VendorStockRpc(vendor.Index, vendor.ServerStockSnapshot());
+                return false;
+            }
             if (gold.Value < item.price)
             {
                 MessageRpc(InventoryMessage.NotEnoughGold, 0, 0);
@@ -483,6 +530,8 @@ namespace RPG.Items
             }
             if (ServerAddItem(item, 1) <= 0) return false;
             gold.Value -= item.price;
+            vendor.ServerTake(stockIndex);
+            VendorStockRpc(vendor.Index, vendor.ServerStockSnapshot());
             return true;
         }
 
@@ -518,6 +567,7 @@ namespace RPG.Items
             NotEnoughGold,
             /// <summary>Gold gained; the amount travels in the item id field.</summary>
             Gold,
+            SoldOut,
         }
     }
 }

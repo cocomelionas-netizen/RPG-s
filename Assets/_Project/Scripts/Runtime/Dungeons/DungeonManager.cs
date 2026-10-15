@@ -4,6 +4,7 @@ using RPG.Items;
 using RPG.Monsters;
 using RPG.Navigation;
 using RPG.Networking;
+using RPG.Progression;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -150,23 +151,75 @@ namespace RPG.Dungeons
             if (nearest == null) return false;
 
             if (nearest.Kind == PortalKind.DungeonEntrance)
-                return ServerEnter(nearest.transform.position) != null;
+                return ServerEnter(nearest.transform.position, player) != null;
             return ServerLeave(player);
         }
 
-        /// <summary>Server: opens a new instance for the living players around an entrance. Returns it (null if nobody).</summary>
+        /// <summary>
+        /// Why a player may not open or join this dungeon ("You must be level 3..."), or null when they may.
+        /// <paramref name="needsKey"/>: whether they must also carry the key (only the one who opens it does).
+        /// </summary>
+        public string EntryRefusal(Health player, bool needsKey)
+        {
+            if (definition == null || player == null) return null;
+            int level = player.TryGetComponent(out CharacterProgress progress) ? progress.Level : 1;
+            if (level < definition.minLevel)
+                return $"You must be level {definition.minLevel} to enter {definition.displayName}";
+            if (needsKey && definition.key != null && (!player.TryGetComponent(out Inventory inventory) || inventory.CountOf(definition.key) <= 0))
+                return $"You need a {definition.key.displayName} to enter {definition.displayName}";
+            return null;
+        }
+
+        /// <summary>
+        /// Server: <paramref name="opener"/> opens a new instance at an entrance, if they meet the level and carry
+        /// the key (used up). Living players around the entrance who meet the level go in with them, up to the limit.
+        /// Returns the instance (null when refused).
+        /// </summary>
+        public DungeonInstance ServerEnter(Vector2 entrance, Health opener)
+        {
+            if (definition == null || opener == null) return null;
+            string refusal = EntryRefusal(opener, true);
+            if (refusal != null)
+            {
+                Announce(opener, refusal);
+                return null;
+            }
+
+            var group = new List<Health> { opener };
+            foreach (Health player in PlayersAround(entrance))
+            {
+                if (player == opener) continue;
+                string reason = EntryRefusal(player, false);
+                if (reason != null) Announce(player, reason);
+                else if (group.Count < definition.maxPlayers) group.Add(player);
+            }
+
+            if (definition.key != null && opener.TryGetComponent(out Inventory inventory) && !inventory.ServerRemoveItem(definition.key, 1))
+                return null;
+            return Open(group);
+        }
+
+        /// <summary>Server: opens a new instance for the living players around an entrance, without entry checks (tests, tools).</summary>
         public DungeonInstance ServerEnter(Vector2 entrance)
         {
-            if (definition == null || definition.instancePrefab == null) return null;
+            return Open(PlayersAround(entrance));
+        }
 
-            var group = new List<Health>();
+        private List<Health> PlayersAround(Vector2 entrance)
+        {
+            var players = new List<Health>();
             foreach (NetworkClient client in Network.ConnectedClientsList)
             {
                 if (client.PlayerObject == null || !client.PlayerObject.TryGetComponent(out Health player)) continue;
                 if (!player.IsDead && Vector2.Distance(AutoAttack.ServerPosition(player), entrance) <= groupRadius)
-                    group.Add(player);
+                    players.Add(player);
             }
-            if (group.Count == 0) return null;
+            return players;
+        }
+
+        private DungeonInstance Open(List<Health> group)
+        {
+            if (definition == null || definition.instancePrefab == null || group.Count == 0) return null;
 
             GameObject instanceObject = Instantiate(definition.instancePrefab);
             var instance = instanceObject.GetComponent<DungeonInstance>();
@@ -253,6 +306,11 @@ namespace RPG.Dungeons
         private static void Teleport(Health player, Vector2 destination, string message)
         {
             if (player.TryGetComponent(out PlayerNetworkMovement movement)) movement.ServerTeleport(destination);
+            Announce(player, message);
+        }
+
+        private static void Announce(Health player, string message)
+        {
             if (player.TryGetComponent(out DungeonTraveller traveller)) traveller.ServerAnnounce(message);
         }
 
