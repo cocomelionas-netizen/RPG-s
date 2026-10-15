@@ -25,7 +25,7 @@ Asmeninis bandomasis projektas: išdėstymas ir balanso skaičiai paimti iš Dre
 |---|---|---|
 | XP lygiui (1→2: 100, 10→11: 1087, 24→25: 97 380) ir už nužudymą (lygis 1: 20 … 25: 2389) | `player_exp_levels` | `LevelCurve` |
 | Elitinių HP ~5,6× | `npc_template` | `MonsterAI.EliteHealthScale` |
-| Elitiniai: garantuotas žalias arba mėlynas daiktas; bosas: garantuotas auksinis (Rare) + 25 % violetinis (Epic) | `npc_template` loot tikimybės | `MonsterAI`, `LootDrop`, `AffixCatalog.RollQuality` |
+| Elitiniai: daugiau medžiagų; bosas: garantuotas auksinis (Rare) + 25 % violetinis (Epic) | `npc_template` loot tikimybės | `MonsterAI`, `LootDrop`, `AffixCatalog.RollQuality` |
 | Prekeiviai: Rare 1 vnt., Uncommon 3 vnt., atsinaujina kas 60 s | `npc_vendor` | `VendorDefinition` |
 | Atributų kainos XP | `Dreadmyst.exe` | `AttributeRules.PointCost` |
 
@@ -36,12 +36,19 @@ naudojame savo, laiptuotas kaip jų bosų.
 
 - Kiekvienas ginklas ir šarvas turi lygį (`ItemDefinition.itemLevel`, kaip Dreadmyst `required_level`):
   užsidėti galima tik nuo to lygio, aprašyme — „Requires level N“.
-- Monstrai ir skrynios meta daiktus **pagal savo lygį** (kaip Dreadmyst `material_chance_*` lentelės):
-  nuo 3 lygių žemiau iki 1 aukščiau, dažniausiai savo lygio (`LootDrop.LevelWeight`). Pvz. 3 lygio monstras —
-  1–4 lygio daiktai; 25 lygio — iki 25. Kol aukštesnių daiktų nėra, krenta aukščiausi esami.
+- **Gatavi daiktai nekrenta — jie gaminami (craft) iš medžiagų.** Monstrai ir skrynios meta medžiagas
+  **pagal savo lygį**, ta pačia tvarka, kaip Dreadmyst parenka savo daiktų medžiagą (`material_chance_*`):
+  nuo 3 lygių žemiau iki 1 aukščiau, dažniausiai savo lygio (`LootDrop.LevelWeight`, `LootDrop.PickMaterial`).
+  Pvz. 1 lygio monstras — Bronze Ingot, Aspen Log, Leather Hide, Linen Cloth; Mythril — tik nuo 6 lygio.
+- Medžiagos krenta 40 % tikimybe kiekvienam ridenimui, kartais 2 vnt. Elitiniai ridena 2 kartus + 3 papildomus,
+  bosai + 6 papildomus ir dar garantuotą auksinį daiktą (+25 % violetinį) — tik bosai meta gatavus daiktus.
+  Skrynios ridena 1 (dėžė), 2 (Oak Chest) ar 3 (Strongbox) kartus.
+- **Gaminimas** — St. Revere klasių prekeiviai (lange „Craft“): kardas/lankas/lazda ir krūtinė — 6 medžiagos,
+  galva ir kojos — 4. Rodomi daiktai, kurių medžiagos turi, aukščiausio lygio, kurį gali dėvėti.
+  Kariui — kardai, oda, grandinės, plokštės; šauliui — lankai, oda, grandinės; magui — lazdos, mantijos
+  (Dreadmyst `player_desirable_armor`). Pagamintas daiktas kartais geresnis: auksinis 2 %, mėlynas 8 %,
+  žalias 25 % (`LootDrop.CraftChances`), 20 % su lizdu brangakmeniui.
 - Monstrų ir skrynių lygiai — iš Dreadmyst duomenų (kiekviena vieta turi savo lygį).
-- Kokybė kiekvienam ridenimui: auksinis 0,3 %, mėlynas 2 %, žalias 8 %, baltas 6 % (`LootDrop.GearChances`);
-  paprastesnis daiktas pakeliamas iki tos kokybės afiksu. Skrynios ridena 1 (dėžė), 2 (Oak Chest) ar 3 (Strongbox) kartus.
 - **Daiktai kaip Dreadmyst** (`Scripts/Editor/DreadmystGear.cs`): kiekvienam lygiui 1–25 — tos medžiagos, kurias
   Dreadmyst `material_chance_weapon` / `material_chance_armor` leidžia tame lygyje, su ta pačia tikimybe
   (`ItemDefinition.dropWeight`). Medžiagų pavadinimai — iš `Dreadmyst.exe`:
@@ -52,6 +59,7 @@ naudojame savo, laiptuotas kaip jų bosų.
     Helmet/Breastplate/Sabatons), mantijos (Linen, Wool, Silk, Spiritsilk — Hood/Vestments/Slippers, duoda manos);
   - žala ir šarvai auga kartu su Dreadmyst pardavimo kaina (ginklas 50 + 10 × lygis + 2 × lygis × (pakopa − 1),
     krūtinė 50 + 2,5 × pakopa × lygis). Pvz. Bronze Sword 1 lygio — +2 žala, Titanium Sword 25 lygio — +21.
-  - Seni rankų darbo daiktai lieka tik prekeiviams (retieji) ir senuose išsaugojimuose — pagal lygį nebekrenta.
+  - Medžiagos: metalai — „Ingot“ (ginklams, grandinėms ir plokštėms), mediena — „Log“, oda — „Hide“, audinys — „Cloth“.
+  - Seni rankų darbo daiktai lieka tik prekeiviams (retieji) ir senuose išsaugojimuose.
 - Spalvos kaip Dreadmyst: žalia → mėlyna → **auksinė** (Epic) → **violetinė** (Legendary, aukščiausia).
-  Bosas — garantuotas auksinis + 25 % violetinis; elitiniai — garantuotas žalias arba mėlynas.
+  Bosas — garantuotas auksinis + 25 % violetinis.
