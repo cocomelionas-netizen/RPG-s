@@ -12,7 +12,9 @@ namespace RPG.Progression
     /// A player's class, level and experience. The server owns all three; every peer derives the stats
     /// (max health, auto-attack damage, range, speed, plus equipment bonuses) and the look from them, so the owner also knows
     /// how close it must walk to attack.
-    /// Experience comes from monster kills (<see cref="ServerAddExperience"/>); levelling up raises stats and heals fully.
+    /// Experience comes from monster kills (<see cref="ServerAddExperience"/>); levelling up raises stats, heals fully
+    /// and gives attribute points to spend (<see cref="RequestSpendPoint"/>). Damage, health, mana and critical chance
+    /// come from the class, the level, the attributes (class + spent + items) and the equipment.
     /// The class is chosen when the character is created and restored with the rest of the character by
     /// <see cref="RPG.Accounts.CharacterPersistence"/>.
     /// </summary>
@@ -28,6 +30,10 @@ namespace RPG.Progression
             1, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
         private readonly NetworkVariable<int> experience = new NetworkVariable<int>(
             0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+        private readonly NetworkVariable<AttributeSet> spentPoints = new NetworkVariable<AttributeSet>(
+            default, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+        private readonly NetworkVariable<int> unspentPoints = new NetworkVariable<int>(
+            0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
 
         private static readonly Color LevelUpColor = new Color(1f, 0.85f, 0.3f);
         private static readonly Color ExperienceTextColor = new Color(0.75f, 0.55f, 1f);
@@ -36,6 +42,7 @@ namespace RPG.Progression
         private AutoAttack autoAttack;
         private CharacterAnimator characterAnimator;
         private Inventory inventory;
+        private Mana mana;
 
         /// <summary>Raised on every peer when the level goes up by gaining experience (not when a saved character is loaded).</summary>
         public event Action<int> LevelledUp;
@@ -50,6 +57,21 @@ namespace RPG.Progression
         public int Level => level.Value;
         public int Experience => experience.Value;
         public int ExperienceToNext => LevelCurve.ExperienceToNext(level.Value);
+        public int UnspentPoints => unspentPoints.Value;
+        public AttributeSet SpentPoints => spentPoints.Value;
+
+        /// <summary>Class attributes plus spent points plus the equipment's.</summary>
+        public AttributeSet TotalAttributes
+        {
+            get
+            {
+                AttributeSet total = (Class != null ? Class.baseAttributes : default) + spentPoints.Value;
+                return inventory != null ? total + inventory.Attributes : total;
+            }
+        }
+
+        /// <summary>Critical hit chance with Agility (0..1).</summary>
+        public float CritChance => Class != null ? Mathf.Clamp01(Class.critChance + AttributeRules.CritBonus(TotalAttributes)) : 0f;
 
         private void Awake()
         {
@@ -57,12 +79,15 @@ namespace RPG.Progression
             autoAttack = GetComponent<AutoAttack>();
             characterAnimator = GetComponent<CharacterAnimator>();
             inventory = GetComponent<Inventory>();
+            mana = GetComponent<Mana>();
         }
 
         public override void OnNetworkSpawn()
         {
             classIndex.OnValueChanged += OnClassChanged;
             level.OnValueChanged += OnLevelChanged;
+            spentPoints.OnValueChanged += OnPointsChanged;
+            unspentPoints.OnValueChanged += OnUnspentChanged;
             if (inventory != null) inventory.Changed += OnEquipmentChanged;
 
             if (IsServer)
@@ -70,6 +95,8 @@ namespace RPG.Progression
                 classIndex.Value = catalog != null && catalog.Get(defaultClass) != null ? defaultClass : 0;
                 level.Value = 1;
                 experience.Value = 0;
+                spentPoints.Value = default;
+                unspentPoints.Value = 0;
             }
         }
 
@@ -83,12 +110,24 @@ namespace RPG.Progression
         {
             classIndex.OnValueChanged -= OnClassChanged;
             level.OnValueChanged -= OnLevelChanged;
+            spentPoints.OnValueChanged -= OnPointsChanged;
+            unspentPoints.OnValueChanged -= OnUnspentChanged;
             if (inventory != null) inventory.Changed -= OnEquipmentChanged;
         }
 
         private void OnEquipmentChanged()
         {
             ApplyClassAndLevel(false);
+        }
+
+        private void OnPointsChanged(AttributeSet previous, AttributeSet current)
+        {
+            ApplyClassAndLevel(false);
+        }
+
+        private void OnUnspentChanged(int previous, int current)
+        {
+            Changed?.Invoke();
         }
 
         // ---------- Server ----------
@@ -106,6 +145,7 @@ namespace RPG.Progression
             ExperienceGainedRpc(amount);
             if (newLevel != level.Value)
             {
+                unspentPoints.Value += (newLevel - level.Value) * AttributeRules.PointsPerLevel;
                 level.Value = newLevel;
                 LevelUpRpc(newLevel);
                 Debug.Log($"[Server] {health.DisplayName} reached level {newLevel}.");
@@ -121,14 +161,51 @@ namespace RPG.Progression
             return true;
         }
 
-        /// <summary>Server only: restores a saved character (class, level and progress into the level).</summary>
-        public void ServerLoad(int savedClass, int savedLevel, int savedExperience)
+        /// <summary>Server only: restores a saved character (class, level, progress into the level and attribute points).</summary>
+        public void ServerLoad(int savedClass, int savedLevel, int savedExperience, AttributeSet savedSpent)
         {
             if (!IsServer) return;
             if (catalog != null && catalog.Get(savedClass) != null) classIndex.Value = savedClass;
             level.Value = Mathf.Clamp(savedLevel, 1, LevelCurve.MaxLevel);
             experience.Value = Mathf.Clamp(savedExperience, 0, Mathf.Max(0, LevelCurve.ExperienceToNext(level.Value) - 1));
+
+            // Never more points than the level has given (a damaged or edited save).
+            int earned = (level.Value - 1) * AttributeRules.PointsPerLevel;
+            var spent = new AttributeSet(Mathf.Max(0, savedSpent.strength), Mathf.Max(0, savedSpent.agility),
+                Mathf.Max(0, savedSpent.intelligence), Mathf.Max(0, savedSpent.vitality));
+            int spentTotal = spent.strength + spent.agility + spent.intelligence + spent.vitality;
+            if (spentTotal > earned)
+            {
+                spent = default;
+                spentTotal = 0;
+            }
+            spentPoints.Value = spent;
+            // Every point the levels gave is either spent or waiting; characters saved before attributes get theirs now.
+            unspentPoints.Value = earned - spentTotal;
             ApplyClassAndLevel(true);
+        }
+
+        /// <summary>Owner: puts one unspent point into an attribute.</summary>
+        public void RequestSpendPoint(Attribute attribute)
+        {
+            if (IsOwner) SpendPointRpc(attribute);
+        }
+
+        [Rpc(SendTo.Server)]
+        private void SpendPointRpc(Attribute attribute, RpcParams rpcParams = default)
+        {
+            if (rpcParams.Receive.SenderClientId == OwnerClientId) ServerSpendPoint(attribute);
+        }
+
+        /// <summary>Server only: spends one point on an attribute. False when there is none to spend.</summary>
+        public bool ServerSpendPoint(Attribute attribute)
+        {
+            if (!IsServer || unspentPoints.Value <= 0 || attribute < Attribute.Strength || attribute > Attribute.Vitality) return false;
+            AttributeSet spent = spentPoints.Value;
+            spent[attribute] += 1;
+            unspentPoints.Value -= 1;
+            spentPoints.Value = spent;
+            return true;
         }
 
         [Rpc(SendTo.Owner)]
@@ -165,16 +242,19 @@ namespace RPG.Progression
             if (definition == null) return;
 
             int currentLevel = Mathf.Max(1, level.Value);
-            int damageBonus = inventory != null ? inventory.DamageBonus : 0;
-            int healthBonus = inventory != null ? inventory.HealthBonus : 0;
+            AttributeSet attributes = TotalAttributes;
+            int damageBonus = (inventory != null ? inventory.DamageBonus : 0) + AttributeRules.DamageBonus(attributes[definition.primaryAttribute]);
+            int healthBonus = (inventory != null ? inventory.HealthBonus : 0) + AttributeRules.HealthBonus(attributes);
+            int manaBonus = (inventory != null ? inventory.ManaBonus : 0) + AttributeRules.ManaBonus(attributes);
             autoAttack.SetStats(definition.MinDamageAt(currentLevel) + damageBonus, definition.MaxDamageAt(currentLevel) + damageBonus,
-                definition.attackInterval, definition.attackRange, definition.critChance, definition.projectileColor);
+                definition.attackInterval, definition.attackRange, CritChance, definition.projectileColor);
             if (characterAnimator != null && definition.animations != null)
                 characterAnimator.AnimationSet = definition.animations;
             if (IsServer && IsSpawned)
             {
                 health.ServerSetMaxHealth(definition.MaxHealthAt(currentLevel) + healthBonus, healFully);
                 health.ServerArmor = inventory != null ? inventory.Armor : 0;
+                if (mana != null) mana.ServerSetMax(definition.MaxManaAt(currentLevel) + manaBonus, healFully);
             }
 
             Changed?.Invoke();

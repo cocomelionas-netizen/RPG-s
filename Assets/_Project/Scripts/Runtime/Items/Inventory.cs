@@ -21,6 +21,7 @@ namespace RPG.Items
         public const int EquipmentSlots = 4;
 
         [SerializeField] private ItemCatalog catalog;
+        [SerializeField] private AffixCatalog affixes;
         [SerializeField, Min(1)] private int bagSize = 20;
         [Tooltip("Given to every new character.")]
         [SerializeField] private ItemDefinition[] startingItems = Array.Empty<ItemDefinition>();
@@ -37,6 +38,7 @@ namespace RPG.Items
         private readonly NetworkVariable<int> gold = new NetworkVariable<int>(
             0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
         private Health health;
+        private Mana mana;
         private CharacterProgress progress;
         private double potionReadyAt;
 
@@ -44,6 +46,7 @@ namespace RPG.Items
         public event Action Changed;
 
         public ItemCatalog Catalog => catalog;
+        public AffixCatalog Affixes => affixes;
         public int BagSize => bag != null ? bag.Count : 0;
         public float PickupRange => pickupRange;
         public int Gold => gold.Value;
@@ -52,10 +55,13 @@ namespace RPG.Items
         public int DamageBonus { get; private set; }
         public int HealthBonus { get; private set; }
         public int Armor { get; private set; }
+        public int ManaBonus { get; private set; }
+        public AttributeSet Attributes { get; private set; }
 
         private void Awake()
         {
             health = GetComponent<Health>();
+            mana = GetComponent<Mana>();
             progress = GetComponent<CharacterProgress>();
             bag = new NetworkList<ItemStack>(null, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
             equipment = new NetworkList<ItemStack>(null, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
@@ -95,6 +101,22 @@ namespace RPG.Items
 
         public ItemDefinition Definition(ItemStack stack) => catalog != null && !stack.IsEmpty ? catalog.Get(stack.ItemId) : null;
 
+        /// <summary>The random affix of a stack (null when it has none).</summary>
+        public AffixDefinition Affix(ItemStack stack) => affixes != null && !stack.IsEmpty ? affixes.Get(stack.AffixId) : null;
+
+        /// <summary>The item's name with its affix, for example "Iron Sword of the Bear".</summary>
+        public string DisplayName(ItemStack stack)
+        {
+            ItemDefinition item = Definition(stack);
+            return item != null ? item.NameWith(Affix(stack)) : "";
+        }
+
+        public ItemRarity Quality(ItemStack stack)
+        {
+            ItemDefinition item = Definition(stack);
+            return item != null ? item.QualityWith(Affix(stack)) : ItemRarity.Common;
+        }
+
         /// <summary>How many of an item the bag holds.</summary>
         public int CountOf(ItemDefinition item)
         {
@@ -113,7 +135,8 @@ namespace RPG.Items
 
         private void RecalculateBonuses()
         {
-            int damage = 0, healthBonus = 0, armor = 0;
+            int damage = 0, healthBonus = 0, armor = 0, manaBonus = 0;
+            AttributeSet attributes = default;
             for (int i = 0; i < equipment.Count; i++)
             {
                 ItemDefinition item = Definition(equipment[i]);
@@ -121,10 +144,22 @@ namespace RPG.Items
                 damage += item.damageBonus;
                 healthBonus += item.healthBonus;
                 armor += item.armor;
+                manaBonus += item.manaBonus;
+                attributes += item.attributes;
+
+                AffixDefinition affix = Affix(equipment[i]);
+                if (affix == null) continue;
+                damage += affix.damageBonus;
+                healthBonus += affix.healthBonus;
+                armor += affix.armor;
+                manaBonus += affix.manaBonus;
+                attributes += affix.attributes;
             }
             DamageBonus = damage;
             HealthBonus = healthBonus;
             Armor = armor;
+            ManaBonus = manaBonus;
+            Attributes = attributes;
         }
 
         /// <summary>Server: replaces the bag and equipment with saved ones (unknown items are dropped).</summary>
@@ -138,14 +173,15 @@ namespace RPG.Items
                 ItemStack stack = savedEquipment != null && i < savedEquipment.Count ? savedEquipment[i] : ItemStack.Empty;
                 ItemDefinition item = Definition(stack);
                 // Only something that belongs in this slot.
-                equipment[i] = item != null && (int)item.slot - 1 == i ? new ItemStack(stack.ItemId, 1) : ItemStack.Empty;
+                equipment[i] = item != null && (int)item.slot - 1 == i && IsKnown(stack) ? new ItemStack(stack.ItemId, 1, stack.AffixId) : ItemStack.Empty;
             }
         }
 
         private bool IsKnown(ItemStack stack)
         {
             ItemDefinition item = Definition(stack);
-            return item != null && stack.Count <= item.maxStack;
+            bool affixKnown = stack.AffixId == 0 || Affix(stack) != null;
+            return item != null && affixKnown && stack.Count <= item.maxStack;
         }
 
         /// <summary>The bag's contents, slot by slot.</summary>
@@ -233,14 +269,15 @@ namespace RPG.Items
         }
 
         [Rpc(SendTo.Owner)]
-        private void MessageRpc(InventoryMessage message, int itemId)
+        private void MessageRpc(InventoryMessage message, int itemId, int affixId)
         {
             ItemDefinition item = catalog != null ? catalog.Get(itemId) : null;
+            AffixDefinition affix = affixes != null ? affixes.Get(affixId) : null;
             Vector3 above = transform.position + Vector3.up * 1.1f;
             switch (message)
             {
                 case InventoryMessage.Received:
-                    if (item != null) CombatTextLayer.ShowText(above, "+ " + item.displayName, ItemDefinition.RarityColor(item.rarity), 0.8f);
+                    if (item != null) CombatTextLayer.ShowText(above, "+ " + item.NameWith(affix), ItemDefinition.RarityColor(item.QualityWith(affix)), 0.8f);
                     break;
                 case InventoryMessage.BagFull:
                     CombatTextLayer.ShowText(above, "Inventory is full", new Color(1f, 0.4f, 0.3f), 0.8f);
@@ -262,33 +299,35 @@ namespace RPG.Items
 
         // ---------- Server ----------
 
-        /// <summary>Server: adds items, filling stacks first. Returns how many fitted.</summary>
-        public int ServerAddItem(ItemDefinition item, int count = 1, bool announce = true)
+        /// <summary>Server: adds items (with an optional random affix id), filling stacks first. Returns how many fitted.</summary>
+        public int ServerAddItem(ItemDefinition item, int count = 1, bool announce = true, int affixId = 0)
         {
             if (!IsServer || catalog == null || item == null || count <= 0) return 0;
             int id = catalog.IdOf(item);
             if (id == 0) return 0;
+            if (affixes == null || affixes.Get(affixId) == null) affixId = 0;
+            var kind = new ItemStack(id, 1, affixId);
 
             int remaining = count;
             for (int i = 0; i < bag.Count && remaining > 0; i++)
             {
                 ItemStack stack = bag[i];
-                if (stack.ItemId != id || stack.Count >= item.maxStack) continue;
+                if (stack.IsEmpty || !stack.SameKind(kind) || stack.Count >= item.maxStack) continue;
                 int added = Mathf.Min(remaining, item.maxStack - stack.Count);
-                bag[i] = new ItemStack(id, stack.Count + added);
+                bag[i] = stack.WithCount(stack.Count + added);
                 remaining -= added;
             }
             for (int i = 0; i < bag.Count && remaining > 0; i++)
             {
                 if (!bag[i].IsEmpty) continue;
                 int added = Mathf.Min(remaining, item.maxStack);
-                bag[i] = new ItemStack(id, added);
+                bag[i] = kind.WithCount(added);
                 remaining -= added;
             }
 
             int fitted = count - remaining;
-            if (announce && fitted > 0) MessageRpc(InventoryMessage.Received, id);
-            if (remaining > 0) MessageRpc(InventoryMessage.BagFull, id);
+            if (announce && fitted > 0) MessageRpc(InventoryMessage.Received, id, affixId);
+            if (remaining > 0) MessageRpc(InventoryMessage.BagFull, id, 0);
             return fitted;
         }
 
@@ -301,15 +340,15 @@ namespace RPG.Items
             if (item == null || !item.IsEquippable) return false;
             if (progress != null && !item.CanBeUsedByClass(progress.ClassIndex))
             {
-                MessageRpc(InventoryMessage.WrongClass, stack.ItemId);
+                MessageRpc(InventoryMessage.WrongClass, stack.ItemId, 0);
                 return false;
             }
 
             int equipIndex = (int)item.slot - 1;
             ItemStack worn = equipment[equipIndex];
-            equipment[equipIndex] = new ItemStack(stack.ItemId, 1);
-            bag[bagIndex] = stack.Count > 1 ? new ItemStack(stack.ItemId, stack.Count - 1) : worn;
-            if (stack.Count > 1 && !worn.IsEmpty) ServerAddItem(Definition(worn), 1, false);
+            equipment[equipIndex] = stack.WithCount(1);
+            bag[bagIndex] = stack.Count > 1 ? stack.WithCount(stack.Count - 1) : worn;
+            if (stack.Count > 1 && !worn.IsEmpty) ServerAddItem(Definition(worn), 1, false, worn.AffixId);
             return true;
         }
 
@@ -328,7 +367,7 @@ namespace RPG.Items
                 equipment[equipIndex] = ItemStack.Empty;
                 return true;
             }
-            MessageRpc(InventoryMessage.BagFull, worn.ItemId);
+            MessageRpc(InventoryMessage.BagFull, worn.ItemId, 0);
             return false;
         }
 
@@ -343,7 +382,7 @@ namespace RPG.Items
             double now = NetworkManager.ServerTime.Time;
             if (now < potionReadyAt)
             {
-                MessageRpc(InventoryMessage.NotReady, stack.ItemId);
+                MessageRpc(InventoryMessage.NotReady, stack.ItemId, 0);
                 return false;
             }
 
@@ -351,11 +390,15 @@ namespace RPG.Items
             {
                 case ItemUse.Heal:
                     health.Heal(Mathf.Max(1, Mathf.RoundToInt(health.Max * item.healFraction)), true);
-                    potionReadyAt = now + potionCooldown;
+                    break;
+                case ItemUse.RestoreMana:
+                    if (mana == null) return false;
+                    mana.ServerRestore(Mathf.Max(1, Mathf.RoundToInt(mana.Max * item.healFraction)));
                     break;
             }
+            potionReadyAt = now + potionCooldown;
 
-            bag[bagIndex] = stack.Count > 1 ? new ItemStack(stack.ItemId, stack.Count - 1) : ItemStack.Empty;
+            bag[bagIndex] = stack.Count > 1 ? stack.WithCount(stack.Count - 1) : ItemStack.Empty;
             return true;
         }
 
@@ -364,7 +407,7 @@ namespace RPG.Items
         {
             if (!IsServer || amount == 0) return;
             gold.Value = Mathf.Max(0, gold.Value + amount);
-            if (announce && amount > 0) MessageRpc(InventoryMessage.Gold, amount);
+            if (announce && amount > 0) MessageRpc(InventoryMessage.Gold, amount, 0);
         }
 
         /// <summary>Server: restores saved gold.</summary>
@@ -389,7 +432,7 @@ namespace RPG.Items
             ItemDefinition item = stock[stockIndex];
             if (gold.Value < item.price)
             {
-                MessageRpc(InventoryMessage.NotEnoughGold, 0);
+                MessageRpc(InventoryMessage.NotEnoughGold, 0, 0);
                 return false;
             }
             if (ServerAddItem(item, 1) <= 0) return false;
@@ -403,10 +446,11 @@ namespace RPG.Items
             if (!IsServer || health.IsDead || !IsNear(vendor) || bagIndex < 0 || bagIndex >= bag.Count) return false;
             ItemStack stack = bag[bagIndex];
             ItemDefinition item = Definition(stack);
-            if (item == null || item.SellPrice <= 0) return false;
+            int price = item != null ? item.SellPriceWith(Affix(stack)) : 0;
+            if (price <= 0) return false;
 
-            bag[bagIndex] = stack.Count > 1 ? new ItemStack(stack.ItemId, stack.Count - 1) : ItemStack.Empty;
-            ServerAddGold(item.SellPrice);
+            bag[bagIndex] = stack.Count > 1 ? stack.WithCount(stack.Count - 1) : ItemStack.Empty;
+            ServerAddGold(price);
             return true;
         }
 

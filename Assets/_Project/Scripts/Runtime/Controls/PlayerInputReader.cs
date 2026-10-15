@@ -19,6 +19,7 @@ namespace RPG.Controls
         private InputAction attackAction;
         private InputAction cancelAction;
         private InputAction inventoryAction;
+        private InputAction characterAction;
         private readonly InputAction[] abilityActions = new InputAction[AbilityKeyCount];
 
         /// <summary>Number of ability keys (1, 2, 3...).</summary>
@@ -41,6 +42,9 @@ namespace RPG.Controls
 
         /// <summary>I or B: open or close the inventory.</summary>
         public bool InventoryPressed => inventoryAction.WasPressedThisFrame();
+
+        /// <summary>C: open or close the character sheet.</summary>
+        public bool CharacterPressed => characterAction.WasPressedThisFrame();
 
         /// <summary>Esc: clear the target / cancel.</summary>
         public bool CancelPressed => cancelAction.WasPressedThisFrame();
@@ -89,6 +93,7 @@ namespace RPG.Controls
             cancelAction = new InputAction("Cancel", InputActionType.Button, "<Keyboard>/escape");
             inventoryAction = new InputAction("Inventory", InputActionType.Button, "<Keyboard>/i");
             inventoryAction.AddBinding("<Keyboard>/b");
+            characterAction = new InputAction("Character", InputActionType.Button, "<Keyboard>/c");
             for (int i = 0; i < abilityActions.Length; i++)
                 abilityActions[i] = new InputAction($"Ability{i + 1}", InputActionType.Button, $"<Keyboard>/{i + 1}");
         }
@@ -103,6 +108,7 @@ namespace RPG.Controls
             attackAction.Enable();
             cancelAction.Enable();
             inventoryAction.Enable();
+            characterAction.Enable();
             foreach (InputAction action in abilityActions) action.Enable();
         }
 
@@ -116,6 +122,7 @@ namespace RPG.Controls
             attackAction.Disable();
             cancelAction.Disable();
             inventoryAction.Disable();
+            characterAction.Disable();
             foreach (InputAction action in abilityActions) action.Disable();
         }
 
@@ -129,6 +136,7 @@ namespace RPG.Controls
             attackAction.Dispose();
             cancelAction.Dispose();
             inventoryAction.Dispose();
+            characterAction.Dispose();
             foreach (InputAction action in abilityActions) action.Dispose();
         }
     }

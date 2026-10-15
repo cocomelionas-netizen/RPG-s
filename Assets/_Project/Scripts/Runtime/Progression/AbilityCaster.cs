@@ -16,6 +16,7 @@ namespace RPG.Progression
         NotReady,
         NoTarget,
         OutOfRange,
+        NoMana,
     }
 
     /// <summary>
@@ -39,6 +40,7 @@ namespace RPG.Progression
 
         private CharacterProgress progress;
         private Health health;
+        private Mana mana;
         private AutoAttack autoAttack;
         private CharacterAnimator characterAnimator;
         private PlayerMovement movement;
@@ -72,6 +74,7 @@ namespace RPG.Progression
         {
             progress = GetComponent<CharacterProgress>();
             health = GetComponent<Health>();
+            mana = GetComponent<Mana>();
             autoAttack = GetComponent<AutoAttack>();
             characterAnimator = GetComponent<CharacterAnimator>();
             movement = GetComponent<PlayerMovement>();
@@ -126,6 +129,9 @@ namespace RPG.Progression
             return slot >= 0 && slot < abilities.Count && slot < MaxSlots ? abilities[slot] : null;
         }
 
+        /// <summary>True when there is enough mana for the ability (always without a mana pool).</summary>
+        public bool HasManaFor(AbilityDefinition ability) => ability == null || mana == null || mana.Has(ability.manaCost);
+
         /// <summary>Seconds until the slot can be used again (its own cooldown or the global one).</summary>
         public float CooldownRemaining(int slot)
         {
@@ -164,6 +170,11 @@ namespace RPG.Progression
             if (CooldownRemaining(slot) > 0f)
             {
                 CastFailed?.Invoke(slot, CastFailure.NotReady);
+                return;
+            }
+            if (!HasManaFor(ability))
+            {
+                CastFailed?.Invoke(slot, CastFailure.NoMana);
                 return;
             }
 
@@ -226,6 +237,7 @@ namespace RPG.Progression
                 case CastFailure.NotReady: return ability != null ? $"{ability.displayName} is not ready" : "Not ready";
                 case CastFailure.NoTarget: return "No enemy target";
                 case CastFailure.OutOfRange: return "Out of range";
+                case CastFailure.NoMana: return "Not enough mana";
                 default: return "";
             }
         }
@@ -269,6 +281,12 @@ namespace RPG.Progression
                     failure = CastFailure.OutOfRange;
                     return false;
                 }
+            }
+
+            if (mana != null && !mana.ServerSpend(ability.manaCost))
+            {
+                failure = CastFailure.NoMana;
+                return false;
             }
 
             switch (ability.kind)

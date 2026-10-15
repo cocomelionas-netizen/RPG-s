@@ -4,6 +4,19 @@ using UnityEngine;
 
 namespace RPG.Items
 {
+    /// <summary>One item in a loot bag, with the random affix it rolled (0 for none).</summary>
+    public struct LootItem
+    {
+        public ItemDefinition Item;
+        public int AffixId;
+
+        public LootItem(ItemDefinition item, int affixId)
+        {
+            Item = item;
+            AffixId = affixId;
+        }
+    }
+
     /// <summary>
     /// Items a monster left behind. Only the server knows what is inside; a player who walks up and clicks it
     /// gets everything that fits in their bag. Disappears when emptied or after a while.
@@ -14,13 +27,13 @@ namespace RPG.Items
         [SerializeField] private float bobHeight = 0.04f;
         [SerializeField] private float bobSpeed = 3f;
 
-        private readonly List<ItemDefinition> contents = new List<ItemDefinition>();
+        private readonly List<LootItem> contents = new List<LootItem>();
         private float despawnAt;
         private Transform visual;
         private Vector3 visualBase;
 
         /// <summary>Server only: what is still inside.</summary>
-        public IReadOnlyList<ItemDefinition> Contents => contents;
+        public IReadOnlyList<LootItem> Contents => contents;
 
         private void Awake()
         {
@@ -33,11 +46,19 @@ namespace RPG.Items
         }
 
         /// <summary>Server: fills the bag (before or right after spawning it).</summary>
+        public void ServerSetContents(IEnumerable<LootItem> items)
+        {
+            contents.Clear();
+            foreach (LootItem item in items)
+                if (item.Item != null) contents.Add(item);
+        }
+
+        /// <summary>Server: fills the bag with items without affixes.</summary>
         public void ServerSetContents(IEnumerable<ItemDefinition> items)
         {
             contents.Clear();
             foreach (ItemDefinition item in items)
-                if (item != null) contents.Add(item);
+                if (item != null) contents.Add(new LootItem(item, 0));
         }
 
         public override void OnNetworkSpawn()
@@ -53,7 +74,7 @@ namespace RPG.Items
             bool tookAny = false;
             for (int i = contents.Count - 1; i >= 0; i--)
             {
-                if (inventory.ServerAddItem(contents[i]) <= 0) continue;
+                if (inventory.ServerAddItem(contents[i].Item, 1, true, contents[i].AffixId) <= 0) continue;
                 contents.RemoveAt(i);
                 tookAny = true;
             }

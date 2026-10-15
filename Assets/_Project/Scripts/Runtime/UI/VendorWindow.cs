@@ -196,7 +196,10 @@ namespace RPG.UI
             if (item.damageBonus > 0) parts.Add($"+{item.damageBonus} dmg");
             if (item.healthBonus > 0) parts.Add($"+{item.healthBonus} HP");
             if (item.armor > 0) parts.Add($"{item.armor} armor");
+            if (item.manaBonus > 0) parts.Add($"+{item.manaBonus} mana");
+            if (!item.attributes.IsZero) parts.Add(item.attributes.Describe("  "));
             if (item.use == ItemUse.Heal) parts.Add($"heals {Mathf.RoundToInt(item.healFraction * 100f)}%");
+            if (item.use == ItemUse.RestoreMana) parts.Add($"restores {Mathf.RoundToInt(item.healFraction * 100f)}% mana");
             string className = ClassName(item, progress);
             if (className != null)
             {

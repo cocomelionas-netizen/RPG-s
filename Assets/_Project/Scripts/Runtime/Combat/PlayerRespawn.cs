@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace RPG.Combat
 {
-    /// <summary>Server: a dead player comes back at the spawn point with full health after a delay.</summary>
+    /// <summary>Server: a dead player comes back at the spawn point with full health and mana after a delay.</summary>
     [RequireComponent(typeof(Health), typeof(PlayerNetworkMovement))]
     public class PlayerRespawn : NetworkBehaviour
     {
@@ -13,6 +13,7 @@ namespace RPG.Combat
         private Health health;
         private PlayerNetworkMovement networkMovement;
         private AutoAttack autoAttack;
+        private Mana mana;
         private double respawnAt = -1.0;
 
         public float RespawnDelay
@@ -26,6 +27,7 @@ namespace RPG.Combat
             health = GetComponent<Health>();
             networkMovement = GetComponent<PlayerNetworkMovement>();
             autoAttack = GetComponent<AutoAttack>();
+            mana = GetComponent<Mana>();
         }
 
         public override void OnNetworkSpawn()
@@ -54,6 +56,7 @@ namespace RPG.Combat
             Vector2 spawn = bootstrap != null ? (Vector2)bootstrap.GetSpawnPosition() : Vector2.zero;
             networkMovement.ServerTeleport(spawn);
             health.RestoreFull();
+            if (mana != null) mana.ServerRestore(mana.Max);
             Debug.Log($"[Server] {health.DisplayName} respawned.");
         }
     }
