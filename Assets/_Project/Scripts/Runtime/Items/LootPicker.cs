@@ -4,14 +4,15 @@ using RPG.Dungeons;
 using RPG.Player;
 using RPG.UI;
 using RPG.Vendors;
+using RPG.World;
 using Unity.Netcode;
 using UnityEngine;
 
 namespace RPG.Items
 {
     /// <summary>
-    /// Owner: clicking a loot bag, a portal or a vendor walks to it and then picks the loot up, uses the portal
-    /// or opens the vendor's window.
+    /// Owner: clicking a loot bag, a portal, a vendor or a waystone walks to it and then picks the loot up,
+    /// uses the portal, or opens the vendor's or waystone's window.
     /// WASD or another click cancels.
     /// Runs before <see cref="PlayerMovement"/> so the click on the bag does not also become a move elsewhere.
     /// </summary>
@@ -26,6 +27,7 @@ namespace RPG.Items
         private LootBag pending;
         private Portal pendingPortal;
         private Vendor pendingVendor;
+        private Waystone pendingWaystone;
         private DungeonTraveller traveller;
         private readonly List<Collider2D> pointerHits = new List<Collider2D>();
 
@@ -51,13 +53,21 @@ namespace RPG.Items
                 pending = LootUnderPointer();
                 pendingPortal = pending == null && traveller != null ? PortalUnderPointer() : null;
                 pendingVendor = pending == null && pendingPortal == null ? VendorUnderPointer() : null;
-                if (pending != null || pendingPortal != null || pendingVendor != null) movement.SuppressClickMoveUntilRelease();
+                pendingWaystone = pending == null && pendingPortal == null && pendingVendor == null ? UnderPointer<Waystone>() : null;
+                if (pending != null || pendingPortal != null || pendingVendor != null || pendingWaystone != null)
+                    movement.SuppressClickMoveUntilRelease();
             }
             if (input.MoveInput.sqrMagnitude > 0.01f)
             {
                 pending = null;
                 pendingPortal = null;
                 pendingVendor = null;
+                pendingWaystone = null;
+            }
+            if (pendingWaystone != null)
+            {
+                UpdateWaystone();
+                return;
             }
             if (pendingVendor != null)
             {
@@ -122,6 +132,35 @@ namespace RPG.Items
             if (movement.Destination.HasValue) movement.Stop();
             VendorWindow.Open(pendingVendor);
             pendingVendor = null;
+        }
+
+        private void UpdateWaystone()
+        {
+            Vector2 target = pendingWaystone.transform.position;
+            if (Vector2.Distance(transform.position, target) > pendingWaystone.UseRange * 0.8f)
+            {
+                movement.SetDestination(target);
+                return;
+            }
+
+            if (movement.Destination.HasValue) movement.Stop();
+            WaystoneWindow.Open(pendingWaystone);
+            pendingWaystone = null;
+        }
+
+        private T UnderPointer<T>() where T : Component
+        {
+            if (worldCamera == null) worldCamera = Camera.main;
+            if (worldCamera == null) return null;
+
+            Vector2 point = worldCamera.ScreenToWorldPoint(input.PointerPosition);
+            Physics2D.OverlapPoint(point, ContactFilter2D.noFilter, pointerHits);
+            foreach (Collider2D hit in pointerHits)
+            {
+                T found = hit.GetComponentInParent<T>();
+                if (found != null) return found;
+            }
+            return null;
         }
 
         private Vendor VendorUnderPointer()

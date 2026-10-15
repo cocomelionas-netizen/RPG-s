@@ -4,6 +4,7 @@ using RPG.Items;
 using RPG.Navigation;
 using RPG.Networking;
 using RPG.Progression;
+using RPG.World;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -24,6 +25,7 @@ namespace RPG.Accounts
 
         private CharacterProgress progress;
         private Inventory inventory;
+        private WaystoneTraveller waystones;
         private Health health;
         private PlayerNetworkMovement networkMovement;
         private AccountService accounts;
@@ -38,6 +40,7 @@ namespace RPG.Accounts
         {
             progress = GetComponent<CharacterProgress>();
             inventory = GetComponent<Inventory>();
+            waystones = GetComponent<WaystoneTraveller>();
             health = GetComponent<Health>();
             networkMovement = GetComponent<PlayerNetworkMovement>();
         }
@@ -86,6 +89,7 @@ namespace RPG.Accounts
 
             inventory.ServerLoad(ToStacks(saved.bag), ToStacks(saved.equipment));
             inventory.ServerSetGold(saved.gold);
+            if (waystones != null) waystones.ServerLoad(saved.waystones);
             var position = new Vector2(saved.x, saved.y);
             // A spot on no map (for example inside a dungeon that has closed since) keeps the spawn point.
             WorldNavigation navigation = WorldNavigation.At(position);
@@ -108,6 +112,7 @@ namespace RPG.Accounts
             record.unspentPoints = progress.UnspentPoints;
             record.bag = ToRecords(inventory.BagSnapshot());
             record.equipment = ToRecords(inventory.EquipmentSnapshot());
+            if (waystones != null) record.waystones = waystones.DiscoveredMask;
             Vector2 position = AutoAttack.ServerPosition(this);
             record.x = position.x;
             record.y = position.y;

@@ -27,6 +27,8 @@ namespace RPG.Accounts
         public int unspentPoints;
         public ItemRecord[] bag = Array.Empty<ItemRecord>();
         public ItemRecord[] equipment = Array.Empty<ItemRecord>();
+        /// <summary>Discovered waystones, as bits by waystone id.</summary>
+        public int waystones;
         /// <summary>False for a new character, which starts at the spawn point with the starting items.</summary>
         public bool hasBeenSaved;
         public float x;
