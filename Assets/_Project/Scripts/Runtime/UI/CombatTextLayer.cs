@@ -9,6 +9,8 @@ namespace RPG.UI
     /// White: damage you deal, yellow and bigger: critical, red: damage you take.
     /// Also shows other short messages (heals, experience, level ups) with <see cref="ShowText"/>.
     /// </summary>
+    // After the camera has moved this frame, so numbers stay where the hit landed while the camera follows.
+    [DefaultExecutionOrder(1000)]
     [RequireComponent(typeof(RectTransform))]
     public class CombatTextLayer : MonoBehaviour
     {
