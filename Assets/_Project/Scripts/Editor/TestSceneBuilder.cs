@@ -674,6 +674,8 @@ namespace RPG.EditorTools
             var aiObject = new SerializedObject(ai);
             aiObject.FindProperty("level").intValue = spec.Level;
             aiObject.FindProperty("experienceReward").intValue = spec.Experience;
+            // For now monsters do not attack players who come near; they only fight back (with their camp) when hit.
+            aiObject.FindProperty("aggroRadius").floatValue = 0f;
             aiObject.ApplyModifiedPropertiesWithoutUndo();
             ai.ConfigureLoot(lootBagPrefab, spec.Loot);
 

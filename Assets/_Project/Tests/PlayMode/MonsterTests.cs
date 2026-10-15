@@ -80,6 +80,7 @@ namespace RPG.Tests
         public IEnumerator Monster_AttacksPlayerInAggroRange()
         {
             MonsterAI goblin = SpawnGoblin(new Vector2(0.5f, 0f));
+            goblin.AggroRadius = 3f;
 
             float end = Time.time + 3f;
             while (playerHealth.Current == playerHealth.Max && Time.time < end)

@@ -32,6 +32,8 @@
 - **Monstrai susiskirsto aplink taikinį.** Keli goblinai nestovi viename taške.
 - **Žaidėjo HP atsistato** (`HealthRegeneration`). Po 5 s be žalos atsistato 5 % HP per sekundę.
 
+> **Šiuo metu monstrai iš toli nepuola** (`aggroRadius` = 0, nustatyta scenos įrankyje). Jie kovoja tik tada, kai juos užpuoli, o jų stovyklos draugai prisideda.
+
 ## Failai
 
 | Failas | Paskirtis |
