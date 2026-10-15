@@ -5,19 +5,19 @@ Asmeninis bandomasis projektas: išdėstymas ir balanso skaičiai paimti iš Dre
 
 ## Žemėlapis
 
-- Pasaulis — Dreadmyst startinės zonos dydžio: jų žemėlapio „fanadin“ sritis x 0–250, y 30–260
-  (pas mus 256 × 236 langelių vietoj 80 × 80). Duomenys — `Scripts/Editor/DreadmystStartArea.cs`
-  (sugeneruota iš `game.db`).
-- Miestelis (prekeiviai, manekenai) — jų starto vietoje (`start` teleportas 17, 106).
-- **Monstrai** — 87 jų vietose, atsiranda iš naujo per tiek pat, kiek pas juos (Antling 5 s, kiti 60 s,
-  elitiniai 90 s). Jų lygiai 1–2 → Goblin, 3–4 → Goblin Brute, 5–6 → Orc; jų elitiniai (Antling Broodmother,
-  Drauglyen) pas mus visada elitiniai. Aukštesnio lygio (11–25) monstrų kol kas nėra.
-- **Skrynios** — 34 jų vietose: dėžės ir statinės → Wooden Crate (atsiranda po 60 s), skrynios iki 4 lygio →
-  Oak Chest, aukštesnės → Iron Strongbox (po 5 min).
-- **Teleportų akmenys** — miestelyje ir jų waypoint vietose; zonos: Pilgrim's Refuge, Merchant's Way,
-  Fields of Dreams, Howler's Valley, Thicket of the Wanderer, Wolf's Den, Trog Cave (kai kurių zonų vardai
-  priskirti pagal artimiausią vietą). Seni atrasti akmenys gali atitikti kitus akmenis.
+- Pasaulis apima Dreadmyst žemėlapio „fanadin“ sritį nuo starto iki pagrindinio miesto: x 0–560, y 30–340
+  (pas mus 568 × 318 langelių). Duomenys — `Scripts/Editor/DreadmystStartArea.cs` (sugeneruota iš `game.db`).
+- **Startas** — Pilgrim's Refuge (jų `start` teleportas 17, 106): čia atsiranda nauji veikėjai ir po mirties.
+- **Pagrindinis miestas** — St. Revere (524, 250): prekeiviai stovi ten, kur Dreadmyst sunkiųjų šarvų, šaulių,
+  lazdų prekeiviai ir juvelyras.
+- **Monstrai** — 277 jų vietose (be miestų), su jų lygiais (1–25) ir atsiradimo laikais (iki 10 min).
+  Išvaizda: 1–2 lygis — Goblin, 3–5 — Goblin Brute, aukštesni — Orc. HP ir žala auga su lygiu
+  (`MonsterAI.HealthScaleBetween`), jų elitiniai ir bosai pas mus — elitiniai.
+- **Skrynios** — 97 jų vietose, su jų lygiais ir atsiradimo laikais (60 s / 5 min).
+- **Teleportų akmenys** — jų waypoint ir teleport vietose: Pilgrim's Refuge, Merchant's Way, Fields of Dreams,
+  Howler's Valley, Thicket of the Wanderer, St. Revere, Kandorys Passage, Kandorys Castle.
 - **Požemio įėjimas** — Wolf's Den vietoje.
+- **M** — viso pasaulio žemėlapis (vietos, akmenys, prekeiviai, portalai, žaidėjai ir tu), kaip Dreadmyst.
 
 ## Balansas
 

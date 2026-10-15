@@ -84,10 +84,14 @@ namespace RPG.EditorTools
         // The world is the size of Dreadmyst's start region, laid out from its data (DreadmystStartArea).
         private const int MapWidth = DreadmystStartArea.Width;
         private const int MapHeight = DreadmystStartArea.Height;
+        // New characters start in Pilgrim's Refuge; the main town with the vendors is St. Revere, like in Dreadmyst.
+        private static Vector3Int StartCell => DreadmystStartArea.Start;
         private static Vector3Int TownCell => DreadmystStartArea.Town;
-        // Around the spawn: a paved square and no rocks or trees.
-        private const int TownSquareRadius = 4;
-        private const int TownClearRadius = 7;
+        // Paved squares, and areas without rocks or trees, around both.
+        private const int TownSquareRadius = 6;
+        private const int TownClearRadius = 18;
+        private const int StartSquareRadius = 3;
+        private const int StartClearRadius = 6;
         private const int Seed = 12345;
         private const int TreeSeed = 777;
 
@@ -181,7 +185,7 @@ namespace RPG.EditorTools
             // Players are not placed in the scene: the server spawns one per connection at the spawn point.
             GameObject playerPrefab = CreatePlayerPrefab(playerAnimations, barSprite, classes, items, affixes, potion, manaPotion);
             var spawnPoint = new GameObject("Player Spawn").transform;
-            spawnPoint.position = grid.GetCellCenterWorld(TownCell);
+            spawnPoint.position = grid.GetCellCenterWorld(StartCell);
 
             CreateNetworkManager(playerPrefab, spawnPoint);
             CreateCamera(spawnPoint);
@@ -287,25 +291,34 @@ namespace RPG.EditorTools
         {
             var random = new System.Random(Seed);
             Vector3Int town = TownCell;
+            Vector3Int start = StartCell;
 
             for (int x = 0; x < MapWidth; x++)
             for (int y = 0; y < MapHeight; y++)
             {
                 var cell = new Vector3Int(x, y, 0);
-                bool isPath = x == town.x || y == town.y;
-                bool townSquare = Mathf.Abs(x - town.x) <= TownSquareRadius && Mathf.Abs(y - town.y) <= TownSquareRadius;
-                ground.SetTile(cell, isPath || townSquare ? pathTile : grassTiles[random.Next(grassTiles.Length)]);
+                // Roads cross at the start and in town.
+                bool isPath = x == town.x || y == town.y || x == start.x || y == start.y;
+                bool square = Within(cell, town, TownSquareRadius) || Within(cell, start, StartSquareRadius);
+                ground.SetTile(cell, isPath || square ? pathTile : grassTiles[random.Next(grassTiles.Length)]);
 
                 bool isBorder = x == 0 || y == 0 || x == MapWidth - 1 || y == MapHeight - 1;
-                bool nearSpawn = Mathf.Abs(x - town.x) <= TownClearRadius && Mathf.Abs(y - town.y) <= TownClearRadius;
-                bool scatteredRock = !isPath && !nearSpawn && random.NextDouble() < 0.05;
+                bool scatteredRock = !isPath && !IsCleared(cell, 0) && random.NextDouble() < 0.05;
                 if (isBorder || scatteredRock)
                     obstacles.SetTile(cell, rockTile);
             }
 
-            // A small wall near the spawn to test collisions and sorting (walk behind / in front of it).
+            // A small wall near the start to test collisions and sorting (walk behind / in front of it).
             for (int i = 0; i < 4; i++)
-                obstacles.SetTile(new Vector3Int(town.x + 3 + i, town.y + 2, 0), rockTile);
+                obstacles.SetTile(new Vector3Int(start.x + 3 + i, start.y + 2, 0), rockTile);
+        }
+
+        private static bool Within(Vector3Int cell, Vector3Int center, int radius) =>
+            Mathf.Abs(cell.x - center.x) <= radius && Mathf.Abs(cell.y - center.y) <= radius;
+
+        /// <summary>Inside the cleared town or start area (no rocks, trees, or monsters' spots), shrunk by <paramref name="shrink"/>.</summary>
+        private static bool IsCleared(Vector3Int cell, int shrink) =>
+            Within(cell, TownCell, TownClearRadius - shrink) || Within(cell, StartCell, StartClearRadius - shrink);
         }
 
         private static void CreateGlobalLight()
@@ -490,14 +503,15 @@ namespace RPG.EditorTools
             var props = new GameObject("Props").transform;
             TreeCells.Clear();
             Vector3Int town = TownCell;
+            Vector3Int start = StartCell;
 
             for (int x = 2; x < MapWidth - 2; x++)
             for (int y = 2; y < MapHeight - 2; y++)
             {
                 var cell = new Vector3Int(x, y, 0);
-                bool isPath = x == town.x || y == town.y;
-                bool nearSpawn = Mathf.Abs(x - town.x) <= TownClearRadius - 1 && Mathf.Abs(y - town.y) <= TownClearRadius - 1;
-                if (isPath || nearSpawn || obstacles.HasTile(cell) || random.NextDouble() >= 0.03)
+                bool isPath = x == town.x || y == town.y || x == start.x || y == start.y;
+                // A little sparser than before: the world is much bigger now.
+                if (isPath || IsCleared(cell, 1) || obstacles.HasTile(cell) || random.NextDouble() >= 0.02)
                     continue;
 
                 var tree = (GameObject)PrefabUtility.InstantiatePrefab(treePrefab, props);
@@ -505,9 +519,9 @@ namespace RPG.EditorTools
                 TreeCells.Add(cell);
             }
 
-            // One tree right next to the spawn to test walking behind and in front of tall objects.
+            // One tree right next to the start to test walking behind and in front of tall objects.
             var nearTree = (GameObject)PrefabUtility.InstantiatePrefab(treePrefab, props);
-            nearTree.transform.position = grid.GetCellCenterWorld(new Vector3Int(town.x - 2, town.y + 1, 0));
+            nearTree.transform.position = grid.GetCellCenterWorld(new Vector3Int(start.x - 2, start.y + 1, 0));
         }
 
         private static void CreateClickMarker(Sprite sprite, PlayerMovement movement)
@@ -852,14 +866,8 @@ namespace RPG.EditorTools
 
         private static void PlaceVendors(Grid grid, VendorDefinition[] vendors)
         {
-            Vector3Int town = TownCell;
-            // Warrior north-east, ranger west, mage east of the spawn, around the town square.
-            // The jeweler stands south of the spawn.
-            var places = new[]
-            {
-                new Vector3Int(town.x + 1, town.y + 5, 0), new Vector3Int(town.x - 5, town.y + 1, 0), new Vector3Int(town.x + 5, town.y - 1, 0),
-                new Vector3Int(town.x + 1, town.y - 5, 0),
-            };
+            // In St. Revere, where Dreadmyst's heavy armor, ranged, staves merchants and jeweler stand.
+            Vector3Int[] places = DreadmystStartArea.Vendors;
             var cloaks = new[] { new Color(0.55f, 0.15f, 0.12f), new Color(0.15f, 0.4f, 0.18f), new Color(0.3f, 0.2f, 0.6f), new Color(0.2f, 0.55f, 0.6f) };
             var parent = new GameObject("Town Vendors").transform;
 
@@ -908,8 +916,8 @@ namespace RPG.EditorTools
                 zone.transform.position = grid.GetCellCenterWorld(places[i].cell);
                 zone.AddComponent<Zone>().Configure(places[i].name, places[i].zoneRadius * cellToWorld);
 
-                // In town the stone stands at the corner of the square, not in the middle of it.
-                Vector3Int stoneCell = places[i].cell == TownCell ? TownCell + new Vector3Int(-3, 3, 0) : OpenCellNear(obstacles, places[i].cell);
+                // At the start the stone stands at the corner of the square, not in the middle of it.
+                Vector3Int stoneCell = places[i].cell == StartCell ? StartCell + new Vector3Int(-3, 3, 0) : OpenCellNear(obstacles, places[i].cell);
                 var stone = new GameObject($"Waystone {i} {places[i].name}");
                 stone.transform.SetParent(stones, false);
                 stone.transform.position = grid.GetCellCenterWorld(stoneCell);
@@ -1199,9 +1207,9 @@ namespace RPG.EditorTools
         }
 
         /// <summary>
-        /// One monster on every spot Dreadmyst has one in its start region, coming back as fast as there.
-        /// Dreadmyst levels 1-2 look like goblins, 3-4 brutes, 5-6 orcs, and keep the Dreadmyst level (experience and
-        /// gear drops follow it); its elites are always elite here.
+        /// One monster on every spot Dreadmyst has one between the start and St. Revere, coming back as fast as there.
+        /// Dreadmyst levels 1-2 look like goblins, 3-5 brutes, higher orcs, and keep the Dreadmyst level (health, damage,
+        /// experience and gear drops follow it); its elites and bosses are elites here. None inside the towns.
         /// </summary>
         private static void PlaceMonsters(Grid grid, Tilemap obstacles, GameObject goblin, GameObject brute, GameObject orc)
         {
@@ -1210,7 +1218,8 @@ namespace RPG.EditorTools
             for (int i = 0; i < monsters.Length; i++)
             {
                 (Vector3Int cell, int level, bool elite, float respawn) = monsters[i];
-                GameObject prefab = level <= 2 ? goblin : level <= 4 ? brute : orc;
+                if (IsCleared(cell, 0)) continue;
+                GameObject prefab = level <= 2 ? goblin : level <= 5 ? brute : orc;
                 var spot = new GameObject($"Monster Spot {i + 1} {prefab.name}{(elite ? " (elite)" : "")}");
                 spot.transform.SetParent(parent, false);
                 spot.transform.position = grid.GetCellCenterWorld(OpenCellNear(obstacles, cell));
@@ -1292,9 +1301,9 @@ namespace RPG.EditorTools
 
         private static void PlaceDummies(Grid grid, GameObject dummyPrefab)
         {
-            Vector3Int town = TownCell;
-            // Right and left of the spawn, on grass inside the cleared spawn area.
-            var cells = new[] { new Vector3Int(town.x + 2, town.y - 2, 0), new Vector3Int(town.x - 3, town.y - 1, 0) };
+            Vector3Int start = StartCell;
+            // Right and left of the start, on grass inside the cleared start area.
+            var cells = new[] { new Vector3Int(start.x + 2, start.y - 2, 0), new Vector3Int(start.x - 3, start.y - 1, 0) };
             var parent = new GameObject("Training Dummies").transform;
             foreach (Vector3Int cell in cells)
             {
@@ -1362,6 +1371,11 @@ namespace RPG.EditorTools
             inventoryWindow.AddComponent<InventoryWindow>();
 
             CreateHudElement<ZoneBanner>(canvasObject.transform, "Zone Banner", new Vector2(0.5f, 1f), new Vector2(0.5f, 1f), new Vector2(0f, -150f), new Vector2(800f, 60f));
+
+            var worldMap = new GameObject("World Map", typeof(RectTransform));
+            worldMap.transform.SetParent(canvasObject.transform, false);
+            Stretch((RectTransform)worldMap.transform);
+            worldMap.AddComponent<WorldMap>();
 
             var waystoneWindow = new GameObject("Waystone Window", typeof(RectTransform));
             waystoneWindow.transform.SetParent(canvasObject.transform, false);
