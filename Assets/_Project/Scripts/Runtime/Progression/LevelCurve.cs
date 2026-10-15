@@ -21,12 +21,29 @@ namespace RPG.Progression
         /// <summary>The rank title of a level, from Recruit (1) to Champion (25).</summary>
         public static string RankName(int level) => Ranks[Mathf.Clamp(level, 1, MaxLevel) - 1];
 
+        // Dreadmyst's tables (player_exp_levels): experience to reach the next level, and what a kill of a monster
+        // of each level is worth, for levels 1 to 25.
+        private static readonly int[] ExperienceTable =
+        {
+            100, 100, 123, 150, 195, 267, 373, 531, 760, 1087, 1548, 2194, 3091,
+            4331, 6031, 8352, 11510, 15788, 21564, 29339, 39780, 53762, 72451, 97380, 129293,
+        };
+
+        private static readonly int[] KillExperienceTable =
+        {
+            20, 20, 24, 30, 39, 44, 62, 88, 126, 155, 186, 223, 268,
+            322, 386, 463, 556, 667, 800, 960, 1152, 1382, 1659, 1991, 2389,
+        };
+
         /// <summary>Experience needed to go from <paramref name="level"/> to the next one (0 at max level).</summary>
         public static int ExperienceToNext(int level)
         {
             if (level >= MaxLevel) return 0;
-            return Mathf.RoundToInt(40f * Mathf.Pow(Mathf.Max(1, level), 1.5f) + 20f);
+            return ExperienceTable[Mathf.Max(1, level) - 1];
         }
+
+        /// <summary>What killing a monster of <paramref name="monsterLevel"/> is worth (before the outlevelling cut).</summary>
+        public static int KillExperienceFor(int monsterLevel) => KillExperienceTable[Mathf.Clamp(monsterLevel, 1, MaxLevel) - 1];
 
         /// <summary>
         /// Adds experience, levelling up as many times as it covers. Experience is the progress into the current

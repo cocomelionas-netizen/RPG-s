@@ -22,11 +22,15 @@ namespace RPG.Tests
     public class LevelCurveTests
     {
         [Test]
-        public void LevelCurve_NeedsMoreExperienceEachLevel()
+        public void LevelCurve_NeedsMoreExperienceEachLevel_LikeDreadmyst()
         {
             for (int level = 1; level < LevelCurve.MaxLevel - 1; level++)
-                Assert.Less(LevelCurve.ExperienceToNext(level), LevelCurve.ExperienceToNext(level + 1));
+                Assert.LessOrEqual(LevelCurve.ExperienceToNext(level), LevelCurve.ExperienceToNext(level + 1));
+            Assert.AreEqual(100, LevelCurve.ExperienceToNext(1));
+            Assert.AreEqual(1087, LevelCurve.ExperienceToNext(10));
             Assert.AreEqual(0, LevelCurve.ExperienceToNext(LevelCurve.MaxLevel));
+            Assert.AreEqual(20, LevelCurve.KillExperienceFor(1));
+            Assert.AreEqual(2389, LevelCurve.KillExperienceFor(25));
         }
 
         [Test]

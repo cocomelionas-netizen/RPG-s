@@ -88,5 +88,6 @@ Naujausia versija po kiekvieno push'o į `main` automatiškai sukuriama ir paske
 | + | Pavadintos zonos ir teleportų akmenys (Waystones) (įkvėpta Dreadmyst) | ✅ [Waystones.md](Waystones.md) |
 | + | Brangakmeniai: lizdai, įstatymas, juvelyras ir jungimas (įkvėpta Dreadmyst) | ✅ [Gems.md](Gems.md) |
 | + | Skrynios pasaulyje, elitiniai monstrai, laipsniai ir 25 lygiai (įkvėpta Dreadmyst) | ✅ [Chests.md](Chests.md) |
+| + | Pasaulis, monstrų ir skrynių išdėstymas bei balansas pagal Dreadmyst | ✅ [DreadmystLayout.md](DreadmystLayout.md) |
 
 Multiplayer'is planuojamas anksti (3 etapas) sąmoningai. Kovą, monstrus ir daiktus iškart rašysime serverio autoriteto principu, kad vėliau nereikėtų jų perrašinėti.

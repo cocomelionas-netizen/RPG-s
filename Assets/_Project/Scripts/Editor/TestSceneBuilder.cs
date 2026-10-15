@@ -81,7 +81,10 @@ namespace RPG.EditorTools
             "Assets/Settings/Mobile_RPAsset.asset",
         };
 
-        private const int MapSize = 80;
+        // The world is the size of Dreadmyst's start region, laid out from its data (DreadmystStartArea).
+        private const int MapWidth = DreadmystStartArea.Width;
+        private const int MapHeight = DreadmystStartArea.Height;
+        private static Vector3Int TownCell => DreadmystStartArea.Town;
         // Around the spawn: a paved square and no rocks or trees.
         private const int TownSquareRadius = 4;
         private const int TownClearRadius = 7;
@@ -124,21 +127,21 @@ namespace RPG.EditorTools
             GameObject goblinPrefab = CreateMonsterPrefab(new MonsterSpec
             {
                 Name = "Goblin", Animations = goblinAnimations, Scale = 0.85f, Health = 45, MinDamage = 3, MaxDamage = 5,
-                AttackInterval = 2f, Level = 2, Experience = 20, MoveSpeed = 1.8f, Gold = new Vector2Int(3, 6),
+                AttackInterval = 2f, Level = 2, Experience = LevelCurve.KillExperienceFor(2), MoveSpeed = 1.8f, Gold = new Vector2Int(3, 6),
                 Loot = Loot(items, ("GoblinEar", 0.6f), ("DenKey", 0.04f), ("ChippedRuby", 0.02f), ("ChippedTopaz", 0.02f), ("ChippedSapphire", 0.02f), ("ChippedEmerald", 0.02f), ("HealingPotion", 0.3f), ("ManaPotion", 0.15f), ("RustySword", 0.08f), ("LeatherCap", 0.08f), ("PaddedVest", 0.08f),
                     ("WornBoots", 0.08f), ("IronSword", 0.03f)),
             }, barSprite, lootBagPrefab, affixes);
             GameObject brutePrefab = CreateMonsterPrefab(new MonsterSpec
             {
                 Name = "Goblin Brute", Animations = bruteAnimations, Scale = 1.05f, Health = 120, MinDamage = 6, MaxDamage = 10,
-                AttackInterval = 2.2f, Level = 4, Experience = 45, MoveSpeed = 1.6f, Gold = new Vector2Int(10, 16),
+                AttackInterval = 2.2f, Level = 4, Experience = LevelCurve.KillExperienceFor(4), MoveSpeed = 1.6f, Gold = new Vector2Int(10, 16),
                 Loot = Loot(items, ("BruteTusk", 0.6f), ("DenKey", 0.25f), ("ChippedRuby", 0.04f), ("ChippedTopaz", 0.04f), ("ChippedSapphire", 0.04f), ("ChippedEmerald", 0.04f), ("HealingPotion", 0.5f), ("ManaPotion", 0.25f), ("IronSword", 0.12f), ("IronHelm", 0.1f), ("Chainmail", 0.1f),
                     ("IronBoots", 0.1f), ("GoblinCleaver", 0.04f)),
             }, barSprite, lootBagPrefab, affixes);
             GameObject orcPrefab = CreateMonsterPrefab(new MonsterSpec
             {
                 Name = "Orc", Animations = orcAnimations, Scale = 1.15f, Health = 220, MinDamage = 10, MaxDamage = 15,
-                AttackInterval = 2f, Level = 6, Experience = 90, MoveSpeed = 1.7f, Gold = new Vector2Int(20, 30),
+                AttackInterval = 2f, Level = 6, Experience = LevelCurve.KillExperienceFor(6), MoveSpeed = 1.7f, Gold = new Vector2Int(20, 30),
                 Loot = Loot(items, ("OrcFang", 0.6f), ("DenKey", 0.35f), ("ChippedRuby", 0.05f), ("ChippedTopaz", 0.05f), ("ChippedSapphire", 0.05f), ("ChippedEmerald", 0.05f), ("Ruby", 0.01f), ("Sapphire", 0.01f), ("HealingPotion", 0.6f), ("ManaPotion", 0.3f), ("GoblinCleaver", 0.1f), ("OrcSkullHelm", 0.1f), ("OrcishPlate", 0.05f),
                     ("OrcishGreataxe", 0.05f)),
             }, barSprite, lootBagPrefab, affixes);
@@ -147,10 +150,15 @@ namespace RPG.EditorTools
             GameObject kingPrefab = CreateMonsterPrefab(new MonsterSpec
             {
                 Name = "Goblin King", Animations = kingAnimations, Scale = 1.5f, Health = 900, MinDamage = 14, MaxDamage = 20,
-                AttackInterval = 2.2f, Level = 8, Experience = 300, MoveSpeed = 1.5f, Gold = new Vector2Int(150, 200),
+                AttackInterval = 2.2f, Level = 8, Experience = LevelCurve.KillExperienceFor(8) * 4, MoveSpeed = 1.5f, Gold = new Vector2Int(150, 200),
                 Loot = Loot(items, ("CrownShard", 1f), ("Ruby", 0.25f), ("Topaz", 0.25f), ("Sapphire", 0.25f), ("Emerald", 0.25f), ("FlawlessRuby", 0.05f), ("FlawlessEmerald", 0.05f), ("HealingPotion", 1f), ("ManaPotion", 1f), ("OrcishGreataxe", 0.5f), ("OrcishPlate", 0.5f),
                     ("OrcSkullHelm", 0.4f), ("GoblinCleaver", 0.4f)),
-            }, barSprite, lootBagPrefab, affixes, boss => boss.AddComponent<BossMechanics>());
+            }, barSprite, lootBagPrefab, affixes, boss =>
+            {
+                boss.AddComponent<BossMechanics>();
+                // Like most Dreadmyst bosses: one gold (rare) piece for sure, a purple (epic) one a quarter of the time.
+                boss.GetComponent<MonsterAI>().ConfigureGuaranteedLoot(1, ItemRarity.Rare, 0.25f);
+            });
             DungeonDefinition dungeon = CreateDungeon(brutePrefab, orcPrefab, kingPrefab);
             ChestPrefabs chests = CreateChestPrefabs(items, affixes, lootBagPrefab);
             CharacterAnimationSet rangerAnimations = CreateCharacterAnimationSet("Ranger", RangerArtFolder, RangerAnimationSetPath, new Color(0.2f, 0.45f, 0.22f), null);
@@ -169,7 +177,7 @@ namespace RPG.EditorTools
             PlaceTrees(grid, obstacles, treePrefab);
             var navigation = grid.gameObject.AddComponent<WorldNavigation>();
             navigation.Configure(grid, ground, obstacles);
-            navigation.ZoneName = "Greenvale Wilds";
+            navigation.ZoneName = "Fanadin";
 
             CreateGlobalLight();
             CreateEventSystem();
@@ -177,7 +185,7 @@ namespace RPG.EditorTools
             // Players are not placed in the scene: the server spawns one per connection at the spawn point.
             GameObject playerPrefab = CreatePlayerPrefab(playerAnimations, barSprite, classes, items, affixes, potion, manaPotion);
             var spawnPoint = new GameObject("Player Spawn").transform;
-            spawnPoint.position = grid.GetCellCenterWorld(new Vector3Int(MapSize / 2, MapSize / 2, 0));
+            spawnPoint.position = grid.GetCellCenterWorld(TownCell);
 
             CreateNetworkManager(playerPrefab, spawnPoint);
             CreateCamera(spawnPoint);
@@ -185,11 +193,11 @@ namespace RPG.EditorTools
             CreateTargetIndicator(targetRingSprite);
             new GameObject("Combat Effects").AddComponent<CombatEffects>().Configure(projectileSprite, effectRingSprite, GroundRingRadius);
             PlaceDummies(grid, dummyPrefab);
-            PlaceMonsterCamps(grid, goblinPrefab, brutePrefab, orcPrefab);
+            PlaceMonsters(grid, obstacles, goblinPrefab, brutePrefab, orcPrefab);
             PlaceChests(grid, obstacles, chests);
-            PlaceDungeon(grid, dungeon);
+            PlaceDungeon(grid, obstacles, dungeon);
             PlaceVendors(grid, CreateVendors(items, potion, manaPotion));
-            PlaceZonesAndWaystones(grid, PlaceholderArtGenerator.Waystone("Waystone"));
+            PlaceZonesAndWaystones(grid, obstacles, PlaceholderArtGenerator.Waystone("Waystone"));
             CreateHud();
 
             EditorSceneManager.SaveScene(EditorSceneManager.GetActiveScene(), ScenePath);
@@ -282,18 +290,18 @@ namespace RPG.EditorTools
         private static void PaintTestMap(Tilemap ground, Tilemap obstacles, Tile[] grassTiles, Tile pathTile, Tile rockTile)
         {
             var random = new System.Random(Seed);
-            int center = MapSize / 2;
+            Vector3Int town = TownCell;
 
-            for (int x = 0; x < MapSize; x++)
-            for (int y = 0; y < MapSize; y++)
+            for (int x = 0; x < MapWidth; x++)
+            for (int y = 0; y < MapHeight; y++)
             {
                 var cell = new Vector3Int(x, y, 0);
-                bool isPath = x == center || y == center;
-                bool townSquare = Mathf.Abs(x - center) <= TownSquareRadius && Mathf.Abs(y - center) <= TownSquareRadius;
+                bool isPath = x == town.x || y == town.y;
+                bool townSquare = Mathf.Abs(x - town.x) <= TownSquareRadius && Mathf.Abs(y - town.y) <= TownSquareRadius;
                 ground.SetTile(cell, isPath || townSquare ? pathTile : grassTiles[random.Next(grassTiles.Length)]);
 
-                bool isBorder = x == 0 || y == 0 || x == MapSize - 1 || y == MapSize - 1;
-                bool nearSpawn = Mathf.Abs(x - center) <= TownClearRadius && Mathf.Abs(y - center) <= TownClearRadius;
+                bool isBorder = x == 0 || y == 0 || x == MapWidth - 1 || y == MapHeight - 1;
+                bool nearSpawn = Mathf.Abs(x - town.x) <= TownClearRadius && Mathf.Abs(y - town.y) <= TownClearRadius;
                 bool scatteredRock = !isPath && !nearSpawn && random.NextDouble() < 0.05;
                 if (isBorder || scatteredRock)
                     obstacles.SetTile(cell, rockTile);
@@ -301,7 +309,7 @@ namespace RPG.EditorTools
 
             // A small wall near the spawn to test collisions and sorting (walk behind / in front of it).
             for (int i = 0; i < 4; i++)
-                obstacles.SetTile(new Vector3Int(center + 3 + i, center + 2, 0), rockTile);
+                obstacles.SetTile(new Vector3Int(town.x + 3 + i, town.y + 2, 0), rockTile);
         }
 
         private static void CreateGlobalLight()
@@ -485,14 +493,14 @@ namespace RPG.EditorTools
             var random = new System.Random(TreeSeed);
             var props = new GameObject("Props").transform;
             TreeCells.Clear();
-            int center = MapSize / 2;
+            Vector3Int town = TownCell;
 
-            for (int x = 2; x < MapSize - 2; x++)
-            for (int y = 2; y < MapSize - 2; y++)
+            for (int x = 2; x < MapWidth - 2; x++)
+            for (int y = 2; y < MapHeight - 2; y++)
             {
                 var cell = new Vector3Int(x, y, 0);
-                bool isPath = x == center || y == center;
-                bool nearSpawn = Mathf.Abs(x - center) <= TownClearRadius - 1 && Mathf.Abs(y - center) <= TownClearRadius - 1;
+                bool isPath = x == town.x || y == town.y;
+                bool nearSpawn = Mathf.Abs(x - town.x) <= TownClearRadius - 1 && Mathf.Abs(y - town.y) <= TownClearRadius - 1;
                 if (isPath || nearSpawn || obstacles.HasTile(cell) || random.NextDouble() >= 0.03)
                     continue;
 
@@ -503,7 +511,7 @@ namespace RPG.EditorTools
 
             // One tree right next to the spawn to test walking behind and in front of tall objects.
             var nearTree = (GameObject)PrefabUtility.InstantiatePrefab(treePrefab, props);
-            nearTree.transform.position = grid.GetCellCenterWorld(new Vector3Int(center - 2, center + 1, 0));
+            nearTree.transform.position = grid.GetCellCenterWorld(new Vector3Int(town.x - 2, town.y + 1, 0));
         }
 
         private static void CreateClickMarker(Sprite sprite, PlayerMovement movement)
@@ -813,12 +821,13 @@ namespace RPG.EditorTools
                 stock[items.Length] = potion;
                 stock[items.Length + 1] = manaPotion;
                 vendor.stock = stock;
-                // Better gear is scarce and comes back over time; common gear and potions never run out.
+                // Like Dreadmyst's vendors: better gear is scarce (1 rare, 3 uncommon) and comes back every minute;
+                // common gear and potions never run out.
                 var limits = new int[stock.Length];
                 for (int i = 0; i < stock.Length; i++)
-                    limits[i] = stock[i] == null ? 0 : stock[i].rarity >= ItemRarity.Rare ? 1 : stock[i].rarity == ItemRarity.Uncommon ? 2 : 0;
+                    limits[i] = stock[i] == null ? 0 : stock[i].rarity >= ItemRarity.Rare ? 1 : stock[i].rarity == ItemRarity.Uncommon ? 3 : 0;
                 vendor.stockLimits = limits;
-                vendor.restockSeconds = 300f;
+                vendor.restockSeconds = 60f;
                 vendor.combinesGems = false;
                 EditorUtility.SetDirty(vendor);
                 return vendor;
@@ -846,13 +855,13 @@ namespace RPG.EditorTools
 
         private static void PlaceVendors(Grid grid, VendorDefinition[] vendors)
         {
-            int center = MapSize / 2;
+            Vector3Int town = TownCell;
             // Warrior north-east, ranger west, mage east of the spawn, around the town square.
             // The jeweler stands south of the spawn.
             var places = new[]
             {
-                new Vector3Int(center + 1, center + 5, 0), new Vector3Int(center - 5, center + 1, 0), new Vector3Int(center + 5, center - 1, 0),
-                new Vector3Int(center + 1, center - 5, 0),
+                new Vector3Int(town.x + 1, town.y + 5, 0), new Vector3Int(town.x - 5, town.y + 1, 0), new Vector3Int(town.x + 5, town.y - 1, 0),
+                new Vector3Int(town.x + 1, town.y - 5, 0),
             };
             var cloaks = new[] { new Color(0.55f, 0.15f, 0.12f), new Color(0.15f, 0.4f, 0.18f), new Color(0.3f, 0.2f, 0.6f), new Color(0.2f, 0.55f, 0.6f) };
             var parent = new GameObject("Town Vendors").transform;
@@ -877,35 +886,36 @@ namespace RPG.EditorTools
         }
 
         /// <summary>
-        /// Named areas of the world map and a waystone in each. Outer stones stand on the main paths, which are
-        /// always clear. Waystone ids are saved with characters: keep them, only add new ones.
+        /// Dreadmyst's named places of the start region, with a waystone where Dreadmyst has a waypoint (and in town).
+        /// Waystone ids are saved with characters: keep them, only add new ones.
         /// </summary>
-        private static void PlaceZonesAndWaystones(Grid grid, Sprite waystoneSprite)
+        private static void PlaceZonesAndWaystones(Grid grid, Tilemap obstacles, Sprite waystoneSprite)
         {
-            int c = MapSize / 2;
             // One cell step is about 0.56 world units diagonally.
             const float cellToWorld = 0.56f;
-            var areas = new (string name, Vector3Int zoneCell, float cellRadius, Vector3Int stoneCell)[]
-            {
-                ("Greenvale", new Vector3Int(c, c, 0), 9f, new Vector3Int(c - 3, c + 3, 0)),
-                ("Brute Hills", new Vector3Int(c + 22, c - 1, 0), 12f, new Vector3Int(c + 18, c, 0)),
-                ("Northern Ridge", new Vector3Int(c + 3, c + 23, 0), 11f, new Vector3Int(c, c + 19, 0)),
-                ("Orc Marsh", new Vector3Int(c - 22, c + 4, 0), 12f, new Vector3Int(c - 18, c, 0)),
-                ("Southern Fen", new Vector3Int(c - 6, c - 23, 0), 11f, new Vector3Int(c, c - 19, 0)),
-            };
-
             var zones = new GameObject("Zones").transform;
-            var stones = new GameObject("Waystones").transform;
-            for (int i = 0; i < areas.Length; i++)
+            foreach ((string name, Vector3Int cell, float radius) in DreadmystStartArea.OtherZones)
             {
-                var zone = new GameObject($"Zone {areas[i].name}");
+                var zone = new GameObject($"Zone {name}");
                 zone.transform.SetParent(zones, false);
-                zone.transform.position = grid.GetCellCenterWorld(areas[i].zoneCell);
-                zone.AddComponent<Zone>().Configure(areas[i].name, areas[i].cellRadius * cellToWorld);
+                zone.transform.position = grid.GetCellCenterWorld(cell);
+                zone.AddComponent<Zone>().Configure(name, radius * cellToWorld);
+            }
 
-                var stone = new GameObject($"Waystone {i} {areas[i].name}");
+            var places = DreadmystStartArea.Places;
+            var stones = new GameObject("Waystones").transform;
+            for (int i = 0; i < places.Length; i++)
+            {
+                var zone = new GameObject($"Zone {places[i].name}");
+                zone.transform.SetParent(zones, false);
+                zone.transform.position = grid.GetCellCenterWorld(places[i].cell);
+                zone.AddComponent<Zone>().Configure(places[i].name, places[i].zoneRadius * cellToWorld);
+
+                // In town the stone stands at the corner of the square, not in the middle of it.
+                Vector3Int stoneCell = places[i].cell == TownCell ? TownCell + new Vector3Int(-3, 3, 0) : OpenCellNear(obstacles, places[i].cell);
+                var stone = new GameObject($"Waystone {i} {places[i].name}");
                 stone.transform.SetParent(stones, false);
-                stone.transform.position = grid.GetCellCenterWorld(areas[i].stoneCell);
+                stone.transform.position = grid.GetCellCenterWorld(stoneCell);
                 var spriteRenderer = stone.AddComponent<SpriteRenderer>();
                 spriteRenderer.sprite = waystoneSprite;
                 spriteRenderer.spriteSortPoint = SpriteSortPoint.Pivot;
@@ -914,18 +924,17 @@ namespace RPG.EditorTools
                 box.isTrigger = true;
                 box.size = new Vector2(0.45f, 0.8f);
                 box.offset = new Vector2(0f, 0.4f);
-                stone.AddComponent<Waystone>().Configure(i, areas[i].name);
+                stone.AddComponent<Waystone>().Configure(i, places[i].name);
             }
         }
 
-        private static void PlaceDungeon(Grid grid, DungeonDefinition dungeon)
+        private static void PlaceDungeon(Grid grid, Tilemap obstacles, DungeonDefinition dungeon)
         {
             new GameObject("Dungeon Manager").AddComponent<DungeonManager>().Configure(dungeon);
 
-            // The entrance: just south-west of the spawn point, inside the cleared area.
-            int center = MapSize / 2;
+            // The entrance stands where Dreadmyst has Wolf's Den.
             var entrance = new GameObject("Dungeon Entrance");
-            entrance.transform.position = grid.GetCellCenterWorld(new Vector3Int(center - 2, center - 3, 0));
+            entrance.transform.position = grid.GetCellCenterWorld(OpenCellNear(obstacles, DreadmystStartArea.DungeonEntrance));
             var visual = new GameObject("Visual").AddComponent<SpriteRenderer>();
             visual.transform.SetParent(entrance.transform, false);
             visual.sprite = dungeon.portalSprite;
@@ -1191,30 +1200,24 @@ namespace RPG.EditorTools
             EditorUtility.SetDirty(prefabsList);
         }
 
-        private static void PlaceMonsterCamps(Grid grid, GameObject goblin, GameObject brute, GameObject orc)
+        /// <summary>
+        /// One monster on every spot Dreadmyst has one in its start region, coming back as fast as there.
+        /// Dreadmyst levels 1-2 become goblins, 3-4 brutes, 5-6 orcs; its elites are always elite here.
+        /// </summary>
+        private static void PlaceMonsters(Grid grid, Tilemap obstacles, GameObject goblin, GameObject brute, GameObject orc)
         {
-            int center = MapSize / 2;
-            // Goblins near the town, tougher camps further out (east: brutes, west: orcs).
-            var camps = new (string name, Vector3Int cell, GameObject prefab, int count)[]
+            var parent = new GameObject("Monster Spots").transform;
+            var monsters = DreadmystStartArea.Monsters;
+            for (int i = 0; i < monsters.Length; i++)
             {
-                ("Goblin Camp 1", new Vector3Int(center + 12, center + 6, 0), goblin, 3),
-                ("Goblin Camp 2", new Vector3Int(center - 10, center + 4, 0), goblin, 3),
-                ("Goblin Camp 3", new Vector3Int(center + 4, center - 10, 0), goblin, 3),
-                ("Goblin Camp 4", new Vector3Int(center + 18, center + 18, 0), goblin, 3),
-                ("Goblin Camp 5", new Vector3Int(center - 18, center - 6, 0), goblin, 3),
-                ("Goblin Brute Camp 1", new Vector3Int(center + 24, center - 4, 0), brute, 2),
-                ("Goblin Brute Camp 2", new Vector3Int(center + 6, center + 26, 0), brute, 2),
-                ("Orc Camp 1", new Vector3Int(center - 24, center + 8, 0), orc, 2),
-                ("Orc Camp 2", new Vector3Int(center - 12, center - 26, 0), orc, 2),
-            };
-
-            var parent = new GameObject("Monster Camps").transform;
-            foreach ((string campName, Vector3Int cell, GameObject prefab, int count) in camps)
-            {
-                var camp = new GameObject(campName);
-                camp.transform.SetParent(parent, false);
-                camp.transform.position = grid.GetCellCenterWorld(cell);
-                camp.AddComponent<MonsterSpawner>().Configure(prefab, count, 1.2f, prefab == goblin ? 20f : 40f);
+                (Vector3Int cell, int level, bool elite, float respawn) = monsters[i];
+                GameObject prefab = level <= 2 ? goblin : level <= 4 ? brute : orc;
+                var spot = new GameObject($"Monster Spot {i + 1} {prefab.name}{(elite ? " (elite)" : "")}");
+                spot.transform.SetParent(parent, false);
+                spot.transform.position = grid.GetCellCenterWorld(OpenCellNear(obstacles, cell));
+                var spawner = spot.AddComponent<MonsterSpawner>();
+                spawner.Configure(prefab, 1, 0.6f, respawn);
+                spawner.EliteChance = elite ? 1f : 0f;
             }
         }
 
@@ -1270,42 +1273,31 @@ namespace RPG.EditorTools
             return prefab;
         }
 
-        /// <summary>Crates by the goblin camps and around town, chests by the brutes, strongboxes by the orcs.</summary>
+        /// <summary>
+        /// A container on every spot Dreadmyst has one in its start region, back after the same time
+        /// (crates and barrels 60 s, chests 5 min). Crates and barrels become wooden crates; chests up to level 4
+        /// oak chests, higher ones iron strongboxes.
+        /// </summary>
         private static void PlaceChests(Grid grid, Tilemap obstacles, ChestPrefabs chests)
         {
-            int c = MapSize / 2;
-            var spots = new (Vector3Int cell, GameObject prefab, float respawn)[]
-            {
-                (new Vector3Int(c + 14, c + 4, 0), chests.Crate, 120f),
-                (new Vector3Int(c - 8, c + 2, 0), chests.Crate, 120f),
-                (new Vector3Int(c + 6, c - 12, 0), chests.Crate, 120f),
-                (new Vector3Int(c + 20, c + 16, 0), chests.Crate, 120f),
-                (new Vector3Int(c - 16, c - 8, 0), chests.Crate, 120f),
-                (new Vector3Int(c + 9, c - 3, 0), chests.Crate, 120f),
-                (new Vector3Int(c - 8, c - 8, 0), chests.Crate, 120f),
-                (new Vector3Int(c - 4, c + 11, 0), chests.Crate, 120f),
-                (new Vector3Int(c + 26, c - 2, 0), chests.Chest, 240f),
-                (new Vector3Int(c + 8, c + 28, 0), chests.Chest, 240f),
-                (new Vector3Int(c - 26, c + 10, 0), chests.Strongbox, 420f),
-                (new Vector3Int(c - 14, c - 28, 0), chests.Strongbox, 420f),
-            };
-
             var parent = new GameObject("Chests").transform;
+            var spots = DreadmystStartArea.Chests;
             for (int i = 0; i < spots.Length; i++)
             {
-                Vector3Int cell = OpenCellNear(obstacles, spots[i].cell);
+                (Vector3Int cell, int kind, int level, float respawn) = spots[i];
+                GameObject prefab = kind == 0 ? chests.Crate : level <= 4 ? chests.Chest : chests.Strongbox;
                 var spawner = new GameObject($"Chest Spot {i + 1}");
                 spawner.transform.SetParent(parent, false);
-                spawner.transform.position = grid.GetCellCenterWorld(cell);
-                spawner.AddComponent<ChestSpawner>().Configure(spots[i].prefab, spots[i].respawn);
+                spawner.transform.position = grid.GetCellCenterWorld(OpenCellNear(obstacles, cell));
+                spawner.AddComponent<ChestSpawner>().Configure(prefab, respawn);
             }
         }
 
         private static void PlaceDummies(Grid grid, GameObject dummyPrefab)
         {
-            int center = MapSize / 2;
+            Vector3Int town = TownCell;
             // Right and left of the spawn, on grass inside the cleared spawn area.
-            var cells = new[] { new Vector3Int(center + 2, center - 2, 0), new Vector3Int(center - 3, center - 1, 0) };
+            var cells = new[] { new Vector3Int(town.x + 2, town.y - 2, 0), new Vector3Int(town.x - 3, town.y - 1, 0) };
             var parent = new GameObject("Training Dummies").transform;
             foreach (Vector3Int cell in cells)
             {
