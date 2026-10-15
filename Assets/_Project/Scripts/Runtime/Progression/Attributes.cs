@@ -14,9 +14,9 @@ namespace RPG.Progression
         Intelligence,
         /// <summary>Health.</summary>
         Vitality,
-        /// <summary>Points put straight into health (like Dreadmyst lets you).</summary>
+        /// <summary>Points put straight into health (like Dreadmyst lets you), +1 each.</summary>
         Health,
-        /// <summary>Points put straight into mana.</summary>
+        /// <summary>Points put straight into mana, +1 each.</summary>
         Mana,
     }
 
@@ -111,14 +111,30 @@ namespace RPG.Progression
     /// <summary>What attributes are worth. The same rules for every class; the class only picks its primary attribute.</summary>
     public static class AttributeRules
     {
-        public const int PointsPerLevel = 5;
         public const int HealthPerVitality = 4;
         public const int HealthPerStrength = 1;
         public const int ManaPerIntelligence = 4;
         public const float CritPerAgility = 0.004f;
         /// <summary>What one point put straight into health or mana adds.</summary>
-        public const int HealthPerPoint = 5;
-        public const int ManaPerPoint = 5;
+        public const int HealthPerPoint = 1;
+        public const int ManaPerPoint = 1;
+
+        /// <summary>
+        /// Experience the next point costs when <paramref name="invested"/> points are already in the attribute
+        /// (Dreadmyst's prices): health and mana x^(x/1500), at least 1, so they stay cheap for a long time;
+        /// the other attributes x^1.5 + 5.
+        /// </summary>
+        public static int PointCost(Attribute attribute, int invested)
+        {
+            int x = Mathf.Max(0, invested);
+            if (attribute == Attribute.Health || attribute == Attribute.Mana)
+            {
+                double growing = Math.Pow(x, x / 1500.0);
+                return growing >= int.MaxValue ? int.MaxValue : Mathf.Max(1, (int)growing);
+            }
+            double steady = Math.Pow(x, 1.5);
+            return steady >= int.MaxValue - 5 ? int.MaxValue : (int)steady + 5;
+        }
 
         /// <summary>Added to minimum and maximum damage: a quarter of the class's primary attribute.</summary>
         public static int DamageBonus(int primaryAttribute) => Mathf.Max(0, primaryAttribute) / 4;

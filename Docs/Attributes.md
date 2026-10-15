@@ -43,6 +43,11 @@
   Critical Chance), spalvos paimtos iš Dreadmyst lango: pilkai smėlinės etiketės, šviesios reikšmės, mana mėlyna.
 - Prie Health, Mana ir keturių atributų — mažas violetinis „+“. Užvedus pelę: „+1 Strength: 1 point“ ir
   „You have invested N points.“ / „You haven't invested anything.“ (kaip Dreadmyst). Užvedus ant eilutės — aprašymas.
-- Taškus galima dėti tiesiai į **Health** (+5 HP) ir **Mana** (+5 manos), kaip Dreadmyst.
-- Iš Dreadmyst kliento (`Dreadmyst.exe`) matyti, kad jie stats ir spells perka už XP, o kainą nustato serveris
-  (`spend_exp_min`, `spend_exp_x`) — pačių skaičių kliente nėra. Mes paliekame 5 taškus už lygį.
+- Taškai **perkami už patirtį (XP)**, kaip Dreadmyst: gauta XP kelia lygį ir kartu kaupiasi „Experience to spend“;
+  išleidus XP lygis nemažėja. Taškų už lygį nebėra.
+- Kainos — iš Dreadmyst kliento (`Dreadmyst.exe`, funkcija `0x558b50`), kai jau investuota `x` taškų:
+  - Strength, Agility, Intelligence, Vitality: `x^1.5 + 5` → 5, 6, 7, 10, 13, 16, 19, 23, 27, 32, 36…
+  - Health, Mana (+1 už tašką): `x^(x/1500)`, mažiausiai 1 — ilgai po 1 XP, brangsta tik turint šimtus taškų.
+  - (Kliente dar: Regeneration/Meditate `x^1.4 + 4`, kritiniai `x/2 + 1` ar `x/3 + 1`, Dodge/Block `x + 1`,
+    atsparumai `x/3 + 1`, Bartering/Lockpicking `2x + 1`, ginklų įgūdžiai `3 × Strength kaina` — mes jų neturime.)
+- Kainos spalva tokia pati kaip Dreadmyst (#B500AF), kai XP neužtenka — pilka.

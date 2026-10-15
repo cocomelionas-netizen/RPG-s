@@ -12,8 +12,9 @@ namespace RPG.Progression
     /// A player's class, level and experience. The server owns all three; every peer derives the stats
     /// (max health, auto-attack damage, range, speed, plus equipment bonuses) and the look from them, so the owner also knows
     /// how close it must walk to attack.
-    /// Experience comes from monster kills (<see cref="ServerAddExperience"/>); levelling up raises stats, heals fully
-    /// and gives attribute points to spend (<see cref="RequestSpendPoint"/>). Damage, health, mana and critical chance
+    /// Experience comes from monster kills (<see cref="ServerAddExperience"/>); levelling up raises stats and heals
+    /// fully. Earned experience is also spent on attribute points, each costing more than the last
+    /// (<see cref="RequestSpendPoint"/>, <see cref="AttributeRules.PointCost"/>). Damage, health, mana and critical chance
     /// come from the class, the level, the attributes (class + spent + items) and the equipment.
     /// The class is chosen when the character is created and restored with the rest of the character by
     /// <see cref="RPG.Accounts.CharacterPersistence"/>.
@@ -32,7 +33,9 @@ namespace RPG.Progression
             0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
         private readonly NetworkVariable<AttributeSet> spentPoints = new NetworkVariable<AttributeSet>(
             default, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
-        private readonly NetworkVariable<int> unspentPoints = new NetworkVariable<int>(
+        // Experience earned and not yet spent on attributes (like Dreadmyst: experience levels you up and is also
+        // the currency for attribute points).
+        private readonly NetworkVariable<int> experienceToSpend = new NetworkVariable<int>(
             0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
 
         private static readonly Color LevelUpColor = new Color(1f, 0.85f, 0.3f);
@@ -57,8 +60,14 @@ namespace RPG.Progression
         public int Level => level.Value;
         public int Experience => experience.Value;
         public int ExperienceToNext => LevelCurve.ExperienceToNext(level.Value);
-        public int UnspentPoints => unspentPoints.Value;
+        /// <summary>Experience that can still be spent on attribute points.</summary>
+        public int ExperienceToSpend => experienceToSpend.Value;
         public AttributeSet SpentPoints => spentPoints.Value;
+
+        /// <summary>Experience the next point in an attribute costs.</summary>
+        public int PointCost(Attribute attribute) => AttributeRules.PointCost(attribute, spentPoints.Value[attribute]);
+
+        public bool CanAfford(Attribute attribute) => experienceToSpend.Value >= PointCost(attribute);
 
         /// <summary>Class attributes plus spent points plus the equipment's.</summary>
         public AttributeSet TotalAttributes
@@ -87,7 +96,7 @@ namespace RPG.Progression
             classIndex.OnValueChanged += OnClassChanged;
             level.OnValueChanged += OnLevelChanged;
             spentPoints.OnValueChanged += OnPointsChanged;
-            unspentPoints.OnValueChanged += OnUnspentChanged;
+            experienceToSpend.OnValueChanged += OnExperienceToSpendChanged;
             if (inventory != null) inventory.Changed += OnEquipmentChanged;
 
             if (IsServer)
@@ -96,7 +105,7 @@ namespace RPG.Progression
                 level.Value = 1;
                 experience.Value = 0;
                 spentPoints.Value = default;
-                unspentPoints.Value = 0;
+                experienceToSpend.Value = 0;
             }
         }
 
@@ -111,7 +120,7 @@ namespace RPG.Progression
             classIndex.OnValueChanged -= OnClassChanged;
             level.OnValueChanged -= OnLevelChanged;
             spentPoints.OnValueChanged -= OnPointsChanged;
-            unspentPoints.OnValueChanged -= OnUnspentChanged;
+            experienceToSpend.OnValueChanged -= OnExperienceToSpendChanged;
             if (inventory != null) inventory.Changed -= OnEquipmentChanged;
         }
 
@@ -125,14 +134,17 @@ namespace RPG.Progression
             ApplyClassAndLevel(false);
         }
 
-        private void OnUnspentChanged(int previous, int current)
+        private void OnExperienceToSpendChanged(int previous, int current)
         {
             Changed?.Invoke();
         }
 
         // ---------- Server ----------
 
-        /// <summary>Server only: adds experience and levels up as many times as it covers.</summary>
+        /// <summary>
+        /// Server only: adds experience, levelling up as many times as it covers. The same experience can also be
+        /// spent on attribute points (spending it does not lower the level).
+        /// </summary>
         public void ServerAddExperience(int amount)
         {
             if (!IsServer || amount <= 0) return;
@@ -142,10 +154,10 @@ namespace RPG.Progression
             LevelCurve.Gain(ref newLevel, ref newExperience, amount);
 
             experience.Value = newExperience;
+            experienceToSpend.Value = (int)Mathf.Min(int.MaxValue, (long)experienceToSpend.Value + amount);
             ExperienceGainedRpc(amount);
             if (newLevel != level.Value)
             {
-                unspentPoints.Value += (newLevel - level.Value) * AttributeRules.PointsPerLevel;
                 level.Value = newLevel;
                 LevelUpRpc(newLevel);
                 Debug.Log($"[Server] {health.DisplayName} reached level {newLevel}.");
@@ -161,32 +173,26 @@ namespace RPG.Progression
             return true;
         }
 
-        /// <summary>Server only: restores a saved character (class, level, progress into the level and attribute points).</summary>
-        public void ServerLoad(int savedClass, int savedLevel, int savedExperience, AttributeSet savedSpent)
+        /// <summary>
+        /// Server only: restores a saved character (class, level, progress into the level, attribute points and
+        /// the experience still to spend).
+        /// </summary>
+        public void ServerLoad(int savedClass, int savedLevel, int savedExperience, AttributeSet savedSpent, int savedExperienceToSpend)
         {
             if (!IsServer) return;
             if (catalog != null && catalog.Get(savedClass) != null) classIndex.Value = savedClass;
             level.Value = Mathf.Clamp(savedLevel, 1, LevelCurve.MaxLevel);
             experience.Value = Mathf.Clamp(savedExperience, 0, Mathf.Max(0, LevelCurve.ExperienceToNext(level.Value) - 1));
 
-            // Never more points than the level has given (a damaged or edited save).
-            int earned = (level.Value - 1) * AttributeRules.PointsPerLevel;
             AttributeSet spent = default;
             for (int i = 0; i < AttributeSet.Count; i++)
                 spent[(Attribute)i] = Mathf.Max(0, savedSpent[(Attribute)i]);
-            int spentTotal = spent.Total;
-            if (spentTotal > earned)
-            {
-                spent = default;
-                spentTotal = 0;
-            }
             spentPoints.Value = spent;
-            // Every point the levels gave is either spent or waiting; characters saved before attributes get theirs now.
-            unspentPoints.Value = earned - spentTotal;
+            experienceToSpend.Value = Mathf.Max(0, savedExperienceToSpend);
             ApplyClassAndLevel(true);
         }
 
-        /// <summary>Owner: puts one unspent point into an attribute.</summary>
+        /// <summary>Owner: buys one point in an attribute with experience.</summary>
         public void RequestSpendPoint(Attribute attribute)
         {
             if (IsOwner) SpendPointRpc(attribute);
@@ -198,13 +204,15 @@ namespace RPG.Progression
             if (rpcParams.Receive.SenderClientId == OwnerClientId) ServerSpendPoint(attribute);
         }
 
-        /// <summary>Server only: spends one point on an attribute. False when there is none to spend.</summary>
+        /// <summary>Server only: buys one point in an attribute at <see cref="PointCost"/>. False when the experience does not cover it.</summary>
         public bool ServerSpendPoint(Attribute attribute)
         {
-            if (!IsServer || unspentPoints.Value <= 0 || attribute < Attribute.Strength || attribute > Attribute.Mana) return false;
+            if (!IsServer || attribute < Attribute.Strength || attribute > Attribute.Mana) return false;
+            int cost = PointCost(attribute);
+            if (experienceToSpend.Value < cost) return false;
             AttributeSet spent = spentPoints.Value;
             spent[attribute] += 1;
-            unspentPoints.Value -= 1;
+            experienceToSpend.Value -= cost;
             spentPoints.Value = spent;
             return true;
         }
@@ -235,8 +243,7 @@ namespace RPG.Progression
             CombatEffects.Ring(transform.position, 0.9f, LevelUpColor);
             CombatTextLayer.ShowText(transform.position + Vector3.up * 1.2f, $"Level {newLevel}!", LevelUpColor, 1.3f);
             if (IsOwner)
-                MessageLog.Add($"You reached level {newLevel} and the rank of {LevelCurve.RankName(newLevel)}! " +
-                               $"You have {AttributeRules.PointsPerLevel} new attribute points (C).", LevelUpColor);
+                MessageLog.Add($"You reached level {newLevel} and the rank of {LevelCurve.RankName(newLevel)}!", LevelUpColor);
             LevelledUp?.Invoke(newLevel);
         }
 

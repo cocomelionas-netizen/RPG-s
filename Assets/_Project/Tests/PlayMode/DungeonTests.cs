@@ -151,7 +151,7 @@ namespace RPG.Tests
         public IEnumerator Entering_BelowTheMinimumLevel_IsRefused()
         {
             Assert.Greater(dungeon.minLevel, 1, "The dungeon has a level requirement.");
-            player.GetComponent<CharacterProgress>().ServerLoad(0, 1, 0, default);
+            player.GetComponent<CharacterProgress>().ServerLoad(0, 1, 0, default, 0);
             yield return null;
 
             int keys = inventory.CountOf(dungeon.key);

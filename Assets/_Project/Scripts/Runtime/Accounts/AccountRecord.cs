@@ -22,9 +22,9 @@ namespace RPG.Accounts
         public int level = 1;
         public int experience;
         public int gold;
-        /// <summary>Attribute points the player spent, and those still to spend.</summary>
+        /// <summary>Attribute points the player bought, and the experience still to spend on more.</summary>
         public AttributeSet spentPoints;
-        public int unspentPoints;
+        public int experienceToSpend;
         public ItemRecord[] bag = Array.Empty<ItemRecord>();
         public ItemRecord[] equipment = Array.Empty<ItemRecord>();
         /// <summary>Discovered waystones, as bits by waystone id.</summary>
