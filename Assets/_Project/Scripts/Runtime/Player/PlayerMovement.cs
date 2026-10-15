@@ -203,7 +203,7 @@ namespace RPG.Player
             repathTimer = repathInterval;
 
             // Without navigation (or without a route) walk straight; being blocked then cancels the move.
-            WorldNavigation navigation = WorldNavigation.Instance;
+            WorldNavigation navigation = WorldNavigation.At(body.position);
             if (navigation != null && !navigation.FindPath(body.position, destination.Value, waypoints))
                 waypoints.Clear();
             routeEndsAtDestination = waypoints.Count == 0 || waypoints[waypoints.Count - 1] == plannedDestination;

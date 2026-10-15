@@ -16,7 +16,7 @@ namespace RPG.Tests
         [TearDown]
         public void TearDown()
         {
-            // Immediately, so WorldNavigation.Instance is gone before the next test runs.
+            // Immediately, so the test maps are gone before the next test runs.
             foreach (GameObject go in created)
                 Object.DestroyImmediate(go);
             created.Clear();

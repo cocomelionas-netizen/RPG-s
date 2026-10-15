@@ -85,7 +85,7 @@ namespace RPG.Monsters
             if (monsterPrefab == null) return;
 
             Vector2 center = transform.position;
-            WorldNavigation navigation = WorldNavigation.Instance;
+            WorldNavigation navigation = WorldNavigation.At(center);
             Vector2 point;
             if (navigation == null || !navigation.TryGetRandomPoint(center, radius, out point))
             {

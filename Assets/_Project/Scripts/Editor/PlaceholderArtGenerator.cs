@@ -267,6 +267,39 @@ namespace RPG.EditorTools
             return SaveSprite(texture, Folder, name, new Vector2(0.5f, baseY / height));
         }
 
+        /// <summary>A standing oval of swirling violet light, pivot at its base.</summary>
+        public static Sprite Portal(string name)
+        {
+            const int width = 160;
+            const int height = 256;
+            const float baseY = 16f;
+            var texture = new Texture2D(width, height, TextureFormat.RGBA32, false);
+            var center = new Vector2(0f, 120f);
+            var outer = new Color(0.45f, 0.2f, 0.8f);
+            var inner = new Color(0.85f, 0.7f, 1f);
+            for (int y = 0; y < height; y++)
+            for (int x = 0; x < width; x++)
+            {
+                var p = new Vector2(x + 0.5f - width * 0.5f, y + 0.5f);
+                Color color = Color.clear;
+                float shadow = Mathf.Clamp01(1f - new Vector2(p.x / 60f, (p.y - baseY) / 12f).magnitude) * 0.45f;
+                if (shadow > 0f) color = new Color(0.2f, 0f, 0.3f, shadow);
+
+                Vector2 local = new Vector2((p.x - center.x) / 58f, (p.y - center.y) / 100f);
+                float r = local.magnitude;
+                if (r <= 1f)
+                {
+                    float angle = Mathf.Atan2(local.y, local.x);
+                    float swirl = Mathf.Sin(angle * 3f + r * 9f) * 0.5f + 0.5f;
+                    Color glow = Color.Lerp(outer, inner, Mathf.Clamp01((1f - r) * 0.8f + swirl * 0.3f));
+                    glow.a = r > 0.85f ? Mathf.Lerp(1f, 0.6f, (r - 0.85f) / 0.15f) : 0.92f;
+                    color = glow;
+                }
+                texture.SetPixel(x, y, color);
+            }
+            return SaveSprite(texture, Folder, name, new Vector2(0.5f, baseY / height));
+        }
+
         /// <summary>A small cloth sack with a golden glint, left on the ground as loot.</summary>
         public static Sprite LootSack(string name)
         {

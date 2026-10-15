@@ -181,7 +181,9 @@ namespace RPG.Networking
         private void ApplyCorrectionRpc(Vector2 position, int correctionId)
         {
             appliedCorrection = correctionId;
+            Vector2 previous = transform.position;
             movement.Teleport(position);
+            SnapCameraIfFar(previous);
             lastSent = new MotionState { Position = position, Facing = movement.FacingDirection };
         }
 
@@ -229,7 +231,9 @@ namespace RPG.Networking
 
             if (IsOwner)
             {
+                Vector2 previous = transform.position;
                 movement.Teleport(position);
+                SnapCameraIfFar(previous);
                 lastSent = new MotionState { Position = position, Facing = movement.FacingDirection };
             }
             else
@@ -237,6 +241,14 @@ namespace RPG.Networking
                 correctionCount++;
                 ApplyCorrectionRpc(position, correctionCount);
             }
+        }
+
+        /// <summary>Owner: after a long jump (respawn, portal) the camera jumps too instead of gliding across the map.</summary>
+        private void SnapCameraIfFar(Vector2 previousPosition)
+        {
+            if (Vector2.Distance(transform.position, previousPosition) < 3f) return;
+            var cameraFollow = FindAnyObjectByType<CameraFollow>();
+            if (cameraFollow != null) cameraFollow.Follow(transform, snap: true);
         }
 
         private void Correct(string reason)
