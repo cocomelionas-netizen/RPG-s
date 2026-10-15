@@ -214,9 +214,12 @@ namespace RPG.UI
             Color tint = potion != null ? potion.iconColor * 0.7f : EmptyPotion;
             tint.a = 0.92f;
             slot.Background.color = tint;
-            slot.Name.text = use == ItemUse.Heal ? "Health" : "Mana";
-            slot.Countdown.text = count > 0 ? count.ToString() : "";
-            slot.Cooldown.anchorMax = new Vector2(1f, 0f);
+            string label = use == ItemUse.Heal ? "Health" : "Mana";
+            slot.Name.text = count > 0 ? $"{label}  x{count}" : label;
+            // Potions share one cooldown.
+            float remaining = inventory.PotionCooldownRemaining;
+            slot.Cooldown.anchorMax = new Vector2(1f, count > 0 ? inventory.PotionCooldownFraction : 0f);
+            slot.Countdown.text = count > 0 && remaining >= 0.05f ? Mathf.CeilToInt(remaining).ToString() : "";
             SetHighlighted(slot, false);
         }
 

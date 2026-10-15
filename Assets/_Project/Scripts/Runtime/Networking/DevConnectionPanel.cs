@@ -58,7 +58,9 @@ namespace RPG.Networking
 
             if (running)
             {
-                GUILayout.BeginArea(new Rect(10f, 10f, 260f, 70f), GUI.skin.box);
+                // Under the minimap (top right), clear of the player's portrait.
+                float hudScale = Mathf.Sqrt(Screen.width / 1920f * (Screen.height / 1080f));
+                GUILayout.BeginArea(new Rect(Screen.width - 270f, 300f * hudScale, 260f, 70f), GUI.skin.box);
                 DrawStatus(network);
             }
             else
