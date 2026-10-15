@@ -177,6 +177,8 @@ namespace RPG.Combat
 
             double now = NetworkManager.ServerTime.Time;
             if (now < nextAttackTime) return;
+            // Stunned or incapacitated units cannot swing.
+            if (health.Effects != null && health.Effects.IsDisabled) return;
 
             Vector2 from = ServerPosition(this);
             Vector2 to = ServerPosition(serverTarget);

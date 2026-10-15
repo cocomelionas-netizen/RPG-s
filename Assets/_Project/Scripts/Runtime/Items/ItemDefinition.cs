@@ -47,6 +47,8 @@ namespace RPG.Items
         Heal,
         /// <summary>Restores a share of max mana and is used up.</summary>
         RestoreMana,
+        /// <summary>A Tome: teaches its spell and is used up.</summary>
+        LearnSpell,
     }
 
     /// <summary>One kind of item: its slot, rarity, stats and use. Players' bags refer to it by catalog index.</summary>
@@ -91,6 +93,8 @@ namespace RPG.Items
         [Min(1)] public int maxStack = 1;
         [Tooltip("A stronger version that sometimes drops in its place (a serum for a potion).")]
         public ItemDefinition strongerVariant;
+        [Tooltip("Tomes: the spell it teaches.")]
+        public AbilityDefinition teachesSpell;
 
         [Header("Gem")]
         [Tooltip("A gem: clicking it sets it into an empty socket of worn gear, where its attributes count.")]
@@ -209,7 +213,13 @@ namespace RPG.Items
             if (!string.IsNullOrEmpty(socketLine)) text.AppendLine(socketLine);
             if (isGem) text.AppendLine("Set into gear with an empty socket");
             if (isGem && combinesInto != null) text.AppendLine($"{combineCount} combine into {combinesInto.displayName} at a jeweler");
-            if (use != ItemUse.None)
+            if (use == ItemUse.LearnSpell && teachesSpell != null)
+            {
+                text.AppendLine($"Use: learn {teachesSpell.displayName}");
+                if (!string.IsNullOrEmpty(teachesSpell.description)) text.AppendLine(teachesSpell.description);
+                if (itemLevel > 1) text.AppendLine($"Requires level {itemLevel}");
+            }
+            else if (use != ItemUse.None)
             {
                 string pool = use == ItemUse.Heal ? "health" : "mana";
                 string amount = restoreAmount > 0 ? $"{restoreAmount} {pool}" : $"{Mathf.RoundToInt(healFraction * 100f)}% {pool}";

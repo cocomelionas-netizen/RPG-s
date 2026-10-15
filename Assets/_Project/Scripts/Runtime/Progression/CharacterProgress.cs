@@ -47,12 +47,16 @@ namespace RPG.Progression
         private Inventory inventory;
         private Mana mana;
         private HealthRegeneration regeneration;
+        private StatusEffects effects;
 
         /// <summary>Raised on every peer when the level goes up by gaining experience (not when a saved character is loaded).</summary>
         public event Action<int> LevelledUp;
 
         /// <summary>Raised on every peer when class or level changed (stats were re-applied).</summary>
         public event Action Changed;
+
+        /// <summary>Raised on every peer when the class changed (the spellbook starts over).</summary>
+        public event Action ClassChanged;
 
         public ClassCatalog Catalog => catalog;
         public int ClassIndex => classIndex.Value;
@@ -76,8 +80,27 @@ namespace RPG.Progression
             get
             {
                 AttributeSet total = (Class != null ? Class.baseAttributes : default) + spentPoints.Value;
-                return inventory != null ? total + inventory.Attributes : total;
+                if (inventory != null) total += inventory.Attributes;
+                return effects != null ? total + EffectBonus(total) : total;
             }
+        }
+
+        /// <summary>What buffs add: a share of the main attributes (Blessing of Champions), Intelligence, spell critical.</summary>
+        private AttributeSet EffectBonus(AttributeSet total)
+        {
+            var bonus = new AttributeSet();
+            float percent = effects.Total(StatusKind.Attributes) / 100f;
+            if (percent != 0f)
+            {
+                bonus.strength = Mathf.RoundToInt(total.strength * percent);
+                bonus.agility = Mathf.RoundToInt(total.agility * percent);
+                bonus.intelligence = Mathf.RoundToInt(total.intelligence * percent);
+                bonus.vitality = Mathf.RoundToInt(total.vitality * percent);
+                bonus.willpower = Mathf.RoundToInt(total.willpower * percent);
+            }
+            bonus.intelligence += Mathf.RoundToInt(effects.Total(StatusKind.Intellect));
+            bonus.spellCritical += Mathf.RoundToInt(effects.Total(StatusKind.SpellCritical));
+            return bonus;
         }
 
         /// <summary>Whether the class fights at range (its auto-attack shoots).</summary>
@@ -123,6 +146,7 @@ namespace RPG.Progression
             inventory = GetComponent<Inventory>();
             mana = GetComponent<Mana>();
             regeneration = GetComponent<HealthRegeneration>();
+            effects = GetComponent<StatusEffects>();
         }
 
         public override void OnNetworkSpawn()
@@ -132,6 +156,7 @@ namespace RPG.Progression
             spentPoints.OnValueChanged += OnPointsChanged;
             experienceToSpend.OnValueChanged += OnExperienceToSpendChanged;
             if (inventory != null) inventory.Changed += OnEquipmentChanged;
+            if (effects != null) effects.Changed += OnEquipmentChanged;
 
             if (IsServer)
             {
@@ -156,6 +181,7 @@ namespace RPG.Progression
             spentPoints.OnValueChanged -= OnPointsChanged;
             experienceToSpend.OnValueChanged -= OnExperienceToSpendChanged;
             if (inventory != null) inventory.Changed -= OnEquipmentChanged;
+            if (effects != null) effects.Changed -= OnEquipmentChanged;
         }
 
         private void OnEquipmentChanged()
@@ -251,6 +277,14 @@ namespace RPG.Progression
             return true;
         }
 
+        /// <summary>Server only: pays experience for something else than an attribute (a spell's next rank). False when short.</summary>
+        public bool ServerTrySpendExperience(int cost)
+        {
+            if (!IsServer || cost < 0 || experienceToSpend.Value < cost) return false;
+            experienceToSpend.Value -= cost;
+            return true;
+        }
+
         [Rpc(SendTo.Owner)]
         private void ExperienceGainedRpc(int amount)
         {
@@ -263,6 +297,7 @@ namespace RPG.Progression
         private void OnClassChanged(int previous, int current)
         {
             ApplyClassAndLevel(true);
+            ClassChanged?.Invoke();
         }
 
         private void OnLevelChanged(int previous, int current)

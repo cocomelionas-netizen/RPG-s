@@ -27,6 +27,9 @@ namespace RPG.Accounts
         public int experienceToSpend;
         public ItemRecord[] bag = Array.Empty<ItemRecord>();
         public ItemRecord[] equipment = Array.Empty<ItemRecord>();
+        /// <summary>Rank of every spell of the class (0: not learned) and the spell in each action bar slot (-1: empty).</summary>
+        public int[] spellRanks;
+        public int[] spellBar;
         /// <summary>Discovered waystones, as bits by waystone id.</summary>
         public int waystones;
         /// <summary>False for a new character, which starts at the spawn point with the starting items.</summary>

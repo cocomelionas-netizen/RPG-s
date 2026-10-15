@@ -304,6 +304,13 @@ namespace RPG.Monsters
                 return;
             }
 
+            // Stunned or incapacitated: stands still and does nothing.
+            if (health.Effects != null && health.Effects.IsDisabled)
+            {
+                if (motion.Destination.HasValue) motion.ServerStop();
+                return;
+            }
+
             if (Time.time >= nextScanTime)
             {
                 nextScanTime = Time.time + ScanInterval;
@@ -348,6 +355,8 @@ namespace RPG.Monsters
                 NetworkObject player = client.PlayerObject;
                 if (player == null || !player.TryGetComponent(out Health playerHealth)) continue;
                 if (playerHealth.IsDead || !health.IsHostileTo(playerHealth)) continue;
+                // Stealthed (Vanish) players are not noticed.
+                if (playerHealth.Effects != null && playerHealth.Effects.IsStealthed) continue;
 
                 if (Vector2.Distance(Position, AutoAttack.ServerPosition(playerHealth)) <= aggroRadius)
                     AddThreat(playerHealth, SightThreat * ScanInterval, true);
@@ -394,6 +403,7 @@ namespace RPG.Monsters
             {
                 Health unit = entry.Key;
                 bool gone = unit == null || !unit.IsSpawned || unit.IsDead
+                            || (unit.Effects != null && unit.Effects.IsStealthed)
                             || Vector2.Distance(Position, AutoAttack.ServerPosition(unit)) > leashRadius + aggroRadius;
                 if (gone)
                 {

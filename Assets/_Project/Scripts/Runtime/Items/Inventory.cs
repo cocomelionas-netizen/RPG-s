@@ -694,6 +694,15 @@ namespace RPG.Items
                     // The count travels in the affix field.
                     if (item != null) MessageLog.Add($"You need {affixId} [{item.displayName}].", MessageLog.WarningColor);
                     break;
+                case InventoryMessage.LearnedSpell:
+                    if (item == null || item.teachesSpell == null) break;
+                    CombatTextLayer.ShowText(above, $"Learned {item.teachesSpell.displayName}", new Color(0.75f, 0.55f, 1f), 1f);
+                    MessageLog.Add($"You learned a new ability: {item.teachesSpell.displayName}. Open the spellbook (P) to place it on your bar.",
+                        new Color(0.75f, 0.55f, 1f));
+                    break;
+                case InventoryMessage.AlreadyKnown:
+                    MessageLog.Add("You already know that ability.", MessageLog.WarningColor);
+                    break;
                 case InventoryMessage.PickingLock:
                     CombatTextLayer.ShowText(above, "Picking the lock...", new Color(0.85f, 0.8f, 0.6f), 0.8f);
                     MessageLog.Add("You pick the lock...", new Color(0.85f, 0.8f, 0.6f));
@@ -799,6 +808,7 @@ namespace RPG.Items
             ItemStack stack = bag[bagIndex];
             ItemDefinition item = Definition(stack);
             if (item == null || item.use == ItemUse.None) return false;
+            if (item.use == ItemUse.LearnSpell) return ServerLearnFrom(bagIndex, stack, item);
             if (item.use == ItemUse.RestoreMana && mana == null) return false;
             if (progress != null && !item.CanBeUsedAtLevel(progress.Level))
             {
@@ -822,6 +832,31 @@ namespace RPG.Items
             potionReadyAt.Value = now + potionCooldown;
 
             bag[bagIndex] = stack.Count > 1 ? stack.WithCount(stack.Count - 1) : ItemStack.Empty;
+            return true;
+        }
+
+        /// <summary>Server: reads a Tome: its class and level, then the spell is learned and the Tome used up.</summary>
+        private bool ServerLearnFrom(int bagIndex, ItemStack stack, ItemDefinition tome)
+        {
+            var spellbook = GetComponent<Spellbook>();
+            if (spellbook == null || tome.teachesSpell == null) return false;
+            if (progress != null && !tome.CanBeUsedByClass(progress.ClassIndex))
+            {
+                MessageRpc(InventoryMessage.WrongClass, stack.ItemId, 0);
+                return false;
+            }
+            if (progress != null && !tome.CanBeUsedAtLevel(progress.Level))
+            {
+                MessageRpc(InventoryMessage.LevelTooLow, stack.ItemId, 0);
+                return false;
+            }
+            if (!spellbook.ServerLearn(tome.teachesSpell))
+            {
+                MessageRpc(InventoryMessage.AlreadyKnown, stack.ItemId, 0);
+                return false;
+            }
+            bag[bagIndex] = stack.Count > 1 ? stack.WithCount(stack.Count - 1) : ItemStack.Empty;
+            MessageRpc(InventoryMessage.LearnedSpell, stack.ItemId, 0);
             return true;
         }
 
@@ -986,6 +1021,9 @@ namespace RPG.Items
             /// <summary>Picking a lock: the Lockpicking needed travels in the item id field, the player's in the affix field.</summary>
             PickingLock,
             LockpickingTooLow,
+            /// <summary>A Tome was read; it travels in the item id field.</summary>
+            LearnedSpell,
+            AlreadyKnown,
         }
     }
 }

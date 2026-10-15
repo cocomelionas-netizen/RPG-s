@@ -15,7 +15,8 @@ namespace RPG.Tests
 {
     /// <summary>
     /// Levels, experience, classes and abilities on a real host. Needs the prefabs and class assets
-    /// from RPG > Build Test Scene (Warrior: Heavy Strike, Whirlwind, Second Wind; Ranger is class 1).
+    /// from RPG > Build Test Scene (Warrior: Source's Paladin spells, on the bar Mighty Blow, Holy Wrath, Radiance;
+    /// Ranger is class 1).
     /// </summary>
     public class ProgressionTests
     {
@@ -168,28 +169,45 @@ namespace RPG.Tests
         }
 
         [UnityTest]
-        public IEnumerator Ability_AreaAroundSelf_HitsOnlyNearbyEnemies()
+        public IEnumerator SpellWithCastTime_LandsAfterTheCast_AndLeavesItsDamageOverTime()
         {
-            Health left = Spawn(dummyPrefab, new Vector2(-0.6f, 0f)).GetComponent<Health>();
-            Health right = Spawn(dummyPrefab, new Vector2(0.6f, 0f)).GetComponent<Health>();
-            Health far = Spawn(dummyPrefab, new Vector2(4f, 0f)).GetComponent<Health>();
+            // Holy Wrath: 1 sec cast, Holy damage, more over 3 sec.
+            Health dummy = Spawn(dummyPrefab, new Vector2(2f, 0f)).GetComponent<Health>();
             yield return null;
+            AbilityDefinition holyWrath = caster.GetAbility(1);
+            Assert.Greater(holyWrath.castTime, 0f);
 
-            Assert.IsTrue(caster.ServerTryCast(1, null, out CastFailure failure), failure.ToString());
-            Assert.Less(left.Current, left.Max);
-            Assert.Less(right.Current, right.Max);
-            Assert.AreEqual(far.Max, far.Current);
+            Assert.IsTrue(caster.ServerTryCast(1, dummy, out CastFailure failure), failure.ToString());
+            Assert.AreEqual(dummy.Max, dummy.Current, "Nothing lands while casting.");
+            yield return new WaitForSeconds(holyWrath.castTime + 0.3f);
+
+            Assert.Less(dummy.Current, dummy.Max);
+            Assert.IsTrue(dummy.Effects.Has(StatusKind.DamageOverTime));
         }
 
         [UnityTest]
-        public IEnumerator Ability_SelfHeal_RestoresHealth()
+        public IEnumerator FriendlySpell_WithoutAFriend_HealsTheCaster()
         {
+            // Radiance: heals a friendly target, or the caster.
             playerHealth.ApplyDamage(60, false);
             int hurt = playerHealth.Current;
             yield return null;
 
             Assert.IsTrue(caster.ServerTryCast(2, null, out CastFailure failure), failure.ToString());
+            yield return new WaitForSeconds(caster.GetAbility(2).castTime + 0.3f);
             Assert.Greater(playerHealth.Current, hurt);
+        }
+
+        [UnityTest]
+        public IEnumerator Stunned_CannotCast()
+        {
+            Health dummy = Spawn(dummyPrefab, new Vector2(0.5f, 0f)).GetComponent<Health>();
+            yield return null;
+            Assert.IsTrue(playerHealth.Effects.ServerApply("Test Stun", Color.white, StatusKind.Stun, 0f, 3f));
+
+            Assert.IsFalse(caster.ServerTryCast(0, dummy, out CastFailure failure));
+            Assert.AreEqual(CastFailure.Disabled, failure);
+            Assert.AreEqual(0f, playerHealth.Effects.SpeedMultiplier, "Stunned units cannot move.");
         }
 
         private GameObject Spawn(GameObject prefab, Vector2 offset)

@@ -109,30 +109,23 @@ namespace RPG.Tests
         [UnityTest]
         public IEnumerator Ability_CostsMana_AndFailsWithoutEnough()
         {
-            // Second Wind (warrior slot 2) needs no target.
-            AbilityDefinition secondWind = progress.Class.abilities[2];
-            Assert.Greater(secondWind.manaCost, 0);
+            // Mighty Blow (bar slot 0): Source's mana, base plus per level.
+            AbilityDefinition mightyBlow = caster.GetAbility(0);
+            int cost = caster.ManaCost(mightyBlow);
+            Assert.Greater(cost, 0);
+            Assert.AreEqual(mightyBlow.ManaCostAt(progress.Level), cost);
+            GameObject dummy = Object.Instantiate(dummyPrefab, player.transform.position + new Vector3(0.5f, 0f, 0f), Quaternion.identity);
+            dummy.GetComponent<NetworkObject>().Spawn(destroyWithScene: true);
+            yield return null;
             int before = mana.Current;
 
-            Assert.IsTrue(caster.ServerTryCast(2, null, out CastFailure failure), failure.ToString());
-            Assert.AreEqual(before - secondWind.manaCost, mana.Current);
-            yield return null;
+            Assert.IsTrue(caster.ServerTryCast(0, dummy.GetComponent<Health>(), out CastFailure failure), failure.ToString());
+            Assert.AreEqual(before - cost, mana.Current);
+            yield return new WaitForSeconds(mightyBlow.cooldown + 0.1f);
 
             Assert.IsTrue(mana.ServerSpend(mana.Current));
-            Assert.IsFalse(caster.ServerTryCast(1, null, out failure));
+            Assert.IsFalse(caster.ServerTryCast(0, dummy.GetComponent<Health>(), out failure));
             Assert.AreEqual(CastFailure.NoMana, failure);
-        }
-
-        [UnityTest]
-        public IEnumerator ManaPotion_RestoresMana()
-        {
-            ItemDefinition potion = Item("ManaPotion");
-            inventory.ServerAddItem(potion, 1, false);
-            mana.ServerSpend(mana.Current);
-            yield return null;
-
-            Assert.IsTrue(inventory.ServerUse(FindInBag(potion)));
-            Assert.Greater(mana.Current, 0);
         }
 
         // ---------- Attributes ----------

@@ -26,6 +26,7 @@ namespace RPG.Accounts
         private CharacterProgress progress;
         private Inventory inventory;
         private WaystoneTraveller waystones;
+        private Spellbook spellbook;
         private Health health;
         private PlayerNetworkMovement networkMovement;
         private AccountService accounts;
@@ -41,6 +42,7 @@ namespace RPG.Accounts
             progress = GetComponent<CharacterProgress>();
             inventory = GetComponent<Inventory>();
             waystones = GetComponent<WaystoneTraveller>();
+            spellbook = GetComponent<Spellbook>();
             health = GetComponent<Health>();
             networkMovement = GetComponent<PlayerNetworkMovement>();
         }
@@ -56,6 +58,7 @@ namespace RPG.Accounts
             Load(account.character);
             progress.Changed += OnCharacterChanged;
             inventory.Changed += OnCharacterChanged;
+            if (spellbook != null) spellbook.Changed += OnCharacterChanged;
             nextAutosave = Time.time + autosaveSeconds;
             ServerSave();
         }
@@ -65,6 +68,7 @@ namespace RPG.Accounts
             if (!IsServer || account == null) return;
             progress.Changed -= OnCharacterChanged;
             inventory.Changed -= OnCharacterChanged;
+            if (spellbook != null) spellbook.Changed -= OnCharacterChanged;
             ServerSave();
             accounts.LogOut(OwnerClientId);
         }
@@ -87,6 +91,7 @@ namespace RPG.Accounts
             progress.ServerLoad(saved.classIndex, saved.level, saved.experience, saved.spentPoints, saved.experienceToSpend);
             if (!saved.hasBeenSaved) return;
 
+            if (spellbook != null) spellbook.ServerLoad(saved.spellRanks, saved.spellBar);
             inventory.ServerLoad(ToStacks(saved.bag), ToStacks(saved.equipment));
             inventory.ServerSetGold(saved.gold);
             if (waystones != null) waystones.ServerLoad(saved.waystones);
@@ -113,6 +118,11 @@ namespace RPG.Accounts
             record.bag = ToRecords(inventory.BagSnapshot());
             record.equipment = ToRecords(inventory.EquipmentSnapshot());
             if (waystones != null) record.waystones = waystones.DiscoveredMask;
+            if (spellbook != null)
+            {
+                record.spellRanks = spellbook.RanksSnapshot();
+                record.spellBar = spellbook.BarSnapshot();
+            }
             Vector2 position = AutoAttack.ServerPosition(this);
             record.x = position.x;
             record.y = position.y;
