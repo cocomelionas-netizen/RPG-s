@@ -48,6 +48,8 @@ namespace RPG.Monsters
         [SerializeField] private GameObject lootBagPrefab;
         [Tooltip("Rolls random affixes on dropped weapons and armor (none when empty).")]
         [SerializeField] private AffixCatalog affixes;
+        [Tooltip("Chance that a dropped weapon or armor piece has a socket for a gem.")]
+        [SerializeField, Range(0f, 1f)] private float socketChance = 0.25f;
 
         [Header("Aggro")]
         [SerializeField, Min(0f)] private float aggroRadius = 3f;
@@ -336,7 +338,8 @@ namespace RPG.Monsters
             drops.Clear();
             foreach (LootEntry entry in loot)
                 if (entry.item != null && Random.value < entry.chance)
-                    drops.Add(new LootItem(entry.item, affixes != null ? affixes.Roll(entry.item, level) : 0));
+                    drops.Add(new LootItem(entry.item, affixes != null ? affixes.Roll(entry.item, level) : 0,
+                        entry.item.IsEquippable && Random.value < socketChance ? ItemStack.EmptySocket : 0));
             if (drops.Count == 0) return;
 
             GameObject bag = Instantiate(lootBagPrefab, transform.position, Quaternion.identity);

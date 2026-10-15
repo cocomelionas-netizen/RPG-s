@@ -33,6 +33,7 @@ namespace RPG.UI
         private Text title;
         private Text goldText;
         private RectTransform list;
+        private Button combineButton;
         private readonly List<Row> rows = new List<Row>();
         private Vendor shown;
 
@@ -82,6 +83,13 @@ namespace RPG.UI
             closeRect.sizeDelta = new Vector2(34f, 34f);
             close.onClick.AddListener(Hide);
 
+            combineButton = UIFactory.CreateButton("Combine", rect, new Color(0.2f, 0.35f, 0.45f, 0.95f), "Combine gems (3 of a kind = 1 better)", 15);
+            var combineRect = (RectTransform)combineButton.transform;
+            combineRect.anchorMin = combineRect.anchorMax = combineRect.pivot = new Vector2(0.5f, 0f);
+            combineRect.anchoredPosition = new Vector2(0f, 12f);
+            combineRect.sizeDelta = new Vector2(width - 28f, 34f);
+            combineButton.onClick.AddListener(CombineGems);
+
             list = UIFactory.CreateRect("Goods", rect);
             list.anchorMin = list.anchorMax = list.pivot = new Vector2(0f, 1f);
             list.anchoredPosition = new Vector2(14f, -92f);
@@ -119,7 +127,9 @@ namespace RPG.UI
             for (int i = 0; i < stock.Length; i++)
                 rows.Add(CreateRow(i));
 
-            float height = 92f + stock.Length * (rowHeight + 4f) + 40f;
+            bool jeweler = definition != null && definition.combinesGems;
+            combineButton.gameObject.SetActive(jeweler);
+            float height = 92f + stock.Length * (rowHeight + 4f) + 40f + (jeweler ? 46f : 0f);
             ((RectTransform)window.transform).sizeDelta = new Vector2(width, height);
             window.SetActive(true);
             Inventory inventory = UIFactory.LocalPlayer<Inventory>();
@@ -147,6 +157,12 @@ namespace RPG.UI
             row.Details = AddText(rect, 12, TextAnchor.UpperLeft, new Vector2(8f, -24f), new Vector2(width - 140f, 20f));
             row.Price = AddText(rect, 16, TextAnchor.MiddleRight, new Vector2(width - 140f, 0f), new Vector2(104f, rowHeight));
             return row;
+        }
+
+        private void CombineGems()
+        {
+            Inventory inventory = UIFactory.LocalPlayer<Inventory>();
+            if (inventory != null && shown != null) inventory.RequestCombineGems(shown);
         }
 
         private void Buy(int index)
@@ -203,6 +219,7 @@ namespace RPG.UI
             if (item.armor > 0) parts.Add($"{item.armor} armor");
             if (item.manaBonus > 0) parts.Add($"+{item.manaBonus} mana");
             if (!item.attributes.IsZero) parts.Add(item.attributes.Describe("  "));
+            if (item.isGem) parts.Add("gem: set into a socket");
             if (item.use == ItemUse.Heal) parts.Add($"heals {Mathf.RoundToInt(item.healFraction * 100f)}%");
             if (item.use == ItemUse.RestoreMana) parts.Add($"restores {Mathf.RoundToInt(item.healFraction * 100f)}% mana");
             string className = ClassName(item, progress);

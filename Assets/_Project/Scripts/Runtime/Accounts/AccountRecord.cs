@@ -42,12 +42,15 @@ namespace RPG.Accounts
         public int count;
         /// <summary>Random affix (0 for none).</summary>
         public int affix;
+        /// <summary>0: no socket, -1: empty socket, above 0: the gem's item id.</summary>
+        public int socket;
 
-        public ItemRecord(int id, int count, int affix)
+        public ItemRecord(int id, int count, int affix, int socket = 0)
         {
             this.id = id;
             this.count = count;
             this.affix = affix;
+            this.socket = socket;
         }
     }
 }

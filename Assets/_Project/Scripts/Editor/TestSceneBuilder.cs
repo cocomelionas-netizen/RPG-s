@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using RPG.CameraSystem;
@@ -123,21 +124,21 @@ namespace RPG.EditorTools
             {
                 Name = "Goblin", Animations = goblinAnimations, Scale = 0.85f, Health = 45, MinDamage = 3, MaxDamage = 5,
                 AttackInterval = 2f, Level = 2, Experience = 20, MoveSpeed = 1.8f, Gold = new Vector2Int(3, 6),
-                Loot = Loot(items, ("GoblinEar", 0.6f), ("DenKey", 0.04f), ("HealingPotion", 0.3f), ("ManaPotion", 0.15f), ("RustySword", 0.08f), ("LeatherCap", 0.08f), ("PaddedVest", 0.08f),
+                Loot = Loot(items, ("GoblinEar", 0.6f), ("DenKey", 0.04f), ("ChippedRuby", 0.02f), ("ChippedTopaz", 0.02f), ("ChippedSapphire", 0.02f), ("ChippedEmerald", 0.02f), ("HealingPotion", 0.3f), ("ManaPotion", 0.15f), ("RustySword", 0.08f), ("LeatherCap", 0.08f), ("PaddedVest", 0.08f),
                     ("WornBoots", 0.08f), ("IronSword", 0.03f)),
             }, barSprite, lootBagPrefab, affixes);
             GameObject brutePrefab = CreateMonsterPrefab(new MonsterSpec
             {
                 Name = "Goblin Brute", Animations = bruteAnimations, Scale = 1.05f, Health = 120, MinDamage = 6, MaxDamage = 10,
                 AttackInterval = 2.2f, Level = 4, Experience = 45, MoveSpeed = 1.6f, Gold = new Vector2Int(10, 16),
-                Loot = Loot(items, ("BruteTusk", 0.6f), ("DenKey", 0.25f), ("HealingPotion", 0.5f), ("ManaPotion", 0.25f), ("IronSword", 0.12f), ("IronHelm", 0.1f), ("Chainmail", 0.1f),
+                Loot = Loot(items, ("BruteTusk", 0.6f), ("DenKey", 0.25f), ("ChippedRuby", 0.04f), ("ChippedTopaz", 0.04f), ("ChippedSapphire", 0.04f), ("ChippedEmerald", 0.04f), ("HealingPotion", 0.5f), ("ManaPotion", 0.25f), ("IronSword", 0.12f), ("IronHelm", 0.1f), ("Chainmail", 0.1f),
                     ("IronBoots", 0.1f), ("GoblinCleaver", 0.04f)),
             }, barSprite, lootBagPrefab, affixes);
             GameObject orcPrefab = CreateMonsterPrefab(new MonsterSpec
             {
                 Name = "Orc", Animations = orcAnimations, Scale = 1.15f, Health = 220, MinDamage = 10, MaxDamage = 15,
                 AttackInterval = 2f, Level = 6, Experience = 90, MoveSpeed = 1.7f, Gold = new Vector2Int(20, 30),
-                Loot = Loot(items, ("OrcFang", 0.6f), ("DenKey", 0.35f), ("HealingPotion", 0.6f), ("ManaPotion", 0.3f), ("GoblinCleaver", 0.1f), ("OrcSkullHelm", 0.1f), ("OrcishPlate", 0.05f),
+                Loot = Loot(items, ("OrcFang", 0.6f), ("DenKey", 0.35f), ("ChippedRuby", 0.05f), ("ChippedTopaz", 0.05f), ("ChippedSapphire", 0.05f), ("ChippedEmerald", 0.05f), ("Ruby", 0.01f), ("Sapphire", 0.01f), ("HealingPotion", 0.6f), ("ManaPotion", 0.3f), ("GoblinCleaver", 0.1f), ("OrcSkullHelm", 0.1f), ("OrcishPlate", 0.05f),
                     ("OrcishGreataxe", 0.05f)),
             }, barSprite, lootBagPrefab, affixes);
             CharacterAnimationSet kingAnimations = CreateCharacterAnimationSet("GoblinKing", KingArtFolder, KingAnimationSetPath,
@@ -146,7 +147,7 @@ namespace RPG.EditorTools
             {
                 Name = "Goblin King", Animations = kingAnimations, Scale = 1.5f, Health = 900, MinDamage = 14, MaxDamage = 20,
                 AttackInterval = 2.2f, Level = 8, Experience = 300, MoveSpeed = 1.5f, Gold = new Vector2Int(150, 200),
-                Loot = Loot(items, ("CrownShard", 1f), ("HealingPotion", 1f), ("ManaPotion", 1f), ("OrcishGreataxe", 0.5f), ("OrcishPlate", 0.5f),
+                Loot = Loot(items, ("CrownShard", 1f), ("Ruby", 0.25f), ("Topaz", 0.25f), ("Sapphire", 0.25f), ("Emerald", 0.25f), ("FlawlessRuby", 0.05f), ("FlawlessEmerald", 0.05f), ("HealingPotion", 1f), ("ManaPotion", 1f), ("OrcishGreataxe", 0.5f), ("OrcishPlate", 0.5f),
                     ("OrcSkullHelm", 0.4f), ("GoblinCleaver", 0.4f)),
             }, barSprite, lootBagPrefab, affixes, boss => boss.AddComponent<BossMechanics>());
             DungeonDefinition dungeon = CreateDungeon(brutePrefab, orcPrefab, kingPrefab);
@@ -796,6 +797,7 @@ namespace RPG.EditorTools
                     limits[i] = stock[i] == null ? 0 : stock[i].rarity >= ItemRarity.Rare ? 1 : stock[i].rarity == ItemRarity.Uncommon ? 2 : 0;
                 vendor.stockLimits = limits;
                 vendor.restockSeconds = 300f;
+                vendor.combinesGems = false;
                 EditorUtility.SetDirty(vendor);
                 return vendor;
             }
@@ -808,15 +810,29 @@ namespace RPG.EditorTools
                     "HuntingBow", "Longbow", "ElvenBow", "LeatherHood", "StuddedJerkin", "RangerBoots"),
                 MakeVendor("MageVendor", "Elara the Arcanist", "Mage staves and robes",
                     "ApprenticeStaff", "RunedStaff", "StaffOfEmbers", "SilkHood", "ApprenticeRobe", "EnchantedRobe", "SilkSlippers"),
+                Jeweler(MakeVendor("JewelerVendor", "Gemma Brightstone", "Jeweler: gems, gem combining",
+                    "ChippedRuby", "ChippedTopaz", "ChippedSapphire", "ChippedEmerald")),
             };
+        }
+
+        private static VendorDefinition Jeweler(VendorDefinition vendor)
+        {
+            vendor.combinesGems = true;
+            EditorUtility.SetDirty(vendor);
+            return vendor;
         }
 
         private static void PlaceVendors(Grid grid, VendorDefinition[] vendors)
         {
             int center = MapSize / 2;
             // Warrior north-east, ranger west, mage east of the spawn, around the town square.
-            var places = new[] { new Vector3Int(center + 1, center + 5, 0), new Vector3Int(center - 5, center + 1, 0), new Vector3Int(center + 5, center - 1, 0) };
-            var cloaks = new[] { new Color(0.55f, 0.15f, 0.12f), new Color(0.15f, 0.4f, 0.18f), new Color(0.3f, 0.2f, 0.6f) };
+            // The jeweler stands south of the spawn.
+            var places = new[]
+            {
+                new Vector3Int(center + 1, center + 5, 0), new Vector3Int(center - 5, center + 1, 0), new Vector3Int(center + 5, center - 1, 0),
+                new Vector3Int(center + 1, center - 5, 0),
+            };
+            var cloaks = new[] { new Color(0.55f, 0.15f, 0.12f), new Color(0.15f, 0.4f, 0.18f), new Color(0.3f, 0.2f, 0.6f), new Color(0.2f, 0.55f, 0.6f) };
             var parent = new GameObject("Town Vendors").transform;
 
             for (int i = 0; i < vendors.Length; i++)
@@ -996,6 +1012,26 @@ namespace RPG.EditorTools
                 manaPotion,
                 CreateKey("DenKey", "Den Key", new Color(0.85f, 0.65f, 0.25f), 20),
             };
+            // Gems: three of a kind combine into the next tier at the jeweler.
+            var gems = new List<ItemDefinition>();
+            foreach ((string gemName, RPG.Progression.Attribute attribute, Color color) in new[]
+                     {
+                         ("Ruby", RPG.Progression.Attribute.Strength, new Color(0.85f, 0.1f, 0.15f)),
+                         ("Topaz", RPG.Progression.Attribute.Agility, new Color(0.95f, 0.65f, 0.15f)),
+                         ("Sapphire", RPG.Progression.Attribute.Intelligence, new Color(0.15f, 0.35f, 0.95f)),
+                         ("Emerald", RPG.Progression.Attribute.Vitality, new Color(0.15f, 0.75f, 0.3f)),
+                     })
+            {
+                ItemDefinition flawless = CreateGem($"Flawless{gemName}", $"Flawless {gemName}", ItemRarity.Epic, attribute, 7, color * 1.15f, 600, null);
+                ItemDefinition normal = CreateGem(gemName, gemName, ItemRarity.Rare, attribute, 4, color, 200, flawless);
+                ItemDefinition chipped = CreateGem($"Chipped{gemName}", $"Chipped {gemName}", ItemRarity.Uncommon, attribute, 2, color * 0.8f, 60, normal);
+                gems.Add(chipped);
+                gems.Add(normal);
+                gems.Add(flawless);
+            }
+            var all = new List<ItemDefinition>(catalog.items);
+            all.AddRange(gems);
+            catalog.items = all.ToArray();
             EditorUtility.SetDirty(catalog);
             return catalog;
         }
@@ -1031,6 +1067,8 @@ namespace RPG.EditorTools
             item.manaBonus = 0;
             item.attributes = default;
             item.canHaveAffix = true;
+            item.isGem = false;
+            item.combinesInto = null;
             EditorUtility.SetDirty(item);
             return item;
         }
@@ -1041,6 +1079,20 @@ namespace RPG.EditorTools
             item.maxStack = 20;
             item.canHaveAffix = false;
             return item;
+        }
+
+        private static ItemDefinition CreateGem(string fileName, string displayName, ItemRarity rarity, RPG.Progression.Attribute attribute,
+            int amount, Color iconColor, int price, ItemDefinition combinesInto)
+        {
+            ItemDefinition gem = CreateItem(fileName, displayName, ItemSlot.None, rarity, 0, 0, 0, iconColor, price);
+            var attributes = new AttributeSet();
+            attributes[attribute] = amount;
+            gem.attributes = attributes;
+            gem.maxStack = 10;
+            gem.canHaveAffix = false;
+            gem.isGem = true;
+            gem.combinesInto = combinesInto;
+            return gem;
         }
 
         private static ItemDefinition CreateKey(string fileName, string displayName, Color iconColor, int price)
