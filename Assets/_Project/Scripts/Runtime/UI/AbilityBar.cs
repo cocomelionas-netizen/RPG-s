@@ -1,3 +1,4 @@
+using RPG.Combat;
 using RPG.Progression;
 using UnityEngine;
 using UnityEngine.UI;
@@ -5,14 +6,16 @@ using UnityEngine.UI;
 namespace RPG.UI
 {
     /// <summary>
-    /// The local player's ability buttons (keys 1, 2, 3...) with a cooldown overlay and countdown,
-    /// plus a line for messages such as "Out of range". Clicking a button uses the ability too.
+    /// The local player's action bar: Attack (key 1) followed by the class abilities (keys 2, 3, 4...)
+    /// with a cooldown overlay and countdown, plus a line for messages such as "No enemy target".
+    /// Clicking a button does the same as its key. Attack and an ability being walked into range are highlighted.
     /// Builds its own UI; place it on an empty RectTransform in the HUD canvas.
     /// </summary>
     [RequireComponent(typeof(RectTransform))]
     public class AbilityBar : MonoBehaviour
     {
-        [SerializeField, Min(1)] private int slotCount = 3;
+        [Tooltip("Buttons in total: Attack plus this many minus one abilities.")]
+        [SerializeField, Min(1)] private int slotCount = 4;
         [SerializeField, Min(16f)] private float slotSize = 76f;
         [SerializeField, Min(0f)] private float spacing = 10f;
         [SerializeField, Min(0.1f)] private float messageSeconds = 1.6f;
@@ -31,6 +34,10 @@ namespace RPG.UI
         private Text message;
         private float messageTimer;
         private AbilityCaster caster;
+        private PlayerTargeting targeting;
+
+        private static readonly Color AttackColor = new Color(0.55f, 0.18f, 0.12f, 0.92f);
+        private static readonly Color ActiveOutline = new Color(1f, 0.85f, 0.3f);
 
         private void Awake()
         {
@@ -73,6 +80,7 @@ namespace RPG.UI
             slot.Key.rectTransform.offsetMin = new Vector2(5f, 0f);
             slot.Key.rectTransform.offsetMax = new Vector2(0f, -3f);
             slot.Key.text = (index + 1).ToString();
+            button.gameObject.AddComponent<Outline>().effectDistance = new Vector2(3f, -3f);
 
             slot.Name = UIFactory.CreateText("Name", rect, 13, TextAnchor.LowerCenter);
             UIFactory.Stretch(slot.Name.rectTransform);
@@ -84,14 +92,26 @@ namespace RPG.UI
             return slot;
         }
 
-        private void OnSlotClicked(int slot)
+        private void OnSlotClicked(int button)
         {
-            if (caster != null) caster.TryCast(slot);
+            if (button == 0)
+            {
+                if (targeting != null) targeting.AttackSelected();
+            }
+            else if (caster != null)
+            {
+                caster.TryCast(button - 1);
+            }
         }
 
         private void OnCastFailed(int slot, CastFailure failure)
         {
-            message.text = AbilityCaster.Describe(failure, caster != null ? caster.GetAbility(slot) : null);
+            ShowMessage(AbilityCaster.Describe(failure, caster != null ? caster.GetAbility(slot) : null));
+        }
+
+        private void ShowMessage(string text)
+        {
+            message.text = text;
             messageTimer = messageSeconds;
         }
 
@@ -101,14 +121,30 @@ namespace RPG.UI
             if (local != caster)
             {
                 if (caster != null) caster.CastFailed -= OnCastFailed;
+                if (targeting != null) targeting.AttackFailed -= ShowMessage;
                 caster = local;
+                targeting = caster != null ? caster.GetComponent<PlayerTargeting>() : null;
                 if (caster != null) caster.CastFailed += OnCastFailed;
+                if (targeting != null) targeting.AttackFailed += ShowMessage;
             }
 
             for (int i = 0; i < slots.Length; i++)
             {
-                AbilityDefinition ability = caster != null ? caster.GetAbility(i) : null;
                 Slot slot = slots[i];
+                if (i == 0)
+                {
+                    slot.Root.SetActive(targeting != null);
+                    if (targeting == null) continue;
+                    slot.Background.color = AttackColor;
+                    slot.Name.text = "Attack";
+                    slot.Cooldown.anchorMax = new Vector2(1f, 0f);
+                    slot.Countdown.text = "";
+                    SetHighlighted(slot, targeting.IsAttacking);
+                    continue;
+                }
+
+                int abilitySlot = i - 1;
+                AbilityDefinition ability = caster != null ? caster.GetAbility(abilitySlot) : null;
                 slot.Root.SetActive(ability != null);
                 if (ability == null) continue;
 
@@ -116,9 +152,10 @@ namespace RPG.UI
                 tint.a = 0.92f;
                 slot.Background.color = tint;
                 slot.Name.text = ability.displayName;
+                SetHighlighted(slot, caster.PendingSlot == abilitySlot);
 
-                float remaining = caster.CooldownRemaining(i);
-                slot.Cooldown.anchorMax = new Vector2(1f, caster.CooldownFraction(i));
+                float remaining = caster.CooldownRemaining(abilitySlot);
+                slot.Cooldown.anchorMax = new Vector2(1f, caster.CooldownFraction(abilitySlot));
                 slot.Countdown.text = remaining >= 1f ? Mathf.CeilToInt(remaining).ToString() : "";
             }
 
@@ -128,9 +165,16 @@ namespace RPG.UI
             message.color = color;
         }
 
+        private static void SetHighlighted(Slot slot, bool highlighted)
+        {
+            var outline = slot.Root.GetComponent<Outline>();
+            outline.effectColor = highlighted ? ActiveOutline : new Color(0f, 0f, 0f, 0.6f);
+        }
+
         private void OnDestroy()
         {
             if (caster != null) caster.CastFailed -= OnCastFailed;
+            if (targeting != null) targeting.AttackFailed -= ShowMessage;
         }
     }
 }

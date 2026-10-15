@@ -8,11 +8,11 @@
 
   | Veiksmas | Kas vyksta |
   |----------|-----------|
-  | Kairys pelės mygtukas ant priešo | Pažymi jį ir pradeda pulti: veikėjas prieina į atstumą ir muša pats |
+  | Kairys pelės mygtukas ant priešo | Pažymi jį (nuo 6 etapo pataisymo – nepuola) |
   | Kairys pelės mygtukas ant žemės | Nustoja pulti ir eina ten (taikinys lieka pažymėtas) |
   | WASD | Nustoja pulti (taikinys lieka) |
   | **Tab** | Kitas artimiausias priešas (iki 10 vienetų) |
-  | **F** | Pulti pažymėtą taikinį |
+  | **1** arba **F** (mygtukas „Attack“) | Pulti pažymėtą taikinį: veikėjas prieina į atstumą ir muša pats |
   | **Esc** | Atšaukti taikinį |
 
 - **Automatinė ataka (`AutoAttack`).** Ją visą sprendžia serveris. Klientas tik paprašo „pulti šį“, o serveris pats patikrina:
