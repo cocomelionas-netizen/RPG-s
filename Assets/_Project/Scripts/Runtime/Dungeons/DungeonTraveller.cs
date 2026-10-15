@@ -42,6 +42,7 @@ namespace RPG.Dungeons
         private void AnnounceRpc(string message)
         {
             CombatTextLayer.ShowText(transform.position + Vector3.up * 1.2f, message, MessageColor, 1.1f);
+            MessageLog.Add(message + ".", MessageColor);
         }
     }
 }

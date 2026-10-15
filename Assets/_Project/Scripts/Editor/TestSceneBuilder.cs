@@ -123,21 +123,21 @@ namespace RPG.EditorTools
             {
                 Name = "Goblin", Animations = goblinAnimations, Scale = 0.85f, Health = 45, MinDamage = 3, MaxDamage = 5,
                 AttackInterval = 2f, Level = 2, Experience = 20, MoveSpeed = 1.8f, Gold = new Vector2Int(3, 6),
-                Loot = Loot(items, ("GoblinEar", 0.6f), ("HealingPotion", 0.3f), ("ManaPotion", 0.15f), ("RustySword", 0.08f), ("LeatherCap", 0.08f), ("PaddedVest", 0.08f),
+                Loot = Loot(items, ("GoblinEar", 0.6f), ("DenKey", 0.04f), ("HealingPotion", 0.3f), ("ManaPotion", 0.15f), ("RustySword", 0.08f), ("LeatherCap", 0.08f), ("PaddedVest", 0.08f),
                     ("WornBoots", 0.08f), ("IronSword", 0.03f)),
             }, barSprite, lootBagPrefab, affixes);
             GameObject brutePrefab = CreateMonsterPrefab(new MonsterSpec
             {
                 Name = "Goblin Brute", Animations = bruteAnimations, Scale = 1.05f, Health = 120, MinDamage = 6, MaxDamage = 10,
                 AttackInterval = 2.2f, Level = 4, Experience = 45, MoveSpeed = 1.6f, Gold = new Vector2Int(10, 16),
-                Loot = Loot(items, ("BruteTusk", 0.6f), ("HealingPotion", 0.5f), ("ManaPotion", 0.25f), ("IronSword", 0.12f), ("IronHelm", 0.1f), ("Chainmail", 0.1f),
+                Loot = Loot(items, ("BruteTusk", 0.6f), ("DenKey", 0.25f), ("HealingPotion", 0.5f), ("ManaPotion", 0.25f), ("IronSword", 0.12f), ("IronHelm", 0.1f), ("Chainmail", 0.1f),
                     ("IronBoots", 0.1f), ("GoblinCleaver", 0.04f)),
             }, barSprite, lootBagPrefab, affixes);
             GameObject orcPrefab = CreateMonsterPrefab(new MonsterSpec
             {
                 Name = "Orc", Animations = orcAnimations, Scale = 1.15f, Health = 220, MinDamage = 10, MaxDamage = 15,
                 AttackInterval = 2f, Level = 6, Experience = 90, MoveSpeed = 1.7f, Gold = new Vector2Int(20, 30),
-                Loot = Loot(items, ("OrcFang", 0.6f), ("HealingPotion", 0.6f), ("ManaPotion", 0.3f), ("GoblinCleaver", 0.1f), ("OrcSkullHelm", 0.1f), ("OrcishPlate", 0.05f),
+                Loot = Loot(items, ("OrcFang", 0.6f), ("DenKey", 0.35f), ("HealingPotion", 0.6f), ("ManaPotion", 0.3f), ("GoblinCleaver", 0.1f), ("OrcSkullHelm", 0.1f), ("OrcishPlate", 0.05f),
                     ("OrcishGreataxe", 0.05f)),
             }, barSprite, lootBagPrefab, affixes);
             CharacterAnimationSet kingAnimations = CreateCharacterAnimationSet("GoblinKing", KingArtFolder, KingAnimationSetPath,
@@ -767,6 +767,9 @@ namespace RPG.EditorTools
                 new MonsterPack(brute, 2, 1),
             };
             dungeon.bossPrefab = boss;
+            dungeon.minLevel = 3;
+            dungeon.key = AssetDatabase.LoadAssetAtPath<ItemDefinition>($"{ItemsFolder}/DenKey.asset");
+            dungeon.maxPlayers = 4;
             dungeon.monsterAggroRadius = 3.5f;
             EditorUtility.SetDirty(dungeon);
             return dungeon;
@@ -785,6 +788,12 @@ namespace RPG.EditorTools
                 stock[items.Length] = potion;
                 stock[items.Length + 1] = manaPotion;
                 vendor.stock = stock;
+                // Better gear is scarce and comes back over time; common gear and potions never run out.
+                var limits = new int[stock.Length];
+                for (int i = 0; i < stock.Length; i++)
+                    limits[i] = stock[i] == null ? 0 : stock[i].rarity >= ItemRarity.Rare ? 1 : stock[i].rarity == ItemRarity.Uncommon ? 2 : 0;
+                vendor.stockLimits = limits;
+                vendor.restockSeconds = 300f;
                 EditorUtility.SetDirty(vendor);
                 return vendor;
             }
@@ -941,6 +950,7 @@ namespace RPG.EditorTools
                 CreateJunk("OrcFang", "Orc Fang", new Color(0.8f, 0.78f, 0.65f), 40),
                 CreateJunk("CrownShard", "Crown Shard", new Color(0.85f, 0.7f, 0.2f), 200),
                 manaPotion,
+                CreateKey("DenKey", "Den Key", new Color(0.85f, 0.65f, 0.25f), 20),
             };
             EditorUtility.SetDirty(catalog);
             return catalog;
@@ -985,6 +995,14 @@ namespace RPG.EditorTools
         {
             ItemDefinition item = CreateItem(fileName, displayName, ItemSlot.None, ItemRarity.Poor, 0, 0, 0, iconColor, price);
             item.maxStack = 20;
+            item.canHaveAffix = false;
+            return item;
+        }
+
+        private static ItemDefinition CreateKey(string fileName, string displayName, Color iconColor, int price)
+        {
+            ItemDefinition item = CreateItem(fileName, displayName, ItemSlot.None, ItemRarity.Rare, 0, 0, 0, iconColor, price);
+            item.maxStack = 5;
             item.canHaveAffix = false;
             return item;
         }

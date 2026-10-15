@@ -85,3 +85,18 @@ Iš viso **88** testai. Kodas patikrintas .NET kompiliatoriumi, PlayMode testai 
 - Vienas požemis, vienas planas. Atsitiktinai generuojamų požemių nėra.
 - Visos kopijos yra toje pačioje scenoje, todėl klientai gauna informaciją ir apie kitų grupių monstrus (interest management dar nėra). Kai žaidėjų bus daug, to reikės.
 - Lauko monstrų puolimas iš toli tebėra išjungtas, kaip prašei.
+
+## Įėjimo sąlygos
+
+- `DungeonDefinition.minLevel` (Goblin Den: 3), `key` (Den Key) ir `maxPlayers` (4).
+- Portalą paspaudęs žaidėjas turi būti reikiamo lygio ir turėti raktą — vienas raktas sunaudojamas.
+  Kiti žaidėjai prie portalo eina kartu, jei atitinka lygį (rakto jiems nereikia), iki `maxPlayers`.
+- Atsisakymo priežastis rodoma virš galvos ir žinučių lange („You need a Den Key to enter Goblin Den“).
+- Den Key krenta iš monstrų: Goblin 4%, Goblin Brute 25%, Orc 35%.
+
+## Ribotos prekeivių atsargos
+
+- `VendorDefinition.stockLimits` (0 = neribota) ir `restockSeconds` (300 s).
+  Klasių prekeiviai: Rare daiktai — 1 vnt., Uncommon — 2 vnt., Common ir gėrimai — neriboti.
+- Likutį saugo serveris (`Vendor.ServerRemaining`), klientas jį gauna atidaręs langą ir po pirkimo;
+  lange rodoma „(2 left)“ arba „(sold out)“.

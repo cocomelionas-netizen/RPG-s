@@ -127,6 +127,27 @@ namespace RPG.Tests
         }
 
         [UnityTest]
+        public IEnumerator LimitedItem_SellsOut()
+        {
+            int limited = -1;
+            for (int i = 0; i < vendor.Definition.stock.Length; i++)
+                if (vendor.Definition.LimitOf(i) == 1) limited = i;
+            Assert.GreaterOrEqual(limited, 0, "The warrior vendor has a one-of-a-kind item.");
+            inventory.ServerAddGold(5000, false);
+            ItemDefinition item = vendor.Definition.stock[limited];
+
+            Assert.IsTrue(inventory.ServerBuy(vendor, limited));
+            int goldAfterFirst = inventory.Gold;
+            Assert.AreEqual(0, vendor.ServerRemaining(limited));
+            Assert.IsFalse(inventory.ServerBuy(vendor, limited), "Sold out.");
+            yield return null;
+
+            Assert.AreEqual(goldAfterFirst, inventory.Gold);
+            Assert.AreEqual(1, inventory.CountOf(item));
+            Assert.AreEqual(Vendor.Unlimited, vendor.ServerRemaining(vendor.Definition.stock.Length - 1), "Potions never run out.");
+        }
+
+        [UnityTest]
         public IEnumerator Trading_FarFromTheVendor_Fails()
         {
             vendorObject.transform.position = player.transform.position + new Vector3(6f, 0f, 0f);
