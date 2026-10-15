@@ -94,7 +94,7 @@ namespace RPG.Tests
 
             int healthBefore = playerHealth.Max;
             inventory.ServerAddItem(emerald, 1, false);
-            Assert.IsTrue(inventory.ServerSocketGem(FindInBag(emerald)));
+            Assert.IsTrue(inventory.ServerSocketGem(FindInBag(emerald), true, (int)ItemSlot.Weapon - 1));
             yield return null;
 
             Assert.AreEqual(emerald, inventory.Gem(inventory.GetEquipped(ItemSlot.Weapon)));
@@ -103,14 +103,32 @@ namespace RPG.Tests
         }
 
         [UnityTest]
-        public IEnumerator Gem_WithoutAnEmptySocket_StaysInTheBag()
+        public IEnumerator Gem_IntoAnItemWithoutAnEmptySocket_StaysInTheBag()
         {
             ItemDefinition ruby = Item("ChippedRuby");
+            ItemDefinition helm = Item("IronHelm");
+            inventory.ServerAddItem(helm, 1, false);
             inventory.ServerAddItem(ruby, 1, false);
             yield return null;
 
-            Assert.IsFalse(inventory.ServerSocketGem(FindInBag(ruby)));
+            Assert.IsFalse(inventory.ServerSocketGem(FindInBag(ruby), false, FindInBag(helm)), "The helm has no socket.");
+            Assert.IsFalse(inventory.ServerSocketGem(FindInBag(ruby), true, (int)ItemSlot.Weapon - 1), "Nothing is worn there.");
             Assert.AreEqual(1, inventory.CountOf(ruby));
+        }
+
+        [UnityTest]
+        public IEnumerator Gem_IntoTheChosenBagItem()
+        {
+            ItemDefinition topaz = Item("ChippedTopaz");
+            ItemDefinition boots = Item("IronBoots");
+            inventory.ServerAddItem(boots, 1, false, 0, ItemStack.EmptySocket);
+            inventory.ServerAddItem(topaz, 1, false);
+            yield return null;
+
+            int bootsIndex = FindInBag(boots);
+            Assert.IsTrue(inventory.ServerSocketGem(FindInBag(topaz), false, bootsIndex));
+            Assert.AreEqual(topaz, inventory.Gem(inventory.GetBagSlot(bootsIndex)));
+            Assert.AreEqual(0, inventory.CountOf(topaz));
         }
 
         [UnityTest]

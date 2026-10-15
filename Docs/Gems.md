@@ -9,8 +9,8 @@
 
 - **Lizdai:** 25% monstrų numestų ginklų ir šarvų turi lizdą (`ItemStack.Socket`: 0 — nėra, -1 — tuščias,
   >0 — įstatyto brangakmenio daikto id). Lizdas rodomas aprašyme („Socket: empty“ / „Socket: Ruby (+4 Strength)“).
-- **Įstatymas:** paspaudus brangakmenį krepšyje jis įstatomas į pirmą dėvimą daiktą (ginklas, galva, krūtinė, kojos)
-  su tuščiu lizdu. Brangakmenis lieka visam laikui, jo atributai skaičiuojami kaip daikto.
+- **Įstatymas:** paspaudi brangakmenį (rėmelis pagelsta), tada daiktą — dėvimą arba krepšyje. Jei jame yra tuščias lizdas,
+  brangakmenis įstatomas, jei ne — parašoma, kad vietos nėra. Esc atšaukia. Brangakmenis lieka visam laikui.
 - **Juvelyras** Gemma Brightstone (miestelio pietuose) parduoda Chipped brangakmenius ir mygtuku
   „Combine gems“ sujungia kiekvienus 3 vienodus į geresnį (Chipped → paprastas → Flawless).
 - **Kritimas:** Chipped — iš visų lauko monstrų (2–5%), paprasti — iš orkų ir Goblin King, Flawless — iš Goblin King.
