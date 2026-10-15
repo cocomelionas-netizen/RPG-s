@@ -42,5 +42,16 @@ naudojame savo, laiptuotas kaip jų bosų.
 - Monstrų ir skrynių lygiai — iš Dreadmyst duomenų (kiekviena vieta turi savo lygį).
 - Kokybė kiekvienam ridenimui: auksinis 0,3 %, mėlynas 2 %, žalias 8 %, baltas 6 % (`LootDrop.GearChances`);
   paprastesnis daiktas pakeliamas iki tos kokybės afiksu. Skrynios ridena 1 (dėžė), 2 (Oak Chest) ar 3 (Strongbox) kartus.
+- **Daiktai kaip Dreadmyst** (`Scripts/Editor/DreadmystGear.cs`): kiekvienam lygiui 1–25 — tos medžiagos, kurias
+  Dreadmyst `material_chance_weapon` / `material_chance_armor` leidžia tame lygyje, su ta pačia tikimybe
+  (`ItemDefinition.dropWeight`). Medžiagų pavadinimai — iš `Dreadmyst.exe`:
+  - ginklai: kariui kardas (Bronze, Steel, Mythril, Emerald, Crystal, Diamond, Titanium), šauliui lankas ir magui
+    lazda (Aspen, Elm, Cherry, Black Walnut, White Oak, Hard Maple, Hickory);
+  - šarvai (galva, krūtinė, kojos), tinka visiems: oda (Leather, Brigandine, Gambeson — Cap/Jerkin/Boots),
+    grandinės (Bronze, Steel, Mythril, Emerald — Coif/Chainmail/Greaves), plokštės (Crystal, Diamond, Titanium —
+    Helmet/Breastplate/Sabatons), mantijos (Linen, Wool, Silk, Spiritsilk — Hood/Vestments/Slippers, duoda manos);
+  - žala ir šarvai auga kartu su Dreadmyst pardavimo kaina (ginklas 50 + 10 × lygis + 2 × lygis × (pakopa − 1),
+    krūtinė 50 + 2,5 × pakopa × lygis). Pvz. Bronze Sword 1 lygio — +2 žala, Titanium Sword 25 lygio — +21.
+  - Seni rankų darbo daiktai lieka tik prekeiviams (retieji) ir senuose išsaugojimuose — pagal lygį nebekrenta.
 - Spalvos kaip Dreadmyst: žalia → mėlyna → **auksinė** (Epic) → **violetinė** (Legendary, aukščiausia).
   Bosas — garantuotas auksinis + 25 % violetinis; elitiniai — garantuotas žalias arba mėlynas.

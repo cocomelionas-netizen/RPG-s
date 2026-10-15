@@ -845,12 +845,19 @@ namespace RPG.EditorTools
 
             return new[]
             {
+                // Dreadmyst's gear for the first levels, plus one rare piece each.
                 MakeVendor("WarriorVendor", "Thorin Ironhand", "Warrior weapons and armor",
-                    "MilitiaSword", "SteelLongsword", "WarAxe", "SteelHelm", "SteelBreastplate", "SteelSabatons"),
+                    GearFile("Bronze Sword", 1), GearFile("Steel Sword", 4), "WarAxe",
+                    GearFile("Leather Cap", 1), GearFile("Leather Jerkin", 1), GearFile("Leather Boots", 1),
+                    GearFile("Bronze Coif", 3), GearFile("Bronze Chainmail", 3), GearFile("Bronze Greaves", 3)),
                 MakeVendor("RangerVendor", "Sylva Swiftarrow", "Ranger bows and leather",
-                    "HuntingBow", "Longbow", "ElvenBow", "LeatherHood", "StuddedJerkin", "RangerBoots"),
+                    GearFile("Aspen Bow", 1), GearFile("Elm Bow", 4), "ElvenBow",
+                    GearFile("Leather Cap", 1), GearFile("Leather Jerkin", 1), GearFile("Leather Boots", 1),
+                    GearFile("Brigandine Cap", 4), GearFile("Brigandine Jerkin", 4), GearFile("Brigandine Boots", 4)),
                 MakeVendor("MageVendor", "Elara the Arcanist", "Mage staves and robes",
-                    "ApprenticeStaff", "RunedStaff", "StaffOfEmbers", "SilkHood", "ApprenticeRobe", "EnchantedRobe", "SilkSlippers"),
+                    GearFile("Aspen Staff", 1), GearFile("Elm Staff", 4), "StaffOfEmbers",
+                    GearFile("Linen Hood", 1), GearFile("Linen Vestments", 1), GearFile("Linen Slippers", 1),
+                    GearFile("Wool Hood", 4), GearFile("Wool Vestments", 4), GearFile("Wool Slippers", 4)),
                 Jeweler(MakeVendor("JewelerVendor", "Gemma Brightstone", "Jeweler: gems, gem combining",
                     "ChippedRuby", "ChippedTopaz", "ChippedSapphire", "ChippedEmerald")),
             };
@@ -1065,10 +1072,91 @@ namespace RPG.EditorTools
                 gems.Add(flawless);
             }
             var all = new List<ItemDefinition>(catalog.items);
+            // The hand-made gear is only sold now: drops by level come from Dreadmyst's gear below.
+            foreach (ItemDefinition item in all)
+                if (item.IsEquippable) item.dropWeight = 0f;
             all.AddRange(gems);
+            all.AddRange(CreateDreadmystGear());
             catalog.items = all.ToArray();
             EditorUtility.SetDirty(catalog);
             return catalog;
+        }
+
+        private static readonly Color[] MetalColors =
+        {
+            new Color(0.72f, 0.48f, 0.25f), new Color(0.7f, 0.73f, 0.78f), new Color(0.55f, 0.75f, 0.9f), new Color(0.2f, 0.7f, 0.4f),
+            new Color(0.75f, 0.9f, 1f), new Color(0.92f, 0.95f, 1f), new Color(0.5f, 0.5f, 0.58f),
+        };
+
+        private static readonly Color[] WoodColors =
+        {
+            new Color(0.82f, 0.72f, 0.52f), new Color(0.65f, 0.5f, 0.32f), new Color(0.62f, 0.3f, 0.22f), new Color(0.32f, 0.22f, 0.15f),
+            new Color(0.88f, 0.82f, 0.68f), new Color(0.75f, 0.58f, 0.36f), new Color(0.55f, 0.4f, 0.25f),
+        };
+
+        private static Color ArmorColor(int armorType)
+        {
+            switch (DreadmystGear.KindOf(armorType))
+            {
+                case DreadmystGear.ArmorKind.Leather: return new Color(0.55f, 0.38f, 0.22f) * (0.9f + 0.1f * (armorType - 2));
+                case DreadmystGear.ArmorKind.Chain:
+                case DreadmystGear.ArmorKind.Plate: return MetalColors[armorType - 5];
+                case DreadmystGear.ArmorKind.Robe:
+                    return new[] { new Color(0.85f, 0.8f, 0.7f), new Color(0.6f, 0.55f, 0.5f), new Color(0.7f, 0.5f, 0.85f), new Color(0.5f, 0.8f, 0.95f) }[armorType - 12];
+                default: return new Color(0.8f, 0.8f, 0.75f);
+            }
+        }
+
+        /// <summary>Asset file name of a generated piece, e.g. "Dreadmyst/SteelSword_L04".</summary>
+        private static string GearFile(string displayName, int level) => $"Dreadmyst/{displayName.Replace(" ", "")}_L{level:00}";
+
+        /// <summary>
+        /// Dreadmyst's gear (<see cref="DreadmystGear"/>): for every level, each material its chance tables can drop
+        /// there, as a sword (warriors), bow (rangers) and staff (mages), and as head, chest and feet armor anyone may
+        /// wear. Stats grow with Dreadmyst's sell price of the piece, the drop weight is its material chance.
+        /// </summary>
+        private static List<ItemDefinition> CreateDreadmystGear()
+        {
+            var gear = new List<ItemDefinition>();
+            ItemDefinition Piece(string displayName, ItemSlot slot, int level, float chance, int damage, int armor, int mana,
+                Color color, float dreadmystSellPrice, int requiredClass)
+            {
+                // Our gold is about a tenth of theirs: vendors pay a quarter of the price.
+                int price = Mathf.Max(1, Mathf.RoundToInt(dreadmystSellPrice * 0.4f));
+                ItemDefinition item = CreateItem(GearFile(displayName, level), displayName, slot, ItemRarity.Common, damage, 0, armor,
+                    color, price, requiredClass, level);
+                item.manaBonus = mana;
+                item.dropWeight = chance / 100f;
+                gear.Add(item);
+                return item;
+            }
+
+            foreach ((int tier, int level, float chance) in DreadmystGear.WeaponChances)
+            {
+                int sell = DreadmystGear.WeaponSellPrice(tier, level);
+                int damage = Mathf.RoundToInt(2f + (sell - 50) * 0.035f);
+                Piece($"{DreadmystGear.Metals[tier - 1]} Sword", ItemSlot.Weapon, level, chance, damage, 0, 0, MetalColors[tier - 1], sell, WarriorClass);
+                Piece($"{DreadmystGear.Woods[tier - 1]} Bow", ItemSlot.Weapon, level, chance, damage, 0, 0, WoodColors[tier - 1], sell * 1.1f, RangerClass);
+                Piece($"{DreadmystGear.Woods[tier - 1]} Staff", ItemSlot.Weapon, level, chance, damage, 0, Mathf.RoundToInt(damage * 0.5f),
+                    WoodColors[tier - 1] * 0.9f, sell * 1.1f, MageClass);
+            }
+
+            foreach ((int type, int level, float chance) in DreadmystGear.ArmorChances)
+            {
+                float sell = DreadmystGear.ArmorSellPrice(type, level);
+                float power = sell - 50f;
+                bool robe = DreadmystGear.KindOf(type) == DreadmystGear.ArmorKind.Robe;
+                // Robes cost like armor but give mana: little armor, a mana pool that grows with their price.
+                float armor = robe ? 1f + level * 0.15f : 3f + power * 0.06f;
+                float mana = robe ? 4f + power * 0.12f : 0f;
+                (string head, string chest, string feet) = DreadmystGear.NamesOf(DreadmystGear.KindOf(type));
+                string material = DreadmystGear.ArmorMaterials[type];
+                Color color = ArmorColor(type);
+                foreach ((string baseName, ItemSlot slot, float share) in new[] { (head, ItemSlot.Head, 0.7f), (chest, ItemSlot.Chest, 1f), (feet, ItemSlot.Feet, 0.5f) })
+                    Piece($"{material} {baseName}", slot, level, chance, 0, Mathf.Max(1, Mathf.RoundToInt(armor * share)),
+                        Mathf.RoundToInt(mana * share), color, sell * (0.6f + 0.4f * share), -1);
+            }
+            return gear;
         }
 
         /// <summary>Loot entries by item asset file name.</summary>
@@ -1105,6 +1193,7 @@ namespace RPG.EditorTools
             item.canHaveAffix = true;
             item.isGem = false;
             item.combinesInto = null;
+            item.dropWeight = 1f;
             EditorUtility.SetDirty(item);
             return item;
         }

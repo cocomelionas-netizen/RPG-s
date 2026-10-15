@@ -145,6 +145,22 @@ namespace RPG.Tests
             }
         }
 
+        [Test]
+        public void GearDrops_UseDreadmystMaterialsOfTheirLevel()
+        {
+            var catalog = AssetDatabase.LoadAssetAtPath<ItemCatalog>("Assets/_Project/Data/Items/ItemCatalog.asset");
+            for (int i = 0; i < 200; i++)
+            {
+                Assert.IsTrue(LootDrop.PickGear(catalog, null, 1, ItemRarity.Legendary, 0f, out LootItem low));
+                Assert.Greater(low.Item.dropWeight, 0f, $"{low.Item.displayName} is only sold, it should not drop.");
+                StringAssert.DoesNotContain("Mythril", low.Item.displayName, "Mythril starts at level 6.");
+                StringAssert.DoesNotContain("Titanium", low.Item.displayName);
+
+                Assert.IsTrue(LootDrop.PickGear(catalog, null, 25, ItemRarity.Legendary, 0f, out LootItem high));
+                StringAssert.DoesNotContain("Bronze Sword", high.Item.displayName, "Bronze weapons stop at level 5.");
+            }
+        }
+
         [UnityTest]
         public IEnumerator EliteMonster_IsTougherAndNamedSo()
         {

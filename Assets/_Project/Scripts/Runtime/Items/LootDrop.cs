@@ -58,7 +58,7 @@ namespace RPG.Items
 
         /// <summary>
         /// A piece of gear of <paramref name="quality"/> around <paramref name="level"/>: an item no better than that
-        /// quality, weighted by <see cref="LevelWeight"/>, raised to the quality with an affix when it is plainer.
+        /// quality, weighted by <see cref="LevelWeight"/> and its <see cref="ItemDefinition.dropWeight"/>, raised to the quality with an affix when it is plainer.
         /// When nothing fits the level window, the highest-level gear below it is used. False when there is no gear.
         /// </summary>
         public static bool PickGear(ItemCatalog catalog, AffixCatalog affixes, int level, ItemRarity quality, float socketChance,
@@ -73,8 +73,8 @@ namespace RPG.Items
             int bestFallbackLevel = 0;
             foreach (ItemDefinition item in catalog.items)
             {
-                if (item == null || !item.IsEquippable || item.rarity > quality) continue;
-                float weight = LevelWeight(item.itemLevel, level);
+                if (item == null || !item.IsEquippable || item.rarity > quality || item.dropWeight <= 0f) continue;
+                float weight = LevelWeight(item.itemLevel, level) * item.dropWeight;
                 if (weight > 0f)
                 {
                     Pool.Add(item);
@@ -88,10 +88,11 @@ namespace RPG.Items
                 // Higher than any gear made yet: the best gear there is.
                 foreach (ItemDefinition item in catalog.items)
                 {
-                    if (item == null || !item.IsEquippable || item.rarity > quality || item.itemLevel != bestFallbackLevel) continue;
+                    if (item == null || !item.IsEquippable || item.rarity > quality || item.dropWeight <= 0f
+                        || item.itemLevel != bestFallbackLevel) continue;
                     Pool.Add(item);
-                    Weights.Add(1f);
-                    total += 1f;
+                    Weights.Add(item.dropWeight);
+                    total += item.dropWeight;
                 }
                 if (total <= 0f) return false;
             }

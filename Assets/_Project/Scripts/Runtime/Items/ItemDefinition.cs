@@ -61,6 +61,8 @@ namespace RPG.Items
         public int requiredClass = -1;
         [Tooltip("The item's level: monsters drop gear around their own level, and a player needs this level to wear it.")]
         [Range(1, 25)] public int itemLevel = 1;
+        [Tooltip("How often it drops among the gear of its level, like Dreadmyst's material chance; 0: never drops by level (only from loot tables and vendors).")]
+        [Min(0f)] public float dropWeight = 1f;
 
         [Header("Use")]
         public ItemUse use = ItemUse.None;
