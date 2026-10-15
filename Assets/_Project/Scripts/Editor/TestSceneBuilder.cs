@@ -319,7 +319,6 @@ namespace RPG.EditorTools
         /// <summary>Inside the cleared town or start area (no rocks, trees, or monsters' spots), shrunk by <paramref name="shrink"/>.</summary>
         private static bool IsCleared(Vector3Int cell, int shrink) =>
             Within(cell, TownCell, TownClearRadius - shrink) || Within(cell, StartCell, StartClearRadius - shrink);
-        }
 
         private static void CreateGlobalLight()
         {
