@@ -551,6 +551,18 @@ namespace RPG.Items
         private bool InLootRange(LootBag loot) =>
             !health.IsDead && Vector2.Distance(AutoAttack.ServerPosition(this), loot.transform.position) <= pickupRange + 0.4f;
 
+        /// <summary>Server: opens the owner's loot window on a bag (a chest they just opened).</summary>
+        public void ServerShowLoot(LootBag loot)
+        {
+            if (IsServer && loot != null && loot.IsSpawned) SendLootContents(loot);
+        }
+
+        /// <summary>Server: tells the owner a lock is being picked, or that their Lockpicking is too low for it.</summary>
+        public void ServerLockMessage(bool picking, int required, int have)
+        {
+            if (IsServer) MessageRpc(picking ? InventoryMessage.PickingLock : InventoryMessage.LockpickingTooLow, required, have);
+        }
+
         /// <summary>Server: tells the owner what is in the bag (nothing when it is out of reach).</summary>
         private void SendLootContents(LootBag loot)
         {
@@ -681,6 +693,16 @@ namespace RPG.Items
                     CombatTextLayer.ShowText(above, "Not enough materials", new Color(1f, 0.4f, 0.3f), 0.8f);
                     // The count travels in the affix field.
                     if (item != null) MessageLog.Add($"You need {affixId} [{item.displayName}].", MessageLog.WarningColor);
+                    break;
+                case InventoryMessage.PickingLock:
+                    CombatTextLayer.ShowText(above, "Picking the lock...", new Color(0.85f, 0.8f, 0.6f), 0.8f);
+                    MessageLog.Add("You pick the lock...", new Color(0.85f, 0.8f, 0.6f));
+                    break;
+                case InventoryMessage.LockpickingTooLow:
+                    // Needed in the item id field, what the player has in the affix field.
+                    CombatTextLayer.ShowText(above, "Lockpicking not high enough", new Color(1f, 0.4f, 0.3f), 0.8f);
+                    MessageLog.Add($"Lockpicking not high enough: this lock needs {itemId}, you have {affixId}. " +
+                                   "Raise Lockpicking in the character sheet (C, Combat page).", MessageLog.WarningColor);
                     break;
                 case InventoryMessage.Gold:
                     CombatTextLayer.ShowText(above, $"+{itemId} gold", GoldColor, 0.8f);
@@ -961,6 +983,9 @@ namespace RPG.Items
             /// <summary>Potions combined; how many new potions travels in the item id field.</summary>
             PotionsCombined,
             NothingToCombinePotions,
+            /// <summary>Picking a lock: the Lockpicking needed travels in the item id field, the player's in the affix field.</summary>
+            PickingLock,
+            LockpickingTooLow,
         }
     }
 }

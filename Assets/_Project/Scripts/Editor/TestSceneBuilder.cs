@@ -1519,37 +1519,48 @@ namespace RPG.EditorTools
             public GameObject Strongbox;
         }
 
+        /// <summary>
+        /// Source's containers (gameobject_template): crates and barrels hold only gold; chests ("Aspen Chest" and
+        /// the like) are locked for Lockpicking of twice their level and hold a piece of gear (green 100%, blue 12%,
+        /// gold 5%, purple 1%), a potion (75%), a gem (75%) and twice the gold; strongboxes two more pieces, a potion
+        /// and a gem for sure and three times the gold.
+        /// </summary>
         private static ChestPrefabs CreateChestPrefabs(ItemCatalog items, AffixCatalog affixes, GameObject lootBagPrefab)
         {
             var wood = new Color(0.55f, 0.38f, 0.22f);
             var darkWood = new Color(0.42f, 0.26f, 0.14f);
             var iron = new Color(0.45f, 0.47f, 0.52f);
             var gold = new Color(0.95f, 0.78f, 0.3f);
+            ItemDefinition[] potions = Loot(items, ("HealingPotion", 1f), ("ManaPotion", 1f)).Select(entry => entry.item).ToArray();
+            ItemDefinition[] gems = Loot(items, ("ChippedRuby", 1f), ("ChippedTopaz", 1f), ("ChippedSapphire", 1f), ("ChippedEmerald", 1f))
+                .Select(entry => entry.item).ToArray();
+
+            GameObject chest = CreateChestPrefab("OakChest", "Oak Chest", 4, 2f,
+                PlaceholderArtGenerator.Container("OakChest", darkWood, iron, gold, 60f, 32f, true), lootBagPrefab, affixes, items,
+                lootChest => lootChest.ConfigureLocked(100f, 12f, 5f, 1f, 0, 75f, 75f, potions, gems));
+            GameObject strongbox = CreateChestPrefab("IronStrongbox", "Iron Strongbox", 6, 3f,
+                PlaceholderArtGenerator.Container("IronStrongbox", iron, new Color(0.3f, 0.31f, 0.35f), gold, 56f, 36f, false), lootBagPrefab, affixes,
+                items, lootChest => lootChest.ConfigureLocked(100f, 15f, 5f, 1f, 2, 100f, 100f, potions, gems));
             return new ChestPrefabs
             {
-                Crate = CreateChestPrefab("WoodenCrate", "Wooden Crate", 2, new Vector2Int(3, 8),
-                    PlaceholderArtGenerator.Container("WoodenCrate", wood, darkWood, darkWood, 52f, 34f, false), lootBagPrefab, affixes,
-                    Loot(items, ("GoblinEar", 0.5f), ("HealingPotion", 0.5f), ("ManaPotion", 0.4f)), items, 1),
-                Chest = CreateChestPrefab("OakChest", "Oak Chest", 4, new Vector2Int(10, 25),
-                    PlaceholderArtGenerator.Container("OakChest", darkWood, iron, gold, 60f, 32f, true), lootBagPrefab, affixes,
-                    Loot(items, ("HealingPotion", 0.7f), ("ManaPotion", 0.6f), ("DenKey", 0.15f), ("ChippedRuby", 0.1f), ("ChippedTopaz", 0.1f),
-                        ("ChippedSapphire", 0.1f), ("ChippedEmerald", 0.1f)), items, 2),
-                Strongbox = CreateChestPrefab("IronStrongbox", "Iron Strongbox", 6, new Vector2Int(30, 60),
-                    PlaceholderArtGenerator.Container("IronStrongbox", iron, new Color(0.3f, 0.31f, 0.35f), gold, 56f, 36f, false), lootBagPrefab, affixes,
-                    Loot(items, ("DenKey", 0.3f), ("ChippedRuby", 0.25f), ("ChippedTopaz", 0.25f), ("ChippedSapphire", 0.25f),
-                        ("ChippedEmerald", 0.25f), ("Ruby", 0.05f), ("Emerald", 0.05f)), items, 3),
+                Crate = CreateChestPrefab("WoodenCrate", "Wooden Crate", 2, 1f,
+                    PlaceholderArtGenerator.Container("WoodenCrate", wood, darkWood, darkWood, 52f, 34f, false), lootBagPrefab, affixes, items, null),
+                Chest = chest,
+                Strongbox = strongbox,
             };
         }
 
-        private static GameObject CreateChestPrefab(string fileName, string chestName, int level, Vector2Int gold, Sprite sprite,
-            GameObject lootBagPrefab, AffixCatalog affixes, LootEntry[] loot, ItemCatalog gear, int gearRolls)
+        private static GameObject CreateChestPrefab(string fileName, string chestName, int level, float goldRatio, Sprite sprite,
+            GameObject lootBagPrefab, AffixCatalog affixes, ItemCatalog gear, Action<LootChest> configure)
         {
             var chest = new GameObject(chestName);
             var spriteRenderer = chest.AddComponent<SpriteRenderer>();
             spriteRenderer.sprite = sprite;
             spriteRenderer.spriteSortPoint = SpriteSortPoint.Pivot;
             chest.AddComponent<NetworkObject>();
-            chest.AddComponent<LootChest>().Configure(chestName, level, loot, gold, lootBagPrefab, affixes, gear, gearRolls);
+            var lootChest = chest.AddComponent<LootChest>();
+            lootChest.Configure(chestName, level, lootBagPrefab, affixes, gear, goldRatio);
+            configure?.Invoke(lootChest);
             // Clicked to open; does not block walking.
             AddHitbox(chest, new Vector2(0.45f, 0.35f), new Vector2(0f, 0.15f));
 
@@ -1563,8 +1574,7 @@ namespace RPG.EditorTools
 
         /// <summary>
         /// A container on every spot Source has one in its start region, back after the same time
-        /// (crates and barrels 60 s, chests 5 min). Crates and barrels become wooden crates; chests up to level 4
-        /// oak chests, higher ones iron strongboxes.
+        /// (crates and barrels 60 s, chests 5 min). Crates and barrels become wooden crates, chests locked oak chests.
         /// </summary>
         private static void PlaceChests(Grid grid, Tilemap obstacles, ChestPrefabs chests)
         {
@@ -1573,7 +1583,8 @@ namespace RPG.EditorTools
             for (int i = 0; i < spots.Length; i++)
             {
                 (Vector3Int cell, int kind, int level, float respawn) = spots[i];
-                GameObject prefab = kind == 0 ? chests.Crate : level <= 4 ? chests.Chest : chests.Strongbox;
+                // Source's start region has crates, barrels and chests (its strongboxes are further on).
+                GameObject prefab = kind == 0 ? chests.Crate : chests.Chest;
                 var spawner = new GameObject($"Chest Spot {i + 1}");
                 spawner.transform.SetParent(parent, false);
                 spawner.transform.position = grid.GetCellCenterWorld(OpenCellNear(obstacles, cell));
