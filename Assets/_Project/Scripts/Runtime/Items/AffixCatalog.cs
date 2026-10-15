@@ -59,5 +59,31 @@ namespace RPG.Items
             }
             return IdOf(candidates[candidates.Count - 1]);
         }
+
+        /// <summary>
+        /// An affix of exactly <paramref name="quality"/> for a guaranteed drop (Source's bosses always drop a gold
+        /// item, for example). Prefers affixes meant for <paramref name="monsterLevel"/>, otherwise takes any of that
+        /// quality, otherwise the best quality there is.
+        /// </summary>
+        public int RollQuality(ItemDefinition item, int monsterLevel, ItemRarity quality)
+        {
+            if (item == null || !item.IsEquippable || !item.canHaveAffix) return 0;
+
+            candidates.Clear();
+            foreach (AffixDefinition affix in affixes)
+                if (affix != null && affix.quality == quality && monsterLevel >= affix.minLevel && monsterLevel <= affix.maxLevel)
+                    candidates.Add(affix);
+            if (candidates.Count == 0)
+                foreach (AffixDefinition affix in affixes)
+                    if (affix != null && affix.quality == quality) candidates.Add(affix);
+            if (candidates.Count == 0)
+                foreach (AffixDefinition affix in affixes)
+                    if (affix != null && (candidates.Count == 0 || affix.quality > candidates[0].quality))
+                    {
+                        candidates.Clear();
+                        candidates.Add(affix);
+                    }
+            return candidates.Count > 0 ? IdOf(candidates[Random.Range(0, candidates.Count)]) : 0;
+        }
     }
 }

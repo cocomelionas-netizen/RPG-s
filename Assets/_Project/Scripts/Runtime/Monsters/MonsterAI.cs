@@ -50,6 +50,11 @@ namespace RPG.Monsters
         [SerializeField] private AffixCatalog affixes;
         [Tooltip("Chance that a dropped weapon or armor piece has a socket for a gem.")]
         [SerializeField, Range(0f, 1f)] private float socketChance = 0.25f;
+        [Tooltip("Bosses: pieces of gear always dropped, with an affix of the quality below (Source's bosses always drop gold).")]
+        [SerializeField, Min(0)] private int guaranteedGear;
+        [SerializeField] private ItemRarity guaranteedQuality = ItemRarity.Rare;
+        [Tooltip("Bosses: chance of one more piece of epic (purple) gear.")]
+        [SerializeField, Range(0f, 1f)] private float epicChance;
 
         [Header("Aggro")]
         [SerializeField, Min(0f)] private float aggroRadius = 3f;
@@ -127,7 +132,8 @@ namespace RPG.Monsters
 
         // ---------- Elites ----------
 
-        public const float EliteHealthScale = 2.5f;
+        // Source's elites have about 5.6 times the health of normal monsters.
+        public const float EliteHealthScale = 5.6f;
         public const float EliteDamageScale = 1.5f;
         public const int EliteRewardScale = 3;
         private const float EliteSizeScale = 1.25f;
@@ -367,8 +373,21 @@ namespace RPG.Monsters
 
         private void DropLoot()
         {
-            // Elites roll their loot table twice.
-            LootDrop.Spawn(lootBagPrefab, transform.position, loot, affixes, level, socketChance, IsElite ? 2 : 1);
+            // Like Source: elites roll their table twice and always drop a green or blue piece; bosses always drop
+            // their guaranteed gear and sometimes an epic one on top.
+            var guaranteed = new List<ItemRarity>();
+            for (int i = 0; i < guaranteedGear; i++) guaranteed.Add(guaranteedQuality);
+            if (IsElite) guaranteed.Add(Random.value < 0.5f ? ItemRarity.Uncommon : ItemRarity.Rare);
+            if (epicChance > 0f && Random.value < epicChance) guaranteed.Add(ItemRarity.Epic);
+            LootDrop.Spawn(lootBagPrefab, transform.position, loot, affixes, level, socketChance, IsElite ? 2 : 1, guaranteed.ToArray());
+        }
+
+        /// <summary>Sets the gear a boss always drops (used by the scene builder).</summary>
+        public void ConfigureGuaranteedLoot(int pieces, ItemRarity quality, float extraEpicChance)
+        {
+            guaranteedGear = Mathf.Max(0, pieces);
+            guaranteedQuality = quality;
+            epicChance = Mathf.Clamp01(extraEpicChance);
         }
 
         private void AwardExperience()
