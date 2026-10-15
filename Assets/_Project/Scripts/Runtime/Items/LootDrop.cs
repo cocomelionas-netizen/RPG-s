@@ -134,31 +134,51 @@ namespace RPG.Items
         }
 
         /// <summary>
+        /// Rolls every table entry once into <paramref name="into"/>: each drops at its chance, as many as it rolls.
+        /// Gear can get an affix and a socket; a potion drops as the tier of <paramref name="level"/>.
+        /// </summary>
+        public static void RollEntries(LootEntry[] entries, int level, AffixCatalog affixes, float socketChance, List<LootItem> into)
+        {
+            if (entries == null) return;
+            foreach (LootEntry entry in entries)
+            {
+                if (entry.item == null || Random.value >= entry.chance) continue;
+                ItemDefinition item = PotionForLevel(entry.item, level);
+                int count = entry.RollCount();
+                if (item.IsEquippable)
+                {
+                    // Each piece of gear rolls its own affix and socket.
+                    for (int i = 0; i < count; i++)
+                    {
+                        int affix = affixes != null ? affixes.Roll(item, level) : 0;
+                        into.Add(new LootItem(item, affix, Random.value < socketChance ? ItemStack.EmptySocket : 0));
+                    }
+                }
+                else
+                {
+                    into.Add(new LootItem(item, affixes != null ? affixes.Roll(item, level) : 0, 0, count));
+                }
+            }
+        }
+
+        /// <summary>
         /// Rolls every table entry and the material chance <paramref name="rolls"/> times (the material chance
-        /// <paramref name="extraMaterialRolls"/> more), adds one finished piece of gear for each of
-        /// <paramref name="guaranteed"/> (at that quality), and spawns a bag with what dropped. Gear listed in the
-        /// table itself can get an affix and a socket too. False when nothing dropped.
+        /// <paramref name="extraMaterialRolls"/> more), adds <paramref name="extra"/> (already rolled drops) and one
+        /// finished piece of gear for each of <paramref name="guaranteed"/> (at that quality), and spawns a bag with
+        /// what dropped. Gear listed in the table itself can get an affix and a socket too. False when nothing dropped.
         /// </summary>
         public static bool Spawn(GameObject bagPrefab, Vector2 position, LootEntry[] entries, ItemCatalog gear, AffixCatalog affixes,
-            int level, float socketChance, int rolls = 1, int extraMaterialRolls = 0, params ItemRarity[] guaranteed)
+            int level, float socketChance, int rolls = 1, int extraMaterialRolls = 0, List<LootItem> extra = null,
+            params ItemRarity[] guaranteed)
         {
             if (bagPrefab == null) return false;
             Drops.Clear();
             for (int roll = 0; roll < rolls; roll++)
             {
-                if (entries != null)
-                {
-                    foreach (LootEntry entry in entries)
-                    {
-                        if (entry.item == null || Random.value >= entry.chance) continue;
-                        ItemDefinition item = PotionForLevel(entry.item, level);
-                        int affix = affixes != null ? affixes.Roll(item, level) : 0;
-                        int socket = item.IsEquippable && Random.value < socketChance ? ItemStack.EmptySocket : 0;
-                        Drops.Add(new LootItem(item, affix, socket));
-                    }
-                }
+                RollEntries(entries, level, affixes, socketChance, Drops);
                 RollMaterials(gear, level);
             }
+            if (extra != null) Drops.AddRange(extra);
 
             for (int roll = 0; roll < extraMaterialRolls; roll++)
                 RollMaterials(gear, level);

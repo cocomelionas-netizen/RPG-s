@@ -57,6 +57,10 @@ namespace RPG.Monsters
         [SerializeField] private ItemRarity guaranteedQuality = ItemRarity.Rare;
         [Tooltip("Bosses: chance of one more piece of the top quality (Dreadmyst's purple: legendary).")]
         [SerializeField, Range(0f, 1f)] private float purpleChance;
+        [Tooltip("Dreadmyst's boss loot chances: one piece of blue, of gold and of purple gear, each rolled on its own.")]
+        [SerializeField] private Vector3 qualityChances;
+        [Tooltip("Rolled once on death on top of the loot table (a boss's keys and treasures).")]
+        [SerializeField] private LootEntry[] bonusLoot = System.Array.Empty<LootEntry>();
 
         [Header("Aggro")]
         [SerializeField, Min(0f)] private float aggroRadius = 3f;
@@ -143,9 +147,12 @@ namespace RPG.Monsters
         /// </summary>
         public void ServerOverrideLevel(int newLevel)
         {
-            level = Mathf.Clamp(newLevel, 1, LevelCurve.MaxLevel);
+            level = Mathf.Clamp(newLevel, 1, MaxLevel);
             experienceReward = LevelCurve.KillExperienceFor(level);
         }
+
+        /// <summary>Monsters go above the players' top level: Dreadmyst's dungeon bosses are 28 and 30.</summary>
+        public const int MaxLevel = 30;
 
         // How much tougher a monster gets per level. Its damage grows as fast as players' health does
         // (LevelCurve.HealthGrowth, Dreadmyst's), so a monster of your level is as dangerous at 25 as at 1.
@@ -430,10 +437,37 @@ namespace RPG.Monsters
             var guaranteed = new List<ItemRarity>();
             for (int i = 0; i < guaranteedGear; i++) guaranteed.Add(guaranteedQuality);
             if (purpleChance > 0f && Random.value < purpleChance) guaranteed.Add(ItemRarity.Legendary);
-            int extraMaterialRolls = (IsElite ? EliteMaterialRolls : 0) + (guaranteedGear > 0 ? BossMaterialRolls : 0);
+            if (Random.value < qualityChances.x) guaranteed.Add(ItemRarity.Rare);
+            if (Random.value < qualityChances.y) guaranteed.Add(ItemRarity.Epic);
+            if (Random.value < qualityChances.z) guaranteed.Add(ItemRarity.Legendary);
+            bool boss = guaranteedGear > 0 || qualityChances != Vector3.zero;
+            int extraMaterialRolls = (IsElite ? EliteMaterialRolls : 0) + (boss ? BossMaterialRolls : 0);
+            var bonus = new List<LootItem>();
+            LootDrop.RollEntries(bonusLoot, level, affixes, socketChance, bonus);
             LootDrop.Spawn(lootBagPrefab, transform.position, loot, gear, affixes, level, socketChance, IsElite ? 2 : 1,
-                extraMaterialRolls, guaranteed.ToArray());
+                extraMaterialRolls, bonus, guaranteed.ToArray());
         }
+
+        /// <summary>
+        /// Like Dreadmyst's boss loot chances: one piece of blue, one of gold and one of purple gear, each with its own
+        /// chance (0-1). Also gives it a boss's extra material rolls.
+        /// </summary>
+        public void ConfigureQualityDrops(float blue, float gold, float purple)
+        {
+            qualityChances = new Vector3(Mathf.Clamp01(blue), Mathf.Clamp01(gold), Mathf.Clamp01(purple));
+        }
+
+        /// <summary>Server, before spawning: adds drops rolled once on death (keys, treasures), on top of the loot table.</summary>
+        public void ServerAddBonusLoot(LootEntry[] entries)
+        {
+            if (entries == null || entries.Length == 0) return;
+            var all = new LootEntry[bonusLoot.Length + entries.Length];
+            bonusLoot.CopyTo(all, 0);
+            entries.CopyTo(all, bonusLoot.Length);
+            bonusLoot = all;
+        }
+
+        public IReadOnlyList<LootEntry> BonusLoot => bonusLoot;
 
         /// <summary>Sets the gear a boss always drops (used by the scene builder).</summary>
         public void ConfigureGuaranteedLoot(int pieces, ItemRarity quality, float extraPurpleChance)

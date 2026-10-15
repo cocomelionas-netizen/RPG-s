@@ -23,6 +23,10 @@ namespace RPG.Monsters
         [SerializeField, Min(0)] private int level;
         [Tooltip("The school of the monsters' hits here (physical keeps the prefab's).")]
         [SerializeField] private DamageSchool damageSchool = DamageSchool.Physical;
+        [Tooltip("The name of the monsters here (empty keeps the prefab's).")]
+        [SerializeField] private string displayName;
+        [Tooltip("Rolled once when one of them dies, on top of its own drops (keys).")]
+        [SerializeField] private RPG.Items.LootEntry[] bonusLoot = System.Array.Empty<RPG.Items.LootEntry>();
 
         private readonly List<NetworkObject> alive = new List<NetworkObject>();
         private readonly List<float> respawnTimes = new List<float>();
@@ -49,6 +53,20 @@ namespace RPG.Monsters
         {
             get => damageSchool;
             set => damageSchool = value;
+        }
+
+        /// <summary>The name of the monsters at this spot (empty keeps the prefab's).</summary>
+        public string DisplayName
+        {
+            get => displayName;
+            set => displayName = value;
+        }
+
+        /// <summary>Drops rolled once when a monster of this spot dies, on top of its own (keys).</summary>
+        public RPG.Items.LootEntry[] BonusLoot
+        {
+            get => bonusLoot;
+            set => bonusLoot = value ?? System.Array.Empty<RPG.Items.LootEntry>();
         }
 
         public float RespawnSeconds
@@ -125,12 +143,14 @@ namespace RPG.Monsters
             {
                 ai.Home = point;
                 if (level > 0) ai.ServerOverrideLevel(level);
+                if (bonusLoot.Length > 0) ai.ServerAddBonusLoot(bonusLoot);
             }
             if (damageSchool != DamageSchool.Physical && monster.TryGetComponent(out AutoAttack attack)) attack.School = damageSchool;
 
             var networkObject = monster.GetComponent<NetworkObject>();
             networkObject.Spawn(destroyWithScene: true);
             if (ai != null && Random.value < eliteChance) ai.ServerMakeElite();
+            if (!string.IsNullOrEmpty(displayName) && monster.TryGetComponent(out Health health)) health.ServerSetDisplayName(displayName);
             alive.Add(networkObject);
         }
     }

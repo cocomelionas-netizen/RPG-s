@@ -9,5 +9,5 @@ sed -i 's/\.linearVelocity/.velocity/g' src/*.cs
 sed -i 's/ContactFilter2D\.noFilter/new ContactFilter2D().NoFilter()/g' src/*.cs
 sed -i 's/FindObjectsByType<UnitFrame>(FindObjectsInactive.Include)/FindObjectsOfType<UnitFrame>(true)/; s/FindObjectsByType<Health>()/FindObjectsOfType<Health>()/' src/PlayerTargeting.cs
 sed -i 's/Object.FindAnyObjectByType<LootBag>()/Object.FindObjectOfType<LootBag>()/' src/InventoryTests.cs
-sed -i 's/FindObjectsByType<LootBag>()/FindObjectsOfType<LootBag>()/' src/DungeonManager.cs
+sed -i 's/FindObjectsByType<LootBag>()/FindObjectsOfType<LootBag>()/' src/DungeonManager.cs src/DungeonTests.cs
 sed -i 's/FindAnyObjectByType</FindObjectOfType</g' src/*.cs

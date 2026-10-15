@@ -49,7 +49,6 @@ namespace RPG.EditorTools
         private const string ItemsFolder = "Assets/_Project/Data/Items";
         private const string AffixesFolder = "Assets/_Project/Data/Items/Affixes";
         private const string DungeonInstancePrefabPath = "Assets/_Project/Prefabs/World/DungeonInstance.prefab";
-        private const string DungeonDefinitionPath = "Assets/_Project/Data/Dungeons/GoblinDen.asset";
         private const string KingAnimationSetPath = "Assets/_Project/Data/Characters/GoblinKing_AnimationSet.asset";
         private const string KingArtFolder = PlaceholderArtGenerator.Folder + "/GoblinKing";
         private const string VendorsFolder = "Assets/_Project/Data/Vendors";
@@ -132,35 +131,33 @@ namespace RPG.EditorTools
             {
                 Name = "Goblin", Animations = goblinAnimations, Scale = 0.85f, Health = 45, MinDamage = 3, MaxDamage = 5,
                 AttackInterval = 2f, Level = 2, Experience = LevelCurve.KillExperienceFor(2), MoveSpeed = 1.8f, Gold = new Vector2Int(3, 6),
-                Loot = Loot(items, ("GoblinEar", 0.6f), ("DenKey", 0.04f), ("ChippedRuby", 0.02f), ("ChippedTopaz", 0.02f), ("ChippedSapphire", 0.02f), ("ChippedEmerald", 0.02f), ("HealingPotion", 0.3f), ("ManaPotion", 0.15f)),
+                Loot = Loot(items, ("GoblinEar", 0.6f), ("ChippedRuby", 0.02f), ("ChippedTopaz", 0.02f), ("ChippedSapphire", 0.02f), ("ChippedEmerald", 0.02f), ("HealingPotion", 0.3f), ("ManaPotion", 0.15f)),
             }, barSprite, lootBagPrefab, affixes);
             GameObject brutePrefab = CreateMonsterPrefab(new MonsterSpec
             {
                 Name = "Goblin Brute", Animations = bruteAnimations, Scale = 1.05f, Health = 120, MinDamage = 6, MaxDamage = 10,
                 AttackInterval = 2.2f, Level = 4, Experience = LevelCurve.KillExperienceFor(4), MoveSpeed = 1.6f, Gold = new Vector2Int(10, 16),
-                Loot = Loot(items, ("BruteTusk", 0.6f), ("DenKey", 0.25f), ("ChippedRuby", 0.04f), ("ChippedTopaz", 0.04f), ("ChippedSapphire", 0.04f), ("ChippedEmerald", 0.04f), ("HealingPotion", 0.5f), ("ManaPotion", 0.25f)),
+                Loot = Loot(items, ("BruteTusk", 0.6f), ("ChippedRuby", 0.04f), ("ChippedTopaz", 0.04f), ("ChippedSapphire", 0.04f), ("ChippedEmerald", 0.04f), ("HealingPotion", 0.5f), ("ManaPotion", 0.25f)),
             }, barSprite, lootBagPrefab, affixes);
             GameObject orcPrefab = CreateMonsterPrefab(new MonsterSpec
             {
                 Name = "Orc", Animations = orcAnimations, Scale = 1.15f, Health = 220, MinDamage = 10, MaxDamage = 15,
                 AttackInterval = 2f, Level = 6, Experience = LevelCurve.KillExperienceFor(6), MoveSpeed = 1.7f, Gold = new Vector2Int(20, 30),
-                Loot = Loot(items, ("OrcFang", 0.6f), ("DenKey", 0.35f), ("ChippedRuby", 0.05f), ("ChippedTopaz", 0.05f), ("ChippedSapphire", 0.05f), ("ChippedEmerald", 0.05f), ("Ruby", 0.01f), ("Sapphire", 0.01f), ("HealingPotion", 0.6f), ("ManaPotion", 0.3f)),
+                Loot = Loot(items, ("OrcFang", 0.6f), ("ChippedRuby", 0.05f), ("ChippedTopaz", 0.05f), ("ChippedSapphire", 0.05f), ("ChippedEmerald", 0.05f), ("Ruby", 0.01f), ("Sapphire", 0.01f), ("HealingPotion", 0.6f), ("ManaPotion", 0.3f)),
             }, barSprite, lootBagPrefab, affixes);
             CharacterAnimationSet kingAnimations = CreateCharacterAnimationSet("GoblinKing", KingArtFolder, KingAnimationSetPath,
                 new Color(0.75f, 0.58f, 0.15f), new Color(0.4f, 0.58f, 0.25f));
-            GameObject kingPrefab = CreateMonsterPrefab(new MonsterSpec
+            // Dreadmyst's dungeon bosses: an orc's numbers (each boss's own health, damage, level and loot are set per
+            // dungeon spot, measured against a normal monster), drawn bigger, with the ground slam.
+            GameObject bossPrefab = CreateMonsterPrefab(new MonsterSpec
             {
-                Name = "Goblin King", Animations = kingAnimations, Scale = 1.5f, Health = 900, MinDamage = 14, MaxDamage = 20,
-                AttackInterval = 2.2f, Level = 8, Experience = LevelCurve.KillExperienceFor(8) * 4, MoveSpeed = 1.5f, Gold = new Vector2Int(150, 200),
-                Loot = Loot(items, ("CrownShard", 1f), ("Ruby", 0.25f), ("Topaz", 0.25f), ("Sapphire", 0.25f), ("Emerald", 0.25f), ("FlawlessRuby", 0.05f), ("FlawlessEmerald", 0.05f), ("HealingPotion", 1f), ("ManaPotion", 1f)),
-            }, barSprite, lootBagPrefab, affixes, boss =>
-            {
-                boss.AddComponent<BossMechanics>();
-                // Like most Dreadmyst bosses: one gold piece for sure, a purple one a quarter of the time.
-                boss.GetComponent<MonsterAI>().ConfigureGuaranteedLoot(1, ItemRarity.Epic, 0.25f);
-            });
-            DungeonDefinition dungeon = CreateDungeon(brutePrefab, orcPrefab, kingPrefab);
+                Name = "Dungeon Boss", Animations = kingAnimations, Scale = 1.5f, Health = 220, MinDamage = 10, MaxDamage = 15,
+                AttackInterval = 2f, Level = 6, Experience = LevelCurve.KillExperienceFor(6), MoveSpeed = 1.7f, Gold = new Vector2Int(20, 30),
+                Loot = Loot(items, ("OrcFang", 0.6f), ("ChippedRuby", 0.05f), ("ChippedTopaz", 0.05f), ("ChippedSapphire", 0.05f), ("ChippedEmerald", 0.05f), ("Ruby", 0.01f), ("Sapphire", 0.01f), ("HealingPotion", 0.6f), ("ManaPotion", 0.3f)),
+            }, barSprite, lootBagPrefab, affixes, boss => boss.AddComponent<BossMechanics>());
             ChestPrefabs chests = CreateChestPrefabs(items, affixes, lootBagPrefab);
+            DungeonDefinition[] dungeons = CreateDungeons(goblinPrefab, brutePrefab, orcPrefab, bossPrefab,
+                CreateDungeonContainers(chests, items, affixes, lootBagPrefab));
             CharacterAnimationSet rangerAnimations = CreateCharacterAnimationSet("Ranger", RangerArtFolder, RangerAnimationSetPath, new Color(0.2f, 0.45f, 0.22f), null);
             CharacterAnimationSet mageAnimations = CreateCharacterAnimationSet("Mage", MageArtFolder, MageAnimationSetPath, new Color(0.45f, 0.22f, 0.62f), null);
             ClassCatalog classes = CreateClasses(playerAnimations, rangerAnimations, mageAnimations, items);
@@ -195,7 +192,8 @@ namespace RPG.EditorTools
             PlaceDummies(grid, dummyPrefab);
             PlaceMonsters(grid, obstacles, goblinPrefab, brutePrefab, orcPrefab);
             PlaceChests(grid, obstacles, chests);
-            PlaceDungeon(grid, obstacles, dungeon);
+            PlaceEdgeMonsters(grid, obstacles, orcPrefab);
+            PlaceDungeons(grid, obstacles, dungeons);
             PlaceVendors(grid, CreateVendors(items, potion, manaPotion));
             PlaceZonesAndWaystones(grid, obstacles, PlaceholderArtGenerator.Waystone("Waystone"));
             CreateHud();
@@ -788,38 +786,6 @@ namespace RPG.EditorTools
             return prefab;
         }
 
-        private static DungeonDefinition CreateDungeon(GameObject brute, GameObject orc, GameObject boss)
-        {
-            var instance = new GameObject("Dungeon Instance");
-            instance.AddComponent<NetworkObject>();
-            instance.AddComponent<DungeonInstance>();
-            Directory.CreateDirectory(Path.GetDirectoryName(DungeonInstancePrefabPath));
-            GameObject instancePrefab = PrefabUtility.SaveAsPrefabAsset(instance, DungeonInstancePrefabPath);
-            UnityEngine.Object.DestroyImmediate(instance);
-            RegisterNetworkPrefab(instancePrefab);
-
-            var dungeon = LoadOrCreateAsset<DungeonDefinition>(DungeonDefinitionPath);
-            dungeon.displayName = "Goblin Den";
-            dungeon.instancePrefab = instancePrefab;
-            dungeon.floorTile = CreateTile("DungeonFloor",
-                PlaceholderArtGenerator.GroundTile("DungeonFloor", new Color(0.24f, 0.22f, 0.21f), new Color(0.36f, 0.33f, 0.3f), 7));
-            dungeon.wallTile = CreateTile("DungeonWall", PlaceholderArtGenerator.Rock("DungeonWall", 9), Tile.ColliderType.Grid);
-            dungeon.portalSprite = PlaceholderArtGenerator.Portal("Portal");
-            dungeon.packs = new[]
-            {
-                new MonsterPack(brute, 1, 2),
-                new MonsterPack(orc, 2, 2),
-                new MonsterPack(brute, 2, 1),
-            };
-            dungeon.bossPrefab = boss;
-            dungeon.minLevel = 3;
-            dungeon.key = AssetDatabase.LoadAssetAtPath<ItemDefinition>($"{ItemsFolder}/DenKey.asset");
-            dungeon.maxPlayers = 4;
-            dungeon.monsterAggroRadius = 3.5f;
-            EditorUtility.SetDirty(dungeon);
-            return dungeon;
-        }
-
         private static VendorDefinition[] CreateVendors(ItemCatalog catalog, ItemDefinition potion, ItemDefinition manaPotion)
         {
             VendorDefinition MakeVendor(string fileName, string vendorName, string title, params string[] items)
@@ -859,8 +825,9 @@ namespace RPG.EditorTools
                 Crafter(MakeVendor("MageVendor", "Elara the Arcanist", "Mage staves and robes, crafting",
                         GearFile("Aspen Staff", 1), "StaffOfEmbers", GearFile("Linen Hood", 1), GearFile("Linen Vestments", 1), GearFile("Linen Slippers", 1)),
                     catalog, MageClass, DreadmystGear.ArmorKind.Robe),
+                // Also Dreadmyst's Major Treasury Gold, which the Demiplane Key is made with.
                 Jeweler(MakeVendor("JewelerVendor", "Gemma Brightstone", "Jeweler: gems, gem combining",
-                    "ChippedRuby", "ChippedTopaz", "ChippedSapphire", "ChippedEmerald")),
+                    "ChippedRuby", "ChippedTopaz", "ChippedSapphire", "ChippedEmerald", "MajorTreasuryGold")),
                 Trainer("WarriorTrainer", "Halfrid", "Warrior trainer: spell Tomes", WarriorClass),
                 Trainer("RangerTrainer", "Kelda", "Ranger trainer: spell Tomes", RangerClass),
                 Trainer("MageTrainer", "Gyldan", "Mage trainer: spell Tomes", MageClass),
@@ -981,24 +948,6 @@ namespace RPG.EditorTools
             }
         }
 
-        private static void PlaceDungeon(Grid grid, Tilemap obstacles, DungeonDefinition dungeon)
-        {
-            new GameObject("Dungeon Manager").AddComponent<DungeonManager>().Configure(dungeon);
-
-            // The entrance stands where Dreadmyst has Wolf's Den.
-            var entrance = new GameObject("Dungeon Entrance");
-            entrance.transform.position = grid.GetCellCenterWorld(OpenCellNear(obstacles, DreadmystStartArea.DungeonEntrance));
-            var visual = new GameObject("Visual").AddComponent<SpriteRenderer>();
-            visual.transform.SetParent(entrance.transform, false);
-            visual.sprite = dungeon.portalSprite;
-            visual.spriteSortPoint = SpriteSortPoint.Pivot;
-            var box = entrance.AddComponent<BoxCollider2D>();
-            box.isTrigger = true;
-            box.size = new Vector2(0.6f, 0.9f);
-            box.offset = new Vector2(0f, 0.45f);
-            entrance.AddComponent<Portal>().Configure(PortalKind.DungeonEntrance, visual, null, false);
-        }
-
         private static GameObject CreateLootBagPrefab(Sprite sprite)
         {
             var loot = new GameObject("Loot Bag");
@@ -1105,6 +1054,7 @@ namespace RPG.EditorTools
             all.AddRange(CreateDreadmystGear(out List<ItemDefinition> materials));
             all.AddRange(materials);
             all.AddRange(CreatePotions(potion, manaPotion));
+            all.AddRange(CreateDungeonItems());
             catalog.items = all.ToArray();
             EditorUtility.SetDirty(catalog);
             return catalog;
@@ -1357,6 +1307,9 @@ namespace RPG.EditorTools
             item.strongerVariant = null;
             item.craftMaterial = null;
             item.craftCount = 1;
+            item.description = null;
+            item.combineWith = Array.Empty<ItemDefinition>();
+            item.combineResult = null;
             EditorUtility.SetDirty(item);
             return item;
         }
@@ -1530,6 +1483,9 @@ namespace RPG.EditorTools
                 spawner.Configure(prefab, 1, 0.6f, respawn);
                 spawner.EliteChance = elite ? 1f : 0f;
                 spawner.Level = level;
+                // Horned beasts and Lesser Wyrms sometimes drop Keys to the Barracks.
+                int keyLoot = KeyDropperLoot(cell);
+                if (keyLoot > 0) spawner.BonusLoot = DungeonLoot(keyLoot);
                 // From level 3 every fourth spot (and every elite) hits with magic: frost, fire, shadow or holy,
                 // so the resists matter.
                 if (level >= 3 && (elite || i % 4 == 0)) spawner.School = (DamageSchool)(1 + i / 4 % 4);

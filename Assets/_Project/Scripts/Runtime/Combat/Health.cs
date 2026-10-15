@@ -48,6 +48,9 @@ namespace RPG.Combat
 
         public int Current => current.Value;
         public int Max => max.Value;
+
+        /// <summary>The max health it starts with (also readable on a prefab, before spawning).</summary>
+        public int BaseMax => maxHealth;
         public float Fraction => max.Value > 0 ? (float)current.Value / max.Value : 0f;
         public bool IsDead => IsSpawned && current.Value <= 0;
         public string DisplayName => displayName.Value.ToString();

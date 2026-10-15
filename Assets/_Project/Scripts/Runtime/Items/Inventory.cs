@@ -545,7 +545,7 @@ namespace RPG.Items
             ulong id = loot.NetworkObjectId;
             if (InLootRange(loot)) loot.ServerGiveOne(this, index, itemId);
             if (loot.IsSpawned) SendLootContents(loot);
-            else LootContentsRpc(id, Array.Empty<int>(), Array.Empty<int>(), Array.Empty<int>());
+            else LootContentsRpc(id, Array.Empty<int>(), Array.Empty<int>(), Array.Empty<int>(), Array.Empty<int>());
         }
 
         private bool InLootRange(LootBag loot) =>
@@ -568,23 +568,25 @@ namespace RPG.Items
         {
             int count = InLootRange(loot) ? loot.Contents.Count : 0;
             var ids = new int[count];
+            var counts = new int[count];
             var affixIds = new int[count];
             var sockets = new int[count];
             for (int i = 0; i < count; i++)
             {
                 LootItem item = loot.Contents[i];
                 ids[i] = catalog.IdOf(item.Item);
+                counts[i] = item.Count;
                 affixIds[i] = item.AffixId;
                 sockets[i] = item.Socket;
             }
-            LootContentsRpc(loot.NetworkObjectId, ids, affixIds, sockets);
+            LootContentsRpc(loot.NetworkObjectId, ids, counts, affixIds, sockets);
         }
 
         [Rpc(SendTo.Owner)]
-        private void LootContentsRpc(ulong lootId, int[] ids, int[] affixIds, int[] sockets)
+        private void LootContentsRpc(ulong lootId, int[] ids, int[] counts, int[] affixIds, int[] sockets)
         {
             var stacks = new ItemStack[ids.Length];
-            for (int i = 0; i < ids.Length; i++) stacks[i] = new ItemStack(ids[i], 1, affixIds[i], sockets[i]);
+            for (int i = 0; i < ids.Length; i++) stacks[i] = new ItemStack(ids[i], counts[i], affixIds[i], sockets[i]);
             LootContentsReceived?.Invoke(lootId, stacks);
         }
 
@@ -616,7 +618,7 @@ namespace RPG.Items
                 ServerPickUp(loot);
                 // Keeps an open loot window up to date (or closes it when everything was taken).
                 if (loot.IsSpawned) SendLootContents(loot);
-                else LootContentsRpc(id, Array.Empty<int>(), Array.Empty<int>(), Array.Empty<int>());
+                else LootContentsRpc(id, Array.Empty<int>(), Array.Empty<int>(), Array.Empty<int>(), Array.Empty<int>());
             }
         }
 
@@ -809,6 +811,7 @@ namespace RPG.Items
             ItemDefinition item = Definition(stack);
             if (item == null || item.use == ItemUse.None) return false;
             if (item.use == ItemUse.LearnSpell) return ServerLearnFrom(bagIndex, stack, item);
+            if (item.use == ItemUse.Combine) return ServerCombineFrom(item);
             if (item.use == ItemUse.RestoreMana && mana == null) return false;
             if (progress != null && !item.CanBeUsedAtLevel(progress.Level))
             {
@@ -832,6 +835,34 @@ namespace RPG.Items
             potionReadyAt.Value = now + potionCooldown;
 
             bag[bagIndex] = stack.Count > 1 ? stack.WithCount(stack.Count - 1) : ItemStack.Empty;
+            return true;
+        }
+
+        /// <summary>
+        /// Server: puts an item together with the ones it combines with (one of each) into its result, like Dreadmyst's
+        /// Dale Gem on a Depleted Key. Nothing is used up when one is missing or there is no room.
+        /// </summary>
+        public bool ServerCombineFrom(ItemDefinition item)
+        {
+            if (!IsServer || item == null || item.combineResult == null) return false;
+            foreach (ItemDefinition other in item.combineWith)
+            {
+                if (other == null || CountOf(other) >= (other == item ? 2 : 1)) continue;
+                MessageRpc(InventoryMessage.NotEnoughMaterials, catalog.IdOf(other), 1);
+                return false;
+            }
+            ServerRemoveItem(item, 1);
+            foreach (ItemDefinition other in item.combineWith)
+                if (other != null) ServerRemoveItem(other, 1);
+            if (ServerAddItem(item.combineResult, 1, false) <= 0)
+            {
+                // No room: give everything back.
+                ServerAddItem(item, 1, false);
+                foreach (ItemDefinition other in item.combineWith)
+                    if (other != null) ServerAddItem(other, 1, false);
+                return false;
+            }
+            MessageRpc(InventoryMessage.Crafted, catalog.IdOf(item.combineResult), 0);
             return true;
         }
 

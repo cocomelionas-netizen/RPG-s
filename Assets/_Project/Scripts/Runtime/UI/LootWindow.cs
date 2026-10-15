@@ -188,7 +188,7 @@ namespace RPG.UI
                 background.a = 0.95f;
                 view.Background.color = background;
                 view.Border.effectColor = rarity;
-                view.Label.text = inventory.DisplayName(contents[i]);
+                view.Label.text = contents[i].Count > 1 ? $"{inventory.DisplayName(contents[i])} x{contents[i].Count}" : inventory.DisplayName(contents[i]);
                 view.Label.color = rarity;
             }
             UpdateTooltip(inventory);
