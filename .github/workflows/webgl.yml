@@ -10,6 +10,10 @@ name: WebGL build
 on:
   push:
     branches: [main]
+    # Documentation changes do not change the game.
+    paths-ignore:
+      - 'Docs/**'
+      - '**/*.md'
   workflow_dispatch:
 
 permissions:
@@ -39,10 +43,25 @@ jobs:
         with:
           lfs: true
 
-      # No Library cache: with Unity 6000.6 a restored Library made the editor get killed (exit code 137)
-      # right after it started, while a clean import builds fine in about 15 minutes.
+      # Imported assets are cached; compiled scripts and the Unity Data Store are not. With Unity 6000.6 a
+      # restored Library that still had them made the editor get killed (exit code 137) right after it started.
+      - uses: actions/cache@v4
+        with:
+          path: |
+            Library
+            !Library/ScriptAssemblies
+            !Library/PlayerScriptAssemblies
+            !Library/Bee
+            !Library/DataStore
+          key: Library-WebGL-v3-${{ hashFiles('Packages/packages-lock.json', 'ProjectSettings/ProjectVersion.txt') }}-${{ github.sha }}
+          restore-keys: |
+            Library-WebGL-v3-${{ hashFiles('Packages/packages-lock.json', 'ProjectSettings/ProjectVersion.txt') }}-
+            Library-WebGL-v3-
 
       - name: Build WebGL
+        id: build
+        # If the cached Library breaks the editor, the next steps build again from a clean one.
+        continue-on-error: true
         uses: game-ci/unity-builder@v4
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
@@ -51,6 +70,23 @@ jobs:
         with:
           targetPlatform: WebGL
           buildMethod: RPG.EditorTools.BuildMenu.BuildWebGLFromCommandLine
+
+      - name: Remove the cached Library after a failed build
+        if: steps.build.outcome == 'failure'
+        run: sudo rm -rf Library Builds
+
+      - name: Build WebGL again from a clean Library
+        if: steps.build.outcome == 'failure'
+        uses: game-ci/unity-builder@v4
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+        with:
+          targetPlatform: WebGL
+          buildMethod: RPG.EditorTools.BuildMenu.BuildWebGLFromCommandLine
+          # The first attempt already regenerated the scene, so the working tree is not clean any more.
+          allowDirtyBuild: true
 
       - name: Add .nojekyll
         run: sudo touch Builds/WebGL/.nojekyll
