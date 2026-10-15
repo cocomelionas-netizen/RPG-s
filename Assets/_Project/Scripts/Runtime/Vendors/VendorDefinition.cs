@@ -16,6 +16,8 @@ namespace RPG.Vendors
         public int[] stockLimits = Array.Empty<int>();
         [Tooltip("Seconds between restocks: limited items are refilled to their limit.")]
         [Min(10f)] public float restockSeconds = 300f;
+        [Tooltip("A jeweler: combines three of the same gem into a better one.")]
+        public bool combinesGems;
 
         /// <summary>The most of a stock item the vendor holds (0 for unlimited).</summary>
         public int LimitOf(int index) => index >= 0 && index < stockLimits.Length ? Mathf.Max(0, stockLimits[index]) : 0;

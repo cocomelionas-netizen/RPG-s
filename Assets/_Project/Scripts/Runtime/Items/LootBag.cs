@@ -9,11 +9,14 @@ namespace RPG.Items
     {
         public ItemDefinition Item;
         public int AffixId;
+        /// <summary>0 or <see cref="ItemStack.EmptySocket"/>.</summary>
+        public int Socket;
 
-        public LootItem(ItemDefinition item, int affixId)
+        public LootItem(ItemDefinition item, int affixId, int socket = 0)
         {
             Item = item;
             AffixId = affixId;
+            Socket = socket;
         }
     }
 
@@ -74,7 +77,7 @@ namespace RPG.Items
             bool tookAny = false;
             for (int i = contents.Count - 1; i >= 0; i--)
             {
-                if (inventory.ServerAddItem(contents[i].Item, 1, true, contents[i].AffixId) <= 0) continue;
+                if (inventory.ServerAddItem(contents[i].Item, 1, true, contents[i].AffixId, contents[i].Socket) <= 0) continue;
                 contents.RemoveAt(i);
                 tookAny = true;
             }

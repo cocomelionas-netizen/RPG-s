@@ -65,6 +65,12 @@ namespace RPG.Items
         [Range(0f, 1f)] public float healFraction = 0.35f;
         [Min(1)] public int maxStack = 1;
 
+        [Header("Gem")]
+        [Tooltip("A gem: clicking it sets it into an empty socket of worn gear, where its attributes count.")]
+        public bool isGem;
+        [Tooltip("A jeweler turns three of this gem into one of these.")]
+        public ItemDefinition combinesInto;
+
         [Header("Look")]
         [Tooltip("Color of the item's square in the bag until it has an icon.")]
         public Color iconColor = new Color(0.5f, 0.5f, 0.5f);
@@ -111,7 +117,9 @@ namespace RPG.Items
 
         /// <summary>Tooltip text: name, quality and slot, stats and use, with an affix when the item has one.</summary>
         /// <param name="className">Name of the required class to show (null when anyone may use it).</param>
-        public string Describe(string className = null, AffixDefinition affix = null)
+        /// <param name="socketLine">"Socket: empty" or the gem in it (null when the item has no socket).</param>
+        /// <param name="sellPrice">What a vendor pays, when it differs from the item's own (a gem in its socket); -1 to work it out.</param>
+        public string Describe(string className = null, AffixDefinition affix = null, string socketLine = null, int sellPrice = -1)
         {
             var text = new StringBuilder();
             text.AppendLine(NameWith(affix));
@@ -129,12 +137,15 @@ namespace RPG.Items
             if (mana > 0) text.AppendLine($"+{mana} mana");
             if (totalArmor > 0) text.AppendLine($"+{totalArmor} armor");
             if (!totalAttributes.IsZero) text.AppendLine(totalAttributes.Describe("\n"));
+            if (!string.IsNullOrEmpty(socketLine)) text.AppendLine(socketLine);
+            if (isGem) text.AppendLine("Set into an empty socket of worn gear");
+            if (isGem && combinesInto != null) text.AppendLine($"3 combine into {combinesInto.displayName} at a jeweler");
             if (use == ItemUse.Heal) text.AppendLine($"Use: restores {Mathf.RoundToInt(healFraction * 100f)}% health");
             if (use == ItemUse.RestoreMana) text.AppendLine($"Use: restores {Mathf.RoundToInt(healFraction * 100f)}% mana");
             if (maxStack > 1) text.AppendLine($"Stacks up to {maxStack}");
             if (!string.IsNullOrEmpty(className)) text.AppendLine($"{className} only");
-            if (price > 0) text.AppendLine($"Sells for {SellPriceWith(affix)} gold");
-            text.Append(IsEquippable ? "Click to equip" : use != ItemUse.None ? "Click to use" : "");
+            if (price > 0) text.AppendLine($"Sells for {(sellPrice >= 0 ? sellPrice : SellPriceWith(affix))} gold");
+            text.Append(IsEquippable ? "Click to equip" : use != ItemUse.None ? "Click to use" : isGem ? "Click to set into a socket" : "");
             return text.ToString().TrimEnd();
         }
     }

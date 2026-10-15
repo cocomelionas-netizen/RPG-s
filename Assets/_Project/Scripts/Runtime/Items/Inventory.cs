@@ -108,6 +108,33 @@ namespace RPG.Items
         /// <summary>The random affix of a stack (null when it has none).</summary>
         public AffixDefinition Affix(ItemStack stack) => affixes != null && !stack.IsEmpty ? affixes.Get(stack.AffixId) : null;
 
+        /// <summary>The gem set in an item's socket (null when none).</summary>
+        public ItemDefinition Gem(ItemStack stack) => stack.HasGem && catalog != null ? catalog.Get(stack.Socket) : null;
+
+        /// <summary>"Socket: empty" or "Socket: Ruby (+4 Strength)"; null when the item has no socket.</summary>
+        public string SocketText(ItemStack stack)
+        {
+            if (!stack.HasSocket) return null;
+            ItemDefinition gem = Gem(stack);
+            return gem == null ? "Socket: empty" : $"Socket: {gem.displayName} ({gem.attributes.Describe(", ")})";
+        }
+
+        /// <summary>What a vendor pays for one: the item with its affix, plus the gem in its socket.</summary>
+        public int SellPrice(ItemStack stack)
+        {
+            ItemDefinition item = Definition(stack);
+            if (item == null) return 0;
+            ItemDefinition gem = Gem(stack);
+            return item.SellPriceWith(Affix(stack)) + (gem != null ? gem.SellPrice : 0);
+        }
+
+        /// <summary>Tooltip text of a stack, with its affix, socket and real sell price.</summary>
+        public string Describe(ItemStack stack, string className)
+        {
+            ItemDefinition item = Definition(stack);
+            return item != null ? item.Describe(className, Affix(stack), SocketText(stack), SellPrice(stack)) : "";
+        }
+
         /// <summary>The item's name with its affix, for example "Iron Sword of the Bear".</summary>
         public string DisplayName(ItemStack stack)
         {
@@ -129,6 +156,53 @@ namespace RPG.Items
             for (int i = 0; i < bag.Count; i++)
                 if (bag[i].ItemId == id) count += bag[i].Count;
             return count;
+        }
+
+        /// <summary>
+        /// Server: sets a gem from the bag into the first worn item (weapon, head, chest, feet) with an empty socket.
+        /// Gems stay there for good.
+        /// </summary>
+        public bool ServerSocketGem(int bagIndex)
+        {
+            if (!IsServer || bagIndex < 0 || bagIndex >= bag.Count || health.IsDead) return false;
+            ItemStack gemStack = bag[bagIndex];
+            ItemDefinition gem = Definition(gemStack);
+            if (gem == null || !gem.isGem) return false;
+
+            for (int i = 0; i < equipment.Count; i++)
+            {
+                if (equipment[i].IsEmpty || equipment[i].Socket != ItemStack.EmptySocket) continue;
+                equipment[i] = equipment[i].WithSocket(gemStack.ItemId);
+                bag[bagIndex] = gemStack.Count > 1 ? gemStack.WithCount(gemStack.Count - 1) : ItemStack.Empty;
+                MessageRpc(InventoryMessage.GemSocketed, gemStack.ItemId, 0);
+                return true;
+            }
+            MessageRpc(InventoryMessage.NoEmptySocket, 0, 0);
+            return false;
+        }
+
+        /// <summary>Server: at a jeweler, turns every three of the same gem into one better gem. Returns how many were made.</summary>
+        public int ServerCombineGems(Vendor jeweler)
+        {
+            if (!IsServer || health.IsDead || !IsNear(jeweler) || !jeweler.Definition.combinesGems) return 0;
+            int made = 0;
+            foreach (ItemDefinition gem in catalog.items)
+            {
+                if (gem == null || !gem.isGem || gem.combinesInto == null) continue;
+                while (CountOf(gem) >= 3 && ServerRemoveItem(gem, 3))
+                {
+                    if (ServerAddItem(gem.combinesInto, 1, true) > 0)
+                    {
+                        made++;
+                        continue;
+                    }
+                    // No room for the result: give the three back and stop.
+                    ServerAddItem(gem, 3, false);
+                    break;
+                }
+            }
+            MessageRpc(made > 0 ? InventoryMessage.GemsCombined : InventoryMessage.NothingToCombine, made, 0);
+            return made;
         }
 
         /// <summary>Server: takes items out of the bag (keys, quest items). False, and nothing taken, when there are not enough.</summary>
@@ -202,6 +276,16 @@ namespace RPG.Items
                 manaBonus += item.manaBonus;
                 attributes += item.attributes;
 
+                ItemDefinition gem = Gem(equipment[i]);
+                if (gem != null)
+                {
+                    damage += gem.damageBonus;
+                    healthBonus += gem.healthBonus;
+                    armor += gem.armor;
+                    manaBonus += gem.manaBonus;
+                    attributes += gem.attributes;
+                }
+
                 AffixDefinition affix = Affix(equipment[i]);
                 if (affix == null) continue;
                 damage += affix.damageBonus;
@@ -228,7 +312,7 @@ namespace RPG.Items
                 ItemStack stack = savedEquipment != null && i < savedEquipment.Count ? savedEquipment[i] : ItemStack.Empty;
                 ItemDefinition item = Definition(stack);
                 // Only something that belongs in this slot.
-                equipment[i] = item != null && (int)item.slot - 1 == i && IsKnown(stack) ? new ItemStack(stack.ItemId, 1, stack.AffixId) : ItemStack.Empty;
+                equipment[i] = item != null && (int)item.slot - 1 == i && IsKnown(stack) ? new ItemStack(stack.ItemId, 1, stack.AffixId, stack.Socket) : ItemStack.Empty;
             }
         }
 
@@ -236,7 +320,9 @@ namespace RPG.Items
         {
             ItemDefinition item = Definition(stack);
             bool affixKnown = stack.AffixId == 0 || Affix(stack) != null;
-            return item != null && affixKnown && stack.Count <= item.maxStack;
+            ItemDefinition gem = Gem(stack);
+            bool socketValid = !stack.HasSocket || (item != null && item.IsEquippable && (!stack.HasGem || (gem != null && gem.isGem)));
+            return item != null && affixKnown && socketValid && stack.Count <= item.maxStack;
         }
 
         /// <summary>The bag's contents, slot by slot.</summary>
@@ -268,11 +354,31 @@ namespace RPG.Items
             if (item == null) return;
             if (item.IsEquippable) RequestEquip(bagIndex);
             else if (item.use != ItemUse.None) RequestUse(bagIndex);
+            else if (item.isGem) RequestSocketGem(bagIndex);
         }
 
         public void RequestBuy(Vendor vendor, int stockIndex)
         {
             if (IsOwner && vendor != null) BuyRpc(vendor.Index, stockIndex);
+        }
+
+        public void RequestSocketGem(int bagIndex) { if (IsOwner) SocketGemRpc(bagIndex); }
+
+        public void RequestCombineGems(Vendor jeweler)
+        {
+            if (IsOwner && jeweler != null) CombineGemsRpc(jeweler.Index);
+        }
+
+        [Rpc(SendTo.Server)]
+        private void SocketGemRpc(int bagIndex, RpcParams rpcParams = default)
+        {
+            if (rpcParams.Receive.SenderClientId == OwnerClientId) ServerSocketGem(bagIndex);
+        }
+
+        [Rpc(SendTo.Server)]
+        private void CombineGemsRpc(int vendorIndex, RpcParams rpcParams = default)
+        {
+            if (rpcParams.Receive.SenderClientId == OwnerClientId) ServerCombineGems(Vendor.Get(vendorIndex));
         }
 
         /// <summary>Owner: asks how many of each item a vendor has left (the answer updates <see cref="Vendor.KnownRemaining"/>).</summary>
@@ -373,6 +479,21 @@ namespace RPG.Items
                     CombatTextLayer.ShowText(above, "Not enough gold", new Color(1f, 0.4f, 0.3f), 0.8f);
                     MessageLog.Add("Not enough gold.", MessageLog.WarningColor);
                     break;
+                case InventoryMessage.GemSocketed:
+                    if (item == null) break;
+                    CombatTextLayer.ShowText(above, $"{item.displayName} set", ItemDefinition.RarityColor(item.rarity), 0.8f);
+                    MessageLog.Add($"You set [{item.displayName}] into your gear.", ItemDefinition.RarityColor(item.rarity));
+                    break;
+                case InventoryMessage.NoEmptySocket:
+                    CombatTextLayer.ShowText(above, "No empty socket", new Color(1f, 0.4f, 0.3f), 0.8f);
+                    MessageLog.Add("None of your worn gear has an empty socket.", MessageLog.WarningColor);
+                    break;
+                case InventoryMessage.GemsCombined:
+                    MessageLog.Add($"The jeweler made {itemId} better gem(s) for you.", GoldColor);
+                    break;
+                case InventoryMessage.NothingToCombine:
+                    MessageLog.Add("You need 3 of the same gem to combine them.", MessageLog.WarningColor);
+                    break;
                 case InventoryMessage.SoldOut:
                     CombatTextLayer.ShowText(above, "Sold out", new Color(1f, 0.4f, 0.3f), 0.8f);
                     MessageLog.Add("That item is sold out. Vendors restock every few minutes.", MessageLog.WarningColor);
@@ -387,13 +508,15 @@ namespace RPG.Items
         // ---------- Server ----------
 
         /// <summary>Server: adds items (with an optional random affix id), filling stacks first. Returns how many fitted.</summary>
-        public int ServerAddItem(ItemDefinition item, int count = 1, bool announce = true, int affixId = 0)
+        public int ServerAddItem(ItemDefinition item, int count = 1, bool announce = true, int affixId = 0, int socket = 0)
         {
             if (!IsServer || catalog == null || item == null || count <= 0) return 0;
             int id = catalog.IdOf(item);
             if (id == 0) return 0;
             if (affixes == null || affixes.Get(affixId) == null) affixId = 0;
-            var kind = new ItemStack(id, 1, affixId);
+            ItemDefinition gem = socket > 0 ? catalog.Get(socket) : null;
+            if (!item.IsEquippable || (socket > 0 && (gem == null || !gem.isGem))) socket = item.IsEquippable && socket != 0 ? ItemStack.EmptySocket : 0;
+            var kind = new ItemStack(id, 1, affixId, socket);
 
             int remaining = count;
             for (int i = 0; i < bag.Count && remaining > 0; i++)
@@ -435,7 +558,7 @@ namespace RPG.Items
             ItemStack worn = equipment[equipIndex];
             equipment[equipIndex] = stack.WithCount(1);
             bag[bagIndex] = stack.Count > 1 ? stack.WithCount(stack.Count - 1) : worn;
-            if (stack.Count > 1 && !worn.IsEmpty) ServerAddItem(Definition(worn), 1, false, worn.AffixId);
+            if (stack.Count > 1 && !worn.IsEmpty) ServerAddItem(Definition(worn), 1, false, worn.AffixId, worn.Socket);
             return true;
         }
 
@@ -541,7 +664,7 @@ namespace RPG.Items
             if (!IsServer || health.IsDead || !IsNear(vendor) || bagIndex < 0 || bagIndex >= bag.Count) return false;
             ItemStack stack = bag[bagIndex];
             ItemDefinition item = Definition(stack);
-            int price = item != null ? item.SellPriceWith(Affix(stack)) : 0;
+            int price = item != null ? SellPrice(stack) : 0;
             if (price <= 0) return false;
 
             bag[bagIndex] = stack.Count > 1 ? stack.WithCount(stack.Count - 1) : ItemStack.Empty;
@@ -568,6 +691,12 @@ namespace RPG.Items
             /// <summary>Gold gained; the amount travels in the item id field.</summary>
             Gold,
             SoldOut,
+            /// <summary>A gem was set; the gem travels in the item id field.</summary>
+            GemSocketed,
+            NoEmptySocket,
+            /// <summary>Gems combined; how many new gems travels in the item id field.</summary>
+            GemsCombined,
+            NothingToCombine,
         }
     }
 }

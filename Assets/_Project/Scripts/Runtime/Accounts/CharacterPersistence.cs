@@ -128,7 +128,7 @@ namespace RPG.Accounts
             var stacks = new List<ItemStack>();
             if (records == null) return stacks;
             foreach (ItemRecord record in records)
-                stacks.Add(new ItemStack(record.id, record.count, record.affix));
+                stacks.Add(new ItemStack(record.id, record.count, record.affix, record.socket));
             return stacks;
         }
 
@@ -136,7 +136,7 @@ namespace RPG.Accounts
         {
             var records = new ItemRecord[stacks.Length];
             for (int i = 0; i < stacks.Length; i++)
-                records[i] = new ItemRecord(stacks[i].ItemId, stacks[i].Count, stacks[i].AffixId);
+                records[i] = new ItemRecord(stacks[i].ItemId, stacks[i].Count, stacks[i].AffixId, stacks[i].Socket);
             return records;
         }
     }
