@@ -24,6 +24,7 @@ namespace RPG.Progression
         public string displayName = "Ability";
         public AbilityKind kind = AbilityKind.TargetDamage;
         [Min(0f)] public float cooldown = 6f;
+        [Min(0)] public int manaCost = 10;
         [Tooltip("Max distance to the target (target abilities).")]
         [Min(0f)] public float range = 1f;
         [Tooltip("Area radius (area abilities).")]

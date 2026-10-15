@@ -131,7 +131,9 @@ namespace RPG.Tests
                     level = 3,
                     experience = 10,
                     gold = 77,
-                    bag = new[] { new ItemRecord(catalog.IdOf(sword), 1) },
+                    spentPoints = new AttributeSet(1, 0, 0, 2),
+                    unspentPoints = 7,
+                    bag = new[] { new ItemRecord(catalog.IdOf(sword), 1, 3) },
                     hasBeenSaved = true,
                 },
             });
@@ -148,6 +150,8 @@ namespace RPG.Tests
             Assert.AreEqual("Hero", player.GetComponent<Health>().DisplayName);
             Assert.AreEqual(1, player.GetComponent<Inventory>().CountOf(sword));
             Assert.AreEqual(77, player.GetComponent<Inventory>().Gold);
+            Assert.AreEqual(new AttributeSet(1, 0, 0, 2), progress.SpentPoints);
+            Assert.AreEqual(7, progress.UnspentPoints, "Level 3 gave 10 points, 3 are spent.");
 
             progress.ServerAddExperience(LevelCurve.ExperienceToNext(3));
             player.GetComponent<CharacterPersistence>().ServerSave();
@@ -155,6 +159,8 @@ namespace RPG.Tests
             Assert.IsTrue(store.TryLoad("hero", out AccountRecord saved));
             Assert.AreEqual(4, saved.character.level);
             Assert.AreEqual(1, saved.character.classIndex);
+            Assert.AreEqual(7 + AttributeRules.PointsPerLevel, saved.character.unspentPoints);
+            Assert.AreEqual(3, saved.character.bag[0].affix, "The affix is saved with the item.");
         }
 
         [UnityTest]

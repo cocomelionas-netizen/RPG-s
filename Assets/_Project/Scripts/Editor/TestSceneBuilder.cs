@@ -45,6 +45,7 @@ namespace RPG.EditorTools
         private const string MonstersFolder = "Assets/_Project/Prefabs/Monsters";
         private const string LootBagPrefabPath = "Assets/_Project/Prefabs/World/LootBag.prefab";
         private const string ItemsFolder = "Assets/_Project/Data/Items";
+        private const string AffixesFolder = "Assets/_Project/Data/Items/Affixes";
         private const string DungeonInstancePrefabPath = "Assets/_Project/Prefabs/World/DungeonInstance.prefab";
         private const string DungeonDefinitionPath = "Assets/_Project/Data/Dungeons/GoblinDen.asset";
         private const string KingAnimationSetPath = "Assets/_Project/Data/Characters/GoblinKing_AnimationSet.asset";
@@ -115,38 +116,39 @@ namespace RPG.EditorTools
                 new Color(0.33f, 0.31f, 0.29f), new Color(0.3f, 0.45f, 0.2f));
             CharacterAnimationSet orcAnimations = CreateCharacterAnimationSet("Orc", OrcArtFolder, OrcAnimationSetPath,
                 new Color(0.45f, 0.12f, 0.1f), new Color(0.42f, 0.52f, 0.36f));
-            ItemCatalog items = CreateItems(out ItemDefinition potion);
+            ItemCatalog items = CreateItems(out ItemDefinition potion, out ItemDefinition manaPotion);
+            AffixCatalog affixes = CreateAffixes();
             GameObject lootBagPrefab = CreateLootBagPrefab(PlaceholderArtGenerator.LootSack("LootSack"));
             GameObject goblinPrefab = CreateMonsterPrefab(new MonsterSpec
             {
                 Name = "Goblin", Animations = goblinAnimations, Scale = 0.85f, Health = 45, MinDamage = 3, MaxDamage = 5,
                 AttackInterval = 2f, Level = 2, Experience = 20, MoveSpeed = 1.8f, Gold = new Vector2Int(3, 6),
-                Loot = Loot(items, ("HealingPotion", 0.3f), ("RustySword", 0.08f), ("LeatherCap", 0.08f), ("PaddedVest", 0.08f),
+                Loot = Loot(items, ("GoblinEar", 0.6f), ("HealingPotion", 0.3f), ("ManaPotion", 0.15f), ("RustySword", 0.08f), ("LeatherCap", 0.08f), ("PaddedVest", 0.08f),
                     ("WornBoots", 0.08f), ("IronSword", 0.03f)),
-            }, barSprite, lootBagPrefab);
+            }, barSprite, lootBagPrefab, affixes);
             GameObject brutePrefab = CreateMonsterPrefab(new MonsterSpec
             {
                 Name = "Goblin Brute", Animations = bruteAnimations, Scale = 1.05f, Health = 120, MinDamage = 6, MaxDamage = 10,
                 AttackInterval = 2.2f, Level = 4, Experience = 45, MoveSpeed = 1.6f, Gold = new Vector2Int(10, 16),
-                Loot = Loot(items, ("HealingPotion", 0.5f), ("IronSword", 0.12f), ("IronHelm", 0.1f), ("Chainmail", 0.1f),
+                Loot = Loot(items, ("BruteTusk", 0.6f), ("HealingPotion", 0.5f), ("ManaPotion", 0.25f), ("IronSword", 0.12f), ("IronHelm", 0.1f), ("Chainmail", 0.1f),
                     ("IronBoots", 0.1f), ("GoblinCleaver", 0.04f)),
-            }, barSprite, lootBagPrefab);
+            }, barSprite, lootBagPrefab, affixes);
             GameObject orcPrefab = CreateMonsterPrefab(new MonsterSpec
             {
                 Name = "Orc", Animations = orcAnimations, Scale = 1.15f, Health = 220, MinDamage = 10, MaxDamage = 15,
                 AttackInterval = 2f, Level = 6, Experience = 90, MoveSpeed = 1.7f, Gold = new Vector2Int(20, 30),
-                Loot = Loot(items, ("HealingPotion", 0.6f), ("GoblinCleaver", 0.1f), ("OrcSkullHelm", 0.1f), ("OrcishPlate", 0.05f),
+                Loot = Loot(items, ("OrcFang", 0.6f), ("HealingPotion", 0.6f), ("ManaPotion", 0.3f), ("GoblinCleaver", 0.1f), ("OrcSkullHelm", 0.1f), ("OrcishPlate", 0.05f),
                     ("OrcishGreataxe", 0.05f)),
-            }, barSprite, lootBagPrefab);
+            }, barSprite, lootBagPrefab, affixes);
             CharacterAnimationSet kingAnimations = CreateCharacterAnimationSet("GoblinKing", KingArtFolder, KingAnimationSetPath,
                 new Color(0.75f, 0.58f, 0.15f), new Color(0.4f, 0.58f, 0.25f));
             GameObject kingPrefab = CreateMonsterPrefab(new MonsterSpec
             {
                 Name = "Goblin King", Animations = kingAnimations, Scale = 1.5f, Health = 900, MinDamage = 14, MaxDamage = 20,
                 AttackInterval = 2.2f, Level = 8, Experience = 300, MoveSpeed = 1.5f, Gold = new Vector2Int(150, 200),
-                Loot = Loot(items, ("HealingPotion", 1f), ("HealingPotion", 1f), ("OrcishGreataxe", 0.5f), ("OrcishPlate", 0.5f),
+                Loot = Loot(items, ("CrownShard", 1f), ("HealingPotion", 1f), ("ManaPotion", 1f), ("OrcishGreataxe", 0.5f), ("OrcishPlate", 0.5f),
                     ("OrcSkullHelm", 0.4f), ("GoblinCleaver", 0.4f)),
-            }, barSprite, lootBagPrefab, boss => boss.AddComponent<BossMechanics>());
+            }, barSprite, lootBagPrefab, affixes, boss => boss.AddComponent<BossMechanics>());
             DungeonDefinition dungeon = CreateDungeon(brutePrefab, orcPrefab, kingPrefab);
             CharacterAnimationSet rangerAnimations = CreateCharacterAnimationSet("Ranger", RangerArtFolder, RangerAnimationSetPath, new Color(0.2f, 0.45f, 0.22f), null);
             CharacterAnimationSet mageAnimations = CreateCharacterAnimationSet("Mage", MageArtFolder, MageAnimationSetPath, new Color(0.45f, 0.22f, 0.62f), null);
@@ -168,7 +170,7 @@ namespace RPG.EditorTools
             CreateEventSystem();
 
             // Players are not placed in the scene: the server spawns one per connection at the spawn point.
-            GameObject playerPrefab = CreatePlayerPrefab(playerAnimations, barSprite, classes, items, potion);
+            GameObject playerPrefab = CreatePlayerPrefab(playerAnimations, barSprite, classes, items, affixes, potion, manaPotion);
             var spawnPoint = new GameObject("Player Spawn").transform;
             spawnPoint.position = grid.GetCellCenterWorld(new Vector3Int(MapSize / 2, MapSize / 2, 0));
 
@@ -180,7 +182,7 @@ namespace RPG.EditorTools
             PlaceDummies(grid, dummyPrefab);
             PlaceMonsterCamps(grid, goblinPrefab, brutePrefab, orcPrefab);
             PlaceDungeon(grid, dungeon);
-            PlaceVendors(grid, CreateVendors(items, potion));
+            PlaceVendors(grid, CreateVendors(items, potion, manaPotion));
             CreateHud();
 
             EditorSceneManager.SaveScene(EditorSceneManager.GetActiveScene(), ScenePath);
@@ -310,7 +312,7 @@ namespace RPG.EditorTools
         }
 
         private static GameObject CreatePlayerPrefab(CharacterAnimationSet animations, Sprite barSprite, ClassCatalog classes,
-            ItemCatalog items, ItemDefinition startingPotion)
+            ItemCatalog items, AffixCatalog affixes, ItemDefinition startingPotion, ItemDefinition startingManaPotion)
         {
             var player = new GameObject("Player");
 
@@ -337,6 +339,7 @@ namespace RPG.EditorTools
 
             AddHealth(player, "Player", true, Faction.Player, 100);
             player.AddComponent<HealthRegeneration>();
+            player.AddComponent<Mana>();
             player.AddComponent<AutoAttack>();
             player.AddComponent<PlayerTargeting>();
             player.AddComponent<PlayerRespawn>();
@@ -348,10 +351,11 @@ namespace RPG.EditorTools
             var inventory = player.AddComponent<Inventory>();
             var inventoryObject = new SerializedObject(inventory);
             inventoryObject.FindProperty("catalog").objectReferenceValue = items;
+            inventoryObject.FindProperty("affixes").objectReferenceValue = affixes;
             SerializedProperty startingItems = inventoryObject.FindProperty("startingItems");
-            startingItems.arraySize = 3;
+            startingItems.arraySize = 5;
             for (int i = 0; i < startingItems.arraySize; i++)
-                startingItems.GetArrayElementAtIndex(i).objectReferenceValue = startingPotion;
+                startingItems.GetArrayElementAtIndex(i).objectReferenceValue = i < 3 ? startingPotion : startingManaPotion;
             inventoryObject.ApplyModifiedPropertiesWithoutUndo();
             player.AddComponent<LootPicker>();
             player.AddComponent<CharacterPersistence>();
@@ -581,23 +585,27 @@ namespace RPG.EditorTools
             var frost = new Color(0.5f, 0.85f, 1f);
             var heal = new Color(0.4f, 1f, 0.5f);
 
-            CharacterClassDefinition warrior = CreateClass("Warrior", warriorLook, 110, 11, 8, 12, 1f, 1.5f, 0.9f, 0.1f, Color.clear, new[]
+            // Base health is lowered by what the level-1 attributes add, so totals stay as before attributes.
+            CharacterClassDefinition warrior = CreateClass("Warrior", warriorLook, 35, 11, 5, 9, 1f, 1.5f, 0.9f, 0.06f, Color.clear,
+                new AttributeSet(15, 10, 5, 15), RPG.Progression.Attribute.Strength, 20, 4, new[]
             {
-                CreateAbility("Warrior_HeavyStrike", "Heavy Strike", AbilityKind.TargetDamage, 6f, 1f, 0f, 2.2f, 0f, steel),
-                CreateAbility("Warrior_Whirlwind", "Whirlwind", AbilityKind.SelfArea, 10f, 0f, 1.4f, 1.3f, 0f, steel),
-                CreateAbility("Warrior_SecondWind", "Second Wind", AbilityKind.SelfHeal, 30f, 0f, 0f, 0f, 0.3f, heal),
+                CreateAbility("Warrior_HeavyStrike", "Heavy Strike", AbilityKind.TargetDamage, 6f, 10, 1f, 0f, 2.2f, 0f, steel),
+                CreateAbility("Warrior_Whirlwind", "Whirlwind", AbilityKind.SelfArea, 10f, 15, 0f, 1.4f, 1.3f, 0f, steel),
+                CreateAbility("Warrior_SecondWind", "Second Wind", AbilityKind.SelfHeal, 30f, 20, 0f, 0f, 0f, 0.3f, heal),
             });
-            CharacterClassDefinition ranger = CreateClass("Ranger", rangerLook, 90, 9, 6, 9, 0.8f, 1.7f, 5f, 0.15f, new Color(0.85f, 0.75f, 0.45f), new[]
+            CharacterClassDefinition ranger = CreateClass("Ranger", rangerLook, 40, 9, 3, 6, 0.8f, 1.7f, 5f, 0.09f, new Color(0.85f, 0.75f, 0.45f),
+                new AttributeSet(10, 15, 10, 10), RPG.Progression.Attribute.Agility, 20, 6, new[]
             {
-                CreateAbility("Ranger_AimedShot", "Aimed Shot", AbilityKind.TargetDamage, 7f, 6f, 0f, 2.2f, 0f, green),
-                CreateAbility("Ranger_Volley", "Volley", AbilityKind.TargetArea, 10f, 6f, 1.3f, 1.2f, 0f, green),
-                CreateAbility("Ranger_Mend", "Mend", AbilityKind.SelfHeal, 30f, 0f, 0f, 0f, 0.25f, heal),
+                CreateAbility("Ranger_AimedShot", "Aimed Shot", AbilityKind.TargetDamage, 7f, 12, 6f, 0f, 2.2f, 0f, green),
+                CreateAbility("Ranger_Volley", "Volley", AbilityKind.TargetArea, 10f, 18, 6f, 1.3f, 1.2f, 0f, green),
+                CreateAbility("Ranger_Mend", "Mend", AbilityKind.SelfHeal, 30f, 20, 0f, 0f, 0f, 0.25f, heal),
             });
-            CharacterClassDefinition mage = CreateClass("Mage", mageLook, 80, 8, 5, 8, 0.8f, 1.8f, 4.5f, 0.1f, new Color(0.7f, 0.5f, 1f), new[]
+            CharacterClassDefinition mage = CreateClass("Mage", mageLook, 35, 8, 0, 3, 0.8f, 1.8f, 4.5f, 0.08f, new Color(0.7f, 0.5f, 1f),
+                new AttributeSet(5, 5, 20, 10), RPG.Progression.Attribute.Intelligence, 20, 10, new[]
             {
-                CreateAbility("Mage_Fireball", "Fireball", AbilityKind.TargetDamage, 5f, 5.5f, 0f, 2.8f, 0f, fire),
-                CreateAbility("Mage_Flamestrike", "Flamestrike", AbilityKind.TargetArea, 12f, 5.5f, 1.4f, 1.8f, 0f, fire),
-                CreateAbility("Mage_FrostNova", "Frost Nova", AbilityKind.SelfArea, 14f, 0f, 1.8f, 1.4f, 0f, frost),
+                CreateAbility("Mage_Fireball", "Fireball", AbilityKind.TargetDamage, 5f, 15, 5.5f, 0f, 2.8f, 0f, fire),
+                CreateAbility("Mage_Flamestrike", "Flamestrike", AbilityKind.TargetArea, 12f, 25, 5.5f, 1.4f, 1.8f, 0f, fire),
+                CreateAbility("Mage_FrostNova", "Frost Nova", AbilityKind.SelfArea, 14f, 30, 0f, 1.8f, 1.4f, 0f, frost),
             });
 
             var catalog = LoadOrCreateAsset<ClassCatalog>($"{ClassesFolder}/ClassCatalog.asset");
@@ -609,7 +617,8 @@ namespace RPG.EditorTools
 
         private static CharacterClassDefinition CreateClass(string className, CharacterAnimationSet look, int baseHealth, int healthPerLevel,
             int minDamage, int maxDamage, float damagePerLevel, float attackInterval, float attackRange, float critChance,
-            Color projectileColor, AbilityDefinition[] abilities)
+            Color projectileColor, AttributeSet attributes, RPG.Progression.Attribute primaryAttribute, int baseMana, int manaPerLevel,
+            AbilityDefinition[] abilities)
         {
             var definition = LoadOrCreateAsset<CharacterClassDefinition>($"{ClassesFolder}/{className}.asset");
             definition.displayName = className;
@@ -623,18 +632,23 @@ namespace RPG.EditorTools
             definition.attackRange = attackRange;
             definition.critChance = critChance;
             definition.projectileColor = projectileColor;
+            definition.baseAttributes = attributes;
+            definition.primaryAttribute = primaryAttribute;
+            definition.baseMana = baseMana;
+            definition.manaPerLevel = manaPerLevel;
             definition.abilities = abilities;
             EditorUtility.SetDirty(definition);
             return definition;
         }
 
-        private static AbilityDefinition CreateAbility(string fileName, string displayName, AbilityKind kind, float cooldown,
+        private static AbilityDefinition CreateAbility(string fileName, string displayName, AbilityKind kind, float cooldown, int manaCost,
             float range, float radius, float damageMultiplier, float healFraction, Color effectColor)
         {
             var ability = LoadOrCreateAsset<AbilityDefinition>($"{AbilitiesFolder}/{fileName}.asset");
             ability.displayName = displayName;
             ability.kind = kind;
             ability.cooldown = cooldown;
+            ability.manaCost = manaCost;
             ability.range = range;
             ability.radius = radius;
             ability.damageMultiplier = damageMultiplier;
@@ -674,7 +688,7 @@ namespace RPG.EditorTools
         }
 
         private static GameObject CreateMonsterPrefab(MonsterSpec spec, Sprite barSprite, GameObject lootBagPrefab,
-            Action<GameObject> addExtras = null)
+            AffixCatalog affixes, Action<GameObject> addExtras = null)
         {
             var monster = new GameObject(spec.Name);
             monster.transform.localScale = new Vector3(spec.Scale, spec.Scale, 1f);
@@ -711,7 +725,7 @@ namespace RPG.EditorTools
             // For now monsters do not attack players who come near; they only fight back (with their camp) when hit.
             aiObject.FindProperty("aggroRadius").floatValue = 0f;
             aiObject.ApplyModifiedPropertiesWithoutUndo();
-            ai.ConfigureLoot(lootBagPrefab, spec.Loot);
+            ai.ConfigureLoot(lootBagPrefab, spec.Loot, affixes);
             ai.GoldReward = spec.Gold;
 
             // The bar and hitbox are children, so they scale with the monster.
@@ -756,17 +770,18 @@ namespace RPG.EditorTools
             return dungeon;
         }
 
-        private static VendorDefinition[] CreateVendors(ItemCatalog catalog, ItemDefinition potion)
+        private static VendorDefinition[] CreateVendors(ItemCatalog catalog, ItemDefinition potion, ItemDefinition manaPotion)
         {
             VendorDefinition MakeVendor(string fileName, string vendorName, string title, params string[] items)
             {
                 var vendor = LoadOrCreateAsset<VendorDefinition>($"{VendorsFolder}/{fileName}.asset");
                 vendor.displayName = vendorName;
                 vendor.title = title;
-                var stock = new ItemDefinition[items.Length + 1];
+                var stock = new ItemDefinition[items.Length + 2];
                 for (int i = 0; i < items.Length; i++)
                     stock[i] = AssetDatabase.LoadAssetAtPath<ItemDefinition>($"{ItemsFolder}/{items[i]}.asset");
                 stock[items.Length] = potion;
+                stock[items.Length + 1] = manaPotion;
                 vendor.stock = stock;
                 EditorUtility.SetDirty(vendor);
                 return vendor;
@@ -846,7 +861,7 @@ namespace RPG.EditorTools
             return prefab;
         }
 
-        private static ItemCatalog CreateItems(out ItemDefinition potion)
+        private static ItemCatalog CreateItems(out ItemDefinition potion, out ItemDefinition manaPotion)
         {
             var metal = new Color(0.62f, 0.64f, 0.7f);
             var leather = new Color(0.55f, 0.38f, 0.22f);
@@ -867,7 +882,14 @@ namespace RPG.EditorTools
             potion.price = 10;
             potion.requiredClass = -1;
             potion.iconColor = new Color(0.85f, 0.15f, 0.2f);
+            potion.canHaveAffix = false;
             EditorUtility.SetDirty(potion);
+
+            manaPotion = CreateItem("ManaPotion", "Mana Potion", ItemSlot.None, ItemRarity.Common, 0, 0, 0, new Color(0.2f, 0.35f, 0.95f), 10);
+            manaPotion.use = ItemUse.RestoreMana;
+            manaPotion.healFraction = 0.4f;
+            manaPotion.maxStack = 10;
+            manaPotion.canHaveAffix = false;
 
             var catalog = LoadOrCreateAsset<ItemCatalog>($"{ItemsFolder}/ItemCatalog.asset");
             // Players will store item ids (catalog index + 1): only ever append to this list.
@@ -910,6 +932,13 @@ namespace RPG.EditorTools
                 CreateItem("ApprenticeRobe", "Apprentice Robe", ItemSlot.Chest, ItemRarity.Common, 0, 8, 4, cloth, 35, MageClass),
                 CreateItem("EnchantedRobe", "Enchanted Robe", ItemSlot.Chest, ItemRarity.Uncommon, 0, 20, 7, arcane, 140, MageClass),
                 CreateItem("SilkSlippers", "Silk Slippers", ItemSlot.Feet, ItemRarity.Common, 0, 4, 2, cloth, 15, MageClass),
+
+                // Junk dropped by monsters: only worth selling.
+                CreateJunk("GoblinEar", "Goblin Ear", new Color(0.45f, 0.6f, 0.3f), 8),
+                CreateJunk("BruteTusk", "Brute Tusk", new Color(0.9f, 0.88f, 0.75f), 24),
+                CreateJunk("OrcFang", "Orc Fang", new Color(0.8f, 0.78f, 0.65f), 40),
+                CreateJunk("CrownShard", "Crown Shard", new Color(0.85f, 0.7f, 0.2f), 200),
+                manaPotion,
             };
             EditorUtility.SetDirty(catalog);
             return catalog;
@@ -943,8 +972,70 @@ namespace RPG.EditorTools
             item.iconColor = iconColor;
             item.price = price;
             item.requiredClass = requiredClass;
+            item.manaBonus = 0;
+            item.attributes = default;
+            item.canHaveAffix = true;
             EditorUtility.SetDirty(item);
             return item;
+        }
+
+        private static ItemDefinition CreateJunk(string fileName, string displayName, Color iconColor, int price)
+        {
+            ItemDefinition item = CreateItem(fileName, displayName, ItemSlot.None, ItemRarity.Poor, 0, 0, 0, iconColor, price);
+            item.maxStack = 20;
+            item.canHaveAffix = false;
+            return item;
+        }
+
+        private static AffixCatalog CreateAffixes()
+        {
+            AffixDefinition Affix(string fileName, string displayName, bool isPrefix, ItemRarity quality, int minLevel, int maxLevel,
+                AttributeSet attributes, int damage = 0, int health = 0, int armor = 0, int mana = 0)
+            {
+                var affix = LoadOrCreateAsset<AffixDefinition>($"{AffixesFolder}/{fileName}.asset");
+                affix.displayName = displayName;
+                affix.isPrefix = isPrefix;
+                affix.quality = quality;
+                affix.minLevel = minLevel;
+                affix.maxLevel = maxLevel;
+                affix.attributes = attributes;
+                affix.damageBonus = damage;
+                affix.healthBonus = health;
+                affix.armor = armor;
+                affix.manaBonus = mana;
+                affix.priceMultiplier = quality switch
+                {
+                    ItemRarity.Uncommon => 1.5f,
+                    ItemRarity.Rare => 2.5f,
+                    ItemRarity.Epic => 4f,
+                    _ => 8f,
+                };
+                EditorUtility.SetDirty(affix);
+                return affix;
+            }
+
+            var catalog = LoadOrCreateAsset<AffixCatalog>($"{AffixesFolder}/AffixCatalog.asset");
+            // Items store affix ids (index + 1): only ever append to this list.
+            catalog.affixes = new[]
+            {
+                Affix("Sturdy", "Sturdy", true, ItemRarity.Uncommon, 1, 5, default, armor: 2),
+                Affix("Sharp", "Sharp", true, ItemRarity.Uncommon, 1, 5, default, damage: 1),
+                Affix("OfTheBear", "of the Bear", false, ItemRarity.Uncommon, 1, 99, new AttributeSet(2, 0, 0, 2)),
+                Affix("OfTheFox", "of the Fox", false, ItemRarity.Uncommon, 1, 99, new AttributeSet(0, 3, 0, 1)),
+                Affix("OfTheOwl", "of the Owl", false, ItemRarity.Uncommon, 1, 99, new AttributeSet(0, 0, 3, 1)),
+                Affix("Reinforced", "Reinforced", true, ItemRarity.Rare, 3, 99, new AttributeSet(0, 0, 0, 3), armor: 4),
+                Affix("Keen", "Keen", true, ItemRarity.Rare, 3, 99, new AttributeSet(0, 2, 0, 0), damage: 3),
+                Affix("Arcane", "Arcane", true, ItemRarity.Rare, 3, 99, new AttributeSet(0, 0, 4, 0), mana: 15),
+                Affix("OfTheTiger", "of the Tiger", false, ItemRarity.Rare, 3, 99, new AttributeSet(4, 4, 0, 0)),
+                Affix("OfTheWhale", "of the Whale", false, ItemRarity.Rare, 3, 99, new AttributeSet(0, 0, 0, 5), health: 10),
+                Affix("Brutal", "Brutal", true, ItemRarity.Epic, 5, 99, new AttributeSet(6, 0, 0, 0), damage: 4),
+                Affix("OfTheSorcerer", "of the Sorcerer", false, ItemRarity.Epic, 5, 99, new AttributeSet(0, 0, 8, 2), mana: 25),
+                Affix("OfTheGuardian", "of the Guardian", false, ItemRarity.Epic, 5, 99, new AttributeSet(0, 0, 0, 8), health: 20, armor: 6),
+                Affix("Kingslayer", "Kingslayer's", true, ItemRarity.Legendary, 7, 99, new AttributeSet(6, 6, 6, 6), damage: 6, armor: 5),
+            };
+            catalog.affixChance = 0.6f;
+            EditorUtility.SetDirty(catalog);
+            return catalog;
         }
 
         /// <summary>Prefabs spawned at runtime must be in the network prefab list on server and clients.</summary>
@@ -1035,7 +1126,8 @@ namespace RPG.EditorTools
             CreateUnitFrame(canvasObject.transform, "Target Frame", UnitFrameRole.Target, new Vector2(0.5f, 1f), new Vector2(0f, -30f));
 
             // These build their own contents at runtime.
-            CreateHudElement<ExperienceBar>(canvasObject.transform, "Experience Bar", new Vector2(0.5f, 0f), new Vector2(0.5f, 0f), new Vector2(0f, 18f), new Vector2(380f, 16f));
+            CreateHudElement<ExperienceBar>(canvasObject.transform, "Experience Bar", new Vector2(0.5f, 0f), new Vector2(0.5f, 0f), new Vector2(0f, 4f), new Vector2(380f, 12f));
+            CreateHudElement<ManaBar>(canvasObject.transform, "Mana Bar", new Vector2(0.5f, 0f), new Vector2(0.5f, 0f), new Vector2(0f, 19f), new Vector2(380f, 16f));
             CreateHudElement<AbilityBar>(canvasObject.transform, "Ability Bar", new Vector2(0.5f, 0f), new Vector2(0.5f, 0f), new Vector2(0f, 122f), new Vector2(400f, 80f));
             // Name plates first, so the windows are drawn over them.
             var nameplates = new GameObject("NPC Nameplates", typeof(RectTransform));
@@ -1052,6 +1144,11 @@ namespace RPG.EditorTools
             inventoryWindow.transform.SetParent(canvasObject.transform, false);
             Stretch((RectTransform)inventoryWindow.transform);
             inventoryWindow.AddComponent<InventoryWindow>();
+
+            var characterWindow = new GameObject("Character Window", typeof(RectTransform));
+            characterWindow.transform.SetParent(canvasObject.transform, false);
+            Stretch((RectTransform)characterWindow.transform);
+            characterWindow.AddComponent<CharacterWindow>();
         }
 
         private static void CreateHudElement<T>(Transform canvas, string elementName, Vector2 anchor, Vector2 pivot, Vector2 position, Vector2 size) where T : Component

@@ -151,7 +151,10 @@ namespace RPG.UI
                 Color tint = ability.effectColor * 0.45f;
                 tint.a = 0.92f;
                 slot.Background.color = tint;
-                slot.Name.text = ability.displayName;
+                bool enoughMana = caster.HasManaFor(ability);
+                slot.Name.text = ability.manaCost > 0
+                    ? $"{ability.displayName}\n<color={(enoughMana ? "#8fb3ff" : "#ff6655")}>{ability.manaCost} mana</color>"
+                    : ability.displayName;
                 SetHighlighted(slot, caster.PendingSlot == abilitySlot);
 
                 float remaining = caster.CooldownRemaining(abilitySlot);

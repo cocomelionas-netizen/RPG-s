@@ -237,12 +237,12 @@ namespace RPG.UI
                 return;
             }
 
-            Color rarity = ItemDefinition.RarityColor(item.rarity);
+            Color rarity = ItemDefinition.RarityColor(inventory.Quality(stack));
             Color background = item.iconColor * 0.55f;
             background.a = 0.95f;
             view.Background.color = background;
             view.Border.effectColor = rarity;
-            view.Label.text = item.displayName;
+            view.Label.text = inventory.DisplayName(stack);
             view.Label.color = rarity;
             if (view.Count != null && bagSlots.Contains(view))
                 view.Count.text = stack.Count > 1 ? stack.Count.ToString() : "";
@@ -260,6 +260,7 @@ namespace RPG.UI
         private void ShowTooltip()
         {
             ItemDefinition item = null;
+            ItemStack hoveredStack = ItemStack.Empty;
             if (hovered != null)
             {
                 int bagIndex = bagSlots.IndexOf(hovered);
@@ -267,20 +268,22 @@ namespace RPG.UI
                 ItemStack stack = bagIndex >= 0 ? inventory.GetBagSlot(bagIndex)
                     : equipIndex >= 0 ? inventory.GetEquipped(EquipmentOrder[equipIndex]) : ItemStack.Empty;
                 item = inventory.Definition(stack);
+                hoveredStack = stack;
+                AffixDefinition affix = inventory.Affix(stack);
                 string className = VendorWindow.ClassName(item, inventory.GetComponent<CharacterProgress>());
                 if (item != null && equipIndex >= 0)
-                    tooltipText.text = item.Describe(className).Replace("Click to equip", "Click to take off");
+                    tooltipText.text = item.Describe(className, affix).Replace("Click to equip", "Click to take off");
                 else if (item != null && VendorWindow.CurrentVendor != null)
-                    tooltipText.text = item.Describe(className).Replace("Click to equip", "").Replace("Click to use", "").TrimEnd()
-                                       + $"\nClick to sell for {item.SellPrice} gold";
+                    tooltipText.text = item.Describe(className, affix).Replace("Click to equip", "").Replace("Click to use", "").TrimEnd()
+                                       + $"\nClick to sell for {item.SellPriceWith(affix)} gold";
                 else if (item != null)
-                    tooltipText.text = item.Describe(className);
+                    tooltipText.text = item.Describe(className, affix);
             }
 
             tooltip.gameObject.SetActive(item != null);
             if (item == null) return;
 
-            tooltipText.color = ItemDefinition.RarityColor(item.rarity);
+            tooltipText.color = ItemDefinition.RarityColor(inventory.Quality(hoveredStack));
             var canvas = GetComponentInParent<Canvas>();
             float scale = canvas != null ? canvas.scaleFactor : 1f;
             Vector2 pointer = UnityEngine.InputSystem.Mouse.current != null

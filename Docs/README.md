@@ -82,5 +82,6 @@ Naujausia versija po kiekvieno push'o į `main` automatiškai sukuriama ir paske
 | 10 | Požemiai (instancijos) | ✅ [Stage10.md](Stage10.md) |
 | ~~11~~ | ~~PvP~~ | ✖ atsisakyta |
 | + | Didesnis žemėlapis, miestelis, klasių prekeiviai, auksas (įkvėpta Source) | ✅ [Town.md](Town.md) |
+| + | Mana, šlamštas iš monstrų, atsitiktiniai afiksai ir 6 kokybės lygiai, atributai (įkvėpta Source) | ✅ [Attributes.md](Attributes.md) |
 
 Multiplayer'is planuojamas anksti (3 etapas) sąmoningai. Kovą, monstrus ir daiktus iškart rašysime serverio autoriteto principu, kad vėliau nereikėtų jų perrašinėti.

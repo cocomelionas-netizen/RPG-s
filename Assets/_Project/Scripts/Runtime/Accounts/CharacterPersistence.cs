@@ -81,7 +81,7 @@ namespace RPG.Accounts
         private void Load(CharacterRecord saved)
         {
             health.ServerSetDisplayName(account.username);
-            progress.ServerLoad(saved.classIndex, saved.level, saved.experience);
+            progress.ServerLoad(saved.classIndex, saved.level, saved.experience, saved.spentPoints);
             if (!saved.hasBeenSaved) return;
 
             inventory.ServerLoad(ToStacks(saved.bag), ToStacks(saved.equipment));
@@ -104,6 +104,8 @@ namespace RPG.Accounts
             record.level = progress.Level;
             record.experience = progress.Experience;
             record.gold = inventory.Gold;
+            record.spentPoints = progress.SpentPoints;
+            record.unspentPoints = progress.UnspentPoints;
             record.bag = ToRecords(inventory.BagSnapshot());
             record.equipment = ToRecords(inventory.EquipmentSnapshot());
             Vector2 position = AutoAttack.ServerPosition(this);
@@ -121,7 +123,7 @@ namespace RPG.Accounts
             var stacks = new List<ItemStack>();
             if (records == null) return stacks;
             foreach (ItemRecord record in records)
-                stacks.Add(new ItemStack(record.id, record.count));
+                stacks.Add(new ItemStack(record.id, record.count, record.affix));
             return stacks;
         }
 
@@ -129,7 +131,7 @@ namespace RPG.Accounts
         {
             var records = new ItemRecord[stacks.Length];
             for (int i = 0; i < stacks.Length; i++)
-                records[i] = new ItemRecord(stacks[i].ItemId, stacks[i].Count);
+                records[i] = new ItemRecord(stacks[i].ItemId, stacks[i].Count, stacks[i].AffixId);
             return records;
         }
     }

@@ -89,7 +89,7 @@ namespace RPG.Tests
             yield return null;
             Assert.AreEqual(1, progress.Level);
             Assert.AreEqual("Warrior", progress.ClassName);
-            Assert.AreEqual(progress.Class.MaxHealthAt(1), playerHealth.Max);
+            Assert.AreEqual(progress.Class.MaxHealthAt(1) + AttributeRules.HealthBonus(progress.TotalAttributes), playerHealth.Max);
             Assert.AreEqual(playerHealth.Max, playerHealth.Current);
             Assert.AreEqual(progress.Class.attackRange, player.GetComponent<AutoAttack>().Range);
         }
@@ -120,7 +120,7 @@ namespace RPG.Tests
 
             Assert.AreEqual("Ranger", progress.ClassName);
             Assert.AreEqual(2, progress.Level);
-            Assert.AreEqual(progress.Class.MaxHealthAt(2), playerHealth.Max);
+            Assert.AreEqual(progress.Class.MaxHealthAt(2) + AttributeRules.HealthBonus(progress.TotalAttributes), playerHealth.Max);
             Assert.Greater(player.GetComponent<AutoAttack>().Range, 3f, "Rangers attack from afar.");
         }
 

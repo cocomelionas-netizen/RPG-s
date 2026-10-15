@@ -46,6 +46,8 @@ namespace RPG.Monsters
         [Tooltip("Each entry is rolled on death; the items that drop are left in a loot bag.")]
         [SerializeField] private LootEntry[] loot = System.Array.Empty<LootEntry>();
         [SerializeField] private GameObject lootBagPrefab;
+        [Tooltip("Rolls random affixes on dropped weapons and armor (none when empty).")]
+        [SerializeField] private AffixCatalog affixes;
 
         [Header("Aggro")]
         [SerializeField, Min(0f)] private float aggroRadius = 3f;
@@ -132,10 +134,11 @@ namespace RPG.Monsters
         }
 
         /// <summary>Sets the drops (used by the scene builder and tests).</summary>
-        public void ConfigureLoot(GameObject bagPrefab, LootEntry[] entries)
+        public void ConfigureLoot(GameObject bagPrefab, LootEntry[] entries, AffixCatalog affixCatalog = null)
         {
             lootBagPrefab = bagPrefab;
             loot = entries ?? System.Array.Empty<LootEntry>();
+            if (affixCatalog != null) affixes = affixCatalog;
         }
 
         public float AggroRadius
@@ -325,14 +328,15 @@ namespace RPG.Monsters
             return best;
         }
 
-        private readonly List<ItemDefinition> drops = new List<ItemDefinition>();
+        private readonly List<LootItem> drops = new List<LootItem>();
 
         private void DropLoot()
         {
             if (lootBagPrefab == null) return;
             drops.Clear();
             foreach (LootEntry entry in loot)
-                if (entry.item != null && Random.value < entry.chance) drops.Add(entry.item);
+                if (entry.item != null && Random.value < entry.chance)
+                    drops.Add(new LootItem(entry.item, affixes != null ? affixes.Roll(entry.item, level) : 0));
             if (drops.Count == 0) return;
 
             GameObject bag = Instantiate(lootBagPrefab, transform.position, Quaternion.identity);

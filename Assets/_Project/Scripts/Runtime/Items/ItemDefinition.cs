@@ -1,4 +1,5 @@
 using System.Text;
+using RPG.Progression;
 using UnityEngine;
 
 namespace RPG.Items
@@ -13,12 +14,15 @@ namespace RPG.Items
         Feet,
     }
 
+    /// <summary>Quality, from vendor junk to the rarest finds. Random affixes can raise an item's quality.</summary>
     public enum ItemRarity
     {
+        Poor,
         Common,
         Uncommon,
         Rare,
         Epic,
+        Legendary,
     }
 
     /// <summary>What happens when the item is used from the bag.</summary>
@@ -27,6 +31,8 @@ namespace RPG.Items
         None,
         /// <summary>Restores a share of max health and is used up.</summary>
         Heal,
+        /// <summary>Restores a share of max mana and is used up.</summary>
+        RestoreMana,
     }
 
     /// <summary>One kind of item: its slot, rarity, stats and use. Players' bags refer to it by catalog index.</summary>
@@ -43,6 +49,10 @@ namespace RPG.Items
         [Min(0)] public int healthBonus;
         [Tooltip("Reduces damage taken: 100 armor halves it.")]
         [Min(0)] public int armor;
+        [Min(0)] public int manaBonus;
+        public AttributeSet attributes;
+        [Tooltip("Random affixes can be rolled on it when it drops (weapons and armor).")]
+        public bool canHaveAffix = true;
 
         [Header("Trade and restrictions")]
         [Tooltip("Price at vendors in gold; vendors buy it back for a quarter of this.")]
@@ -65,9 +75,11 @@ namespace RPG.Items
         {
             switch (rarity)
             {
+                case ItemRarity.Poor: return new Color(0.6f, 0.6f, 0.6f);
                 case ItemRarity.Uncommon: return new Color(0.35f, 0.9f, 0.35f);
                 case ItemRarity.Rare: return new Color(0.35f, 0.6f, 1f);
                 case ItemRarity.Epic: return new Color(0.75f, 0.4f, 1f);
+                case ItemRarity.Legendary: return new Color(1f, 0.6f, 0.15f);
                 default: return new Color(0.92f, 0.92f, 0.92f);
             }
         }
@@ -75,24 +87,53 @@ namespace RPG.Items
         /// <summary>What a vendor pays for one (a quarter of the price, at least 1 for anything with a price).</summary>
         public int SellPrice => price > 0 ? Mathf.Max(1, price / 4) : 0;
 
+        /// <summary>Sell price with an affix: better affixes make an item worth more.</summary>
+        public int SellPriceWith(AffixDefinition affix)
+        {
+            if (affix == null) return SellPrice;
+            return Mathf.Max(1, Mathf.RoundToInt(SellPrice * affix.priceMultiplier));
+        }
+
+        /// <summary>"Sturdy Iron Helm" or "Iron Sword of the Bear".</summary>
+        public string NameWith(AffixDefinition affix)
+        {
+            if (affix == null) return displayName;
+            return affix.isPrefix ? $"{affix.displayName} {displayName}" : $"{displayName} {affix.displayName}";
+        }
+
+        /// <summary>The better of the item's own quality and its affix's.</summary>
+        public ItemRarity QualityWith(AffixDefinition affix)
+        {
+            return affix != null && affix.quality > rarity ? affix.quality : rarity;
+        }
+
         public bool CanBeUsedByClass(int classIndex) => requiredClass < 0 || requiredClass == classIndex;
 
-        /// <summary>Tooltip text: name, rarity and slot, stats and use.</summary>
+        /// <summary>Tooltip text: name, quality and slot, stats and use, with an affix when the item has one.</summary>
         /// <param name="className">Name of the required class to show (null when anyone may use it).</param>
-        public string Describe(string className = null)
+        public string Describe(string className = null, AffixDefinition affix = null)
         {
             var text = new StringBuilder();
-            text.AppendLine(displayName);
-            text.Append(rarity);
+            text.AppendLine(NameWith(affix));
+            text.Append(QualityWith(affix));
             if (IsEquippable) text.Append(' ').Append(slot);
             text.AppendLine();
-            if (damageBonus > 0) text.AppendLine($"+{damageBonus} damage");
-            if (healthBonus > 0) text.AppendLine($"+{healthBonus} health");
-            if (armor > 0) text.AppendLine($"+{armor} armor");
+
+            int damage = damageBonus + (affix != null ? affix.damageBonus : 0);
+            int health = healthBonus + (affix != null ? affix.healthBonus : 0);
+            int totalArmor = armor + (affix != null ? affix.armor : 0);
+            int mana = manaBonus + (affix != null ? affix.manaBonus : 0);
+            AttributeSet totalAttributes = attributes + (affix != null ? affix.attributes : default);
+            if (damage > 0) text.AppendLine($"+{damage} damage");
+            if (health > 0) text.AppendLine($"+{health} health");
+            if (mana > 0) text.AppendLine($"+{mana} mana");
+            if (totalArmor > 0) text.AppendLine($"+{totalArmor} armor");
+            if (!totalAttributes.IsZero) text.AppendLine(totalAttributes.Describe("\n"));
             if (use == ItemUse.Heal) text.AppendLine($"Use: restores {Mathf.RoundToInt(healFraction * 100f)}% health");
+            if (use == ItemUse.RestoreMana) text.AppendLine($"Use: restores {Mathf.RoundToInt(healFraction * 100f)}% mana");
             if (maxStack > 1) text.AppendLine($"Stacks up to {maxStack}");
             if (!string.IsNullOrEmpty(className)) text.AppendLine($"{className} only");
-            if (price > 0) text.AppendLine($"Sells for {SellPrice} gold");
+            if (price > 0) text.AppendLine($"Sells for {SellPriceWith(affix)} gold");
             text.Append(IsEquippable ? "Click to equip" : use != ItemUse.None ? "Click to use" : "");
             return text.ToString().TrimEnd();
         }

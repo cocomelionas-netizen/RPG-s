@@ -1,4 +1,5 @@
 using System;
+using RPG.Progression;
 
 namespace RPG.Accounts
 {
@@ -21,6 +22,9 @@ namespace RPG.Accounts
         public int level = 1;
         public int experience;
         public int gold;
+        /// <summary>Attribute points the player spent, and those still to spend.</summary>
+        public AttributeSet spentPoints;
+        public int unspentPoints;
         public ItemRecord[] bag = Array.Empty<ItemRecord>();
         public ItemRecord[] equipment = Array.Empty<ItemRecord>();
         /// <summary>False for a new character, which starts at the spawn point with the starting items.</summary>
@@ -34,11 +38,14 @@ namespace RPG.Accounts
     {
         public int id;
         public int count;
+        /// <summary>Random affix (0 for none).</summary>
+        public int affix;
 
-        public ItemRecord(int id, int count)
+        public ItemRecord(int id, int count, int affix)
         {
             this.id = id;
             this.count = count;
+            this.affix = affix;
         }
     }
 }
