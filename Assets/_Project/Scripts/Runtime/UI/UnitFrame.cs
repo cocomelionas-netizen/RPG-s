@@ -1,3 +1,4 @@
+using RPG.Characters;
 using RPG.Combat;
 using RPG.Monsters;
 using RPG.Progression;
@@ -15,7 +16,7 @@ namespace RPG.UI
     }
 
     /// <summary>
-    /// Screen frame of a unit: a round portrait (the unit's current sprite) with its level, the name, and health
+    /// Screen frame of a unit: a round portrait (the unit's standing, front-facing sprite) with its level, the name, and health
     /// and mana bars. The player's frame has the portrait on the left, the target's on the right.
     /// Builds its own UI; place it on a RectTransform about 440 x 110 in the HUD canvas.
     /// </summary>
@@ -157,23 +158,34 @@ namespace RPG.UI
             UpdateFace();
         }
 
-        /// <summary>Shows the unit's current animation frame, zoomed on the head.</summary>
+        /// <summary>Shows the unit standing and facing the viewer, zoomed on the head; it does not animate.</summary>
         private void UpdateFace()
         {
-            var body = bound.GetComponent<SpriteRenderer>();
-            Sprite sprite = body != null ? body.sprite : null;
+            Sprite sprite = PortraitSprite(bound);
             face.enabled = sprite != null;
             if (sprite == null) return;
 
-            face.sprite = sprite;
-            float height = portraitSize * FaceZoom;
-            float aspect = sprite.rect.width / Mathf.Max(1f, sprite.rect.height);
-            face.rectTransform.sizeDelta = new Vector2(height * aspect, height);
-            // Face the middle of the screen, like the bars.
-            bool facingLeft = body.flipX;
-            bool wantLeft = role == UnitFrameRole.Target;
-            face.rectTransform.localScale = new Vector3(facingLeft == wantLeft ? 1f : -1f, 1f, 1f);
+            if (face.sprite != sprite)
+            {
+                face.sprite = sprite;
+                float height = portraitSize * FaceZoom;
+                float aspect = sprite.rect.width / Mathf.Max(1f, sprite.rect.height);
+                face.rectTransform.sizeDelta = new Vector2(height * aspect, height);
+            }
             face.color = bound.IsDead ? new Color(0.5f, 0.5f, 0.5f) : Color.white;
+        }
+
+        /// <summary>The first idle frame facing south; units without animations show their sprite as it is.</summary>
+        private static Sprite PortraitSprite(Health unit)
+        {
+            var animator = unit.GetComponent<CharacterAnimator>();
+            CharacterAnimationSet set = animator != null ? animator.AnimationSet : null;
+            if (set != null && set.TryGetFrames(CharacterAnimationSet.IdleClip, Direction8.South, out _, out Sprite[] frames, out _)
+                && frames != null && frames.Length > 0 && frames[0] != null)
+                return frames[0];
+
+            var body = unit.GetComponent<SpriteRenderer>();
+            return body != null ? body.sprite : null;
         }
     }
 }

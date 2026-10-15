@@ -42,7 +42,9 @@ namespace RPG.Items
         private Mana mana;
         private CharacterProgress progress;
         private PlayerInputReader input;
-        private double potionReadyAt;
+        // Server time when potions can be used again (shared by all potions); replicated so the bar can show it.
+        private readonly NetworkVariable<double> potionReadyAt = new NetworkVariable<double>(
+            0.0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
 
         /// <summary>Raised on every peer when the bag or the equipment changed.</summary>
         public event Action Changed;
@@ -128,6 +130,13 @@ namespace RPG.Items
                 if (bag[i].ItemId == id) count += bag[i].Count;
             return count;
         }
+
+        /// <summary>Seconds until potions can be used again (0 when ready).</summary>
+        public float PotionCooldownRemaining =>
+            IsSpawned ? Mathf.Max(0f, (float)(potionReadyAt.Value - NetworkManager.ServerTime.Time)) : 0f;
+
+        /// <summary>Share of the potion cooldown still to wait, 1 right after drinking.</summary>
+        public float PotionCooldownFraction => potionCooldown > 0f ? Mathf.Clamp01(PotionCooldownRemaining / potionCooldown) : 0f;
 
         /// <summary>The first bag slot holding an item used this way (-1 when there is none).</summary>
         public int FindUsable(ItemUse use)
@@ -417,7 +426,7 @@ namespace RPG.Items
             if (item == null || item.use == ItemUse.None) return false;
 
             double now = NetworkManager.ServerTime.Time;
-            if (now < potionReadyAt)
+            if (now < potionReadyAt.Value)
             {
                 MessageRpc(InventoryMessage.NotReady, stack.ItemId, 0);
                 return false;
@@ -433,7 +442,7 @@ namespace RPG.Items
                     mana.ServerRestore(Mathf.Max(1, Mathf.RoundToInt(mana.Max * item.healFraction)));
                     break;
             }
-            potionReadyAt = now + potionCooldown;
+            potionReadyAt.Value = now + potionCooldown;
 
             bag[bagIndex] = stack.Count > 1 ? stack.WithCount(stack.Count - 1) : ItemStack.Empty;
             return true;
