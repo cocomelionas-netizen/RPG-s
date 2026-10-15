@@ -267,6 +267,22 @@ namespace RPG.EditorTools
             return SaveSprite(texture, Folder, name, new Vector2(0.5f, baseY / height));
         }
 
+        /// <summary>A soft white glowing ball for projectiles (tinted at runtime).</summary>
+        public static Sprite Orb(string name)
+        {
+            const int size = 64;
+            var texture = new Texture2D(size, size, TextureFormat.RGBA32, false);
+            for (int y = 0; y < size; y++)
+            for (int x = 0; x < size; x++)
+            {
+                float d = new Vector2(x + 0.5f - size * 0.5f, y + 0.5f - size * 0.5f).magnitude / (size * 0.5f);
+                float glow = Mathf.Clamp01(1f - d);
+                float alpha = Mathf.Clamp01(glow * glow * 1.6f + (d < 0.35f ? 0.6f : 0f));
+                texture.SetPixel(x, y, new Color(1f, 1f, 1f, alpha));
+            }
+            return SaveSprite(texture, Folder, name, new Vector2(0.5f, 0.5f));
+        }
+
         /// <summary>A flat isometric ring for ground markers (click destination, target circles).</summary>
         public static Sprite GroundRing(string name, Color color)
         {

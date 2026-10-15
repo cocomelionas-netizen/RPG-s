@@ -18,6 +18,10 @@ namespace RPG.Controls
         private InputAction targetNextAction;
         private InputAction attackAction;
         private InputAction cancelAction;
+        private readonly InputAction[] abilityActions = new InputAction[AbilityKeyCount];
+
+        /// <summary>Number of ability keys (1, 2, 3...).</summary>
+        public const int AbilityKeyCount = 5;
 
         /// <summary>Keyboard movement in screen space, each axis in [-1, 1].</summary>
         public Vector2 MoveInput => moveAction.ReadValue<Vector2>();
@@ -36,6 +40,12 @@ namespace RPG.Controls
 
         /// <summary>Esc: clear the target / cancel.</summary>
         public bool CancelPressed => cancelAction.WasPressedThisFrame();
+
+        /// <summary>True on the frame an ability key (1, 2, 3...) went down; slot 0 is key 1.</summary>
+        public bool AbilityPressed(int slot)
+        {
+            return slot >= 0 && slot < abilityActions.Length && abilityActions[slot].WasPressedThisFrame();
+        }
 
         /// <summary>Pointer position in screen pixels.</summary>
         public Vector2 PointerPosition => pointAction.ReadValue<Vector2>();
@@ -73,6 +83,8 @@ namespace RPG.Controls
             targetNextAction = new InputAction("TargetNext", InputActionType.Button, "<Keyboard>/tab");
             attackAction = new InputAction("Attack", InputActionType.Button, "<Keyboard>/f");
             cancelAction = new InputAction("Cancel", InputActionType.Button, "<Keyboard>/escape");
+            for (int i = 0; i < abilityActions.Length; i++)
+                abilityActions[i] = new InputAction($"Ability{i + 1}", InputActionType.Button, $"<Keyboard>/{i + 1}");
         }
 
         private void OnEnable()
@@ -84,6 +96,7 @@ namespace RPG.Controls
             targetNextAction.Enable();
             attackAction.Enable();
             cancelAction.Enable();
+            foreach (InputAction action in abilityActions) action.Enable();
         }
 
         private void OnDisable()
@@ -95,6 +108,7 @@ namespace RPG.Controls
             targetNextAction.Disable();
             attackAction.Disable();
             cancelAction.Disable();
+            foreach (InputAction action in abilityActions) action.Disable();
         }
 
         private void OnDestroy()
@@ -106,6 +120,7 @@ namespace RPG.Controls
             targetNextAction.Dispose();
             attackAction.Dispose();
             cancelAction.Dispose();
+            foreach (InputAction action in abilityActions) action.Dispose();
         }
     }
 }

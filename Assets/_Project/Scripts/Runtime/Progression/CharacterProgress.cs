@@ -1,0 +1,165 @@
+using System;
+using RPG.Characters;
+using RPG.Combat;
+using RPG.UI;
+using Unity.Netcode;
+using UnityEngine;
+
+namespace RPG.Progression
+{
+    /// <summary>
+    /// A player's class, level and experience. The server owns all three; every peer derives the stats
+    /// (max health, auto-attack damage, range, speed) and the look from them, so the owner also knows
+    /// how close it must walk to attack.
+    /// Experience comes from monster kills (<see cref="ServerAddExperience"/>); levelling up raises stats and heals fully.
+    /// For now the class can be changed at any time (testing); a character's class becomes fixed with accounts (Stage 8).
+    /// </summary>
+    [RequireComponent(typeof(Health), typeof(AutoAttack))]
+    public class CharacterProgress : NetworkBehaviour
+    {
+        [SerializeField] private ClassCatalog catalog;
+        [SerializeField, Min(0)] private int defaultClass;
+
+        private readonly NetworkVariable<int> classIndex = new NetworkVariable<int>(
+            0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+        private readonly NetworkVariable<int> level = new NetworkVariable<int>(
+            1, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+        private readonly NetworkVariable<int> experience = new NetworkVariable<int>(
+            0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+
+        private static readonly Color LevelUpColor = new Color(1f, 0.85f, 0.3f);
+        private static readonly Color ExperienceTextColor = new Color(0.75f, 0.55f, 1f);
+
+        private Health health;
+        private AutoAttack autoAttack;
+        private CharacterAnimator characterAnimator;
+
+        /// <summary>Raised on every peer when the level goes up: new level.</summary>
+        public event Action<int> LevelledUp;
+
+        /// <summary>Raised on every peer when class or level changed (stats were re-applied).</summary>
+        public event Action Changed;
+
+        public ClassCatalog Catalog => catalog;
+        public int ClassIndex => classIndex.Value;
+        public CharacterClassDefinition Class => catalog != null ? catalog.Get(classIndex.Value) : null;
+        public string ClassName => Class != null ? Class.displayName : "";
+        public int Level => level.Value;
+        public int Experience => experience.Value;
+        public int ExperienceToNext => LevelCurve.ExperienceToNext(level.Value);
+
+        private void Awake()
+        {
+            health = GetComponent<Health>();
+            autoAttack = GetComponent<AutoAttack>();
+            characterAnimator = GetComponent<CharacterAnimator>();
+        }
+
+        public override void OnNetworkSpawn()
+        {
+            classIndex.OnValueChanged += OnClassChanged;
+            level.OnValueChanged += OnLevelChanged;
+
+            if (IsServer)
+            {
+                classIndex.Value = catalog != null && catalog.Get(defaultClass) != null ? defaultClass : 0;
+                level.Value = 1;
+                experience.Value = 0;
+            }
+        }
+
+        protected override void OnNetworkPostSpawn()
+        {
+            // After every component spawned, so Health has set its own defaults first.
+            ApplyClassAndLevel(true);
+        }
+
+        public override void OnNetworkDespawn()
+        {
+            classIndex.OnValueChanged -= OnClassChanged;
+            level.OnValueChanged -= OnLevelChanged;
+        }
+
+        // ---------- Server ----------
+
+        /// <summary>Server only: adds experience and levels up as many times as it covers.</summary>
+        public void ServerAddExperience(int amount)
+        {
+            if (!IsServer || amount <= 0) return;
+
+            int newLevel = level.Value;
+            int newExperience = experience.Value;
+            LevelCurve.Gain(ref newLevel, ref newExperience, amount);
+
+            experience.Value = newExperience;
+            ExperienceGainedRpc(amount);
+            if (newLevel != level.Value)
+            {
+                level.Value = newLevel;
+                Debug.Log($"[Server] {health.DisplayName} reached level {newLevel}.");
+            }
+        }
+
+        /// <summary>Server only: switches class (keeps level and experience) and restores full health.</summary>
+        public bool ServerSetClass(int index)
+        {
+            if (!IsServer || catalog == null || catalog.Get(index) == null) return false;
+            if (classIndex.Value == index) return true;
+            classIndex.Value = index;
+            return true;
+        }
+
+        /// <summary>Owner: asks the server to switch class.</summary>
+        public void RequestClass(int index)
+        {
+            if (IsOwner) RequestClassRpc(index);
+        }
+
+        [Rpc(SendTo.Server)]
+        private void RequestClassRpc(int index, RpcParams rpcParams = default)
+        {
+            if (rpcParams.Receive.SenderClientId != OwnerClientId || health.IsDead) return;
+            ServerSetClass(index);
+        }
+
+        [Rpc(SendTo.Owner)]
+        private void ExperienceGainedRpc(int amount)
+        {
+            CombatTextLayer.ShowText(transform.position + Vector3.up * 1.05f, $"+{amount} XP", ExperienceTextColor, 0.8f);
+        }
+
+        // ---------- Everyone ----------
+
+        private void OnClassChanged(int previous, int current)
+        {
+            ApplyClassAndLevel(true);
+        }
+
+        private void OnLevelChanged(int previous, int current)
+        {
+            ApplyClassAndLevel(current > previous);
+            if (current <= previous) return;
+
+            CombatEffects.Ring(transform.position, 0.9f, LevelUpColor);
+            CombatTextLayer.ShowText(transform.position + Vector3.up * 1.2f, $"Level {current}!", LevelUpColor, 1.3f);
+            LevelledUp?.Invoke(current);
+        }
+
+        /// <summary>Applies the stats and look of the current class at the current level.</summary>
+        private void ApplyClassAndLevel(bool healFully)
+        {
+            CharacterClassDefinition definition = Class;
+            if (definition == null) return;
+
+            int currentLevel = Mathf.Max(1, level.Value);
+            autoAttack.SetStats(definition.MinDamageAt(currentLevel), definition.MaxDamageAt(currentLevel),
+                definition.attackInterval, definition.attackRange, definition.critChance, definition.projectileColor);
+            if (characterAnimator != null && definition.animations != null)
+                characterAnimator.AnimationSet = definition.animations;
+            if (IsServer && IsSpawned)
+                health.ServerSetMaxHealth(definition.MaxHealthAt(currentLevel), healFully);
+
+            Changed?.Invoke();
+        }
+    }
+}

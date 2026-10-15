@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Unity.Collections;
 using Unity.Netcode;
 using UnityEngine;
@@ -25,8 +26,13 @@ namespace RPG.Combat
         private readonly NetworkVariable<FixedString32Bytes> displayName = new NetworkVariable<FixedString32Bytes>(
             default, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
 
+        private static readonly List<Health> SpawnedUnits = new List<Health>();
+
         /// <summary>Raised on every peer when damage lands: (amount, critical).</summary>
         public event Action<int, bool> Damaged;
+
+        /// <summary>Raised on every peer when a noticeable heal lands (abilities, not regeneration): amount.</summary>
+        public event Action<int> Healed;
 
         /// <summary>Server only: health reached zero.</summary>
         public event Action Died;
@@ -47,13 +53,22 @@ namespace RPG.Combat
         /// <summary>Server only: ignores all damage while set (for example a monster walking back home).</summary>
         public bool ServerInvulnerable { get; set; }
 
+        /// <summary>Every spawned unit on this peer (for area effects and target searches).</summary>
+        public static IReadOnlyList<Health> Spawned => SpawnedUnits;
+
         public override void OnNetworkSpawn()
         {
+            SpawnedUnits.Add(this);
             if (!IsServer) return;
 
             max.Value = maxHealth;
             current.Value = maxHealth;
             displayName.Value = appendOwnerId ? $"{defaultName} {OwnerClientId}" : defaultName;
+        }
+
+        public override void OnNetworkDespawn()
+        {
+            SpawnedUnits.Remove(this);
         }
 
         public bool IsHostileTo(Health other)
@@ -77,10 +92,22 @@ namespace RPG.Combat
         }
 
         /// <summary>Server only: restores some health. Ignored for dead units.</summary>
-        public void Heal(int amount)
+        /// <param name="announce">Show the heal to everyone (a green number); off for quiet regeneration.</param>
+        public void Heal(int amount, bool announce = false)
         {
             if (!IsServer || IsDead || amount <= 0) return;
-            current.Value = Mathf.Min(max.Value, current.Value + amount);
+            int healed = Mathf.Min(max.Value, current.Value + amount) - current.Value;
+            current.Value += healed;
+            if (announce && healed > 0) HealedRpc(healed);
+        }
+
+        /// <summary>Server only: changes max health (class and level). <paramref name="fill"/> also restores full health.</summary>
+        public void ServerSetMaxHealth(int value, bool fill)
+        {
+            if (!IsServer) return;
+            max.Value = Mathf.Max(1, value);
+            if (fill && !IsDead) current.Value = max.Value;
+            else current.Value = Mathf.Min(current.Value, max.Value);
         }
 
         /// <summary>Server only: back to full health (respawn, out-of-combat reset).</summary>
@@ -94,6 +121,12 @@ namespace RPG.Combat
         private void DamagedRpc(int amount, bool critical)
         {
             Damaged?.Invoke(amount, critical);
+        }
+
+        [Rpc(SendTo.Everyone)]
+        private void HealedRpc(int amount)
+        {
+            Healed?.Invoke(amount);
         }
     }
 }
