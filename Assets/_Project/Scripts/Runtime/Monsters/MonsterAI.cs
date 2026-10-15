@@ -132,6 +132,7 @@ namespace RPG.Monsters
         // The level every peer sees (a spawn spot can give a monster another level than its prefab's).
         private readonly NetworkVariable<int> networkLevel = new NetworkVariable<int>(
             0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+        private int prefabLevel;
 
         /// <summary>Shown on the target frame and nameplate; sets the experience it gives and the level of its gear drops.</summary>
         public int Level => IsSpawned && networkLevel.Value > 0 ? networkLevel.Value : level;
@@ -144,6 +145,25 @@ namespace RPG.Monsters
         {
             level = Mathf.Clamp(newLevel, 1, LevelCurve.MaxLevel);
             experienceReward = LevelCurve.KillExperienceFor(level);
+        }
+
+        // How much tougher a monster gets per level, roughly as fast as a player grows.
+        private const float HealthPerLevel = 0.15f;
+        private const float DamagePerLevel = 0.12f;
+
+        /// <summary>How much more health a monster of <paramref name="toLevel"/> has than the same monster of <paramref name="fromLevel"/>.</summary>
+        public static float HealthScaleBetween(int fromLevel, int toLevel) =>
+            (1f + HealthPerLevel * (toLevel - 1)) / (1f + HealthPerLevel * (fromLevel - 1));
+
+        public static float DamageScaleBetween(int fromLevel, int toLevel) =>
+            (1f + DamagePerLevel * (toLevel - 1)) / (1f + DamagePerLevel * (fromLevel - 1));
+
+        protected override void OnNetworkPostSpawn()
+        {
+            // After Health has set itself up: a monster given another level than its prefab's is as tough as that level.
+            if (!IsServer || level == prefabLevel) return;
+            health.ServerSetMaxHealth(Mathf.Max(1, Mathf.RoundToInt(health.Max * HealthScaleBetween(prefabLevel, level))), true);
+            autoAttack.DamageScale *= DamageScaleBetween(prefabLevel, level);
         }
 
         // ---------- Elites ----------
@@ -168,7 +188,7 @@ namespace RPG.Monsters
             elite.Value = true;
             health.ServerSetDisplayName($"Elite {health.DisplayName}");
             health.ServerSetMaxHealth(Mathf.RoundToInt(health.Max * EliteHealthScale), true);
-            autoAttack.DamageScale = EliteDamageScale;
+            autoAttack.DamageScale *= EliteDamageScale;
         }
 
         private void OnEliteChanged(bool previous, bool current) => ApplyEliteLook();
@@ -232,6 +252,7 @@ namespace RPG.Monsters
             autoAttack = GetComponent<AutoAttack>();
             motion = GetComponent<MonsterMotion>();
             normalScale = transform.localScale;
+            prefabLevel = level;
         }
 
         public override void OnNetworkSpawn()

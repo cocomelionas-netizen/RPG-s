@@ -20,6 +20,7 @@ namespace RPG.Controls
         private InputAction cancelAction;
         private InputAction inventoryAction;
         private InputAction characterAction;
+        private InputAction mapAction;
         private readonly InputAction[] abilityActions = new InputAction[AbilityKeyCount];
         private readonly InputAction[] potionActions = new InputAction[PotionKeyCount];
 
@@ -49,6 +50,9 @@ namespace RPG.Controls
 
         /// <summary>C: open or close the character sheet.</summary>
         public bool CharacterPressed => characterAction.WasPressedThisFrame();
+
+        /// <summary>M: open or close the world map.</summary>
+        public bool MapPressed => mapAction.WasPressedThisFrame();
 
         /// <summary>Esc: clear the target / cancel.</summary>
         public bool CancelPressed => cancelAction.WasPressedThisFrame();
@@ -104,6 +108,7 @@ namespace RPG.Controls
             inventoryAction = new InputAction("Inventory", InputActionType.Button, "<Keyboard>/i");
             inventoryAction.AddBinding("<Keyboard>/b");
             characterAction = new InputAction("Character", InputActionType.Button, "<Keyboard>/c");
+            mapAction = new InputAction("Map", InputActionType.Button, "<Keyboard>/m");
             for (int i = 0; i < abilityActions.Length; i++)
                 abilityActions[i] = new InputAction($"Ability{i + 1}", InputActionType.Button, $"<Keyboard>/{i + 1}");
             for (int i = 0; i < potionActions.Length; i++)
@@ -121,6 +126,7 @@ namespace RPG.Controls
             cancelAction.Enable();
             inventoryAction.Enable();
             characterAction.Enable();
+            mapAction.Enable();
             foreach (InputAction action in abilityActions) action.Enable();
             foreach (InputAction action in potionActions) action.Enable();
         }
@@ -136,6 +142,7 @@ namespace RPG.Controls
             cancelAction.Disable();
             inventoryAction.Disable();
             characterAction.Disable();
+            mapAction.Disable();
             foreach (InputAction action in abilityActions) action.Disable();
             foreach (InputAction action in potionActions) action.Disable();
         }
@@ -151,6 +158,7 @@ namespace RPG.Controls
             cancelAction.Dispose();
             inventoryAction.Dispose();
             characterAction.Dispose();
+            mapAction.Dispose();
             foreach (InputAction action in abilityActions) action.Dispose();
             foreach (InputAction action in potionActions) action.Dispose();
         }

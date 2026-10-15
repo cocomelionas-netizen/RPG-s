@@ -12,7 +12,7 @@ namespace RPG.UI
 {
     /// <summary>
     /// The zone name and a square map around the local player: walkable ground, obstacles, and dots for
-    /// players, monsters, vendors, portals, waystones and chests. Each map's picture is drawn once from its navigation grid.
+    /// players, monsters, vendors, portals, waystones and chests. The picture comes from <see cref="MapPicture"/>.
     /// Builds its own UI; place it on a RectTransform about 240 x 270 in the top right of the HUD canvas.
     /// </summary>
     [RequireComponent(typeof(RectTransform))]
@@ -21,12 +21,6 @@ namespace RPG.UI
         [SerializeField, Min(50f)] private float mapSize = 220f;
         [Tooltip("World units shown from edge to edge.")]
         [SerializeField, Min(5f)] private float worldSpan = 30f;
-        [Tooltip("Texture pixels per world unit when drawing a map.")]
-        [SerializeField, Min(1)] private int texturePixelsPerUnit = 4;
-
-        private static readonly Color32 Walkable = new Color32(70, 92, 48, 255);
-        private static readonly Color32 Blocked = new Color32(28, 40, 22, 255);
-        private static readonly Color32 Outside = new Color32(8, 8, 8, 255);
         private static readonly Color SelfColor = Color.white;
         private static readonly Color PlayerColor = new Color(0.4f, 0.8f, 1f);
         private static readonly Color MonsterColor = new Color(0.95f, 0.2f, 0.15f);
@@ -35,7 +29,6 @@ namespace RPG.UI
         private static readonly Color WaystoneColor = new Color(0.3f, 0.95f, 0.9f);
         private static readonly Color ChestColor = new Color(0.85f, 0.6f, 0.3f);
 
-        private readonly Dictionary<WorldNavigation, Texture2D> pictures = new Dictionary<WorldNavigation, Texture2D>();
         private readonly List<Image> dots = new List<Image>();
         private GameObject panel;
         private Text zoneText;
@@ -58,7 +51,7 @@ namespace RPG.UI
             frame.raycastTarget = false;
             UIFactory.Place(frame.rectTransform, new Vector2(0.5f, 1f), new Vector2(0f, -32f), Vector2.one * (mapSize + 8f));
 
-            Image background = UIFactory.CreateImage("View", frame.transform, Outside);
+            Image background = UIFactory.CreateImage("View", frame.transform, MapPicture.OutsideColor);
             background.raycastTarget = false;
             UIFactory.Place(background.rectTransform, new Vector2(0.5f, 0.5f), Vector2.zero, Vector2.one * mapSize);
             background.gameObject.AddComponent<RectMask2D>();
@@ -68,12 +61,6 @@ namespace RPG.UI
             picture.transform.SetParent(view, false);
             picture.raycastTarget = false;
             picture.rectTransform.anchorMin = picture.rectTransform.anchorMax = new Vector2(0.5f, 0.5f);
-        }
-
-        private void OnDestroy()
-        {
-            foreach (Texture2D texture in pictures.Values)
-                if (texture != null) Destroy(texture);
         }
 
         private void LateUpdate()
@@ -92,7 +79,7 @@ namespace RPG.UI
             if (map != null)
             {
                 Rect bounds = map.WorldBounds;
-                picture.texture = Picture(map);
+                picture.texture = MapPicture.Of(map);
                 picture.rectTransform.sizeDelta = bounds.size * scale;
                 picture.rectTransform.anchoredPosition = (bounds.center - center) * scale;
             }
@@ -140,43 +127,6 @@ namespace RPG.UI
             dot.color = color;
             dot.rectTransform.sizeDelta = new Vector2(size, size);
             dot.rectTransform.anchoredPosition = offset;
-        }
-
-        /// <summary>The map's walkable ground drawn into a texture (made once per map).</summary>
-        private Texture2D Picture(WorldNavigation map)
-        {
-            if (pictures.TryGetValue(map, out Texture2D texture) && texture != null) return texture;
-            ForgetRemovedMaps();
-
-            Rect bounds = map.WorldBounds;
-            int width = Mathf.Clamp(Mathf.CeilToInt(bounds.width * texturePixelsPerUnit), 1, 1024);
-            int height = Mathf.Clamp(Mathf.CeilToInt(bounds.height * texturePixelsPerUnit), 1, 1024);
-            var pixels = new Color32[width * height];
-            for (int y = 0; y < height; y++)
-            for (int x = 0; x < width; x++)
-            {
-                var point = new Vector2(bounds.xMin + (x + 0.5f) / width * bounds.width, bounds.yMin + (y + 0.5f) / height * bounds.height);
-                pixels[y * width + x] = !map.Contains(point) ? Outside : map.IsWalkable(point) ? Walkable : Blocked;
-            }
-
-            texture = new Texture2D(width, height, TextureFormat.RGBA32, false) { wrapMode = TextureWrapMode.Clamp, filterMode = FilterMode.Bilinear };
-            texture.SetPixels32(pixels);
-            texture.Apply();
-            pictures[map] = texture;
-            return texture;
-        }
-
-        /// <summary>Dungeon maps are removed when their instance closes; drop their pictures too.</summary>
-        private void ForgetRemovedMaps()
-        {
-            var removed = new List<WorldNavigation>();
-            foreach (KeyValuePair<WorldNavigation, Texture2D> entry in pictures)
-                if (entry.Key == null) removed.Add(entry.Key);
-            foreach (WorldNavigation map in removed)
-            {
-                if (pictures[map] != null) Destroy(pictures[map]);
-                pictures.Remove(map);
-            }
         }
     }
 }
