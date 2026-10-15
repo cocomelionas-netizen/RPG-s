@@ -44,6 +44,12 @@ namespace RPG.Items
         [Tooltip("Reduces damage taken: 100 armor halves it.")]
         [Min(0)] public int armor;
 
+        [Header("Trade and restrictions")]
+        [Tooltip("Price at vendors in gold; vendors buy it back for a quarter of this.")]
+        [Min(0)] public int price = 10;
+        [Tooltip("Index of the class (in the class catalog) that may equip it; -1 for every class.")]
+        public int requiredClass = -1;
+
         [Header("Use")]
         public ItemUse use = ItemUse.None;
         [Range(0f, 1f)] public float healFraction = 0.35f;
@@ -66,8 +72,14 @@ namespace RPG.Items
             }
         }
 
+        /// <summary>What a vendor pays for one (a quarter of the price, at least 1 for anything with a price).</summary>
+        public int SellPrice => price > 0 ? Mathf.Max(1, price / 4) : 0;
+
+        public bool CanBeUsedByClass(int classIndex) => requiredClass < 0 || requiredClass == classIndex;
+
         /// <summary>Tooltip text: name, rarity and slot, stats and use.</summary>
-        public string Describe()
+        /// <param name="className">Name of the required class to show (null when anyone may use it).</param>
+        public string Describe(string className = null)
         {
             var text = new StringBuilder();
             text.AppendLine(displayName);
@@ -79,6 +91,8 @@ namespace RPG.Items
             if (armor > 0) text.AppendLine($"+{armor} armor");
             if (use == ItemUse.Heal) text.AppendLine($"Use: restores {Mathf.RoundToInt(healFraction * 100f)}% health");
             if (maxStack > 1) text.AppendLine($"Stacks up to {maxStack}");
+            if (!string.IsNullOrEmpty(className)) text.AppendLine($"{className} only");
+            if (price > 0) text.AppendLine($"Sells for {SellPrice} gold");
             text.Append(IsEquippable ? "Click to equip" : use != ItemUse.None ? "Click to use" : "");
             return text.ToString().TrimEnd();
         }

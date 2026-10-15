@@ -41,6 +41,8 @@ namespace RPG.Monsters
         [SerializeField, Min(1)] private int level = 1;
         [Tooltip("Experience for each player who fought it (less for players above its level).")]
         [SerializeField, Min(0)] private int experienceReward = 20;
+        [Tooltip("Gold for each player who fought it (min, max).")]
+        [SerializeField] private Vector2Int goldReward = new Vector2Int(2, 5);
         [Tooltip("Each entry is rolled on death; the items that drop are left in a loot bag.")]
         [SerializeField] private LootEntry[] loot = System.Array.Empty<LootEntry>();
         [SerializeField] private GameObject lootBagPrefab;
@@ -122,6 +124,12 @@ namespace RPG.Monsters
         public int ExperienceReward => experienceReward;
 
         public IReadOnlyList<LootEntry> Loot => loot;
+
+        public Vector2Int GoldReward
+        {
+            get => goldReward;
+            set => goldReward = new Vector2Int(Mathf.Max(0, value.x), Mathf.Max(value.x, value.y));
+        }
 
         /// <summary>Sets the drops (used by the scene builder and tests).</summary>
         public void ConfigureLoot(GameObject bagPrefab, LootEntry[] entries)
@@ -334,12 +342,13 @@ namespace RPG.Monsters
 
         private void AwardExperience()
         {
-            if (experienceReward <= 0) return;
             foreach (Health fighter in threat.Keys)
             {
                 if (fighter == null || !fighter.IsSpawned || fighter.IsDead) continue;
-                if (fighter.TryGetComponent(out CharacterProgress progress))
+                if (experienceReward > 0 && fighter.TryGetComponent(out CharacterProgress progress))
                     progress.ServerAddExperience(LevelCurve.KillExperience(experienceReward, level, progress.Level));
+                if (goldReward.y > 0 && fighter.TryGetComponent(out Inventory inventory))
+                    inventory.ServerAddGold(Random.Range(goldReward.x, goldReward.y + 1));
             }
         }
 

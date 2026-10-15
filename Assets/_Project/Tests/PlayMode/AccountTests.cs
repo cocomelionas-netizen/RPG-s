@@ -130,6 +130,7 @@ namespace RPG.Tests
                     classIndex = 1,
                     level = 3,
                     experience = 10,
+                    gold = 77,
                     bag = new[] { new ItemRecord(catalog.IdOf(sword), 1) },
                     hasBeenSaved = true,
                 },
@@ -146,6 +147,7 @@ namespace RPG.Tests
             Assert.AreEqual("Ranger", progress.ClassName);
             Assert.AreEqual("Hero", player.GetComponent<Health>().DisplayName);
             Assert.AreEqual(1, player.GetComponent<Inventory>().CountOf(sword));
+            Assert.AreEqual(77, player.GetComponent<Inventory>().Gold);
 
             progress.ServerAddExperience(LevelCurve.ExperienceToNext(3));
             player.GetComponent<CharacterPersistence>().ServerSave();

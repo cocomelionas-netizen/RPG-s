@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using RPG.Combat;
+using RPG.Progression;
 using RPG.UI;
+using RPG.Vendors;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -11,6 +13,7 @@ namespace RPG.Items
     /// A player's bag and worn equipment. The server owns both lists; the owner only asks to equip,
     /// take off, use or pick up, and the server checks that the move is valid.
     /// Equipped items add damage, health and armor (applied by <see cref="RPG.Progression.CharacterProgress"/>).
+    /// Also holds the character's gold, earned from monsters and spent or earned at vendors.
     /// </summary>
     [RequireComponent(typeof(Health))]
     public class Inventory : NetworkBehaviour
@@ -24,10 +27,17 @@ namespace RPG.Items
         [SerializeField, Min(0f)] private float potionCooldown = 5f;
         [Tooltip("How close the player must be to pick up loot (the server allows a little more).")]
         [SerializeField, Min(0.1f)] private float pickupRange = 1.2f;
+        [SerializeField, Min(0)] private int startingGold = 20;
+
+        private const float TradeRangeTolerance = 0.5f;
+        private static readonly Color GoldColor = new Color(1f, 0.82f, 0.25f);
 
         private NetworkList<ItemStack> bag;
         private NetworkList<ItemStack> equipment;
+        private readonly NetworkVariable<int> gold = new NetworkVariable<int>(
+            0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
         private Health health;
+        private CharacterProgress progress;
         private double potionReadyAt;
 
         /// <summary>Raised on every peer when the bag or the equipment changed.</summary>
@@ -36,6 +46,7 @@ namespace RPG.Items
         public ItemCatalog Catalog => catalog;
         public int BagSize => bag != null ? bag.Count : 0;
         public float PickupRange => pickupRange;
+        public int Gold => gold.Value;
 
         /// <summary>Sum of the equipped items' bonuses.</summary>
         public int DamageBonus { get; private set; }
@@ -45,6 +56,7 @@ namespace RPG.Items
         private void Awake()
         {
             health = GetComponent<Health>();
+            progress = GetComponent<CharacterProgress>();
             bag = new NetworkList<ItemStack>(null, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
             equipment = new NetworkList<ItemStack>(null, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
         }
@@ -62,6 +74,7 @@ namespace RPG.Items
                 for (int i = 0; i < EquipmentSlots; i++) equipment.Add(ItemStack.Empty);
                 foreach (ItemDefinition item in startingItems)
                     ServerAddItem(item, 1, false);
+                gold.Value = startingGold;
             }
             RecalculateBonuses();
         }
@@ -166,6 +179,28 @@ namespace RPG.Items
             else if (item.use != ItemUse.None) RequestUse(bagIndex);
         }
 
+        public void RequestBuy(Vendor vendor, int stockIndex)
+        {
+            if (IsOwner && vendor != null) BuyRpc(vendor.Index, stockIndex);
+        }
+
+        public void RequestSell(Vendor vendor, int bagIndex)
+        {
+            if (IsOwner && vendor != null) SellRpc(vendor.Index, bagIndex);
+        }
+
+        [Rpc(SendTo.Server)]
+        private void BuyRpc(int vendorIndex, int stockIndex, RpcParams rpcParams = default)
+        {
+            if (rpcParams.Receive.SenderClientId == OwnerClientId) ServerBuy(Vendor.Get(vendorIndex), stockIndex);
+        }
+
+        [Rpc(SendTo.Server)]
+        private void SellRpc(int vendorIndex, int bagIndex, RpcParams rpcParams = default)
+        {
+            if (rpcParams.Receive.SenderClientId == OwnerClientId) ServerSell(Vendor.Get(vendorIndex), bagIndex);
+        }
+
         public void RequestPickUp(LootBag loot)
         {
             if (IsOwner && loot != null && loot.IsSpawned) PickUpRpc(loot.NetworkObject);
@@ -213,6 +248,15 @@ namespace RPG.Items
                 case InventoryMessage.NotReady:
                     CombatTextLayer.ShowText(above, "Not ready yet", new Color(1f, 0.4f, 0.3f), 0.8f);
                     break;
+                case InventoryMessage.WrongClass:
+                    CombatTextLayer.ShowText(above, "Your class cannot use that", new Color(1f, 0.4f, 0.3f), 0.8f);
+                    break;
+                case InventoryMessage.NotEnoughGold:
+                    CombatTextLayer.ShowText(above, "Not enough gold", new Color(1f, 0.4f, 0.3f), 0.8f);
+                    break;
+                case InventoryMessage.Gold:
+                    CombatTextLayer.ShowText(above, $"+{itemId} gold", GoldColor, 0.8f);
+                    break;
             }
         }
 
@@ -255,6 +299,11 @@ namespace RPG.Items
             ItemStack stack = bag[bagIndex];
             ItemDefinition item = Definition(stack);
             if (item == null || !item.IsEquippable) return false;
+            if (progress != null && !item.CanBeUsedByClass(progress.ClassIndex))
+            {
+                MessageRpc(InventoryMessage.WrongClass, stack.ItemId);
+                return false;
+            }
 
             int equipIndex = (int)item.slot - 1;
             ItemStack worn = equipment[equipIndex];
@@ -310,6 +359,57 @@ namespace RPG.Items
             return true;
         }
 
+        /// <summary>Server: adds (or with a negative amount removes) gold. Shows gains to the owner.</summary>
+        public void ServerAddGold(int amount, bool announce = true)
+        {
+            if (!IsServer || amount == 0) return;
+            gold.Value = Mathf.Max(0, gold.Value + amount);
+            if (announce && amount > 0) MessageRpc(InventoryMessage.Gold, amount);
+        }
+
+        /// <summary>Server: restores saved gold.</summary>
+        public void ServerSetGold(int amount)
+        {
+            if (IsServer) gold.Value = Mathf.Max(0, amount);
+        }
+
+        private bool IsNear(Vendor vendor)
+        {
+            return vendor != null && vendor.Definition != null
+                   && Vector2.Distance(AutoAttack.ServerPosition(this), vendor.transform.position) <= vendor.TradeRange + TradeRangeTolerance;
+        }
+
+        /// <summary>Server: buys one item from a vendor the player stands next to.</summary>
+        public bool ServerBuy(Vendor vendor, int stockIndex)
+        {
+            if (!IsServer || health.IsDead || !IsNear(vendor)) return false;
+            ItemDefinition[] stock = vendor.Definition.stock;
+            if (stockIndex < 0 || stockIndex >= stock.Length || stock[stockIndex] == null) return false;
+
+            ItemDefinition item = stock[stockIndex];
+            if (gold.Value < item.price)
+            {
+                MessageRpc(InventoryMessage.NotEnoughGold, 0);
+                return false;
+            }
+            if (ServerAddItem(item, 1) <= 0) return false;
+            gold.Value -= item.price;
+            return true;
+        }
+
+        /// <summary>Server: sells one item from a bag slot to a vendor the player stands next to.</summary>
+        public bool ServerSell(Vendor vendor, int bagIndex)
+        {
+            if (!IsServer || health.IsDead || !IsNear(vendor) || bagIndex < 0 || bagIndex >= bag.Count) return false;
+            ItemStack stack = bag[bagIndex];
+            ItemDefinition item = Definition(stack);
+            if (item == null || item.SellPrice <= 0) return false;
+
+            bag[bagIndex] = stack.Count > 1 ? new ItemStack(stack.ItemId, stack.Count - 1) : ItemStack.Empty;
+            ServerAddGold(item.SellPrice);
+            return true;
+        }
+
         /// <summary>Server: takes what fits from a loot bag the player stands next to.</summary>
         public bool ServerPickUp(LootBag loot)
         {
@@ -324,6 +424,10 @@ namespace RPG.Items
             Received,
             BagFull,
             NotReady,
+            WrongClass,
+            NotEnoughGold,
+            /// <summary>Gold gained; the amount travels in the item id field.</summary>
+            Gold,
         }
     }
 }
