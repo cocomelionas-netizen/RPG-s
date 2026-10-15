@@ -1,6 +1,7 @@
 using System;
 using RPG.Characters;
 using RPG.Combat;
+using RPG.Items;
 using RPG.UI;
 using Unity.Netcode;
 using UnityEngine;
@@ -9,7 +10,7 @@ namespace RPG.Progression
 {
     /// <summary>
     /// A player's class, level and experience. The server owns all three; every peer derives the stats
-    /// (max health, auto-attack damage, range, speed) and the look from them, so the owner also knows
+    /// (max health, auto-attack damage, range, speed, plus equipment bonuses) and the look from them, so the owner also knows
     /// how close it must walk to attack.
     /// Experience comes from monster kills (<see cref="ServerAddExperience"/>); levelling up raises stats and heals fully.
     /// For now the class can be changed at any time (testing); a character's class becomes fixed with accounts (Stage 8).
@@ -33,6 +34,7 @@ namespace RPG.Progression
         private Health health;
         private AutoAttack autoAttack;
         private CharacterAnimator characterAnimator;
+        private Inventory inventory;
 
         /// <summary>Raised on every peer when the level goes up: new level.</summary>
         public event Action<int> LevelledUp;
@@ -53,12 +55,14 @@ namespace RPG.Progression
             health = GetComponent<Health>();
             autoAttack = GetComponent<AutoAttack>();
             characterAnimator = GetComponent<CharacterAnimator>();
+            inventory = GetComponent<Inventory>();
         }
 
         public override void OnNetworkSpawn()
         {
             classIndex.OnValueChanged += OnClassChanged;
             level.OnValueChanged += OnLevelChanged;
+            if (inventory != null) inventory.Changed += OnEquipmentChanged;
 
             if (IsServer)
             {
@@ -78,6 +82,12 @@ namespace RPG.Progression
         {
             classIndex.OnValueChanged -= OnClassChanged;
             level.OnValueChanged -= OnLevelChanged;
+            if (inventory != null) inventory.Changed -= OnEquipmentChanged;
+        }
+
+        private void OnEquipmentChanged()
+        {
+            ApplyClassAndLevel(false);
         }
 
         // ---------- Server ----------
@@ -152,12 +162,17 @@ namespace RPG.Progression
             if (definition == null) return;
 
             int currentLevel = Mathf.Max(1, level.Value);
-            autoAttack.SetStats(definition.MinDamageAt(currentLevel), definition.MaxDamageAt(currentLevel),
+            int damageBonus = inventory != null ? inventory.DamageBonus : 0;
+            int healthBonus = inventory != null ? inventory.HealthBonus : 0;
+            autoAttack.SetStats(definition.MinDamageAt(currentLevel) + damageBonus, definition.MaxDamageAt(currentLevel) + damageBonus,
                 definition.attackInterval, definition.attackRange, definition.critChance, definition.projectileColor);
             if (characterAnimator != null && definition.animations != null)
                 characterAnimator.AnimationSet = definition.animations;
             if (IsServer && IsSpawned)
-                health.ServerSetMaxHealth(definition.MaxHealthAt(currentLevel), healFully);
+            {
+                health.ServerSetMaxHealth(definition.MaxHealthAt(currentLevel) + healthBonus, healFully);
+                health.ServerArmor = inventory != null ? inventory.Armor : 0;
+            }
 
             Changed?.Invoke();
         }

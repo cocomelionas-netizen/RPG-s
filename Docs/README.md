@@ -19,13 +19,14 @@ Assets/_Project/
   Audio/
   Prefabs/
     Characters/        Player.prefab ir kt.
-    Monsters/          Goblin.prefab ir kt.
+    Monsters/          Goblin, GoblinBrute, Orc
     World/             pasaulio objektai
   Scenes/              World_Test.unity
   Data/
     Characters/        animacijų rinkiniai (CharacterAnimationSet)
     Classes/           klasės (Warrior, Ranger, Mage) ir ClassCatalog
     Abilities/         gebėjimai
+    Items/             daiktai ir ItemCatalog
   Settings/Rendering/  Renderer2D.asset (2D Renderer, izometrinis rūšiavimas)
   Tiles/               Tile asset'ai tilemap'ams
   Scripts/
@@ -33,13 +34,14 @@ Assets/_Project/
       CameraSystem/    CameraFollow
       Characters/      Direction8, CharacterAnimationSet, CharacterAnimator
       Combat/          Health, HealthRegeneration, AutoAttack, PlayerTargeting, PlayerRespawn, TrainingDummy, CombatEffects
+      Items/           daiktai, inventorius, loot (Inventory, LootBag, ItemCatalog)
       Monsters/        MonsterAI, MonsterMotion, MonsterSpawner
       Navigation/      NavGrid (A*), WorldNavigation (kelio paieška tilemap'e)
       Progression/     klasės, gebėjimai, lygiai ir patirtis (CharacterProgress, AbilityCaster, LevelCurve)
       Controls/        PlayerInputReader
       Networking/      NetworkBootstrap, PlayerNetworkMovement, MovementValidator, OfflineTransport, DevConnectionPanel, DevBot
       Player/          PlayerMovement
-      UI/              UnitFrame, CombatTextLayer, AbilityBar, ExperienceBar, ClassPicker
+      UI/              UnitFrame, CombatTextLayer, AbilityBar, ExperienceBar, ClassPicker, InventoryWindow
       World/           ClickMarker
       Core/            rezervuota kitiems etapams
     Editor/            redaktoriaus įrankiai (RPG meniu), grafikos importo taisyklės, build meniu
@@ -71,10 +73,10 @@ Naujausia versija po kiekvieno push'o į `main` automatiškai sukuriama ir paske
 | 4 | Taikinio pasirinkimas ir realaus laiko kova (HP, žala, auto-attack) | ✅ [Stage4.md](Stage4.md) |
 | 5 | Monstrai ir jų AI (spawn, aggro, kelio paieška tilemap'e) | ✅ [Stage5.md](Stage5.md) |
 | 6 | Gebėjimai, klasės, lygiai ir patirtis | ✅ [Stage6.md](Stage6.md) |
-| 7 | Inventorius, ginklai, šarvai, loot | ⏳ |
+| 7 | Inventorius, ginklai, šarvai, loot | ✅ [Stage7.md](Stage7.md) |
 | 8 | Saugus progreso išsaugojimas serveryje (paskyros, duomenų bazė) | ⏳ |
-| 9 | Užduotys ir NPC | ⏳ |
+| ~~9~~ | ~~Užduotys ir NPC~~ | ✖ atsisakyta |
 | 10 | Požemiai (instancijos) | ⏳ |
-| 11 | PvP | ⏳ |
+| ~~11~~ | ~~PvP~~ | ✖ atsisakyta |
 
 Multiplayer'is planuojamas anksti (3 etapas) sąmoningai. Kovą, monstrus ir daiktus iškart rašysime serverio autoriteto principu, kad vėliau nereikėtų jų perrašinėti.

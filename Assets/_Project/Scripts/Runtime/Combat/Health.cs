@@ -53,6 +53,16 @@ namespace RPG.Combat
         /// <summary>Server only: ignores all damage while set (for example a monster walking back home).</summary>
         public bool ServerInvulnerable { get; set; }
 
+        /// <summary>Server only: reduces damage taken; 100 armor halves it.</summary>
+        public int ServerArmor { get; set; }
+
+        /// <summary>Damage left after armor: amount * 100 / (100 + armor), at least 1.</summary>
+        public static int ReduceByArmor(int amount, int armor)
+        {
+            if (amount <= 0) return 0;
+            return Mathf.Max(1, Mathf.RoundToInt(amount * 100f / (100f + Mathf.Max(0, armor))));
+        }
+
         /// <summary>Every spawned unit on this peer (for area effects and target searches).</summary>
         public static IReadOnlyList<Health> Spawned => SpawnedUnits;
 
@@ -81,6 +91,7 @@ namespace RPG.Combat
         public void ApplyDamage(int amount, bool critical, Health attacker = null)
         {
             if (!IsServer || IsDead || ServerInvulnerable || amount <= 0) return;
+            amount = ReduceByArmor(amount, ServerArmor);
 
             current.Value = Mathf.Max(0, current.Value - amount);
             LastDamageTime = Time.time;
