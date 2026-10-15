@@ -63,6 +63,10 @@ namespace RPG.Monsters
         private const float AssistThreat = 0.5f;
         private const float SpreadDistance = 0.3f;
         private const float HomeReachedDistance = 0.15f;
+        // The path home may end next to home when home itself is blocked.
+        private const float HomeNearbyDistance = 1f;
+        // Evading longer than this means it got stuck somewhere: it is placed back home.
+        private const float MaxEvadeSeconds = 10f;
 
         private static readonly List<MonsterAI> ServerMonsters = new List<MonsterAI>();
 
@@ -78,6 +82,7 @@ namespace RPG.Monsters
         private float nextWanderTime;
         private float pathFailedSince = -1f;
         private float removeAt;
+        private float evadeStartedAt;
 
         /// <summary>Server only.</summary>
         public MonsterState State { get; private set; } = MonsterState.Idle;
@@ -343,17 +348,25 @@ namespace RPG.Monsters
             pathFailedSince = -1f;
             autoAttack.ServerStopAttack(false);
             health.ServerInvulnerable = true;
+            evadeStartedAt = Time.time;
+            motion.ServerStop();
             motion.ServerMoveTo(home, evadeSpeedScale);
         }
 
         private void UpdateEvade()
         {
-            // Still walking home (StartEvade set the destination; arriving clears it).
-            if (motion.Destination.HasValue && !motion.PathFailed) return;
+            float distance = Vector2.Distance(Position, home);
+            bool arrived = distance <= HomeReachedDistance || (!motion.Destination.HasValue && distance <= HomeNearbyDistance);
+            if (!arrived)
+            {
+                // Keep steering home every frame, so a route that ended elsewhere is planned again.
+                motion.ServerMoveTo(home, evadeSpeedScale);
+                bool stuck = Time.time - evadeStartedAt >= MaxEvadeSeconds;
+                if (!motion.PathFailed && !stuck) return;
 
-            // No way home (should not happen on a sane map): jump there instead of getting stuck.
-            if (motion.PathFailed && Vector2.Distance(Position, home) > HomeReachedDistance)
+                // No way home or stuck (should not happen on a sane map): jump there instead.
                 motion.ServerTeleport(home);
+            }
 
             motion.ServerStop();
             health.ServerInvulnerable = false;
