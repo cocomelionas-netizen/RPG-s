@@ -6,21 +6,27 @@ namespace RPG.Items
 {
     /// <summary>
     /// Server: rolls loot and leaves it on the ground in a loot bag (monsters, chests). The loot table gives the
-    /// fixed drops (junk, potions, keys, gems); gear comes by level, the way Source does it: a piece of the
-    /// quality that rolls, picked from the gear around the dropper's level.
+    /// fixed drops (junk, potions, keys, gems). Gear itself is crafted: what drops are crafting materials, picked
+    /// the way Source picks the material of its gear drops (by the dropper's level and its material chances).
+    /// Only guaranteed pieces (bosses) drop as finished gear.
     /// </summary>
     public static class LootDrop
     {
+        /// <summary>Chance per roll that crafting materials drop.</summary>
+        public const float MaterialChance = 0.4f;
+
+        /// <summary>Chance that one more piece of material drops with them.</summary>
+        public const float ExtraMaterialChance = 0.35f;
+
         /// <summary>
-        /// Chance per roll of a gear drop of each quality, best first (stand-ins for Source's server values,
-        /// tiered like its bosses: gold rarely, blue sometimes, green more often, plain white gear now and then).
+        /// The quality a crafted piece comes out at, best first (the rest are plain): gold rarely, blue sometimes,
+        /// green often. A plainer piece is raised to the quality with an affix.
         /// </summary>
-        public static readonly (ItemRarity quality, float chance)[] GearChances =
+        public static readonly (ItemRarity quality, float chance)[] CraftChances =
         {
-            (ItemRarity.Epic, 0.003f),
-            (ItemRarity.Rare, 0.02f),
-            (ItemRarity.Uncommon, 0.08f),
-            (ItemRarity.Common, 0.06f),
+            (ItemRarity.Epic, 0.02f),
+            (ItemRarity.Rare, 0.08f),
+            (ItemRarity.Uncommon, 0.25f),
         };
 
         /// <summary>Gear from this many levels below the dropper up to <see cref="LevelsAbove"/> above it can drop.</summary>
@@ -44,16 +50,28 @@ namespace RPG.Items
                 : 1f + difference * 0.75f / LevelsBelow;
         }
 
-        /// <summary>The quality of a gear drop for one roll, or null when no gear drops.</summary>
-        public static ItemRarity? RollGearQuality()
+        /// <summary>A quality from a table of chances (best first), or null when none of them rolls.</summary>
+        public static ItemRarity? RollQuality((ItemRarity quality, float chance)[] chances)
         {
             float roll = Random.value;
-            foreach ((ItemRarity quality, float chance) in GearChances)
+            foreach ((ItemRarity quality, float chance) in chances)
             {
                 if (roll < chance) return quality;
                 roll -= chance;
             }
             return null;
+        }
+
+        /// <summary>
+        /// A crafting material dropped by a dropper of <paramref name="level"/>: the material of a craftable piece
+        /// picked like a gear drop (<see cref="PickGear"/>), so better materials only drop from their own levels on.
+        /// </summary>
+        public static bool PickMaterial(ItemCatalog catalog, int level, out ItemDefinition material)
+        {
+            material = null;
+            if (!PickGear(catalog, null, level, ItemRarity.Legendary, 0f, out LootItem piece)) return false;
+            material = piece.Item.craftMaterial;
+            return material != null;
         }
 
         /// <summary>
@@ -116,13 +134,13 @@ namespace RPG.Items
         }
 
         /// <summary>
-        /// Rolls every table entry and the gear chance <paramref name="rolls"/> times (the gear chance
-        /// <paramref name="extraGearRolls"/> more), adds one piece of gear for each of <paramref name="guaranteed"/>
-        /// (at that quality), and spawns a bag with what dropped. Gear listed in the table itself can get an affix and
-        /// a socket too. False when nothing dropped.
+        /// Rolls every table entry and the material chance <paramref name="rolls"/> times (the material chance
+        /// <paramref name="extraMaterialRolls"/> more), adds one finished piece of gear for each of
+        /// <paramref name="guaranteed"/> (at that quality), and spawns a bag with what dropped. Gear listed in the
+        /// table itself can get an affix and a socket too. False when nothing dropped.
         /// </summary>
         public static bool Spawn(GameObject bagPrefab, Vector2 position, LootEntry[] entries, ItemCatalog gear, AffixCatalog affixes,
-            int level, float socketChance, int rolls = 1, int extraGearRolls = 0, params ItemRarity[] guaranteed)
+            int level, float socketChance, int rolls = 1, int extraMaterialRolls = 0, params ItemRarity[] guaranteed)
         {
             if (bagPrefab == null) return false;
             Drops.Clear();
@@ -138,18 +156,11 @@ namespace RPG.Items
                         Drops.Add(new LootItem(entry.item, affix, socket));
                     }
                 }
-
-                ItemRarity? quality = RollGearQuality();
-                if (quality.HasValue && PickGear(gear, affixes, level, quality.Value, socketChance, out LootItem drop))
-                    Drops.Add(drop);
+                RollMaterials(gear, level);
             }
 
-            for (int roll = 0; roll < extraGearRolls; roll++)
-            {
-                ItemRarity? quality = RollGearQuality();
-                if (quality.HasValue && PickGear(gear, affixes, level, quality.Value, socketChance, out LootItem drop))
-                    Drops.Add(drop);
-            }
+            for (int roll = 0; roll < extraMaterialRolls; roll++)
+                RollMaterials(gear, level);
 
             if (guaranteed != null)
                 foreach (ItemRarity quality in guaranteed)
@@ -161,6 +172,13 @@ namespace RPG.Items
             bag.GetComponent<LootBag>().ServerSetContents(Drops);
             bag.GetComponent<NetworkObject>().Spawn(destroyWithScene: true);
             return true;
+        }
+
+        private static void RollMaterials(ItemCatalog gear, int level)
+        {
+            if (Random.value >= MaterialChance || !PickMaterial(gear, level, out ItemDefinition material)) return;
+            Drops.Add(new LootItem(material, 0));
+            if (Random.value < ExtraMaterialChance) Drops.Add(new LootItem(material, 0));
         }
     }
 }

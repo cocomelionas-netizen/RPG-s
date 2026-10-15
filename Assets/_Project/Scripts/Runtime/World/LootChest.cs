@@ -19,9 +19,9 @@ namespace RPG.World
         [SerializeField] private Vector2Int gold = new Vector2Int(2, 6);
         [SerializeField] private GameObject lootBagPrefab;
         [SerializeField] private AffixCatalog affixes;
-        [Tooltip("Gear dropped by level, around the chest's level.")]
+        [Tooltip("The craftable gear whose materials drop, around the chest's level.")]
         [SerializeField] private ItemCatalog gear;
-        [Tooltip("Times the gear chance is rolled when it is opened.")]
+        [Tooltip("Times the material chance is rolled when it is opened.")]
         [SerializeField, Min(0)] private int gearRolls = 2;
         [SerializeField, Range(0f, 1f)] private float socketChance = 0.25f;
         [SerializeField, Min(0.3f)] private float openRange = 1.2f;
@@ -79,7 +79,7 @@ namespace RPG.World
             opened = true;
             if (gold.y > 0 && opener.TryGetComponent(out Inventory inventory))
                 inventory.ServerAddGold(Random.Range(gold.x, gold.y + 1));
-            // The table once (junk, potions, gems), the gear chance several times.
+            // The table once (junk, potions, gems), the material chance several times.
             LootDrop.Spawn(lootBagPrefab, transform.position + new Vector3(0f, -0.25f, 0f), loot, gear, affixes, level, socketChance,
                 1, Mathf.Max(0, gearRolls - 1));
             NetworkObject.Despawn(true);

@@ -75,11 +75,19 @@ namespace RPG.Items
         [Tooltip("A jeweler turns three of this gem into one of these.")]
         public ItemDefinition combinesInto;
 
+        [Header("Crafting")]
+        [Tooltip("Crafted by a vendor from this material (null: cannot be crafted). Also what drops instead of the piece: monsters drop materials, not gear.")]
+        public ItemDefinition craftMaterial;
+        [Tooltip("How many of the material crafting takes.")]
+        [Min(1)] public int craftCount = 1;
+
         [Header("Look")]
         [Tooltip("Color of the item's square in the bag until it has an icon.")]
         public Color iconColor = new Color(0.5f, 0.5f, 0.5f);
 
         public bool IsEquippable => slot != ItemSlot.None;
+
+        public bool IsCraftable => craftMaterial != null;
 
         public static Color RarityColor(ItemRarity rarity)
         {
@@ -153,6 +161,7 @@ namespace RPG.Items
             if (maxStack > 1) text.AppendLine($"Stacks up to {maxStack}");
             if (!string.IsNullOrEmpty(className)) text.AppendLine($"{className} only");
             if (IsEquippable) text.AppendLine($"Requires level {itemLevel}");
+            if (IsCraftable) text.AppendLine($"Crafted from {craftCount} {craftMaterial.displayName}");
             if (price > 0) text.AppendLine($"Sells for {(sellPrice >= 0 ? sellPrice : SellPriceWith(affix))} gold");
             text.Append(IsEquippable ? "Click to equip" : use != ItemUse.None ? "Click to use" : isGem ? "Click, then click the item to set it into" : "");
             return text.ToString().TrimEnd();

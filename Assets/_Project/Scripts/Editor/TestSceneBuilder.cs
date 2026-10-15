@@ -839,28 +839,45 @@ namespace RPG.EditorTools
                 vendor.stockLimits = limits;
                 vendor.restockSeconds = 60f;
                 vendor.combinesGems = false;
+                vendor.crafts = Array.Empty<ItemDefinition>();
                 EditorUtility.SetDirty(vendor);
                 return vendor;
             }
 
             return new[]
             {
-                // Source's gear for the first levels, plus one rare piece each.
-                MakeVendor("WarriorVendor", "Thorin Ironhand", "Warrior weapons and armor",
-                    GearFile("Bronze Sword", 1), GearFile("Steel Sword", 4), "WarAxe",
-                    GearFile("Leather Cap", 1), GearFile("Leather Jerkin", 1), GearFile("Leather Boots", 1),
-                    GearFile("Bronze Coif", 3), GearFile("Bronze Chainmail", 3), GearFile("Bronze Greaves", 3)),
-                MakeVendor("RangerVendor", "Sylva Swiftarrow", "Ranger bows and leather",
-                    GearFile("Aspen Bow", 1), GearFile("Elm Bow", 4), "ElvenBow",
-                    GearFile("Leather Cap", 1), GearFile("Leather Jerkin", 1), GearFile("Leather Boots", 1),
-                    GearFile("Brigandine Cap", 4), GearFile("Brigandine Jerkin", 4), GearFile("Brigandine Boots", 4)),
-                MakeVendor("MageVendor", "Elara the Arcanist", "Mage staves and robes",
-                    GearFile("Aspen Staff", 1), GearFile("Elm Staff", 4), "StaffOfEmbers",
-                    GearFile("Linen Hood", 1), GearFile("Linen Vestments", 1), GearFile("Linen Slippers", 1),
-                    GearFile("Wool Hood", 4), GearFile("Wool Vestments", 4), GearFile("Wool Slippers", 4)),
+                // Starting gear and one rare piece each; everything better is crafted from materials.
+                Crafter(MakeVendor("WarriorVendor", "Thorin Ironhand", "Warrior weapons and armor, crafting",
+                        GearFile("Bronze Sword", 1), "WarAxe", GearFile("Leather Cap", 1), GearFile("Leather Jerkin", 1), GearFile("Leather Boots", 1)),
+                    catalog, WarriorClass, SourceGear.ArmorKind.Leather, SourceGear.ArmorKind.Chain, SourceGear.ArmorKind.Plate),
+                Crafter(MakeVendor("RangerVendor", "Sylva Swiftarrow", "Ranger bows and leather, crafting",
+                        GearFile("Aspen Bow", 1), "ElvenBow", GearFile("Leather Cap", 1), GearFile("Leather Jerkin", 1), GearFile("Leather Boots", 1)),
+                    catalog, RangerClass, SourceGear.ArmorKind.Leather, SourceGear.ArmorKind.Chain),
+                Crafter(MakeVendor("MageVendor", "Elara the Arcanist", "Mage staves and robes, crafting",
+                        GearFile("Aspen Staff", 1), "StaffOfEmbers", GearFile("Linen Hood", 1), GearFile("Linen Vestments", 1), GearFile("Linen Slippers", 1)),
+                    catalog, MageClass, SourceGear.ArmorKind.Robe),
                 Jeweler(MakeVendor("JewelerVendor", "Gemma Brightstone", "Jeweler: gems, gem combining",
                     "ChippedRuby", "ChippedTopaz", "ChippedSapphire", "ChippedEmerald")),
             };
+        }
+
+        /// <summary>
+        /// Lets a vendor craft its class's weapons and the armor of <paramref name="armorKinds"/> (Source's desirable
+        /// armor of the class) from materials.
+        /// </summary>
+        private static VendorDefinition Crafter(VendorDefinition vendor, ItemCatalog catalog, int classIndex, params SourceGear.ArmorKind[] armorKinds)
+        {
+            var crafts = new List<ItemDefinition>();
+            foreach (ItemDefinition item in catalog.items)
+            {
+                if (item == null || !item.IsCraftable) continue;
+                bool classWeapon = item.slot == ItemSlot.Weapon && item.requiredClass == classIndex;
+                bool armor = GearArmorKinds.TryGetValue(item, out SourceGear.ArmorKind kind) && Array.IndexOf(armorKinds, kind) >= 0;
+                if (classWeapon || armor) crafts.Add(item);
+            }
+            vendor.crafts = crafts.ToArray();
+            EditorUtility.SetDirty(vendor);
+            return vendor;
         }
 
         private static VendorDefinition Jeweler(VendorDefinition vendor)
@@ -1076,7 +1093,8 @@ namespace RPG.EditorTools
             foreach (ItemDefinition item in all)
                 if (item.IsEquippable) item.dropWeight = 0f;
             all.AddRange(gems);
-            all.AddRange(CreateSourceGear());
+            all.AddRange(CreateSourceGear(out List<ItemDefinition> materials));
+            all.AddRange(materials);
             catalog.items = all.ToArray();
             EditorUtility.SetDirty(catalog);
             return catalog;
@@ -1110,16 +1128,71 @@ namespace RPG.EditorTools
         /// <summary>Asset file name of a generated piece, e.g. "Source/SteelSword_L04".</summary>
         private static string GearFile(string displayName, int level) => $"Source/{displayName.Replace(" ", "")}_L{level:00}";
 
+        /// <summary>What kind of armor each generated armor piece is (which class vendor crafts it); weapons are not in it.</summary>
+        private static readonly Dictionary<ItemDefinition, SourceGear.ArmorKind> GearArmorKinds =
+            new Dictionary<ItemDefinition, SourceGear.ArmorKind>();
+
+        /// <summary>How many of its material a piece takes to craft.</summary>
+        private static int CraftCount(ItemSlot slot) => slot == ItemSlot.Weapon || slot == ItemSlot.Chest ? 6 : 4;
+
+        /// <summary>A crafting material: rarer (colored) the later it starts dropping.</summary>
+        private static ItemDefinition CreateMaterial(string displayName, int firstLevel, Color color)
+        {
+            ItemRarity rarity = firstLevel < 6 ? ItemRarity.Common : firstLevel < 13 ? ItemRarity.Uncommon
+                : firstLevel < 20 ? ItemRarity.Rare : ItemRarity.Epic;
+            ItemDefinition material = CreateItem($"Source/Materials/{displayName.Replace(" ", "")}", displayName, ItemSlot.None,
+                rarity, 0, 0, 0, color, 2 + firstLevel);
+            material.maxStack = 50;
+            material.canHaveAffix = false;
+            return material;
+        }
+
+        private static int FirstLevel((int key, int level, float chance)[] table, int key)
+        {
+            int first = 25;
+            foreach ((int tableKey, int level, float _) in table)
+                if (tableKey == key) first = Mathf.Min(first, level);
+            return first;
+        }
+
         /// <summary>
         /// Source's gear (<see cref="SourceGear"/>): for every level, each material its chance tables can drop
         /// there, as a sword (warriors), bow (rangers) and staff (mages), and as head, chest and feet armor anyone may
         /// wear. Stats grow with Source's sell price of the piece, the drop weight is its material chance.
+        /// Every piece is crafted from its material (ingots, logs, hides, cloth), which is what monsters drop.
         /// </summary>
-        private static List<ItemDefinition> CreateSourceGear()
+        private static List<ItemDefinition> CreateSourceGear(out List<ItemDefinition> materials)
         {
+            GearArmorKinds.Clear();
             var gear = new List<ItemDefinition>();
+            materials = new List<ItemDefinition>();
+            var ingots = new ItemDefinition[SourceGear.Metals.Length];
+            var logs = new ItemDefinition[SourceGear.Woods.Length];
+            for (int tier = 1; tier <= ingots.Length; tier++)
+            {
+                (int, int, float)[] weaponTable = SourceGear.WeaponChances;
+                ingots[tier - 1] = CreateMaterial($"{SourceGear.Metals[tier - 1]} Ingot", FirstLevel(weaponTable, tier), MetalColors[tier - 1]);
+                logs[tier - 1] = CreateMaterial($"{SourceGear.Woods[tier - 1]} Log", FirstLevel(weaponTable, tier), WoodColors[tier - 1]);
+            }
+            materials.AddRange(ingots);
+            materials.AddRange(logs);
+            // Armor: hides for leather, the metal ingots for chain (Bronze-Emerald) and plate (Crystal-Titanium), cloth for robes.
+            var armorMaterials = new ItemDefinition[SourceGear.ArmorMaterials.Length];
+            for (int type = 2; type < armorMaterials.Length; type++)
+            {
+                SourceGear.ArmorKind kind = SourceGear.KindOf(type);
+                if (kind == SourceGear.ArmorKind.Chain || kind == SourceGear.ArmorKind.Plate)
+                {
+                    armorMaterials[type] = ingots[type - 5];
+                    continue;
+                }
+                string name = SourceGear.ArmorMaterials[type] + (kind == SourceGear.ArmorKind.Leather ? " Hide" : " Cloth");
+                armorMaterials[type] = CreateMaterial(name, FirstLevel(SourceGear.ArmorChances, type), ArmorColor(type));
+                materials.Add(armorMaterials[type]);
+            }
+
             ItemDefinition Piece(string displayName, ItemSlot slot, int level, float chance, int damage, int armor, int mana,
-                Color color, float SourceSellPrice, int requiredClass)
+                Color color, float SourceSellPrice, int requiredClass, ItemDefinition material)
             {
                 // Our gold is about a tenth of theirs: vendors pay a quarter of the price.
                 int price = Mathf.Max(1, Mathf.RoundToInt(SourceSellPrice * 0.4f));
@@ -1127,6 +1200,8 @@ namespace RPG.EditorTools
                     color, price, requiredClass, level);
                 item.manaBonus = mana;
                 item.dropWeight = chance / 100f;
+                item.craftMaterial = material;
+                item.craftCount = CraftCount(slot);
                 gear.Add(item);
                 return item;
             }
@@ -1135,10 +1210,12 @@ namespace RPG.EditorTools
             {
                 int sell = SourceGear.WeaponSellPrice(tier, level);
                 int damage = Mathf.RoundToInt(2f + (sell - 50) * 0.035f);
-                Piece($"{SourceGear.Metals[tier - 1]} Sword", ItemSlot.Weapon, level, chance, damage, 0, 0, MetalColors[tier - 1], sell, WarriorClass);
-                Piece($"{SourceGear.Woods[tier - 1]} Bow", ItemSlot.Weapon, level, chance, damage, 0, 0, WoodColors[tier - 1], sell * 1.1f, RangerClass);
+                Piece($"{SourceGear.Metals[tier - 1]} Sword", ItemSlot.Weapon, level, chance, damage, 0, 0, MetalColors[tier - 1], sell,
+                    WarriorClass, ingots[tier - 1]);
+                Piece($"{SourceGear.Woods[tier - 1]} Bow", ItemSlot.Weapon, level, chance, damage, 0, 0, WoodColors[tier - 1], sell * 1.1f,
+                    RangerClass, logs[tier - 1]);
                 Piece($"{SourceGear.Woods[tier - 1]} Staff", ItemSlot.Weapon, level, chance, damage, 0, Mathf.RoundToInt(damage * 0.5f),
-                    WoodColors[tier - 1] * 0.9f, sell * 1.1f, MageClass);
+                    WoodColors[tier - 1] * 0.9f, sell * 1.1f, MageClass, logs[tier - 1]);
             }
 
             foreach ((int type, int level, float chance) in SourceGear.ArmorChances)
@@ -1153,8 +1230,11 @@ namespace RPG.EditorTools
                 string material = SourceGear.ArmorMaterials[type];
                 Color color = ArmorColor(type);
                 foreach ((string baseName, ItemSlot slot, float share) in new[] { (head, ItemSlot.Head, 0.7f), (chest, ItemSlot.Chest, 1f), (feet, ItemSlot.Feet, 0.5f) })
-                    Piece($"{material} {baseName}", slot, level, chance, 0, Mathf.Max(1, Mathf.RoundToInt(armor * share)),
-                        Mathf.RoundToInt(mana * share), color, sell * (0.6f + 0.4f * share), -1);
+                {
+                    ItemDefinition piece = Piece($"{material} {baseName}", slot, level, chance, 0, Mathf.Max(1, Mathf.RoundToInt(armor * share)),
+                        Mathf.RoundToInt(mana * share), color, sell * (0.6f + 0.4f * share), -1, armorMaterials[type]);
+                    GearArmorKinds[piece] = SourceGear.KindOf(type);
+                }
             }
             return gear;
         }

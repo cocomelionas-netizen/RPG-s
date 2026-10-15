@@ -405,6 +405,18 @@ namespace RPG.Items
             if (rpcParams.Receive.SenderClientId == OwnerClientId) ServerCombineGems(Vendor.Get(vendorIndex));
         }
 
+        /// <summary>Owner: asks a vendor to craft a piece from its craft list out of materials in the bag.</summary>
+        public void RequestCraft(Vendor vendor, int craftIndex)
+        {
+            if (IsOwner && vendor != null) CraftRpc(vendor.Index, craftIndex);
+        }
+
+        [Rpc(SendTo.Server)]
+        private void CraftRpc(int vendorIndex, int craftIndex, RpcParams rpcParams = default)
+        {
+            if (rpcParams.Receive.SenderClientId == OwnerClientId) ServerCraft(Vendor.Get(vendorIndex), craftIndex);
+        }
+
         /// <summary>Owner: asks how many of each item a vendor has left (the answer updates <see cref="Vendor.KnownRemaining"/>).</summary>
         public void RequestVendorStock(Vendor vendor)
         {
@@ -530,6 +542,16 @@ namespace RPG.Items
                 case InventoryMessage.SoldOut:
                     CombatTextLayer.ShowText(above, "Sold out", new Color(1f, 0.4f, 0.3f), 0.8f);
                     MessageLog.Add("That item is sold out. Vendors restock every few minutes.", MessageLog.WarningColor);
+                    break;
+                case InventoryMessage.Crafted:
+                    if (item == null) break;
+                    CombatTextLayer.ShowText(above, "Crafted " + item.NameWith(affix), ItemDefinition.RarityColor(item.QualityWith(affix)), 0.8f);
+                    MessageLog.Add($"You craft [{item.NameWith(affix)}].", ItemDefinition.RarityColor(item.QualityWith(affix)));
+                    break;
+                case InventoryMessage.NotEnoughMaterials:
+                    CombatTextLayer.ShowText(above, "Not enough materials", new Color(1f, 0.4f, 0.3f), 0.8f);
+                    // The count travels in the affix field.
+                    if (item != null) MessageLog.Add($"You need {affixId} [{item.displayName}].", MessageLog.WarningColor);
                     break;
                 case InventoryMessage.Gold:
                     CombatTextLayer.ShowText(above, $"+{itemId} gold", GoldColor, 0.8f);
@@ -696,6 +718,50 @@ namespace RPG.Items
             return true;
         }
 
+        /// <summary>
+        /// Server: a vendor the player stands next to crafts a piece from its craft list: it takes the materials and
+        /// gives the piece, which may come out better (<see cref="LootDrop.CraftChances"/>) and with a socket.
+        /// The player must be of the piece's level.
+        /// </summary>
+        public bool ServerCraft(Vendor vendor, int craftIndex)
+        {
+            if (!IsServer || health.IsDead || !IsNear(vendor)) return false;
+            ItemDefinition[] crafts = vendor.Definition.crafts;
+            if (crafts == null || craftIndex < 0 || craftIndex >= crafts.Length) return false;
+            ItemDefinition item = crafts[craftIndex];
+            if (item == null || !item.IsCraftable) return false;
+            if (progress != null && progress.Level < item.itemLevel)
+            {
+                MessageRpc(InventoryMessage.LevelTooLow, catalog.IdOf(item), 0);
+                return false;
+            }
+            if (CountOf(item.craftMaterial) < item.craftCount)
+            {
+                MessageRpc(InventoryMessage.NotEnoughMaterials, catalog.IdOf(item.craftMaterial), item.craftCount);
+                return false;
+            }
+
+            int level = progress != null ? progress.Level : item.itemLevel;
+            ItemRarity? better = LootDrop.RollQuality(LootDrop.CraftChances);
+            int affix = 0;
+            if (affixes != null)
+                affix = better.HasValue && better.Value > item.rarity ? affixes.RollQuality(item, level, better.Value) : affixes.Roll(item, level);
+            int socket = UnityEngine.Random.value < CraftSocketChance ? ItemStack.EmptySocket : 0;
+
+            ServerRemoveItem(item.craftMaterial, item.craftCount);
+            if (ServerAddItem(item, 1, false, affix, socket) <= 0)
+            {
+                // No room: the materials go back.
+                ServerAddItem(item.craftMaterial, item.craftCount, false);
+                return false;
+            }
+            MessageRpc(InventoryMessage.Crafted, catalog.IdOf(item), affix);
+            return true;
+        }
+
+        /// <summary>Chance that a crafted piece has an empty socket.</summary>
+        public const float CraftSocketChance = 0.2f;
+
         /// <summary>Server: sells one item from a bag slot to a vendor the player stands next to.</summary>
         public bool ServerSell(Vendor vendor, int bagIndex)
         {
@@ -738,6 +804,10 @@ namespace RPG.Items
             NothingToCombine,
             /// <summary>The player's level is below the item's; the item travels in the item id field.</summary>
             LevelTooLow,
+            /// <summary>A piece was crafted: the item and its affix.</summary>
+            Crafted,
+            /// <summary>Too few materials: the material travels in the item id field, how many are needed in the affix field.</summary>
+            NotEnoughMaterials,
         }
     }
 }

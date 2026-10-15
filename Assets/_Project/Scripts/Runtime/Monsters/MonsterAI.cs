@@ -172,6 +172,9 @@ namespace RPG.Monsters
         public const float EliteHealthScale = 5.6f;
         public const float EliteDamageScale = 1.5f;
         public const int EliteRewardScale = 3;
+        /// <summary>Extra rolls of the material chance for an elite, and for a boss (a monster with guaranteed gear).</summary>
+        public const int EliteMaterialRolls = 3;
+        public const int BossMaterialRolls = 6;
         private const float EliteSizeScale = 1.25f;
 
         private readonly NetworkVariable<bool> elite = new NetworkVariable<bool>(
@@ -412,13 +415,14 @@ namespace RPG.Monsters
 
         private void DropLoot()
         {
-            // Like Source: elites roll twice and always drop a green or blue piece; bosses always drop their
-            // guaranteed gear (gold) and sometimes a purple one on top. All gear comes from around the monster's level.
+            // Gear is crafted from the materials monsters drop: elites roll the table twice and drop more
+            // materials; bosses drop the most, plus their guaranteed finished gear (gold, sometimes purple).
             var guaranteed = new List<ItemRarity>();
             for (int i = 0; i < guaranteedGear; i++) guaranteed.Add(guaranteedQuality);
-            if (IsElite) guaranteed.Add(Random.value < 0.5f ? ItemRarity.Uncommon : ItemRarity.Rare);
             if (purpleChance > 0f && Random.value < purpleChance) guaranteed.Add(ItemRarity.Legendary);
-            LootDrop.Spawn(lootBagPrefab, transform.position, loot, gear, affixes, level, socketChance, IsElite ? 2 : 1, 0, guaranteed.ToArray());
+            int extraMaterialRolls = (IsElite ? EliteMaterialRolls : 0) + (guaranteedGear > 0 ? BossMaterialRolls : 0);
+            LootDrop.Spawn(lootBagPrefab, transform.position, loot, gear, affixes, level, socketChance, IsElite ? 2 : 1,
+                extraMaterialRolls, guaranteed.ToArray());
         }
 
         /// <summary>Sets the gear a boss always drops (used by the scene builder).</summary>

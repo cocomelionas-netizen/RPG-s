@@ -147,6 +147,54 @@ namespace RPG.Tests
             Assert.AreEqual(Vendor.Unlimited, vendor.ServerRemaining(vendor.Definition.stock.Length - 1), "Potions never run out.");
         }
 
+        private int FirstLevelCraft()
+        {
+            ItemDefinition[] crafts = vendor.Definition.crafts;
+            for (int i = 0; i < crafts.Length; i++)
+                if (crafts[i] != null && crafts[i].itemLevel == 1 && crafts[i].IsCraftable) return i;
+            return -1;
+        }
+
+        [UnityTest]
+        public IEnumerator Crafting_TakesTheMaterials_AndGivesThePiece()
+        {
+            int index = FirstLevelCraft();
+            Assert.GreaterOrEqual(index, 0, "The warrior vendor crafts level 1 gear.");
+            ItemDefinition piece = vendor.Definition.crafts[index];
+            inventory.ServerAddItem(piece.craftMaterial, piece.craftCount + 1, false);
+
+            Assert.IsTrue(inventory.ServerCraft(vendor, index));
+            yield return null;
+            Assert.AreEqual(1, inventory.CountOf(piece.craftMaterial), "Only the recipe's materials are used.");
+            Assert.AreEqual(1, inventory.CountOf(piece));
+        }
+
+        [UnityTest]
+        public IEnumerator Crafting_WithTooFewMaterials_Fails()
+        {
+            int index = FirstLevelCraft();
+            ItemDefinition piece = vendor.Definition.crafts[index];
+            inventory.ServerAddItem(piece.craftMaterial, piece.craftCount - 1, false);
+
+            Assert.IsFalse(inventory.ServerCraft(vendor, index));
+            yield return null;
+            Assert.AreEqual(piece.craftCount - 1, inventory.CountOf(piece.craftMaterial));
+            Assert.AreEqual(0, inventory.CountOf(piece));
+        }
+
+        [UnityTest]
+        public IEnumerator Crafting_AboveYourLevel_Fails()
+        {
+            ItemDefinition[] crafts = vendor.Definition.crafts;
+            int index = System.Array.FindIndex(crafts, item => item != null && item.itemLevel >= 10);
+            Assert.GreaterOrEqual(index, 0);
+            inventory.ServerAddItem(crafts[index].craftMaterial, crafts[index].craftCount, false);
+
+            Assert.IsFalse(inventory.ServerCraft(vendor, index));
+            yield return null;
+            Assert.AreEqual(0, inventory.CountOf(crafts[index]));
+        }
+
         [UnityTest]
         public IEnumerator Trading_FarFromTheVendor_Fails()
         {
