@@ -5,6 +5,7 @@ using RPG.CameraSystem;
 using RPG.Characters;
 using RPG.Combat;
 using RPG.Controls;
+using RPG.Items;
 using RPG.Monsters;
 using RPG.Navigation;
 using RPG.Networking;
@@ -38,7 +39,13 @@ namespace RPG.EditorTools
         private const string PlayerPrefabPath = "Assets/_Project/Prefabs/Characters/Player.prefab";
         private const string TreePrefabPath = "Assets/_Project/Prefabs/World/Tree.prefab";
         private const string DummyPrefabPath = "Assets/_Project/Prefabs/World/TrainingDummy.prefab";
-        private const string GoblinPrefabPath = "Assets/_Project/Prefabs/Monsters/Goblin.prefab";
+        private const string MonstersFolder = "Assets/_Project/Prefabs/Monsters";
+        private const string LootBagPrefabPath = "Assets/_Project/Prefabs/World/LootBag.prefab";
+        private const string ItemsFolder = "Assets/_Project/Data/Items";
+        private const string BruteAnimationSetPath = "Assets/_Project/Data/Characters/GoblinBrute_AnimationSet.asset";
+        private const string BruteArtFolder = PlaceholderArtGenerator.Folder + "/GoblinBrute";
+        private const string OrcAnimationSetPath = "Assets/_Project/Data/Characters/Orc_AnimationSet.asset";
+        private const string OrcArtFolder = PlaceholderArtGenerator.Folder + "/Orc";
         private const string NetworkPrefabsListPath = "Assets/DefaultNetworkPrefabs.asset";
         private const string PlayerAnimationSetPath = "Assets/_Project/Data/Characters/Player_AnimationSet.asset";
         private const string PlayerArtFolder = PlaceholderArtGenerator.Folder + "/Player";
@@ -89,7 +96,33 @@ namespace RPG.EditorTools
             Sprite barSprite = PlaceholderArtGenerator.BarPixel("BarPixel");
             Sprite targetRingSprite = PlaceholderArtGenerator.GroundRing("TargetRing", new Color(0.95f, 0.2f, 0.15f, 0.9f));
             GameObject dummyPrefab = CreateDummyPrefab(PlaceholderArtGenerator.TrainingDummy("TrainingDummy"), barSprite);
-            GameObject goblinPrefab = CreateGoblinPrefab(goblinAnimations, barSprite);
+            CharacterAnimationSet bruteAnimations = CreateCharacterAnimationSet("GoblinBrute", BruteArtFolder, BruteAnimationSetPath,
+                new Color(0.33f, 0.31f, 0.29f), new Color(0.3f, 0.45f, 0.2f));
+            CharacterAnimationSet orcAnimations = CreateCharacterAnimationSet("Orc", OrcArtFolder, OrcAnimationSetPath,
+                new Color(0.45f, 0.12f, 0.1f), new Color(0.42f, 0.52f, 0.36f));
+            ItemCatalog items = CreateItems(out ItemDefinition potion);
+            GameObject lootBagPrefab = CreateLootBagPrefab(PlaceholderArtGenerator.LootSack("LootSack"));
+            GameObject goblinPrefab = CreateMonsterPrefab(new MonsterSpec
+            {
+                Name = "Goblin", Animations = goblinAnimations, Scale = 0.85f, Health = 45, MinDamage = 3, MaxDamage = 5,
+                AttackInterval = 2f, Level = 2, Experience = 20, MoveSpeed = 1.8f,
+                Loot = Loot(items, ("HealingPotion", 0.3f), ("RustySword", 0.08f), ("LeatherCap", 0.08f), ("PaddedVest", 0.08f),
+                    ("WornBoots", 0.08f), ("IronSword", 0.03f)),
+            }, barSprite, lootBagPrefab);
+            GameObject brutePrefab = CreateMonsterPrefab(new MonsterSpec
+            {
+                Name = "Goblin Brute", Animations = bruteAnimations, Scale = 1.05f, Health = 120, MinDamage = 6, MaxDamage = 10,
+                AttackInterval = 2.2f, Level = 4, Experience = 45, MoveSpeed = 1.6f,
+                Loot = Loot(items, ("HealingPotion", 0.5f), ("IronSword", 0.12f), ("IronHelm", 0.1f), ("Chainmail", 0.1f),
+                    ("IronBoots", 0.1f), ("GoblinCleaver", 0.04f)),
+            }, barSprite, lootBagPrefab);
+            GameObject orcPrefab = CreateMonsterPrefab(new MonsterSpec
+            {
+                Name = "Orc", Animations = orcAnimations, Scale = 1.15f, Health = 220, MinDamage = 10, MaxDamage = 15,
+                AttackInterval = 2f, Level = 6, Experience = 90, MoveSpeed = 1.7f,
+                Loot = Loot(items, ("HealingPotion", 0.6f), ("GoblinCleaver", 0.1f), ("OrcSkullHelm", 0.1f), ("OrcishPlate", 0.05f),
+                    ("OrcishGreataxe", 0.05f)),
+            }, barSprite, lootBagPrefab);
             CharacterAnimationSet rangerAnimations = CreateCharacterAnimationSet("Ranger", RangerArtFolder, RangerAnimationSetPath, new Color(0.2f, 0.45f, 0.22f), null);
             CharacterAnimationSet mageAnimations = CreateCharacterAnimationSet("Mage", MageArtFolder, MageAnimationSetPath, new Color(0.45f, 0.22f, 0.62f), null);
             ClassCatalog classes = CreateClasses(playerAnimations, rangerAnimations, mageAnimations);
@@ -110,7 +143,7 @@ namespace RPG.EditorTools
             CreateEventSystem();
 
             // Players are not placed in the scene: the server spawns one per connection at the spawn point.
-            GameObject playerPrefab = CreatePlayerPrefab(playerAnimations, barSprite, classes);
+            GameObject playerPrefab = CreatePlayerPrefab(playerAnimations, barSprite, classes, items, potion);
             var spawnPoint = new GameObject("Player Spawn").transform;
             spawnPoint.position = grid.GetCellCenterWorld(new Vector3Int(MapSize / 2, MapSize / 2, 0));
 
@@ -120,7 +153,7 @@ namespace RPG.EditorTools
             CreateTargetIndicator(targetRingSprite);
             new GameObject("Combat Effects").AddComponent<CombatEffects>().Configure(projectileSprite, effectRingSprite, GroundRingRadius);
             PlaceDummies(grid, dummyPrefab);
-            PlaceMonsterCamps(grid, goblinPrefab);
+            PlaceMonsterCamps(grid, goblinPrefab, brutePrefab, orcPrefab);
             CreateHud();
 
             EditorSceneManager.SaveScene(EditorSceneManager.GetActiveScene(), ScenePath);
@@ -248,7 +281,8 @@ namespace RPG.EditorTools
             go.AddComponent<InputSystemUIInputModule>();
         }
 
-        private static GameObject CreatePlayerPrefab(CharacterAnimationSet animations, Sprite barSprite, ClassCatalog classes)
+        private static GameObject CreatePlayerPrefab(CharacterAnimationSet animations, Sprite barSprite, ClassCatalog classes,
+            ItemCatalog items, ItemDefinition startingPotion)
         {
             var player = new GameObject("Player");
 
@@ -283,6 +317,15 @@ namespace RPG.EditorTools
             progressObject.FindProperty("catalog").objectReferenceValue = classes;
             progressObject.ApplyModifiedPropertiesWithoutUndo();
             player.AddComponent<AbilityCaster>();
+            var inventory = player.AddComponent<Inventory>();
+            var inventoryObject = new SerializedObject(inventory);
+            inventoryObject.FindProperty("catalog").objectReferenceValue = items;
+            SerializedProperty startingItems = inventoryObject.FindProperty("startingItems");
+            startingItems.arraySize = 3;
+            for (int i = 0; i < startingItems.arraySize; i++)
+                startingItems.GetArrayElementAtIndex(i).objectReferenceValue = startingPotion;
+            inventoryObject.ApplyModifiedPropertiesWithoutUndo();
+            player.AddComponent<LootPicker>();
             AddHealthPresenter(player, barSprite, 0.85f);
             AddHitbox(player, new Vector2(0.36f, 0.62f), new Vector2(0f, 0.34f));
 
@@ -581,47 +624,155 @@ namespace RPG.EditorTools
             return asset;
         }
 
-        private static GameObject CreateGoblinPrefab(CharacterAnimationSet animations, Sprite barSprite)
+        /// <summary>What makes one monster type different from another.</summary>
+        private struct MonsterSpec
         {
-            var goblin = new GameObject("Goblin");
-            // Smaller than the player.
-            goblin.transform.localScale = new Vector3(0.85f, 0.85f, 1f);
+            public string Name;
+            public CharacterAnimationSet Animations;
+            public float Scale;
+            public int Health;
+            public int MinDamage;
+            public int MaxDamage;
+            public float AttackInterval;
+            public int Level;
+            public int Experience;
+            public float MoveSpeed;
+            public LootEntry[] Loot;
+        }
 
-            var spriteRenderer = goblin.AddComponent<SpriteRenderer>();
-            spriteRenderer.sprite = animations.FindClip(CharacterAnimationSet.IdleClip).south[0];
+        private static GameObject CreateMonsterPrefab(MonsterSpec spec, Sprite barSprite, GameObject lootBagPrefab)
+        {
+            var monster = new GameObject(spec.Name);
+            monster.transform.localScale = new Vector3(spec.Scale, spec.Scale, 1f);
+
+            var spriteRenderer = monster.AddComponent<SpriteRenderer>();
+            spriteRenderer.sprite = spec.Animations.FindClip(CharacterAnimationSet.IdleClip).south[0];
             spriteRenderer.spriteSortPoint = SpriteSortPoint.Pivot;
 
             // Moved by the server, not by physics; no solid collider, so players and monsters pass through each other.
-            var body = goblin.AddComponent<Rigidbody2D>();
+            var body = monster.AddComponent<Rigidbody2D>();
             body.bodyType = RigidbodyType2D.Kinematic;
 
-            goblin.AddComponent<NetworkObject>();
-            goblin.AddComponent<MonsterMotion>();
-            goblin.AddComponent<CharacterAnimator>().AnimationSet = animations;
+            monster.AddComponent<NetworkObject>();
+            var motion = monster.AddComponent<MonsterMotion>();
+            var motionObject = new SerializedObject(motion);
+            motionObject.FindProperty("moveSpeed").floatValue = spec.MoveSpeed;
+            motionObject.ApplyModifiedPropertiesWithoutUndo();
+            monster.AddComponent<CharacterAnimator>().AnimationSet = spec.Animations;
 
-            AddHealth(goblin, "Goblin", false, Faction.Monster, 45);
-            var autoAttack = goblin.AddComponent<AutoAttack>();
+            AddHealth(monster, spec.Name, false, Faction.Monster, spec.Health);
+            var autoAttack = monster.AddComponent<AutoAttack>();
             var attackObject = new SerializedObject(autoAttack);
-            attackObject.FindProperty("minDamage").intValue = 3;
-            attackObject.FindProperty("maxDamage").intValue = 5;
-            attackObject.FindProperty("attackInterval").floatValue = 2f;
+            attackObject.FindProperty("minDamage").intValue = spec.MinDamage;
+            attackObject.FindProperty("maxDamage").intValue = spec.MaxDamage;
+            attackObject.FindProperty("attackInterval").floatValue = spec.AttackInterval;
             attackObject.FindProperty("range").floatValue = 0.7f;
             attackObject.FindProperty("critChance").floatValue = 0.05f;
             attackObject.ApplyModifiedPropertiesWithoutUndo();
 
-            var ai = goblin.AddComponent<MonsterAI>();
+            var ai = monster.AddComponent<MonsterAI>();
             var aiObject = new SerializedObject(ai);
-            aiObject.FindProperty("level").intValue = 2;
-            aiObject.FindProperty("experienceReward").intValue = 20;
+            aiObject.FindProperty("level").intValue = spec.Level;
+            aiObject.FindProperty("experienceReward").intValue = spec.Experience;
             aiObject.ApplyModifiedPropertiesWithoutUndo();
-            AddHealthPresenter(goblin, barSprite, 0.85f);
-            AddHitbox(goblin, new Vector2(0.4f, 0.65f), new Vector2(0f, 0.34f));
+            ai.ConfigureLoot(lootBagPrefab, spec.Loot);
 
-            Directory.CreateDirectory(Path.GetDirectoryName(GoblinPrefabPath));
-            GameObject prefab = PrefabUtility.SaveAsPrefabAsset(goblin, GoblinPrefabPath);
-            UnityEngine.Object.DestroyImmediate(goblin);
+            // The bar and hitbox are children, so they scale with the monster.
+            AddHealthPresenter(monster, barSprite, 0.85f);
+            AddHitbox(monster, new Vector2(0.4f, 0.65f), new Vector2(0f, 0.34f));
+
+            string path = $"{MonstersFolder}/{spec.Name.Replace(" ", "")}.prefab";
+            Directory.CreateDirectory(MonstersFolder);
+            GameObject prefab = PrefabUtility.SaveAsPrefabAsset(monster, path);
+            UnityEngine.Object.DestroyImmediate(monster);
             RegisterNetworkPrefab(prefab);
             return prefab;
+        }
+
+        private static GameObject CreateLootBagPrefab(Sprite sprite)
+        {
+            var loot = new GameObject("Loot Bag");
+            var spriteRenderer = loot.AddComponent<SpriteRenderer>();
+            spriteRenderer.sprite = sprite;
+            spriteRenderer.spriteSortPoint = SpriteSortPoint.Pivot;
+            loot.AddComponent<NetworkObject>();
+            loot.AddComponent<LootBag>();
+            AddHitbox(loot, new Vector2(0.35f, 0.3f), new Vector2(0f, 0.13f));
+
+            Directory.CreateDirectory(Path.GetDirectoryName(LootBagPrefabPath));
+            GameObject prefab = PrefabUtility.SaveAsPrefabAsset(loot, LootBagPrefabPath);
+            UnityEngine.Object.DestroyImmediate(loot);
+            RegisterNetworkPrefab(prefab);
+            return prefab;
+        }
+
+        private static ItemCatalog CreateItems(out ItemDefinition potion)
+        {
+            var metal = new Color(0.62f, 0.64f, 0.7f);
+            var leather = new Color(0.55f, 0.38f, 0.22f);
+            var orcish = new Color(0.45f, 0.3f, 0.25f);
+
+            potion = LoadOrCreateAsset<ItemDefinition>($"{ItemsFolder}/HealingPotion.asset");
+            potion.displayName = "Healing Potion";
+            potion.slot = ItemSlot.None;
+            potion.rarity = ItemRarity.Common;
+            potion.damageBonus = potion.healthBonus = potion.armor = 0;
+            potion.use = ItemUse.Heal;
+            potion.healFraction = 0.35f;
+            potion.maxStack = 10;
+            potion.iconColor = new Color(0.85f, 0.15f, 0.2f);
+            EditorUtility.SetDirty(potion);
+
+            var catalog = LoadOrCreateAsset<ItemCatalog>($"{ItemsFolder}/ItemCatalog.asset");
+            // Players will store item ids (catalog index + 1): only ever append to this list.
+            catalog.items = new[]
+            {
+                potion,
+                CreateItem("RustySword", "Rusty Sword", ItemSlot.Weapon, ItemRarity.Common, 2, 0, 0, metal * 0.8f),
+                CreateItem("IronSword", "Iron Sword", ItemSlot.Weapon, ItemRarity.Uncommon, 4, 0, 0, metal),
+                CreateItem("GoblinCleaver", "Goblin Cleaver", ItemSlot.Weapon, ItemRarity.Rare, 7, 10, 0, new Color(0.5f, 0.6f, 0.4f)),
+                CreateItem("OrcishGreataxe", "Orcish Greataxe", ItemSlot.Weapon, ItemRarity.Epic, 12, 20, 0, orcish),
+                CreateItem("LeatherCap", "Leather Cap", ItemSlot.Head, ItemRarity.Common, 0, 0, 4, leather),
+                CreateItem("IronHelm", "Iron Helm", ItemSlot.Head, ItemRarity.Uncommon, 0, 5, 8, metal),
+                CreateItem("OrcSkullHelm", "Orc Skull Helm", ItemSlot.Head, ItemRarity.Rare, 0, 15, 12, new Color(0.85f, 0.82f, 0.7f)),
+                CreateItem("PaddedVest", "Padded Vest", ItemSlot.Chest, ItemRarity.Common, 0, 0, 6, leather),
+                CreateItem("Chainmail", "Chainmail", ItemSlot.Chest, ItemRarity.Uncommon, 0, 10, 12, metal),
+                CreateItem("OrcishPlate", "Orcish Plate", ItemSlot.Chest, ItemRarity.Epic, 0, 30, 22, orcish),
+                CreateItem("WornBoots", "Worn Boots", ItemSlot.Feet, ItemRarity.Common, 0, 0, 3, leather),
+                CreateItem("IronBoots", "Iron Boots", ItemSlot.Feet, ItemRarity.Uncommon, 0, 5, 6, metal),
+            };
+            EditorUtility.SetDirty(catalog);
+            return catalog;
+        }
+
+        /// <summary>Loot entries by item asset file name.</summary>
+        private static LootEntry[] Loot(ItemCatalog catalog, params (string fileName, float chance)[] drops)
+        {
+            var entries = new LootEntry[drops.Length];
+            for (int i = 0; i < drops.Length; i++)
+            {
+                var item = AssetDatabase.LoadAssetAtPath<ItemDefinition>($"{ItemsFolder}/{drops[i].fileName}.asset");
+                if (item == null) Debug.LogError($"[TestScene] Loot item {drops[i].fileName} not found.");
+                entries[i] = new LootEntry(item, drops[i].chance);
+            }
+            return entries;
+        }
+
+        private static ItemDefinition CreateItem(string fileName, string displayName, ItemSlot slot, ItemRarity rarity,
+            int damageBonus, int healthBonus, int armor, Color iconColor)
+        {
+            var item = LoadOrCreateAsset<ItemDefinition>($"{ItemsFolder}/{fileName}.asset");
+            item.displayName = displayName;
+            item.slot = slot;
+            item.rarity = rarity;
+            item.damageBonus = damageBonus;
+            item.healthBonus = healthBonus;
+            item.armor = armor;
+            item.use = ItemUse.None;
+            item.maxStack = 1;
+            item.iconColor = iconColor;
+            EditorUtility.SetDirty(item);
+            return item;
         }
 
         /// <summary>Prefabs spawned at runtime must be in the network prefab list on server and clients.</summary>
@@ -639,24 +790,26 @@ namespace RPG.EditorTools
             EditorUtility.SetDirty(prefabsList);
         }
 
-        private static void PlaceMonsterCamps(Grid grid, GameObject monsterPrefab)
+        private static void PlaceMonsterCamps(Grid grid, GameObject goblin, GameObject brute, GameObject orc)
         {
             int center = MapSize / 2;
-            // Away from the spawn so new players are not attacked right away (5-7 units from it).
-            var camps = new[]
+            // Goblins 5-7 units from the spawn so new players are not attacked right away; tougher camps further out.
+            var camps = new (string name, Vector3Int cell, GameObject prefab, int count)[]
             {
-                new Vector3Int(center + 12, center + 6, 0),
-                new Vector3Int(center - 10, center + 4, 0),
-                new Vector3Int(center + 4, center - 10, 0),
+                ("Goblin Camp 1", new Vector3Int(center + 12, center + 6, 0), goblin, 3),
+                ("Goblin Camp 2", new Vector3Int(center - 10, center + 4, 0), goblin, 3),
+                ("Goblin Camp 3", new Vector3Int(center + 4, center - 10, 0), goblin, 3),
+                ("Goblin Brute Camp", new Vector3Int(center + 15, center - 6, 0), brute, 2),
+                ("Orc Camp", new Vector3Int(center - 6, center + 15, 0), orc, 2),
             };
 
             var parent = new GameObject("Monster Camps").transform;
-            for (int i = 0; i < camps.Length; i++)
+            foreach ((string campName, Vector3Int cell, GameObject prefab, int count) in camps)
             {
-                var camp = new GameObject($"Goblin Camp {i + 1}");
+                var camp = new GameObject(campName);
                 camp.transform.SetParent(parent, false);
-                camp.transform.position = grid.GetCellCenterWorld(camps[i]);
-                camp.AddComponent<MonsterSpawner>().Configure(monsterPrefab, 3, 1.2f, 20f);
+                camp.transform.position = grid.GetCellCenterWorld(cell);
+                camp.AddComponent<MonsterSpawner>().Configure(prefab, count, 1.2f, prefab == goblin ? 20f : 40f);
             }
         }
 
@@ -708,6 +861,10 @@ namespace RPG.EditorTools
             // These build their own contents at runtime.
             CreateHudElement<ExperienceBar>(canvasObject.transform, "Experience Bar", new Vector2(0.5f, 0f), new Vector2(0.5f, 0f), new Vector2(0f, 18f), new Vector2(380f, 16f));
             CreateHudElement<AbilityBar>(canvasObject.transform, "Ability Bar", new Vector2(0.5f, 0f), new Vector2(0.5f, 0f), new Vector2(0f, 122f), new Vector2(400f, 80f));
+            var inventoryWindow = new GameObject("Inventory Window", typeof(RectTransform));
+            inventoryWindow.transform.SetParent(canvasObject.transform, false);
+            Stretch((RectTransform)inventoryWindow.transform);
+            inventoryWindow.AddComponent<InventoryWindow>();
             CreateHudElement<ClassPicker>(canvasObject.transform, "Class Picker", new Vector2(1f, 1f), new Vector2(1f, 1f), new Vector2(-150f, -60f), new Vector2(130f, 140f));
         }
 

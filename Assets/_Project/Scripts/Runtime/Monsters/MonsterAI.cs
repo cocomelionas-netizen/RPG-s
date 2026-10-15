@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using RPG.Combat;
+using RPG.Items;
 using RPG.Navigation;
 using RPG.Progression;
 using Unity.Netcode;
@@ -40,6 +41,9 @@ namespace RPG.Monsters
         [SerializeField, Min(1)] private int level = 1;
         [Tooltip("Experience for each player who fought it (less for players above its level).")]
         [SerializeField, Min(0)] private int experienceReward = 20;
+        [Tooltip("Each entry is rolled on death; the items that drop are left in a loot bag.")]
+        [SerializeField] private LootEntry[] loot = System.Array.Empty<LootEntry>();
+        [SerializeField] private GameObject lootBagPrefab;
 
         [Header("Aggro")]
         [SerializeField, Min(0f)] private float aggroRadius = 3f;
@@ -116,6 +120,15 @@ namespace RPG.Monsters
         public int Level => level;
 
         public int ExperienceReward => experienceReward;
+
+        public IReadOnlyList<LootEntry> Loot => loot;
+
+        /// <summary>Sets the drops (used by the scene builder and tests).</summary>
+        public void ConfigureLoot(GameObject bagPrefab, LootEntry[] entries)
+        {
+            lootBagPrefab = bagPrefab;
+            loot = entries ?? System.Array.Empty<LootEntry>();
+        }
 
         public float AggroRadius
         {
@@ -304,6 +317,21 @@ namespace RPG.Monsters
             return best;
         }
 
+        private readonly List<ItemDefinition> drops = new List<ItemDefinition>();
+
+        private void DropLoot()
+        {
+            if (lootBagPrefab == null) return;
+            drops.Clear();
+            foreach (LootEntry entry in loot)
+                if (entry.item != null && Random.value < entry.chance) drops.Add(entry.item);
+            if (drops.Count == 0) return;
+
+            GameObject bag = Instantiate(lootBagPrefab, transform.position, Quaternion.identity);
+            bag.GetComponent<LootBag>().ServerSetContents(drops);
+            bag.GetComponent<NetworkObject>().Spawn(destroyWithScene: true);
+        }
+
         private void AwardExperience()
         {
             if (experienceReward <= 0) return;
@@ -420,6 +448,7 @@ namespace RPG.Monsters
         private void OnDied()
         {
             AwardExperience();
+            DropLoot();
             State = MonsterState.Dead;
             CurrentTarget = null;
             threat.Clear();

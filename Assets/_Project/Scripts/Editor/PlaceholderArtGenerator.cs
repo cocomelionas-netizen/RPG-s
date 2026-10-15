@@ -267,6 +267,36 @@ namespace RPG.EditorTools
             return SaveSprite(texture, Folder, name, new Vector2(0.5f, baseY / height));
         }
 
+        /// <summary>A small cloth sack with a golden glint, left on the ground as loot.</summary>
+        public static Sprite LootSack(string name)
+        {
+            const int size = 96;
+            const float baseY = 12f;
+            var texture = new Texture2D(size, size, TextureFormat.RGBA32, false);
+            var cloth = new Color(0.55f, 0.38f, 0.2f);
+            var gold = new Color(1f, 0.85f, 0.3f);
+            for (int y = 0; y < size; y++)
+            for (int x = 0; x < size; x++)
+            {
+                var p = new Vector2(x + 0.5f - size * 0.5f, y + 0.5f);
+                Color color = Color.clear;
+                float shadow = Mathf.Clamp01(1f - new Vector2(p.x / 30f, (p.y - baseY) / 9f).magnitude) * 0.4f;
+                if (shadow > 0f) color = new Color(0f, 0f, 0f, shadow);
+
+                if (Ellipse(p, new Vector2(0f, 34f), 26f, 24f))
+                {
+                    float shade = Mathf.Lerp(1.15f, 0.7f, Mathf.InverseLerp(-26f, 26f, p.x + (p.y - 34f) * 0.3f));
+                    color = cloth * shade;
+                    color.a = 1f;
+                }
+                if (Ellipse(p, new Vector2(0f, 62f), 9f, 7f)) { color = cloth * 0.85f; color.a = 1f; }
+                if (Mathf.Abs(p.y - 56f) < 2.5f && Mathf.Abs(p.x) < 10f) color = new Color(0.3f, 0.2f, 0.1f);
+                if (Ellipse(p, new Vector2(-8f, 44f), 4f, 4f) || Ellipse(p, new Vector2(10f, 30f), 3f, 3f)) color = gold;
+                texture.SetPixel(x, y, color);
+            }
+            return SaveSprite(texture, Folder, name, new Vector2(0.5f, baseY / size));
+        }
+
         /// <summary>A soft white glowing ball for projectiles (tinted at runtime).</summary>
         public static Sprite Orb(string name)
         {
