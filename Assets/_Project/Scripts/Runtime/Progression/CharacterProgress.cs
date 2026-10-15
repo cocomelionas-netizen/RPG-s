@@ -46,6 +46,7 @@ namespace RPG.Progression
         private CharacterAnimator characterAnimator;
         private Inventory inventory;
         private Mana mana;
+        private HealthRegeneration regeneration;
 
         /// <summary>Raised on every peer when the level goes up by gaining experience (not when a saved character is loaded).</summary>
         public event Action<int> LevelledUp;
@@ -79,8 +80,40 @@ namespace RPG.Progression
             }
         }
 
-        /// <summary>Critical hit chance with Agility (0..1).</summary>
-        public float CritChance => Class != null ? Mathf.Clamp01(Class.critChance + AttributeRules.CritBonus(TotalAttributes)) : 0f;
+        /// <summary>Whether the class fights at range (its auto-attack shoots).</summary>
+        public bool IsRanged => Class != null && Class.projectileColor.a > 0f;
+
+        /// <summary>Critical hit chance of auto-attacks with Agility and the melee or ranged critical rating (0..1).</summary>
+        public float CritChance
+        {
+            get
+            {
+                if (Class == null) return 0f;
+                AttributeSet total = TotalAttributes;
+                return Mathf.Clamp01(Class.critChance + AttributeRules.CritBonus(total) + AttributeRules.AttackCritBonus(total, IsRanged));
+            }
+        }
+
+        /// <summary>Critical hit chance of abilities with Agility and Spell Critical (0..1).</summary>
+        public float SpellCritChance
+        {
+            get
+            {
+                if (Class == null) return 0f;
+                AttributeSet total = TotalAttributes;
+                return Mathf.Clamp01(Class.critChance + AttributeRules.CritBonus(total) + AttributeRules.SpellCritBonus(total));
+            }
+        }
+
+        /// <summary>The weapon skill of the worn weapon (null without a weapon or skill).</summary>
+        public Attribute? WeaponSkill
+        {
+            get
+            {
+                ItemDefinition weapon = inventory != null ? inventory.Definition(inventory.GetEquipped(ItemSlot.Weapon)) : null;
+                return weapon != null ? ItemDefinition.SkillOf(weapon.weaponType) : null;
+            }
+        }
 
         private void Awake()
         {
@@ -89,6 +122,7 @@ namespace RPG.Progression
             characterAnimator = GetComponent<CharacterAnimator>();
             inventory = GetComponent<Inventory>();
             mana = GetComponent<Mana>();
+            regeneration = GetComponent<HealthRegeneration>();
         }
 
         public override void OnNetworkSpawn()
@@ -207,7 +241,7 @@ namespace RPG.Progression
         /// <summary>Server only: buys one point in an attribute at <see cref="PointCost"/>. False when the experience does not cover it.</summary>
         public bool ServerSpendPoint(Attribute attribute)
         {
-            if (!IsServer || attribute < Attribute.Strength || attribute > Attribute.Mana) return false;
+            if (!IsServer || attribute < 0 || (int)attribute >= AttributeSet.Count) return false;
             int cost = PointCost(attribute);
             if (experienceToSpend.Value < cost) return false;
             AttributeSet spent = spentPoints.Value;
@@ -258,7 +292,10 @@ namespace RPG.Progression
             int damageBonus = (inventory != null ? inventory.DamageBonus : 0) + AttributeRules.DamageBonus(attributes[definition.primaryAttribute]);
             int healthBonus = (inventory != null ? inventory.HealthBonus : 0) + AttributeRules.HealthBonus(attributes);
             int manaBonus = (inventory != null ? inventory.ManaBonus : 0) + AttributeRules.ManaBonus(attributes);
-            autoAttack.SetStats(definition.MinDamageAt(currentLevel) + damageBonus, definition.MaxDamageAt(currentLevel) + damageBonus,
+            // The worn weapon's skill (Swords, Ranged, Staves...) raises all its damage.
+            float skill = AttributeRules.WeaponSkillBonus(attributes, WeaponSkill);
+            autoAttack.SetStats(Mathf.RoundToInt((definition.MinDamageAt(currentLevel) + damageBonus) * skill),
+                Mathf.RoundToInt((definition.MaxDamageAt(currentLevel) + damageBonus) * skill),
                 definition.attackInterval, definition.attackRange, CritChance, definition.projectileColor);
             if (characterAnimator != null && definition.animations != null)
                 characterAnimator.AnimationSet = definition.animations;
@@ -266,6 +303,16 @@ namespace RPG.Progression
             {
                 health.ServerSetMaxHealth(definition.MaxHealthAt(currentLevel) + healthBonus, healFully);
                 health.ServerArmor = inventory != null ? inventory.Armor : 0;
+                health.ServerDodgeChance = AttributeRules.DodgeChance(attributes);
+                health.ServerBlockChance = AttributeRules.BlockChance(attributes);
+                health.ServerSetResist(DamageSchool.Frost, attributes.resistFrost);
+                health.ServerSetResist(DamageSchool.Fire, attributes.resistFire);
+                health.ServerSetResist(DamageSchool.Shadow, attributes.resistShadow);
+                health.ServerSetResist(DamageSchool.Holy, attributes.resistHoly);
+                autoAttack.SpellCritChance = SpellCritChance;
+                autoAttack.AbilityPower = AttributeRules.AbilityPower(attributes);
+                if (regeneration != null) regeneration.ServerBonusPerSecond = AttributeRules.HealthRegenPerSecond(attributes);
+                if (mana != null) mana.ServerBonusPerSecond = AttributeRules.ManaRegenPerSecond(attributes);
                 if (mana != null) mana.ServerSetMax(definition.MaxManaAt(currentLevel) + manaBonus, healFully);
             }
 

@@ -24,6 +24,8 @@ namespace RPG.Combat
         [SerializeField, Min(0.1f)] private float attackInterval = 1.5f;
         [SerializeField, Min(0.1f)] private float range = 0.9f;
         [SerializeField, Range(0f, 1f)] private float critChance = 0.1f;
+        [Tooltip("The school of this unit's hits: a magic school is reduced by the target's resist of it.")]
+        [SerializeField] private DamageSchool damageSchool = DamageSchool.Physical;
         [Tooltip("Extra range the server allows, because positions it sees are slightly out of date.")]
         [SerializeField, Min(0f)] private float rangeTolerance = 0.35f;
         [Tooltip("Ranged attackers shoot a projectile of this color; alpha 0 means melee.")]
@@ -74,10 +76,34 @@ namespace RPG.Combat
         /// <summary>Server: scales all damage this unit deals (elite monsters hit harder).</summary>
         public float DamageScale { get; set; } = 1f;
 
+        /// <summary>The school of this unit's auto-attacks (monsters may hit with frost, fire, shadow or holy).</summary>
+        public DamageSchool School
+        {
+            get => damageSchool;
+            set => damageSchool = value;
+        }
+
+        /// <summary>Server: critical chance of abilities (Spell Critical); the attack's own when not set.</summary>
+        public float SpellCritChance { get; set; } = -1f;
+
+        /// <summary>Server: multiplier of ability damage and heals (Willpower).</summary>
+        public float AbilityPower { get; set; } = 1f;
+
         /// <summary>Server: one damage roll (auto-attack damage times <paramref name="multiplier"/>, critical hits double it).</summary>
         public int RollDamage(float multiplier, out bool critical)
         {
-            critical = Random.value < critChance;
+            return RollDamage(multiplier, critChance, out critical);
+        }
+
+        /// <summary>Server: one ability's damage roll: with Willpower and the spell critical chance.</summary>
+        public int RollAbilityDamage(float multiplier, out bool critical)
+        {
+            return RollDamage(multiplier * AbilityPower, SpellCritChance >= 0f ? SpellCritChance : critChance, out critical);
+        }
+
+        private int RollDamage(float multiplier, float chance, out bool critical)
+        {
+            critical = Random.value < chance;
             int damage = Mathf.RoundToInt(Random.Range(minDamage, maxDamage + 1) * multiplier * DamageScale);
             return Mathf.Max(1, damage) * (critical ? 2 : 1);
         }
@@ -160,7 +186,7 @@ namespace RPG.Combat
             nextAttackTime = now + attackInterval;
 
             Health hitTarget = serverTarget;
-            hitTarget.ApplyDamage(damage, critical, health);
+            hitTarget.ApplyDamage(damage, critical, health, damageSchool);
             ServerHitLanded?.Invoke(hitTarget, damage);
             PlayAttackRpc(to - from);
         }

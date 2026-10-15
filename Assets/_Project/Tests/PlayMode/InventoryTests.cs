@@ -212,6 +212,28 @@ namespace RPG.Tests
             Assert.AreEqual(0, inventory.CountOf(Item("IronBoots")));
         }
 
+        [UnityTest]
+        public IEnumerator LootWindow_TakesOneItemAtATime()
+        {
+            GameObject bag = Object.Instantiate(lootBagPrefab, player.transform.position, Quaternion.identity);
+            var loot = bag.GetComponent<LootBag>();
+            loot.ServerSetContents(new[] { Item("IronBoots"), Item("GoblinEar") });
+            bag.GetComponent<NetworkObject>().Spawn(destroyWithScene: true);
+            yield return null;
+            Assert.AreSame(loot, LootBag.Find(loot.NetworkObjectId));
+
+            int earId = inventory.Catalog.IdOf(Item("GoblinEar"));
+            Assert.IsFalse(loot.ServerGiveOne(inventory, 0, earId), "Slot 0 holds the boots, not the ear.");
+            Assert.IsTrue(loot.ServerGiveOne(inventory, 1, earId));
+            Assert.AreEqual(1, inventory.CountOf(Item("GoblinEar")));
+            Assert.AreEqual(0, inventory.CountOf(Item("IronBoots")), "Only the clicked item is taken.");
+            Assert.AreEqual(1, loot.Contents.Count);
+
+            Assert.IsTrue(loot.ServerGiveOne(inventory, 0, inventory.Catalog.IdOf(Item("IronBoots"))));
+            yield return null;
+            Assert.IsFalse(loot.IsSpawned, "An emptied bag disappears.");
+        }
+
         /// <summary>Makes the player a warrior of <paramref name="level"/>, high enough to wear the gear a test needs.</summary>
         private void SetLevel(int level)
         {

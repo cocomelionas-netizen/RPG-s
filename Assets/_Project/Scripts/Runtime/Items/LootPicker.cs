@@ -104,7 +104,8 @@ namespace RPG.Items
             }
 
             if (movement.Destination.HasValue) movement.Stop();
-            inventory.RequestPickUp(pending);
+            // Opens the loot window: take one item by clicking it, or all of them.
+            inventory.RequestLootContents(pending);
             pending = null;
         }
 

@@ -121,14 +121,21 @@ namespace RPG.Items
             return gem == null ? "Socket: empty" : $"Socket: {gem.displayName} ({gem.attributes.Describe(", ")})";
         }
 
-        /// <summary>What a vendor pays for one: the item with its affix, plus the gem in its socket.</summary>
+        /// <summary>Share Bartering takes off what vendors charge and adds to what they pay.</summary>
+        public float BarteringBonus => progress != null ? AttributeRules.BarteringDiscount(progress.TotalAttributes) : 0f;
+
+        /// <summary>What a vendor pays for one: the item with its affix, plus the gem in its socket, plus Bartering.</summary>
         public int SellPrice(ItemStack stack)
         {
             ItemDefinition item = Definition(stack);
             if (item == null) return 0;
             ItemDefinition gem = Gem(stack);
-            return item.SellPriceWith(Affix(stack)) + (gem != null ? gem.SellPrice : 0);
+            int price = item.SellPriceWith(Affix(stack)) + (gem != null ? gem.SellPrice : 0);
+            return Mathf.FloorToInt(price * (1f + BarteringBonus));
         }
+
+        /// <summary>What a vendor charges for an item, less Bartering.</summary>
+        public int BuyPrice(ItemDefinition item) => item != null ? Mathf.CeilToInt(item.price * (1f - BarteringBonus)) : 0;
 
         /// <summary>Tooltip text of a stack, with its affix, socket and real sell price.</summary>
         public string Describe(ItemStack stack, string className)
@@ -504,6 +511,71 @@ namespace RPG.Items
             if (IsOwner && loot != null && loot.IsSpawned) PickUpRpc(loot.NetworkObject);
         }
 
+        /// <summary>Owner: shows what lies in a loot bag the player stands next to (the answer opens the loot window).</summary>
+        public void RequestLootContents(LootBag loot)
+        {
+            if (IsOwner && loot != null && loot.IsSpawned) LootContentsRequestRpc(loot.NetworkObject);
+        }
+
+        /// <summary>Owner: takes one item out of a loot bag (<paramref name="index"/> as the loot window shows it).</summary>
+        public void RequestTakeLoot(LootBag loot, int index, int itemId)
+        {
+            if (IsOwner && loot != null && loot.IsSpawned) TakeLootRpc(loot.NetworkObject, index, itemId);
+        }
+
+        /// <summary>
+        /// Raised on the owner with what a loot bag holds (by its network id), after asking or taking from it; an
+        /// empty list when it is gone or out of reach.
+        /// </summary>
+        public static event Action<ulong, ItemStack[]> LootContentsReceived;
+
+        [Rpc(SendTo.Server)]
+        private void LootContentsRequestRpc(NetworkObjectReference lootReference, RpcParams rpcParams = default)
+        {
+            if (rpcParams.Receive.SenderClientId != OwnerClientId) return;
+            if (lootReference.TryGet(out NetworkObject lootObject) && lootObject.TryGetComponent(out LootBag loot))
+                SendLootContents(loot);
+        }
+
+        [Rpc(SendTo.Server)]
+        private void TakeLootRpc(NetworkObjectReference lootReference, int index, int itemId, RpcParams rpcParams = default)
+        {
+            if (rpcParams.Receive.SenderClientId != OwnerClientId) return;
+            if (!lootReference.TryGet(out NetworkObject lootObject) || !lootObject.TryGetComponent(out LootBag loot)) return;
+            ulong id = loot.NetworkObjectId;
+            if (InLootRange(loot)) loot.ServerGiveOne(this, index, itemId);
+            if (loot.IsSpawned) SendLootContents(loot);
+            else LootContentsRpc(id, Array.Empty<int>(), Array.Empty<int>(), Array.Empty<int>());
+        }
+
+        private bool InLootRange(LootBag loot) =>
+            !health.IsDead && Vector2.Distance(AutoAttack.ServerPosition(this), loot.transform.position) <= pickupRange + 0.4f;
+
+        /// <summary>Server: tells the owner what is in the bag (nothing when it is out of reach).</summary>
+        private void SendLootContents(LootBag loot)
+        {
+            int count = InLootRange(loot) ? loot.Contents.Count : 0;
+            var ids = new int[count];
+            var affixIds = new int[count];
+            var sockets = new int[count];
+            for (int i = 0; i < count; i++)
+            {
+                LootItem item = loot.Contents[i];
+                ids[i] = catalog.IdOf(item.Item);
+                affixIds[i] = item.AffixId;
+                sockets[i] = item.Socket;
+            }
+            LootContentsRpc(loot.NetworkObjectId, ids, affixIds, sockets);
+        }
+
+        [Rpc(SendTo.Owner)]
+        private void LootContentsRpc(ulong lootId, int[] ids, int[] affixIds, int[] sockets)
+        {
+            var stacks = new ItemStack[ids.Length];
+            for (int i = 0; i < ids.Length; i++) stacks[i] = new ItemStack(ids[i], 1, affixIds[i], sockets[i]);
+            LootContentsReceived?.Invoke(lootId, stacks);
+        }
+
         [Rpc(SendTo.Server)]
         private void EquipRpc(int bagIndex, RpcParams rpcParams = default)
         {
@@ -527,7 +599,13 @@ namespace RPG.Items
         {
             if (rpcParams.Receive.SenderClientId != OwnerClientId) return;
             if (lootReference.TryGet(out NetworkObject lootObject) && lootObject.TryGetComponent(out LootBag loot))
+            {
+                ulong id = loot.NetworkObjectId;
                 ServerPickUp(loot);
+                // Keeps an open loot window up to date (or closes it when everything was taken).
+                if (loot.IsSpawned) SendLootContents(loot);
+                else LootContentsRpc(id, Array.Empty<int>(), Array.Empty<int>(), Array.Empty<int>());
+            }
         }
 
         [Rpc(SendTo.Owner)]
@@ -777,13 +855,14 @@ namespace RPG.Items
                 VendorStockRpc(vendor.Index, vendor.ServerStockSnapshot());
                 return false;
             }
-            if (gold.Value < item.price)
+            int price = BuyPrice(item);
+            if (gold.Value < price)
             {
                 MessageRpc(InventoryMessage.NotEnoughGold, 0, 0);
                 return false;
             }
             if (ServerAddItem(item, 1) <= 0) return false;
-            gold.Value -= item.price;
+            gold.Value -= price;
             vendor.ServerTake(stockIndex);
             VendorStockRpc(vendor.Index, vendor.ServerStockSnapshot());
             return true;

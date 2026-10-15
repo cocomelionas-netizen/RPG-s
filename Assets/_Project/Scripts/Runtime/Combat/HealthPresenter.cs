@@ -45,12 +45,14 @@ namespace RPG.Combat
         private void OnEnable()
         {
             health.Damaged += OnDamaged;
+            health.Avoided += OnAvoided;
             health.Healed += OnHealed;
         }
 
         private void OnDisable()
         {
             health.Damaged -= OnDamaged;
+            health.Avoided -= OnAvoided;
             health.Healed -= OnHealed;
         }
 
@@ -106,7 +108,17 @@ namespace RPG.Combat
         {
             flashTimer = FlashSeconds;
             bool hurtsLocalPlayer = health.IsOwner && health.GetComponent<PlayerTargeting>() != null;
-            CombatTextLayer.Show(transform.position + Vector3.up * damageNumberHeight, amount, critical, hurtsLocalPlayer);
+            Vector3 at = transform.position + Vector3.up * damageNumberHeight;
+            // Magic damage shows in its school's colour.
+            if (health.LastDamageSchool != DamageSchool.Physical)
+                CombatTextLayer.ShowText(at, critical ? amount + "!" : amount.ToString(), DamageSchools.ColorOf(health.LastDamageSchool), critical ? 1.4f : 1f);
+            else
+                CombatTextLayer.Show(at, amount, critical, hurtsLocalPlayer);
+        }
+
+        private void OnAvoided(string what)
+        {
+            CombatTextLayer.ShowText(transform.position + Vector3.up * (damageNumberHeight + 0.15f), what, new Color(0.8f, 0.85f, 0.9f), 0.9f);
         }
 
         private void OnHealed(int amount)

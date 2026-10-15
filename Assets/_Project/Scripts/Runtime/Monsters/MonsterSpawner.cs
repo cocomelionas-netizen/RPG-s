@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using RPG.Navigation;
+using RPG.Combat;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -20,6 +21,8 @@ namespace RPG.Monsters
         [SerializeField, Range(0f, 1f)] private float eliteChance = 0.08f;
         [Tooltip("The level of the monsters at this spot (0 keeps the prefab's).")]
         [SerializeField, Min(0)] private int level;
+        [Tooltip("The school of the monsters' hits here (physical keeps the prefab's).")]
+        [SerializeField] private DamageSchool damageSchool = DamageSchool.Physical;
 
         private readonly List<NetworkObject> alive = new List<NetworkObject>();
         private readonly List<float> respawnTimes = new List<float>();
@@ -39,6 +42,13 @@ namespace RPG.Monsters
         {
             get => level;
             set => level = Mathf.Max(0, value);
+        }
+
+        /// <summary>The school of the monsters' hits at this spot (physical keeps the prefab's).</summary>
+        public DamageSchool School
+        {
+            get => damageSchool;
+            set => damageSchool = value;
         }
 
         public float RespawnSeconds
@@ -116,6 +126,7 @@ namespace RPG.Monsters
                 ai.Home = point;
                 if (level > 0) ai.ServerOverrideLevel(level);
             }
+            if (damageSchool != DamageSchool.Physical && monster.TryGetComponent(out AutoAttack attack)) attack.School = damageSchool;
 
             var networkObject = monster.GetComponent<NetworkObject>();
             networkObject.Spawn(destroyWithScene: true);
