@@ -14,9 +14,13 @@ namespace RPG.Progression
         Intelligence,
         /// <summary>Health.</summary>
         Vitality,
+        /// <summary>Points put straight into health (like Source lets you).</summary>
+        Health,
+        /// <summary>Points put straight into mana.</summary>
+        Mana,
     }
 
-    /// <summary>A value for each of the four attributes (from a class, spent points or items).</summary>
+    /// <summary>A value for each attribute (from a class, spent points or items).</summary>
     [Serializable]
     public struct AttributeSet : IEquatable<AttributeSet>, INetworkSerializeByMemcpy
     {
@@ -24,16 +28,23 @@ namespace RPG.Progression
         public int agility;
         public int intelligence;
         public int vitality;
+        public int health;
+        public int mana;
 
-        public const int Count = 4;
+        public const int Count = 6;
 
-        public AttributeSet(int strength, int agility, int intelligence, int vitality)
+        public AttributeSet(int strength, int agility, int intelligence, int vitality, int health = 0, int mana = 0)
         {
             this.strength = strength;
             this.agility = agility;
             this.intelligence = intelligence;
             this.vitality = vitality;
+            this.health = health;
+            this.mana = mana;
         }
+
+        /// <summary>Sum of all values (for example every point spent).</summary>
+        public int Total => strength + agility + intelligence + vitality + health + mana;
 
         public int this[Attribute attribute]
         {
@@ -44,6 +55,8 @@ namespace RPG.Progression
                     case Attribute.Strength: return strength;
                     case Attribute.Agility: return agility;
                     case Attribute.Intelligence: return intelligence;
+                    case Attribute.Health: return health;
+                    case Attribute.Mana: return mana;
                     default: return vitality;
                 }
             }
@@ -54,24 +67,28 @@ namespace RPG.Progression
                     case Attribute.Strength: strength = value; break;
                     case Attribute.Agility: agility = value; break;
                     case Attribute.Intelligence: intelligence = value; break;
+                    case Attribute.Health: health = value; break;
+                    case Attribute.Mana: mana = value; break;
                     default: vitality = value; break;
                 }
             }
         }
 
-        public bool IsZero => strength == 0 && agility == 0 && intelligence == 0 && vitality == 0;
+        public bool IsZero => strength == 0 && agility == 0 && intelligence == 0 && vitality == 0 && health == 0 && mana == 0;
 
         public static AttributeSet operator +(AttributeSet a, AttributeSet b)
         {
-            return new AttributeSet(a.strength + b.strength, a.agility + b.agility, a.intelligence + b.intelligence, a.vitality + b.vitality);
+            return new AttributeSet(a.strength + b.strength, a.agility + b.agility, a.intelligence + b.intelligence, a.vitality + b.vitality,
+                a.health + b.health, a.mana + b.mana);
         }
 
         public bool Equals(AttributeSet other) =>
-            strength == other.strength && agility == other.agility && intelligence == other.intelligence && vitality == other.vitality;
+            strength == other.strength && agility == other.agility && intelligence == other.intelligence && vitality == other.vitality
+            && health == other.health && mana == other.mana;
 
         public override bool Equals(object obj) => obj is AttributeSet other && Equals(other);
 
-        public override int GetHashCode() => HashCode.Combine(strength, agility, intelligence, vitality);
+        public override int GetHashCode() => HashCode.Combine(strength, agility, intelligence, vitality, health, mana);
 
         /// <summary>For tooltips, for example "+3 Strength, +2 Vitality" (empty when all are zero).</summary>
         public string Describe(string separator = ", ")
@@ -80,7 +97,12 @@ namespace RPG.Progression
             for (int i = 0; i < Count; i++)
             {
                 var attribute = (Attribute)i;
-                if (this[attribute] != 0) parts.Add($"{(this[attribute] > 0 ? "+" : "")}{this[attribute]} {attribute}");
+                if (this[attribute] == 0) continue;
+                // Health and mana points show what they add, the others their own value.
+                int shown = attribute == Attribute.Health ? AttributeRules.HealthBonus(new AttributeSet { health = this[attribute] })
+                    : attribute == Attribute.Mana ? AttributeRules.ManaBonus(new AttributeSet { mana = this[attribute] })
+                    : this[attribute];
+                parts.Add($"{(shown > 0 ? "+" : "")}{shown} {attribute}");
             }
             return string.Join(separator, parts);
         }
@@ -94,13 +116,17 @@ namespace RPG.Progression
         public const int HealthPerStrength = 1;
         public const int ManaPerIntelligence = 4;
         public const float CritPerAgility = 0.004f;
+        /// <summary>What one point put straight into health or mana adds.</summary>
+        public const int HealthPerPoint = 5;
+        public const int ManaPerPoint = 5;
 
         /// <summary>Added to minimum and maximum damage: a quarter of the class's primary attribute.</summary>
         public static int DamageBonus(int primaryAttribute) => Mathf.Max(0, primaryAttribute) / 4;
 
-        public static int HealthBonus(AttributeSet total) => total.vitality * HealthPerVitality + total.strength * HealthPerStrength;
+        public static int HealthBonus(AttributeSet total) =>
+            total.vitality * HealthPerVitality + total.strength * HealthPerStrength + total.health * HealthPerPoint;
 
-        public static int ManaBonus(AttributeSet total) => total.intelligence * ManaPerIntelligence;
+        public static int ManaBonus(AttributeSet total) => total.intelligence * ManaPerIntelligence + total.mana * ManaPerPoint;
 
         public static float CritBonus(AttributeSet total) => total.agility * CritPerAgility;
     }
