@@ -39,14 +39,8 @@ jobs:
         with:
           lfs: true
 
-      - uses: actions/cache@v4
-        with:
-          path: Library
-          # Bump the version (v2, v3...) to start from a clean Library when a cached one is broken.
-          key: Library-WebGL-v2-${{ hashFiles('Packages/packages-lock.json', 'ProjectSettings/ProjectVersion.txt') }}-${{ github.sha }}
-          restore-keys: |
-            Library-WebGL-v2-${{ hashFiles('Packages/packages-lock.json', 'ProjectSettings/ProjectVersion.txt') }}-
-            Library-WebGL-v2-
+      # No Library cache: with Unity 6000.6 a restored Library made the editor get killed (exit code 137)
+      # right after it started, while a clean import builds fine in about 15 minutes.
 
       - name: Build WebGL
         uses: game-ci/unity-builder@v4
