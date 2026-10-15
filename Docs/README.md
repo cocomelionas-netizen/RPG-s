@@ -34,6 +34,7 @@ Assets/_Project/
       CameraSystem/    CameraFollow
       Characters/      Direction8, CharacterAnimationSet, CharacterAnimator
       Combat/          Health, HealthRegeneration, AutoAttack, PlayerTargeting, PlayerRespawn, TrainingDummy, CombatEffects
+      Dungeons/        požemiai: instancijos, portalai, bosas (DungeonManager, DungeonInstance, BossMechanics)
       Items/           daiktai, inventorius, loot (Inventory, LootBag, ItemCatalog)
       Monsters/        MonsterAI, MonsterMotion, MonsterSpawner
       Navigation/      NavGrid (A*), WorldNavigation (kelio paieška tilemap'e)
@@ -77,7 +78,7 @@ Naujausia versija po kiekvieno push'o į `main` automatiškai sukuriama ir paske
 | 7 | Inventorius, ginklai, šarvai, loot | ✅ [Stage7.md](Stage7.md) |
 | 8 | Saugus progreso išsaugojimas serveryje (paskyros, duomenų bazė) | ✅ [Stage8.md](Stage8.md) |
 | ~~9~~ | ~~Užduotys ir NPC~~ | ✖ atsisakyta |
-| 10 | Požemiai (instancijos) | ⏳ |
+| 10 | Požemiai (instancijos) | ✅ [Stage10.md](Stage10.md) |
 | ~~11~~ | ~~PvP~~ | ✖ atsisakyta |
 
 Multiplayer'is planuojamas anksti (3 etapas) sąmoningai. Kovą, monstrus ir daiktus iškart rašysime serverio autoriteto principu, kad vėliau nereikėtų jų perrašinėti.

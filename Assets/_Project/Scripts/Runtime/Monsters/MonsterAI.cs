@@ -350,7 +350,7 @@ namespace RPG.Monsters
             if (wanderRadius <= 0f || motion.Destination.HasValue || Time.time < nextWanderTime) return;
 
             nextWanderTime = Time.time + Random.Range(wanderPauseSeconds.x, wanderPauseSeconds.y);
-            WorldNavigation navigation = WorldNavigation.Instance;
+            WorldNavigation navigation = WorldNavigation.At(home);
             Vector2 point;
             if (navigation == null)
             {

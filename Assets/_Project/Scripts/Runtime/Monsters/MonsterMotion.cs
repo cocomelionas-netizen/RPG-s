@@ -113,7 +113,7 @@ namespace RPG.Monsters
         {
             if (!IsServer || offset.sqrMagnitude < 0.000001f) return;
             Vector2 next = (Vector2)transform.position + offset;
-            WorldNavigation navigation = WorldNavigation.Instance;
+            WorldNavigation navigation = WorldNavigation.At(next);
             if (navigation != null && !navigation.IsWalkable(next)) return;
             SetPosition(next);
         }
@@ -134,7 +134,7 @@ namespace RPG.Monsters
             pathGoal = destination.Value;
             repathTimer = repathInterval;
 
-            WorldNavigation navigation = WorldNavigation.Instance;
+            WorldNavigation navigation = WorldNavigation.At(transform.position);
             if (navigation == null)
             {
                 path.Add(pathGoal);

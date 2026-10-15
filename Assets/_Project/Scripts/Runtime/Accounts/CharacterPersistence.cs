@@ -86,8 +86,9 @@ namespace RPG.Accounts
 
             inventory.ServerLoad(ToStacks(saved.bag), ToStacks(saved.equipment));
             var position = new Vector2(saved.x, saved.y);
-            WorldNavigation navigation = WorldNavigation.Instance;
-            bool safe = navigation == null || navigation.IsWalkable(position);
+            // A spot on no map (for example inside a dungeon that has closed since) keeps the spawn point.
+            WorldNavigation navigation = WorldNavigation.At(position);
+            bool safe = navigation != null && navigation.IsWalkable(position);
             if (safe && networkMovement != null) networkMovement.ServerTeleport(position);
             Debug.Log($"[Accounts] Loaded {account.username}: level {saved.level} {progress.ClassName}.");
         }

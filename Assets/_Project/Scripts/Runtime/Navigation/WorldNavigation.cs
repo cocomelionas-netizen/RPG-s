@@ -9,6 +9,8 @@ namespace RPG.Navigation
     /// no static prop (tree trunk, training dummy post) on it. The grid is built the first time it is needed,
     /// after the scene has loaded. Paths are smoothed so characters walk straight wherever nothing is in the way.
     /// Used by the server for monsters and by the local player for click-to-move.
+    /// Several maps can exist at once (the world and dungeon instances far away from it); <see cref="At"/> finds
+    /// the one under a position.
     /// </summary>
     public class WorldNavigation : MonoBehaviour
     {
@@ -28,8 +30,15 @@ namespace RPG.Navigation
         private readonly List<Vector2> points = new List<Vector2>();
         private readonly List<Collider2D> overlaps = new List<Collider2D>();
 
-        /// <summary>The navigation of the loaded world (null when the scene has none).</summary>
-        public static WorldNavigation Instance { get; private set; }
+        private static readonly List<WorldNavigation> Maps = new List<WorldNavigation>();
+
+        /// <summary>The map that contains a world position, or null when the position is on no map (tests, the void).</summary>
+        public static WorldNavigation At(Vector2 worldPosition)
+        {
+            foreach (WorldNavigation map in Maps)
+                if (map != null && map.Contains(worldPosition)) return map;
+            return null;
+        }
 
         private NavGrid Map
         {
@@ -42,12 +51,18 @@ namespace RPG.Navigation
 
         private void OnEnable()
         {
-            Instance = this;
+            if (!Maps.Contains(this)) Maps.Add(this);
         }
 
         private void OnDisable()
         {
-            if (Instance == this) Instance = null;
+            Maps.Remove(this);
+        }
+
+        /// <summary>True when the position is inside this map's ground area (walkable or not).</summary>
+        public bool Contains(Vector2 worldPosition)
+        {
+            return Map.Contains(ToCell(worldPosition));
         }
 
         /// <summary>Sets the map to navigate (used by the scene builder and tests). Rebuilds on next use.</summary>

@@ -6,6 +6,7 @@ using RPG.Accounts;
 using RPG.Characters;
 using RPG.Combat;
 using RPG.Controls;
+using RPG.Dungeons;
 using RPG.Items;
 using RPG.Monsters;
 using RPG.Navigation;
@@ -43,6 +44,10 @@ namespace RPG.EditorTools
         private const string MonstersFolder = "Assets/_Project/Prefabs/Monsters";
         private const string LootBagPrefabPath = "Assets/_Project/Prefabs/World/LootBag.prefab";
         private const string ItemsFolder = "Assets/_Project/Data/Items";
+        private const string DungeonInstancePrefabPath = "Assets/_Project/Prefabs/World/DungeonInstance.prefab";
+        private const string DungeonDefinitionPath = "Assets/_Project/Data/Dungeons/GoblinDen.asset";
+        private const string KingAnimationSetPath = "Assets/_Project/Data/Characters/GoblinKing_AnimationSet.asset";
+        private const string KingArtFolder = PlaceholderArtGenerator.Folder + "/GoblinKing";
         private const string BruteAnimationSetPath = "Assets/_Project/Data/Characters/GoblinBrute_AnimationSet.asset";
         private const string BruteArtFolder = PlaceholderArtGenerator.Folder + "/GoblinBrute";
         private const string OrcAnimationSetPath = "Assets/_Project/Data/Characters/Orc_AnimationSet.asset";
@@ -124,6 +129,16 @@ namespace RPG.EditorTools
                 Loot = Loot(items, ("HealingPotion", 0.6f), ("GoblinCleaver", 0.1f), ("OrcSkullHelm", 0.1f), ("OrcishPlate", 0.05f),
                     ("OrcishGreataxe", 0.05f)),
             }, barSprite, lootBagPrefab);
+            CharacterAnimationSet kingAnimations = CreateCharacterAnimationSet("GoblinKing", KingArtFolder, KingAnimationSetPath,
+                new Color(0.75f, 0.58f, 0.15f), new Color(0.4f, 0.58f, 0.25f));
+            GameObject kingPrefab = CreateMonsterPrefab(new MonsterSpec
+            {
+                Name = "Goblin King", Animations = kingAnimations, Scale = 1.5f, Health = 900, MinDamage = 14, MaxDamage = 20,
+                AttackInterval = 2.2f, Level = 8, Experience = 300, MoveSpeed = 1.5f,
+                Loot = Loot(items, ("HealingPotion", 1f), ("HealingPotion", 1f), ("OrcishGreataxe", 0.5f), ("OrcishPlate", 0.5f),
+                    ("OrcSkullHelm", 0.4f), ("GoblinCleaver", 0.4f)),
+            }, barSprite, lootBagPrefab, boss => boss.AddComponent<BossMechanics>());
+            DungeonDefinition dungeon = CreateDungeon(brutePrefab, orcPrefab, kingPrefab);
             CharacterAnimationSet rangerAnimations = CreateCharacterAnimationSet("Ranger", RangerArtFolder, RangerAnimationSetPath, new Color(0.2f, 0.45f, 0.22f), null);
             CharacterAnimationSet mageAnimations = CreateCharacterAnimationSet("Mage", MageArtFolder, MageAnimationSetPath, new Color(0.45f, 0.22f, 0.62f), null);
             ClassCatalog classes = CreateClasses(playerAnimations, rangerAnimations, mageAnimations);
@@ -155,6 +170,7 @@ namespace RPG.EditorTools
             new GameObject("Combat Effects").AddComponent<CombatEffects>().Configure(projectileSprite, effectRingSprite, GroundRingRadius);
             PlaceDummies(grid, dummyPrefab);
             PlaceMonsterCamps(grid, goblinPrefab, brutePrefab, orcPrefab);
+            PlaceDungeon(grid, dungeon);
             CreateHud();
 
             EditorSceneManager.SaveScene(EditorSceneManager.GetActiveScene(), ScenePath);
@@ -328,6 +344,7 @@ namespace RPG.EditorTools
             inventoryObject.ApplyModifiedPropertiesWithoutUndo();
             player.AddComponent<LootPicker>();
             player.AddComponent<CharacterPersistence>();
+            player.AddComponent<DungeonTraveller>();
             AddHealthPresenter(player, barSprite, 0.85f);
             AddHitbox(player, new Vector2(0.36f, 0.62f), new Vector2(0f, 0.34f));
 
@@ -644,7 +661,8 @@ namespace RPG.EditorTools
             public LootEntry[] Loot;
         }
 
-        private static GameObject CreateMonsterPrefab(MonsterSpec spec, Sprite barSprite, GameObject lootBagPrefab)
+        private static GameObject CreateMonsterPrefab(MonsterSpec spec, Sprite barSprite, GameObject lootBagPrefab,
+            Action<GameObject> addExtras = null)
         {
             var monster = new GameObject(spec.Name);
             monster.transform.localScale = new Vector3(spec.Scale, spec.Scale, 1f);
@@ -686,6 +704,7 @@ namespace RPG.EditorTools
             // The bar and hitbox are children, so they scale with the monster.
             AddHealthPresenter(monster, barSprite, 0.85f);
             AddHitbox(monster, new Vector2(0.4f, 0.65f), new Vector2(0f, 0.34f));
+            addExtras?.Invoke(monster);
 
             string path = $"{MonstersFolder}/{spec.Name.Replace(" ", "")}.prefab";
             Directory.CreateDirectory(MonstersFolder);
@@ -693,6 +712,54 @@ namespace RPG.EditorTools
             UnityEngine.Object.DestroyImmediate(monster);
             RegisterNetworkPrefab(prefab);
             return prefab;
+        }
+
+        private static DungeonDefinition CreateDungeon(GameObject brute, GameObject orc, GameObject boss)
+        {
+            var instance = new GameObject("Dungeon Instance");
+            instance.AddComponent<NetworkObject>();
+            instance.AddComponent<DungeonInstance>();
+            Directory.CreateDirectory(Path.GetDirectoryName(DungeonInstancePrefabPath));
+            GameObject instancePrefab = PrefabUtility.SaveAsPrefabAsset(instance, DungeonInstancePrefabPath);
+            UnityEngine.Object.DestroyImmediate(instance);
+            RegisterNetworkPrefab(instancePrefab);
+
+            var dungeon = LoadOrCreateAsset<DungeonDefinition>(DungeonDefinitionPath);
+            dungeon.displayName = "Goblin Den";
+            dungeon.instancePrefab = instancePrefab;
+            dungeon.floorTile = CreateTile("DungeonFloor",
+                PlaceholderArtGenerator.GroundTile("DungeonFloor", new Color(0.24f, 0.22f, 0.21f), new Color(0.36f, 0.33f, 0.3f), 7));
+            dungeon.wallTile = CreateTile("DungeonWall", PlaceholderArtGenerator.Rock("DungeonWall", 9), Tile.ColliderType.Grid);
+            dungeon.portalSprite = PlaceholderArtGenerator.Portal("Portal");
+            dungeon.packs = new[]
+            {
+                new MonsterPack(brute, 1, 2),
+                new MonsterPack(orc, 2, 2),
+                new MonsterPack(brute, 2, 1),
+            };
+            dungeon.bossPrefab = boss;
+            dungeon.monsterAggroRadius = 3.5f;
+            EditorUtility.SetDirty(dungeon);
+            return dungeon;
+        }
+
+        private static void PlaceDungeon(Grid grid, DungeonDefinition dungeon)
+        {
+            new GameObject("Dungeon Manager").AddComponent<DungeonManager>().Configure(dungeon);
+
+            // The entrance: just south-west of the spawn point, inside the cleared area.
+            int center = MapSize / 2;
+            var entrance = new GameObject("Dungeon Entrance");
+            entrance.transform.position = grid.GetCellCenterWorld(new Vector3Int(center - 2, center - 3, 0));
+            var visual = new GameObject("Visual").AddComponent<SpriteRenderer>();
+            visual.transform.SetParent(entrance.transform, false);
+            visual.sprite = dungeon.portalSprite;
+            visual.spriteSortPoint = SpriteSortPoint.Pivot;
+            var box = entrance.AddComponent<BoxCollider2D>();
+            box.isTrigger = true;
+            box.size = new Vector2(0.6f, 0.9f);
+            box.offset = new Vector2(0f, 0.45f);
+            entrance.AddComponent<Portal>().Configure(PortalKind.DungeonEntrance, visual, null, false);
         }
 
         private static GameObject CreateLootBagPrefab(Sprite sprite)

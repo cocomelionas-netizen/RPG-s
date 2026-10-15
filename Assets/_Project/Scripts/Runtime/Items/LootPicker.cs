@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using RPG.Controls;
+using RPG.Dungeons;
 using RPG.Player;
 using Unity.Netcode;
 using UnityEngine;
@@ -7,7 +8,8 @@ using UnityEngine;
 namespace RPG.Items
 {
     /// <summary>
-    /// Owner: clicking a loot bag walks to it and picks it up when close enough. WASD or another click cancels.
+    /// Owner: clicking a loot bag or a portal walks to it and then picks the loot up or uses the portal.
+    /// WASD or another click cancels.
     /// Runs before <see cref="PlayerMovement"/> so the click on the bag does not also become a move elsewhere.
     /// </summary>
     [DefaultExecutionOrder(-45)]
@@ -19,6 +21,8 @@ namespace RPG.Items
         private PlayerMovement movement;
         private Camera worldCamera;
         private LootBag pending;
+        private Portal pendingPortal;
+        private DungeonTraveller traveller;
         private readonly List<Collider2D> pointerHits = new List<Collider2D>();
 
         private void Awake()
@@ -26,6 +30,7 @@ namespace RPG.Items
             inventory = GetComponent<Inventory>();
             input = GetComponent<PlayerInputReader>();
             movement = GetComponent<PlayerMovement>();
+            traveller = GetComponent<DungeonTraveller>();
         }
 
         public override void OnNetworkSpawn()
@@ -40,9 +45,19 @@ namespace RPG.Items
             if (input.MoveClickPressed && !input.IsPointerOverUI)
             {
                 pending = LootUnderPointer();
-                if (pending != null) movement.SuppressClickMoveUntilRelease();
+                pendingPortal = pending == null && traveller != null ? PortalUnderPointer() : null;
+                if (pending != null || pendingPortal != null) movement.SuppressClickMoveUntilRelease();
             }
-            if (input.MoveInput.sqrMagnitude > 0.01f) pending = null;
+            if (input.MoveInput.sqrMagnitude > 0.01f)
+            {
+                pending = null;
+                pendingPortal = null;
+            }
+            if (pendingPortal != null)
+            {
+                UpdatePortal();
+                return;
+            }
             if (pending == null) return;
             if (!pending.IsSpawned)
             {
@@ -60,6 +75,43 @@ namespace RPG.Items
             if (movement.Destination.HasValue) movement.Stop();
             inventory.RequestPickUp(pending);
             pending = null;
+        }
+
+        private void UpdatePortal()
+        {
+            if (pendingPortal == null || !pendingPortal.isActiveAndEnabled)
+            {
+                pendingPortal = null;
+                return;
+            }
+
+            DungeonManager manager = DungeonManager.Instance;
+            float range = manager != null ? manager.PortalRange : 1.2f;
+            Vector2 target = pendingPortal.transform.position;
+            if (Vector2.Distance(transform.position, target) > range * 0.7f)
+            {
+                movement.SetDestination(target);
+                return;
+            }
+
+            if (movement.Destination.HasValue) movement.Stop();
+            traveller.RequestUsePortal();
+            pendingPortal = null;
+        }
+
+        private Portal PortalUnderPointer()
+        {
+            if (worldCamera == null) worldCamera = Camera.main;
+            if (worldCamera == null) return null;
+
+            Vector2 point = worldCamera.ScreenToWorldPoint(input.PointerPosition);
+            Physics2D.OverlapPoint(point, ContactFilter2D.noFilter, pointerHits);
+            foreach (Collider2D hit in pointerHits)
+            {
+                Portal portal = hit.GetComponentInParent<Portal>();
+                if (portal != null) return portal;
+            }
+            return null;
         }
 
         private LootBag LootUnderPointer()

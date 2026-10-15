@@ -27,6 +27,8 @@ namespace RPG.Combat
         {
             public SpriteRenderer Renderer;
             public bool IsRing;
+            /// <summary>A warning ring: stays at full size and pulses until it ends.</summary>
+            public bool IsTelegraph;
             public Vector3 From;
             public Vector3 To;
             public float Duration;
@@ -67,11 +69,25 @@ namespace RPG.Combat
             if (instance != null) instance.SpawnRing(center, radius, color);
         }
 
+        /// <summary>A pulsing ring that marks where something is about to hit (for example a boss slam).</summary>
+        public static void Telegraph(Vector2 center, float radius, Color color, float seconds)
+        {
+            if (instance == null || instance.ringSprite == null || radius <= 0f) return;
+            Effect effect = instance.Take(instance.ringSprite, color);
+            effect.IsRing = true;
+            effect.IsTelegraph = true;
+            effect.From = effect.To = new Vector3(center.x, center.y, 0f);
+            effect.Radius = radius;
+            effect.Duration = Mathf.Max(0.1f, seconds);
+            instance.Place(effect);
+        }
+
         private void SpawnProjectile(Vector2 from, Vector2 to, Color color)
         {
             if (projectileSprite == null) return;
             Effect effect = Take(projectileSprite, color);
             effect.IsRing = false;
+            effect.IsTelegraph = false;
             effect.From = new Vector3(from.x, from.y + projectileHeight, 0f);
             effect.To = new Vector3(to.x, to.y + projectileHeight, 0f);
             effect.Duration = Mathf.Max(0.06f, Vector2.Distance(from, to) / projectileSpeed);
@@ -84,6 +100,7 @@ namespace RPG.Combat
             if (ringSprite == null || radius <= 0f) return;
             Effect effect = Take(ringSprite, color);
             effect.IsRing = true;
+            effect.IsTelegraph = false;
             effect.From = effect.To = new Vector3(center.x, center.y, 0f);
             effect.Radius = radius;
             effect.Duration = ringSeconds;
@@ -132,7 +149,17 @@ namespace RPG.Combat
             float t = Mathf.Clamp01(effect.Age / effect.Duration);
             Transform effectTransform = effect.Renderer.transform;
 
-            if (effect.IsRing)
+            if (effect.IsTelegraph)
+            {
+                float scale = effect.Radius / ringSpriteRadius;
+                effectTransform.position = effect.From;
+                effectTransform.localScale = new Vector3(scale, scale, 1f);
+                Color color = effect.Color;
+                // Pulses faster as the hit comes closer.
+                color.a *= 0.45f + 0.45f * Mathf.Abs(Mathf.Sin(effect.Age * Mathf.Lerp(6f, 18f, t)));
+                effect.Renderer.color = color;
+            }
+            else if (effect.IsRing)
             {
                 // Spreads out from 40 % to the full radius while fading.
                 float scale = effect.Radius / ringSpriteRadius * Mathf.Lerp(0.4f, 1f, Mathf.Sqrt(t));
