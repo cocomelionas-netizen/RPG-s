@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using RPG.Combat;
+using RPG.Controls;
 using RPG.Progression;
 using RPG.UI;
 using RPG.Vendors;
@@ -40,6 +41,7 @@ namespace RPG.Items
         private Health health;
         private Mana mana;
         private CharacterProgress progress;
+        private PlayerInputReader input;
         private double potionReadyAt;
 
         /// <summary>Raised on every peer when the bag or the equipment changed.</summary>
@@ -125,6 +127,34 @@ namespace RPG.Items
             for (int i = 0; i < bag.Count; i++)
                 if (bag[i].ItemId == id) count += bag[i].Count;
             return count;
+        }
+
+        /// <summary>The first bag slot holding an item used this way (-1 when there is none).</summary>
+        public int FindUsable(ItemUse use)
+        {
+            for (int i = 0; i < bag.Count; i++)
+            {
+                ItemDefinition item = Definition(bag[i]);
+                if (item != null && item.use == use) return i;
+            }
+            return -1;
+        }
+
+        /// <summary>The potion keys: 5 drinks a healing potion, 6 a mana potion.</summary>
+        public static ItemUse PotionKeyUse(int index) => index == 0 ? ItemUse.Heal : ItemUse.RestoreMana;
+
+        private void Update()
+        {
+            if (!IsSpawned || !IsOwner) return;
+            if (input == null) input = GetComponent<PlayerInputReader>();
+            if (input == null || !input.enabled) return;
+            for (int i = 0; i < PlayerInputReader.PotionKeyCount; i++)
+            {
+                if (!input.PotionPressed(i)) continue;
+                int slot = FindUsable(PotionKeyUse(i));
+                if (slot >= 0) RequestUse(slot);
+                else MessageLog.Add(i == 0 ? "You have no healing potions." : "You have no mana potions.", MessageLog.WarningColor);
+            }
         }
 
         private void OnListChanged(NetworkListEvent<ItemStack> change)
@@ -277,22 +307,29 @@ namespace RPG.Items
             switch (message)
             {
                 case InventoryMessage.Received:
-                    if (item != null) CombatTextLayer.ShowText(above, "+ " + item.NameWith(affix), ItemDefinition.RarityColor(item.QualityWith(affix)), 0.8f);
+                    if (item == null) break;
+                    CombatTextLayer.ShowText(above, "+ " + item.NameWith(affix), ItemDefinition.RarityColor(item.QualityWith(affix)), 0.8f);
+                    MessageLog.Add($"You receive [{item.NameWith(affix)}].", ItemDefinition.RarityColor(item.QualityWith(affix)));
                     break;
                 case InventoryMessage.BagFull:
                     CombatTextLayer.ShowText(above, "Inventory is full", new Color(1f, 0.4f, 0.3f), 0.8f);
+                    MessageLog.Add("Inventory is full.", MessageLog.WarningColor);
                     break;
                 case InventoryMessage.NotReady:
                     CombatTextLayer.ShowText(above, "Not ready yet", new Color(1f, 0.4f, 0.3f), 0.8f);
+                    MessageLog.Add("Not ready yet.", MessageLog.WarningColor);
                     break;
                 case InventoryMessage.WrongClass:
                     CombatTextLayer.ShowText(above, "Your class cannot use that", new Color(1f, 0.4f, 0.3f), 0.8f);
+                    MessageLog.Add("Your class cannot use that.", MessageLog.WarningColor);
                     break;
                 case InventoryMessage.NotEnoughGold:
                     CombatTextLayer.ShowText(above, "Not enough gold", new Color(1f, 0.4f, 0.3f), 0.8f);
+                    MessageLog.Add("Not enough gold.", MessageLog.WarningColor);
                     break;
                 case InventoryMessage.Gold:
                     CombatTextLayer.ShowText(above, $"+{itemId} gold", GoldColor, 0.8f);
+                    MessageLog.Add($"You receive {itemId} gold.", GoldColor);
                     break;
             }
         }

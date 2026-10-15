@@ -26,7 +26,7 @@ namespace RPG.UI
             fill = fillImage.rectTransform;
             UIFactory.Stretch(fill);
 
-            label = UIFactory.CreateText("Label", background.transform, 14, TextAnchor.MiddleCenter);
+            label = UIFactory.CreateText("Label", background.transform, 11, TextAnchor.MiddleCenter);
             UIFactory.Stretch(label.rectTransform);
             label.horizontalOverflow = HorizontalWrapMode.Overflow;
         }

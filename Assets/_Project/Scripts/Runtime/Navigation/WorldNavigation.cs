@@ -17,6 +17,8 @@ namespace RPG.Navigation
         [SerializeField] private Grid grid;
         [SerializeField] private Tilemap ground;
         [SerializeField] private Tilemap obstacles;
+        [Tooltip("Shown above the minimap.")]
+        [SerializeField] private string zoneName = "Wilderness";
         [Tooltip("A cell is blocked when a solid collider without a rigidbody (tree trunk, post) overlaps this radius around its center.")]
         [SerializeField, Min(0.01f)] private float propCheckRadius = 0.15f;
         [Tooltip("How far from blocked cells a straight walk must stay (about the radius of a character's feet).")]
@@ -26,6 +28,7 @@ namespace RPG.Navigation
         private const int NearestWalkableSearchRadius = 3;
 
         private NavGrid navGrid;
+        private Rect worldBounds;
         private readonly List<Vector3Int> cellPath = new List<Vector3Int>();
         private readonly List<Vector2> points = new List<Vector2>();
         private readonly List<Collider2D> overlaps = new List<Collider2D>();
@@ -38,6 +41,22 @@ namespace RPG.Navigation
             foreach (WorldNavigation map in Maps)
                 if (map != null && map.Contains(worldPosition)) return map;
             return null;
+        }
+
+        public string ZoneName
+        {
+            get => zoneName;
+            set => zoneName = value;
+        }
+
+        /// <summary>World-space rectangle around every ground cell.</summary>
+        public Rect WorldBounds
+        {
+            get
+            {
+                if (navGrid == null) Build();
+                return worldBounds;
+            }
         }
 
         private NavGrid Map
@@ -88,6 +107,7 @@ namespace RPG.Navigation
             Physics2D.SyncTransforms();
             ground.CompressBounds();
             navGrid = new NavGrid(ground.cellBounds, IsCellWalkable, cell => grid.GetCellCenterWorld(cell));
+            worldBounds = CellsToWorld(ground.cellBounds);
         }
 
         private bool IsCellWalkable(Vector3Int cell)
@@ -107,6 +127,21 @@ namespace RPG.Navigation
                 return true;
             }
             return false;
+        }
+
+        private Rect CellsToWorld(BoundsInt cells)
+        {
+            Vector2 min = Vector2.positiveInfinity;
+            Vector2 max = Vector2.negativeInfinity;
+            foreach (int x in new[] { cells.xMin, cells.xMax - 1 })
+            foreach (int y in new[] { cells.yMin, cells.yMax - 1 })
+            {
+                Vector2 center = grid.GetCellCenterWorld(new Vector3Int(x, y, 0));
+                min = Vector2.Min(min, center);
+                max = Vector2.Max(max, center);
+            }
+            Vector2 half = (Vector2)grid.cellSize * 0.5f;
+            return Rect.MinMaxRect(min.x - half.x, min.y - half.y, max.x + half.x, max.y + half.y);
         }
 
         public bool IsWalkable(Vector2 worldPosition)

@@ -164,7 +164,9 @@ namespace RPG.EditorTools
             obstacles.gameObject.AddComponent<TilemapCollider2D>();
             PaintTestMap(ground, obstacles, grassTiles, pathTile, rockTile);
             PlaceTrees(grid, obstacles, treePrefab);
-            grid.gameObject.AddComponent<WorldNavigation>().Configure(grid, ground, obstacles);
+            var navigation = grid.gameObject.AddComponent<WorldNavigation>();
+            navigation.Configure(grid, ground, obstacles);
+            navigation.ZoneName = "Greenvale";
 
             CreateGlobalLight();
             CreateEventSystem();
@@ -1122,14 +1124,20 @@ namespace RPG.EditorTools
             Stretch((RectTransform)combatText.transform);
             combatText.AddComponent<CombatTextLayer>();
 
-            CreateUnitFrame(canvasObject.transform, "Player Frame", UnitFrameRole.LocalPlayer, new Vector2(0.5f, 0f), new Vector2(0f, 40f));
-            CreateUnitFrame(canvasObject.transform, "Target Frame", UnitFrameRole.Target, new Vector2(0.5f, 1f), new Vector2(0f, -30f));
+            // Names over units first, so frames and windows are drawn over them.
+            var unitNameplates = new GameObject("Unit Nameplates", typeof(RectTransform));
+            unitNameplates.transform.SetParent(canvasObject.transform, false);
+            Stretch((RectTransform)unitNameplates.transform);
+            unitNameplates.AddComponent<UnitNameplates>();
 
-            // These build their own contents at runtime.
-            CreateHudElement<ExperienceBar>(canvasObject.transform, "Experience Bar", new Vector2(0.5f, 0f), new Vector2(0.5f, 0f), new Vector2(0f, 4f), new Vector2(380f, 12f));
-            CreateHudElement<ManaBar>(canvasObject.transform, "Mana Bar", new Vector2(0.5f, 0f), new Vector2(0.5f, 0f), new Vector2(0f, 19f), new Vector2(380f, 16f));
-            CreateHudElement<AbilityBar>(canvasObject.transform, "Ability Bar", new Vector2(0.5f, 0f), new Vector2(0.5f, 0f), new Vector2(0f, 122f), new Vector2(400f, 80f));
-            // Name plates first, so the windows are drawn over them.
+            // These build their own contents at runtime. Layout: player top left, target top middle,
+            // minimap top right, messages bottom left, action bar and experience bottom middle.
+            CreateUnitFrame(canvasObject.transform, "Player Frame", UnitFrameRole.LocalPlayer, new Vector2(0f, 1f), new Vector2(24f, -16f));
+            CreateUnitFrame(canvasObject.transform, "Target Frame", UnitFrameRole.Target, new Vector2(0.5f, 1f), new Vector2(0f, -16f));
+            CreateHudElement<Minimap>(canvasObject.transform, "Minimap", new Vector2(1f, 1f), new Vector2(1f, 1f), new Vector2(-20f, -10f), new Vector2(240f, 270f));
+            CreateHudElement<MessageLog>(canvasObject.transform, "Message Log", new Vector2(0f, 0f), new Vector2(0f, 0f), new Vector2(12f, 12f), new Vector2(480f, 180f));
+            CreateHudElement<ExperienceBar>(canvasObject.transform, "Experience Bar", new Vector2(0.5f, 0f), new Vector2(0.5f, 0f), new Vector2(0f, 4f), new Vector2(520f, 12f));
+            CreateHudElement<AbilityBar>(canvasObject.transform, "Ability Bar", new Vector2(0.5f, 0f), new Vector2(0.5f, 0f), new Vector2(0f, 32f), new Vector2(520f, 80f));
             var nameplates = new GameObject("NPC Nameplates", typeof(RectTransform));
             nameplates.transform.SetParent(canvasObject.transform, false);
             Stretch((RectTransform)nameplates.transform);
@@ -1165,70 +1173,18 @@ namespace RPG.EditorTools
 
         private static void CreateUnitFrame(Transform canvas, string frameName, UnitFrameRole role, Vector2 anchor, Vector2 offset)
         {
-            Font font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
-
+            // The frame builds its portrait and bars at runtime.
             var holder = new GameObject(frameName, typeof(RectTransform));
             holder.transform.SetParent(canvas, false);
             var holderRect = (RectTransform)holder.transform;
             holderRect.anchorMin = holderRect.anchorMax = holderRect.pivot = anchor;
             holderRect.anchoredPosition = offset;
-            holderRect.sizeDelta = new Vector2(380f, 70f);
-
-            var panel = CreateImage("Panel", holder.transform, new Color(0.08f, 0.07f, 0.06f, 0.85f));
-            Stretch(panel.rectTransform);
-
-            Text nameText = CreateText("Name", panel.transform, font, 22, TextAnchor.UpperLeft);
-            nameText.rectTransform.anchorMin = new Vector2(0f, 0.5f);
-            nameText.rectTransform.anchorMax = new Vector2(1f, 1f);
-            nameText.rectTransform.offsetMin = new Vector2(12f, 0f);
-            nameText.rectTransform.offsetMax = new Vector2(-12f, -6f);
-
-            var barBackground = CreateImage("Bar", panel.transform, new Color(0f, 0f, 0f, 0.8f));
-            barBackground.rectTransform.anchorMin = new Vector2(0f, 0f);
-            barBackground.rectTransform.anchorMax = new Vector2(1f, 0.5f);
-            barBackground.rectTransform.offsetMin = new Vector2(12f, 10f);
-            barBackground.rectTransform.offsetMax = new Vector2(-12f, -2f);
-
-            var fill = CreateImage("Fill", barBackground.transform, Color.red);
-            Stretch(fill.rectTransform);
-
-            Text valueText = CreateText("Value", barBackground.transform, font, 16, TextAnchor.MiddleCenter);
-            Stretch(valueText.rectTransform);
+            holderRect.sizeDelta = new Vector2(440f, 110f);
 
             var frame = holder.AddComponent<UnitFrame>();
             var frameObject = new SerializedObject(frame);
             frameObject.FindProperty("role").enumValueIndex = (int)role;
-            frameObject.FindProperty("panel").objectReferenceValue = panel.gameObject;
-            frameObject.FindProperty("nameText").objectReferenceValue = nameText;
-            frameObject.FindProperty("fill").objectReferenceValue = fill.rectTransform;
-            frameObject.FindProperty("fillImage").objectReferenceValue = fill;
-            frameObject.FindProperty("valueText").objectReferenceValue = valueText;
             frameObject.ApplyModifiedPropertiesWithoutUndo();
-
-            panel.gameObject.SetActive(false);
-        }
-
-        private static UnityEngine.UI.Image CreateImage(string imageName, Transform parent, Color color)
-        {
-            var go = new GameObject(imageName, typeof(RectTransform));
-            go.transform.SetParent(parent, false);
-            var image = go.AddComponent<UnityEngine.UI.Image>();
-            image.color = color;
-            return image;
-        }
-
-        private static Text CreateText(string textName, Transform parent, Font font, int size, TextAnchor alignment)
-        {
-            var go = new GameObject(textName, typeof(RectTransform));
-            go.transform.SetParent(parent, false);
-            var text = go.AddComponent<Text>();
-            text.font = font;
-            text.fontSize = size;
-            text.alignment = alignment;
-            text.color = Color.white;
-            text.raycastTarget = false;
-            go.AddComponent<UnityEngine.UI.Outline>().effectColor = new Color(0f, 0f, 0f, 0.8f);
-            return text;
         }
 
         private static void Stretch(RectTransform rect)

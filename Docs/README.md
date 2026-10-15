@@ -83,5 +83,6 @@ Naujausia versija po kiekvieno push'o į `main` automatiškai sukuriama ir paske
 | ~~11~~ | ~~PvP~~ | ✖ atsisakyta |
 | + | Didesnis žemėlapis, miestelis, klasių prekeiviai, auksas (įkvėpta Source) | ✅ [Town.md](Town.md) |
 | + | Mana, šlamštas iš monstrų, atsitiktiniai afiksai ir 6 kokybės lygiai, atributai (įkvėpta Source) | ✅ [Attributes.md](Attributes.md) |
+| + | Naujas HUD: portretų rėmeliai, minimapas, žinučių langas, veiksmų juosta su gėrimais, vardai virš monstrų (įkvėpta Source) | ✅ [Hud.md](Hud.md) |
 
 Multiplayer'is planuojamas anksti (3 etapas) sąmoningai. Kovą, monstrus ir daiktus iškart rašysime serverio autoriteto principu, kad vėliau nereikėtų jų perrašinėti.
