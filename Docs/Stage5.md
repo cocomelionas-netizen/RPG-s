@@ -16,7 +16,7 @@
   | **Mirtis** | Pilkas kūnas guli 3 s ir dingsta. Po 20 s stovykla atsiunčia naują gobliną. |
 
   Goblinas grįžta namo, kai:
-  - nutolsta nuo namų daugiau nei 9 vienetus;
+  - nubėga daugiau nei 25 vienetus nuo vietos, kur prasidėjo kova. Kiekvienas goblino smūgis tau perkelia šią vietą ten, kur jis smogė, todėl kol goblinas tave pasiveja ir muša, jis seka toliau (pakeista pagal tavo pastabą, anksčiau buvo 9 vienetai nuo namų);
   - visi, su kuriais kovojo, mirė arba pabėgo;
   - 3 s neranda kelio iki taikinio.
 
@@ -65,7 +65,7 @@ https://cocomelionas-netizen.github.io/RPG-s/ (jei rodo seną versiją, perkrauk
 1. **Rask goblinus.** Nuo starto eik į viršų ir truputį į dešinę (~5 vienetai), į kairę arba į dešinę žemyn (~7 vienetai). Goblinai lėtai vaikštinėja savo stovyklose.
 2. **Priartėk per ~3 vienetus.** Goblinas turi tave pastebėti, ateiti ir pradėti kirsti: matysi raudonus žalos skaičius ir mažėjantį HP apačioje. Kartu turėtų atbėgti ir jo draugai.
 3. **Kovok:** pažymėk gobliną (pele arba **Tab**) ir spausk **1** (Attack). Numuštas goblinas papilkėja ir po 3 s dingsta. Po ~20 s stovykloje atsiranda naujas.
-4. **Pabėk toli** (daugiau nei ~9 vienetus nuo stovyklos). Goblinas apsisuka, grįžta namo, jo HP užsipildo, o grįžtančio jo sužeisti nepavyksta.
+4. **Pabėk toli** (daugiau nei ~25 vienetus nuo vietos, kur goblinas tau paskutinį kartą smogė). Goblinas apsisuka, grįžta namo, jo HP užsipildo, o grįžtančio jo sužeisti nepavyksta.
 5. **Leisk goblinams tave nugalėti.** Atgimsi prie starto, o goblinai grįš į stovyklą.
 6. **Pailsėk** – po 5 s be žalos tavo HP pamažu atsistato.
 7. **Kelio paieška:**

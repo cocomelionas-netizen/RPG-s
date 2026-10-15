@@ -24,7 +24,9 @@ namespace RPG.Monsters
     /// - Idle: wanders near home; a hostile player coming within the aggro radius (or hitting it) starts a fight.
     /// - Chase: keeps a threat table (damage dealt to it, plus a little for being seen), attacks the top entry
     ///   with <see cref="AutoAttack"/> and calls nearby idle monsters to help.
-    /// - Evade: when pulled too far from home, when its targets are dead or gone, or when it cannot reach them,
+    /// - Leash: it chases up to <see cref="LeashRadius"/> from where the fight started, and every hit it lands
+    ///   moves that point to where it hit, so a monster that keeps hitting you keeps following you.
+    /// - Evade: when pulled past the leash, when its targets are dead or gone, or when it cannot reach them,
     ///   it walks home ignoring damage and returns to full health (no kiting monsters across the map).
     /// - Dead: every living player that fought it gets experience; the corpse is removed after a short while
     ///   and a <see cref="MonsterSpawner"/> brings a new one later.
@@ -42,8 +44,8 @@ namespace RPG.Monsters
         [SerializeField, Min(0f)] private float aggroRadius = 3f;
         [Tooltip("Idle monsters this close join the fight when this one is pulled.")]
         [SerializeField, Min(0f)] private float assistRadius = 2.5f;
-        [Tooltip("Walks home when pulled this far from its home position.")]
-        [SerializeField, Min(1f)] private float leashRadius = 9f;
+        [Tooltip("Gives up the chase this far from home, or from where it last hit its target.")]
+        [SerializeField, Min(1f)] private float leashRadius = 25f;
         [Tooltip("Walks home when it cannot find a way to its target for this long.")]
         [SerializeField, Min(0.5f)] private float giveUpSeconds = 3f;
 
@@ -66,7 +68,7 @@ namespace RPG.Monsters
         // The path home may end next to home when home itself is blocked.
         private const float HomeNearbyDistance = 1f;
         // Evading longer than this means it got stuck somewhere: it is placed back home.
-        private const float MaxEvadeSeconds = 10f;
+        private const float MaxEvadeSeconds = 30f;
 
         private static readonly List<MonsterAI> ServerMonsters = new List<MonsterAI>();
 
@@ -83,6 +85,7 @@ namespace RPG.Monsters
         private float pathFailedSince = -1f;
         private float removeAt;
         private float evadeStartedAt;
+        private Vector2 leashAnchor;
 
         /// <summary>Server only.</summary>
         public MonsterState State { get; private set; } = MonsterState.Idle;
@@ -90,7 +93,10 @@ namespace RPG.Monsters
         /// <summary>Server only: who it is fighting.</summary>
         public Health CurrentTarget { get; private set; }
 
-        /// <summary>Where it spawned and returns to. Set it before spawning to choose another point.</summary>
+        /// <summary>
+        /// Where it spawned and returns to. Set it before spawning to choose another point;
+        /// setting it also measures the leash of a fight in progress from there.
+        /// </summary>
         public Vector2 Home
         {
             get => home;
@@ -98,6 +104,7 @@ namespace RPG.Monsters
             {
                 home = value;
                 hasHome = true;
+                leashAnchor = value;
             }
         }
 
@@ -111,6 +118,9 @@ namespace RPG.Monsters
             get => aggroRadius;
             set => aggroRadius = Mathf.Max(0f, value);
         }
+
+        /// <summary>Server only: where the leash is measured from (home, or where it last hit its target).</summary>
+        public Vector2 LeashAnchor => State == MonsterState.Chase ? leashAnchor : home;
 
         public float LeashRadius
         {
@@ -140,6 +150,7 @@ namespace RPG.Monsters
             if (!hasHome) Home = transform.position;
             health.Died += OnDied;
             health.DamageTaken += OnDamageTaken;
+            autoAttack.ServerHitLanded += OnHitLanded;
             ServerMonsters.Add(this);
             nextWanderTime = Time.time + Random.Range(wanderPauseSeconds.x, wanderPauseSeconds.y);
         }
@@ -150,6 +161,7 @@ namespace RPG.Monsters
 
             health.Died -= OnDied;
             health.DamageTaken -= OnDamageTaken;
+            autoAttack.ServerHitLanded -= OnHitLanded;
             ServerMonsters.Remove(this);
         }
 
@@ -167,7 +179,7 @@ namespace RPG.Monsters
                     return;
             }
 
-            if (Vector2.Distance(Position, home) > leashRadius)
+            if (Vector2.Distance(Position, LeashAnchor) > leashRadius)
             {
                 StartEvade();
                 return;
@@ -182,6 +194,7 @@ namespace RPG.Monsters
             CurrentTarget = TopThreat();
             if (CurrentTarget != null)
             {
+                if (State != MonsterState.Chase) leashAnchor = home;
                 State = MonsterState.Chase;
                 UpdateChase();
             }
@@ -228,6 +241,12 @@ namespace RPG.Monsters
             }
         }
 
+        private void OnHitLanded(Health target, int damage)
+        {
+            // Still in the fight: it may follow its target another leash length from here.
+            if (State == MonsterState.Chase) leashAnchor = Position;
+        }
+
         private void OnDamageTaken(Health attacker, int amount)
         {
             if (attacker != null) AddThreat(attacker, amount, true);
@@ -243,7 +262,7 @@ namespace RPG.Monsters
             {
                 Health unit = entry.Key;
                 bool gone = unit == null || !unit.IsSpawned || unit.IsDead
-                            || Vector2.Distance(home, AutoAttack.ServerPosition(unit)) > leashRadius;
+                            || Vector2.Distance(Position, AutoAttack.ServerPosition(unit)) > leashRadius + aggroRadius;
                 if (gone)
                 {
                     expiredThreat.Add(unit);

@@ -45,6 +45,9 @@ namespace RPG.Combat
         /// <summary>Server only: what this unit is attacking.</summary>
         public Health ServerTarget => serverTarget;
 
+        /// <summary>Server only: an auto-attack landed: (target, damage).</summary>
+        public event Action<Health, int> ServerHitLanded;
+
         /// <summary>Owner only: the server stopped the attack (target died, became invalid, or we died).</summary>
         public event Action AttackStopped;
 
@@ -153,7 +156,9 @@ namespace RPG.Combat
             int damage = RollDamage(1f, out bool critical);
             nextAttackTime = now + attackInterval;
 
-            serverTarget.ApplyDamage(damage, critical, health);
+            Health hitTarget = serverTarget;
+            hitTarget.ApplyDamage(damage, critical, health);
+            ServerHitLanded?.Invoke(hitTarget, damage);
             PlayAttackRpc(to - from);
         }
 
