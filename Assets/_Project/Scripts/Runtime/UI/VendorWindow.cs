@@ -284,8 +284,9 @@ namespace RPG.UI
                     : $"{item.displayName}  <size=13><color=#ff6655>(sold out)</color></size>";
                 row.Name.color = ItemDefinition.RarityColor(item.rarity);
                 row.Details.text = Summary(item, progress);
-                row.Price.text = $"{item.price} g";
-                row.Price.color = inventory.Gold >= item.price && left != 0 ? GoldColor : Unaffordable;
+                int price = inventory.BuyPrice(item);
+                row.Price.text = $"{price} g";
+                row.Price.color = inventory.Gold >= price && left != 0 ? GoldColor : Unaffordable;
             }
             UpdateCrafts(inventory, progress);
         }

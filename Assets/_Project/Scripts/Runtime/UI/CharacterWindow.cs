@@ -10,9 +10,9 @@ using UnityEngine.UI;
 namespace RPG.UI
 {
     /// <summary>
-    /// The local player's character sheet (C, or the Character button), laid out like Dreadmyst's: rows of
-    /// "Label: value", attributes with a small purple + to spend a point, and a tooltip for every row
-    /// (what the stat does; on a + what a point costs and how many are already invested).
+    /// The local player's character sheet (C, or the Character button), laid out like Dreadmyst's: three pages
+    /// (attributes, combat ratings, weapon skills) of "Label: value" rows, a small purple + to spend a point on every
+    /// stat, and a tooltip for every row (what the stat does; on a + what a point costs and how many are invested).
     /// Builds its own UI; place it on a RectTransform that fills the HUD canvas.
     /// </summary>
     [RequireComponent(typeof(RectTransform))]
@@ -40,30 +40,116 @@ namespace RPG.UI
         private const string CostHex = "b500af";
         private const string TooExpensiveHex = "7a6a7a";
 
-        private enum Stat { Health, Mana, Armor, Strength, Agility, Intelligence, Vitality, Damage, Critical }
-
-        private static readonly Dictionary<Stat, string> Descriptions = new Dictionary<Stat, string>
+        /// <summary>One line of the sheet: its label, how to show its value, the attribute its + buys (if any) and what it does.</summary>
+        private class Row
         {
-            { Stat.Health, "The damage you can take before you fall. Grows with points bought with experience (+1 each), Vitality, Strength, levels and gear." },
-            { Stat.Mana, "Spent on abilities and slowly regained. Grows with points bought with experience (+1 each), Intelligence, levels and gear." },
-            { Stat.Armor, "Reduces the damage of every hit you take. Comes from gear." },
-            { Stat.Strength, "+1 health per point. Warriors deal a quarter of their Strength as extra damage." },
-            { Stat.Agility, "+0.4% critical chance per point. Rangers deal a quarter of their Agility as extra damage." },
-            { Stat.Intelligence, "+4 mana per point. Mages deal a quarter of their Intelligence as extra damage." },
-            { Stat.Vitality, "+4 health per point." },
-            { Stat.Damage, "The damage of your attacks; abilities multiply it." },
-            { Stat.Critical, "The chance for a hit to deal double damage." },
-        };
+            public string Label;
+            public System.Func<string> Value;
+            public Attribute? Plus;
+            public string Description;
+            public Text ValueText;
+            public bool Mana;
+        }
 
         private GameObject window;
         private GameObject toggleButton;
         private Text title;
         private Text points;
-        private readonly Dictionary<Stat, Text> values = new Dictionary<Stat, Text>();
+        private Text pageText;
+        private readonly List<List<Row>> pages = new List<List<Row>>();
+        private readonly List<GameObject> pageRoots = new List<GameObject>();
+        private int page;
         private RectTransform tooltip;
         private Text tooltipText;
         private System.Func<string> tooltipContent;
         private CharacterProgress progress;
+        private Health health;
+        private Mana mana;
+        private AutoAttack attack;
+        private Inventory inventory;
+        private AttributeSet total;
+        private AttributeSet fromItems;
+
+        private static string Percent(float chance) => $"{Mathf.RoundToInt(chance * 1000f) / 10f}%";
+
+        /// <summary>An attribute's total, with what items add in green.</summary>
+        private string AttributeValue(Attribute attribute, string extra = null)
+        {
+            string shown = fromItems[attribute] != 0
+                ? $"{total[attribute]} <size=13><color=#7fbf6a>(+{fromItems[attribute]})</color></size>"
+                : total[attribute].ToString();
+            return extra != null ? $"{shown} <size=13><color=#{ColorUtility.ToHtmlStringRGB(LabelColor)}>{extra}</color></size>" : shown;
+        }
+
+        private Row Stat(Attribute attribute, string description, System.Func<string> extra = null) => new Row
+        {
+            Label = AttributeRules.NameOf(attribute) + ":",
+            Value = () => AttributeValue(attribute, extra?.Invoke()),
+            Plus = attribute,
+            Description = description,
+        };
+
+        private void BuildPages()
+        {
+            pages.Add(new List<Row>
+            {
+                new Row { Label = "Health:", Value = () => health.Max.ToString(), Plus = Attribute.Health,
+                    Description = "The damage you can take before you fall. Grows with points bought with experience (+1 each), Courage, Strength, levels and gear." },
+                new Row { Label = "Mana:", Value = () => mana != null ? mana.Max.ToString() : "0", Plus = Attribute.Mana, Mana = true,
+                    Description = "Spent on abilities and slowly regained. Grows with points bought with experience (+1 each), Intelligence, levels and gear." },
+                new Row { Label = "Armor Value:", Value = () => (inventory != null ? inventory.Armor : 0).ToString(),
+                    Description = "Reduces the damage of every hit you take. Comes from gear." },
+                null,
+                Stat(Attribute.Strength, "+1 health per point. Warriors deal a quarter of their Strength as extra damage."),
+                Stat(Attribute.Agility, "+0.4% critical chance per point. Rangers deal a quarter of their Agility as extra damage."),
+                Stat(Attribute.Willpower, "+0.5% ability damage and heals per point.",
+                    () => $"+{Mathf.RoundToInt((AttributeRules.AbilityPower(total) - 1f) * 100f)}%"),
+                Stat(Attribute.Intelligence, "+4 mana per point. Mages deal a quarter of their Intelligence as extra damage."),
+                Stat(Attribute.Vitality, "+4 health per point."),
+                Stat(Attribute.Regeneration, "Health regained every second, even in combat: 1 every 5 seconds per point.",
+                    () => $"{AttributeRules.HealthRegenPerSecond(total):0.#}/s"),
+                Stat(Attribute.Meditate, "Mana regained every second: 1 every 5 seconds per point.",
+                    () => $"{AttributeRules.ManaRegenPerSecond(total):0.#}/s"),
+                null,
+                new Row { Label = "Damage:", Value = () => $"{attack.MinDamage} - {attack.MaxDamage}",
+                    Description = "The damage of your attacks; abilities multiply it. Your weapon's skill raises it." },
+                new Row { Label = "Critical Chance:", Value = () => Percent(progress.CritChance),
+                    Description = "The chance for an attack to deal double damage: your class, Agility and the melee or ranged critical rating." },
+            });
+            pages.Add(new List<Row>
+            {
+                Stat(Attribute.MeleeCritical, "Critical chance of melee attacks: +0.2% per point.", () => Percent(AttributeRules.AttackCritBonus(total, false))),
+                Stat(Attribute.RangedCritical, "Critical chance of ranged attacks: +0.2% per point.", () => Percent(AttributeRules.AttackCritBonus(total, true))),
+                Stat(Attribute.SpellCritical, "Critical chance of abilities: +0.2% per point.", () => Percent(progress.SpellCritChance)),
+                null,
+                Stat(Attribute.Dodge, "Chance to avoid a hit completely: +0.2% per point, at most 40%.", () => Percent(AttributeRules.DodgeChance(total))),
+                Stat(Attribute.Block, "Chance to block half of a hit: +0.2% per point, at most 50%.", () => Percent(AttributeRules.BlockChance(total))),
+                null,
+                Stat(Attribute.ResistFrost, "Less frost damage taken: rating / (rating + 100).", () => Percent(AttributeRules.ResistReduction(total.resistFrost))),
+                Stat(Attribute.ResistFire, "Less fire damage taken: rating / (rating + 100).", () => Percent(AttributeRules.ResistReduction(total.resistFire))),
+                Stat(Attribute.ResistShadow, "Less shadow damage taken: rating / (rating + 100).", () => Percent(AttributeRules.ResistReduction(total.resistShadow))),
+                Stat(Attribute.ResistHoly, "Less holy damage taken: rating / (rating + 100).", () => Percent(AttributeRules.ResistReduction(total.resistHoly))),
+                null,
+                Stat(Attribute.Bartering, "Vendors charge 0.5% less and pay 0.5% more per point, up to 25%.", () => Percent(AttributeRules.BarteringDiscount(total))),
+                Stat(Attribute.Lockpicking, "Opens locked chests: you need twice the chest's level."),
+            });
+            var skills = new List<Row>();
+            for (Attribute skill = Attribute.Staves; skill <= Attribute.Shields; skill++)
+            {
+                Attribute current = skill;
+                string what = current == Attribute.Shields ? "+0.1% block chance per point." : "+0.5% damage per point with this kind of weapon.";
+                skills.Add(Stat(current, what, () =>
+                {
+                    if (current == Attribute.Shields) return null;
+                    bool worn = progress.WeaponSkill == current;
+                    string bonus = $"+{Mathf.RoundToInt((AttributeRules.WeaponSkillBonus(total, current) - 1f) * 100f)}%";
+                    return worn ? $"{bonus} (your weapon)" : bonus;
+                }));
+            }
+            pages.Add(skills);
+        }
+
+        private static readonly string[] PageNames = { "Attributes", "Combat", "Weapon Skills" };
 
         private void Awake()
         {
@@ -88,46 +174,68 @@ namespace RPG.UI
             UIFactory.Place((RectTransform)close.transform, new Vector2(1f, 1f), new Vector2(-8f, -8f), new Vector2(26f, 26f));
             close.onClick.AddListener(Toggle);
 
-            float y = -66f;
-            AddPlus(rect, Attribute.Health, y);
-            AddRow(rect, Stat.Health, "Health:", ref y);
-            AddPlus(rect, Attribute.Mana, y);
-            AddRow(rect, Stat.Mana, "Mana:", ref y);
-            AddRow(rect, Stat.Armor, "Armor Value:", ref y);
-            y -= 12f;
-            for (int i = 0; i <= (int)Attribute.Vitality; i++)
+            BuildPages();
+            float lowest = 0f;
+            foreach (List<Row> rows in pages)
             {
-                var attribute = (Attribute)i;
-                float rowY = y;
-                AddRow(rect, Stat.Strength + i, $"{attribute}:", ref y);
-                AddPlus(rect, attribute, rowY);
+                RectTransform root = UIFactory.CreateRect("Page", rect);
+                UIFactory.Stretch(root);
+                pageRoots.Add(root.gameObject);
+                float y = -66f;
+                foreach (Row row in rows)
+                {
+                    if (row == null)
+                    {
+                        y -= 12f;
+                        continue;
+                    }
+                    if (row.Plus.HasValue) AddPlus(root, row.Plus.Value, y);
+                    AddRow(root, row, ref y);
+                }
+                lowest = Mathf.Min(lowest, y);
             }
-            y -= 12f;
-            AddRow(rect, Stat.Damage, "Damage:", ref y);
-            AddRow(rect, Stat.Critical, "Critical Chance:", ref y);
-            y -= 8f;
-            points = AddText(rect, "", 15, TextAnchor.UpperLeft, new Vector2(LabelX, y), new Vector2(Width - 40f, 22f));
+
+            float bottom = lowest - 8f;
+            Button previous = UIFactory.CreateButton("Previous", rect, PlusColor, "<", 15);
+            UIFactory.Place((RectTransform)previous.transform, new Vector2(0f, 1f), new Vector2(LabelX, bottom), new Vector2(26f, 22f));
+            previous.onClick.AddListener(() => ShowPage(page - 1));
+            Button next = UIFactory.CreateButton("Next", rect, PlusColor, ">", 15);
+            UIFactory.Place((RectTransform)next.transform, new Vector2(0f, 1f), new Vector2(Width - LabelX - 26f, bottom), new Vector2(26f, 22f));
+            next.onClick.AddListener(() => ShowPage(page + 1));
+            pageText = AddText(rect, "", 15, TextAnchor.MiddleCenter, new Vector2(LabelX + 30f, bottom), new Vector2(Width - 2f * LabelX - 60f, 22f));
+            pageText.color = LabelColor;
+
+            points = AddText(rect, "", 15, TextAnchor.UpperLeft, new Vector2(LabelX, bottom - 30f), new Vector2(Width - 40f, 22f));
             points.color = TitleColor;
-            rect.sizeDelta = new Vector2(Width, -y + 34f);
+            rect.sizeDelta = new Vector2(Width, -bottom + 30f + 34f);
 
             BuildTooltip();
+            ShowPage(0);
             window.SetActive(false);
         }
 
-        private void AddRow(RectTransform parent, Stat stat, string label, ref float y)
+        private void ShowPage(int index)
+        {
+            page = (index % pages.Count + pages.Count) % pages.Count;
+            for (int i = 0; i < pageRoots.Count; i++) pageRoots[i].SetActive(i == page);
+            pageText.text = $"{PageNames[page]}  ({page + 1}/{pages.Count})";
+            HideTooltip();
+        }
+
+        private void AddRow(RectTransform parent, Row row, ref float y)
         {
             // A see-through strip under the row catches the pointer for the tooltip.
-            Image strip = UIFactory.CreateImage(label, parent, Color.clear);
+            Image strip = UIFactory.CreateImage(row.Label, parent, Color.clear);
             UIFactory.Place(strip.rectTransform, new Vector2(0f, 1f), new Vector2(LabelX - 6f, y + 2f), new Vector2(PlusX - LabelX, RowHeight));
             HoverArea hover = strip.gameObject.AddComponent<HoverArea>();
-            hover.Entered += _ => ShowTooltip(() => Descriptions[stat]);
+            hover.Entered += _ => ShowTooltip(() => row.Description);
             hover.Exited += _ => HideTooltip();
 
-            Text labelText = AddText(parent, label, 16, TextAnchor.MiddleLeft, new Vector2(LabelX, y), new Vector2(ValueX - LabelX, RowHeight));
+            Text labelText = AddText(parent, row.Label, 16, TextAnchor.MiddleLeft, new Vector2(LabelX, y), new Vector2(ValueX - LabelX, RowHeight));
             labelText.color = LabelColor;
-            Text value = AddText(parent, "", 16, TextAnchor.MiddleLeft, new Vector2(ValueX, y), new Vector2(PlusX - ValueX - 6f, RowHeight));
-            value.color = stat == Stat.Mana ? ManaColor : ValueColor;
-            values[stat] = value;
+            row.ValueText = AddText(parent, "", 16, TextAnchor.MiddleLeft, new Vector2(ValueX, y), new Vector2(PlusX - ValueX - 6f, RowHeight));
+            row.ValueText.color = row.Mana ? ManaColor : ValueColor;
+            row.ValueText.horizontalOverflow = HorizontalWrapMode.Overflow;
             y -= RowHeight;
         }
 
@@ -149,7 +257,7 @@ namespace RPG.UI
             int invested = progress != null ? progress.SpentPoints[attribute] : 0;
             string gain = attribute == Attribute.Health ? $"+{AttributeRules.HealthPerPoint} Health"
                 : attribute == Attribute.Mana ? $"+{AttributeRules.ManaPerPoint} Mana"
-                : $"+1 {attribute}";
+                : $"+1 {AttributeRules.NameOf(attribute)}";
             int cost = progress != null ? progress.PointCost(attribute) : AttributeRules.PointCost(attribute, 0);
             bool affordable = progress != null && progress.CanAfford(attribute);
             string header = $"<color=#{TooltipHeaderHex}>{gain}:</color> <color=#{(affordable ? CostHex : TooExpensiveHex)}>{cost}xp</color>";
@@ -197,7 +305,7 @@ namespace RPG.UI
         {
             if (progress == null) return;
             if (progress.CanAfford(attribute)) progress.RequestSpendPoint(attribute);
-            else MessageLog.Add($"You need {progress.PointCost(attribute)} experience to raise {attribute}.", MessageLog.WarningColor);
+            else MessageLog.Add($"You need {progress.PointCost(attribute)} experience to raise {AttributeRules.NameOf(attribute)}.", MessageLog.WarningColor);
         }
 
         private void Update()
@@ -220,28 +328,17 @@ namespace RPG.UI
                 return;
             }
 
-            var health = progress.GetComponent<Health>();
-            var mana = progress.GetComponent<Mana>();
-            var attack = progress.GetComponent<AutoAttack>();
-            var inventory = progress.GetComponent<Inventory>();
+            health = progress.GetComponent<Health>();
+            mana = progress.GetComponent<Mana>();
+            attack = progress.GetComponent<AutoAttack>();
+            inventory = progress.GetComponent<Inventory>();
             title.text = $"{health.DisplayName}\n<size=15><color=#{ColorUtility.ToHtmlStringRGB(LabelColor)}>Level {progress.Level} {progress.ClassName}, " +
                          $"{LevelCurve.RankName(progress.Level)}</color></size>";
 
-            values[Stat.Health].text = health.Max.ToString();
-            values[Stat.Mana].text = mana != null ? mana.Max.ToString() : "0";
-            values[Stat.Armor].text = (inventory != null ? inventory.Armor : 0).ToString();
-
-            AttributeSet total = progress.TotalAttributes;
-            AttributeSet fromItems = inventory != null ? inventory.Attributes : default;
-            for (int i = 0; i <= (int)Attribute.Vitality; i++)
-            {
-                var attribute = (Attribute)i;
-                values[Stat.Strength + i].text = fromItems[attribute] != 0
-                    ? $"{total[attribute]} <size=13><color=#7fbf6a>(+{fromItems[attribute]})</color></size>"
-                    : total[attribute].ToString();
-            }
-            values[Stat.Damage].text = $"{attack.MinDamage} - {attack.MaxDamage}";
-            values[Stat.Critical].text = $"{Mathf.RoundToInt(progress.CritChance * 1000f) / 10f}%";
+            total = progress.TotalAttributes;
+            fromItems = inventory != null ? inventory.Attributes : default;
+            foreach (Row row in pages[page])
+                if (row != null) row.ValueText.text = row.Value();
             points.text = $"Experience to spend: <color=#{CostHex}>{progress.ExperienceToSpend}xp</color>";
 
             UpdateTooltip();

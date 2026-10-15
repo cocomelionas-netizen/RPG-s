@@ -195,6 +195,59 @@ namespace RPG.Tests
             Assert.AreEqual(1, progress.SpentPoints.health);
         }
 
+        [Test]
+        public void DreadmystStatCosts_FromTheirClient()
+        {
+            Assert.AreEqual(6, AttributeRules.PointCost(Attribute.MeleeCritical, 10), "x/2 + 1");
+            Assert.AreEqual(4, AttributeRules.PointCost(Attribute.RangedCritical, 9), "x/3 + 1");
+            Assert.AreEqual(4, AttributeRules.PointCost(Attribute.ResistFire, 9), "x/3 + 1");
+            Assert.AreEqual(6, AttributeRules.PointCost(Attribute.Dodge, 5), "x + 1");
+            Assert.AreEqual(7, AttributeRules.PointCost(Attribute.Bartering, 3), "2x + 1");
+            Assert.AreEqual(4, AttributeRules.PointCost(Attribute.Regeneration, 0), "x^1.4 + 4");
+            Assert.AreEqual(3 * AttributeRules.PointCost(Attribute.Strength, 4), AttributeRules.PointCost(Attribute.Swords, 4), "3x Strength's");
+            Assert.AreEqual("Courage", AttributeRules.NameOf(Attribute.Vitality));
+        }
+
+        [UnityTest]
+        public IEnumerator DodgeBlockAndResists_ProtectThePlayer()
+        {
+            playerHealth.ServerDodgeChance = 1f;
+            int full = playerHealth.Current;
+            playerHealth.ApplyDamage(20, false);
+            Assert.AreEqual(full, playerHealth.Current, "A dodged hit does nothing.");
+
+            playerHealth.ServerDodgeChance = 0f;
+            playerHealth.ServerArmor = 0;
+            playerHealth.ServerBlockChance = 1f;
+            playerHealth.ApplyDamage(20, false);
+            Assert.AreEqual(full - 10, playerHealth.Current, "A blocked hit does half.");
+
+            playerHealth.ServerBlockChance = 0f;
+            playerHealth.ServerSetResist(DamageSchool.Fire, 100);
+            int before = playerHealth.Current;
+            playerHealth.ApplyDamage(20, false, null, DamageSchool.Fire);
+            Assert.AreEqual(before - 10, playerHealth.Current, "100 fire resist halves fire damage.");
+            before = playerHealth.Current;
+            playerHealth.ApplyDamage(20, false, null, DamageSchool.Frost);
+            Assert.AreEqual(before - 20, playerHealth.Current, "Not frost damage.");
+            yield return null;
+        }
+
+        [UnityTest]
+        public IEnumerator PointsInCombatStats_ReachTheFight()
+        {
+            progress.ServerAddExperience(LevelCurve.ExperienceToNext(1));
+            yield return null;
+            Assert.IsTrue(progress.ServerSpendPoint(Attribute.Dodge));
+            Assert.IsTrue(progress.ServerSpendPoint(Attribute.ResistShadow));
+            Assert.IsTrue(progress.ServerSpendPoint(Attribute.SpellCritical));
+            yield return null;
+
+            Assert.AreEqual(AttributeRules.AvoidPerRating, playerHealth.ServerDodgeChance, 1e-6f);
+            Assert.AreEqual(1, playerHealth.ServerResist(DamageSchool.Shadow));
+            Assert.Greater(progress.SpellCritChance, progress.CritChance - 0.0001f);
+        }
+
         // ---------- Affixes and junk ----------
 
         [UnityTest]

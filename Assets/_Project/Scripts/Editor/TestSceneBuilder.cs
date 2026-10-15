@@ -1311,6 +1311,13 @@ namespace RPG.EditorTools
             item.maxStack = 1;
             item.iconColor = iconColor;
             item.price = price;
+            // The weapon skill that raises a weapon's damage, from its name.
+            string lowerName = fileName.ToLowerInvariant();
+            item.weaponType = slot != ItemSlot.Weapon ? WeaponType.None
+                : lowerName.Contains("bow") ? WeaponType.Ranged
+                : lowerName.Contains("staff") ? WeaponType.Staff
+                : lowerName.Contains("axe") || lowerName.Contains("cleaver") ? WeaponType.Axe
+                : WeaponType.Sword;
             item.requiredClass = requiredClass;
             item.itemLevel = itemLevel;
             item.manaBonus = 0;
@@ -1363,9 +1370,13 @@ namespace RPG.EditorTools
         private static AffixCatalog CreateAffixes()
         {
             AffixDefinition Affix(string fileName, string displayName, bool isPrefix, ItemRarity quality, int minLevel, int maxLevel,
-                AttributeSet attributes, int damage = 0, int health = 0, int armor = 0, int mana = 0)
+                AttributeSet attributes, int damage = 0, int health = 0, int armor = 0, int mana = 0) =>
+                Fill(LoadOrCreateAsset<AffixDefinition>($"{AffixesFolder}/{fileName}.asset"), displayName, isPrefix, quality,
+                    minLevel, maxLevel, attributes, damage, health, armor, mana);
+
+            AffixDefinition Fill(AffixDefinition affix, string displayName, bool isPrefix, ItemRarity quality, int minLevel, int maxLevel,
+                AttributeSet attributes, int damage, int health, int armor, int mana)
             {
-                var affix = LoadOrCreateAsset<AffixDefinition>($"{AffixesFolder}/{fileName}.asset");
                 affix.displayName = displayName;
                 affix.isPrefix = isPrefix;
                 affix.quality = quality;
@@ -1410,17 +1421,22 @@ namespace RPG.EditorTools
             // Our first affixes stay for items that have them; only Dreadmyst's roll now.
             foreach (AffixDefinition old in catalog.affixes) old.retired = true;
 
-            // Dreadmyst's affixes (all suffixes: "Steel Sword of the Novice", "of Magical Vim"). Its values are
-            // multipliers (1.7-3.0) of a level-based amount the server works out; here an attribute gets
-            // multiplier x (level + 2) / 2 at the middle of the affix's levels (Novice, levels 1-5: +5), health and mana
-            // three times that, armor the same. More stats make it rarer: 1 green, 2 blue, 3+ gold; level 25 ones purple.
+            // Dreadmyst's affixes, all 7145 (all suffixes: "Steel Sword of the Novice", "of Magical Vim"), kept inside the
+            // catalog asset. Its values are multipliers (0.3-3.0) of a level-based amount the server works out; here a
+            // stat gets multiplier x (level + 2) / 2 at the middle of the affix's levels (Novice, levels 1-5: +5),
+            // health and mana three times that. More stats make it rarer: 1 green, 2 blue, 3 gold, 4+ or level 25 purple.
+            string catalogPath = AssetDatabase.GetAssetPath(catalog);
+            var existing = new Dictionary<string, AffixDefinition>();
+            foreach (UnityEngine.Object asset in AssetDatabase.LoadAllAssetsAtPath(catalogPath))
+                if (asset is AffixDefinition sub && AssetDatabase.IsSubAsset(sub)) existing[sub.name] = sub;
+
             var all = new List<AffixDefinition>(catalog.affixes);
             for (int i = 0; i < DreadmystAffixes.All.Length; i++)
             {
                 (string name, bool singleNoun, int minLevel, int maxLevel, string stats) = DreadmystAffixes.All[i];
                 float middle = (minLevel + maxLevel) / 2f;
                 var attributes = new AttributeSet();
-                int health = 0, mana = 0, armor = 0, count = 0;
+                int health = 0, mana = 0, armor = 0, damage = 0, count = 0;
                 foreach (string stat in stats.Split(','))
                 {
                     string[] pair = stat.Split(':');
@@ -1428,22 +1444,25 @@ namespace RPG.EditorTools
                     float multiplier = float.Parse(pair[1], System.Globalization.CultureInfo.InvariantCulture);
                     int points = Mathf.Max(1, Mathf.RoundToInt(multiplier * (middle + 2f) / 2f));
                     count++;
-                    switch (type)
-                    {
-                        case DreadmystAffixes.Mana: mana += points * 3; break;
-                        case DreadmystAffixes.Health: health += points * 3; break;
-                        case DreadmystAffixes.Armor: armor += points; break;
-                        case DreadmystAffixes.Strength: attributes.strength += points; break;
-                        case DreadmystAffixes.Agility: attributes.agility += points; break;
-                        case DreadmystAffixes.Intellect: attributes.intelligence += points; break;
-                        case DreadmystAffixes.Courage: attributes.vitality += points; break;
-                    }
+                    RPG.Progression.Attribute? attribute = DreadmystAffixes.AttributeOf(type);
+                    if (attribute.HasValue) attributes[attribute.Value] += points;
+                    else if (type == DreadmystAffixes.Mana) mana += points * 3;
+                    else if (type == DreadmystAffixes.Health) health += points * 3;
+                    else if (type == DreadmystAffixes.Armor) armor += points;
+                    else damage += points;
                 }
-                ItemRarity quality = minLevel >= 25 ? ItemRarity.Legendary
-                    : count >= 3 ? ItemRarity.Epic : count == 2 ? ItemRarity.Rare : ItemRarity.Uncommon;
-                string fileName = $"Dreadmyst/{i:000}_{new string(name.Where(char.IsLetterOrDigit).ToArray())}";
-                all.Add(Affix(fileName, singleNoun ? $"of the {name}" : $"of {name}", false, quality, minLevel, maxLevel,
-                    attributes, health: health, armor: armor, mana: mana));
+                ItemRarity quality = minLevel >= 25 || count >= 4 ? ItemRarity.Legendary
+                    : count == 3 ? ItemRarity.Epic : count == 2 ? ItemRarity.Rare : ItemRarity.Uncommon;
+
+                string key = $"Dreadmyst{i:0000}";
+                if (!existing.TryGetValue(key, out AffixDefinition affix))
+                {
+                    affix = ScriptableObject.CreateInstance<AffixDefinition>();
+                    affix.name = key;
+                    AssetDatabase.AddObjectToAsset(affix, catalog);
+                }
+                all.Add(Fill(affix, singleNoun ? $"of the {name}" : $"of {name}", false, quality, minLevel, maxLevel,
+                    attributes, damage, health, armor, mana));
             }
             catalog.affixes = all.ToArray();
             catalog.affixChance = 0.6f;
@@ -1487,6 +1506,9 @@ namespace RPG.EditorTools
                 spawner.Configure(prefab, 1, 0.6f, respawn);
                 spawner.EliteChance = elite ? 1f : 0f;
                 spawner.Level = level;
+                // From level 3 every fourth spot (and every elite) hits with magic: frost, fire, shadow or holy,
+                // so the resists matter.
+                if (level >= 3 && (elite || i % 4 == 0)) spawner.School = (DamageSchool)(1 + i / 4 % 4);
             }
         }
 
@@ -1624,6 +1646,11 @@ namespace RPG.EditorTools
             vendorWindow.transform.SetParent(canvasObject.transform, false);
             Stretch((RectTransform)vendorWindow.transform);
             vendorWindow.AddComponent<VendorWindow>();
+
+            var lootWindow = new GameObject("Loot Window", typeof(RectTransform));
+            lootWindow.transform.SetParent(canvasObject.transform, false);
+            Stretch((RectTransform)lootWindow.transform);
+            lootWindow.AddComponent<LootWindow>();
 
             var inventoryWindow = new GameObject("Inventory Window", typeof(RectTransform));
             inventoryWindow.transform.SetParent(canvasObject.transform, false);

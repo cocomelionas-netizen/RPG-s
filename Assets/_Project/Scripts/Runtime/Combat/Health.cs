@@ -31,6 +31,12 @@ namespace RPG.Combat
         /// <summary>Raised on every peer when damage lands: (amount, critical).</summary>
         public event Action<int, bool> Damaged;
 
+        /// <summary>Raised on every peer with the school of the damage that just landed (after <see cref="Damaged"/>).</summary>
+        public DamageSchool LastDamageSchool { get; private set; }
+
+        /// <summary>Raised on every peer when a hit was dodged ("Dodge") or partly blocked ("Block").</summary>
+        public event Action<string> Avoided;
+
         /// <summary>Raised on every peer when a noticeable heal lands (abilities, not regeneration): amount.</summary>
         public event Action<int> Healed;
 
@@ -55,6 +61,22 @@ namespace RPG.Combat
 
         /// <summary>Server only: reduces damage taken; 100 armor halves it.</summary>
         public int ServerArmor { get; set; }
+
+        /// <summary>Server only: chance (0..1) to avoid a hit completely.</summary>
+        public float ServerDodgeChance { get; set; }
+
+        /// <summary>Server only: chance (0..1) to block half of a hit.</summary>
+        public float ServerBlockChance { get; set; }
+
+        private readonly int[] resists = new int[5];
+
+        /// <summary>Server only: resist rating against a magic school (physical damage has none).</summary>
+        public void ServerSetResist(DamageSchool school, int rating)
+        {
+            if (school != DamageSchool.Physical) resists[(int)school] = Mathf.Max(0, rating);
+        }
+
+        public int ServerResist(DamageSchool school) => resists[(int)school];
 
         /// <summary>Damage left after armor: amount * 100 / (100 + armor), at least 1.</summary>
         public static int ReduceByArmor(int amount, int armor)
@@ -88,14 +110,27 @@ namespace RPG.Combat
 
         /// <summary>Server only. Ignored for dead or invulnerable units and non-positive amounts.</summary>
         /// <param name="attacker">Who dealt the damage (monsters turn on their attackers); null when unknown.</param>
-        public void ApplyDamage(int amount, bool critical, Health attacker = null)
+        /// <param name="school">Physical, or a magic school this unit's resist of that school reduces.</param>
+        public void ApplyDamage(int amount, bool critical, Health attacker = null, DamageSchool school = DamageSchool.Physical)
         {
             if (!IsServer || IsDead || ServerInvulnerable || amount <= 0) return;
+            LastDamageTime = Time.time;
+            if (ServerDodgeChance > 0f && UnityEngine.Random.value < ServerDodgeChance)
+            {
+                AvoidedRpc(AvoidKind.Dodge);
+                // Still counts as being attacked: monsters keep their threat.
+                DamageTaken?.Invoke(attacker, 0);
+                return;
+            }
+            bool blocked = ServerBlockChance > 0f && UnityEngine.Random.value < ServerBlockChance;
+            if (blocked) amount = Mathf.Max(1, amount / 2);
             amount = ReduceByArmor(amount, ServerArmor);
+            if (school != DamageSchool.Physical)
+                amount = Mathf.Max(1, Mathf.RoundToInt(amount * (1f - RPG.Progression.AttributeRules.ResistReduction(resists[(int)school]))));
 
             current.Value = Mathf.Max(0, current.Value - amount);
-            LastDamageTime = Time.time;
-            DamagedRpc(amount, critical);
+            if (blocked) AvoidedRpc(AvoidKind.Block);
+            DamagedRpc(amount, critical, school);
             DamageTaken?.Invoke(attacker, amount);
 
             if (current.Value == 0)
@@ -135,10 +170,19 @@ namespace RPG.Combat
             current.Value = max.Value;
         }
 
+        private enum AvoidKind : byte { Dodge, Block }
+
         [Rpc(SendTo.Everyone)]
-        private void DamagedRpc(int amount, bool critical)
+        private void DamagedRpc(int amount, bool critical, DamageSchool school)
         {
+            LastDamageSchool = school;
             Damaged?.Invoke(amount, critical);
+        }
+
+        [Rpc(SendTo.Everyone)]
+        private void AvoidedRpc(AvoidKind kind)
+        {
+            Avoided?.Invoke(kind == AvoidKind.Dodge ? "Dodge" : "Block");
         }
 
         [Rpc(SendTo.Everyone)]

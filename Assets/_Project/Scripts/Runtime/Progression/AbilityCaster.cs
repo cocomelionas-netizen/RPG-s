@@ -301,7 +301,7 @@ namespace RPG.Progression
                     HitArea(self, ability.radius, ability.damageMultiplier);
                     break;
                 case AbilityKind.SelfHeal:
-                    health.Heal(Mathf.Max(1, Mathf.RoundToInt(health.Max * ability.healFraction)), true);
+                    health.Heal(Mathf.Max(1, Mathf.RoundToInt(health.Max * ability.healFraction * autoAttack.AbilityPower)), true);
                     break;
             }
 
@@ -314,7 +314,7 @@ namespace RPG.Progression
 
         private void Hit(Health target, float multiplier)
         {
-            int damage = autoAttack.RollDamage(multiplier, out bool critical);
+            int damage = autoAttack.RollAbilityDamage(multiplier, out bool critical);
             target.ApplyDamage(damage, critical, health);
         }
 

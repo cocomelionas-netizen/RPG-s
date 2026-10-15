@@ -332,6 +332,8 @@ namespace RPG.UI
             if (item == null) return;
 
             tooltipText.color = ItemDefinition.RarityColor(inventory.Quality(hoveredStack));
+            // Dreadmyst affixes can add many stats: the tooltip grows with its text.
+            tooltip.sizeDelta = new Vector2(250f, Mathf.Max(60f, tooltipText.preferredHeight + 14f));
             var canvas = GetComponentInParent<Canvas>();
             float scale = canvas != null ? canvas.scaleFactor : 1f;
             Vector2 pointer = UnityEngine.InputSystem.Mouse.current != null

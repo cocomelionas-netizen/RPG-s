@@ -46,6 +46,8 @@ namespace RPG.Items
                 visual = spriteRenderer.transform;
                 visualBase = visual.localPosition;
             }
+            // Sparkles show there is loot to take.
+            LootSparkles.AddTo(transform, spriteRenderer);
         }
 
         /// <summary>Server: fills the bag (before or right after spawning it).</summary>
@@ -64,9 +66,37 @@ namespace RPG.Items
                 if (item != null) contents.Add(new LootItem(item, 0));
         }
 
+        private static readonly List<LootBag> Bags = new List<LootBag>();
+
+        /// <summary>The spawned loot bag with this network id on this peer (null when it is gone).</summary>
+        public static LootBag Find(ulong networkId)
+        {
+            foreach (LootBag bag in Bags)
+                if (bag != null && bag.IsSpawned && bag.NetworkObjectId == networkId) return bag;
+            return null;
+        }
+
         public override void OnNetworkSpawn()
         {
+            Bags.Add(this);
             if (IsServer) despawnAt = Time.time + lifetime;
+        }
+
+        public override void OnNetworkDespawn() => Bags.Remove(this);
+
+        /// <summary>
+        /// Server: gives the player the one item at <paramref name="index"/> when it still is <paramref name="itemId"/>
+        /// (the loot window shows what was inside a moment ago). True when it was taken.
+        /// </summary>
+        public bool ServerGiveOne(Inventory inventory, int index, int itemId)
+        {
+            if (!IsServer || inventory == null || inventory.Catalog == null || index < 0 || index >= contents.Count) return false;
+            LootItem item = contents[index];
+            if (inventory.Catalog.IdOf(item.Item) != itemId) return false;
+            if (inventory.ServerAddItem(item.Item, 1, true, item.AffixId, item.Socket) <= 0) return false;
+            contents.RemoveAt(index);
+            if (contents.Count == 0) NetworkObject.Despawn(true);
+            return true;
         }
 
         /// <summary>Server: moves every item that fits into the player's bag. True when anything was taken.</summary>

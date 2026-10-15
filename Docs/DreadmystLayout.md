@@ -69,15 +69,36 @@ naudojame savo, laiptuotas kaip jų bosų.
 - Spalvos kaip Dreadmyst: žalia → mėlyna → **auksinė** (Epic) → **violetinė** (Legendary, aukščiausia).
   Bosas — garantuotas auksinis + 25 % violetinis.
 
+## Statai (C langas, 3 puslapiai)
+
+Visi Dreadmyst statai (pavadinimai, ID ir XP kainos — iš `Dreadmyst.exe`), kiekvienam galima pirkti taškus už XP:
+
+| Puslapis | Statai | Ką daro pas mus |
+|---|---|---|
+| Attributes | Health, Mana, Strength, Agility, Willpower, Intelligence, Courage, Regeneration, Meditate | Willpower +0,5 % gebėjimų žalos ir gydymo; Regeneration / Meditate — 1 HP / mana kas 5 s už tašką, ir kovoje |
+| Combat | Melee / Ranged / Spell Critical, Dodge, Block, Resist Frost / Fire / Shadow / Holy, Bartering, Lockpicking | kritiniai +0,2 % už tašką; Dodge +0,2 % (iki 40 %) išvengti smūgio; Block +0,2 % (iki 50 %) — pusė žalos; atsparumas r / (r + 100); Bartering −0,5 % pirkti / +0,5 % parduoti (iki 25 %); Lockpicking — skrynioms (2 × lygis) |
+| Weapon Skills | Staves, Maces, Axes, Swords, Ranged, Daggers, Wands, Shields | +0,5 % žalos dėvimu tos rūšies ginklu; Shields +0,1 % blokavimo |
+
+Kainos: kritiniai (melee, spell) x/2 + 1, ranged kritiniai ir atsparumai x/3 + 1, Dodge / Block x + 1, Bartering /
+Lockpicking 2x + 1, Regeneration / Meditate x^1,4 + 4, ginklų įgūdžiai 3 × Strength kaina.
+
+Monstrai nuo 3 lygio kas ketvirtoje vietoje (ir elitiniai) muša magija — Frost, Fire, Shadow ar Holy (skaičiai tos
+spalvos), todėl atsparumai turi prasmę.
+
 ## Afiksai
 
-- Visi Dreadmyst afiksai yra priesagos: „Steel Sword of the Novice“, „Aspen Bow of Magical Vim“. Imami tie 685, kurių
-  status turime (mana, HP, šarvai, Str, Agi, Int, Courage → Vitality).
-- Dreadmyst afikso vertė — daugiklis (1,7–3,0), kurį serveris paverčia skaičiumi pagal lygį (formulės kliente nėra).
-  Pas mus: atributas = daugiklis × (lygis + 2) / 2 afikso lygių viduryje (Novice, 1–5 lyg.: +5; Elder, 20–25: +34),
-  HP ir mana — 3 kartus tiek, šarvai — tiek pat.
-- Kokybė pagal statų skaičių: 1 — žalias, 2 — mėlynas, 3+ — auksinis; tik 25 lygio — violetiniai.
+- Visi 7145 Dreadmyst afiksai (visi — priesagos: „Steel Sword of the Novice“, „Aspen Bow of Magical Vim“), su jų
+  lygių ribomis ir visais statais (iki 5 viename). Laikomi `AffixCatalog.asset` viduje.
+- Dreadmyst afikso vertė — daugiklis (0,3–3,0), kurį serveris paverčia skaičiumi pagal lygį (formulės kliente nėra).
+  Pas mus: statas = daugiklis × (lygis + 2) / 2 afikso lygių viduryje (Novice, 1–5 lyg.: +5; Elder, 20–25: +34),
+  HP ir mana — 3 kartus tiek, Weapon Value — prie žalos.
+- Kokybė pagal statų skaičių: 1 — žalias, 2 — mėlynas, 3 — auksinis, 4+ arba 25 lygio — violetinis.
 - Seni mūsų afiksai lieka daiktams, kurie juos jau turi, bet nebekrenta.
+
+## Grobis
+
+- Kur monstras paliko grobį, žiba žiežirbos. Paspaudus — prieini ir atsidaro mažas grobio langas: daiktai su
+  aprašymais; paspaudus daiktą — paimi jį, „Take all“ — viską. Tuščias maišas dingsta.
 
 ## Gėrimai
 

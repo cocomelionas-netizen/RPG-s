@@ -14,6 +14,20 @@ namespace RPG.Items
         Feet,
     }
 
+    /// <summary>What kind of weapon a weapon is: its Dreadmyst weapon skill raises its damage.</summary>
+    public enum WeaponType
+    {
+        None,
+        Staff,
+        Mace,
+        Axe,
+        Sword,
+        Ranged,
+        Dagger,
+        Wand,
+        Shield,
+    }
+
     /// <summary>Quality, from vendor junk to the rarest finds. Random affixes can raise an item's quality.</summary>
     public enum ItemRarity
     {
@@ -42,6 +56,8 @@ namespace RPG.Items
         public string displayName = "Item";
         public ItemSlot slot = ItemSlot.None;
         public ItemRarity rarity = ItemRarity.Common;
+        [Tooltip("For weapons: which weapon skill raises its damage.")]
+        public WeaponType weaponType = WeaponType.None;
 
         [Header("Stats while equipped")]
         [Tooltip("Added to auto-attack (and so ability) damage.")]
@@ -96,6 +112,23 @@ namespace RPG.Items
         public bool IsEquippable => slot != ItemSlot.None;
 
         public bool IsCraftable => craftMaterial != null;
+
+        /// <summary>The weapon skill of a weapon type (null for none).</summary>
+        public static Attribute? SkillOf(WeaponType type)
+        {
+            switch (type)
+            {
+                case WeaponType.Staff: return Attribute.Staves;
+                case WeaponType.Mace: return Attribute.Maces;
+                case WeaponType.Axe: return Attribute.Axes;
+                case WeaponType.Sword: return Attribute.Swords;
+                case WeaponType.Ranged: return Attribute.Ranged;
+                case WeaponType.Dagger: return Attribute.Daggers;
+                case WeaponType.Wand: return Attribute.Wands;
+                case WeaponType.Shield: return Attribute.Shields;
+                default: return null;
+            }
+        }
 
         /// <summary>Whether a player of <paramref name="playerLevel"/> may drink it (potions have a level like gear).</summary>
         public bool CanBeUsedAtLevel(int playerLevel) => use == ItemUse.None || playerLevel >= itemLevel;
@@ -160,7 +193,7 @@ namespace RPG.Items
             var text = new StringBuilder();
             text.AppendLine(NameWith(affix));
             text.Append(QualityWith(affix));
-            if (IsEquippable) text.Append(' ').Append(slot);
+            if (IsEquippable) text.Append(' ').Append(weaponType != WeaponType.None ? weaponType.ToString() : slot.ToString());
             text.AppendLine();
 
             int damage = damageBonus + (affix != null ? affix.damageBonus : 0);

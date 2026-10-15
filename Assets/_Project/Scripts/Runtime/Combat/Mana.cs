@@ -32,6 +32,9 @@ namespace RPG.Combat
 
         public bool Has(int amount) => current.Value >= amount;
 
+        /// <summary>Server: mana regained every second on top of the usual (Meditate).</summary>
+        public float ServerBonusPerSecond { get; set; }
+
         /// <summary>Server: spends mana. False (and nothing spent) when there is not enough.</summary>
         public bool ServerSpend(int amount)
         {
@@ -65,7 +68,7 @@ namespace RPG.Combat
                 return;
             }
 
-            pending += max.Value * regenFractionPerSecond * Time.deltaTime;
+            pending += (max.Value * regenFractionPerSecond + ServerBonusPerSecond) * Time.deltaTime;
             int amount = Mathf.FloorToInt(pending);
             if (amount <= 0) return;
             pending -= amount;

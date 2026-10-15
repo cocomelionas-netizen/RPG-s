@@ -2,7 +2,10 @@ using UnityEngine;
 
 namespace RPG.Combat
 {
-    /// <summary>Server: slowly heals a living unit once it has not taken damage for a while (out of combat).</summary>
+    /// <summary>
+    /// Server: slowly heals a living unit once it has not taken damage for a while (out of combat), and all the time by
+    /// <see cref="ServerBonusPerSecond"/> (a player's Regeneration).
+    /// </summary>
     [RequireComponent(typeof(Health))]
     public class HealthRegeneration : MonoBehaviour
     {
@@ -12,6 +15,9 @@ namespace RPG.Combat
 
         private Health health;
         private float pending;
+
+        /// <summary>Server: health regained every second even in combat (Regeneration).</summary>
+        public float ServerBonusPerSecond { get; set; }
 
         public float DelayAfterDamage
         {
@@ -26,16 +32,15 @@ namespace RPG.Combat
 
         private void Update()
         {
-            bool canRegenerate = health.IsServer && health.IsSpawned && !health.IsDead
-                                 && health.Current < health.Max
-                                 && Time.time - health.LastDamageTime >= delayAfterDamage;
+            bool canRegenerate = health.IsServer && health.IsSpawned && !health.IsDead && health.Current < health.Max;
             if (!canRegenerate)
             {
                 pending = 0f;
                 return;
             }
 
-            pending += health.Max * fractionPerSecond * Time.deltaTime;
+            bool outOfCombat = Time.time - health.LastDamageTime >= delayAfterDamage;
+            pending += ((outOfCombat ? health.Max * fractionPerSecond : 0f) + ServerBonusPerSecond) * Time.deltaTime;
             int amount = Mathf.FloorToInt(pending);
             if (amount <= 0) return;
 
