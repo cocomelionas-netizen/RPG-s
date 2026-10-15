@@ -16,7 +16,7 @@ Asmeninis bandomasis projektas: išdėstymas ir balanso skaičiai paimti iš Sou
 - **Skrynios** — 97 jų vietose, su jų lygiais ir atsiradimo laikais (60 s / 5 min).
 - **Teleportų akmenys** — jų waypoint ir teleport vietose: Pilgrim's Refuge, Merchant's Way, Fields of Dreams,
   Howler's Valley, Thicket of the Wanderer, St. Revere, Kandorys Passage, Kandorys Castle.
-- **Požemio įėjimas** — Wolf's Den vietoje.
+- **Požemių įėjimai** — ten, kur Source (žr. „Požemiai“ žemiau).
 - **M** — viso pasaulio žemėlapis (vietos, akmenys, prekeiviai, portalai, žaidėjai ir tu), kaip Source.
 
 ## Balansas
@@ -156,3 +156,53 @@ padalintos per pusę, kaip ir mūsų HP. Atstumai: Source jardai / 120 (melee 13
 - Supaprastinta: Charge — iškart šalia taikinio; Retribution veikia visada (ne tik po parry); Eye Gouge — mažiau žalos;
   Antimagic — Silence; Remove Curse — kaip Cleanse; Multi-Shot — 3 × 70 %; Ice Shard veikia tik ant sulėtintų (Chains of Ice),
   Kidney Shot — tik ant „Incapacitate“; Sabotage — tik monstrams, kurie dar nekovoja; trūkstamos trukmės parinktos.
+
+## Požemiai
+
+Visi Source požemiai, į kuriuos įeinama iš mūsų pasaulio dalies (ir iš jų vidaus), sugeneruoti
+`Tools/SourceData/dungeons.py` → `Scripts/Editor/SourceDungeons.cs`:
+
+- **Planas** — iš Source `maps/<žemėlapis>.map` (langelio žymė 0 — praeinama, 0x20 / 0x60 — siena): kambariai,
+  koridoriai ir kolonos tokie pat. Atvykimo vieta, išėjimai, monstrai (`npc`) ir konteineriai (`gameobject`) — jų vietose.
+- **Įėjimo taisyklės** — `dungeon_template`: lygis, raktas (sunaudojamas vienas, tik atidarančiojo), žaidėjų skaičius.
+- Kiekviena grupė gauna savo kopiją; monstrai ir skrynios neatsiranda iš naujo; išėjimai visada atviri.
+
+| Požemys (Source žemėlapis) | Įėjimas | Taisyklės | Bosai | Ką meta bosai |
+|---|---|---|---|---|
+| Wolf's Den (`wolf_cave_1`) | Wolf's Den | laisvai | — (Cave Howler, Risen Miner, 5 lyg.) | — |
+| Trog Cave (`goblin_cave`) | Trog Cave | laisvai | — (Cave Trog, 3 lyg.) | — |
+| The Lower Garrison (`stormrock_ruins`) | pietinis kraštas* | 25 lyg., iki 4 | Melchon (28) | **10 Tower Key**, 3 Divine Accessory Orb |
+| Decrepit Tower (`fort_amir`) | pietinis kraštas* | 25 lyg., **Tower Key**, iki 4 | Lord Zargan (30), Tchazzar (30) | Divine orbai, 4 Magic Dust |
+| Abandoned Barracks (`fort_nasu`) | (267, 191) | 25 lyg., **Keys to the Barracks**, vienas | Sarloch the Betrayer (25) | **Depleted Key** |
+| Kandorys Undercourse (`dilapidated_sewers`) | pietinis kraštas* | 25 lyg., **Undercourse Key**, vienas | Knight Maximus (28) | **2 Keys to St. Revere**, Divine Armor Orb |
+| Desecrated Altar (`st_maria_1`) | prie St. Revere (508, 143) | 25 lyg., **Keys to St. Revere**, vienas | Ebondeath (30) | **Salmaster's Key**, orbai, Magic Dust |
+| Salmaster's Descent (`temple_of_mez_1`) | Desecrated Altar viduje | 25 lyg., **Salmaster's Key**, vienas | Salmaster (30), Balagos (30) | Major orbai, Divine Weapon Orb, brangakmeniai |
+| Telamont's Demiplane (`wizards_tower_2`) | (370, 272) | 25 lyg., **Demiplane Key**, iki 4 | Demiplanar Guardian (30) | **20 Sanctum Key**, Flawless ir paprasti brangakmeniai |
+| Telamont's Sanctuary (`st_maria_3`) | Demiplane viduje | 25 lyg., **Sanctum Key**, iki 4 | Prince Telamont (30) | 5 kiekvieno Flawless brangakmenio, Arcane Essence |
+
+\* Source šiuos įėjimus turi toliau į pietus, nei siekia mūsų pasaulis — jie stovi pietiniame krašte (tame pačiame x).
+
+**Raktų grandinė (kaip Source):**
+
+- Vienas: Horned Charger / Horned Beast / Lesser Wyrm (5 %) → *Keys to the Barracks* → Sarloch → *Depleted Key*;
+  + *Dale Gem* (Zhendale stovykla, 15 %) — paspaudus sujungiama į *Undercourse Key* → Knight Maximus → *Keys to St. Revere*
+  → Ebondeath → *Salmaster's Key* → Salmaster's Descent.
+- Grupė: Lower Garrison (be rakto) → Melchon → *Tower Key* → Decrepit Tower.
+- Grupė: Tantorus / Fasthorn (100 %) → *Inactive Demiplane Key* + *Magic Dust* + *Major Treasury Gold* (juvelyras) — paspaudus
+  sujungiama į *Demiplane Key* → Demiplanar Guardian → *Sanctum Key* → Telamont's Sanctuary.
+- Zhendale stovykla ir Tantorus / Fasthorn Source'e yra už mūsų pasaulio krašto — jie perkelti į pietinį kraštą
+  (stovykla išlaiko savo formą).
+
+**Sunkumas.** Lygiai — Source (bosai 28–30; monstrų lygis gali būti iki 30). Source elitiniai ir „boss“ pažymėti
+monstrai — pas mus elitiniai. Kur Source nurodo savo HP, jis perskaičiuojamas kaip kartotinis paprasto to lygio monstro
+(Source paprastas 25 lygio — 7340 HP): pvz. Melchon ≈ 16,5×, Lord Zargan ≈ 29×, Demiplanar Guardian ≈ 81×, Fallen
+Guard ≈ 2,7×. Žala — pagal Source `weapon_value` (400 — įprastas elitinis): Kandorys Knight 7,5×, Guardian 11×.
+Auksas — `custom_gold_ratio`. Bosai turi žemės smūgį (mūsų mechanika).
+
+**Skrynios** — Source konteineriai jų vietose, su jų pavadinimais ir lygiais: Rosewood Crate (auksas), Rosewood Chest
+(užrakinta, Lockpicking 50; daiktas, gėrimas 75 %, brangakmenis 75 %), Platinum Strongbox (dar 2 daiktai, gėrimas ir
+brangakmenis 100 %, auksas × 3), urvuose — Elm / Aspen / Copper.
+
+**Bosų grobis** — Source `loot` lentelės (vienodos eilutės skaičiuojamos kartą) ir jų kokybės tikimybės (`loot_blue/gold/
+purple_chance`, pvz. Lord Zargan — violetinis 100 %). Orbai, Magic Dust, Arcane Essence kol kas tik parduodami (Source
+kaina); Source ametistai ir statų ritiniai praleisti (pas mus jų nėra); Refined → mūsų paprastas, Flawless → Flawless brangakmenis.

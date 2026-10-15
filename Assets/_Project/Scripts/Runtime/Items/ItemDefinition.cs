@@ -49,6 +49,8 @@ namespace RPG.Items
         RestoreMana,
         /// <summary>A Tome: teaches its spell and is used up.</summary>
         LearnSpell,
+        /// <summary>Put together with the items it combines with into another (Source's key recipes); all are used up.</summary>
+        Combine,
     }
 
     /// <summary>One kind of item: its slot, rarity, stats and use. Players' bags refer to it by catalog index.</summary>
@@ -56,6 +58,8 @@ namespace RPG.Items
     public class ItemDefinition : ScriptableObject
     {
         public string displayName = "Item";
+        [Tooltip("Flavor text shown in the tooltip.")]
+        [TextArea] public string description;
         public ItemSlot slot = ItemSlot.None;
         public ItemRarity rarity = ItemRarity.Common;
         [Tooltip("For weapons: which weapon skill raises its damage.")]
@@ -96,6 +100,10 @@ namespace RPG.Items
         [Tooltip("Tomes: the spell it teaches.")]
         public AbilityDefinition teachesSpell;
 
+        [Tooltip("Combine: the other items it takes (one of each), and what they make.")]
+        public ItemDefinition[] combineWith = System.Array.Empty<ItemDefinition>();
+        public ItemDefinition combineResult;
+
         [Header("Gem")]
         [Tooltip("A gem: clicking it sets it into an empty socket of worn gear, where its attributes count.")]
         public bool isGem;
@@ -135,7 +143,7 @@ namespace RPG.Items
         }
 
         /// <summary>Whether a player of <paramref name="playerLevel"/> may drink it (potions have a level like gear).</summary>
-        public bool CanBeUsedAtLevel(int playerLevel) => use == ItemUse.None || playerLevel >= itemLevel;
+        public bool CanBeUsedAtLevel(int playerLevel) => use == ItemUse.None || use == ItemUse.Combine || playerLevel >= itemLevel;
 
         /// <summary>Seconds between restoring ticks of potions that work over time.</summary>
         public const float RestoreInterval = 2f;
@@ -219,7 +227,14 @@ namespace RPG.Items
                 if (!string.IsNullOrEmpty(teachesSpell.description)) text.AppendLine(teachesSpell.description);
                 if (itemLevel > 1) text.AppendLine($"Requires level {itemLevel}");
             }
-            else if (use != ItemUse.None)
+            else if (use == ItemUse.Combine && combineResult != null)
+            {
+                var others = new StringBuilder();
+                foreach (ItemDefinition other in combineWith)
+                    if (other != null) others.Append(others.Length > 0 ? " and " : "").Append(other.displayName);
+                text.AppendLine(others.Length > 0 ? $"Use: combine with {others} into {combineResult.displayName}" : $"Use: turn into {combineResult.displayName}");
+            }
+            else if (use != ItemUse.None && use != ItemUse.Combine)
             {
                 string pool = use == ItemUse.Heal ? "health" : "mana";
                 string amount = restoreAmount > 0 ? $"{restoreAmount} {pool}" : $"{Mathf.RoundToInt(healFraction * 100f)}% {pool}";
@@ -227,6 +242,7 @@ namespace RPG.Items
                 if (itemLevel > 1) text.AppendLine($"Requires level {itemLevel}");
                 if (combinesInto != null) text.AppendLine($"{combineCount} combine into {combinesInto.displayName} at a vendor");
             }
+            if (!string.IsNullOrEmpty(description)) text.AppendLine(description);
             if (maxStack > 1) text.AppendLine($"Stacks up to {maxStack}");
             if (!string.IsNullOrEmpty(className)) text.AppendLine($"{className} only");
             if (IsEquippable) text.AppendLine($"Requires level {itemLevel}");

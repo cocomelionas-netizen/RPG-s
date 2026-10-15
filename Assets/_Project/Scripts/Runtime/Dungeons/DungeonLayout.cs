@@ -4,69 +4,64 @@ using UnityEngine;
 namespace RPG.Dungeons
 {
     /// <summary>
-    /// The plan of a dungeon in grid cells: rooms in a row joined by corridors, the last room the boss's.
-    /// Every peer builds the same tilemaps from it, so only the dungeon's slot needs to be sent over the network.
+    /// The plan of a dungeon in grid cells, read from its definition's rows (Source's map: '.' walkable).
+    /// Every peer builds the same tilemaps from it, so only the dungeon and its slot need to be sent over the network.
     /// </summary>
-    public static class DungeonLayout
+    public sealed class DungeonLayout
     {
-        /// <summary>Rooms from the entrance to the boss room.</summary>
-        public static readonly RectInt[] Rooms =
+        private static readonly Dictionary<DungeonDefinition, DungeonLayout> Cache = new Dictionary<DungeonDefinition, DungeonLayout>();
+
+        private readonly string[] source;
+        private readonly bool[,] floor;
+
+        public int Width { get; }
+        public int Height { get; }
+
+        private DungeonLayout(string[] rows)
         {
-            new RectInt(0, 0, 9, 9),
-            new RectInt(13, 0, 9, 9),
-            new RectInt(26, 0, 9, 9),
-            new RectInt(39, -2, 13, 13),
-        };
-
-        /// <summary>Three cells wide, joining each room to the next.</summary>
-        public static readonly RectInt[] Corridors =
-        {
-            new RectInt(9, 3, 4, 3),
-            new RectInt(22, 3, 4, 3),
-            new RectInt(35, 3, 4, 3),
-        };
-
-        public static int BossRoom => Rooms.Length - 1;
-
-        /// <summary>Where players arrive.</summary>
-        public static Vector3Int Arrival => new Vector3Int(5, 4, 0);
-
-        /// <summary>The exit next to the arrival point (always open).</summary>
-        public static Vector3Int EntranceExit => new Vector3Int(1, 4, 0);
-
-        /// <summary>The exit at the far end of the boss room (opens when the boss is dead).</summary>
-        public static Vector3Int BossExit => new Vector3Int(50, 4, 0);
-
-        public static Vector3Int RoomCenter(int room)
-        {
-            RectInt rect = Rooms[Mathf.Clamp(room, 0, Rooms.Length - 1)];
-            return new Vector3Int(rect.x + rect.width / 2, rect.y + rect.height / 2, 0);
+            source = rows;
+            Height = rows.Length;
+            foreach (string row in rows)
+                Width = Mathf.Max(Width, row != null ? row.Length : 0);
+            floor = new bool[Width, Height];
+            for (int y = 0; y < Height; y++)
+            {
+                string row = rows[y];
+                if (row == null) continue;
+                for (int x = 0; x < row.Length; x++)
+                    floor[x, y] = row[x] == '.';
+            }
         }
 
-        public static bool IsFloor(Vector3Int cell)
+        /// <summary>The plan of a dungeon (built once, again when its rows change).</summary>
+        public static DungeonLayout For(DungeonDefinition dungeon)
         {
-            var point = new Vector2Int(cell.x, cell.y);
-            foreach (RectInt room in Rooms)
-                if (room.Contains(point)) return true;
-            foreach (RectInt corridor in Corridors)
-                if (corridor.Contains(point)) return true;
-            return false;
+            string[] rows = dungeon != null && dungeon.rows != null ? dungeon.rows : System.Array.Empty<string>();
+            if (dungeon != null && Cache.TryGetValue(dungeon, out DungeonLayout cached) && cached.source == rows) return cached;
+            var layout = new DungeonLayout(rows);
+            if (dungeon != null) Cache[dungeon] = layout;
+            return layout;
         }
+
+        public bool IsFloor(Vector3Int cell) =>
+            cell.x >= 0 && cell.y >= 0 && cell.x < Width && cell.y < Height && floor[cell.x, cell.y];
 
         /// <summary>Every floor cell.</summary>
-        public static List<Vector3Int> FloorCells()
+        public List<Vector3Int> FloorCells()
         {
             var cells = new List<Vector3Int>();
-            foreach (Vector3Int cell in Bounds().allPositionsWithin)
-                if (IsFloor(cell)) cells.Add(cell);
+            for (int y = 0; y < Height; y++)
+            for (int x = 0; x < Width; x++)
+                if (floor[x, y]) cells.Add(new Vector3Int(x, y, 0));
             return cells;
         }
 
         /// <summary>Cells next to the floor (including diagonally) that are not floor: the walls.</summary>
-        public static List<Vector3Int> WallCells()
+        public List<Vector3Int> WallCells()
         {
             var cells = new List<Vector3Int>();
-            foreach (Vector3Int cell in Bounds().allPositionsWithin)
+            BoundsInt bounds = Bounds();
+            foreach (Vector3Int cell in bounds.allPositionsWithin)
             {
                 if (IsFloor(cell)) continue;
                 bool touchesFloor = false;
@@ -78,18 +73,22 @@ namespace RPG.Dungeons
             return cells;
         }
 
-        /// <summary>All cells of the layout including a one-cell wall border.</summary>
-        public static BoundsInt Bounds()
+        /// <summary>All cells of the plan including a one-cell wall border.</summary>
+        public BoundsInt Bounds() => new BoundsInt(-1, -1, 0, Width + 2, Height + 2, 1);
+
+        /// <summary>The floor cell nearest to <paramref name="cell"/> (itself when it is floor).</summary>
+        public Vector3Int NearestFloor(Vector3Int cell)
         {
-            int xMin = int.MaxValue, yMin = int.MaxValue, xMax = int.MinValue, yMax = int.MinValue;
-            foreach (RectInt room in Rooms)
+            if (IsFloor(cell)) return cell;
+            for (int radius = 1; radius < Mathf.Max(Width, Height); radius++)
+            for (int dx = -radius; dx <= radius; dx++)
+            for (int dy = -radius; dy <= radius; dy++)
             {
-                xMin = Mathf.Min(xMin, room.xMin);
-                yMin = Mathf.Min(yMin, room.yMin);
-                xMax = Mathf.Max(xMax, room.xMax);
-                yMax = Mathf.Max(yMax, room.yMax);
+                if (Mathf.Max(Mathf.Abs(dx), Mathf.Abs(dy)) != radius) continue;
+                var candidate = new Vector3Int(cell.x + dx, cell.y + dy, 0);
+                if (IsFloor(candidate)) return candidate;
             }
-            return new BoundsInt(xMin - 1, yMin - 1, 0, xMax - xMin + 2, yMax - yMin + 2, 1);
+            return cell;
         }
     }
 }

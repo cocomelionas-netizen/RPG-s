@@ -121,7 +121,13 @@ namespace RPG.UI
                 foreach (Vendor vendor in Vendor.All)
                     if (vendor != null && map.Contains(vendor.transform.position)) Dot(ToMap(vendor.transform.position), VendorColor, 7f);
                 foreach (Portal portal in Portal.Portals)
-                    if (portal != null && map.Contains(portal.transform.position)) Dot(ToMap(portal.transform.position), PortalColor, 12f);
+                {
+                    if (portal == null || !map.Contains(portal.transform.position)) continue;
+                    Dot(ToMap(portal.transform.position), PortalColor, 12f);
+                    // Dungeons without a named place of their own get their name next to the portal.
+                    if (!string.IsNullOrEmpty(portal.Label) && !HasZoneNamed(portal.Label))
+                        Label(ToMap(portal.transform.position) + new Vector2(0f, -16f), portal.Label, PortalColor, 12);
+                }
                 foreach (Health unit in Health.Spawned)
                     if (unit != null && unit != self && unit.Faction == Faction.Player && map.Contains(unit.transform.position))
                         Dot(ToMap(unit.transform.position), PlayerColor, 9f);
@@ -134,6 +140,13 @@ namespace RPG.UI
                 if (dots[i].gameObject.activeSelf) dots[i].gameObject.SetActive(false);
             for (int i = usedLabels; i < labels.Count; i++)
                 if (labels[i].gameObject.activeSelf) labels[i].gameObject.SetActive(false);
+        }
+
+        private static bool HasZoneNamed(string zoneName)
+        {
+            foreach (Zone zone in Zone.All)
+                if (zone != null && zone.DisplayName == zoneName) return true;
+            return false;
         }
 
         private void Dot(Vector2 at, Color color, float diameter)

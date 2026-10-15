@@ -5,6 +5,7 @@ using RPG.Monsters;
 using RPG.Navigation;
 using RPG.Networking;
 using RPG.Progression;
+using RPG.World;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -13,14 +14,15 @@ namespace RPG.Dungeons
 {
     /// <summary>
     /// Runs dungeon instances. One lives in the world scene on every peer.
-    /// - Everyone: builds an instance's tilemaps, navigation and exit portals when it spawns.
-    /// - Server: when a player uses the entrance, every living player standing around it enters a new instance
-    ///   in a free slot far from the world (each group gets its own copy). Fills it with monster packs and the boss,
-    ///   sends players back to the entrance through the exits, and closes instances that stayed empty for a while.
+    /// - Everyone: builds an instance's tilemaps, navigation, exits and doors when it spawns.
+    /// - Server: when a player uses an entrance, every living player standing around it enters a new instance of its
+    ///   dungeon in a free slot far from the world (each group gets its own copy). Fills it with the dungeon's monsters
+    ///   and containers (once: nothing comes back), sends players out through the exits, and closes instances that
+    ///   stayed empty for a while.
     /// </summary>
     public class DungeonManager : MonoBehaviour
     {
-        [SerializeField] private DungeonDefinition definition;
+        [SerializeField] private DungeonDefinition[] dungeons = System.Array.Empty<DungeonDefinition>();
         [Tooltip("Instances are placed this far from the world, one slot after another.")]
         [SerializeField] private Vector2 firstSlotOrigin = new Vector2(500f, 0f);
         [SerializeField] private float slotSpacing = 150f;
@@ -38,7 +40,9 @@ namespace RPG.Dungeons
 
         public static DungeonManager Instance { get; private set; }
 
-        public DungeonDefinition Definition => definition;
+        /// <summary>The first dungeon (the one entrances without a dungeon of their own open).</summary>
+        public DungeonDefinition Definition => dungeons.Length > 0 ? dungeons[0] : null;
+        public IReadOnlyList<DungeonDefinition> Dungeons => dungeons;
         public float PortalRange => portalRange;
         public IReadOnlyList<DungeonInstance> Instances => instances;
 
@@ -48,11 +52,13 @@ namespace RPG.Dungeons
             set => closeAfterEmptySeconds = Mathf.Max(0f, value);
         }
 
-        /// <summary>Sets the dungeon (used by the scene builder and tests).</summary>
-        public void Configure(DungeonDefinition dungeon)
+        /// <summary>Sets the dungeons (used by the scene builder and tests).</summary>
+        public void Configure(params DungeonDefinition[] definitions)
         {
-            definition = dungeon;
+            dungeons = definitions ?? System.Array.Empty<DungeonDefinition>();
         }
+
+        public DungeonDefinition DungeonAt(int index) => index >= 0 && index < dungeons.Length ? dungeons[index] : null;
 
         private void OnEnable() => Instance = this;
 
@@ -63,10 +69,11 @@ namespace RPG.Dungeons
 
         // ---------- Everyone ----------
 
-        /// <summary>Builds the tilemaps, navigation and exits of an instance at its slot. Returns the root object.</summary>
+        /// <summary>Builds the tilemaps, navigation, exits and doors of an instance at its slot. Returns the root object.</summary>
         public GameObject BuildLayout(DungeonInstance instance, out Grid grid)
         {
-            var root = new GameObject($"Dungeon {instance.Slot}");
+            DungeonDefinition definition = instance.Definition;
+            var root = new GameObject($"Dungeon {instance.Slot} {(definition != null ? definition.displayName : "")}");
             root.transform.position = firstSlotOrigin + Vector2.right * (slotSpacing * Mathf.Max(0, instance.Slot));
 
             grid = root.AddComponent<Grid>();
@@ -78,22 +85,38 @@ namespace RPG.Dungeons
 
             if (definition != null)
             {
-                foreach (Vector3Int cell in DungeonLayout.FloorCells())
-                    floor.SetTile(cell, definition.floorTile);
-                foreach (Vector3Int cell in DungeonLayout.WallCells())
-                {
-                    floor.SetTile(cell, definition.floorTile);
-                    walls.SetTile(cell, definition.wallTile);
-                }
+                DungeonLayout layout = definition.Layout;
+                List<Vector3Int> floorCells = layout.FloorCells();
+                List<Vector3Int> wallCells = layout.WallCells();
+                Fill(floor, floorCells, definition.floorTile);
+                Fill(floor, wallCells, definition.floorTile);
+                Fill(walls, wallCells, definition.wallTile);
             }
             walls.gameObject.AddComponent<TilemapCollider2D>();
             var navigation = root.AddComponent<WorldNavigation>();
             navigation.Configure(grid, floor, walls);
-            if (definition != null) navigation.ZoneName = definition.displayName;
+            if (definition == null) return root;
+            navigation.ZoneName = definition.displayName;
 
-            CreateExit(root.transform, grid, DungeonLayout.EntranceExit, instance, false);
-            CreateExit(root.transform, grid, DungeonLayout.BossExit, instance, true);
+            foreach (DungeonExit exit in definition.exits)
+            {
+                Portal portal = CreatePortal(root.transform, grid, exit.cell, definition, "Exit", out SpriteRenderer visual);
+                portal.ConfigureExit(visual, instance, exit.destination, exit.label);
+            }
+            foreach (DungeonDoor door in definition.doors)
+            {
+                if (door.target == null) continue;
+                Portal portal = CreatePortal(root.transform, grid, door.cell, definition, door.target.displayName, out SpriteRenderer visual);
+                portal.ConfigureEntrance(visual, instance, door.target);
+            }
             return root;
+        }
+
+        private static void Fill(Tilemap tilemap, List<Vector3Int> cells, TileBase tile)
+        {
+            var tiles = new TileBase[cells.Count];
+            for (int i = 0; i < tiles.Length; i++) tiles[i] = tile;
+            tilemap.SetTiles(cells.ToArray(), tiles);
         }
 
         private static Tilemap CreateTilemap(Grid grid, string tilemapName, int sortingOrder, TilemapRenderer.Mode mode)
@@ -108,23 +131,23 @@ namespace RPG.Dungeons
             return tilemap;
         }
 
-        private void CreateExit(Transform parent, Grid grid, Vector3Int cell, DungeonInstance instance, bool needsBoss)
+        private static Portal CreatePortal(Transform parent, Grid grid, Vector3Int cell, DungeonDefinition definition, string portalName,
+            out SpriteRenderer visual)
         {
-            var exit = new GameObject(needsBoss ? "Boss Exit" : "Exit");
-            exit.transform.SetParent(parent, false);
-            exit.transform.position = grid.GetCellCenterWorld(cell);
+            var portalObject = new GameObject(portalName);
+            portalObject.transform.SetParent(parent, false);
+            portalObject.transform.position = grid.GetCellCenterWorld(cell);
 
-            var visual = new GameObject("Visual").AddComponent<SpriteRenderer>();
-            visual.transform.SetParent(exit.transform, false);
-            visual.sprite = definition != null ? definition.portalSprite : null;
+            visual = new GameObject("Visual").AddComponent<SpriteRenderer>();
+            visual.transform.SetParent(portalObject.transform, false);
+            visual.sprite = definition.portalSprite;
             visual.spriteSortPoint = SpriteSortPoint.Pivot;
 
-            var box = exit.AddComponent<BoxCollider2D>();
+            var box = portalObject.AddComponent<BoxCollider2D>();
             box.isTrigger = true;
             box.size = new Vector2(0.6f, 0.9f);
             box.offset = new Vector2(0f, 0.45f);
-
-            exit.AddComponent<Portal>().Configure(PortalKind.DungeonExit, visual, instance, needsBoss);
+            return portalObject.AddComponent<Portal>();
         }
 
         // ---------- Server ----------
@@ -151,34 +174,40 @@ namespace RPG.Dungeons
             if (nearest == null) return false;
 
             if (nearest.Kind == PortalKind.DungeonEntrance)
-                return ServerEnter(nearest.transform.position, player) != null;
-            return ServerLeave(player);
+                return ServerEnter(nearest.transform.position, player, nearest.Dungeon != null ? nearest.Dungeon : Definition) != null;
+            return ServerLeave(player, nearest);
         }
 
         /// <summary>
-        /// Why a player may not open or join this dungeon ("You must be level 3..."), or null when they may.
+        /// Why a player may not open or join a dungeon ("You must be level 25..."), or null when they may.
         /// <paramref name="needsKey"/>: whether they must also carry the key (only the one who opens it does).
         /// </summary>
-        public string EntryRefusal(Health player, bool needsKey)
+        public string EntryRefusal(Health player, bool needsKey, DungeonDefinition dungeon = null)
         {
-            if (definition == null || player == null) return null;
+            dungeon = dungeon != null ? dungeon : Definition;
+            if (dungeon == null || player == null) return null;
             int level = player.TryGetComponent(out CharacterProgress progress) ? progress.Level : 1;
-            if (level < definition.minLevel)
-                return $"You must be level {definition.minLevel} to enter {definition.displayName}";
-            if (needsKey && definition.key != null && (!player.TryGetComponent(out Inventory inventory) || inventory.CountOf(definition.key) <= 0))
-                return $"You need a {definition.key.displayName} to enter {definition.displayName}";
+            if (level < dungeon.minLevel)
+                return $"You must be level {dungeon.minLevel} to enter {dungeon.displayName}";
+            if (needsKey && dungeon.key != null && (!player.TryGetComponent(out Inventory inventory) || inventory.CountOf(dungeon.key) <= 0))
+                return $"You need {Article(dungeon.key.displayName)} to enter {dungeon.displayName}";
             return null;
         }
 
+        // "a Tower Key", but "Keys to the Barracks".
+        private static string Article(string itemName) =>
+            itemName.StartsWith("Keys ") ? itemName : ("AEIOU".IndexOf(itemName[0]) >= 0 ? "an " : "a ") + itemName;
+
         /// <summary>
-        /// Server: <paramref name="opener"/> opens a new instance at an entrance, if they meet the level and carry
-        /// the key (used up). Living players around the entrance who meet the level go in with them, up to the limit.
-        /// Returns the instance (null when refused).
+        /// Server: <paramref name="opener"/> opens a new instance of <paramref name="dungeon"/> (the first one when
+        /// null) at an entrance, if they meet the level and carry the key (used up). Living players around the
+        /// entrance who meet the level go in with them, up to the limit. Returns the instance (null when refused).
         /// </summary>
-        public DungeonInstance ServerEnter(Vector2 entrance, Health opener)
+        public DungeonInstance ServerEnter(Vector2 entrance, Health opener, DungeonDefinition dungeon = null)
         {
-            if (definition == null || opener == null) return null;
-            string refusal = EntryRefusal(opener, true);
+            dungeon = dungeon != null ? dungeon : Definition;
+            if (dungeon == null || opener == null) return null;
+            string refusal = EntryRefusal(opener, true, dungeon);
             if (refusal != null)
             {
                 Announce(opener, refusal);
@@ -189,20 +218,20 @@ namespace RPG.Dungeons
             foreach (Health player in PlayersAround(entrance))
             {
                 if (player == opener) continue;
-                string reason = EntryRefusal(player, false);
+                string reason = EntryRefusal(player, false, dungeon);
                 if (reason != null) Announce(player, reason);
-                else if (group.Count < definition.maxPlayers) group.Add(player);
+                else if (group.Count < dungeon.maxPlayers) group.Add(player);
             }
 
-            if (definition.key != null && opener.TryGetComponent(out Inventory inventory) && !inventory.ServerRemoveItem(definition.key, 1))
+            if (dungeon.key != null && opener.TryGetComponent(out Inventory inventory) && !inventory.ServerRemoveItem(dungeon.key, 1))
                 return null;
-            return Open(group);
+            return Open(dungeon, group);
         }
 
         /// <summary>Server: opens a new instance for the living players around an entrance, without entry checks (tests, tools).</summary>
         public DungeonInstance ServerEnter(Vector2 entrance)
         {
-            return Open(PlayersAround(entrance));
+            return Open(Definition, PlayersAround(entrance));
         }
 
         private List<Health> PlayersAround(Vector2 entrance)
@@ -217,39 +246,61 @@ namespace RPG.Dungeons
             return players;
         }
 
-        private DungeonInstance Open(List<Health> group)
+        private DungeonInstance Open(DungeonDefinition dungeon, List<Health> group)
         {
-            if (definition == null || definition.instancePrefab == null || group.Count == 0) return null;
+            int index = System.Array.IndexOf(dungeons, dungeon);
+            if (dungeon == null || index < 0 || dungeon.instancePrefab == null || group.Count == 0) return null;
 
-            GameObject instanceObject = Instantiate(definition.instancePrefab);
+            GameObject instanceObject = Instantiate(dungeon.instancePrefab);
             var instance = instanceObject.GetComponent<DungeonInstance>();
-            instance.ServerPrepare(FreeSlot());
+            instance.ServerPrepare(FreeSlot(), index);
             instanceObject.GetComponent<NetworkObject>().Spawn(destroyWithScene: true);
             instances.Add(instance);
 
-            SpawnMonsters(instance);
+            SpawnMonsters(instance, dungeon);
+            SpawnChests(instance, dungeon);
+            Vector3Int arrivalCell = dungeon.Layout.NearestFloor(dungeon.arrival);
             for (int i = 0; i < group.Count; i++)
             {
-                Vector2 arrival = instance.CellCenter(DungeonLayout.Arrival) + new Vector2((i % 3 - 1) * 0.35f, (i / 3) * 0.2f);
-                Teleport(group[i], arrival, $"Entering {definition.displayName}");
+                Vector2 arrival = instance.CellCenter(arrivalCell) + new Vector2((i % 3 - 1) * 0.35f, (i / 3) * 0.2f);
+                Teleport(group[i], arrival, $"Entering {dungeon.displayName}");
             }
-            Debug.Log($"[Dungeon] {definition.displayName} opened in slot {instance.Slot} for {group.Count} player(s).");
+            Debug.Log($"[Dungeon] {dungeon.displayName} opened in slot {instance.Slot} for {group.Count} player(s).");
             return instance;
         }
 
-        /// <summary>Server: sends a player in a dungeon back to the entrance.</summary>
-        public bool ServerLeave(Health player)
+        /// <summary>
+        /// Server: sends a player in a dungeon out through <paramref name="exit"/> (to where it leads), or back to the
+        /// dungeon's entrance in the world when no exit is given.
+        /// </summary>
+        public bool ServerLeave(Health player, Portal exit = null)
         {
             Vector2 position = AutoAttack.ServerPosition(player);
-            if (InstanceAt(position) == null) return false;
+            DungeonInstance instance = InstanceAt(position);
+            if (instance == null) return false;
 
-            Portal entrance = null;
-            foreach (Portal portal in Portal.Portals)
-                if (portal.Kind == PortalKind.DungeonEntrance) entrance = portal;
-
-            Vector2 destination = entrance != null ? (Vector2)entrance.transform.position + new Vector2(0f, -0.8f) : Vector2.zero;
+            Vector2 destination;
+            if (exit != null && exit.HasDestination) destination = exit.Destination;
+            else
+            {
+                Portal entrance = WorldEntranceOf(instance.Definition);
+                destination = entrance != null ? (Vector2)entrance.transform.position + new Vector2(0f, -0.8f) : Vector2.zero;
+            }
             Teleport(player, destination, "Back in the world");
             return true;
+        }
+
+        /// <summary>The entrance in the world that opens <paramref name="dungeon"/> (or any world entrance when there is none).</summary>
+        private Portal WorldEntranceOf(DungeonDefinition dungeon)
+        {
+            Portal any = null;
+            foreach (Portal portal in Portal.Portals)
+            {
+                if (portal.Kind != PortalKind.DungeonEntrance || portal.Instance != null || InstanceAt(portal.transform.position) != null) continue;
+                if (portal.Dungeon == dungeon) return portal;
+                if (any == null || portal.Dungeon == null) any = portal;
+            }
+            return any;
         }
 
         /// <summary>The instance whose area contains a position (null in the world).</summary>
@@ -267,40 +318,73 @@ namespace RPG.Dungeons
             return candidate;
         }
 
-        private void SpawnMonsters(DungeonInstance instance)
+        private void SpawnMonsters(DungeonInstance instance, DungeonDefinition dungeon)
         {
-            foreach (MonsterPack pack in definition.packs)
+            DungeonLayout layout = dungeon.Layout;
+            foreach (DungeonMonsterSpot spot in dungeon.monsters)
             {
-                if (pack.prefab == null) continue;
-                Vector2 center = instance.CellCenter(DungeonLayout.RoomCenter(pack.room));
-                for (int i = 0; i < pack.count; i++)
-                {
-                    float angle = i * Mathf.PI * 2f / Mathf.Max(1, pack.count);
-                    Vector2 offset = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle) * 0.5f) * (pack.count > 1 ? 0.8f : 0f);
-                    SpawnMonster(instance, pack.prefab, center + offset);
-                }
-            }
-
-            if (definition.bossPrefab != null)
-            {
-                Vector2 bossPoint = instance.CellCenter(DungeonLayout.RoomCenter(DungeonLayout.BossRoom));
-                NetworkObject boss = SpawnMonster(instance, definition.bossPrefab, bossPoint);
-                boss.GetComponent<Health>().Died += instance.ServerSetBossDefeated;
+                if (spot.prefab == null) continue;
+                NetworkObject monster = SpawnMonster(instance, dungeon, spot, instance.CellCenter(layout.NearestFloor(spot.cell)));
+                if (!spot.boss) continue;
+                instance.BossesLeft++;
+                monster.GetComponent<Health>().Died += instance.ServerBossDied;
             }
         }
 
-        private NetworkObject SpawnMonster(DungeonInstance instance, GameObject prefab, Vector2 point)
+        /// <summary>The health of a normal monster of <paramref name="level"/> (what a spot's health scale multiplies).</summary>
+        public static int NormalHealthAt(DungeonDefinition dungeon, GameObject fallback, int level)
         {
-            GameObject monster = Instantiate(prefab, point, Quaternion.identity);
-            if (monster.TryGetComponent(out MonsterAI ai))
+            GameObject reference = dungeon.referenceMonster != null ? dungeon.referenceMonster : fallback;
+            if (reference == null || !reference.TryGetComponent(out Health health) || !reference.TryGetComponent(out MonsterAI ai)) return 1;
+            return Mathf.Max(1, Mathf.RoundToInt(health.BaseMax * MonsterAI.HealthScaleBetween(ai.Level, level)));
+        }
+
+        private NetworkObject SpawnMonster(DungeonInstance instance, DungeonDefinition dungeon, DungeonMonsterSpot spot, Vector2 point)
+        {
+            GameObject monster = Instantiate(spot.prefab, point, Quaternion.identity);
+            var ai = monster.GetComponent<MonsterAI>();
+            var health = monster.GetComponent<Health>();
+            var attack = monster.GetComponent<AutoAttack>();
+            if (ai != null)
             {
                 ai.Home = point;
-                ai.AggroRadius = definition.monsterAggroRadius;
+                ai.AggroRadius = dungeon.monsterAggroRadius;
+                ai.ServerOverrideLevel(spot.level);
+                if (spot.loot != null && spot.loot.Length > 0) ai.ServerAddBonusLoot(spot.loot);
+                if (spot.blueChance > 0f || spot.goldChance > 0f || spot.purpleChance > 0f)
+                    ai.ConfigureQualityDrops(spot.blueChance, spot.goldChance, spot.purpleChance);
+                if (spot.goldScale > 0f)
+                    ai.GoldReward = new Vector2Int(Mathf.RoundToInt(ai.GoldReward.x * spot.goldScale), Mathf.RoundToInt(ai.GoldReward.y * spot.goldScale));
             }
             var networkObject = monster.GetComponent<NetworkObject>();
             networkObject.Spawn(destroyWithScene: true);
+
+            if (ai != null && spot.elite) ai.ServerMakeElite();
+            if (health != null)
+            {
+                // Source's own health for a monster: a multiple of a normal monster of its level.
+                if (spot.healthScale > 0f)
+                    health.ServerSetMaxHealth(Mathf.Max(1, Mathf.RoundToInt(NormalHealthAt(dungeon, spot.prefab, spot.level) * spot.healthScale)), true);
+                if (!string.IsNullOrEmpty(spot.displayName)) health.ServerSetDisplayName(spot.displayName);
+            }
+            if (attack != null && spot.damageScale > 0f)
+                attack.DamageScale *= spot.damageScale / (spot.elite ? MonsterAI.EliteDamageScale : 1f);
             instance.Monsters.Add(networkObject);
             return networkObject;
+        }
+
+        private void SpawnChests(DungeonInstance instance, DungeonDefinition dungeon)
+        {
+            DungeonLayout layout = dungeon.Layout;
+            foreach (DungeonChestSpot spot in dungeon.chests)
+            {
+                if (spot.prefab == null) continue;
+                GameObject chest = Instantiate(spot.prefab, instance.CellCenter(layout.NearestFloor(spot.cell)), Quaternion.identity);
+                if (chest.TryGetComponent(out LootChest lootChest)) lootChest.ServerOverrideLevel(spot.level);
+                var networkObject = chest.GetComponent<NetworkObject>();
+                networkObject.Spawn(destroyWithScene: true);
+                instance.Chests.Add(networkObject);
+            }
         }
 
         private static void Teleport(Health player, Vector2 destination, string message)
@@ -361,6 +445,8 @@ namespace RPG.Dungeons
         {
             foreach (NetworkObject monster in instance.Monsters)
                 if (monster != null && monster.IsSpawned) monster.Despawn(true);
+            foreach (NetworkObject chest in instance.Chests)
+                if (chest != null && chest.IsSpawned) chest.Despawn(true);
 
             foreach (LootBag loot in FindObjectsByType<LootBag>())
                 if (loot.IsSpawned && instance.Contains(loot.transform.position)) loot.NetworkObject.Despawn(true);

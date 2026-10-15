@@ -4,20 +4,27 @@ using UnityEngine;
 
 namespace RPG.Items
 {
-    /// <summary>One item in a loot bag, with the random affix it rolled (0 for none).</summary>
+    /// <summary>One item (or a stack of the same) in a loot bag, with the random affix it rolled (0 for none).</summary>
     public struct LootItem
     {
         public ItemDefinition Item;
         public int AffixId;
         /// <summary>0 or <see cref="ItemStack.EmptySocket"/>.</summary>
         public int Socket;
+        private int count;
 
-        public LootItem(ItemDefinition item, int affixId, int socket = 0)
+        /// <summary>How many (at least 1).</summary>
+        public int Count => Mathf.Max(1, count);
+
+        public LootItem(ItemDefinition item, int affixId, int socket = 0, int count = 1)
         {
             Item = item;
             AffixId = affixId;
             Socket = socket;
+            this.count = count;
         }
+
+        public LootItem WithCount(int newCount) => new LootItem(Item, AffixId, Socket, newCount);
     }
 
     /// <summary>
@@ -93,8 +100,7 @@ namespace RPG.Items
             if (!IsServer || inventory == null || inventory.Catalog == null || index < 0 || index >= contents.Count) return false;
             LootItem item = contents[index];
             if (inventory.Catalog.IdOf(item.Item) != itemId) return false;
-            if (inventory.ServerAddItem(item.Item, 1, true, item.AffixId, item.Socket) <= 0) return false;
-            contents.RemoveAt(index);
+            if (!GiveStack(inventory, index)) return false;
             if (contents.Count == 0) NetworkObject.Despawn(true);
             return true;
         }
@@ -106,14 +112,21 @@ namespace RPG.Items
 
             bool tookAny = false;
             for (int i = contents.Count - 1; i >= 0; i--)
-            {
-                if (inventory.ServerAddItem(contents[i].Item, 1, true, contents[i].AffixId, contents[i].Socket) <= 0) continue;
-                contents.RemoveAt(i);
-                tookAny = true;
-            }
+                tookAny |= GiveStack(inventory, i);
 
             if (contents.Count == 0) NetworkObject.Despawn(true);
             return tookAny;
+        }
+
+        /// <summary>Moves what fits of one entry into the bag; what does not fit stays. True when any was taken.</summary>
+        private bool GiveStack(Inventory inventory, int index)
+        {
+            LootItem item = contents[index];
+            int taken = inventory.ServerAddItem(item.Item, item.Count, true, item.AffixId, item.Socket);
+            if (taken <= 0) return false;
+            if (taken >= item.Count) contents.RemoveAt(index);
+            else contents[index] = item.WithCount(item.Count - taken);
+            return true;
         }
 
         private void Update()
