@@ -14,14 +14,14 @@
 
 ## Elitiniai monstrai
 
-- ~8% stovyklų monstrų atsiranda elitiniai (`MonsterSpawner.eliteChance`): vardas „Elite …“ auksine spalva,
+- ~8% stovyklų monstrų atsiranda elitiniai (`MonsterSpawner.eliteChance`): vardas „Elite …“,
   25% didesni, 2,5× HP, 1,5× žala, 3× XP ir auksas, loot ridenamas du kartus.
 
 ## Laipsniai
 
 - Didžiausias lygis — 25. Kiekvienas lygis turi laipsnį: Recruit, Private, Lance Corporal, … General,
   Field Marshal, Knight, Baron, Count, Earl, Champion (`LevelCurve.RankName`).
-- Virš kiekvieno žaidėjo galvos (ir tavo) — vardas, o po juo laipsnis, pvz. „<Corporal>“; tavo vardas žalias, kitų — mėlynas.
+- Virš kiekvieno žaidėjo galvos (ir tavo) — vardas, o po juo laipsnis, pvz. „<Corporal>“. Spalvos kaip Dreadmyst: žaidėjai šviesiai mėlyni (#8EACD2), monstrai raudoni (#B63E3D), skrynios beveik baltos (#E8EDE1).
 - Laipsnis rodomas ir rėmelyje, veikėjo lange (C) bei žinutėje pakilus lygiu.
 
 Testai: `ChestTests.cs` (skrynios ir elitai), `LevelCurveTests.cs` (laipsniai).
