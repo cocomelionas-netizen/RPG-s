@@ -187,6 +187,23 @@ namespace RPG.Tests
         }
 
         [UnityTest]
+        public IEnumerator Monster_HittingTheTarget_MovesTheLeashWithTheFight()
+        {
+            MonsterAI goblin = SpawnGoblin(new Vector2(1.6f, 0f));
+            goblin.AggroRadius = 3f;
+            Vector2 home = goblin.transform.position;
+
+            float end = Time.time + 3f;
+            while (playerHealth.Current == playerHealth.Max && Time.time < end)
+                yield return null;
+
+            Assert.Less(playerHealth.Current, playerHealth.Max, "The goblin walked up and hit.");
+            Assert.AreEqual(MonsterState.Chase, goblin.State);
+            Assert.Greater(Vector2.Distance(goblin.LeashAnchor, home), 0.5f, "The leash now starts where it hit.");
+            Assert.Less(Vector2.Distance(goblin.LeashAnchor, goblin.transform.position), 0.3f);
+        }
+
+        [UnityTest]
         public IEnumerator Monster_DiesAndIsRemoved()
         {
             MonsterAI goblin = SpawnGoblin(new Vector2(5f, 0f));
