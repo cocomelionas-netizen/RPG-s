@@ -42,10 +42,11 @@ jobs:
       - uses: actions/cache@v4
         with:
           path: Library
-          key: Library-WebGL-${{ hashFiles('Packages/packages-lock.json', 'ProjectSettings/ProjectVersion.txt') }}-${{ github.sha }}
+          # Bump the version (v2, v3...) to start from a clean Library when a cached one is broken.
+          key: Library-WebGL-v2-${{ hashFiles('Packages/packages-lock.json', 'ProjectSettings/ProjectVersion.txt') }}-${{ github.sha }}
           restore-keys: |
-            Library-WebGL-${{ hashFiles('Packages/packages-lock.json', 'ProjectSettings/ProjectVersion.txt') }}-
-            Library-WebGL-
+            Library-WebGL-v2-${{ hashFiles('Packages/packages-lock.json', 'ProjectSettings/ProjectVersion.txt') }}-
+            Library-WebGL-v2-
 
       - name: Build WebGL
         uses: game-ci/unity-builder@v4
