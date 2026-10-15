@@ -38,6 +38,9 @@ namespace RPG.UI
         private readonly List<Row> craftRows = new List<Row>();
         private Text craftHeader;
         private Vendor shown;
+        private int stockColumns = 1;
+        private int stockPerColumn = 1;
+        private int StockRows => rows.Count > 0 ? stockPerColumn : 0;
         // Craft list entries shown, and the ones found this frame.
         private readonly List<int> shownRecipes = new List<int>();
         private readonly List<int> recipes = new List<int>();
@@ -135,6 +138,8 @@ namespace RPG.UI
             foreach (Row row in rows) Destroy(row.Root);
             rows.Clear();
             ItemDefinition[] stock = definition != null ? definition.stock : Array.Empty<ItemDefinition>();
+            stockColumns = stock.Length > 12 ? 2 : 1;
+            stockPerColumn = Mathf.Max(1, (stock.Length + stockColumns - 1) / stockColumns);
             for (int i = 0; i < stock.Length; i++)
                 rows.Add(CreateRow(i));
 
@@ -160,17 +165,18 @@ namespace RPG.UI
 
         private Row CreateRow(int index)
         {
-            Row row = CreateRowAt(-index * (rowHeight + 4f), RowColor, out Button button);
+            // Long stock lists (a trainer's Tomes) in two columns.
+            Row row = CreateRowAt(-(index % stockPerColumn) * (rowHeight + 4f), RowColor, out Button button, index / stockPerColumn * width);
             button.onClick.AddListener(() => Buy(index));
             return row;
         }
 
-        private Row CreateRowAt(float top, Color color, out Button button)
+        private Row CreateRowAt(float top, Color color, out Button button, float left = 0f)
         {
             button = UIFactory.CreateButton("Item", list, color, null, 0);
             var rect = (RectTransform)button.transform;
             rect.anchorMin = rect.anchorMax = rect.pivot = new Vector2(0f, 1f);
-            rect.anchoredPosition = new Vector2(0f, top);
+            rect.anchoredPosition = new Vector2(left, top);
             rect.sizeDelta = new Vector2(width - 28f, rowHeight);
 
             var row = new Row { Root = button.gameObject };
@@ -215,7 +221,7 @@ namespace RPG.UI
             shownRecipes.Clear();
             shownRecipes.AddRange(recipes);
 
-            float top = -rows.Count * (rowHeight + 4f) - 4f;
+            float top = -StockRows * (rowHeight + 4f) - 4f;
             craftHeader.rectTransform.anchoredPosition = new Vector2(0f, top);
             top -= 44f;
             for (int i = 0; i < recipes.Count; i++)
@@ -227,8 +233,8 @@ namespace RPG.UI
 
             bool jeweler = combineButton.gameObject.activeSelf;
             bool crafts = shown.Definition.crafts != null && shown.Definition.crafts.Length > 0;
-            float height = 92f + rows.Count * (rowHeight + 4f) + (crafts ? 48f : 0f) + recipes.Count * (rowHeight + 4f) + 40f + (jeweler ? 46f : 0f);
-            ((RectTransform)window.transform).sizeDelta = new Vector2(width, height);
+            float height = 92f + StockRows * (rowHeight + 4f) + (crafts ? 48f : 0f) + recipes.Count * (rowHeight + 4f) + 40f + (jeweler ? 46f : 0f);
+            ((RectTransform)window.transform).sizeDelta = new Vector2(width * stockColumns, height);
         }
 
         private void Craft(int craftIndex)

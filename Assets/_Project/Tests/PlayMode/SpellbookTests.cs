@@ -150,6 +150,31 @@ namespace RPG.Tests
             Assert.AreEqual(1f, effects.SpeedMultiplier, 0.001f, "Effects run out.");
         }
 
+        [UnityTest]
+        public IEnumerator Effects_ImmuneSilenceAndLessHealing()
+        {
+            Health health = player.GetComponent<Health>();
+            StatusEffects effects = health.Effects;
+            int full = health.Current;
+
+            Assert.IsTrue(effects.ServerApply("Test Immune", Color.white, StatusKind.Immune, 1f, 2f, harmful: false));
+            health.ApplyDamage(30, false);
+            Assert.AreEqual(full, health.Current, "Immune: no damage.");
+            Assert.IsFalse(effects.ServerApply("Test Stun", Color.white, StatusKind.Stun, 0f, 2f), "Immune: no harmful effects.");
+            effects.ServerClear();
+
+            health.ApplyDamage(40, false);
+            int hurt = health.Current;
+            Assert.IsTrue(effects.ServerApply("Test Sting", Color.white, StatusKind.HealingTaken, -50f, 2f));
+            health.Heal(20);
+            Assert.AreEqual(hurt + 10, health.Current, "Half the healing.");
+
+            Assert.IsTrue(effects.ServerApply("Test Silence", Color.white, StatusKind.Silence, 0f, 2f));
+            yield return null;
+            Assert.IsTrue(effects.IsSilenced);
+            Assert.IsFalse(effects.IsDisabled, "Silenced units can still move.");
+        }
+
         private int FindInBag(ItemDefinition item)
         {
             int id = inventory.Catalog.IdOf(item);

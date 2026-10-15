@@ -8,7 +8,7 @@ using Attribute = RPG.Progression.Attribute;
 namespace RPG.EditorTools
 {
     /// <summary>
-    /// The classes' spells, Source's (spell_template and the Tomes in item_template): our Warrior has the Paladin's,
+    /// The classes' spells up to level 20, Source's (spell_template and the Tomes in item_template): our Warrior has the Paladin's,
     /// the Ranger the Ranger's, the Mage the Mage's, each learned from its Tome's level. Numbers are Source's:
     /// cooldowns, cast times, mana (base + per level), weapon damage percents and spell formulas (base, spread,
     /// coefficient over two attributes, rank divisor), effect durations. Its ranges (yards, melee 130, spells 610) are
@@ -64,6 +64,12 @@ namespace RPG.EditorTools
             spell.breaksControl = false;
             spell.requiresTargetEffect = false;
             spell.requiresTargetOutOfCombat = false;
+            spell.requiredEffectName = "";
+            spell.restoreManaPercent = 0f;
+            spell.restoreManaPerRank = 0f;
+            spell.leapDistance = 2.5f;
+            spell.reviveHealth = 0.4f;
+            spell.reviveMana = 0.2f;
             spell.effectColor = color;
             UnityEditor.EditorUtility.SetDirty(spell);
             return spell;
@@ -98,12 +104,12 @@ namespace RPG.EditorTools
         }
 
         private static SpellEffect Effect(StatusKind kind, float value, float durationMs, float perRank = 0f, float intervalMs = 0f,
-            int maxStacks = 1, DamageSchool school = DamageSchool.Physical, bool anySchool = true, bool onCaster = false)
+            int maxStacks = 1, DamageSchool school = DamageSchool.Physical, bool anySchool = true, bool onCaster = false, bool magicOnly = false)
         {
             return new SpellEffect
             {
                 kind = kind, value = value, valuePerRank = perRank, duration = durationMs / 1000f, interval = intervalMs / 1000f,
-                maxStacks = maxStacks, school = school, anySchool = anySchool, onCaster = onCaster,
+                maxStacks = maxStacks, school = school, anySchool = anySchool && !magicOnly, onCaster = onCaster, magicOnly = magicOnly,
             };
         }
 
@@ -115,7 +121,7 @@ namespace RPG.EditorTools
             return effect;
         }
 
-        /// <summary>The Paladin's spells (Source class 1) up to level 10, for our Warrior.</summary>
+        /// <summary>The Paladin's spells (Source class 1), for our Warrior.</summary>
         private static AbilityDefinition[] CreateWarriorSpells()
         {
             const Attribute Courage = Attribute.Vitality;
@@ -156,10 +162,39 @@ namespace RPG.EditorTools
                     .With(Effect(StatusKind.Dodge, 4f, 300000, 1f)),
                 HealToFull(Spell("TouchOfSalvation", "Touch of Salvation", "Heals a friendly target (or you) to full health.",
                     AbilityKind.FriendlyTarget, 10, DamageSchool.Holy, 180000, 4, 3f, 500, 300, HealColor)),
+                Spell("SalvationAura", "Salvation Aura", "Friends near you take 10% (+1% a rank) less magic damage for 15 sec.", AbilityKind.FriendlyArea, 11,
+                        DamageSchool.Holy, 60000, 2, 1.5f, 0, 0, HolyColor)
+                    .WithRadius(4f)
+                    .With(Effect(StatusKind.DamageTaken, -10f, 15000, -1f, magicOnly: true)),
+                Spell("Retribution", "Retribution", "107% weapon damage; the target cannot swing its weapon for 3 sec.", AbilityKind.TargetDamage, 12,
+                        DamageSchool.Physical, 30000, 2, 1f, 0, 130, SteelColor)
+                    .Weapon(107f, 3f)
+                    .With(Effect(StatusKind.Pacify, 0f, 3000)),
+                Spell("RighteousStorm", "Righteous Storm", "All your damage 20% higher for 9 sec.", AbilityKind.Self, 13,
+                        DamageSchool.Holy, 60000, 2, 1.5f, 0, 0, HolyColor)
+                    .With(Effect(StatusKind.DamageDealt, 20f, 9000)),
+                Spell("FortificationAura", "Fortification Aura", "Friends near you take 18% (+2% a rank) less physical damage for 15 sec.",
+                        AbilityKind.FriendlyArea, 14, DamageSchool.Holy, 60000, 2, 1.5f, 0, 0, SteelColor)
+                    .WithRadius(4f)
+                    .With(Effect(StatusKind.DamageTaken, -18f, 15000, -2f, school: DamageSchool.Physical, anySchool: false)),
+                FreeFromControl(Spell("WingsOfFreedom", "Wings of Freedom", "Frees a friendly target (or you) from stuns, roots and slows, immune to stuns for 1 sec.",
+                        AbilityKind.FriendlyTarget, 15, DamageSchool.Holy, 60000, 2, 1f, 0, 610, HolyColor)
+                    .With(Effect(StatusKind.StunImmunity, 1f, 1000))),
+                Spell("AegisOfValor", "Aegis of Valor", "Take 32% (+3% a rank) less damage for 15 sec.", AbilityKind.Self, 16,
+                        DamageSchool.Holy, 120000, 3, 2.5f, 0, 0, SteelColor)
+                    .With(Effect(StatusKind.DamageTaken, -32f, 15000, -3f)),
+                Spell("Redemption", "Redemption", "Brings the nearest fallen friend back where they fell, with 40% health and 20% mana.",
+                    AbilityKind.Revive, 18, DamageSchool.Holy, 1800000, 6, 4.5f, 3000, 370, HealColor),
+                Spell("ShieldBlock", "Shield Block", "Block rating higher by your Strength for 10 sec.", AbilityKind.Self, 19,
+                        DamageSchool.Physical, 10000, 2, 1f, 400, 0, SteelColor)
+                    .With(Effect(StatusKind.BlockRating, 10f, 10000, 2f).ScaledBy(Attribute.Strength, 1.5f)),
+                Spell("DivineProtection", "Divine Protection", "Immune to all damage for 4 sec, but deal 75% less damage.", AbilityKind.Self, 20,
+                        DamageSchool.Holy, 180000, 5, 3.5f, 0, 0, HolyColor)
+                    .With(Effect(StatusKind.Immune, 1f, 4000), Effect(StatusKind.DamageDealt, -75f, 4000)),
             };
         }
 
-        /// <summary>The Ranger's spells (Source class 3) up to level 10.</summary>
+        /// <summary>The Ranger's spells (Source class 3).</summary>
         private static AbilityDefinition[] CreateRangerSpells()
         {
             return new[]
@@ -204,10 +239,38 @@ namespace RPG.EditorTools
                         DamageSchool.Holy, 30000, 2, 2f, 0, 0, HolyColor)
                     .With(Effect(StatusKind.DamageDealt, 28f, 5000, 2f, school: DamageSchool.Physical, anySchool: false),
                         Effect(StatusKind.ManaOnExpire, 20f, 5000)),
+                Spell("SleepArrow", "Sleep Arrow", "The enemy falls asleep for 8 sec. Any damage wakes it.", AbilityKind.TargetDamage, 11,
+                        DamageSchool.Physical, 30000, 5, 8f, 300, 610, ShadowColor)
+                    .With(Effect(StatusKind.Incapacitate, 0f, 8000)),
+                Spell("Hamstring", "Hamstring", "148% melee damage and 29% (+1% a rank) slower movement for 8 sec.", AbilityKind.TargetDamage, 12,
+                        DamageSchool.Physical, 12000, 1, 1f, 0, 130, SteelColor)
+                    .Weapon(148f, 2f)
+                    .With(Effect(StatusKind.Slow, 29f, 8000, 1f)),
+                FreeFromControl(Spell("TacticalRetreat", "Tactical Retreat", "Leap away from the enemy, free of stuns and slows, 34% faster for 5 sec.",
+                        AbilityKind.Retreat, 14, DamageSchool.Physical, 45000, 2, 3f, 0, 130, NatureColor)
+                    .With(Effect(StatusKind.Haste, 34f, 5000, 1f))),
+                Spell("EtherealSting", "Ethereal Sting", "Burns the enemy's mana every 2 sec for 8 sec; it receives 50% less healing.", AbilityKind.TargetDamage, 15,
+                        DamageSchool.Physical, 18000, 2, 2f, 300, 610, ArcaneColor)
+                    .With(Effect(StatusKind.ManaBurn, 20f, 8000, 4f, 2000).ScaledBy(Attribute.Intelligence, 0.5f),
+                        Effect(StatusKind.HealingTaken, -50f, 8000)),
+                Spell("FlameArrow", "Flame Arrow", "49% ranged damage as Fire; the target takes 19% (+1% a rank) more Fire damage for 10 sec.",
+                        AbilityKind.TargetDamage, 16, DamageSchool.Fire, 18000, 2, 2f, 300, 610, FireColor)
+                    .Weapon(49f, 1f)
+                    .With(Effect(StatusKind.DamageTaken, 19f, 10000, 1f, school: DamageSchool.Fire, anySchool: false)),
+                Unavoidable(Spell("ExplosiveArrow", "Explosive Arrow", "97% ranged damage as Fire that cannot be dodged or blocked. Needs Flame Arrow on the target.",
+                        AbilityKind.TargetDamage, 18, DamageSchool.Fire, 3000, 2, 2f, 300, 610, FireColor)
+                    .Weapon(97f, 3f)
+                    .Requires(StatusKind.DamageTaken, "Flame Arrow")),
+                Spell("EyeGouge", "Eye Gouge", "Blinds the enemy: it deals 30% (+5% a rank) less damage for 10 sec.", AbilityKind.TargetDamage, 19,
+                        DamageSchool.Physical, 120000, 3, 5f, 0, 500, ShadowColor)
+                    .With(Effect(StatusKind.DamageDealt, -30f, 10000, -5f)),
+                Spell("ArrowFlurry", "Arrow Flurry", "Your attacks come twice as fast for 10 sec.", AbilityKind.Self, 20,
+                        DamageSchool.Holy, 60000, 0, 1f, 0, 0, NatureColor)
+                    .With(Effect(StatusKind.AttackSpeed, 50f, 10000)),
             };
         }
 
-        /// <summary>The Mage's spells (Source class 2) up to level 10.</summary>
+        /// <summary>The Mage's spells (Source class 2).</summary>
         private static AbilityDefinition[] CreateMageSpells()
         {
             const Attribute Courage = Attribute.Vitality;
@@ -256,6 +319,28 @@ namespace RPG.EditorTools
                         Effect(StatusKind.DamageTaken, -9f, 15000, -1f, school: DamageSchool.Fire, anySchool: false)),
                 FreeFromControl(Spell("Teleport", "Teleport", "Instantly moves you to the pointer (in reach), free of stuns and roots.", AbilityKind.Teleport, 10,
                     DamageSchool.Shadow, 15000, 1, 1f, 0, 610, ArcaneColor)),
+                Spell("DeepFreeze", "Deep Freeze", "Encases the enemy in ice for 8 sec: it cannot act, and nothing can hurt it.", AbilityKind.TargetDamage, 11,
+                        DamageSchool.Frost, 45000, 2, 2f, 500, 610, FrostColor)
+                    .With(Effect(StatusKind.Stun, 0f, 8000), Effect(StatusKind.Immune, 1f, 8000)),
+                Spell("MagicalAmplification", "Magical Amplification", "A friendly target deals 2% (+1% a rank) more magic damage for 5 min.",
+                        AbilityKind.FriendlyTarget, 12, DamageSchool.Holy, 10000, 2, 2f, 0, 610, ArcaneColor)
+                    .With(Effect(StatusKind.DamageDealt, 2f, 300000, 1f, magicOnly: true)),
+                RestoresMana(Spell("WisdomOfLazarus", "Wisdom of Lazarus", "Restores 39% (+1% a rank) of your mana at once, and more over 3 sec.",
+                        AbilityKind.Self, 14, DamageSchool.Holy, 300000, 0, 0f, 0, 0, ArcaneColor)
+                    .With(Effect(StatusKind.ManaOverTime, 10f, 3000, 2f, 1000).ScaledBy(Attribute.Willpower, 2f)), 39f, 1f),
+                Spell("IllusionGate", "Illusion Gate", "After 10 sec of casting, takes you to St. Revere.", AbilityKind.Recall, 15,
+                    DamageSchool.Shadow, 1200000, 6, 10f, 10000, 0, ArcaneColor),
+                MarkCleanse(Spell("RemoveCurse", "Remove Curse", "Removes one harmful effect from a friendly target (or you).", AbilityKind.FriendlyTarget, 16,
+                    DamageSchool.Holy, 1000, 1, 1f, 0, 610, ArcaneColor)),
+                Spell("MagicalDampening", "Magical Dampening", "A friendly target takes 5% (+1% a rank) less magic damage for 5 min.",
+                        AbilityKind.FriendlyTarget, 18, DamageSchool.Holy, 10000, 2, 2f, 0, 610, ArcaneColor)
+                    .With(Effect(StatusKind.DamageTaken, -5f, 300000, -1f, magicOnly: true)),
+                Spell("Antimagic", "Antimagic", "Interrupts the enemy and keeps it from casting for 4 sec.", AbilityKind.TargetDamage, 19,
+                        DamageSchool.Shadow, 24000, 1, 1f, 0, 610, ShadowColor)
+                    .With(Effect(StatusKind.Silence, 0f, 4000)),
+                Spell("Inferno", "Inferno", "Hurls an immense fiery boulder for great Fire damage.", AbilityKind.TargetDamage, 20,
+                        DamageSchool.Fire, 60000, 3, 5f, 2500, 610, FireColor)
+                    .Power(10f, 8f, 200f, Attribute.Intelligence, Courage, 0.5f),
             };
         }
 
@@ -277,10 +362,18 @@ namespace RPG.EditorTools
             return spell;
         }
 
-        private static AbilityDefinition Requires(this AbilityDefinition spell, StatusKind effect)
+        private static AbilityDefinition Requires(this AbilityDefinition spell, StatusKind effect, string effectName = "")
         {
             spell.requiresTargetEffect = true;
             spell.requiredEffect = effect;
+            spell.requiredEffectName = effectName;
+            return spell;
+        }
+
+        private static AbilityDefinition RestoresMana(AbilityDefinition spell, float percent, float perRank)
+        {
+            spell.restoreManaPercent = percent;
+            spell.restoreManaPerRank = perRank;
             return spell;
         }
 

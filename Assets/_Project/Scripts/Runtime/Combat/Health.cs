@@ -128,6 +128,11 @@ namespace RPG.Combat
         {
             if (!IsServer || IsDead || ServerInvulnerable || amount <= 0) return;
             LastDamageTime = Time.time;
+            if (effects != null && effects.IsImmune)
+            {
+                AvoidedRpc(AvoidKind.Immune);
+                return;
+            }
             StatusEffects attackerEffects = attacker != null ? attacker.Effects : null;
             if (attackerEffects != null && !periodic) attackerEffects.ServerOnAttacked();
             bool avoidable = !periodic && !ignoreDefenses;
@@ -139,7 +144,9 @@ namespace RPG.Combat
                 DamageTaken?.Invoke(attacker, 0);
                 return;
             }
-            bool blocked = avoidable && ServerBlockChance > 0f && UnityEngine.Random.value < ServerBlockChance;
+            float block = ServerBlockChance
+                          + (effects != null ? effects.Total(StatusKind.BlockRating) * RPG.Progression.AttributeRules.AvoidPerRating : 0f);
+            bool blocked = avoidable && block > 0f && UnityEngine.Random.value < block;
             if (blocked) amount = Mathf.Max(1, amount / 2);
             if (avoidable) amount = ReduceByArmor(amount, ServerArmor);
             if (school != DamageSchool.Physical)
@@ -181,6 +188,9 @@ namespace RPG.Combat
         public void Heal(int amount, bool announce = false)
         {
             if (!IsServer || IsDead || amount <= 0) return;
+            // Healing reductions (Ethereal Sting) and boosts.
+            if (effects != null) amount = Mathf.RoundToInt(amount * effects.HealingTakenMultiplier);
+            if (amount <= 0) return;
             int healed = Mathf.Min(max.Value, current.Value + amount) - current.Value;
             current.Value += healed;
             if (announce && healed > 0) HealedRpc(healed);
@@ -195,6 +205,13 @@ namespace RPG.Combat
             else current.Value = Mathf.Min(current.Value, max.Value);
         }
 
+        /// <summary>Server only: brings a dead unit back with some health (Redemption).</summary>
+        public void ServerRevive(int amount)
+        {
+            if (!IsServer || !IsDead) return;
+            current.Value = Mathf.Clamp(amount, 1, max.Value);
+        }
+
         /// <summary>Server only: back to full health (respawn, out-of-combat reset).</summary>
         public void RestoreFull()
         {
@@ -202,7 +219,7 @@ namespace RPG.Combat
             current.Value = max.Value;
         }
 
-        private enum AvoidKind : byte { Dodge, Block, Absorb }
+        private enum AvoidKind : byte { Dodge, Block, Absorb, Immune }
 
         [Rpc(SendTo.Everyone)]
         private void DamagedRpc(int amount, bool critical, DamageSchool school)
@@ -214,7 +231,7 @@ namespace RPG.Combat
         [Rpc(SendTo.Everyone)]
         private void AvoidedRpc(AvoidKind kind)
         {
-            Avoided?.Invoke(kind == AvoidKind.Dodge ? "Dodge" : kind == AvoidKind.Block ? "Block" : "Absorb");
+            Avoided?.Invoke(kind.ToString());
         }
 
         [Rpc(SendTo.Everyone)]

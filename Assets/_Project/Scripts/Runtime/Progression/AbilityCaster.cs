@@ -7,6 +7,7 @@ using RPG.Monsters;
 using RPG.Navigation;
 using RPG.Networking;
 using RPG.Player;
+using RPG.World;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -221,7 +222,7 @@ namespace RPG.Progression
                 CastFailed?.Invoke(slot, CastFailure.Dead);
                 return;
             }
-            if (health.Effects != null && health.Effects.IsDisabled)
+            if (health.Effects != null && health.Effects.IsSilenced)
             {
                 CastFailed?.Invoke(slot, CastFailure.Disabled);
                 return;
@@ -312,6 +313,7 @@ namespace RPG.Progression
                 case CastFailure.Disabled: return "You can't do that right now";
                 case CastFailure.Requirement:
                     if (ability != null && ability.requiresTargetOutOfCombat) return "The target is in combat";
+                    if (ability != null && !string.IsNullOrEmpty(ability.requiredEffectName)) return $"The target needs {ability.requiredEffectName} first";
                     return ability != null && ability.requiredEffect == StatusKind.Slow ? "The target must be slowed (Chains of Ice)"
                         : ability != null && ability.requiredEffect == StatusKind.Incapacitate ? "The target must be incapacitated"
                         : "Invalid target";
@@ -342,7 +344,7 @@ namespace RPG.Progression
                 failure = CastFailure.Dead;
                 return false;
             }
-            if (health.Effects != null && health.Effects.IsDisabled)
+            if (health.Effects != null && health.Effects.IsSilenced)
             {
                 failure = CastFailure.Disabled;
                 return false;
@@ -397,7 +399,10 @@ namespace RPG.Progression
                     failure = CastFailure.OutOfRange;
                     return false;
                 }
-                bool missingEffect = ability.requiresTargetEffect && (target.Effects == null || !target.Effects.Has(ability.requiredEffect));
+                bool missingEffect = ability.requiresTargetEffect && (target.Effects == null
+                    || (string.IsNullOrEmpty(ability.requiredEffectName)
+                        ? !target.Effects.Has(ability.requiredEffect)
+                        : !target.Effects.Has(ability.requiredEffect, ability.requiredEffectName)));
                 bool fighting = ability.requiresTargetOutOfCombat && target.TryGetComponent(out MonsterAI ai) && ai.CurrentTarget != null;
                 if (missingEffect || fighting)
                 {
@@ -433,7 +438,7 @@ namespace RPG.Progression
         {
             if (castingSpell < 0) return;
             bool moved = Vector2.Distance(AutoAttack.ServerPosition(this), castStartPosition) > CastMoveTolerance;
-            bool stopped = health.IsDead || (health.Effects != null && health.Effects.IsDisabled);
+            bool stopped = health.IsDead || (health.Effects != null && health.Effects.IsSilenced);
             if (moved || stopped)
             {
                 int interrupted = castingSpell;
@@ -512,13 +517,30 @@ namespace RPG.Progression
                     effectTarget = to;
                     ApplyEffects(ability, rank, attributes, health);
                     break;
+                case AbilityKind.Retreat:
+                    effectTarget = Leap(self, ability.leapDistance);
+                    Help(ability, rank, attributes, health);
+                    break;
+                case AbilityKind.Recall:
+                    Waystone town = FindTown();
+                    if (town != null && TryGetComponent(out PlayerNetworkMovement traveller))
+                    {
+                        traveller.ServerTeleport(town.ArrivalPoint);
+                        effectTarget = town.ArrivalPoint;
+                    }
+                    break;
+                case AbilityKind.Revive:
+                    Health fallen = NearestFallenFriend(self, ability.range);
+                    if (fallen != null && fallen.TryGetComponent(out PlayerRespawn respawn))
+                    {
+                        respawn.ServerRevive(ability.reviveHealth, ability.reviveMana);
+                        effectTarget = AutoAttack.ServerPosition(fallen);
+                    }
+                    break;
             }
-            if (ability.breaksControl && health.Effects != null)
-            {
-                health.Effects.ServerRemove(StatusKind.Stun);
-                health.Effects.ServerRemove(StatusKind.Root);
-                health.Effects.ServerRemove(StatusKind.Slow);
-            }
+            // Teleport frees the caster; Wings of Freedom (a friendly spell) frees its target.
+            if (ability.breaksControl && ability.kind != AbilityKind.FriendlyTarget && health.Effects != null)
+                health.Effects.ServerFreeFromControl();
 
             double now = Now;
             cooldownStartedAt[spell] = now;
@@ -554,10 +576,71 @@ namespace RPG.Progression
             return 0;
         }
 
+        /// <summary>Server: leaps away from the nearest enemy (or backwards), as far as there is ground; where it landed.</summary>
+        private Vector2 Leap(Vector2 self, float distance)
+        {
+            Health from = autoAttack.ServerTarget;
+            if (from == null || from.IsDead)
+            {
+                float nearest = float.MaxValue;
+                foreach (Health unit in Health.Spawned)
+                {
+                    if (unit == null || !unit.IsSpawned || unit.IsDead || !health.IsHostileTo(unit)) continue;
+                    float d = Vector2.Distance(self, AutoAttack.ServerPosition(unit));
+                    if (d >= nearest) continue;
+                    nearest = d;
+                    from = unit;
+                }
+            }
+            Vector2 away = from != null ? self - AutoAttack.ServerPosition(from) : Vector2.down;
+            if (away.sqrMagnitude < 0.0001f) away = Vector2.down;
+            away.Normalize();
+            WorldNavigation map = WorldNavigation.At(self);
+            for (float step = distance; step > 0.2f; step -= 0.5f)
+            {
+                Vector2 to = self + away * step;
+                if (map != null && !map.IsWalkable(to)) continue;
+                if (TryGetComponent(out PlayerNetworkMovement mover)) mover.ServerTeleport(to);
+                return to;
+            }
+            return self;
+        }
+
+        /// <summary>St. Revere's waystone (Illusion Gate's way home).</summary>
+        private static Waystone FindTown()
+        {
+            Waystone first = null;
+            foreach (Waystone stone in Waystone.All)
+            {
+                if (stone == null) continue;
+                if (stone.DisplayName == "St. Revere") return stone;
+                if (first == null) first = stone;
+            }
+            return first;
+        }
+
+        private Health NearestFallenFriend(Vector2 self, float range)
+        {
+            Health best = null;
+            float bestDistance = range + autoAttack.RangeTolerance;
+            foreach (Health unit in Health.Spawned)
+            {
+                if (unit == null || unit == health || !unit.IsSpawned || !unit.IsDead || health.IsHostileTo(unit)) continue;
+                float d = Vector2.Distance(self, AutoAttack.ServerPosition(unit));
+                if (d > bestDistance) continue;
+                bestDistance = d;
+                best = unit;
+            }
+            return best;
+        }
+
         /// <summary>Server: heals and buffs a friendly unit.</summary>
         private void Help(AbilityDefinition ability, int rank, AttributeSet attributes, Health friend)
         {
             if (ability.removesHarmful && friend.Effects != null) friend.Effects.ServerRemoveHarmful(1);
+            if (ability.breaksControl && ability.kind == AbilityKind.FriendlyTarget && friend.Effects != null) friend.Effects.ServerFreeFromControl();
+            if (ability.restoreManaPercent > 0f && friend.TryGetComponent(out Mana friendMana))
+                friendMana.ServerRestore(Mathf.RoundToInt(friendMana.Max * (ability.restoreManaPercent + ability.restoreManaPerRank * (rank - 1)) / 100f));
             int heal = 0;
             if (ability.healFraction > 0f) heal += Mathf.RoundToInt(friend.Max * ability.healFraction);
             if (ability.isHeal && ability.UsesSpellPower)
@@ -601,11 +684,12 @@ namespace RPG.Progression
                 if (on == null || on.Effects == null || on.IsDead) continue;
                 float value = effect.ValueAt(rank, attributes);
                 // Damage and healing over time follow our health scale, like the spell's own amounts.
-                if (effect.kind == StatusKind.DamageOverTime || effect.kind == StatusKind.HealOverTime || effect.kind == StatusKind.Absorb)
+                if (effect.kind == StatusKind.DamageOverTime || effect.kind == StatusKind.HealOverTime || effect.kind == StatusKind.Absorb
+                    || effect.kind == StatusKind.ManaBurn || effect.kind == StatusKind.ManaOverTime)
                     value *= AbilityDefinition.PowerScale * autoAttack.AbilityPower;
                 bool harmful = health.IsHostileTo(on);
                 on.Effects.ServerApply(ability.displayName, ability.effectColor, effect.kind, value, effect.duration, health,
-                    effect.school, effect.anySchool, effect.interval, effect.maxStacks, harmful);
+                    effect.school, effect.anySchool && !effect.magicOnly, effect.interval, effect.maxStacks, harmful, effect.magicOnly);
             }
         }
 

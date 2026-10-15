@@ -124,7 +124,7 @@ Source konteineriai (`gameobject_template`, laukų pavadinimai — iš `Source.e
 - Virš užrakintos skrynios parašyta „Locked (Lockpicking N)“. Lockpicking keliamas C lange, Combat puslapyje (2x + 1 XP).
 - Skrynios — antras (po bosų) gatavų daiktų šaltinis; visa kita gaminama iš medžiagų.
 
-## Burtai (I etapas: iki 10 lygio)
+## Burtai (iki 20 lygio)
 
 Source burtai (`spell_template`, Tome knygos `item_template`): Warrior turi Paladin burtus, Ranger — Ranger,
 Mage — Mage (`Scripts/Editor/SourceSpells.cs`). Laukimo laikai, užkeikimo laikai, mana (bazė + už lygį), ginklo
@@ -136,6 +136,9 @@ padalintos per pusę, kaip ir mūsų HP. Atstumai: Source jardai / 120 (melee 13
 | Warrior | Mighty Blow, Holy Wrath, Radiance (1), Hammer of Might (2), Charge (3), Blessing of Champions (4), Divine Strike (5), Cleanse (6), Vengeance Aura (7), Blessing of Defense (8), Touch of Salvation (10) |
 | Ranger | Sinister Strike, Entangling Shot, Mark Target (1), Multi-Shot (2), Stunning Shot (3), Focused Evasion (4), Blindside (5), Kidney Shot (6), Vanish (7), Sabotage (8), Aimed Shot (9), Devotion (10) |
 | Mage | Fireball, Ignite, Chains of Ice (1), Scorch (2), Ice Shard (3), Boon of Clairvoyance (4), Ice Blast (5), Vim of Wisdom (6), Bind Spirit (7), Boon of Protection (8), Warmth (9), Teleport (10) |
+| Warrior 11–20 | Salvation Aura (11), Retribution (12), Righteous Storm (13), Fortification Aura (14), Wings of Freedom (15), Aegis of Valor (16), Redemption (18), Shield Block (19), Divine Protection (20) |
+| Ranger 11–20 | Sleep Arrow (11), Hamstring (12), Tactical Retreat (14), Ethereal Sting (15), Flame Arrow (16), Explosive Arrow (18), Eye Gouge (19), Arrow Flurry (20) |
+| Mage 11–20 | Deep Freeze (11), Magical Amplification (12), Wisdom of Lazarus (14), Illusion Gate (15), Remove Curse (16), Magical Dampening (18), Antimagic (19), Inferno (20) |
 
 - Pradžioje žinomi 3 pirmo lygio burtai. Kitus moko Tome knygos (kaina 10 × lygis aukso) pas mokytojus St. Revere
   aikštėje: Halfrid (Warrior), Kelda (Ranger), Gyldan (Mage) — Source mokytojai. Skaityti galima nuo burto lygio.
@@ -147,5 +150,9 @@ padalintos per pusę, kaip ir mūsų HP. Atstumai: Source jardai / 120 (melee 13
   apsauga nuo apsvaiginimo. Ikonos — po žaidėjo ir taikinio juostomis (žalias rėmelis — stiprinimas, raudonas — silpninimas).
 - **Juosta**: 1 — Attack, burtai 2, 3, 4, 7, 8, 9, 0; 5, 6 — gėrimai. Knygoje paspaudus burtą, paskui juostos vietą — burtas
   padedamas ten. Užkeikiant rodoma juosta; pajudėjus užkeikimas nutrūksta.
-- Supaprastinta: Charge — iškart šalia taikinio; Multi-Shot — 3 × 70 %; Ice Shard veikia tik ant sulėtintų (Chains of Ice),
+- II etapo efektai: Pacify (negali kirsti), pagreitis, nepažeidžiamumas, manos deginimas, mažesnis gydymas, greitesnės
+  atakos, blokavimo reitingas, Silence (negali burti). Redemption atgaivina artimiausią kritusį draugą vietoje
+  (40 % HP, 20 % manos); Illusion Gate — po 10 s nukelia į St. Revere; Tactical Retreat — šuolis atgal nuo priešo.
+- Supaprastinta: Charge — iškart šalia taikinio; Retribution veikia visada (ne tik po parry); Eye Gouge — mažiau žalos;
+  Antimagic — Silence; Remove Curse — kaip Cleanse; Multi-Shot — 3 × 70 %; Ice Shard veikia tik ant sulėtintų (Chains of Ice),
   Kidney Shot — tik ant „Incapacitate“; Sabotage — tik monstrams, kurie dar nekovoja; trūkstamos trukmės parinktos.

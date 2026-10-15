@@ -178,14 +178,14 @@ namespace RPG.Combat
             double now = NetworkManager.ServerTime.Time;
             if (now < nextAttackTime) return;
             // Stunned or incapacitated units cannot swing.
-            if (health.Effects != null && health.Effects.IsDisabled) return;
+            if (health.Effects != null && health.Effects.IsPacified) return;
 
             Vector2 from = ServerPosition(this);
             Vector2 to = ServerPosition(serverTarget);
             if (Vector2.Distance(from, to) > range + rangeTolerance) return;
 
             int damage = RollDamage(1f, out bool critical);
-            nextAttackTime = now + attackInterval;
+            nextAttackTime = now + attackInterval * (health.Effects != null ? health.Effects.AttackIntervalMultiplier : 1f);
 
             Health hitTarget = serverTarget;
             hitTarget.ApplyDamage(damage, critical, health, damageSchool);
