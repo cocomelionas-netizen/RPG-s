@@ -523,6 +523,10 @@ namespace RPG.Items
                 case InventoryMessage.NothingToCombine:
                     MessageLog.Add("You need 3 of the same gem to combine them.", MessageLog.WarningColor);
                     break;
+                case InventoryMessage.LevelTooLow:
+                    CombatTextLayer.ShowText(above, "Your level is too low", new Color(1f, 0.4f, 0.3f), 0.8f);
+                    if (item != null) MessageLog.Add($"You need level {item.itemLevel} to wear [{item.displayName}].", MessageLog.WarningColor);
+                    break;
                 case InventoryMessage.SoldOut:
                     CombatTextLayer.ShowText(above, "Sold out", new Color(1f, 0.4f, 0.3f), 0.8f);
                     MessageLog.Add("That item is sold out. Vendors restock every few minutes.", MessageLog.WarningColor);
@@ -580,6 +584,11 @@ namespace RPG.Items
             if (progress != null && !item.CanBeUsedByClass(progress.ClassIndex))
             {
                 MessageRpc(InventoryMessage.WrongClass, stack.ItemId, 0);
+                return false;
+            }
+            if (progress != null && !item.CanBeWornAtLevel(progress.Level))
+            {
+                MessageRpc(InventoryMessage.LevelTooLow, stack.ItemId, 0);
                 return false;
             }
 
@@ -727,6 +736,8 @@ namespace RPG.Items
             /// <summary>Gems combined; how many new gems travels in the item id field.</summary>
             GemsCombined,
             NothingToCombine,
+            /// <summary>The player's level is below the item's; the item travels in the item id field.</summary>
+            LevelTooLow,
         }
     }
 }

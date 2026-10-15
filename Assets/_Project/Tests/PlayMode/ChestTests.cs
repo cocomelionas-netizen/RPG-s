@@ -128,6 +128,23 @@ namespace RPG.Tests
             Assert.IsNotNull(spawner.Current);
         }
 
+        [Test]
+        public void GearDrops_StayAroundTheDroppersLevel()
+        {
+            var catalog = AssetDatabase.LoadAssetAtPath<ItemCatalog>("Assets/_Project/Data/Items/ItemCatalog.asset");
+            Assert.IsNotNull(catalog);
+            Assert.AreEqual(0f, LootDrop.LevelWeight(5, 3), "Two levels above is too high.");
+            Assert.AreEqual(1f, LootDrop.LevelWeight(3, 3), "The dropper's own level is the most likely.");
+
+            for (int level = 1; level <= 6; level++)
+            for (int i = 0; i < 40; i++)
+            {
+                Assert.IsTrue(LootDrop.PickGear(catalog, null, level, ItemRarity.Legendary, 0f, out LootItem drop));
+                Assert.LessOrEqual(drop.Item.itemLevel, level + LootDrop.LevelsAbove, $"Level {level} dropped {drop.Item.displayName}.");
+                Assert.GreaterOrEqual(drop.Item.itemLevel, level - LootDrop.LevelsBelow, $"Level {level} dropped {drop.Item.displayName}.");
+            }
+        }
+
         [UnityTest]
         public IEnumerator EliteMonster_IsTougherAndNamedSo()
         {

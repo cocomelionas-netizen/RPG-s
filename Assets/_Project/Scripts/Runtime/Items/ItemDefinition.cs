@@ -59,6 +59,8 @@ namespace RPG.Items
         [Min(0)] public int price = 10;
         [Tooltip("Index of the class (in the class catalog) that may equip it; -1 for every class.")]
         public int requiredClass = -1;
+        [Tooltip("The item's level: monsters drop gear around their own level, and a player needs this level to wear it.")]
+        [Range(1, 25)] public int itemLevel = 1;
 
         [Header("Use")]
         public ItemUse use = ItemUse.None;
@@ -84,8 +86,9 @@ namespace RPG.Items
                 case ItemRarity.Poor: return new Color(0.6f, 0.6f, 0.6f);
                 case ItemRarity.Uncommon: return new Color(0.35f, 0.9f, 0.35f);
                 case ItemRarity.Rare: return new Color(0.35f, 0.6f, 1f);
-                case ItemRarity.Epic: return new Color(0.75f, 0.4f, 1f);
-                case ItemRarity.Legendary: return new Color(1f, 0.6f, 0.15f);
+                // Dreadmyst's order: green, blue, gold, then purple at the top.
+                case ItemRarity.Epic: return new Color(1f, 0.78f, 0.2f);
+                case ItemRarity.Legendary: return new Color(0.75f, 0.4f, 1f);
                 default: return new Color(0.92f, 0.92f, 0.92f);
             }
         }
@@ -114,6 +117,9 @@ namespace RPG.Items
         }
 
         public bool CanBeUsedByClass(int classIndex) => requiredClass < 0 || requiredClass == classIndex;
+
+        /// <summary>Whether a player of <paramref name="playerLevel"/> may wear it (only gear has a level requirement).</summary>
+        public bool CanBeWornAtLevel(int playerLevel) => !IsEquippable || playerLevel >= itemLevel;
 
         /// <summary>Tooltip text: name, quality and slot, stats and use, with an affix when the item has one.</summary>
         /// <param name="className">Name of the required class to show (null when anyone may use it).</param>
@@ -144,6 +150,7 @@ namespace RPG.Items
             if (use == ItemUse.RestoreMana) text.AppendLine($"Use: restores {Mathf.RoundToInt(healFraction * 100f)}% mana");
             if (maxStack > 1) text.AppendLine($"Stacks up to {maxStack}");
             if (!string.IsNullOrEmpty(className)) text.AppendLine($"{className} only");
+            if (IsEquippable) text.AppendLine($"Requires level {itemLevel}");
             if (price > 0) text.AppendLine($"Sells for {(sellPrice >= 0 ? sellPrice : SellPriceWith(affix))} gold");
             text.Append(IsEquippable ? "Click to equip" : use != ItemUse.None ? "Click to use" : isGem ? "Click, then click the item to set it into" : "");
             return text.ToString().TrimEnd();

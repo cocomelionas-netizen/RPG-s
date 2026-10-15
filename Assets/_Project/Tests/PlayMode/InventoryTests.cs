@@ -89,8 +89,24 @@ namespace RPG.Tests
         }
 
         [UnityTest]
+        public IEnumerator Gear_AboveYourLevel_CannotBeWorn()
+        {
+            ItemDefinition sword = Item("IronSword");
+            Assert.Greater(sword.itemLevel, 1);
+            inventory.ServerAddItem(sword, 1, false);
+            yield return null;
+
+            Assert.IsFalse(inventory.ServerEquip(FindInBag(sword)), "A level 1 character cannot wear it yet.");
+            SetLevel(sword.itemLevel);
+            yield return null;
+            Assert.IsTrue(inventory.ServerEquip(FindInBag(sword)));
+        }
+
+        [UnityTest]
         public IEnumerator EquippingWeapon_AddsDamage_AndTakingItOffRemovesIt()
         {
+            SetLevel(10);
+            yield return null;
             int minBefore = autoAttack.MinDamage;
             ItemDefinition sword = Item("IronSword");
             Assert.AreEqual(1, inventory.ServerAddItem(sword, 1, false));
@@ -112,6 +128,8 @@ namespace RPG.Tests
         [UnityTest]
         public IEnumerator Armor_RaisesHealthAndReducesDamage()
         {
+            SetLevel(10);
+            yield return null;
             int maxBefore = playerHealth.Max;
             ItemDefinition chainmail = Item("Chainmail");
             inventory.ServerAddItem(chainmail, 1, false);
@@ -192,6 +210,12 @@ namespace RPG.Tests
 
             Assert.IsFalse(inventory.ServerPickUp(loot));
             Assert.AreEqual(0, inventory.CountOf(Item("IronBoots")));
+        }
+
+        /// <summary>Makes the player a warrior of <paramref name="level"/>, high enough to wear the gear a test needs.</summary>
+        private void SetLevel(int level)
+        {
+            player.GetComponent<RPG.Progression.CharacterProgress>().ServerLoad(0, level, 0, default, 0);
         }
 
         private static ItemDefinition Item(string fileName)

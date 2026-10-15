@@ -87,6 +87,8 @@ namespace RPG.Tests
             ItemDefinition sword = Item("IronSword");
             ItemDefinition emerald = Item("ChippedEmerald");
             inventory.ServerAddItem(sword, 1, false, 0, ItemStack.EmptySocket);
+            // High enough to wear the sword.
+            player.GetComponent<CharacterProgress>().ServerLoad(0, sword.itemLevel, 0, default, 0);
             yield return null;
             Assert.IsTrue(inventory.ServerEquip(FindInBag(sword)));
             Assert.AreEqual(ItemStack.EmptySocket, inventory.GetEquipped(ItemSlot.Weapon).Socket);

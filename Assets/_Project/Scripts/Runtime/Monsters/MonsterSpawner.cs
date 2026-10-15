@@ -18,6 +18,8 @@ namespace RPG.Monsters
         [SerializeField, Min(0f)] private float respawnSeconds = 20f;
         [Tooltip("Chance that a spawned monster is an elite (tougher, better rewards).")]
         [SerializeField, Range(0f, 1f)] private float eliteChance = 0.08f;
+        [Tooltip("The level of the monsters at this spot (0 keeps the prefab's).")]
+        [SerializeField, Min(0)] private int level;
 
         private readonly List<NetworkObject> alive = new List<NetworkObject>();
         private readonly List<float> respawnTimes = new List<float>();
@@ -30,6 +32,13 @@ namespace RPG.Monsters
         {
             get => eliteChance;
             set => eliteChance = Mathf.Clamp01(value);
+        }
+
+        /// <summary>The level of the monsters at this spot (0 keeps the prefab's).</summary>
+        public int Level
+        {
+            get => level;
+            set => level = Mathf.Max(0, value);
         }
 
         public float RespawnSeconds
@@ -102,7 +111,11 @@ namespace RPG.Monsters
             }
 
             GameObject monster = Instantiate(monsterPrefab, point, Quaternion.identity);
-            if (monster.TryGetComponent(out MonsterAI ai)) ai.Home = point;
+            if (monster.TryGetComponent(out MonsterAI ai))
+            {
+                ai.Home = point;
+                if (level > 0) ai.ServerOverrideLevel(level);
+            }
 
             var networkObject = monster.GetComponent<NetworkObject>();
             networkObject.Spawn(destroyWithScene: true);

@@ -19,24 +19,31 @@ namespace RPG.World
         [SerializeField] private Vector2Int gold = new Vector2Int(2, 6);
         [SerializeField] private GameObject lootBagPrefab;
         [SerializeField] private AffixCatalog affixes;
+        [Tooltip("Gear dropped by level, around the chest's level.")]
+        [SerializeField] private ItemCatalog gear;
+        [Tooltip("Times the gear chance is rolled when it is opened.")]
+        [SerializeField, Min(0)] private int gearRolls = 2;
         [SerializeField, Range(0f, 1f)] private float socketChance = 0.25f;
         [SerializeField, Min(0.3f)] private float openRange = 1.2f;
 
         private static readonly List<LootChest> Chests = new List<LootChest>();
+        private readonly NetworkVariable<int> networkLevel = new NetworkVariable<int>(
+            0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
         private bool opened;
 
         /// <summary>Every spawned chest (on every peer).</summary>
         public static IReadOnlyList<LootChest> All => Chests;
 
         public string DisplayName => displayName;
-        public int Level => level;
+        public int Level => IsSpawned && networkLevel.Value > 0 ? networkLevel.Value : level;
         public float OpenRange => openRange;
 
         /// <summary>"Oak Chest Lv4", as shown above it.</summary>
-        public string Label => $"{displayName} Lv{level}";
+        public string Label => $"{displayName} Lv{Level}";
 
         /// <summary>Sets what the chest holds (used by the scene builder).</summary>
-        public void Configure(string chestName, int chestLevel, LootEntry[] entries, Vector2Int goldRange, GameObject bagPrefab, AffixCatalog affixCatalog)
+        public void Configure(string chestName, int chestLevel, LootEntry[] entries, Vector2Int goldRange, GameObject bagPrefab,
+            AffixCatalog affixCatalog, ItemCatalog gearCatalog = null, int gearRollCount = 2)
         {
             displayName = chestName;
             level = Mathf.Max(1, chestLevel);
@@ -44,9 +51,21 @@ namespace RPG.World
             gold = new Vector2Int(Mathf.Max(0, goldRange.x), Mathf.Max(goldRange.x, goldRange.y));
             lootBagPrefab = bagPrefab;
             affixes = affixCatalog;
+            gear = gearCatalog;
+            gearRolls = Mathf.Max(0, gearRollCount);
         }
 
-        public override void OnNetworkSpawn() => Chests.Add(this);
+        /// <summary>Server, before spawning: the level of this spot's chest (its gear drops come from around it).</summary>
+        public void ServerOverrideLevel(int newLevel)
+        {
+            level = Mathf.Clamp(newLevel, 1, 25);
+        }
+
+        public override void OnNetworkSpawn()
+        {
+            Chests.Add(this);
+            if (IsServer) networkLevel.Value = level;
+        }
 
         public override void OnNetworkDespawn() => Chests.Remove(this);
 
@@ -60,7 +79,9 @@ namespace RPG.World
             opened = true;
             if (gold.y > 0 && opener.TryGetComponent(out Inventory inventory))
                 inventory.ServerAddGold(Random.Range(gold.x, gold.y + 1));
-            LootDrop.Spawn(lootBagPrefab, transform.position + new Vector3(0f, -0.25f, 0f), loot, affixes, level, socketChance);
+            // The table once (junk, potions, gems), the gear chance several times.
+            LootDrop.Spawn(lootBagPrefab, transform.position + new Vector3(0f, -0.25f, 0f), loot, gear, affixes, level, socketChance,
+                1, Mathf.Max(0, gearRolls - 1));
             NetworkObject.Despawn(true);
             return true;
         }
