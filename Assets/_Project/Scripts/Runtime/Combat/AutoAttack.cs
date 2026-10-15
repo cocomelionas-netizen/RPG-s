@@ -9,10 +9,10 @@ using Random = UnityEngine.Random;
 namespace RPG.Combat
 {
     /// <summary>
-    /// Melee auto-attack resolved on the server. The owner only asks to attack a target;
+    /// Auto-attack resolved on the server. The owner only asks to attack a target;
     /// the server checks hostility, range and the attack interval, rolls the damage
-    /// and tells everyone to play the attack animation.
-    /// Stats are fixed for now and will come from classes and items later.
+    /// and tells everyone to play the attack animation (and a projectile for ranged attackers).
+    /// Players get their stats from their class and level (<see cref="SetStats"/>), monsters from the prefab.
     /// </summary>
     [RequireComponent(typeof(Health))]
     public class AutoAttack : NetworkBehaviour
@@ -26,6 +26,8 @@ namespace RPG.Combat
         [SerializeField, Range(0f, 1f)] private float critChance = 0.1f;
         [Tooltip("Extra range the server allows, because positions it sees are slightly out of date.")]
         [SerializeField, Min(0f)] private float rangeTolerance = 0.35f;
+        [Tooltip("Ranged attackers shoot a projectile of this color; alpha 0 means melee.")]
+        [SerializeField] private Color projectileColor = Color.clear;
 
         private Health health;
         private CharacterAnimator characterAnimator;
@@ -35,6 +37,10 @@ namespace RPG.Combat
 
         public float Range => range;
         public float AttackInterval => attackInterval;
+        public float RangeTolerance => rangeTolerance;
+        public int MinDamage => minDamage;
+        public int MaxDamage => maxDamage;
+        public float CritChance => critChance;
 
         /// <summary>Server only: what this unit is attacking.</summary>
         public Health ServerTarget => serverTarget;
@@ -47,6 +53,27 @@ namespace RPG.Combat
             health = GetComponent<Health>();
             characterAnimator = GetComponent<CharacterAnimator>();
             movement = GetComponent<PlayerMovement>();
+        }
+
+        /// <summary>
+        /// Sets the attack stats (from class and level). Call it on every peer so the owner walks into the right range.
+        /// </summary>
+        public void SetStats(int newMinDamage, int newMaxDamage, float newInterval, float newRange, float newCritChance, Color newProjectileColor)
+        {
+            minDamage = Mathf.Max(0, newMinDamage);
+            maxDamage = Mathf.Max(minDamage, newMaxDamage);
+            attackInterval = Mathf.Max(0.1f, newInterval);
+            range = Mathf.Max(0.1f, newRange);
+            critChance = Mathf.Clamp01(newCritChance);
+            projectileColor = newProjectileColor;
+        }
+
+        /// <summary>Server: one damage roll (auto-attack damage times <paramref name="multiplier"/>, critical hits double it).</summary>
+        public int RollDamage(float multiplier, out bool critical)
+        {
+            critical = Random.value < critChance;
+            int damage = Mathf.RoundToInt(Random.Range(minDamage, maxDamage + 1) * multiplier);
+            return Mathf.Max(1, damage) * (critical ? 2 : 1);
         }
 
         // ---------- Owner ----------
@@ -123,8 +150,7 @@ namespace RPG.Combat
             Vector2 to = ServerPosition(serverTarget);
             if (Vector2.Distance(from, to) > range + rangeTolerance) return;
 
-            bool critical = Random.value < critChance;
-            int damage = Random.Range(minDamage, maxDamage + 1) * (critical ? 2 : 1);
+            int damage = RollDamage(1f, out bool critical);
             nextAttackTime = now + attackInterval;
 
             serverTarget.ApplyDamage(damage, critical, health);
@@ -136,6 +162,8 @@ namespace RPG.Combat
         {
             if (IsOwner && movement != null) movement.FaceTowards(direction);
             if (characterAnimator != null) characterAnimator.PlayOneShot(AttackClip);
+            if (projectileColor.a > 0f)
+                CombatEffects.Projectile(transform.position, (Vector2)transform.position + direction, projectileColor);
         }
 
         /// <summary>Where the server believes a unit stands (players: last validated position).</summary>

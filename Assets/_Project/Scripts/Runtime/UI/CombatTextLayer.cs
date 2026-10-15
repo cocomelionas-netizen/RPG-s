@@ -7,6 +7,7 @@ namespace RPG.UI
     /// <summary>
     /// Floating damage numbers drawn on the screen canvas above where the hit landed.
     /// White: damage you deal, yellow and bigger: critical, red: damage you take.
+    /// Also shows other short messages (heals, experience, level ups) with <see cref="ShowText"/>.
     /// </summary>
     [RequireComponent(typeof(RectTransform))]
     public class CombatTextLayer : MonoBehaviour
@@ -47,14 +48,26 @@ namespace RPG.UI
             if (instance != null) instance.Spawn(worldPosition, amount, critical, hurtsLocalPlayer);
         }
 
+        /// <summary>Any short floating text, for example "+12" for a heal or "Level 2!".</summary>
+        public static void ShowText(Vector3 worldPosition, string message, Color color, float sizeScale = 1f)
+        {
+            if (instance != null) instance.Spawn(worldPosition, message, color, sizeScale);
+        }
+
         private void Spawn(Vector3 worldPosition, int amount, bool critical, bool hurtsLocalPlayer)
+        {
+            Color color = hurtsLocalPlayer ? new Color(1f, 0.3f, 0.25f) : critical ? new Color(1f, 0.85f, 0.2f) : Color.white;
+            Spawn(worldPosition, critical ? amount + "!" : amount.ToString(), color, critical ? 1.4f : 1f);
+        }
+
+        private void Spawn(Vector3 worldPosition, string message, Color color, float sizeScale)
         {
             Entry entry = entries.Find(e => !e.Text.gameObject.activeSelf) ?? CreateEntry();
             entry.WorldPosition = worldPosition + (Vector3)(Random.insideUnitCircle * 0.1f);
             entry.Age = 0f;
-            entry.Color = hurtsLocalPlayer ? new Color(1f, 0.3f, 0.25f) : critical ? new Color(1f, 0.85f, 0.2f) : Color.white;
-            entry.Text.text = critical ? amount + "!" : amount.ToString();
-            entry.Text.fontSize = critical ? Mathf.RoundToInt(fontSize * 1.4f) : fontSize;
+            entry.Color = color;
+            entry.Text.text = message;
+            entry.Text.fontSize = Mathf.RoundToInt(fontSize * sizeScale);
             entry.Text.gameObject.SetActive(true);
             Place(entry);
         }

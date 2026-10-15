@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using RPG.Combat;
 using RPG.Navigation;
+using RPG.Progression;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -25,12 +26,18 @@ namespace RPG.Monsters
     ///   with <see cref="AutoAttack"/> and calls nearby idle monsters to help.
     /// - Evade: when pulled too far from home, when its targets are dead or gone, or when it cannot reach them,
     ///   it walks home ignoring damage and returns to full health (no kiting monsters across the map).
-    /// - Dead: removed after a short while; a <see cref="MonsterSpawner"/> brings a new one later.
+    /// - Dead: every living player that fought it gets experience; the corpse is removed after a short while
+    ///   and a <see cref="MonsterSpawner"/> brings a new one later.
     /// Clients never run this; they only see the replicated movement, health and attack animations.
     /// </summary>
     [RequireComponent(typeof(Health), typeof(AutoAttack), typeof(MonsterMotion))]
     public class MonsterAI : NetworkBehaviour
     {
+        [Header("Reward")]
+        [SerializeField, Min(1)] private int level = 1;
+        [Tooltip("Experience for each player who fought it (less for players above its level).")]
+        [SerializeField, Min(0)] private int experienceReward = 20;
+
         [Header("Aggro")]
         [SerializeField, Min(0f)] private float aggroRadius = 3f;
         [Tooltip("Idle monsters this close join the fight when this one is pulled.")]
@@ -88,6 +95,11 @@ namespace RPG.Monsters
                 hasHome = true;
             }
         }
+
+        /// <summary>Shown on the target frame and used to scale experience.</summary>
+        public int Level => level;
+
+        public int ExperienceReward => experienceReward;
 
         public float AggroRadius
         {
@@ -245,6 +257,17 @@ namespace RPG.Monsters
             return best;
         }
 
+        private void AwardExperience()
+        {
+            if (experienceReward <= 0) return;
+            foreach (Health fighter in threat.Keys)
+            {
+                if (fighter == null || !fighter.IsSpawned || fighter.IsDead) continue;
+                if (fighter.TryGetComponent(out CharacterProgress progress))
+                    progress.ServerAddExperience(LevelCurve.KillExperience(experienceReward, level, progress.Level));
+            }
+        }
+
         // ---------- States ----------
 
         private void UpdateIdle()
@@ -341,6 +364,7 @@ namespace RPG.Monsters
 
         private void OnDied()
         {
+            AwardExperience();
             State = MonsterState.Dead;
             CurrentTarget = null;
             threat.Clear();

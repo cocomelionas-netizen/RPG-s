@@ -9,6 +9,7 @@ using RPG.Monsters;
 using RPG.Navigation;
 using RPG.Networking;
 using RPG.Player;
+using RPG.Progression;
 using RPG.UI;
 using RPG.World;
 using Unity.Netcode;
@@ -43,6 +44,14 @@ namespace RPG.EditorTools
         private const string PlayerArtFolder = PlaceholderArtGenerator.Folder + "/Player";
         private const string GoblinAnimationSetPath = "Assets/_Project/Data/Characters/Goblin_AnimationSet.asset";
         private const string GoblinArtFolder = PlaceholderArtGenerator.Folder + "/Goblin";
+        private const string RangerAnimationSetPath = "Assets/_Project/Data/Characters/Ranger_AnimationSet.asset";
+        private const string RangerArtFolder = PlaceholderArtGenerator.Folder + "/Ranger";
+        private const string MageAnimationSetPath = "Assets/_Project/Data/Characters/Mage_AnimationSet.asset";
+        private const string MageArtFolder = PlaceholderArtGenerator.Folder + "/Mage";
+        private const string ClassesFolder = "Assets/_Project/Data/Classes";
+        private const string AbilitiesFolder = "Assets/_Project/Data/Abilities";
+        // Visible radius of the GroundRing sprite at scale 1 (128 px wide, ring at 82 %, 256 px per unit).
+        private const float GroundRingRadius = 0.205f;
         private const string Renderer2DPath = "Assets/_Project/Settings/Rendering/Renderer2D.asset";
         private static readonly string[] PipelineAssetPaths =
         {
@@ -81,6 +90,11 @@ namespace RPG.EditorTools
             Sprite targetRingSprite = PlaceholderArtGenerator.GroundRing("TargetRing", new Color(0.95f, 0.2f, 0.15f, 0.9f));
             GameObject dummyPrefab = CreateDummyPrefab(PlaceholderArtGenerator.TrainingDummy("TrainingDummy"), barSprite);
             GameObject goblinPrefab = CreateGoblinPrefab(goblinAnimations, barSprite);
+            CharacterAnimationSet rangerAnimations = CreateCharacterAnimationSet("Ranger", RangerArtFolder, RangerAnimationSetPath, new Color(0.2f, 0.45f, 0.22f), null);
+            CharacterAnimationSet mageAnimations = CreateCharacterAnimationSet("Mage", MageArtFolder, MageAnimationSetPath, new Color(0.45f, 0.22f, 0.62f), null);
+            ClassCatalog classes = CreateClasses(playerAnimations, rangerAnimations, mageAnimations);
+            Sprite projectileSprite = PlaceholderArtGenerator.Orb("Projectile");
+            Sprite effectRingSprite = PlaceholderArtGenerator.GroundRing("EffectRing", Color.white);
 
             EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
 
@@ -96,7 +110,7 @@ namespace RPG.EditorTools
             CreateEventSystem();
 
             // Players are not placed in the scene: the server spawns one per connection at the spawn point.
-            GameObject playerPrefab = CreatePlayerPrefab(playerAnimations, barSprite);
+            GameObject playerPrefab = CreatePlayerPrefab(playerAnimations, barSprite, classes);
             var spawnPoint = new GameObject("Player Spawn").transform;
             spawnPoint.position = grid.GetCellCenterWorld(new Vector3Int(MapSize / 2, MapSize / 2, 0));
 
@@ -104,6 +118,7 @@ namespace RPG.EditorTools
             CreateCamera(spawnPoint);
             CreateClickMarker(markerSprite, null);
             CreateTargetIndicator(targetRingSprite);
+            new GameObject("Combat Effects").AddComponent<CombatEffects>().Configure(projectileSprite, effectRingSprite, GroundRingRadius);
             PlaceDummies(grid, dummyPrefab);
             PlaceMonsterCamps(grid, goblinPrefab);
             CreateHud();
@@ -233,7 +248,7 @@ namespace RPG.EditorTools
             go.AddComponent<InputSystemUIInputModule>();
         }
 
-        private static GameObject CreatePlayerPrefab(CharacterAnimationSet animations, Sprite barSprite)
+        private static GameObject CreatePlayerPrefab(CharacterAnimationSet animations, Sprite barSprite, ClassCatalog classes)
         {
             var player = new GameObject("Player");
 
@@ -263,6 +278,11 @@ namespace RPG.EditorTools
             player.AddComponent<AutoAttack>();
             player.AddComponent<PlayerTargeting>();
             player.AddComponent<PlayerRespawn>();
+            var progress = player.AddComponent<CharacterProgress>();
+            var progressObject = new SerializedObject(progress);
+            progressObject.FindProperty("catalog").objectReferenceValue = classes;
+            progressObject.ApplyModifiedPropertiesWithoutUndo();
+            player.AddComponent<AbilityCaster>();
             AddHealthPresenter(player, barSprite, 0.85f);
             AddHitbox(player, new Vector2(0.36f, 0.62f), new Vector2(0f, 0.34f));
 
@@ -478,6 +498,89 @@ namespace RPG.EditorTools
             return prefab;
         }
 
+        private static ClassCatalog CreateClasses(CharacterAnimationSet warriorLook, CharacterAnimationSet rangerLook, CharacterAnimationSet mageLook)
+        {
+            var steel = new Color(0.85f, 0.85f, 0.95f);
+            var green = new Color(0.45f, 0.95f, 0.4f);
+            var fire = new Color(1f, 0.5f, 0.15f);
+            var frost = new Color(0.5f, 0.85f, 1f);
+            var heal = new Color(0.4f, 1f, 0.5f);
+
+            CharacterClassDefinition warrior = CreateClass("Warrior", warriorLook, 110, 11, 8, 12, 1f, 1.5f, 0.9f, 0.1f, Color.clear, new[]
+            {
+                CreateAbility("Warrior_HeavyStrike", "Heavy Strike", AbilityKind.TargetDamage, 6f, 1f, 0f, 2.2f, 0f, steel),
+                CreateAbility("Warrior_Whirlwind", "Whirlwind", AbilityKind.SelfArea, 10f, 0f, 1.4f, 1.3f, 0f, steel),
+                CreateAbility("Warrior_SecondWind", "Second Wind", AbilityKind.SelfHeal, 30f, 0f, 0f, 0f, 0.3f, heal),
+            });
+            CharacterClassDefinition ranger = CreateClass("Ranger", rangerLook, 90, 9, 6, 9, 0.8f, 1.7f, 5f, 0.15f, new Color(0.85f, 0.75f, 0.45f), new[]
+            {
+                CreateAbility("Ranger_AimedShot", "Aimed Shot", AbilityKind.TargetDamage, 7f, 6f, 0f, 2.2f, 0f, green),
+                CreateAbility("Ranger_Volley", "Volley", AbilityKind.TargetArea, 10f, 6f, 1.3f, 1.2f, 0f, green),
+                CreateAbility("Ranger_Mend", "Mend", AbilityKind.SelfHeal, 30f, 0f, 0f, 0f, 0.25f, heal),
+            });
+            CharacterClassDefinition mage = CreateClass("Mage", mageLook, 80, 8, 5, 8, 0.8f, 1.8f, 4.5f, 0.1f, new Color(0.7f, 0.5f, 1f), new[]
+            {
+                CreateAbility("Mage_Fireball", "Fireball", AbilityKind.TargetDamage, 5f, 5.5f, 0f, 2.8f, 0f, fire),
+                CreateAbility("Mage_Flamestrike", "Flamestrike", AbilityKind.TargetArea, 12f, 5.5f, 1.4f, 1.8f, 0f, fire),
+                CreateAbility("Mage_FrostNova", "Frost Nova", AbilityKind.SelfArea, 14f, 0f, 1.8f, 1.4f, 0f, frost),
+            });
+
+            var catalog = LoadOrCreateAsset<ClassCatalog>($"{ClassesFolder}/ClassCatalog.asset");
+            // Players store the index, so keep this order.
+            catalog.classes = new[] { warrior, ranger, mage };
+            EditorUtility.SetDirty(catalog);
+            return catalog;
+        }
+
+        private static CharacterClassDefinition CreateClass(string className, CharacterAnimationSet look, int baseHealth, int healthPerLevel,
+            int minDamage, int maxDamage, float damagePerLevel, float attackInterval, float attackRange, float critChance,
+            Color projectileColor, AbilityDefinition[] abilities)
+        {
+            var definition = LoadOrCreateAsset<CharacterClassDefinition>($"{ClassesFolder}/{className}.asset");
+            definition.displayName = className;
+            definition.animations = look;
+            definition.baseHealth = baseHealth;
+            definition.healthPerLevel = healthPerLevel;
+            definition.minDamage = minDamage;
+            definition.maxDamage = maxDamage;
+            definition.damagePerLevel = damagePerLevel;
+            definition.attackInterval = attackInterval;
+            definition.attackRange = attackRange;
+            definition.critChance = critChance;
+            definition.projectileColor = projectileColor;
+            definition.abilities = abilities;
+            EditorUtility.SetDirty(definition);
+            return definition;
+        }
+
+        private static AbilityDefinition CreateAbility(string fileName, string displayName, AbilityKind kind, float cooldown,
+            float range, float radius, float damageMultiplier, float healFraction, Color effectColor)
+        {
+            var ability = LoadOrCreateAsset<AbilityDefinition>($"{AbilitiesFolder}/{fileName}.asset");
+            ability.displayName = displayName;
+            ability.kind = kind;
+            ability.cooldown = cooldown;
+            ability.range = range;
+            ability.radius = radius;
+            ability.damageMultiplier = damageMultiplier;
+            ability.healFraction = healFraction;
+            ability.effectColor = effectColor;
+            EditorUtility.SetDirty(ability);
+            return ability;
+        }
+
+        private static T LoadOrCreateAsset<T>(string path) where T : ScriptableObject
+        {
+            Directory.CreateDirectory(Path.GetDirectoryName(path));
+            var asset = AssetDatabase.LoadAssetAtPath<T>(path);
+            if (asset == null)
+            {
+                asset = ScriptableObject.CreateInstance<T>();
+                AssetDatabase.CreateAsset(asset, path);
+            }
+            return asset;
+        }
+
         private static GameObject CreateGoblinPrefab(CharacterAnimationSet animations, Sprite barSprite)
         {
             var goblin = new GameObject("Goblin");
@@ -506,7 +609,11 @@ namespace RPG.EditorTools
             attackObject.FindProperty("critChance").floatValue = 0.05f;
             attackObject.ApplyModifiedPropertiesWithoutUndo();
 
-            goblin.AddComponent<MonsterAI>();
+            var ai = goblin.AddComponent<MonsterAI>();
+            var aiObject = new SerializedObject(ai);
+            aiObject.FindProperty("level").intValue = 2;
+            aiObject.FindProperty("experienceReward").intValue = 20;
+            aiObject.ApplyModifiedPropertiesWithoutUndo();
             AddHealthPresenter(goblin, barSprite, 0.85f);
             AddHitbox(goblin, new Vector2(0.4f, 0.65f), new Vector2(0f, 0.34f));
 
@@ -597,6 +704,23 @@ namespace RPG.EditorTools
 
             CreateUnitFrame(canvasObject.transform, "Player Frame", UnitFrameRole.LocalPlayer, new Vector2(0.5f, 0f), new Vector2(0f, 40f));
             CreateUnitFrame(canvasObject.transform, "Target Frame", UnitFrameRole.Target, new Vector2(0.5f, 1f), new Vector2(0f, -30f));
+
+            // These build their own contents at runtime.
+            CreateHudElement<ExperienceBar>(canvasObject.transform, "Experience Bar", new Vector2(0.5f, 0f), new Vector2(0.5f, 0f), new Vector2(0f, 18f), new Vector2(380f, 16f));
+            CreateHudElement<AbilityBar>(canvasObject.transform, "Ability Bar", new Vector2(0.5f, 0f), new Vector2(0.5f, 0f), new Vector2(0f, 122f), new Vector2(400f, 80f));
+            CreateHudElement<ClassPicker>(canvasObject.transform, "Class Picker", new Vector2(1f, 1f), new Vector2(1f, 1f), new Vector2(-150f, -60f), new Vector2(130f, 140f));
+        }
+
+        private static void CreateHudElement<T>(Transform canvas, string elementName, Vector2 anchor, Vector2 pivot, Vector2 position, Vector2 size) where T : Component
+        {
+            var go = new GameObject(elementName, typeof(RectTransform));
+            go.transform.SetParent(canvas, false);
+            var rect = (RectTransform)go.transform;
+            rect.anchorMin = rect.anchorMax = anchor;
+            rect.pivot = pivot;
+            rect.anchoredPosition = position;
+            rect.sizeDelta = size;
+            go.AddComponent<T>();
         }
 
         private static void CreateUnitFrame(Transform canvas, string frameName, UnitFrameRole role, Vector2 anchor, Vector2 offset)

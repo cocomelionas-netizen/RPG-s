@@ -37,8 +37,19 @@ namespace RPG.Combat
             if (barSprite != null) CreateBar();
         }
 
-        private void OnEnable() => health.Damaged += OnDamaged;
-        private void OnDisable() => health.Damaged -= OnDamaged;
+        private static readonly Color HealTextColor = new Color(0.4f, 1f, 0.45f);
+
+        private void OnEnable()
+        {
+            health.Damaged += OnDamaged;
+            health.Healed += OnHealed;
+        }
+
+        private void OnDisable()
+        {
+            health.Damaged -= OnDamaged;
+            health.Healed -= OnHealed;
+        }
 
         private void CreateBar()
         {
@@ -93,6 +104,11 @@ namespace RPG.Combat
             flashTimer = FlashSeconds;
             bool hurtsLocalPlayer = health.IsOwner && health.GetComponent<PlayerTargeting>() != null;
             CombatTextLayer.Show(transform.position + Vector3.up * damageNumberHeight, amount, critical, hurtsLocalPlayer);
+        }
+
+        private void OnHealed(int amount)
+        {
+            CombatTextLayer.ShowText(transform.position + Vector3.up * damageNumberHeight, "+" + amount, HealTextColor);
         }
     }
 }

@@ -24,19 +24,22 @@ Assets/_Project/
   Scenes/              World_Test.unity
   Data/
     Characters/        animacijų rinkiniai (CharacterAnimationSet)
+    Classes/           klasės (Warrior, Ranger, Mage) ir ClassCatalog
+    Abilities/         gebėjimai
   Settings/Rendering/  Renderer2D.asset (2D Renderer, izometrinis rūšiavimas)
   Tiles/               Tile asset'ai tilemap'ams
   Scripts/
     Runtime/           žaidimo kodas (assembly RPG.Runtime, namespace RPG.*)
       CameraSystem/    CameraFollow
       Characters/      Direction8, CharacterAnimationSet, CharacterAnimator
-      Combat/          Health, HealthRegeneration, AutoAttack, PlayerTargeting, PlayerRespawn, TrainingDummy
+      Combat/          Health, HealthRegeneration, AutoAttack, PlayerTargeting, PlayerRespawn, TrainingDummy, CombatEffects
       Monsters/        MonsterAI, MonsterMotion, MonsterSpawner
       Navigation/      NavGrid (A*), WorldNavigation (kelio paieška tilemap'e)
+      Progression/     klasės, gebėjimai, lygiai ir patirtis (CharacterProgress, AbilityCaster, LevelCurve)
       Controls/        PlayerInputReader
       Networking/      NetworkBootstrap, PlayerNetworkMovement, MovementValidator, OfflineTransport, DevConnectionPanel, DevBot
       Player/          PlayerMovement
-      UI/              UnitFrame, CombatTextLayer
+      UI/              UnitFrame, CombatTextLayer, AbilityBar, ExperienceBar, ClassPicker
       World/           ClickMarker
       Core/            rezervuota kitiems etapams
     Editor/            redaktoriaus įrankiai (RPG meniu), grafikos importo taisyklės, build meniu
@@ -67,7 +70,7 @@ Naujausia versija po kiekvieno push'o į `main` automatiškai sukuriama ir paske
 | 3 | Multiplayer pagrindas: dedikuotas serveris, serverio autoritetas judėjimui, prisijungimas | ✅ [Stage3.md](Stage3.md) |
 | 4 | Taikinio pasirinkimas ir realaus laiko kova (HP, žala, auto-attack) | ✅ [Stage4.md](Stage4.md) |
 | 5 | Monstrai ir jų AI (spawn, aggro, kelio paieška tilemap'e) | ✅ [Stage5.md](Stage5.md) |
-| 6 | Gebėjimai, klasės, lygiai ir patirtis | ⏳ |
+| 6 | Gebėjimai, klasės, lygiai ir patirtis | ✅ [Stage6.md](Stage6.md) |
 | 7 | Inventorius, ginklai, šarvai, loot | ⏳ |
 | 8 | Saugus progreso išsaugojimas serveryje (paskyros, duomenų bazė) | ⏳ |
 | 9 | Užduotys ir NPC | ⏳ |

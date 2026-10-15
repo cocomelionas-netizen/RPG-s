@@ -1,4 +1,6 @@
 using RPG.Combat;
+using RPG.Monsters;
+using RPG.Progression;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -48,13 +50,20 @@ namespace RPG.UI
             bound = health;
         }
 
+        private static string LevelText(Health unit)
+        {
+            if (unit.TryGetComponent(out CharacterProgress progress)) return $"Lv {progress.Level} {progress.ClassName}";
+            if (unit.TryGetComponent(out MonsterAI monster)) return $"Lv {monster.Level}";
+            return "";
+        }
+
         private void LateUpdate()
         {
             bool show = bound != null && bound.IsSpawned;
             if (panel.activeSelf != show) panel.SetActive(show);
             if (!show) return;
 
-            nameText.text = bound.DisplayName;
+            nameText.text = $"{bound.DisplayName}   {LevelText(bound)}";
             fill.anchorMax = new Vector2(bound.Fraction, 1f);
             fillImage.color = bound.Faction == Faction.Player ? FriendlyColor : HostileColor;
             valueText.text = bound.IsDead ? "Dead" : $"{bound.Current} / {bound.Max}";
