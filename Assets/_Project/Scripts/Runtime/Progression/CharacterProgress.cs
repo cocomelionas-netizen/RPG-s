@@ -171,9 +171,10 @@ namespace RPG.Progression
 
             // Never more points than the level has given (a damaged or edited save).
             int earned = (level.Value - 1) * AttributeRules.PointsPerLevel;
-            var spent = new AttributeSet(Mathf.Max(0, savedSpent.strength), Mathf.Max(0, savedSpent.agility),
-                Mathf.Max(0, savedSpent.intelligence), Mathf.Max(0, savedSpent.vitality));
-            int spentTotal = spent.strength + spent.agility + spent.intelligence + spent.vitality;
+            AttributeSet spent = default;
+            for (int i = 0; i < AttributeSet.Count; i++)
+                spent[(Attribute)i] = Mathf.Max(0, savedSpent[(Attribute)i]);
+            int spentTotal = spent.Total;
             if (spentTotal > earned)
             {
                 spent = default;
@@ -200,7 +201,7 @@ namespace RPG.Progression
         /// <summary>Server only: spends one point on an attribute. False when there is none to spend.</summary>
         public bool ServerSpendPoint(Attribute attribute)
         {
-            if (!IsServer || unspentPoints.Value <= 0 || attribute < Attribute.Strength || attribute > Attribute.Vitality) return false;
+            if (!IsServer || unspentPoints.Value <= 0 || attribute < Attribute.Strength || attribute > Attribute.Mana) return false;
             AttributeSet spent = spentPoints.Value;
             spent[attribute] += 1;
             unspentPoints.Value -= 1;

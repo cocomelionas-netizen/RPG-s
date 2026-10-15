@@ -36,3 +36,13 @@
 ## Testai
 
 `Tests/PlayMode/AttributeAndManaTests.cs`, papildyti `AccountTests` ir `ProgressionTests`.
+
+## Veikėjo langas (C) — Dreadmyst stiliumi
+
+- Eilutės „Pavadinimas: reikšmė“ (Health, Mana, Armor Value, Strength, Agility, Intelligence, Vitality, Damage,
+  Critical Chance), spalvos paimtos iš Dreadmyst lango: pilkai smėlinės etiketės, šviesios reikšmės, mana mėlyna.
+- Prie Health, Mana ir keturių atributų — mažas violetinis „+“. Užvedus pelę: „+1 Strength: 1 point“ ir
+  „You have invested N points.“ / „You haven't invested anything.“ (kaip Dreadmyst). Užvedus ant eilutės — aprašymas.
+- Taškus galima dėti tiesiai į **Health** (+5 HP) ir **Mana** (+5 manos), kaip Dreadmyst.
+- Iš Dreadmyst kliento (`Dreadmyst.exe`) matyti, kad jie stats ir spells perka už XP, o kainą nustato serveris
+  (`spend_exp_min`, `spend_exp_x`) — pačių skaičių kliente nėra. Mes paliekame 5 taškus už lygį.

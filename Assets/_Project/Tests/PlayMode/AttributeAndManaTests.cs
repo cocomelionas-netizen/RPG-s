@@ -156,6 +156,23 @@ namespace RPG.Tests
             Assert.AreEqual(healthBefore + AttributeRules.PointsPerLevel * AttributeRules.HealthPerVitality, playerHealth.Max);
         }
 
+        [UnityTest]
+        public IEnumerator PointsIntoHealthAndMana_RaiseThemDirectly()
+        {
+            progress.ServerAddExperience(LevelCurve.ExperienceToNext(1));
+            yield return null;
+            int healthBefore = playerHealth.Max;
+            int manaBefore = mana.Max;
+
+            Assert.IsTrue(progress.ServerSpendPoint(Attribute.Health));
+            Assert.IsTrue(progress.ServerSpendPoint(Attribute.Mana));
+            yield return null;
+
+            Assert.AreEqual(healthBefore + AttributeRules.HealthPerPoint, playerHealth.Max);
+            Assert.AreEqual(manaBefore + AttributeRules.ManaPerPoint, mana.Max);
+            Assert.AreEqual(1, progress.SpentPoints.health);
+        }
+
         // ---------- Affixes and junk ----------
 
         [UnityTest]
