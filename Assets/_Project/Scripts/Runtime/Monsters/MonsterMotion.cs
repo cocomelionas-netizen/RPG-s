@@ -49,6 +49,11 @@ namespace RPG.Monsters
         public bool IsMoving => moving;
         public float MoveSpeed => moveSpeed;
 
+        /// <summary>Server: the share of its speed it can use (0 rooted or stunned, less slowed).</summary>
+        public float StatusSpeed => effects != null ? effects.SpeedMultiplier : 1f;
+
+        private RPG.Combat.StatusEffects effects;
+
         /// <summary>Server only: where the monster is walking to (null when standing).</summary>
         public Vector2? Destination => destination;
 
@@ -158,13 +163,15 @@ namespace RPG.Monsters
 
         private void UpdateServer()
         {
+            if (effects == null) effects = GetComponent<RPG.Combat.StatusEffects>();
             repathTimer -= Time.deltaTime;
             moving = false;
 
             if (destination.HasValue && pathIndex < path.Count)
             {
                 Vector2 position = transform.position;
-                float step = moveSpeed * speedScale * Time.deltaTime;
+                // Slows and roots (status effects) hold it back.
+                float step = moveSpeed * speedScale * StatusSpeed * Time.deltaTime;
                 while (step > 0f && pathIndex < path.Count)
                 {
                     Vector2 toWaypoint = path[pathIndex] - position;

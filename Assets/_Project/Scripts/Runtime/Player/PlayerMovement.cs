@@ -54,6 +54,18 @@ namespace RPG.Player
 
         public float MoveSpeed => moveSpeed;
 
+        /// <summary>Share of the speed the player can use now (status effects: 0 when stunned or rooted).</summary>
+        public float SpeedMultiplier
+        {
+            get
+            {
+                if (effects == null) effects = GetComponent<RPG.Combat.StatusEffects>();
+                return effects != null ? effects.SpeedMultiplier : 1f;
+            }
+        }
+
+        private RPG.Combat.StatusEffects effects;
+
         /// <summary>Current click-to-move target, or null when moving with the keyboard or idle.</summary>
         public Vector2? Destination => destination;
 
@@ -100,7 +112,9 @@ namespace RPG.Player
             if (IsMoving)
                 FacingDirection = moveDirection.normalized;
 
-            Vector2 velocity = moveDirection * moveSpeed;
+            // Slows, roots and stuns (status effects) hold the player back.
+            float speed = moveSpeed * SpeedMultiplier;
+            Vector2 velocity = moveDirection * speed;
 
             if (destination.HasValue)
             {
@@ -108,7 +122,7 @@ namespace RPG.Player
                 if (IsOnLastLeg)
                 {
                     Vector2 toTarget = SteeringTarget - body.position;
-                    if (toTarget.magnitude <= moveSpeed * Time.fixedDeltaTime)
+                    if (toTarget.magnitude <= speed * Time.fixedDeltaTime && speed > 0f)
                         velocity = toTarget / Time.fixedDeltaTime;
                 }
 

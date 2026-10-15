@@ -88,6 +88,16 @@ namespace RPG.Combat
         /// <summary>Every spawned unit on this peer (for area effects and target searches).</summary>
         public static IReadOnlyList<Health> Spawned => SpawnedUnits;
 
+        private StatusEffects effects;
+
+        /// <summary>The unit's buffs and debuffs (null when it has none).</summary>
+        public StatusEffects Effects => effects;
+
+        private void Awake()
+        {
+            effects = GetComponent<StatusEffects>();
+        }
+
         public override void OnNetworkSpawn()
         {
             SpawnedUnits.Add(this);
@@ -111,22 +121,44 @@ namespace RPG.Combat
         /// <summary>Server only. Ignored for dead or invulnerable units and non-positive amounts.</summary>
         /// <param name="attacker">Who dealt the damage (monsters turn on their attackers); null when unknown.</param>
         /// <param name="school">Physical, or a magic school this unit's resist of that school reduces.</param>
-        public void ApplyDamage(int amount, bool critical, Health attacker = null, DamageSchool school = DamageSchool.Physical)
+        /// <param name="periodic">A tick of damage over time: cannot be dodged or blocked and ignores armor.</param>
+        /// <param name="ignoreDefenses">Cannot be dodged or blocked and ignores armor (Aimed Shot).</param>
+        public void ApplyDamage(int amount, bool critical, Health attacker = null, DamageSchool school = DamageSchool.Physical,
+            bool periodic = false, bool ignoreDefenses = false)
         {
             if (!IsServer || IsDead || ServerInvulnerable || amount <= 0) return;
             LastDamageTime = Time.time;
-            if (ServerDodgeChance > 0f && UnityEngine.Random.value < ServerDodgeChance)
+            StatusEffects attackerEffects = attacker != null ? attacker.Effects : null;
+            if (attackerEffects != null && !periodic) attackerEffects.ServerOnAttacked();
+            bool avoidable = !periodic && !ignoreDefenses;
+            float dodge = ServerDodgeChance + (effects != null ? effects.Total(StatusKind.Dodge) / 100f : 0f);
+            if (avoidable && ((effects != null && effects.ServerConsumeEvade()) || (dodge > 0f && UnityEngine.Random.value < dodge)))
             {
                 AvoidedRpc(AvoidKind.Dodge);
                 // Still counts as being attacked: monsters keep their threat.
                 DamageTaken?.Invoke(attacker, 0);
                 return;
             }
-            bool blocked = ServerBlockChance > 0f && UnityEngine.Random.value < ServerBlockChance;
+            bool blocked = avoidable && ServerBlockChance > 0f && UnityEngine.Random.value < ServerBlockChance;
             if (blocked) amount = Mathf.Max(1, amount / 2);
-            amount = ReduceByArmor(amount, ServerArmor);
+            if (avoidable) amount = ReduceByArmor(amount, ServerArmor);
             if (school != DamageSchool.Physical)
                 amount = Mathf.Max(1, Mathf.RoundToInt(amount * (1f - RPG.Progression.AttributeRules.ResistReduction(resists[(int)school]))));
+            // Buffs and debuffs: what the attacker deals more, what this unit takes more or less, shields.
+            if (attackerEffects != null) amount = Mathf.RoundToInt(amount * attackerEffects.DamageDealtMultiplier(school));
+            if (effects != null)
+            {
+                amount = Mathf.RoundToInt(amount * effects.DamageTakenMultiplier(school));
+                int left = effects.ServerAbsorb(amount);
+                if (left < amount && left == 0)
+                {
+                    AvoidedRpc(AvoidKind.Absorb);
+                    return;
+                }
+                amount = left;
+                effects.ServerOnDamaged();
+            }
+            if (amount <= 0) return;
 
             current.Value = Mathf.Max(0, current.Value - amount);
             if (blocked) AvoidedRpc(AvoidKind.Block);
@@ -170,7 +202,7 @@ namespace RPG.Combat
             current.Value = max.Value;
         }
 
-        private enum AvoidKind : byte { Dodge, Block }
+        private enum AvoidKind : byte { Dodge, Block, Absorb }
 
         [Rpc(SendTo.Everyone)]
         private void DamagedRpc(int amount, bool critical, DamageSchool school)
@@ -182,7 +214,7 @@ namespace RPG.Combat
         [Rpc(SendTo.Everyone)]
         private void AvoidedRpc(AvoidKind kind)
         {
-            Avoided?.Invoke(kind == AvoidKind.Dodge ? "Dodge" : "Block");
+            Avoided?.Invoke(kind == AvoidKind.Dodge ? "Dodge" : kind == AvoidKind.Block ? "Block" : "Absorb");
         }
 
         [Rpc(SendTo.Everyone)]

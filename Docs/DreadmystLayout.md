@@ -123,3 +123,29 @@ Dreadmyst konteineriai (`gameobject_template`, laukų pavadinimai — iš `Dread
   jei pakanka — 2 s rakinama (Pick Lock), tada atsidaro grobio langas su tuo, kas viduje. Nuėjus šalin — nutrūksta.
 - Virš užrakintos skrynios parašyta „Locked (Lockpicking N)“. Lockpicking keliamas C lange, Combat puslapyje (2x + 1 XP).
 - Skrynios — antras (po bosų) gatavų daiktų šaltinis; visa kita gaminama iš medžiagų.
+
+## Burtai (I etapas: iki 10 lygio)
+
+Dreadmyst burtai (`spell_template`, Tome knygos `item_template`): Warrior turi Paladin burtus, Ranger — Ranger,
+Mage — Mage (`Scripts/Editor/DreadmystSpells.cs`). Laukimo laikai, užkeikimo laikai, mana (bazė + už lygį), ginklo
+žalos procentai ir burtų formulės (rangas + (statas + statas2 × k) × koef. / (105 − rangas × d)) — Dreadmyst; sumos
+padalintos per pusę, kaip ir mūsų HP. Atstumai: Dreadmyst jardai / 120 (melee 130 → 1,1; burtai 610 → 5,1).
+
+| Klasė | Burtai (lygis) |
+|---|---|
+| Warrior | Mighty Blow, Holy Wrath, Radiance (1), Hammer of Might (2), Charge (3), Blessing of Champions (4), Divine Strike (5), Cleanse (6), Vengeance Aura (7), Blessing of Defense (8), Touch of Salvation (10) |
+| Ranger | Sinister Strike, Entangling Shot, Mark Target (1), Multi-Shot (2), Stunning Shot (3), Focused Evasion (4), Blindside (5), Kidney Shot (6), Vanish (7), Sabotage (8), Aimed Shot (9), Devotion (10) |
+| Mage | Fireball, Ignite, Chains of Ice (1), Scorch (2), Ice Shard (3), Boon of Clairvoyance (4), Ice Blast (5), Vim of Wisdom (6), Bind Spirit (7), Boon of Protection (8), Warmth (9), Teleport (10) |
+
+- Pradžioje žinomi 3 pirmo lygio burtai. Kitus moko Tome knygos (kaina 10 × lygis aukso) pas mokytojus St. Revere
+  aikštėje: Halfrid (Warrior), Kelda (Ranger), Gyldan (Mage) — Dreadmyst mokytojai. Skaityti galima nuo burto lygio.
+- **Rangai**: kiekvienas burtas 1–10 rangų, keliama už XP burtų knygoje (P). Kaina: 10 × burto lygis + 10 × rangas^1,5
+  (Dreadmyst kliente šios formulės nėra — ji serveryje). Rangas didina žalą/gydymą (formulėje) ir efektų stiprumą.
+- **Efektai** (`StatusEffects`): apsvaiginimas, sukaustymas, sulėtinimas, žala ir gydymas per laiką, daugiau/mažiau
+  gaunamos ar daromos žalos, atributų ir Intelligence stiprinimai, spell critical, išsisukimas, „Evade“, skydas
+  (Absorb), „Incapacitate“ (bet kokia žala nutraukia), nematomumas monstrams (Vanish), mana pasibaigus (Devotion),
+  apsauga nuo apsvaiginimo. Ikonos — po žaidėjo ir taikinio juostomis (žalias rėmelis — stiprinimas, raudonas — silpninimas).
+- **Juosta**: 1 — Attack, burtai 2, 3, 4, 7, 8, 9, 0; 5, 6 — gėrimai. Knygoje paspaudus burtą, paskui juostos vietą — burtas
+  padedamas ten. Užkeikiant rodoma juosta; pajudėjus užkeikimas nutrūksta.
+- Supaprastinta: Charge — iškart šalia taikinio; Multi-Shot — 3 × 70 %; Ice Shard veikia tik ant sulėtintų (Chains of Ice),
+  Kidney Shot — tik ant „Incapacitate“; Sabotage — tik monstrams, kurie dar nekovoja; trūkstamos trukmės parinktos.

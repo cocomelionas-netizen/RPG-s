@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using RPG.Characters;
 using RPG.Combat;
 using RPG.Monsters;
@@ -98,6 +99,11 @@ namespace RPG.UI
             UIFactory.Place(manaBackground.rectTransform, barAnchor, new Vector2(barsX, -14f), new Vector2(barWidth, 16f));
             manaBar = manaBackground.gameObject;
 
+            // Buffs and debuffs under the bars: a coloured square each, its initials and seconds left.
+            effectsRow = UIFactory.CreateRect("Effects", panel.transform);
+            UIFactory.Place(effectsRow, barAnchor, new Vector2(barsX, -42f), new Vector2(barWidth, EffectIconSize));
+            effectsMirrored = mirrored;
+
             panel.SetActive(false);
         }
 
@@ -157,6 +163,54 @@ namespace RPG.UI
             }
 
             UpdateFace();
+            UpdateEffects();
+        }
+
+        private const float EffectIconSize = 26f;
+        private const int MaxEffectIcons = 10;
+        private RectTransform effectsRow;
+        private bool effectsMirrored;
+        private readonly List<(Image icon, Outline border, Text label)> effectIcons = new List<(Image, Outline, Text)>();
+
+        private void UpdateEffects()
+        {
+            int shown = 0;
+            StatusEffects effects = bound.Effects;
+            double now = bound.NetworkManager != null ? bound.NetworkManager.ServerTime.Time : 0.0;
+            if (effects != null)
+            {
+                foreach (StatusView view in effects.Views)
+                {
+                    if (shown >= MaxEffectIcons) break;
+                    if (shown == effectIcons.Count)
+                    {
+                        Image icon = UIFactory.CreateImage("Effect", effectsRow, Color.white);
+                        icon.raycastTarget = false;
+                        Vector2 corner = effectsMirrored ? new Vector2(1f, 0.5f) : new Vector2(0f, 0.5f);
+                        float x = shown * (EffectIconSize + 3f) * (effectsMirrored ? -1f : 1f);
+                        UIFactory.Place(icon.rectTransform, corner, new Vector2(x, 0f), new Vector2(EffectIconSize, EffectIconSize));
+                        Outline border = icon.gameObject.AddComponent<Outline>();
+                        border.effectDistance = new Vector2(2f, -2f);
+                        Text label = UIFactory.CreateText("Label", icon.transform, 10, TextAnchor.MiddleCenter);
+                        UIFactory.Stretch(label.rectTransform);
+                        effectIcons.Add((icon, border, label));
+                    }
+                    (Image image, Outline outline, Text text) = effectIcons[shown];
+                    image.gameObject.SetActive(true);
+                    Color color = view.Color;
+                    image.color = new Color(color.r * 0.6f, color.g * 0.6f, color.b * 0.6f, 0.95f);
+                    // Red frame for debuffs, green for buffs.
+                    outline.effectColor = view.Harmful ? new Color(0.9f, 0.2f, 0.15f) : new Color(0.3f, 0.85f, 0.35f);
+                    string name = view.Name.ToString();
+                    string initials = name.Length > 0 ? name.Substring(0, Mathf.Min(2, name.Length)) : "?";
+                    int seconds = Mathf.CeilToInt((float)(view.EndsAt - now));
+                    string stacks = view.Stacks > 1 ? $"x{view.Stacks}" : "";
+                    text.text = seconds < 100 ? $"{initials}{stacks}\n{seconds}" : $"{initials}{stacks}";
+                    shown++;
+                }
+            }
+            for (int i = shown; i < effectIcons.Count; i++)
+                if (effectIcons[i].icon.gameObject.activeSelf) effectIcons[i].icon.gameObject.SetActive(false);
         }
 
         /// <summary>Shows the unit standing and facing the viewer, zoomed on the head; it does not animate.</summary>

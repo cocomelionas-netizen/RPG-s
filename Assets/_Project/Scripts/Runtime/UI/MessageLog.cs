@@ -49,7 +49,7 @@ namespace RPG.UI
             text.verticalOverflow = VerticalWrapMode.Truncate;
 
             if (Lines.Count == 0)
-                Add("Welcome! C: character, I: bag, M: map, 1: attack, 2-4: abilities, 5-6: potions.", new Color(1f, 0.85f, 0.45f));
+                Add("Welcome! C: character, P: spells, I: bag, M: map, 1: attack, 2-4 and 7-0: spells, 5-6: potions.", new Color(1f, 0.85f, 0.45f));
         }
 
         private void LateUpdate()

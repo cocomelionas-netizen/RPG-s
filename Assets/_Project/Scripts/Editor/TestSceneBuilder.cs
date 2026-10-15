@@ -36,7 +36,7 @@ namespace RPG.EditorTools
     /// test map with rocks and trees, the animated player prefab, the click marker and the follow camera.
     /// Menu: RPG > Build Test Scene. Safe to run again (it regenerates everything).
     /// </summary>
-    public static class TestSceneBuilder
+    public static partial class TestSceneBuilder
     {
         public const string ScenePath = "Assets/_Project/Scenes/World_Test.unity";
         private const string TilesFolder = "Assets/_Project/Tiles";
@@ -163,7 +163,7 @@ namespace RPG.EditorTools
             ChestPrefabs chests = CreateChestPrefabs(items, affixes, lootBagPrefab);
             CharacterAnimationSet rangerAnimations = CreateCharacterAnimationSet("Ranger", RangerArtFolder, RangerAnimationSetPath, new Color(0.2f, 0.45f, 0.22f), null);
             CharacterAnimationSet mageAnimations = CreateCharacterAnimationSet("Mage", MageArtFolder, MageAnimationSetPath, new Color(0.45f, 0.22f, 0.62f), null);
-            ClassCatalog classes = CreateClasses(playerAnimations, rangerAnimations, mageAnimations);
+            ClassCatalog classes = CreateClasses(playerAnimations, rangerAnimations, mageAnimations, items);
             Sprite projectileSprite = PlaceholderArtGenerator.Orb("Projectile");
             Sprite effectRingSprite = PlaceholderArtGenerator.GroundRing("EffectRing", Color.white);
 
@@ -370,6 +370,7 @@ namespace RPG.EditorTools
             var progressObject = new SerializedObject(progress);
             progressObject.FindProperty("catalog").objectReferenceValue = classes;
             progressObject.ApplyModifiedPropertiesWithoutUndo();
+            player.AddComponent<Spellbook>();
             player.AddComponent<AbilityCaster>();
             var inventory = player.AddComponent<Inventory>();
             var inventoryObject = new SerializedObject(inventory);
@@ -567,6 +568,8 @@ namespace RPG.EditorTools
         private static Health AddHealth(GameObject go, string unitName, bool appendOwnerId, Faction faction, int maxHealth)
         {
             var health = go.AddComponent<Health>();
+            // Every unit can carry buffs and debuffs (stuns, slows, damage over time...).
+            go.AddComponent<StatusEffects>();
             var healthObject = new SerializedObject(health);
             healthObject.FindProperty("defaultName").stringValue = unitName;
             healthObject.FindProperty("appendOwnerId").boolValue = appendOwnerId;
@@ -621,37 +624,37 @@ namespace RPG.EditorTools
             return prefab;
         }
 
-        private static ClassCatalog CreateClasses(CharacterAnimationSet warriorLook, CharacterAnimationSet rangerLook, CharacterAnimationSet mageLook)
+        /// <summary>The Tomes of each class (by class index), sold by its trainer.</summary>
+        private static readonly Dictionary<int, List<ItemDefinition>> ClassTomes = new Dictionary<int, List<ItemDefinition>>();
+
+        private static ClassCatalog CreateClasses(CharacterAnimationSet warriorLook, CharacterAnimationSet rangerLook, CharacterAnimationSet mageLook,
+            ItemCatalog items)
         {
-            var steel = new Color(0.85f, 0.85f, 0.95f);
-            var green = new Color(0.45f, 0.95f, 0.4f);
-            var fire = new Color(1f, 0.5f, 0.15f);
-            var frost = new Color(0.5f, 0.85f, 1f);
-            var heal = new Color(0.4f, 1f, 0.5f);
 
             // Attributes, and health and mana at level 1 (half of Dreadmyst's player_class_stats, as the attributes add
             // the rest), are Dreadmyst's: warrior 75/30, ranger 60/45, mage 40/70. Both grow with LevelCurve.HealthGrowth.
+            // Spells are Dreadmyst's too (DreadmystSpells.cs): the Paladin's for the warrior.
+            AbilityDefinition[] warriorSpells = CreateWarriorSpells();
+            AbilityDefinition[] rangerSpells = CreateRangerSpells();
+            AbilityDefinition[] mageSpells = CreateMageSpells();
             CharacterClassDefinition warrior = CreateClass("Warrior", warriorLook, 38, 5, 9, 1f, 1.5f, 0.9f, 0.06f, Color.clear,
-                new AttributeSet(15, 10, 5, 15), RPG.Progression.Attribute.Strength, 15, new[]
-            {
-                CreateAbility("Warrior_HeavyStrike", "Heavy Strike", AbilityKind.TargetDamage, 6f, 10, 1f, 0f, 2.2f, 0f, steel),
-                CreateAbility("Warrior_Whirlwind", "Whirlwind", AbilityKind.SelfArea, 10f, 15, 0f, 1.4f, 1.3f, 0f, steel),
-                CreateAbility("Warrior_SecondWind", "Second Wind", AbilityKind.SelfHeal, 30f, 20, 0f, 0f, 0f, 0.3f, heal),
-            });
+                new AttributeSet(15, 10, 5, 15), RPG.Progression.Attribute.Strength, 15, warriorSpells);
             CharacterClassDefinition ranger = CreateClass("Ranger", rangerLook, 30, 3, 6, 0.8f, 1.7f, 5f, 0.09f, new Color(0.85f, 0.75f, 0.45f),
-                new AttributeSet(10, 15, 10, 10), RPG.Progression.Attribute.Agility, 23, new[]
-            {
-                CreateAbility("Ranger_AimedShot", "Aimed Shot", AbilityKind.TargetDamage, 7f, 12, 6f, 0f, 2.2f, 0f, green),
-                CreateAbility("Ranger_Volley", "Volley", AbilityKind.TargetArea, 10f, 18, 6f, 1.3f, 1.2f, 0f, green),
-                CreateAbility("Ranger_Mend", "Mend", AbilityKind.SelfHeal, 30f, 20, 0f, 0f, 0f, 0.25f, heal),
-            });
+                new AttributeSet(10, 15, 10, 10), RPG.Progression.Attribute.Agility, 23, rangerSpells);
             CharacterClassDefinition mage = CreateClass("Mage", mageLook, 20, 0, 3, 0.8f, 1.8f, 4.5f, 0.08f, new Color(0.7f, 0.5f, 1f),
-                new AttributeSet(5, 5, 20, 10), RPG.Progression.Attribute.Intelligence, 35, new[]
-            {
-                CreateAbility("Mage_Fireball", "Fireball", AbilityKind.TargetDamage, 5f, 15, 5.5f, 0f, 2.8f, 0f, fire),
-                CreateAbility("Mage_Flamestrike", "Flamestrike", AbilityKind.TargetArea, 12f, 25, 5.5f, 1.4f, 1.8f, 0f, fire),
-                CreateAbility("Mage_FrostNova", "Frost Nova", AbilityKind.SelfArea, 14f, 30, 0f, 1.8f, 1.4f, 0f, frost),
-            });
+                new AttributeSet(5, 5, 20, 10), RPG.Progression.Attribute.Intelligence, 35, mageSpells);
+
+            // Their Tomes go at the end of the item catalog (players keep item ids).
+            ClassTomes.Clear();
+            ClassTomes[WarriorClass] = CreateTomes(warriorSpells, WarriorClass);
+            ClassTomes[RangerClass] = CreateTomes(rangerSpells, RangerClass);
+            ClassTomes[MageClass] = CreateTomes(mageSpells, MageClass);
+            var allItems = new List<ItemDefinition>(items.items);
+            foreach (List<ItemDefinition> tomes in ClassTomes.Values)
+                foreach (ItemDefinition tome in tomes)
+                    if (!allItems.Contains(tome)) allItems.Add(tome);
+            items.items = allItems.ToArray();
+            EditorUtility.SetDirty(items);
 
             var catalog = LoadOrCreateAsset<ClassCatalog>($"{ClassesFolder}/ClassCatalog.asset");
             // Players store the index, so keep this order.
@@ -858,7 +861,21 @@ namespace RPG.EditorTools
                     catalog, MageClass, DreadmystGear.ArmorKind.Robe),
                 Jeweler(MakeVendor("JewelerVendor", "Gemma Brightstone", "Jeweler: gems, gem combining",
                     "ChippedRuby", "ChippedTopaz", "ChippedSapphire", "ChippedEmerald")),
+                Trainer("WarriorTrainer", "Halfrid", "Warrior trainer: spell Tomes", WarriorClass),
+                Trainer("RangerTrainer", "Kelda", "Ranger trainer: spell Tomes", RangerClass),
+                Trainer("MageTrainer", "Gyldan", "Mage trainer: spell Tomes", MageClass),
             };
+
+            // Dreadmyst's trainers sell their class's Tomes (as many as wanted).
+            VendorDefinition Trainer(string fileName, string trainerName, string title, int classIndex)
+            {
+                string[] tomes = ClassTomes.TryGetValue(classIndex, out List<ItemDefinition> list)
+                    ? list.Select(tome => AssetDatabase.GetAssetPath(tome).Substring(ItemsFolder.Length + 1).Replace(".asset", "")).ToArray()
+                    : Array.Empty<string>();
+                VendorDefinition trainer = MakeVendor(fileName, trainerName, title, tomes);
+                trainer.stockLimits = new int[trainer.stock.Length];
+                return trainer;
+            }
         }
 
         /// <summary>
@@ -891,8 +908,15 @@ namespace RPG.EditorTools
         private static void PlaceVendors(Grid grid, VendorDefinition[] vendors)
         {
             // In St. Revere, where Dreadmyst's heavy armor, ranged, staves merchants and jeweler stand.
-            Vector3Int[] places = DreadmystStartArea.Vendors;
-            var cloaks = new[] { new Color(0.55f, 0.15f, 0.12f), new Color(0.15f, 0.4f, 0.18f), new Color(0.3f, 0.2f, 0.6f), new Color(0.2f, 0.55f, 0.6f) };
+            // The class trainers (Dreadmyst's Halfrid, Kelda and Gyldan) stand on the town square.
+            Vector3Int[] places = DreadmystStartArea.Vendors
+                .Concat(new[] { TownCell + new Vector3Int(4, -3, 0), TownCell + new Vector3Int(4, 3, 0), TownCell + new Vector3Int(-4, 3, 0) })
+                .ToArray();
+            var cloaks = new[]
+            {
+                new Color(0.55f, 0.15f, 0.12f), new Color(0.15f, 0.4f, 0.18f), new Color(0.3f, 0.2f, 0.6f), new Color(0.2f, 0.55f, 0.6f),
+                new Color(0.85f, 0.75f, 0.35f), new Color(0.25f, 0.5f, 0.2f), new Color(0.5f, 0.3f, 0.75f),
+            };
             var parent = new GameObject("Town Vendors").transform;
 
             for (int i = 0; i < vendors.Length; i++)
@@ -1684,6 +1708,11 @@ namespace RPG.EditorTools
             characterWindow.transform.SetParent(canvasObject.transform, false);
             Stretch((RectTransform)characterWindow.transform);
             characterWindow.AddComponent<CharacterWindow>();
+
+            var spellbookWindow = new GameObject("Spellbook Window", typeof(RectTransform));
+            spellbookWindow.transform.SetParent(canvasObject.transform, false);
+            Stretch((RectTransform)spellbookWindow.transform);
+            spellbookWindow.AddComponent<SpellbookWindow>();
         }
 
         private static void CreateHudElement<T>(Transform canvas, string elementName, Vector2 anchor, Vector2 pivot, Vector2 position, Vector2 size) where T : Component
