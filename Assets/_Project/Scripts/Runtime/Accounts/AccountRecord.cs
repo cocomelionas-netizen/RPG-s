@@ -20,6 +20,7 @@ namespace RPG.Accounts
         public int classIndex;
         public int level = 1;
         public int experience;
+        public int gold;
         public ItemRecord[] bag = Array.Empty<ItemRecord>();
         public ItemRecord[] equipment = Array.Empty<ItemRecord>();
         /// <summary>False for a new character, which starts at the spawn point with the starting items.</summary>

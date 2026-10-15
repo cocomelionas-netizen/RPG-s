@@ -85,6 +85,7 @@ namespace RPG.Accounts
             if (!saved.hasBeenSaved) return;
 
             inventory.ServerLoad(ToStacks(saved.bag), ToStacks(saved.equipment));
+            inventory.ServerSetGold(saved.gold);
             var position = new Vector2(saved.x, saved.y);
             // A spot on no map (for example inside a dungeon that has closed since) keeps the spawn point.
             WorldNavigation navigation = WorldNavigation.At(position);
@@ -102,6 +103,7 @@ namespace RPG.Accounts
             record.classIndex = progress.ClassIndex;
             record.level = progress.Level;
             record.experience = progress.Experience;
+            record.gold = inventory.Gold;
             record.bag = ToRecords(inventory.BagSnapshot());
             record.equipment = ToRecords(inventory.EquipmentSnapshot());
             Vector2 position = AutoAttack.ServerPosition(this);

@@ -13,6 +13,7 @@ using RPG.Navigation;
 using RPG.Networking;
 using RPG.Player;
 using RPG.Progression;
+using RPG.Vendors;
 using RPG.UI;
 using RPG.World;
 using Unity.Netcode;
@@ -48,6 +49,11 @@ namespace RPG.EditorTools
         private const string DungeonDefinitionPath = "Assets/_Project/Data/Dungeons/GoblinDen.asset";
         private const string KingAnimationSetPath = "Assets/_Project/Data/Characters/GoblinKing_AnimationSet.asset";
         private const string KingArtFolder = PlaceholderArtGenerator.Folder + "/GoblinKing";
+        private const string VendorsFolder = "Assets/_Project/Data/Vendors";
+        private const string VendorArtFolder = PlaceholderArtGenerator.Folder + "/Vendors";
+        private const int WarriorClass = 0;
+        private const int RangerClass = 1;
+        private const int MageClass = 2;
         private const string BruteAnimationSetPath = "Assets/_Project/Data/Characters/GoblinBrute_AnimationSet.asset";
         private const string BruteArtFolder = PlaceholderArtGenerator.Folder + "/GoblinBrute";
         private const string OrcAnimationSetPath = "Assets/_Project/Data/Characters/Orc_AnimationSet.asset";
@@ -72,7 +78,10 @@ namespace RPG.EditorTools
             "Assets/Settings/Mobile_RPAsset.asset",
         };
 
-        private const int MapSize = 40;
+        private const int MapSize = 80;
+        // Around the spawn: a paved square and no rocks or trees.
+        private const int TownSquareRadius = 4;
+        private const int TownClearRadius = 7;
         private const int Seed = 12345;
         private const int TreeSeed = 777;
 
@@ -111,21 +120,21 @@ namespace RPG.EditorTools
             GameObject goblinPrefab = CreateMonsterPrefab(new MonsterSpec
             {
                 Name = "Goblin", Animations = goblinAnimations, Scale = 0.85f, Health = 45, MinDamage = 3, MaxDamage = 5,
-                AttackInterval = 2f, Level = 2, Experience = 20, MoveSpeed = 1.8f,
+                AttackInterval = 2f, Level = 2, Experience = 20, MoveSpeed = 1.8f, Gold = new Vector2Int(3, 6),
                 Loot = Loot(items, ("HealingPotion", 0.3f), ("RustySword", 0.08f), ("LeatherCap", 0.08f), ("PaddedVest", 0.08f),
                     ("WornBoots", 0.08f), ("IronSword", 0.03f)),
             }, barSprite, lootBagPrefab);
             GameObject brutePrefab = CreateMonsterPrefab(new MonsterSpec
             {
                 Name = "Goblin Brute", Animations = bruteAnimations, Scale = 1.05f, Health = 120, MinDamage = 6, MaxDamage = 10,
-                AttackInterval = 2.2f, Level = 4, Experience = 45, MoveSpeed = 1.6f,
+                AttackInterval = 2.2f, Level = 4, Experience = 45, MoveSpeed = 1.6f, Gold = new Vector2Int(10, 16),
                 Loot = Loot(items, ("HealingPotion", 0.5f), ("IronSword", 0.12f), ("IronHelm", 0.1f), ("Chainmail", 0.1f),
                     ("IronBoots", 0.1f), ("GoblinCleaver", 0.04f)),
             }, barSprite, lootBagPrefab);
             GameObject orcPrefab = CreateMonsterPrefab(new MonsterSpec
             {
                 Name = "Orc", Animations = orcAnimations, Scale = 1.15f, Health = 220, MinDamage = 10, MaxDamage = 15,
-                AttackInterval = 2f, Level = 6, Experience = 90, MoveSpeed = 1.7f,
+                AttackInterval = 2f, Level = 6, Experience = 90, MoveSpeed = 1.7f, Gold = new Vector2Int(20, 30),
                 Loot = Loot(items, ("HealingPotion", 0.6f), ("GoblinCleaver", 0.1f), ("OrcSkullHelm", 0.1f), ("OrcishPlate", 0.05f),
                     ("OrcishGreataxe", 0.05f)),
             }, barSprite, lootBagPrefab);
@@ -134,7 +143,7 @@ namespace RPG.EditorTools
             GameObject kingPrefab = CreateMonsterPrefab(new MonsterSpec
             {
                 Name = "Goblin King", Animations = kingAnimations, Scale = 1.5f, Health = 900, MinDamage = 14, MaxDamage = 20,
-                AttackInterval = 2.2f, Level = 8, Experience = 300, MoveSpeed = 1.5f,
+                AttackInterval = 2.2f, Level = 8, Experience = 300, MoveSpeed = 1.5f, Gold = new Vector2Int(150, 200),
                 Loot = Loot(items, ("HealingPotion", 1f), ("HealingPotion", 1f), ("OrcishGreataxe", 0.5f), ("OrcishPlate", 0.5f),
                     ("OrcSkullHelm", 0.4f), ("GoblinCleaver", 0.4f)),
             }, barSprite, lootBagPrefab, boss => boss.AddComponent<BossMechanics>());
@@ -171,6 +180,7 @@ namespace RPG.EditorTools
             PlaceDummies(grid, dummyPrefab);
             PlaceMonsterCamps(grid, goblinPrefab, brutePrefab, orcPrefab);
             PlaceDungeon(grid, dungeon);
+            PlaceVendors(grid, CreateVendors(items, potion));
             CreateHud();
 
             EditorSceneManager.SaveScene(EditorSceneManager.GetActiveScene(), ScenePath);
@@ -270,10 +280,11 @@ namespace RPG.EditorTools
             {
                 var cell = new Vector3Int(x, y, 0);
                 bool isPath = x == center || y == center;
-                ground.SetTile(cell, isPath ? pathTile : grassTiles[random.Next(grassTiles.Length)]);
+                bool townSquare = Mathf.Abs(x - center) <= TownSquareRadius && Mathf.Abs(y - center) <= TownSquareRadius;
+                ground.SetTile(cell, isPath || townSquare ? pathTile : grassTiles[random.Next(grassTiles.Length)]);
 
                 bool isBorder = x == 0 || y == 0 || x == MapSize - 1 || y == MapSize - 1;
-                bool nearSpawn = Mathf.Abs(x - center) <= 3 && Mathf.Abs(y - center) <= 3;
+                bool nearSpawn = Mathf.Abs(x - center) <= TownClearRadius && Mathf.Abs(y - center) <= TownClearRadius;
                 bool scatteredRock = !isPath && !nearSpawn && random.NextDouble() < 0.05;
                 if (isBorder || scatteredRock)
                     obstacles.SetTile(cell, rockTile);
@@ -451,7 +462,7 @@ namespace RPG.EditorTools
             {
                 var cell = new Vector3Int(x, y, 0);
                 bool isPath = x == center || y == center;
-                bool nearSpawn = Mathf.Abs(x - center) <= 2 && Mathf.Abs(y - center) <= 2;
+                bool nearSpawn = Mathf.Abs(x - center) <= TownClearRadius - 1 && Mathf.Abs(y - center) <= TownClearRadius - 1;
                 if (isPath || nearSpawn || obstacles.HasTile(cell) || random.NextDouble() >= 0.03)
                     continue;
 
@@ -658,6 +669,7 @@ namespace RPG.EditorTools
             public int Level;
             public int Experience;
             public float MoveSpeed;
+            public Vector2Int Gold;
             public LootEntry[] Loot;
         }
 
@@ -700,6 +712,7 @@ namespace RPG.EditorTools
             aiObject.FindProperty("aggroRadius").floatValue = 0f;
             aiObject.ApplyModifiedPropertiesWithoutUndo();
             ai.ConfigureLoot(lootBagPrefab, spec.Loot);
+            ai.GoldReward = spec.Gold;
 
             // The bar and hitbox are children, so they scale with the monster.
             AddHealthPresenter(monster, barSprite, 0.85f);
@@ -743,6 +756,60 @@ namespace RPG.EditorTools
             return dungeon;
         }
 
+        private static VendorDefinition[] CreateVendors(ItemCatalog catalog, ItemDefinition potion)
+        {
+            VendorDefinition MakeVendor(string fileName, string vendorName, string title, params string[] items)
+            {
+                var vendor = LoadOrCreateAsset<VendorDefinition>($"{VendorsFolder}/{fileName}.asset");
+                vendor.displayName = vendorName;
+                vendor.title = title;
+                var stock = new ItemDefinition[items.Length + 1];
+                for (int i = 0; i < items.Length; i++)
+                    stock[i] = AssetDatabase.LoadAssetAtPath<ItemDefinition>($"{ItemsFolder}/{items[i]}.asset");
+                stock[items.Length] = potion;
+                vendor.stock = stock;
+                EditorUtility.SetDirty(vendor);
+                return vendor;
+            }
+
+            return new[]
+            {
+                MakeVendor("WarriorVendor", "Thorin Ironhand", "Warrior weapons and armor",
+                    "MilitiaSword", "SteelLongsword", "WarAxe", "SteelHelm", "SteelBreastplate", "SteelSabatons"),
+                MakeVendor("RangerVendor", "Sylva Swiftarrow", "Ranger bows and leather",
+                    "HuntingBow", "Longbow", "ElvenBow", "LeatherHood", "StuddedJerkin", "RangerBoots"),
+                MakeVendor("MageVendor", "Elara the Arcanist", "Mage staves and robes",
+                    "ApprenticeStaff", "RunedStaff", "StaffOfEmbers", "SilkHood", "ApprenticeRobe", "EnchantedRobe", "SilkSlippers"),
+            };
+        }
+
+        private static void PlaceVendors(Grid grid, VendorDefinition[] vendors)
+        {
+            int center = MapSize / 2;
+            // Warrior north-east, ranger west, mage east of the spawn, around the town square.
+            var places = new[] { new Vector3Int(center + 1, center + 5, 0), new Vector3Int(center - 5, center + 1, 0), new Vector3Int(center + 5, center - 1, 0) };
+            var cloaks = new[] { new Color(0.55f, 0.15f, 0.12f), new Color(0.15f, 0.4f, 0.18f), new Color(0.3f, 0.2f, 0.6f) };
+            var parent = new GameObject("Town Vendors").transform;
+
+            for (int i = 0; i < vendors.Length; i++)
+            {
+                var npc = new GameObject($"Vendor {i + 1} {vendors[i].displayName}");
+                npc.transform.SetParent(parent, false);
+                npc.transform.position = grid.GetCellCenterWorld(places[i]);
+
+                var spriteRenderer = npc.AddComponent<SpriteRenderer>();
+                spriteRenderer.sprite = PlaceholderArtGenerator.CharacterFrame(VendorArtFolder, $"Vendor_{i + 1}", cloaks[i], Vector2.down, 0f, 0f);
+                spriteRenderer.spriteSortPoint = SpriteSortPoint.Pivot;
+
+                // Clicked to trade; does not block walking.
+                var box = npc.AddComponent<BoxCollider2D>();
+                box.isTrigger = true;
+                box.size = new Vector2(0.4f, 0.7f);
+                box.offset = new Vector2(0f, 0.35f);
+                npc.AddComponent<Vendor>().Configure(vendors[i]);
+            }
+        }
+
         private static void PlaceDungeon(Grid grid, DungeonDefinition dungeon)
         {
             new GameObject("Dungeon Manager").AddComponent<DungeonManager>().Configure(dungeon);
@@ -784,6 +851,10 @@ namespace RPG.EditorTools
             var metal = new Color(0.62f, 0.64f, 0.7f);
             var leather = new Color(0.55f, 0.38f, 0.22f);
             var orcish = new Color(0.45f, 0.3f, 0.25f);
+            var steel = new Color(0.75f, 0.78f, 0.85f);
+            var wood = new Color(0.6f, 0.45f, 0.28f);
+            var cloth = new Color(0.55f, 0.4f, 0.7f);
+            var arcane = new Color(0.45f, 0.35f, 0.9f);
 
             potion = LoadOrCreateAsset<ItemDefinition>($"{ItemsFolder}/HealingPotion.asset");
             potion.displayName = "Healing Potion";
@@ -793,6 +864,8 @@ namespace RPG.EditorTools
             potion.use = ItemUse.Heal;
             potion.healFraction = 0.35f;
             potion.maxStack = 10;
+            potion.price = 10;
+            potion.requiredClass = -1;
             potion.iconColor = new Color(0.85f, 0.15f, 0.2f);
             EditorUtility.SetDirty(potion);
 
@@ -801,18 +874,42 @@ namespace RPG.EditorTools
             catalog.items = new[]
             {
                 potion,
-                CreateItem("RustySword", "Rusty Sword", ItemSlot.Weapon, ItemRarity.Common, 2, 0, 0, metal * 0.8f),
-                CreateItem("IronSword", "Iron Sword", ItemSlot.Weapon, ItemRarity.Uncommon, 4, 0, 0, metal),
-                CreateItem("GoblinCleaver", "Goblin Cleaver", ItemSlot.Weapon, ItemRarity.Rare, 7, 10, 0, new Color(0.5f, 0.6f, 0.4f)),
-                CreateItem("OrcishGreataxe", "Orcish Greataxe", ItemSlot.Weapon, ItemRarity.Epic, 12, 20, 0, orcish),
-                CreateItem("LeatherCap", "Leather Cap", ItemSlot.Head, ItemRarity.Common, 0, 0, 4, leather),
-                CreateItem("IronHelm", "Iron Helm", ItemSlot.Head, ItemRarity.Uncommon, 0, 5, 8, metal),
-                CreateItem("OrcSkullHelm", "Orc Skull Helm", ItemSlot.Head, ItemRarity.Rare, 0, 15, 12, new Color(0.85f, 0.82f, 0.7f)),
-                CreateItem("PaddedVest", "Padded Vest", ItemSlot.Chest, ItemRarity.Common, 0, 0, 6, leather),
-                CreateItem("Chainmail", "Chainmail", ItemSlot.Chest, ItemRarity.Uncommon, 0, 10, 12, metal),
-                CreateItem("OrcishPlate", "Orcish Plate", ItemSlot.Chest, ItemRarity.Epic, 0, 30, 22, orcish),
-                CreateItem("WornBoots", "Worn Boots", ItemSlot.Feet, ItemRarity.Common, 0, 0, 3, leather),
-                CreateItem("IronBoots", "Iron Boots", ItemSlot.Feet, ItemRarity.Uncommon, 0, 5, 6, metal),
+                // Dropped by monsters; any class can use them.
+                CreateItem("RustySword", "Rusty Sword", ItemSlot.Weapon, ItemRarity.Common, 2, 0, 0, metal * 0.8f, 8),
+                CreateItem("IronSword", "Iron Sword", ItemSlot.Weapon, ItemRarity.Uncommon, 4, 0, 0, metal, 40),
+                CreateItem("GoblinCleaver", "Goblin Cleaver", ItemSlot.Weapon, ItemRarity.Rare, 7, 10, 0, new Color(0.5f, 0.6f, 0.4f), 160),
+                CreateItem("OrcishGreataxe", "Orcish Greataxe", ItemSlot.Weapon, ItemRarity.Epic, 12, 20, 0, orcish, 500),
+                CreateItem("LeatherCap", "Leather Cap", ItemSlot.Head, ItemRarity.Common, 0, 0, 4, leather, 6),
+                CreateItem("IronHelm", "Iron Helm", ItemSlot.Head, ItemRarity.Uncommon, 0, 5, 8, metal, 40),
+                CreateItem("OrcSkullHelm", "Orc Skull Helm", ItemSlot.Head, ItemRarity.Rare, 0, 15, 12, new Color(0.85f, 0.82f, 0.7f), 150),
+                CreateItem("PaddedVest", "Padded Vest", ItemSlot.Chest, ItemRarity.Common, 0, 0, 6, leather, 10),
+                CreateItem("Chainmail", "Chainmail", ItemSlot.Chest, ItemRarity.Uncommon, 0, 10, 12, metal, 60),
+                CreateItem("OrcishPlate", "Orcish Plate", ItemSlot.Chest, ItemRarity.Epic, 0, 30, 22, orcish, 500),
+                CreateItem("WornBoots", "Worn Boots", ItemSlot.Feet, ItemRarity.Common, 0, 0, 3, leather, 5),
+                CreateItem("IronBoots", "Iron Boots", ItemSlot.Feet, ItemRarity.Uncommon, 0, 5, 6, metal, 35),
+
+                // Sold by the class vendors in town.
+                CreateItem("MilitiaSword", "Militia Sword", ItemSlot.Weapon, ItemRarity.Common, 3, 0, 0, metal * 0.9f, 30, WarriorClass),
+                CreateItem("SteelLongsword", "Steel Longsword", ItemSlot.Weapon, ItemRarity.Uncommon, 6, 0, 0, metal, 120, WarriorClass),
+                CreateItem("WarAxe", "War Axe", ItemSlot.Weapon, ItemRarity.Rare, 10, 10, 0, steel, 400, WarriorClass),
+                CreateItem("SteelHelm", "Steel Helm", ItemSlot.Head, ItemRarity.Uncommon, 0, 5, 10, steel, 110, WarriorClass),
+                CreateItem("SteelBreastplate", "Steel Breastplate", ItemSlot.Chest, ItemRarity.Uncommon, 0, 10, 16, steel, 160, WarriorClass),
+                CreateItem("SteelSabatons", "Steel Sabatons", ItemSlot.Feet, ItemRarity.Uncommon, 0, 0, 8, steel, 90, WarriorClass),
+
+                CreateItem("HuntingBow", "Hunting Bow", ItemSlot.Weapon, ItemRarity.Common, 3, 0, 0, wood, 30, RangerClass),
+                CreateItem("Longbow", "Longbow", ItemSlot.Weapon, ItemRarity.Uncommon, 6, 0, 0, wood, 120, RangerClass),
+                CreateItem("ElvenBow", "Elven Bow", ItemSlot.Weapon, ItemRarity.Rare, 10, 10, 0, new Color(0.55f, 0.75f, 0.45f), 400, RangerClass),
+                CreateItem("LeatherHood", "Leather Hood", ItemSlot.Head, ItemRarity.Common, 0, 0, 3, leather, 20, RangerClass),
+                CreateItem("StuddedJerkin", "Studded Jerkin", ItemSlot.Chest, ItemRarity.Uncommon, 0, 10, 10, leather, 130, RangerClass),
+                CreateItem("RangerBoots", "Ranger Boots", ItemSlot.Feet, ItemRarity.Uncommon, 0, 5, 5, leather, 80, RangerClass),
+
+                CreateItem("ApprenticeStaff", "Apprentice Staff", ItemSlot.Weapon, ItemRarity.Common, 3, 0, 0, wood, 30, MageClass),
+                CreateItem("RunedStaff", "Runed Staff", ItemSlot.Weapon, ItemRarity.Uncommon, 6, 5, 0, arcane, 120, MageClass),
+                CreateItem("StaffOfEmbers", "Staff of Embers", ItemSlot.Weapon, ItemRarity.Rare, 10, 10, 0, new Color(0.9f, 0.4f, 0.15f), 400, MageClass),
+                CreateItem("SilkHood", "Silk Hood", ItemSlot.Head, ItemRarity.Common, 0, 5, 2, cloth, 20, MageClass),
+                CreateItem("ApprenticeRobe", "Apprentice Robe", ItemSlot.Chest, ItemRarity.Common, 0, 8, 4, cloth, 35, MageClass),
+                CreateItem("EnchantedRobe", "Enchanted Robe", ItemSlot.Chest, ItemRarity.Uncommon, 0, 20, 7, arcane, 140, MageClass),
+                CreateItem("SilkSlippers", "Silk Slippers", ItemSlot.Feet, ItemRarity.Common, 0, 4, 2, cloth, 15, MageClass),
             };
             EditorUtility.SetDirty(catalog);
             return catalog;
@@ -832,7 +929,7 @@ namespace RPG.EditorTools
         }
 
         private static ItemDefinition CreateItem(string fileName, string displayName, ItemSlot slot, ItemRarity rarity,
-            int damageBonus, int healthBonus, int armor, Color iconColor)
+            int damageBonus, int healthBonus, int armor, Color iconColor, int price, int requiredClass = -1)
         {
             var item = LoadOrCreateAsset<ItemDefinition>($"{ItemsFolder}/{fileName}.asset");
             item.displayName = displayName;
@@ -844,6 +941,8 @@ namespace RPG.EditorTools
             item.use = ItemUse.None;
             item.maxStack = 1;
             item.iconColor = iconColor;
+            item.price = price;
+            item.requiredClass = requiredClass;
             EditorUtility.SetDirty(item);
             return item;
         }
@@ -866,14 +965,18 @@ namespace RPG.EditorTools
         private static void PlaceMonsterCamps(Grid grid, GameObject goblin, GameObject brute, GameObject orc)
         {
             int center = MapSize / 2;
-            // Goblins 5-7 units from the spawn so new players are not attacked right away; tougher camps further out.
+            // Goblins near the town, tougher camps further out (east: brutes, west: orcs).
             var camps = new (string name, Vector3Int cell, GameObject prefab, int count)[]
             {
                 ("Goblin Camp 1", new Vector3Int(center + 12, center + 6, 0), goblin, 3),
                 ("Goblin Camp 2", new Vector3Int(center - 10, center + 4, 0), goblin, 3),
                 ("Goblin Camp 3", new Vector3Int(center + 4, center - 10, 0), goblin, 3),
-                ("Goblin Brute Camp", new Vector3Int(center + 15, center - 6, 0), brute, 2),
-                ("Orc Camp", new Vector3Int(center - 6, center + 15, 0), orc, 2),
+                ("Goblin Camp 4", new Vector3Int(center + 18, center + 18, 0), goblin, 3),
+                ("Goblin Camp 5", new Vector3Int(center - 18, center - 6, 0), goblin, 3),
+                ("Goblin Brute Camp 1", new Vector3Int(center + 24, center - 4, 0), brute, 2),
+                ("Goblin Brute Camp 2", new Vector3Int(center + 6, center + 26, 0), brute, 2),
+                ("Orc Camp 1", new Vector3Int(center - 24, center + 8, 0), orc, 2),
+                ("Orc Camp 2", new Vector3Int(center - 12, center - 26, 0), orc, 2),
             };
 
             var parent = new GameObject("Monster Camps").transform;
@@ -934,6 +1037,17 @@ namespace RPG.EditorTools
             // These build their own contents at runtime.
             CreateHudElement<ExperienceBar>(canvasObject.transform, "Experience Bar", new Vector2(0.5f, 0f), new Vector2(0.5f, 0f), new Vector2(0f, 18f), new Vector2(380f, 16f));
             CreateHudElement<AbilityBar>(canvasObject.transform, "Ability Bar", new Vector2(0.5f, 0f), new Vector2(0.5f, 0f), new Vector2(0f, 122f), new Vector2(400f, 80f));
+            // Name plates first, so the windows are drawn over them.
+            var nameplates = new GameObject("NPC Nameplates", typeof(RectTransform));
+            nameplates.transform.SetParent(canvasObject.transform, false);
+            Stretch((RectTransform)nameplates.transform);
+            nameplates.AddComponent<NpcNameplates>();
+
+            var vendorWindow = new GameObject("Vendor Window", typeof(RectTransform));
+            vendorWindow.transform.SetParent(canvasObject.transform, false);
+            Stretch((RectTransform)vendorWindow.transform);
+            vendorWindow.AddComponent<VendorWindow>();
+
             var inventoryWindow = new GameObject("Inventory Window", typeof(RectTransform));
             inventoryWindow.transform.SetParent(canvasObject.transform, false);
             Stretch((RectTransform)inventoryWindow.transform);

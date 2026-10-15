@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using RPG.Combat;
 using RPG.Controls;
 using RPG.Items;
+using RPG.Progression;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -46,6 +47,18 @@ namespace RPG.UI
             BuildWindow();
             BuildTooltip();
             window.SetActive(false);
+            VendorWindow.Opened += OnVendorOpened;
+        }
+
+        private void OnDestroy()
+        {
+            VendorWindow.Opened -= OnVendorOpened;
+        }
+
+        private void OnVendorOpened()
+        {
+            // Selling happens by clicking the bag, so show it next to the vendor.
+            if (!window.activeSelf) Toggle();
         }
 
         private void BuildWindow()
@@ -155,7 +168,7 @@ namespace RPG.UI
             tooltip = background.rectTransform;
             tooltip.anchorMin = tooltip.anchorMax = new Vector2(0f, 0f);
             tooltip.pivot = new Vector2(1f, 0f);
-            tooltip.sizeDelta = new Vector2(230f, 130f);
+            tooltip.sizeDelta = new Vector2(250f, 175f);
 
             tooltipText = UIFactory.CreateText("Text", tooltip, 15, TextAnchor.UpperLeft);
             UIFactory.Stretch(tooltipText.rectTransform);
@@ -172,7 +185,9 @@ namespace RPG.UI
 
         private void OnBagClicked(int index)
         {
-            if (inventory != null) inventory.RequestActivate(index);
+            if (inventory == null) return;
+            if (VendorWindow.CurrentVendor != null) inventory.RequestSell(VendorWindow.CurrentVendor, index);
+            else inventory.RequestActivate(index);
         }
 
         private void OnEquipmentClicked(ItemSlot slot)
@@ -239,7 +254,7 @@ namespace RPG.UI
             var health = inventory.GetComponent<Health>();
             string damage = attack != null ? $"{attack.MinDamage}-{attack.MaxDamage}" : "-";
             string maxHealth = health != null ? health.Max.ToString() : "-";
-            statsText.text = $"Damage {damage}   Health {maxHealth}   Armor {inventory.Armor}";
+            statsText.text = $"Damage {damage}   Health {maxHealth}   Armor {inventory.Armor}   Gold {inventory.Gold}";
         }
 
         private void ShowTooltip()
@@ -252,10 +267,14 @@ namespace RPG.UI
                 ItemStack stack = bagIndex >= 0 ? inventory.GetBagSlot(bagIndex)
                     : equipIndex >= 0 ? inventory.GetEquipped(EquipmentOrder[equipIndex]) : ItemStack.Empty;
                 item = inventory.Definition(stack);
+                string className = VendorWindow.ClassName(item, inventory.GetComponent<CharacterProgress>());
                 if (item != null && equipIndex >= 0)
-                    tooltipText.text = item.Describe().Replace("Click to equip", "Click to take off");
+                    tooltipText.text = item.Describe(className).Replace("Click to equip", "Click to take off");
+                else if (item != null && VendorWindow.CurrentVendor != null)
+                    tooltipText.text = item.Describe(className).Replace("Click to equip", "").Replace("Click to use", "").TrimEnd()
+                                       + $"\nClick to sell for {item.SellPrice} gold";
                 else if (item != null)
-                    tooltipText.text = item.Describe();
+                    tooltipText.text = item.Describe(className);
             }
 
             tooltip.gameObject.SetActive(item != null);

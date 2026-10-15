@@ -43,7 +43,8 @@ Assets/_Project/
       Accounts/        paskyros, prisijungimas, veikėjo išsaugojimas (AccountService, CharacterPersistence)
       Networking/      NetworkBootstrap, PlayerNetworkMovement, MovementValidator, OfflineTransport, DevConnectionPanel, DevBot
       Player/          PlayerMovement
-      UI/              UnitFrame, CombatTextLayer, AbilityBar, ExperienceBar, InventoryWindow
+      UI/              UnitFrame, CombatTextLayer, AbilityBar, ExperienceBar, InventoryWindow, VendorWindow, NpcNameplates
+      Vendors/         prekeiviai (Vendor, VendorDefinition)
       World/           ClickMarker
       Core/            rezervuota kitiems etapams
     Editor/            redaktoriaus įrankiai (RPG meniu), grafikos importo taisyklės, build meniu
@@ -80,5 +81,6 @@ Naujausia versija po kiekvieno push'o į `main` automatiškai sukuriama ir paske
 | ~~9~~ | ~~Užduotys ir NPC~~ | ✖ atsisakyta |
 | 10 | Požemiai (instancijos) | ✅ [Stage10.md](Stage10.md) |
 | ~~11~~ | ~~PvP~~ | ✖ atsisakyta |
+| + | Didesnis žemėlapis, miestelis, klasių prekeiviai, auksas (įkvėpta Dreadmyst) | ✅ [Town.md](Town.md) |
 
 Multiplayer'is planuojamas anksti (3 etapas) sąmoningai. Kovą, monstrus ir daiktus iškart rašysime serverio autoriteto principu, kad vėliau nereikėtų jų perrašinėti.
