@@ -85,5 +85,6 @@ Naujausia versija po kiekvieno push'o į `main` automatiškai sukuriama ir paske
 | + | Mana, šlamštas iš monstrų, atsitiktiniai afiksai ir 6 kokybės lygiai, atributai (įkvėpta Dreadmyst) | ✅ [Attributes.md](Attributes.md) |
 | + | Naujas HUD: portretų rėmeliai, minimapas, žinučių langas, veiksmų juosta su gėrimais, vardai virš monstrų (įkvėpta Dreadmyst) | ✅ [Hud.md](Hud.md) |
 | + | Požemio raktas ir lygio reikalavimas, grupės dydis, ribotos prekeivių atsargos (įkvėpta Dreadmyst) | ✅ [Stage10.md](Stage10.md#įėjimo-sąlygos) |
+| + | Pavadintos zonos ir teleportų akmenys (Waystones) (įkvėpta Dreadmyst) | ✅ [Waystones.md](Waystones.md) |
 
 Multiplayer'is planuojamas anksti (3 etapas) sąmoningai. Kovą, monstrus ir daiktus iškart rašysime serverio autoriteto principu, kad vėliau nereikėtų jų perrašinėti.

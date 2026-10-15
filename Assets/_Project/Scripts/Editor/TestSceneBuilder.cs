@@ -166,7 +166,7 @@ namespace RPG.EditorTools
             PlaceTrees(grid, obstacles, treePrefab);
             var navigation = grid.gameObject.AddComponent<WorldNavigation>();
             navigation.Configure(grid, ground, obstacles);
-            navigation.ZoneName = "Greenvale";
+            navigation.ZoneName = "Greenvale Wilds";
 
             CreateGlobalLight();
             CreateEventSystem();
@@ -185,6 +185,7 @@ namespace RPG.EditorTools
             PlaceMonsterCamps(grid, goblinPrefab, brutePrefab, orcPrefab);
             PlaceDungeon(grid, dungeon);
             PlaceVendors(grid, CreateVendors(items, potion, manaPotion));
+            PlaceZonesAndWaystones(grid, PlaceholderArtGenerator.Waystone("Waystone"));
             CreateHud();
 
             EditorSceneManager.SaveScene(EditorSceneManager.GetActiveScene(), ScenePath);
@@ -362,6 +363,7 @@ namespace RPG.EditorTools
             player.AddComponent<LootPicker>();
             player.AddComponent<CharacterPersistence>();
             player.AddComponent<DungeonTraveller>();
+            player.AddComponent<WaystoneTraveller>();
             AddHealthPresenter(player, barSprite, 0.85f);
             AddHitbox(player, new Vector2(0.36f, 0.62f), new Vector2(0f, 0.34f));
 
@@ -836,6 +838,48 @@ namespace RPG.EditorTools
             }
         }
 
+        /// <summary>
+        /// Named areas of the world map and a waystone in each. Outer stones stand on the main paths, which are
+        /// always clear. Waystone ids are saved with characters: keep them, only add new ones.
+        /// </summary>
+        private static void PlaceZonesAndWaystones(Grid grid, Sprite waystoneSprite)
+        {
+            int c = MapSize / 2;
+            // One cell step is about 0.56 world units diagonally.
+            const float cellToWorld = 0.56f;
+            var areas = new (string name, Vector3Int zoneCell, float cellRadius, Vector3Int stoneCell)[]
+            {
+                ("Greenvale", new Vector3Int(c, c, 0), 9f, new Vector3Int(c - 3, c + 3, 0)),
+                ("Brute Hills", new Vector3Int(c + 22, c - 1, 0), 12f, new Vector3Int(c + 18, c, 0)),
+                ("Northern Ridge", new Vector3Int(c + 3, c + 23, 0), 11f, new Vector3Int(c, c + 19, 0)),
+                ("Orc Marsh", new Vector3Int(c - 22, c + 4, 0), 12f, new Vector3Int(c - 18, c, 0)),
+                ("Southern Fen", new Vector3Int(c - 6, c - 23, 0), 11f, new Vector3Int(c, c - 19, 0)),
+            };
+
+            var zones = new GameObject("Zones").transform;
+            var stones = new GameObject("Waystones").transform;
+            for (int i = 0; i < areas.Length; i++)
+            {
+                var zone = new GameObject($"Zone {areas[i].name}");
+                zone.transform.SetParent(zones, false);
+                zone.transform.position = grid.GetCellCenterWorld(areas[i].zoneCell);
+                zone.AddComponent<Zone>().Configure(areas[i].name, areas[i].cellRadius * cellToWorld);
+
+                var stone = new GameObject($"Waystone {i} {areas[i].name}");
+                stone.transform.SetParent(stones, false);
+                stone.transform.position = grid.GetCellCenterWorld(areas[i].stoneCell);
+                var spriteRenderer = stone.AddComponent<SpriteRenderer>();
+                spriteRenderer.sprite = waystoneSprite;
+                spriteRenderer.spriteSortPoint = SpriteSortPoint.Pivot;
+                // Clicked to travel; does not block walking.
+                var box = stone.AddComponent<BoxCollider2D>();
+                box.isTrigger = true;
+                box.size = new Vector2(0.45f, 0.8f);
+                box.offset = new Vector2(0f, 0.4f);
+                stone.AddComponent<Waystone>().Configure(i, areas[i].name);
+            }
+        }
+
         private static void PlaceDungeon(Grid grid, DungeonDefinition dungeon)
         {
             new GameObject("Dungeon Manager").AddComponent<DungeonManager>().Configure(dungeon);
@@ -1170,6 +1214,13 @@ namespace RPG.EditorTools
             inventoryWindow.transform.SetParent(canvasObject.transform, false);
             Stretch((RectTransform)inventoryWindow.transform);
             inventoryWindow.AddComponent<InventoryWindow>();
+
+            CreateHudElement<ZoneBanner>(canvasObject.transform, "Zone Banner", new Vector2(0.5f, 1f), new Vector2(0.5f, 1f), new Vector2(0f, -150f), new Vector2(800f, 60f));
+
+            var waystoneWindow = new GameObject("Waystone Window", typeof(RectTransform));
+            waystoneWindow.transform.SetParent(canvasObject.transform, false);
+            Stretch((RectTransform)waystoneWindow.transform);
+            waystoneWindow.AddComponent<WaystoneWindow>();
 
             var characterWindow = new GameObject("Character Window", typeof(RectTransform));
             characterWindow.transform.SetParent(canvasObject.transform, false);

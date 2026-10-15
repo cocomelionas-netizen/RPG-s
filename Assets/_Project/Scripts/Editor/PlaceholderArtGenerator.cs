@@ -300,6 +300,56 @@ namespace RPG.EditorTools
             return SaveSprite(texture, Folder, name, new Vector2(0.5f, baseY / height));
         }
 
+        /// <summary>A grey standing stone with glowing blue-green runes, used as a teleport waystone.</summary>
+        public static Sprite Waystone(string name)
+        {
+            const int width = 128;
+            const int height = 224;
+            const float baseY = 14f;
+            var texture = new Texture2D(width, height, TextureFormat.RGBA32, false);
+            var stone = new Color(0.46f, 0.47f, 0.5f);
+            var dark = new Color(0.28f, 0.29f, 0.32f);
+            var rune = new Color(0.35f, 1f, 0.9f);
+            for (int y = 0; y < height; y++)
+            for (int x = 0; x < width; x++)
+            {
+                var p = new Vector2(x + 0.5f - width * 0.5f, y + 0.5f);
+                Color color = Color.clear;
+                float shadow = Mathf.Clamp01(1f - new Vector2(p.x / 50f, (p.y - baseY) / 10f).magnitude) * 0.5f;
+                if (shadow > 0f) color = new Color(0f, 0f, 0f, shadow);
+
+                // A slab that narrows towards a pointed top.
+                float t = Mathf.InverseLerp(baseY, 200f, p.y);
+                float halfWidth = Mathf.Lerp(30f, 18f, t) - (p.y > 182f ? (p.y - 182f) * 1.0f : 0f);
+                if (p.y >= baseY && p.y <= 200f && Mathf.Abs(p.x) <= halfWidth)
+                {
+                    float shade = 0.75f + 0.25f * (p.x / Mathf.Max(1f, halfWidth));
+                    color = Color.Lerp(dark, stone, shade);
+                    float crack = Mathf.PerlinNoise(x * 0.15f, y * 0.15f);
+                    if (crack > 0.72f) color *= 0.85f;
+                    color.a = 1f;
+
+                    // Three glowing runes down the middle.
+                    for (int i = 0; i < 3; i++)
+                    {
+                        var runeCenter = new Vector2(0f, 70f + i * 38f);
+                        Vector2 d = p - runeCenter;
+                        bool stroke = (Mathf.Abs(d.x) < 2.2f && Mathf.Abs(d.y) < 11f)
+                                      || (Mathf.Abs(d.y - d.x * 0.8f) < 2.2f && Mathf.Abs(d.x) < 8f)
+                                      || (i == 1 && Mathf.Abs(d.y + d.x * 0.8f) < 2.2f && Mathf.Abs(d.x) < 8f);
+                        if (stroke) color = rune;
+                        else
+                        {
+                            float glow = Mathf.Clamp01(1f - d.magnitude / 16f) * 0.35f;
+                            color = Color.Lerp(color, rune, glow);
+                        }
+                    }
+                }
+                texture.SetPixel(x, y, color);
+            }
+            return SaveSprite(texture, Folder, name, new Vector2(0.5f, baseY / height));
+        }
+
         /// <summary>A small cloth sack with a golden glint, left on the ground as loot.</summary>
         public static Sprite LootSack(string name)
         {

@@ -4,6 +4,7 @@ using RPG.Dungeons;
 using RPG.Monsters;
 using RPG.Navigation;
 using RPG.Vendors;
+using RPG.World;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,7 +12,7 @@ namespace RPG.UI
 {
     /// <summary>
     /// The zone name and a square map around the local player: walkable ground, obstacles, and dots for
-    /// players, monsters, vendors and portals. Each map's picture is drawn once from its navigation grid.
+    /// players, monsters, vendors, portals and waystones. Each map's picture is drawn once from its navigation grid.
     /// Builds its own UI; place it on a RectTransform about 240 x 270 in the top right of the HUD canvas.
     /// </summary>
     [RequireComponent(typeof(RectTransform))]
@@ -31,6 +32,7 @@ namespace RPG.UI
         private static readonly Color MonsterColor = new Color(0.95f, 0.2f, 0.15f);
         private static readonly Color VendorColor = new Color(1f, 0.85f, 0.3f);
         private static readonly Color PortalColor = new Color(0.75f, 0.45f, 1f);
+        private static readonly Color WaystoneColor = new Color(0.3f, 0.95f, 0.9f);
 
         private readonly Dictionary<WorldNavigation, Texture2D> pictures = new Dictionary<WorldNavigation, Texture2D>();
         private readonly List<Image> dots = new List<Image>();
@@ -83,7 +85,7 @@ namespace RPG.UI
             Vector2 center = self.transform.position;
             float scale = mapSize / worldSpan;
             WorldNavigation map = WorldNavigation.At(center);
-            zoneText.text = map != null ? map.ZoneName : "";
+            zoneText.text = Zone.NameAt(center);
 
             picture.enabled = map != null;
             if (map != null)
@@ -99,6 +101,8 @@ namespace RPG.UI
                 if (portal != null) Dot(portal.transform.position, center, scale, PortalColor, 9f);
             foreach (Vendor vendor in Vendor.All)
                 if (vendor != null) Dot(vendor.transform.position, center, scale, VendorColor, 8f);
+            foreach (Waystone stone in Waystone.All)
+                if (stone != null) Dot(stone.transform.position, center, scale, WaystoneColor, 9f);
             foreach (Health unit in Health.Spawned)
             {
                 if (unit == null || unit == self || unit.IsDead) continue;
