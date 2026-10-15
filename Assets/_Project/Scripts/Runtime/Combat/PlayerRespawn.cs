@@ -47,6 +47,16 @@ namespace RPG.Combat
             Debug.Log($"[Server] {health.DisplayName} died.");
         }
 
+        /// <summary>Server: brought back where it fell (Redemption) with shares of health and mana; no respawn then.</summary>
+        public void ServerRevive(float healthShare, float manaShare)
+        {
+            if (!IsServer || !health.IsDead) return;
+            respawnAt = -1.0;
+            health.ServerRevive(Mathf.RoundToInt(health.Max * healthShare));
+            if (mana != null) mana.ServerRestore(Mathf.RoundToInt(mana.Max * manaShare) - mana.Current);
+            Debug.Log($"[Server] {health.DisplayName} was revived.");
+        }
+
         private void Update()
         {
             if (!IsServer || respawnAt < 0.0 || NetworkManager.ServerTime.Time < respawnAt) return;

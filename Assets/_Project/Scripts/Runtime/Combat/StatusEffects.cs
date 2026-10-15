@@ -43,6 +43,24 @@ namespace RPG.Combat
         ManaOnExpire,
         /// <summary>Cannot be stunned.</summary>
         StunImmunity,
+        /// <summary>Cannot swing its weapon (Retribution).</summary>
+        Pacify,
+        /// <summary>Moves Value percent faster.</summary>
+        Haste,
+        /// <summary>Takes no damage and no harmful effects (Divine Protection, Deep Freeze).</summary>
+        Immune,
+        /// <summary>Loses Value mana in all, split into ticks (Ethereal Sting).</summary>
+        ManaBurn,
+        /// <summary>Receives Value percent more (or less, negative) healing.</summary>
+        HealingTaken,
+        /// <summary>Attacks Value percent faster (Arrow Flurry).</summary>
+        AttackSpeed,
+        /// <summary>Regains Value mana in all, split into ticks (Wisdom of Lazarus).</summary>
+        ManaOverTime,
+        /// <summary>Block rating raised by Value (Shield Block).</summary>
+        BlockRating,
+        /// <summary>Cannot cast spells (Antimagic).</summary>
+        Silence,
     }
 
     /// <summary>One effect as everyone sees it (for icons): the server keeps the rest.</summary>
@@ -58,6 +76,8 @@ namespace RPG.Combat
         public bool Harmful;
         public DamageSchool School;
         public bool AnySchool;
+        /// <summary>Damage changes apply to every magic school (not physical).</summary>
+        public bool MagicOnly;
 
         public bool Equals(StatusView other) =>
             Kind == other.Kind && Name.Equals(other.Name) && Value.Equals(other.Value) && StartedAt.Equals(other.StartedAt)
@@ -70,7 +90,7 @@ namespace RPG.Combat
         /// <summary>The effect's total (Value times its stacks).</summary>
         public float Total => Value * Mathf.Max(1, (int)Stacks);
 
-        public bool Matches(DamageSchool school) => AnySchool || School == school;
+        public bool Matches(DamageSchool school) => AnySchool || School == school || (MagicOnly && school != DamageSchool.Physical);
     }
 
     /// <summary>
@@ -165,6 +185,20 @@ namespace RPG.Combat
 
         public bool IsStealthed => Has(StatusKind.Stealth);
 
+        /// <summary>Cannot cast spells (silenced, or stunned).</summary>
+        public bool IsSilenced => IsDisabled || Has(StatusKind.Silence);
+
+        /// <summary>Cannot swing its weapon (pacified, or stunned).</summary>
+        public bool IsPacified => IsDisabled || Has(StatusKind.Pacify);
+
+        public bool IsImmune => Has(StatusKind.Immune);
+
+        /// <summary>Multiplier of healing received.</summary>
+        public float HealingTakenMultiplier => Mathf.Max(0f, 1f + Total(StatusKind.HealingTaken) / 100f);
+
+        /// <summary>Multiplier of the time between auto-attacks (faster below 1).</summary>
+        public float AttackIntervalMultiplier => Mathf.Clamp(1f - Total(StatusKind.AttackSpeed) / 100f, 0.2f, 3f);
+
         /// <summary>Movement speed multiplier: 0 when rooted, less when slowed (the strongest slow counts).</summary>
         public float SpeedMultiplier
         {
@@ -174,7 +208,7 @@ namespace RPG.Combat
                 float slow = 0f;
                 foreach (StatusView view in Views)
                     if (view.Kind == StatusKind.Slow) slow = Mathf.Max(slow, view.Total);
-                return Mathf.Clamp01(1f - slow / 100f);
+                return Mathf.Clamp01(1f - slow / 100f) * (1f + Mathf.Max(0f, Total(StatusKind.Haste)) / 100f);
             }
         }
 
@@ -201,9 +235,11 @@ namespace RPG.Combat
         /// False when it did not take (stun immunity).
         /// </summary>
         public bool ServerApply(string effectName, Color color, StatusKind kind, float value, float duration, Health source = null,
-            DamageSchool school = DamageSchool.Physical, bool anySchool = false, float interval = 0f, int maxStacks = 1, bool harmful = true)
+            DamageSchool school = DamageSchool.Physical, bool anySchool = false, float interval = 0f, int maxStacks = 1, bool harmful = true,
+            bool magicOnly = false)
         {
             if (!IsServer || health.IsDead || duration <= 0f) return false;
+            if (harmful && IsImmune) return false;
             if ((kind == StatusKind.Stun || kind == StatusKind.Incapacitate) && Has(StatusKind.StunImmunity)) return false;
 
             double now = Now;
@@ -229,10 +265,11 @@ namespace RPG.Combat
             effect.View.Harmful = harmful;
             effect.View.School = school;
             effect.View.AnySchool = anySchool;
+            effect.View.MagicOnly = magicOnly;
             effect.Source = source;
             effect.MaxStacks = Mathf.Max(1, maxStacks);
             effect.Remaining = value;
-            if (kind == StatusKind.DamageOverTime || kind == StatusKind.HealOverTime)
+            if (IsOverTime(kind))
             {
                 effect.Interval = interval > 0f ? interval : TickInterval;
                 effect.TicksLeft = Mathf.Max(1, Mathf.RoundToInt(duration / effect.Interval));
@@ -240,6 +277,18 @@ namespace RPG.Combat
             }
             Publish();
             return true;
+        }
+
+        private static bool IsOverTime(StatusKind kind) =>
+            kind == StatusKind.DamageOverTime || kind == StatusKind.HealOverTime || kind == StatusKind.ManaBurn || kind == StatusKind.ManaOverTime;
+
+        /// <summary>Server: removes the effects that take control away (stuns, roots, slows); for Wings of Freedom and Teleport.</summary>
+        public void ServerFreeFromControl()
+        {
+            if (!IsServer) return;
+            int removed = active.RemoveAll(a => a.View.Kind == StatusKind.Stun || a.View.Kind == StatusKind.Root
+                                                || a.View.Kind == StatusKind.Slow || a.View.Kind == StatusKind.Incapacitate);
+            if (removed > 0) Publish();
         }
 
         /// <summary>Server: removes harmful effects (Cleanse); <paramref name="count"/> of them, or all with 0.</summary>
@@ -333,10 +382,21 @@ namespace RPG.Combat
                     effect.Remaining -= amount;
                     effect.TicksLeft--;
                     effect.NextTick += effect.Interval;
-                    if (effect.View.Kind == StatusKind.DamageOverTime)
-                        health.ApplyDamage(amount, false, effect.Source, effect.View.School, periodic: true);
-                    else
-                        health.Heal(amount, true);
+                    switch (effect.View.Kind)
+                    {
+                        case StatusKind.DamageOverTime:
+                            health.ApplyDamage(amount, false, effect.Source, effect.View.School, periodic: true);
+                            break;
+                        case StatusKind.HealOverTime:
+                            health.Heal(amount, true);
+                            break;
+                        case StatusKind.ManaBurn:
+                            if (mana != null) mana.ServerSpend(Mathf.Min(amount, mana.Current));
+                            break;
+                        case StatusKind.ManaOverTime:
+                            if (mana != null) mana.ServerRestore(amount);
+                            break;
+                    }
                     if (health.IsDead) return;
                 }
                 if (i < active.Count && active[i] == effect && effect.View.EndsAt <= now)

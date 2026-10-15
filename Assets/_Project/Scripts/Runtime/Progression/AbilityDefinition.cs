@@ -24,6 +24,12 @@ namespace RPG.Progression
         Charge,
         /// <summary>Moves the caster to the point under the pointer.</summary>
         Teleport,
+        /// <summary>Leaps the caster away from its target (Tactical Retreat).</summary>
+        Retreat,
+        /// <summary>Takes the caster to St. Revere (Illusion Gate).</summary>
+        Recall,
+        /// <summary>Brings the nearest fallen friendly player in range back (Redemption).</summary>
+        Revive,
     }
 
     /// <summary>A buff or debuff a spell puts on its target (or on the caster), Dreadmyst's "apply aura".</summary>
@@ -48,6 +54,8 @@ namespace RPG.Progression
         public bool anySchool = true;
         [Tooltip("Goes on the caster instead of the target.")]
         public bool onCaster;
+        [Tooltip("Damage changes apply to every magic school, not physical (Salvation Aura).")]
+        public bool magicOnly;
 
         public float ValueAt(int rank, AttributeSet casterAttributes) =>
             value + valuePerRank * Mathf.Max(0, rank - 1) + (scalesWithStat ? casterAttributes[stat] * statFactor : 0f);
@@ -122,8 +130,17 @@ namespace RPG.Progression
         [Tooltip("Only on targets that have this effect (Ice Shard: slowed by Chains of Ice; Kidney Shot: incapacitated).")]
         public bool requiresTargetEffect;
         public StatusKind requiredEffect;
+        [Tooltip("And with this name (Explosive Arrow: Flame Arrow's mark); empty: any of the kind.")]
+        public string requiredEffectName = "";
         [Tooltip("Only on monsters not fighting yet (Sabotage).")]
         public bool requiresTargetOutOfCombat;
+        [Tooltip("Percent of max mana restored at once (Wisdom of Lazarus), plus this per rank.")]
+        [Min(0f)] public float restoreManaPercent;
+        [Min(0f)] public float restoreManaPerRank;
+        [Tooltip("How far a Retreat leaps; how much health and mana (shares) a Revive brings back.")]
+        [Min(0f)] public float leapDistance = 2.5f;
+        [Range(0f, 1f)] public float reviveHealth = 0.4f;
+        [Range(0f, 1f)] public float reviveMana = 0.2f;
 
         [Header("Look")]
         [Tooltip("Color of the projectile, ring or glow shown when it is used.")]
@@ -132,7 +149,7 @@ namespace RPG.Progression
         public bool NeedsTarget => kind == AbilityKind.TargetDamage || kind == AbilityKind.TargetArea || kind == AbilityKind.Charge;
 
         public bool IsFriendly => kind == AbilityKind.FriendlyTarget || kind == AbilityKind.Self || kind == AbilityKind.SelfHeal
-                                  || kind == AbilityKind.FriendlyArea;
+                                  || kind == AbilityKind.FriendlyArea || kind == AbilityKind.Recall || kind == AbilityKind.Revive;
 
         public bool DealsWeaponDamage => weaponPercent > 0f;
 

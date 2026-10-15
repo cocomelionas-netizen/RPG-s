@@ -44,6 +44,8 @@ namespace RPG.UI
         private readonly List<Row> rows = new List<Row>();
         private Spellbook shownFor;
         private int shownCount = -1;
+        private int columns = 1;
+        private int perColumn = 1;
 
         private class Row
         {
@@ -104,15 +106,19 @@ namespace RPG.UI
             rows.Clear();
             shownFor = spellbook;
             shownCount = spellbook.Spells.Count;
+            // Long spellbooks (Dreadmyst classes have 20+ spells) in two columns.
+            columns = shownCount > 12 ? 2 : 1;
+            perColumn = Mathf.Max(1, (shownCount + columns - 1) / columns);
             for (int i = 0; i < shownCount; i++) rows.Add(CreateRow(i));
-            windowRect.sizeDelta = new Vector2(Width, Top + shownCount * (RowHeight + 4f) + 50f);
+            windowRect.sizeDelta = new Vector2(Width * columns, Top + perColumn * (RowHeight + 4f) + 50f);
         }
 
         private Row CreateRow(int spell)
         {
             Button button = UIFactory.CreateButton("Spell", windowRect, KnownRow, null, 0);
             var rect = (RectTransform)button.transform;
-            UIFactory.Place(rect, new Vector2(0f, 1f), new Vector2(14f, -Top - spell * (RowHeight + 4f)), new Vector2(Width - 28f, RowHeight));
+            UIFactory.Place(rect, new Vector2(0f, 1f), new Vector2(14f + spell / perColumn * Width, -Top - spell % perColumn * (RowHeight + 4f)),
+                new Vector2(Width - 28f, RowHeight));
             button.onClick.AddListener(() => Pick(spell));
             var row = new Row { Background = (Image)button.targetGraphic };
 
