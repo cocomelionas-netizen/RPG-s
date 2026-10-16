@@ -14,26 +14,27 @@ import sqlite3
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import island  # noqa: E402
 import map_file  # noqa: E402
 
 STEAM = sys.argv[1]
 db = sqlite3.connect(os.path.join(STEAM, 'game.db'))
 db.row_factory = sqlite3.Row
 
-# This project's world is the source game's "fanadin" from x 0-560, y 30-340, shifted like StartAreaData.
-WORLD_DX, WORLD_DY = 2, -28
-WORLD_MAX_X, WORLD_MAX_Y = 564, 309
-
-
+# This project's world is the source game's whole island ("fanadin"), in cells like StartAreaData (island.cell_of).
 def world_cell(x, y):
     """A fanadin position in this project's world cells, pulled inside its edge when it lies beyond it."""
-    cx = min(max(int(math.floor(x)) + WORLD_DX, 3), WORLD_MAX_X)
-    cy = min(max(int(math.floor(y)) + WORLD_DY, 3), WORLD_MAX_Y)
-    return cx, cy
+    cx, cy = island.cell_of(x, y)
+    return min(max(cx, 3), island.WIDTH - 4), min(max(cy, 3), island.HEIGHT - 4)
 
 
 def in_world(x, y):
-    return 0 <= x <= 560 and 30 <= y <= 340
+    return island.on_island(x, y)
+
+
+def local_cell(x, y, size):
+    """A dungeon map's source cell in this project's cells: turned like the island (island.cell_of), so north stays up."""
+    return size - 1 - y, size - 1 - x
 
 
 # The source game's items the dungeons need, under this project's asset names. Gems are this project's own (Refined: the
@@ -118,11 +119,17 @@ for map_id in dungeon_maps:
     info = maps[map_id]
     rule = rules[map_id] if map_id in rules else None
     size, _, flags = map_file.read(os.path.join(STEAM, 'maps', info['name'] + '.map'))
-    rows = [''.join('.' if map_file.walkable(flags, x, y) else '#' for x in range(size)) for y in range(size)]
+    # Row v, column u of the plan is the source cell (size - 1 - v, size - 1 - u) (see local_cell).
+    rows = [''.join('.' if map_file.walkable(flags, size - 1 - v, size - 1 - u) else '#' for u in range(size))
+            for v in range(size)]
     name = entrance['name'].replace(' (Group)', '')
 
     def floor_cell(x, y):
-        """The cell of a position, moved to the nearest walkable cell when it is not walkable."""
+        """The cell of a position (local_cell), moved to the nearest walkable cell when it is not walkable."""
+        cx, cy = source_floor_cell(x, y)
+        return local_cell(cx, cy, size)
+
+    def source_floor_cell(x, y):
         cx, cy = int(math.floor(x)), int(math.floor(y))
         if map_file.walkable(flags, cx, cy):
             return cx, cy
@@ -192,7 +199,8 @@ for d in dungeons:
         d['world'] = world_cell(entrance['x'], entrance['y'])
         d['moved'] = not in_world(entrance['x'], entrance['y'])
     else:
-        d['parent_cell'] = (int(math.floor(entrance['x'])), int(math.floor(entrance['y'])))
+        d['parent_cell'] = local_cell(int(math.floor(entrance['x'])), int(math.floor(entrance['y'])),
+                                      by_map[entrance['map']]['size'])
 
 for d in dungeons:
     # Where an exit leads, in the world: back to the entrance (or the outer dungeon's), or to its own target.
@@ -221,6 +229,7 @@ for d in dungeons:
         if label is None:
             label = p['name'] if not p['name'].endswith(' Island') else 'Leave'
         exits.append((cell, world, label))
+    exits = [(local_cell(cell[0], cell[1], d['size']), world, label) for cell, world, label in exits]
     d['exits'] = exits
 
 # Loot tables of the bosses (and of the outdoor key droppers); identical rows count once.

@@ -8,32 +8,40 @@ Generated data lives in `Scripts/Editor/*Data.cs` (`StartAreaData`, `GearData`, 
 
 ## Map
 
-- The world covers the source map "fanadin" from the start to the main town: x 0–560, y 30–340
-  (568 × 318 cells here). Data: `Scripts/Editor/StartAreaData.cs` (generated from `game.db`).
+- The world is the source game's whole island (map "fanadin": 569 × 690 cells here). Its picture keeps the source game's
+  orientation: north up, St. Revere in the east, Kandorys Castle in the middle, Atmar's Fall and Hillsfar Dale in the west,
+  the beach and the Burial Grounds in the south. A source position (x, y) is the cell (597 − y, 688 − x)
+  (`Tools/GameData/island.py`: `cell_of`); dungeon plans are turned the same way. Data: `Scripts/Editor/StartAreaData.cs`
+  (`Tools/GameData/island.py`).
 - **Ground** – cell by cell from the source game's `maps/fanadin.map` (`Tools/GameData/world.py` →
   `Scripts/Editor/WorldMapData.cs`): its walls, fences and rock walls (flag 0x20) are rocks here, its trees and other
   blocked objects (0x60) are trees (one drawn per little clump, every cell of it blocks), everything else is grass.
   Cells the file does not list are open ground. So the towns, the walls of St. Revere and its houses, the fences and the
-  woods stand where the source game has them. From the start, 474 of the region's 485 NPC and object spots can be walked
-  to; the rest stand in fenced pens or behind gates (a few Horned Beasts, Mahogany Crates and pigs), as in the source game.
+  woods stand where the source game has them. From the start, 863 of the island's 870 NPC and object spots can be walked
+  to; the rest stand in fenced pens (a few pigs), as in the source game.
+- **Zones** – the `.map` file ends with the zone (`zone_template`) of every 13 × 13 block (`map_file.read_zones`); they
+  are the places here (`ZoneMap`): the minimap and the "Entering ..." banner show them. Its "Kandoryrs" is spelled
+  "Kandorys".
 - **Start** – Pilgrim's Refuge (its `start` teleport 17, 106): new characters appear here, and after death.
 - **Main town** – St. Revere (524, 250).
-- **Vendors** – every vendor of the region where the source game stands it (see "Vendors" below).
-- **Monsters** – 277 at their spots (outside the towns), with their levels (1–25) and respawn times (up to 10 min).
-  Look: levels 1–2 – Goblin, 3–5 – Goblin Brute, higher – Orc. HP and damage grow with the level
-  (`MonsterAI.HealthScaleBetween`); its elites and bosses are elites here.
-- **Chests** – 97 at their spots, with their levels and respawn times (60 s / 5 min).
-- **Waypoints** – at its waypoints and teleports: Pilgrim's Refuge, Merchant's Way, Fields of Dreams,
-  Howler's Valley, Thicket of the Wanderer, St. Revere, Kandorys Passage, Kandorys Castle. Walking up to one discovers it
+- **Vendors** – every vendor of the island where the source game stands it (see "Vendors" below).
+- **Monsters** – all 531 hostile NPCs of the island at their spots, with their levels (1–30) and respawn times (up to
+  10 min). HP and damage grow with the level (`MonsterAI.HealthScaleBetween`); its elites and bosses are elites here.
+- **Chests** – 197 at their spots, with their levels and respawn times.
+- **Waypoints** – at the source game's 9 waypoints: Pilgrim's Refuge, St. Revere, Kandorys Beach, Fields of Dreams,
+  Thicket of the Wanderer, Merchant's Way, Atmar's Fall, Deserters, Ruins of Atmar. Walking up to one discovers it
   ("You've discovered a new waypoint!"); from any of them you teleport to a discovered one **for free**, as in the source
   game ("Teleport to this waypoint?").
 - **Dungeon entrances** – where the source game has them (see "Dungeons" below).
-- **M** – the map of the whole world (places, stones, vendors, portals, players and you), as in the source game.
+- **M** – the map of the whole island like the source game's: its places with their level ranges where its map has
+  them (Howler's Valley Level 5+, Trog Cave Level 3+, ... Fireshear Level 25 PvP (Boss); from `mapquester_map.png`,
+  pixel = (614 + 0.855 (x − y), 16 + 0.4275 (x + y))), St. Revere in large letters, the waypoints (greyed until
+  discovered), the dungeon entrances, other players and you.
 
 ## Vendors
 
 From `npc`, `npc_template`, `npc_vendor` and `npc_vendor_random` (`Tools/GameData/world.py` → `Scripts/Editor/VendorData.cs`):
-23 vendors and the transmuter with their names, subnames and spots; 21 vendors sell something that exists here and stand in
+25 vendors and the transmuter with their names, subnames and spots; 21 vendors sell something that exists here and stand in
 the world, with Reginald.
 
 | Who | Where | Sells |
@@ -246,16 +254,15 @@ All of the source game's dungeons that are entered from our part of the world (a
 |---|---|---|---|---|
 | Wolf's Den (`wolf_cave_1`) | Wolf's Den | open | – (Cave Howler, Risen Miner, level 5) | – |
 | Trog Cave (`goblin_cave`) | Trog Cave | open | – (Cave Trog, level 3) | – |
-| The Lower Garrison (`stormrock_ruins`) | south edge* | level 25, up to 4 | Melchon (28) | **10 Tower Keys**, 3 Divine Accessory Orbs |
-| Decrepit Tower (`fort_amir`) | south edge* | level 25, **Tower Key**, up to 4 | Lord Zargan (30), Tchazzar (30) | Divine orbs, 4 Magic Dust |
-| Abandoned Barracks (`fort_nasu`) | (267, 191) | level 25, **Keys to the Barracks**, alone | Sarloch the Betrayer (25) | **Depleted Key** |
-| Kandorys Undercourse (`dilapidated_sewers`) | south edge* | level 25, **Undercourse Key**, alone | Knight Maximus (28) | **2 Keys to St. Revere**, Divine Armor Orb |
-| Desecrated Altar (`st_maria_1`) | by St. Revere (508, 143) | level 25, **Keys to St. Revere**, alone | Ebondeath (30) | **Salmaster's Key**, orbs, Magic Dust |
+| The Lower Garrison (`stormrock_ruins`) | Atmar's Fall | level 25, up to 4 | Melchon (28) | **10 Tower Keys**, 3 Divine Accessory Orbs |
+| Decrepit Tower (`fort_amir`) | Atmar's Fall | level 25, **Tower Key**, up to 4 | Lord Zargan (30), Tchazzar (30) | Divine orbs, 4 Magic Dust |
+| Abandoned Barracks (`fort_nasu`) | Kandorys Castle | level 25, **Keys to the Barracks**, alone | Sarloch the Betrayer (25) | **Depleted Key** |
+| Kandorys Undercourse (`dilapidated_sewers`) | Atmar's Fall | level 25, **Undercourse Key**, alone | Knight Maximus (28) | **2 Keys to St. Revere**, Divine Armor Orb |
+| Desecrated Altar (`st_maria_1`) | by St. Revere | level 25, **Keys to St. Revere**, alone | Ebondeath (30) | **Salmaster's Key**, orbs, Magic Dust |
 | Salmaster's Descent (`temple_of_mez_1`) | inside the Desecrated Altar | level 25, **Salmaster's Key**, alone | Salmaster (30), Balagos (30) | Major orbs, Divine Weapon Orb, gems |
-| Telamont's Demiplane (`wizards_tower_2`) | (370, 272) | level 25, **Demiplane Key**, up to 4 | Demiplanar Guardian (30) | **20 Sanctum Keys**, Flawless and plain gems |
+| Telamont's Demiplane (`wizards_tower_2`) | Kandorys Forecourt | level 25, **Demiplane Key**, up to 4 | Demiplanar Guardian (30) | **20 Sanctum Keys**, Flawless and plain gems |
 | Telamont's Sanctuary (`st_maria_3`) | inside the Demiplane | level 25, **Sanctum Key**, up to 4 | Prince Telamont (30) | 5 of each Flawless gem, Arcane Essence |
 
-\* The source game has these entrances further south than our world reaches – they stand at the south edge (same x).
 
 **The key chain:**
 
@@ -265,8 +272,7 @@ All of the source game's dungeons that are entered from our part of the world (a
 - Group: Lower Garrison (no key) → Melchon → *Tower Key* → Decrepit Tower.
 - Group: Tantorus / Fasthorn (100 %) → *Inactive Demiplane Key* + *Magic Dust* + *Major Treasury Gold* (jeweler) – clicking
   combines them into a *Demiplane Key* → Demiplanar Guardian → *Sanctum Key* → Telamont's Sanctuary.
-- The Zhendale camp and Tantorus / Fasthorn are beyond our world's edge in the source game – they were moved to the south edge
-  (the camp keeps its shape).
+- The Zhendale camp and Tantorus / Fasthorn stand where the source game has them (Hillsfar Dale, the west).
 
 **Difficulty.** Levels are the source's (bosses 28–30; monster levels can go up to 30). The source's elites and "boss"-flagged
 monsters are elites here. Where the source gives a monster's HP, it becomes a multiple of a normal monster of that level

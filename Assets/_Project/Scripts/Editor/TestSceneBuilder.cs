@@ -797,31 +797,25 @@ namespace RPG.EditorTools
         }
 
         /// <summary>
-        /// The source game's named places of the start region, with a waystone where the source game has a waypoint (and in town).
+        /// The source game's zones of the island (<see cref="ZoneMap"/>) and a waystone where the source game has a waypoint.
         /// Waystone ids are saved with characters: keep them, only add new ones.
         /// </summary>
         private static void PlaceZonesAndWaystones(Grid grid, Tilemap obstacles, Sprite waystoneSprite)
         {
-            // One cell step is about 0.56 world units diagonally.
-            const float cellToWorld = 0.56f;
-            var zones = new GameObject("Zones").transform;
-            foreach ((string name, Vector3Int cell, float radius) in StartAreaData.OtherZones)
+            // The source game's zones block by block, and its world map's labels.
+            var zones = new GameObject("Zones");
+            var labels = new ZoneMap.Label[StartAreaData.MapLabels.Length];
+            for (int i = 0; i < labels.Length; i++)
             {
-                var zone = new GameObject($"Zone {name}");
-                zone.transform.SetParent(zones, false);
-                zone.transform.position = grid.GetCellCenterWorld(cell);
-                zone.AddComponent<Zone>().Configure(name, radius * cellToWorld);
+                var label = StartAreaData.MapLabels[i];
+                labels[i] = new ZoneMap.Label { name = label.name, detail = label.detail, position = grid.GetCellCenterWorld(label.cell), town = label.town };
             }
+            zones.AddComponent<ZoneMap>().Configure(grid, StartAreaData.ZoneBlock, StartAreaData.ZoneNames, StartAreaData.ZoneBlocks, labels);
 
             var places = StartAreaData.Places;
             var stones = new GameObject("Waystones").transform;
             for (int i = 0; i < places.Length; i++)
             {
-                var zone = new GameObject($"Zone {places[i].name}");
-                zone.transform.SetParent(zones, false);
-                zone.transform.position = grid.GetCellCenterWorld(places[i].cell);
-                zone.AddComponent<Zone>().Configure(places[i].name, places[i].zoneRadius * cellToWorld);
-
                 // At the start the stone stands at the corner of the square, not in the middle of it.
                 Vector3Int stoneCell = OpenCellNear(obstacles, places[i].cell == StartCell ? StartCell + new Vector3Int(-3, 3, 0) : places[i].cell);
                 var stone = new GameObject($"Waystone {i} {places[i].name}");
