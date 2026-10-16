@@ -19,11 +19,14 @@ namespace RPG.UI
     [RequireComponent(typeof(RectTransform))]
     public class CharacterWindow : MonoBehaviour
     {
-        private const float Width = 640f;
-        private const float RowHeight = 24f;
-        private const float LabelX = 340f;
-        private const float ValueX = 470f;
-        private const float PlusX = 604f;
+        // The source game's character panel (equipment.png): 603 x 571, the stats column right of x 360.
+        private const float Width = 603f;
+        private const float Height = 571f;
+        private const float RowHeight = 26f;
+        private const float RowsTop = 122f;
+        private const float LabelX = 375f;
+        private const float ValueX = 500f;
+        private const float PlusX = 562f;
 
         // Colours taken from the source game's character panel.
         private static readonly Color PanelColor = new Color32(0x12, 0x13, 0x06, 0xF2);
@@ -73,11 +76,14 @@ namespace RPG.UI
 
         private static string Percent(float chance) => $"{Mathf.RoundToInt(chance * 1000f) / 10f}%";
 
-        /// <summary>An attribute's total, with what items add in green.</summary>
+        /// <summary>An attribute's total, with what items add in green; while editing with the points picked in purple.</summary>
         private string AttributeValue(Attribute attribute, string extra = null)
         {
-            string shown = fromItems[attribute] != 0
-                ? $"{total[attribute]} <size=13><color=#7fbf6a>(+{fromItems[attribute]})</color></size>"
+            int picked = PendingOf(attribute);
+            bool untrainable = progress != null && !progress.CanTrain(attribute);
+            string shown = picked > 0 ? $"<color=#{CostHex}>{total[attribute] + picked}</color>"
+                : untrainable ? $"<color=#a04030>{total[attribute]}</color>"
+                : fromItems[attribute] != 0 ? $"{total[attribute]} <size=13><color=#7fbf6a>(+{fromItems[attribute]})</color></size>"
                 : total[attribute].ToString();
             return extra != null ? $"{shown} <size=13><color=#{ColorUtility.ToHtmlStringRGB(LabelColor)}>{extra}</color></size>" : shown;
         }
@@ -94,9 +100,13 @@ namespace RPG.UI
         {
             pages.Add(new List<Row>
             {
-                new Row { Label = "Health:", Value = () => health.Max.ToString(), Plus = Attribute.Health,
+                new Row { Label = "Health:", Value = () => PendingOf(Attribute.Health) > 0
+                        ? $"<color=#{CostHex}>{health.Max + PendingOf(Attribute.Health) * AttributeRules.HealthPerPoint}</color>" : health.Max.ToString(),
+                    Plus = Attribute.Health,
                     Description = "The damage you can take before you fall. Grows with points bought with experience (+1 each), Courage, Strength, levels and gear." },
-                new Row { Label = "Mana:", Value = () => mana != null ? mana.Max.ToString() : "0", Plus = Attribute.Mana, Mana = true,
+                new Row { Label = "Mana:", Value = () => mana == null ? "0" : PendingOf(Attribute.Mana) > 0
+                        ? $"<color=#{CostHex}>{mana.Max + PendingOf(Attribute.Mana) * AttributeRules.ManaPerPoint}</color>" : mana.Max.ToString(),
+                    Plus = Attribute.Mana, Mana = true,
                     Description = "Spent on abilities and slowly regained. Grows with points bought with experience (+1 each), Intelligence, levels and gear." },
                 new Row { Label = "Armor Value:", Value = () => (inventory != null ? inventory.Armor : 0).ToString(),
                     Description = "Reduces the damage of every hit you take. Comes from gear." },
@@ -111,11 +121,6 @@ namespace RPG.UI
                     () => $"{AttributeRules.HealthRegenPerSecond(total):0.#}/s"),
                 Stat(Attribute.Meditate, "Mana regained every second: 1 every 5 seconds per point.",
                     () => $"{AttributeRules.ManaRegenPerSecond(total):0.#}/s"),
-                null,
-                new Row { Label = "Damage:", Value = () => $"{attack.ScaledMinDamage} - {attack.ScaledMaxDamage}",
-                    Description = "The damage of your attacks; abilities multiply it. Your weapon's skill raises it." },
-                new Row { Label = "Critical Chance:", Value = () => Percent(progress.CritChance),
-                    Description = "The chance for an attack to deal double damage: your class, Agility and the melee or ranged critical rating." },
             });
             pages.Add(new List<Row>
             {
@@ -131,8 +136,10 @@ namespace RPG.UI
                 Stat(Attribute.ResistShadow, "Less shadow damage taken: rating / (rating + 100).", () => Percent(AttributeRules.ResistReduction(total.resistShadow))),
                 Stat(Attribute.ResistHoly, "Less holy damage taken: rating / (rating + 100).", () => Percent(AttributeRules.ResistReduction(total.resistHoly))),
                 null,
-                Stat(Attribute.Bartering, "Vendors charge 0.5% less and pay 0.5% more per point, up to 25%.", () => Percent(AttributeRules.BarteringDiscount(total))),
-                Stat(Attribute.Lockpicking, "Opens locked chests: you need twice the chest's level."),
+                new Row { Label = "Damage:", Value = () => $"{attack.ScaledMinDamage} - {attack.ScaledMaxDamage}",
+                    Description = "The damage of your attacks; abilities multiply it. Your weapon's skill raises it." },
+                new Row { Label = "Critical Chance:", Value = () => Percent(progress.CritChance),
+                    Description = "The chance for an attack to deal double damage: your class, Agility and the melee or ranged critical rating." },
             });
             var skills = new List<Row>();
             for (Attribute skill = Attribute.Staves; skill <= Attribute.Shields; skill++)
@@ -147,22 +154,39 @@ namespace RPG.UI
                     return worn ? $"{bonus} (your weapon)" : bonus;
                 }));
             }
+            // Like the source game's SKILLS tab: the weapon skills (only the class's own can be trained), then trading and locks.
+            skills.Add(null);
+            skills.Add(Stat(Attribute.Bartering, "Vendors charge 0.5% less and pay 0.5% more per point, up to 25%.", () => Percent(AttributeRules.BarteringDiscount(total))));
+            skills.Add(Stat(Attribute.Lockpicking, "Opens locked chests: you need twice the chest's level."));
             pages.Add(skills);
         }
 
         private static readonly string[] PageNames = { "GENERAL", "COMBAT", "SKILLS" };
 
         // The source game's paperdoll: equipment indices (Inventory.SlotAt) down the left and the right of the sheet.
-        private static readonly int[] LeftSlots = { 1, 4, 2, 7, 10, 0 };
-        private static readonly int[] RightSlots = { 8, 9, 5, 6, 3 };
+        // Left: Helm, Necklace, Chest, Ranged, Offhand, Weapon; right: two Rings, Hands, Belt, Legs, Feet. Ranged has no
+        // index of its own here (bows are worn as the weapon): it shows a worn bow.
+        private const int RangedSlot = -2;
+        private static readonly int[] LeftSlots = { 1, 4, 2, RangedSlot, 10, 0 };
+        private static readonly int[] RightSlots = { 8, 9, 7, 5, 6, 3 };
         private static readonly string[] SlotNames = { "Weapon", "Helm", "Chest", "Feet", "Necklace", "Belt", "Legs", "Hands", "Ring", "Ring", "Offhand" };
-        private const float SlotSize = 50f;
-        private const float SlotGap = 8f;
-        private const float PaperdollWidth = 320f;
+        private const float SlotSize = 40f;
+        private const float SlotStep = 58f;
+        private const float SlotsTop = 179f;
+        private const float PaperdollWidth = 360f;
+        private ItemSlotView rangedView;
 
         private readonly List<Button> tabs = new List<Button>();
         private readonly ItemSlotView[] slotViews = new ItemSlotView[Inventory.EquipmentSlots];
-        private readonly List<GameObject> plusButtons = new List<GameObject>();
+        private readonly List<(GameObject button, Attribute attribute)> plusButtons = new List<(GameObject, Attribute)>();
+        // Points picked while editing (SPEND EXP), bought on CONFIRM.
+        private readonly Dictionary<Attribute, int> pending = new Dictionary<Attribute, int>();
+        private Button spendButton;
+        private Button confirmButton;
+        private Button cancelButton;
+        private Text costLabel;
+        private Text costText;
+        private Text editNote;
         private Text nameText;
         private Text levelText;
         private Text progressionText;
@@ -185,19 +209,26 @@ namespace RPG.UI
             RectTransform rect = panel.rectTransform;
             rect.anchorMin = rect.anchorMax = rect.pivot = new Vector2(0f, 0.5f);
             rect.anchoredPosition = new Vector2(20f, 40f);
+            rect.sizeDelta = new Vector2(Width, Height);
 
-            title = AddText(rect, "CHARACTER", 20, TextAnchor.UpperCenter, new Vector2(0f, -10f), new Vector2(Width, 28f));
-            title.color = TitleColor;
+            // The header with the title and the tab bar under it, where the source game's panel has them.
+            Image header = UIFactory.CreateImage("Header", rect, new Color32(0x4A, 0x16, 0x12, 0xF5));
+            UIFactory.Place(header.rectTransform, new Vector2(0f, 1f), new Vector2(10f, -14f), new Vector2(Width - 20f, 52f));
+            Image tabBar = UIFactory.CreateImage("Tabs", rect, new Color32(0x14, 0x12, 0x11, 0xF5));
+            UIFactory.Place(tabBar.rectTransform, new Vector2(0f, 1f), new Vector2(10f, -68f), new Vector2(Width - 20f, 38f));
+            title = AddText(rect, "CHARACTER", 21, TextAnchor.MiddleCenter, new Vector2(0f, -26f), new Vector2(Width, 30f));
+            title.color = new Color32(0xE6, 0xD8, 0xC0, 0xFF);
             Button close = UIFactory.CreateButton("Close", rect, new Color(0.35f, 0.12f, 0.1f, 0.95f), "X", 15);
-            UIFactory.Place((RectTransform)close.transform, new Vector2(1f, 1f), new Vector2(-8f, -8f), new Vector2(26f, 26f));
+            UIFactory.Place((RectTransform)close.transform, new Vector2(1f, 1f), new Vector2(-14f, -26f), new Vector2(26f, 26f));
             close.onClick.AddListener(Toggle);
 
             // The tabs, like the source game's: GENERAL, COMBAT, SKILLS.
+            float[] tabCenters = { 156f, 296f, 431f };
             for (int i = 0; i < PageNames.Length; i++)
             {
                 int index = i;
                 Button tab = UIFactory.CreateButton(PageNames[i], rect, Color.clear, PageNames[i], 14);
-                UIFactory.Place((RectTransform)tab.transform, new Vector2(0f, 1f), new Vector2(40f + i * 100f, -44f), new Vector2(96f, 26f));
+                UIFactory.Place((RectTransform)tab.transform, new Vector2(0f, 1f), new Vector2(tabCenters[i] - 55f, -74f), new Vector2(110f, 26f));
                 tab.onClick.AddListener(() => ShowPage(index));
                 tabs.Add(tab);
             }
@@ -205,13 +236,12 @@ namespace RPG.UI
             BuildPaperdoll(rect);
 
             BuildPages();
-            float lowest = -86f - 6f * (SlotSize + SlotGap);
             foreach (List<Row> rows in pages)
             {
                 RectTransform root = UIFactory.CreateRect("Page", rect);
                 UIFactory.Stretch(root);
                 pageRoots.Add(root.gameObject);
-                float y = -86f;
+                float y = -RowsTop;
                 foreach (Row row in rows)
                 {
                     if (row == null)
@@ -222,17 +252,17 @@ namespace RPG.UI
                     if (row.Plus.HasValue) AddPlus(root, row.Plus.Value, y);
                     AddRow(root, row, ref y);
                 }
-                lowest = Mathf.Min(lowest, y);
             }
 
-            float bottom = lowest - 12f;
-            Button spend = UIFactory.CreateButton("Spend Exp", rect, new Color32(0x4A, 0x1E, 0x14, 0xF2), "SPEND EXP", 14);
-            UIFactory.Place((RectTransform)spend.transform, new Vector2(0f, 1f), new Vector2(14f, bottom), new Vector2(120f, 28f));
-            spend.gameObject.AddComponent<Outline>().effectColor = BorderColor;
-            spend.onClick.AddListener(() => SetSpending(!spending));
-            points = AddText(rect, "", 15, TextAnchor.MiddleLeft, new Vector2(146f, bottom), new Vector2(Width - 160f, 28f));
+            float bottom = -534f;
+            spendButton = BottomButton(rect, "SPEND EXP", 14f, bottom, () => SetSpending(true));
+            confirmButton = BottomButton(rect, "CONFIRM", 14f, bottom, Confirm);
+            cancelButton = BottomButton(rect, "CANCEL", 158f, bottom, () => SetSpending(false));
+            points = AddText(rect, "", 15, TextAnchor.MiddleLeft, new Vector2(PaperdollWidth + 14f, bottom), new Vector2(Width - PaperdollWidth - 28f, 28f));
             points.color = TitleColor;
-            rect.sizeDelta = new Vector2(Width, -bottom + 28f + 14f);
+            editNote = AddText(rect, "Only base values are shown\nwhile editing", 12, TextAnchor.MiddleCenter,
+                new Vector2(PaperdollWidth + 10f, -462f), new Vector2(Width - PaperdollWidth - 30f, 34f));
+            editNote.color = LabelColor;
 
             BuildTooltip();
             ShowPage(0);
@@ -244,46 +274,59 @@ namespace RPG.UI
         private void BuildPaperdoll(RectTransform rect)
         {
             Image divider = UIFactory.CreateImage("Divider", rect, BorderColor);
-            UIFactory.Place(divider.rectTransform, new Vector2(0f, 1f), new Vector2(PaperdollWidth, -80f), new Vector2(2f, 6f * (SlotSize + SlotGap)));
+            UIFactory.Place(divider.rectTransform, new Vector2(0f, 1f), new Vector2(PaperdollWidth, -110f), new Vector2(2f, 430f));
             for (int column = 0; column < 2; column++)
             {
                 int[] slots = column == 0 ? LeftSlots : RightSlots;
-                float x = column == 0 ? 18f : PaperdollWidth - 18f - SlotSize;
+                float x = column == 0 ? 46f : 288f;
                 for (int i = 0; i < slots.Length; i++)
-                    slotViews[slots[i]] = CreateEquipmentSlot(rect, slots[i], new Vector2(x, -86f - i * (SlotSize + SlotGap)));
+                {
+                    ItemSlotView view = CreateEquipmentSlot(rect, slots[i], new Vector2(x, -SlotsTop - i * SlotStep));
+                    if (slots[i] == RangedSlot) rangedView = view;
+                    else slotViews[slots[i]] = view;
+                }
             }
 
-            float center = 18f + SlotSize + 8f;
-            float centerWidth = PaperdollWidth - 2f * center;
-            nameText = AddText(rect, "", 17, TextAnchor.UpperCenter, new Vector2(center, -90f), new Vector2(centerWidth, 24f));
+            // Between the columns, as on the source game's panel: name and level, PROGRESSION, EXPERIENCE (and COST while editing).
+            const float center = 100f;
+            const float centerWidth = 180f;
+            nameText = AddText(rect, "", 16, TextAnchor.UpperCenter, new Vector2(center, -112f), new Vector2(centerWidth, 22f));
             nameText.color = ValueColor;
-            levelText = AddText(rect, "", 12, TextAnchor.UpperCenter, new Vector2(center, -114f), new Vector2(centerWidth, 34f));
+            levelText = AddText(rect, "", 12, TextAnchor.UpperCenter, new Vector2(center - 20f, -134f), new Vector2(centerWidth + 40f, 32f));
             levelText.color = LabelColor;
-            Text progressionLabel = AddText(rect, "PROGRESSION", 14, TextAnchor.UpperCenter, new Vector2(center, -170f), new Vector2(centerWidth, 20f));
+            Text progressionLabel = AddText(rect, "PROGRESSION", 14, TextAnchor.UpperCenter, new Vector2(center, -220f), new Vector2(centerWidth, 20f));
             progressionLabel.color = TitleColor;
-            progressionText = AddText(rect, "", 14, TextAnchor.UpperCenter, new Vector2(center, -190f), new Vector2(centerWidth, 20f));
+            progressionText = AddText(rect, "", 14, TextAnchor.UpperCenter, new Vector2(center, -240f), new Vector2(centerWidth, 20f));
             progressionText.color = ValueColor;
-            Text experienceLabel = AddText(rect, "EXPERIENCE", 14, TextAnchor.UpperCenter, new Vector2(center, -224f), new Vector2(centerWidth, 20f));
+            Text experienceLabel = AddText(rect, "EXPERIENCE", 14, TextAnchor.UpperCenter, new Vector2(center, -278f), new Vector2(centerWidth, 20f));
             experienceLabel.color = TitleColor;
-            experienceText = AddText(rect, "", 14, TextAnchor.UpperCenter, new Vector2(center, -244f), new Vector2(centerWidth, 20f));
+            experienceText = AddText(rect, "", 14, TextAnchor.UpperCenter, new Vector2(center, -298f), new Vector2(centerWidth, 20f));
             experienceText.color = ValueColor;
+            costLabel = AddText(rect, "COST", 14, TextAnchor.UpperCenter, new Vector2(center, -336f), new Vector2(centerWidth, 20f));
+            costLabel.color = TitleColor;
+            costText = AddText(rect, "", 14, TextAnchor.UpperCenter, new Vector2(center, -356f), new Vector2(centerWidth, 20f));
+            costText.color = ValueColor;
         }
 
-        private ItemSlotView CreateEquipmentSlot(RectTransform parent, int equipIndex, Vector2 topLeft)
+        private static string SlotName(int equipIndex) => equipIndex == RangedSlot ? "Ranged" : SlotNames[equipIndex];
+
+        private ItemSlotView CreateEquipmentSlot(RectTransform parent, int slot, Vector2 topLeft)
         {
-            Button button = UIFactory.CreateButton(SlotNames[equipIndex], parent, EmptySlotColor, null, 0);
+            // The Ranged slot shows the worn bow, which is the weapon here.
+            int equipIndex = slot == RangedSlot ? 0 : slot;
+            Button button = UIFactory.CreateButton(SlotName(slot), parent, EmptySlotColor, null, 0);
             var rect = (RectTransform)button.transform;
             UIFactory.Place(rect, new Vector2(0f, 1f), topLeft, new Vector2(SlotSize, SlotSize));
             ItemSlotView view = button.gameObject.AddComponent<ItemSlotView>();
             view.Background = (Image)button.targetGraphic;
             view.Border = button.gameObject.AddComponent<Outline>();
             view.Border.effectDistance = new Vector2(2f, -2f);
-            view.Label = UIFactory.CreateText("Name", rect, 10, TextAnchor.MiddleCenter);
+            view.Label = UIFactory.CreateText("Name", rect, 8, TextAnchor.MiddleCenter);
             UIFactory.Stretch(view.Label.rectTransform);
             view.Label.rectTransform.offsetMin = new Vector2(2f, 2f);
             view.Label.rectTransform.offsetMax = new Vector2(-2f, -2f);
             button.onClick.AddListener(() => OnSlotClicked(equipIndex));
-            view.PointerEntered += _ => ShowTooltip(() => SlotTooltip(equipIndex));
+            view.PointerEntered += _ => ShowTooltip(() => SlotTooltip(slot));
             view.PointerExited += _ => HideTooltip();
 
             // Gear dragged from the bag onto its slot is put on.
@@ -310,35 +353,92 @@ namespace RPG.UI
             inventory.RequestUnequipAt(equipIndex);
         }
 
-        private string SlotTooltip(int equipIndex)
+        /// <summary>What a paperdoll slot shows: the worn item, but a bow only in Ranged and a melee weapon only in Weapon.</summary>
+        private ItemStack Shown(int slot)
         {
-            if (inventory == null) return SlotNames[equipIndex];
-            ItemStack stack = inventory.GetEquippedAt(equipIndex);
+            if (inventory == null) return ItemStack.Empty;
+            ItemStack stack = inventory.GetEquippedAt(slot == RangedSlot ? 0 : slot);
+            if (slot != RangedSlot && slot != 0) return stack;
             ItemDefinition item = inventory.Definition(stack);
-            if (item == null) return $"<color=#{TooltipHeaderHex}>{SlotNames[equipIndex]}</color>\nEmpty. Drag gear here from the bag (I).";
+            bool ranged = item != null && item.weaponType == WeaponType.Ranged;
+            return (slot == RangedSlot) == ranged ? stack : ItemStack.Empty;
+        }
+
+        private string SlotTooltip(int slot)
+        {
+            if (inventory == null) return SlotName(slot);
+            ItemStack stack = Shown(slot);
+            ItemDefinition item = inventory.Definition(stack);
+            if (item == null) return $"<color=#{TooltipHeaderHex}>{SlotName(slot)}</color>\nEmpty. Drag gear here from the bag (I).";
             string text = inventory.Describe(stack, VendorWindow.ClassName(item, progress));
             return text.Replace("Click to equip", "Click to take off");
         }
 
+        private Button BottomButton(RectTransform rect, string label, float x, float y, UnityEngine.Events.UnityAction action)
+        {
+            Button button = UIFactory.CreateButton(label, rect, new Color32(0x4A, 0x1E, 0x14, 0xF2), label, 14);
+            UIFactory.Place((RectTransform)button.transform, new Vector2(0f, 1f), new Vector2(x, y), new Vector2(120f, 28f));
+            button.gameObject.AddComponent<Outline>().effectColor = BorderColor;
+            button.onClick.AddListener(action);
+            return button;
+        }
+
+        /// <summary>
+        /// SPEND EXP: the + buttons of the stats the class can train, CONFIRM / CANCEL, the cost so far, and the abilities
+        /// window next to the sheet, like the source game's. Turning it off (CANCEL) forgets the picked points.
+        /// </summary>
         private void SetSpending(bool on)
         {
             spending = on;
-            foreach (GameObject plus in plusButtons) plus.SetActive(on);
+            pending.Clear();
+            RefreshEditing();
+            if (on) SpellbookWindow.OpenBeside((RectTransform)window.transform);
+        }
+
+        private void RefreshEditing()
+        {
+            foreach ((GameObject button, Attribute attribute) in plusButtons)
+                button.SetActive(spending && (progress == null || progress.CanTrain(attribute)));
+            spendButton.gameObject.SetActive(!spending);
+            confirmButton.gameObject.SetActive(spending);
+            cancelButton.gameObject.SetActive(spending);
+            costLabel.gameObject.SetActive(spending);
+            costText.gameObject.SetActive(spending);
+            editNote.gameObject.SetActive(spending);
+        }
+
+        private int PendingOf(Attribute attribute) => pending.TryGetValue(attribute, out int count) ? count : 0;
+
+        /// <summary>What the picked points cost together.</summary>
+        private int PendingCost()
+        {
+            int cost = 0;
+            if (progress == null) return 0;
+            foreach (KeyValuePair<Attribute, int> pick in pending) cost += progress.PointsCost(pick.Key, pick.Value);
+            return cost;
+        }
+
+        private void Confirm()
+        {
+            if (progress != null)
+                foreach (KeyValuePair<Attribute, int> pick in pending) progress.RequestSpendPoints(pick.Key, pick.Value);
+            SetSpending(false);
         }
 
         private void ShowEquipment()
         {
-            for (int i = 0; i < slotViews.Length; i++)
+            for (int i = -2; i < slotViews.Length; i++)
             {
-                ItemSlotView view = slotViews[i];
+                if (i == -1) continue;
+                ItemSlotView view = i == RangedSlot ? rangedView : slotViews[i];
                 if (view == null) continue;
-                ItemStack stack = inventory != null ? inventory.GetEquippedAt(i) : ItemStack.Empty;
+                ItemStack stack = Shown(i);
                 ItemDefinition item = inventory != null ? inventory.Definition(stack) : null;
                 if (item == null)
                 {
                     view.Background.color = EmptySlotColor;
                     view.Border.effectColor = new Color(0f, 0f, 0f, 0.5f);
-                    view.Label.text = $"<color=#{ColorUtility.ToHtmlStringRGB(LabelColor)}>{SlotNames[i]}</color>";
+                    view.Label.text = $"<color=#{ColorUtility.ToHtmlStringRGB(LabelColor)}>{SlotName(i)}</color>";
                     continue;
                 }
                 Color rarity = ItemDefinition.RarityColor(inventory.Quality(stack));
@@ -384,7 +484,7 @@ namespace RPG.UI
             plus.gameObject.AddComponent<Outline>().effectColor = PlusBorder;
             plus.GetComponentInChildren<Text>().color = new Color32(0xE6, 0xD6, 0xF2, 0xFF);
             plus.onClick.AddListener(() => Spend(attribute));
-            plusButtons.Add(plus.gameObject);
+            plusButtons.Add((plus.gameObject, attribute));
 
             HoverArea hover = plus.gameObject.AddComponent<HoverArea>();
             hover.Entered += _ => ShowTooltip(() => PointTooltip(attribute));
@@ -397,8 +497,8 @@ namespace RPG.UI
             string gain = attribute == Attribute.Health ? $"+{AttributeRules.HealthPerPoint} Health"
                 : attribute == Attribute.Mana ? $"+{AttributeRules.ManaPerPoint} Mana"
                 : $"+1 {AttributeRules.NameOf(attribute)}";
-            int cost = progress != null ? progress.PointCost(attribute) : AttributeRules.PointCost(attribute, 0);
-            bool affordable = progress != null && progress.CanAfford(attribute);
+            int cost = AttributeRules.PointCost(attribute, invested + PendingOf(attribute));
+            bool affordable = progress != null && PendingCost() + cost <= progress.ExperienceToSpend;
             string header = $"<color=#{TooltipHeaderHex}>{gain}:</color> <color=#{(affordable ? CostHex : TooExpensiveHex)}>{cost}xp</color>";
             string spent = invested > 0 ? $"You have invested {invested} point{(invested == 1 ? "" : "s")}." : "You haven't invested anything.";
             return $"{header}\n{spent}";
@@ -440,11 +540,22 @@ namespace RPG.UI
             if (!window.activeSelf) HideTooltip();
         }
 
+        /// <summary>Picks one more point (bought on CONFIRM), when the experience covers everything picked.</summary>
         private void Spend(Attribute attribute)
         {
             if (progress == null) return;
-            if (progress.CanAfford(attribute)) progress.RequestSpendPoint(attribute);
-            else MessageLog.Add($"You need {progress.PointCost(attribute)} experience to raise {AttributeRules.NameOf(attribute)}.", MessageLog.WarningColor);
+            if (!progress.CanTrain(attribute))
+            {
+                MessageLog.Add($"Your class cannot train {AttributeRules.NameOf(attribute)}.", MessageLog.WarningColor);
+                return;
+            }
+            int next = AttributeRules.PointCost(attribute, progress.SpentPoints[attribute] + PendingOf(attribute));
+            if (PendingCost() + next > progress.ExperienceToSpend)
+            {
+                MessageLog.Add($"You need {next} more experience to raise {AttributeRules.NameOf(attribute)}.", MessageLog.WarningColor);
+                return;
+            }
+            pending[attribute] = PendingOf(attribute) + 1;
         }
 
         private void Update()
@@ -474,14 +585,16 @@ namespace RPG.UI
             nameText.text = health.DisplayName.ToUpperInvariant();
             levelText.text = $"Level {progress.Level} {progress.ClassName} ({LevelCurve.RankName(progress.Level)})";
             progressionText.text = progress.ExperienceToNext > 0 ? $"{progress.Experience} / {progress.ExperienceToNext}" : "Max level";
-            experienceText.text = progress.ExperienceToSpend.ToString();
+            experienceText.text = (progress.ExperienceToSpend - (spending ? PendingCost() : 0)).ToString();
+            costText.text = PendingCost().ToString();
             ShowEquipment();
 
             total = progress.TotalAttributes;
             fromItems = inventory != null ? inventory.Attributes : default;
             foreach (Row row in pages[page])
                 if (row != null) row.ValueText.text = row.Value();
-            points.text = spending ? $"Click + to raise a stat. Experience to spend: <color=#{CostHex}>{progress.ExperienceToSpend}xp</color>" : "";
+            points.text = "";
+            if (spending) RefreshEditing();
 
             UpdateTooltip();
         }

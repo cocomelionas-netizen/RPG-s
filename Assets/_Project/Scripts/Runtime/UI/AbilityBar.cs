@@ -182,7 +182,7 @@ namespace RPG.UI
         private void OnSlotClicked(int slot)
         {
             if (caster == null) return;
-            if (SpellbookWindow.PendingSpell >= 0 && spellbook != null)
+            if (SpellbookWindow.PendingSpell != -1 && spellbook != null)
             {
                 // A spell picked in the spellbook goes into this slot.
                 spellbook.RequestAssign(slot, SpellbookWindow.PendingSpell);
@@ -218,7 +218,7 @@ namespace RPG.UI
                 if (targeting != null) targeting.AttackFailed += ShowMessage;
             }
 
-            bool dropping = DragSource.IsDragging || SpellbookWindow.PendingSpell >= 0;
+            bool dropping = DragSource.IsDragging || SpellbookWindow.PendingSpell != -1;
             for (int i = 0; i < slots.Length; i++)
             {
                 Slot slot = slots[i];

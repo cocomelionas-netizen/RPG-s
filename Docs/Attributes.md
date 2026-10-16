@@ -29,7 +29,7 @@ Inspired by the source game's mechanics.
 
 - Strength, Agility, Intelligence, Vitality. A class has base attributes and a main attribute.
 - Main attribute / 4 → damage; Vitality × 4 + Strength → HP; Intelligence × 4 → mana; Agility × 0.4% → critical chance.
-- Every level gives 5 points. Window **C** (or the "Character (C)" button) – "+" adds a point (the server checks).
+- Every level gives 5 points. Window **C** (or the "Character (C)" button) – SPEND EXP, then "+" adds pending points and CONFIRM buys them (the server checks; a class trains only its own weapon skills).
 - Items and affixes give attributes too. Old characters get points for the levels they already reached when they log in.
 - The overall numbers at level 1 did not change (base HP and damage were lowered by what the attributes add).
 
