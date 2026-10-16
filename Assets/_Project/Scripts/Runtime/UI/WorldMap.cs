@@ -11,7 +11,7 @@ using UnityEngine.UI;
 namespace RPG.UI
 {
     /// <summary>
-    /// The whole map of the place the local player is in, opened with M like Dreadmyst's: the ground, named places,
+    /// The whole map of the place the local player is in, opened with M like the source game's: the ground, named places,
     /// waystones (with their names, greyed until discovered), towns' vendors, dungeon entrances, other players and
     /// you. Closes with M, Esc or the X. Builds its own UI; place it on a RectTransform that fills the HUD canvas.
     /// </summary>

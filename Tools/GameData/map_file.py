@@ -1,4 +1,4 @@
-"""Reads Dreadmyst's .map files (client data, maps/*.map).
+"""Reads the source game's .map files (client data, maps/*.map).
 
 Layout (little endian):
     int32 size                  the map is size x size cells

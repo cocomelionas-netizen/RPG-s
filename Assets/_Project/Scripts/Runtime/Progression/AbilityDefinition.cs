@@ -32,7 +32,7 @@ namespace RPG.Progression
         Revive,
     }
 
-    /// <summary>A buff or debuff a spell puts on its target (or on the caster), Dreadmyst's "apply aura".</summary>
+    /// <summary>A buff or debuff a spell puts on its target (or on the caster), the source game's "apply aura".</summary>
     [Serializable]
     public class SpellEffect
     {
@@ -62,15 +62,15 @@ namespace RPG.Progression
     }
 
     /// <summary>
-    /// One spell (ability) of a class, a Dreadmyst spell: its mana cost (base + per level), cooldown, cast time and
-    /// range; damage as a share of the weapon's or from Dreadmyst's spell formula (rank + attributes x coefficient /
+    /// One spell (ability) of a class, a source-game spell: its mana cost (base + per level), cooldown, cast time and
+    /// range; damage as a share of the weapon's or from the source game's spell formula (rank + attributes x coefficient /
     /// (105 - rank x divisor)), healing, and the effects it puts on. Spells are learned from Tomes from their level
     /// and ranked up with experience. The server resolves it with <see cref="AbilityCaster"/>.
     /// </summary>
     [CreateAssetMenu(menuName = "RPG/Progression/Ability", fileName = "Ability")]
     public class AbilityDefinition : ScriptableObject
     {
-        /// <summary>Dreadmyst's spell numbers are for its health; ours is half of it, so its amounts are halved too.</summary>
+        /// <summary>The source game's spell numbers are for its health; ours is half of it, so its amounts are halved too.</summary>
         public const float PowerScale = 0.5f;
 
         public string displayName = "Ability";
@@ -83,7 +83,7 @@ namespace RPG.Progression
 
         [Header("Cost and timing")]
         [Min(0f)] public float cooldown = 6f;
-        [Tooltip("Mana at level 0; Mana Per Level is added for every character level (Dreadmyst: 2 + level).")]
+        [Tooltip("Mana at level 0; Mana Per Level is added for every character level (the source game: 2 + level).")]
         [Min(0)] public int manaCost = 10;
         [Min(0f)] public float manaPerLevel;
         [Tooltip("Seconds of casting before it lands; moving breaks it off.")]
@@ -112,7 +112,7 @@ namespace RPG.Progression
         public bool isHeal;
         [Min(0f)] public float spellAmount;
         [Min(0f)] public float spellSpread;
-        [Tooltip("Dreadmyst's coefficient: (Stat + Stat 2 x Factor) x this / (105 - rank x Divisor).")]
+        [Tooltip("The source game's coefficient: (Stat + Stat 2 x Factor) x this / (105 - rank x Divisor).")]
         [Min(0f)] public float spellCoefficient;
         public Attribute spellStat = Attribute.Intelligence;
         public Attribute spellStat2 = Attribute.Vitality;
@@ -161,7 +161,7 @@ namespace RPG.Progression
         public float WeaponPercentAt(int rank) => weaponPercent + weaponPercentPerRank * Mathf.Max(0, rank - 1);
 
         /// <summary>
-        /// Dreadmyst's spell formula: rank + (stat + stat 2 x factor) x coefficient / (105 - rank x divisor), plus the
+        /// The source game's spell formula: rank + (stat + stat 2 x factor) x coefficient / (105 - rank x divisor), plus the
         /// base amount and a roll up to the spread; halved for our health (<see cref="PowerScale"/>).
         /// </summary>
         public float SpellPowerAt(int rank, AttributeSet attributes, float roll01)

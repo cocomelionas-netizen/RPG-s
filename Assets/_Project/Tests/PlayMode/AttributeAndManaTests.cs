@@ -109,7 +109,7 @@ namespace RPG.Tests
         [UnityTest]
         public IEnumerator Ability_CostsMana_AndFailsWithoutEnough()
         {
-            // Mighty Blow (bar slot 0): Dreadmyst's mana, base plus per level.
+            // Mighty Blow (bar slot 0): the source game's mana, base plus per level.
             AbilityDefinition mightyBlow = caster.GetAbility(0);
             int cost = caster.ManaCost(mightyBlow);
             Assert.Greater(cost, 0);
@@ -131,7 +131,7 @@ namespace RPG.Tests
         // ---------- Attributes ----------
 
         [Test]
-        public void PointCosts_GrowWithEveryPoint_LikeDreadmyst()
+        public void PointCosts_GrowWithEveryPoint_LikeTheSourceGame()
         {
             // Attributes: x^1.5 + 5 for the next point after x.
             Assert.AreEqual(5, AttributeRules.PointCost(Attribute.Strength, 0));
@@ -189,7 +189,7 @@ namespace RPG.Tests
         }
 
         [Test]
-        public void DreadmystStatCosts_FromTheirClient()
+        public void StatCosts_FromTheClientData()
         {
             Assert.AreEqual(6, AttributeRules.PointCost(Attribute.MeleeCritical, 10), "x/2 + 1");
             Assert.AreEqual(4, AttributeRules.PointCost(Attribute.RangedCritical, 9), "x/3 + 1");
@@ -279,9 +279,9 @@ namespace RPG.Tests
         }
 
         [Test]
-        public void AffixRoll_UsesDreadmystAffixesOfTheLevel()
+        public void AffixRoll_UsesAffixDataOfTheLevel()
         {
-            ItemDefinition sword = Item("Dreadmyst/BronzeSword_L03");
+            ItemDefinition sword = Item("Generated/BronzeSword_L03");
             int rolled = 0;
             for (int i = 0; i < 200; i++)
             {

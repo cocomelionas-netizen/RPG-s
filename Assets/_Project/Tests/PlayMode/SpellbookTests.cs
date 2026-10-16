@@ -13,7 +13,7 @@ using UnityEngine.TestTools;
 
 namespace RPG.Tests
 {
-    /// <summary>The spellbook (Dreadmyst's spells, Tomes and ranks bought with experience) and status effects, on a real host.</summary>
+    /// <summary>The spellbook (the source game's spells, Tomes and ranks bought with experience) and status effects, on a real host.</summary>
     public class SpellbookTests
     {
         private const string PlayerPrefabPath = "Assets/_Project/Prefabs/Characters/Player.prefab";
@@ -83,7 +83,7 @@ namespace RPG.Tests
                 known++;
                 Assert.GreaterOrEqual(spellbook.SlotOf(i), 0, $"{spellbook.Get(i).displayName} is on the bar.");
             }
-            Assert.AreEqual(3, known, "Dreadmyst classes start with three spells.");
+            Assert.AreEqual(3, known, "The source game's classes start with three spells.");
         }
 
         [UnityTest]

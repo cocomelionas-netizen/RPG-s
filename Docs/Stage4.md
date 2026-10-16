@@ -1,95 +1,95 @@
-# 4 etapas – taikinys ir realaus laiko kova
+# Stage 4 – targeting and real-time combat
 
-## Ką padarėme
+## What we did
 
-- **Gyvybės (`Health`).** Žaidėjas turi 100 HP, treniruočių manekenas – 200. HP reikšmę laiko ir keičia tik serveris, klientai ją tik skaito.
-- **Frakcijos (`Faction`).** Žaidėjai pulti gali tik kitos frakcijos vienetus (monstrus). PvP kol kas išjungtas (11 etapas): kitą žaidėją galima pažymėti, bet ne pulti.
-- **Taikinio pasirinkimas** (`PlayerTargeting`):
+- **Health (`Health`).** The player has 100 HP, the training dummy 200. Only the server holds and changes HP; clients only read it.
+- **Factions (`Faction`).** Players can only attack units of another faction (monsters). PvP is off for now (stage 11): another player can be selected but not attacked.
+- **Targeting** (`PlayerTargeting`):
 
-  | Veiksmas | Kas vyksta |
-  |----------|-----------|
-  | Kairys pelės mygtukas ant priešo | Pažymi jį (nuo 6 etapo pataisymo – nepuola) |
-  | Kairys pelės mygtukas ant žemės | Nustoja pulti ir eina ten (taikinys lieka pažymėtas) |
-  | WASD | Nustoja pulti (taikinys lieka) |
-  | **Tab** | Kitas artimiausias priešas (iki 10 vienetų) |
-  | **1** arba **F** (mygtukas „Attack“) | Pulti pažymėtą taikinį: veikėjas prieina į atstumą ir muša pats |
-  | **Esc** | Atšaukti taikinį |
+  | Action | What happens |
+  |--------|--------------|
+  | Left click on an enemy | Selects it (since the stage 6 fix it does not attack) |
+  | Left click on the ground | Stops attacking and walks there (the target stays selected) |
+  | WASD | Stops attacking (the target stays) |
+  | **Tab** | Next nearest enemy (up to 10 units) |
+  | **1** or **F** ("Attack" button) | Attack the selected target: the character walks into range and attacks by itself |
+  | **Esc** | Clear the target |
 
-- **Automatinė ataka (`AutoAttack`).** Ją visą sprendžia serveris. Klientas tik paprašo „pulti šį“, o serveris pats patikrina:
-  - ar taikinys priešas ir gyvas;
-  - ar atstumas ne didesnis kaip 0.9 vieneto (su 0.35 atsarga dėl vėlavimo);
-  - ar praėjo 1.5 s nuo paskutinio smūgio.
+- **Auto-attack (`AutoAttack`).** The server decides all of it. The client only asks "attack this one", and the server checks:
+  - that the target is an enemy and alive;
+  - that the distance is at most 0.9 units (with 0.35 tolerance for latency);
+  - that 1.5 s have passed since the last hit.
 
-  Žalą (8–12, 10 % tikimybė kritinio smūgio ×2) skaičiuoja serveris, o visi mato atakos animaciją. Apgauti suklastotais pranešimais neįmanoma: serveris tikrina savo turimą poziciją, ne tą, kurią praneša klientas.
-- **Mirtis ir atgimimas** (`PlayerRespawn`). Kai HP lygus 0:
-  - veikėjas tampa pilkas ir pusiau permatomas, judėti negali;
-  - po 5 s serveris jį perkelia prie starto su pilnu HP.
-- **Treniruočių manekenai** (2 vnt. šalia starto):
-  - neatsako smūgiais;
-  - palikti ramybėje po 6 s grįžta į pilną HP;
-  - „mirę“ po 4 s atsistoja.
-- **Vaizdas:**
-  - **viršuje** – taikinio rėmelis (vardas, HP juosta, skaičiai);
-  - **apačioje** – tavo rėmelis;
-  - **virš galvos** – HP juosta, kai vienetas sužeistas arba pažymėtas;
-  - **raudonas žiedas** po pažymėtu taikiniu;
-  - **žalos skaičiai** kyla ir blunka: balti – tavo žala, geltoni su „!“ – kritinis smūgis, raudoni – žala tau;
-  - **raudonas blyksnis** pataikius;
-  - **atakos animacija** – 3 kadrai su kardu, 8 kryptimis (vakarų pusė veidrodinė).
+  The server computes the damage (8–12, 10 % chance of a ×2 critical hit) and everyone sees the attack animation. Faked messages cannot cheat: the server checks the position it has, not the one the client reports.
+- **Death and respawn** (`PlayerRespawn`). At 0 HP:
+  - the character turns grey and half transparent and cannot move;
+  - after 5 s the server moves it to the start with full HP.
+- **Training dummies** (2 next to the start):
+  - do not hit back;
+  - left alone for 6 s they return to full HP;
+  - "dead", they stand up again after 4 s.
+- **Visuals:**
+  - **top** – the target frame (name, HP bar, numbers);
+  - **bottom** – your frame;
+  - **above the head** – an HP bar while the unit is hurt or selected;
+  - **red ring** under the selected target;
+  - **damage numbers** rise and fade: white – your damage, yellow with "!" – a critical hit, red – damage to you;
+  - **red flash** on a hit;
+  - **attack animation** – 3 frames with a sword, 8 directions (the west side mirrored).
 
-## Failai
+## Files
 
-| Failas | Paskirtis |
-|--------|-----------|
-| `Scripts/Runtime/Combat/Health.cs` | HP, frakcija, vardas; žala ir atgimimas serveryje |
-| `Scripts/Runtime/Combat/Faction.cs` | Frakcijos |
-| `Scripts/Runtime/Combat/AutoAttack.cs` | Serverio ataka: atstumas, intervalas, žala, animacija |
-| `Scripts/Runtime/Combat/PlayerTargeting.cs` | Pelė, Tab, F, Esc; priėjimas prie taikinio |
-| `Scripts/Runtime/Combat/PlayerRespawn.cs` | Žaidėjo atgimimas |
-| `Scripts/Runtime/Combat/TrainingDummy.cs` | Manekeno elgsena |
-| `Scripts/Runtime/Combat/HealthPresenter.cs` | Juosta virš galvos, blyksnis, žalos skaičiai, mirties vaizdas |
-| `Scripts/Runtime/Combat/TargetIndicator.cs` | Žiedas po taikiniu |
-| `Scripts/Runtime/UI/UnitFrame.cs` | Tavo ir taikinio rėmeliai |
-| `Scripts/Runtime/UI/CombatTextLayer.cs` | Skraidantys žalos skaičiai |
-| `Prefabs/World/TrainingDummy.prefab` | Manekenas |
-| `Tests/PlayMode/CombatTests.cs` | Kovos testai su tikru Host'u |
+| File | Purpose |
+|------|---------|
+| `Scripts/Runtime/Combat/Health.cs` | HP, faction, name; damage and respawn on the server |
+| `Scripts/Runtime/Combat/Faction.cs` | Factions |
+| `Scripts/Runtime/Combat/AutoAttack.cs` | Server attack: range, interval, damage, animation |
+| `Scripts/Runtime/Combat/PlayerTargeting.cs` | Mouse, Tab, F, Esc; walking up to the target |
+| `Scripts/Runtime/Combat/PlayerRespawn.cs` | Player respawn |
+| `Scripts/Runtime/Combat/TrainingDummy.cs` | Dummy behaviour |
+| `Scripts/Runtime/Combat/HealthPresenter.cs` | Bar above the head, flash, damage numbers, death look |
+| `Scripts/Runtime/Combat/TargetIndicator.cs` | Ring under the target |
+| `Scripts/Runtime/UI/UnitFrame.cs` | Your frame and the target frame |
+| `Scripts/Runtime/UI/CombatTextLayer.cs` | Floating damage numbers |
+| `Prefabs/World/TrainingDummy.prefab` | Dummy |
+| `Tests/PlayMode/CombatTests.cs` | Combat tests on a real Host |
 
-Pakeisti failai:
-- `PlayerInputReader`: pridėti Tab, F ir Esc.
-- `PlayerMovement`: pridėti `FaceTowards()` ir `SuppressClickMoveUntilRelease()` (kad paspaudimas ant priešo kartu nebūtų ir ėjimo komanda).
-- `PlayerNetworkMovement`: miręs žaidėjas negali judėti; pridėtas `ServerTeleport()` atgimimui.
-- `NetworkBootstrap`: pridėtas viešas `GetSpawnPosition()`.
-- Scenos įrankis: sukuria manekenus, HUD ir taikinio žiedą; Player prefab'e dabar yra kovos komponentai ir „Hitbox“ (trigger'is pelės pasirinkimui, judėjimo neblokuoja).
+Changed files:
+- `PlayerInputReader`: added Tab, F and Esc.
+- `PlayerMovement`: added `FaceTowards()` and `SuppressClickMoveUntilRelease()` (so a click on an enemy is not also a move command).
+- `PlayerNetworkMovement`: a dead player cannot move; added `ServerTeleport()` for respawning.
+- `NetworkBootstrap`: added a public `GetSpawnPosition()`.
+- Scene tool: creates the dummies, the HUD and the target ring; the Player prefab now has the combat components and a "Hitbox" (a trigger for mouse picking that does not block movement).
 
-## Kaip patikrinti
+## How to check
 
 1. `RPG > Build Test Scene`, **Play**, **Host**.
-2. **Paspausk ant manekeno** (dešinėje nuo starto):
-   - po juo atsiras raudonas žiedas, viršuje – jo rėmelis;
-   - veikėjas prieis ir pradės mušti: matysi kardo mostą, žalos skaičius ir mažėjančią HP juostą.
-3. **Spausk ant žemės** – puolimas sustoja, o rėmelis lieka. **F** – puolimas vėl prasideda.
-4. **Tab** perjungia du manekenus, **Esc** atšaukia taikinį.
-5. **Numušk manekeną iki 0** – jis tampa pilkas ir po 4 s atsistoja. Palikus jį sužeistą, po 6 s jis atsigydo.
-6. **Multiplayer:** `RPG > Run > Local Server` ir `Local Bot Client`, redaktoriuje **Client**. Kova veikia taip pat, o žalą skaičiuoja serveris. Patikrinau: manekenas 200 → 146 → 35 HP per tikrą serverio procesą.
+2. **Click the dummy** (right of the start):
+   - a red ring appears under it and its frame at the top;
+   - the character walks up and starts hitting: you see the sword swing, damage numbers and the HP bar shrinking.
+3. **Click the ground** – the attack stops, the frame stays. **F** – the attack starts again.
+4. **Tab** switches between the two dummies, **Esc** clears the target.
+5. **Take a dummy down to 0** – it turns grey and stands up after 4 s. Left hurt, it heals after 6 s.
+6. **Multiplayer:** `RPG > Run > Local Server` and `Local Bot Client`, **Client** in the editor. Combat works the same and the server computes the damage. Checked: dummy 200 → 146 → 35 HP through a real server process.
 
-### Automatiniai testai
-`Window > General > Test Runner` → **PlayMode** → **Run All** – **43** testai, iš jų 7 nauji kovos testai:
-- pilnas HP ir vardas;
-- smūgis tik kas 1.5 s;
-- per toli – žalos nėra;
-- draugo pulti negalima;
-- ataka sustoja, kai taikinys miršta;
-- manekenas atsistoja;
-- žaidėjas miršta, negali judėti ir atgimsta prie starto.
+### Automatic tests
+`Window > General > Test Runner` → **PlayMode** → **Run All** – **43** tests, 7 of them new combat tests:
+- full HP and name;
+- one hit only every 1.5 s;
+- too far – no damage;
+- a friend cannot be attacked;
+- the attack stops when the target dies;
+- the dummy stands up;
+- the player dies, cannot move and respawns at the start.
 
-## Kur keisti skaičius
-- Žaidėjo žala, atakos greitis, atstumas, kritinio smūgio tikimybė: `Player.prefab` → `AutoAttack` komponentas. 6–7 etapuose tai perkelsime į klases ir ginklus.
-- HP: `Health` komponentas (`Max Health`).
-- Atgimimo laikas: `PlayerRespawn` ir `TrainingDummy`.
+## Where to change the numbers
+- Player damage, attack speed, range, critical chance: `Player.prefab` → the `AutoAttack` component. In stages 6–7 this moves to classes and weapons.
+- HP: the `Health` component (`Max Health`).
+- Respawn time: `PlayerRespawn` and `TrainingDummy`.
 
-Jei prefab'us keisi rankomis, nepamiršk: `RPG > Build Test Scene` juos sukuria iš naujo.
+If you change prefabs by hand, remember: `RPG > Build Test Scene` creates them again.
 
-## Žinomi apribojimai
-- Kol kas žaidėją sužeisti gali tik testai, nes manekenai neatsako smūgiais. Tikri monstrai su AI bus 5 etape.
-- Ataka tik artimoji (melee). Gebėjimai, nuotolinės atakos ir klasės – 6 etapas.
-- UI naudoja paprastą Unity šriftą ir spalvotus stačiakampius. Gražus tapytas UI bus vėliau, kartu su tikra grafika.
+## Known limitations
+- For now only tests can hurt the player, because the dummies do not hit back. Real monsters with AI come in stage 5.
+- Melee attacks only. Abilities, ranged attacks and classes – stage 6.
+- The UI uses the plain Unity font and coloured rectangles. A nice painted UI comes later, together with real art.

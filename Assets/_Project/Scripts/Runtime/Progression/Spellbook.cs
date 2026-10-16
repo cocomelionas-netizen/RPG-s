@@ -6,7 +6,7 @@ using UnityEngine;
 namespace RPG.Progression
 {
     /// <summary>
-    /// The spells a player knows (Dreadmyst's spellbook): a rank for every spell of the class (0 while not learned),
+    /// The spells a player knows (the source game's spellbook): a rank for every spell of the class (0 while not learned),
     /// and which spell sits in each slot of the action bar. A new character knows the level 1 spells; the rest are
     /// learned from Tomes once the player has the spell's level, and every spell is ranked up with experience
     /// (<see cref="AbilityDefinition.RankCost"/>). The server owns it; the owner asks to rank up and to arrange the bar.

@@ -1,15 +1,15 @@
-// Generated from Dreadmyst's game.db (affix_template): every affix. Stats are "id:multiplier" pairs with Dreadmyst's
-// stat ids (from Dreadmyst.exe): 1 Mana, 2 Health, 3 Armor, 4 Strength, 5 Agility, 6 Willpower, 7 Intelligence,
+// Generated from the source game's game.db (affix_template): every affix. Stats are "id:multiplier" pairs with the source game's
+// stat ids (from the client executable): 1 Mana, 2 Health, 3 Armor, 4 Strength, 5 Agility, 6 Willpower, 7 Intelligence,
 // 8 Courage, 9 Regeneration, 10 Meditate, 11 Weapon Value, 13 Ranged Weapon Value, 15-17 Melee/Ranged/Spell
 // Critical, 18 Dodge, 19 Block, 21-24 Resist Frost/Fire/Shadow/Holy, 28-35 Staves, Maces, Axes, Swords, Ranged,
 // Daggers, Wands, Shields.
 namespace RPG.EditorTools
 {
-    internal static class DreadmystAffixes
+    internal static class AffixData
     {
         public const int Mana = 1, Health = 2, Armor = 3, WeaponValue = 11, RangedWeaponValue = 13;
 
-        /// <summary>The attribute of a Dreadmyst stat id, or null for the ones that are not attributes here (mana, health, armor, weapon value).</summary>
+        /// <summary>The attribute of a source-game stat id, or null for the ones that are not attributes here (mana, health, armor, weapon value).</summary>
         public static RPG.Progression.Attribute? AttributeOf(int stat)
         {
             switch (stat)

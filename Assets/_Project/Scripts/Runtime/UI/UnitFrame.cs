@@ -31,7 +31,7 @@ namespace RPG.UI
         private static readonly Color HealthColor = new Color(0.62f, 0.1f, 0.08f);
         private static readonly Color ManaColor = new Color(0.12f, 0.3f, 0.85f);
         private static readonly Color BorderColor = new Color(0.55f, 0.42f, 0.22f);
-        // Dreadmyst's name colours: enemies red, players light blue.
+        // The source game's name colours: enemies red, players light blue.
         private static readonly Color HostileName = new Color32(0xB6, 0x3E, 0x3D, 0xFF);
         private static readonly Color FriendlyName = new Color32(0x8E, 0xAC, 0xD2, 0xFF);
         /// <summary>Height of a character sprite shown in the portrait, in portrait diameters (shows head and shoulders).</summary>

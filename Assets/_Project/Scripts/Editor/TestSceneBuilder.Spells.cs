@@ -8,8 +8,8 @@ using Attribute = RPG.Progression.Attribute;
 namespace RPG.EditorTools
 {
     /// <summary>
-    /// The classes' spells up to level 20, Dreadmyst's (spell_template and the Tomes in item_template): our Warrior has the Paladin's,
-    /// the Ranger the Ranger's, the Mage the Mage's, each learned from its Tome's level. Numbers are Dreadmyst's:
+    /// The classes' spells up to level 20, the source game's (spell_template and the Tomes in item_template): our Warrior has the Paladin's,
+    /// the Ranger the Ranger's, the Mage the Mage's, each learned from its Tome's level. Numbers are the source game's:
     /// cooldowns, cast times, mana (base + per level), weapon damage percents and spell formulas (base, spread,
     /// coefficient over two attributes, rank divisor), effect durations. Its ranges (yards, melee 130, spells 610) are
     /// divided by 120 for our units. Where its data leaves a duration empty, a short one is chosen.
@@ -31,7 +31,7 @@ namespace RPG.EditorTools
         private static AbilityDefinition Spell(string fileName, string displayName, string description, AbilityKind kind, int level,
             DamageSchool school, float cooldownMs, int manaBase, float manaPerLevel, float castMs, float rangeYards, Color color)
         {
-            AbilityDefinition spell = LoadOrCreateAsset<AbilityDefinition>($"{AbilitiesFolder}/Dreadmyst/{fileName}.asset");
+            AbilityDefinition spell = LoadOrCreateAsset<AbilityDefinition>($"{AbilitiesFolder}/Generated/{fileName}.asset");
             spell.displayName = displayName;
             spell.description = description;
             spell.kind = kind;
@@ -82,7 +82,7 @@ namespace RPG.EditorTools
             return spell;
         }
 
-        /// <summary>Dreadmyst's spell formula: rank + (stat + stat2 x factor) x coefficient / (105 - rank x divisor) + base..base+spread.</summary>
+        /// <summary>The source game's spell formula: rank + (stat + stat2 x factor) x coefficient / (105 - rank x divisor) + base..base+spread.</summary>
         private static AbilityDefinition Power(this AbilityDefinition spell, float amount, float spread, float coefficient,
             Attribute stat, Attribute stat2, float stat2Factor, float divisor = 5f, bool heal = false)
         {
@@ -121,7 +121,7 @@ namespace RPG.EditorTools
             return effect;
         }
 
-        /// <summary>The Paladin's spells (Dreadmyst class 1), for our Warrior.</summary>
+        /// <summary>The Paladin's spells (the source game's class 1), for our Warrior.</summary>
         private static AbilityDefinition[] CreateWarriorSpells()
         {
             const Attribute Courage = Attribute.Vitality;
@@ -194,7 +194,7 @@ namespace RPG.EditorTools
             };
         }
 
-        /// <summary>The Ranger's spells (Dreadmyst class 3).</summary>
+        /// <summary>The Ranger's spells (the source game's class 3).</summary>
         private static AbilityDefinition[] CreateRangerSpells()
         {
             return new[]
@@ -270,7 +270,7 @@ namespace RPG.EditorTools
             };
         }
 
-        /// <summary>The Mage's spells (Dreadmyst class 2).</summary>
+        /// <summary>The Mage's spells (the source game's class 2).</summary>
         private static AbilityDefinition[] CreateMageSpells()
         {
             const Attribute Courage = Attribute.Vitality;
@@ -407,7 +407,7 @@ namespace RPG.EditorTools
             return spell;
         }
 
-        /// <summary>Tomes for the spells above level 1 (Dreadmyst's: level of the spell, sold by the class's trainer).</summary>
+        /// <summary>Tomes for the spells above level 1 (the source game's: level of the spell, sold by the class's trainer).</summary>
         private static List<RPG.Items.ItemDefinition> CreateTomes(AbilityDefinition[] spells, int classIndex)
         {
             var tomes = new List<RPG.Items.ItemDefinition>();

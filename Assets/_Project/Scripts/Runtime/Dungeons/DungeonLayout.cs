@@ -4,7 +4,7 @@ using UnityEngine;
 namespace RPG.Dungeons
 {
     /// <summary>
-    /// The plan of a dungeon in grid cells, read from its definition's rows (Dreadmyst's map: '.' walkable).
+    /// The plan of a dungeon in grid cells, read from its definition's rows (the source game's map: '.' walkable).
     /// Every peer builds the same tilemaps from it, so only the dungeon and its slot need to be sent over the network.
     /// </summary>
     public sealed class DungeonLayout

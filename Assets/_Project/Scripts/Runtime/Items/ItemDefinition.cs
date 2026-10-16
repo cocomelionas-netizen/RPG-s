@@ -14,7 +14,7 @@ namespace RPG.Items
         Feet,
     }
 
-    /// <summary>What kind of weapon a weapon is: its Dreadmyst weapon skill raises its damage.</summary>
+    /// <summary>What kind of weapon a weapon is: its source-game weapon skill raises its damage.</summary>
     public enum WeaponType
     {
         None,
@@ -49,7 +49,7 @@ namespace RPG.Items
         RestoreMana,
         /// <summary>A Tome: teaches its spell and is used up.</summary>
         LearnSpell,
-        /// <summary>Put together with the items it combines with into another (Dreadmyst's key recipes); all are used up.</summary>
+        /// <summary>Put together with the items it combines with into another (the source game's key recipes); all are used up.</summary>
         Combine,
     }
 
@@ -83,16 +83,16 @@ namespace RPG.Items
         public int requiredClass = -1;
         [Tooltip("The item's level: monsters drop gear around their own level, and a player needs this level to wear (or drink) it.")]
         [Range(1, 25)] public int itemLevel = 1;
-        [Tooltip("How often it drops among the gear of its level, like Dreadmyst's material chance; 0: never drops by level (only from loot tables and vendors).")]
+        [Tooltip("How often it drops among the gear of its level, like the source game's material chance; 0: never drops by level (only from loot tables and vendors).")]
         [Min(0f)] public float dropWeight = 1f;
 
         [Header("Use")]
         public ItemUse use = ItemUse.None;
         [Tooltip("Share of max health or mana restored, when Restore Amount is 0.")]
         [Range(0f, 1f)] public float healFraction = 0.35f;
-        [Tooltip("Health or mana restored in all (Dreadmyst potions and serums); 0 uses Heal Fraction instead.")]
+        [Tooltip("Health or mana restored in all (the source game's potions and serums); 0 uses Heal Fraction instead.")]
         [Min(0)] public int restoreAmount;
-        [Tooltip("Seconds the restoring takes, a share every 2 seconds (Dreadmyst potions: 20); 0: all at once (serums).")]
+        [Tooltip("Seconds the restoring takes, a share every 2 seconds (the source game's potions: 20); 0: all at once (serums).")]
         [Min(0f)] public float restoreSeconds;
         [Min(1)] public int maxStack = 1;
         [Tooltip("A stronger version that sometimes drops in its place (a serum for a potion).")]
@@ -161,7 +161,7 @@ namespace RPG.Items
                 case ItemRarity.Poor: return new Color(0.6f, 0.6f, 0.6f);
                 case ItemRarity.Uncommon: return new Color(0.35f, 0.9f, 0.35f);
                 case ItemRarity.Rare: return new Color(0.35f, 0.6f, 1f);
-                // Dreadmyst's order: green, blue, gold, then purple at the top.
+                // The source game's order: green, blue, gold, then purple at the top.
                 case ItemRarity.Epic: return new Color(1f, 0.78f, 0.2f);
                 case ItemRarity.Legendary: return new Color(0.75f, 0.4f, 1f);
                 default: return new Color(0.92f, 0.92f, 0.92f);

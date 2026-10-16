@@ -52,12 +52,12 @@ namespace RPG.Monsters
         [SerializeField] private ItemCatalog gear;
         [Tooltip("Chance that a dropped weapon or armor piece has a socket for a gem.")]
         [SerializeField, Range(0f, 1f)] private float socketChance = 0.25f;
-        [Tooltip("Bosses: pieces of gear always dropped, with an affix of the quality below (Dreadmyst's bosses always drop gold).")]
+        [Tooltip("Bosses: pieces of gear always dropped, with an affix of the quality below (the source game's bosses always drop gold).")]
         [SerializeField, Min(0)] private int guaranteedGear;
         [SerializeField] private ItemRarity guaranteedQuality = ItemRarity.Rare;
-        [Tooltip("Bosses: chance of one more piece of the top quality (Dreadmyst's purple: legendary).")]
+        [Tooltip("Bosses: chance of one more piece of the top quality (the source game's purple: legendary).")]
         [SerializeField, Range(0f, 1f)] private float purpleChance;
-        [Tooltip("Dreadmyst's boss loot chances: one piece of blue, of gold and of purple gear, each rolled on its own.")]
+        [Tooltip("The source game's boss loot chances: one piece of blue, of gold and of purple gear, each rolled on its own.")]
         [SerializeField] private Vector3 qualityChances;
         [Tooltip("Rolled once on death on top of the loot table (a boss's keys and treasures).")]
         [SerializeField] private LootEntry[] bonusLoot = System.Array.Empty<LootEntry>();
@@ -142,7 +142,7 @@ namespace RPG.Monsters
         public int Level => IsSpawned && networkLevel.Value > 0 ? networkLevel.Value : level;
 
         /// <summary>
-        /// Server, before spawning: gives this monster another level (a Dreadmyst spawn spot's), with the experience
+        /// Server, before spawning: gives this monster another level (a source-game spawn spot's), with the experience
         /// a kill of that level is worth.
         /// </summary>
         public void ServerOverrideLevel(int newLevel)
@@ -151,11 +151,11 @@ namespace RPG.Monsters
             experienceReward = LevelCurve.KillExperienceFor(level);
         }
 
-        /// <summary>Monsters go above the players' top level: Dreadmyst's dungeon bosses are 28 and 30.</summary>
+        /// <summary>Monsters go above the players' top level: the source game's dungeon bosses are 28 and 30.</summary>
         public const int MaxLevel = 30;
 
         // How much tougher a monster gets per level. Its damage grows as fast as players' health does
-        // (LevelCurve.HealthGrowth, Dreadmyst's), so a monster of your level is as dangerous at 25 as at 1.
+        // (LevelCurve.HealthGrowth, the source game's), so a monster of your level is as dangerous at 25 as at 1.
         private const float HealthPerLevel = 0.15f;
 
         /// <summary>How much more health a monster of <paramref name="toLevel"/> has than the same monster of <paramref name="fromLevel"/>.</summary>
@@ -175,7 +175,7 @@ namespace RPG.Monsters
 
         // ---------- Elites ----------
 
-        // Dreadmyst's elites have about 5.6 times the health of normal monsters.
+        // The source game's elites have about 5.6 times the health of normal monsters.
         public const float EliteHealthScale = 5.6f;
         public const float EliteDamageScale = 1.5f;
         public const int EliteRewardScale = 3;
@@ -449,7 +449,7 @@ namespace RPG.Monsters
         }
 
         /// <summary>
-        /// Like Dreadmyst's boss loot chances: one piece of blue, one of gold and one of purple gear, each with its own
+        /// Like the source game's boss loot chances: one piece of blue, one of gold and one of purple gear, each with its own
         /// chance (0-1). Also gives it a boss's extra material rolls.
         /// </summary>
         public void ConfigureQualityDrops(float blue, float gold, float purple)

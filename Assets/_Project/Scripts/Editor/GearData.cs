@@ -1,14 +1,14 @@
 namespace RPG.EditorTools
 {
     /// <summary>
-    /// How Dreadmyst makes its gear, taken from its client data (<c>game.db</c>: <c>item_template</c>,
-    /// <c>material_chance_weapon</c>, <c>material_chance_armor</c>) and the material names in <c>Dreadmyst.exe</c>.
+    /// How the source game makes its gear, taken from its client data (<c>game.db</c>: <c>item_template</c>,
+    /// <c>material_chance_weapon</c>, <c>material_chance_armor</c>) and the material names in <c>the client executable</c>.
     /// Every base item exists for every level 1-25 in each material; a drop of some level picks the material by the
     /// chance tables below, so better materials only appear from their own levels on.
     /// </summary>
-    internal static class DreadmystGear
+    internal static class GearData
     {
-        /// <summary>Weapon materials by tier (Dreadmyst weapon_material 1-7): swords, axes, maces, daggers.</summary>
+        /// <summary>Weapon materials by tier (the source game's weapon_material 1-7): swords, axes, maces, daggers.</summary>
         public static readonly string[] Metals = { "Bronze", "Steel", "Mythril", "Emerald", "Crystal", "Diamond", "Titanium" };
 
         /// <summary>Wood by tier (weapon_material 8-14): bows, staves and rods.</summary>
@@ -39,7 +39,7 @@ namespace RPG.EditorTools
         /// </summary>
         public static int TierOf(int armorType) => armorType >= 12 ? 2 * (armorType - 11) : armorType;
 
-        /// <summary>Base item names for head, chest and feet of each armor kind (Dreadmyst's own).</summary>
+        /// <summary>Base item names for head, chest and feet of each armor kind (the source game's own).</summary>
         public static (string head, string chest, string feet) NamesOf(ArmorKind kind)
         {
             switch (kind)
@@ -97,10 +97,10 @@ namespace RPG.EditorTools
             (15, 23, 50f), (15, 24, 33.3f), (15, 25, 16.7f),
         };
 
-        /// <summary>Dreadmyst's sell price of a plain (white) weapon: 50 + 10 x level + 2 x level x (tier - 1).</summary>
+        /// <summary>The source game's sell price of a plain (white) weapon: 50 + 10 x level + 2 x level x (tier - 1).</summary>
         public static int WeaponSellPrice(int tier, int level) => 50 + 10 * level + 2 * level * (tier - 1);
 
-        /// <summary>Dreadmyst's sell price of a plain chest piece: 50 + 2.5 x tier x level.</summary>
+        /// <summary>The source game's sell price of a plain chest piece: 50 + 2.5 x tier x level.</summary>
         public static float ArmorSellPrice(int armorType, int level) => 50f + 2.5f * TierOf(armorType) * level;
     }
 }

@@ -1,18 +1,18 @@
-// Generated from Dreadmyst's game.db (map "fanadin", x 0-560, y 30-340: the start, Pilgrim's Refuge, up to the
+// Generated from the source game's game.db (map "fanadin", x 0-560, y 30-340: the start, Pilgrim's Refuge, up to the
 // main town, St. Revere): where monsters and chests stand and how fast they come back, in this project's cells.
 using UnityEngine;
 
 namespace RPG.EditorTools
 {
-    internal static class DreadmystStartArea
+    internal static class StartAreaData
     {
         public const int Width = 568;
         public const int Height = 318;
-        /// <summary>Where new characters start: Dreadmyst's "start" teleport in Pilgrim's Refuge (17, 106).</summary>
+        /// <summary>Where new characters start: the source game's "start" teleport in Pilgrim's Refuge (17, 106).</summary>
         public static readonly Vector3Int Start = new Vector3Int(19, 78, 0);
         /// <summary>The main town, St. Revere: the middle of its market (524, 250).</summary>
         public static readonly Vector3Int Town = new Vector3Int(526, 222, 0);
-        /// <summary>Vendors where Dreadmyst has them in Revere: heavy armor (warrior), ranged (ranger), staves (mage), jeweler.</summary>
+        /// <summary>Vendors where the source game has them in Revere: heavy armor (warrior), ranged (ranger), staves (mage), jeweler.</summary>
         public static readonly Vector3Int[] Vendors =
         {
             new Vector3Int(523, 220, 0), // Karl
@@ -23,7 +23,7 @@ namespace RPG.EditorTools
         /// <summary>Wolf's Den: the dungeon entrance.</summary>
         public static readonly Vector3Int DungeonEntrance = new Vector3Int(79, 139, 0);
 
-        /// <summary>Monster spots: cell, Dreadmyst level, elite (or boss), respawn seconds (capped at 10 minutes).</summary>
+        /// <summary>Monster spots: cell, source-game level, elite (or boss), respawn seconds (capped at 10 minutes).</summary>
         public static readonly (Vector3Int cell, int level, bool elite, float respawn)[] Monsters =
         {
             (new Vector3Int(51, 218, 0), 11, false, 60f), // Blightchosen Guardsman
@@ -408,7 +408,7 @@ namespace RPG.EditorTools
         };
 
         /// <summary>
-        /// Waystones where Dreadmyst has waypoints and teleports, with the place around each: name, cell, zone radius in
+        /// Waystones where the source game has waypoints and teleports, with the place around each: name, cell, zone radius in
         /// cells. Ids are their index: only add at the end.
         /// </summary>
         public static readonly (string name, Vector3Int cell, float zoneRadius)[] Places =

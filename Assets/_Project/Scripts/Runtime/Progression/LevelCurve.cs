@@ -21,7 +21,7 @@ namespace RPG.Progression
         /// <summary>The rank title of a level, from Recruit (1) to Champion (25).</summary>
         public static string RankName(int level) => Ranks[Mathf.Clamp(level, 1, MaxLevel) - 1];
 
-        // Dreadmyst's tables (player_exp_levels): experience to reach the next level, and what a kill of a monster
+        // The source game's tables (player_exp_levels): experience to reach the next level, and what a kill of a monster
         // of each level is worth, for levels 1 to 25.
         private static readonly int[] ExperienceTable =
         {
@@ -44,7 +44,7 @@ namespace RPG.Progression
 
         /// <summary>What killing a monster of <paramref name="monsterLevel"/> is worth (before the outlevelling cut).</summary>
         /// <summary>
-        /// How a class's health and mana grow, from Dreadmyst's <c>player_class_stats</c>: the level-1 value times the
+        /// How a class's health and mana grow, from the source game's <c>player_class_stats</c>: the level-1 value times the
         /// level, and half again from level 21 (a warrior: 75, 150 ... 1500 at 20, then 2362.5 at 21, 2812.5 at 25).
         /// </summary>
         public static float HealthGrowth(int level)

@@ -1,93 +1,95 @@
-# RPG-s – 2D izometrinis fantasy MMORPG
+# RPG-s – a 2D isometric fantasy MMORPG
 
-Unity 6 (6000.6.4f1), URP su 2D Renderer, C#, Input System.
-Grafika: detali, tapyta HD 2D (ne pixel art, ne 3D). Kol kas naudojami sugeneruoti placeholder'iai.
+Unity 6 (6000.6.4f1), URP with the 2D Renderer, C#, Input System.
+Art: detailed, painted HD 2D (not pixel art, not 3D). Generated placeholders are used for now.
 
-Kalbos taisyklė: dokumentacija lietuviškai, o visas kodas, failų, klasių ir kintamųjų pavadinimai bei komentarai – angliškai.
+Language rule: everything in the repository – documentation, code, file, class and variable names, comments – is in English.
 
-## Projekto struktūra
+## Project structure
 
-Visas mūsų turinys yra `Assets/_Project/`. Kiti `Assets/` aplankai (`Settings`, `TutorialInfo`, `Scenes`, `Readme.asset`) liko iš Unity šablono.
+All our content is in `Assets/_Project/`. The other `Assets/` folders (`Settings`, `TutorialInfo`, `Scenes`, `Readme.asset`) are left from the Unity template.
 
 ```
 Assets/_Project/
   Art/
-    Characters/        tapyti veikėjų sprite'ai (būsimi)
-    Environment/       tapyti žemės tile'ai, uolos, medžiai (būsimi)
-    Placeholder/       laikini sugeneruoti sprite'ai (keisime tikrais)
-    UI/                UI grafika
+    Characters/        painted character sprites (to come)
+    Environment/       painted ground tiles, rocks, trees (to come)
+    Placeholder/       temporary generated sprites (to be replaced)
+    UI/                UI art
   Audio/
   Prefabs/
-    Characters/        Player.prefab ir kt.
-    Monsters/          Goblin, GoblinBrute, Orc
-    World/             pasaulio objektai
+    Characters/        Player.prefab and others
+    Monsters/          Goblin, GoblinBrute, Orc, DungeonBoss
+    World/             world objects
   Scenes/              World_Test.unity
   Data/
-    Characters/        animacijų rinkiniai (CharacterAnimationSet)
-    Classes/           klasės (Warrior, Ranger, Mage) ir ClassCatalog
-    Abilities/         gebėjimai
-    Items/             daiktai ir ItemCatalog
-  Settings/Rendering/  Renderer2D.asset (2D Renderer, izometrinis rūšiavimas)
-  Tiles/               Tile asset'ai tilemap'ams
+    Characters/        animation sets (CharacterAnimationSet)
+    Classes/           classes (Warrior, Ranger, Mage) and the ClassCatalog
+    Abilities/         abilities
+    Items/             items and the ItemCatalog
+    Dungeons/          dungeons (DungeonDefinition)
+  Settings/Rendering/  Renderer2D.asset (2D Renderer, isometric sorting)
+  Tiles/               Tile assets for the tilemaps
   Scripts/
-    Runtime/           žaidimo kodas (assembly RPG.Runtime, namespace RPG.*)
+    Runtime/           game code (assembly RPG.Runtime, namespace RPG.*)
       CameraSystem/    CameraFollow
       Characters/      Direction8, CharacterAnimationSet, CharacterAnimator
       Combat/          Health, HealthRegeneration, AutoAttack, PlayerTargeting, PlayerRespawn, TrainingDummy, CombatEffects
-      Dungeons/        požemiai: instancijos, portalai, bosas (DungeonManager, DungeonInstance, BossMechanics)
-      Items/           daiktai, inventorius, loot (Inventory, LootBag, ItemCatalog)
+      Dungeons/        dungeons: instances, portals, bosses (DungeonManager, DungeonInstance, BossMechanics)
+      Items/           items, inventory, loot (Inventory, LootBag, ItemCatalog)
       Monsters/        MonsterAI, MonsterMotion, MonsterSpawner
-      Navigation/      NavGrid (A*), WorldNavigation (kelio paieška tilemap'e)
-      Progression/     klasės, gebėjimai, lygiai ir patirtis (CharacterProgress, AbilityCaster, LevelCurve)
+      Navigation/      NavGrid (A*), WorldNavigation (pathfinding on the tilemap)
+      Progression/     classes, abilities, levels and experience (CharacterProgress, AbilityCaster, LevelCurve)
       Controls/        PlayerInputReader
-      Accounts/        paskyros, prisijungimas, veikėjo išsaugojimas (AccountService, CharacterPersistence)
+      Accounts/        accounts, login, saving characters (AccountService, CharacterPersistence)
       Networking/      NetworkBootstrap, PlayerNetworkMovement, MovementValidator, OfflineTransport, DevConnectionPanel, DevBot
       Player/          PlayerMovement
       UI/              UnitFrame, CombatTextLayer, AbilityBar, ExperienceBar, InventoryWindow, VendorWindow, NpcNameplates
-      Vendors/         prekeiviai (Vendor, VendorDefinition)
-      World/           ClickMarker
-      Core/            rezervuota kitiems etapams
-    Editor/            redaktoriaus įrankiai (RPG meniu), grafikos importo taisyklės, build meniu
+      Vendors/         vendors (Vendor, VendorDefinition)
+      World/           ClickMarker, chests, waystones, zones
+      Core/            reserved for later stages
+    Editor/            editor tools (RPG menu), the scene builder and its generated data (*Data.cs), art import rules, build menu
   Tests/
-    PlayMode/          automatiniai testai (assembly RPG.Tests.PlayMode)
-.github/workflows/     GitHub Actions: WebGL build'as ir paskelbimas GitHub Pages
-Docs/                  ši dokumentacija (Unity jos neimportuoja)
-Builds/                build'ai (git'e ignoruojama)
+    PlayMode/          automatic tests (assembly RPG.Tests.PlayMode)
+.github/workflows/     GitHub Actions: WebGL build and publishing on GitHub Pages
+Tools/                 CompileCheck (C# check without Unity), GameData (generators for the editor data)
+Docs/                  this documentation (Unity does not import it)
+Builds/                builds (ignored by git)
 ```
 
-Principai:
-- **Input atskirtas nuo logikos.** Įvestį skaito tik `PlayerInputReader`. Vėliau jį bus galima pakeisti tinklo komandomis arba klavišų perskyrimu.
-- **Runtime kodas turi savo assembly** (`RPG.Runtime.asmdef`). Taip greičiau kompiliuojasi, o vėliau lengviau atskirti serverio ir kliento kodą.
-- **Scena generuojama įrankiu** (`RPG > Build Test Scene`), todėl bet kada ją galima atkurti nuo nulio.
-- **Serveris turi paskutinį žodį.** Klientas prognozuoja savo judėjimą, bet serveris jį tikrina ir taiso. Taip pat bus daroma su kova, daiktais ir progresu.
-- **Pateikimas atskirtas nuo judėjimo.** `CharacterAnimator` skaito sąsają `ICharacterMotionSource`, todėl tas pats komponentas tiks žaidėjui, monstrams ir tinklo veikėjams.
+Principles:
+- **Input is separate from logic.** Only `PlayerInputReader` reads input. Later it can be replaced by network commands or key rebinding.
+- **Runtime code has its own assembly** (`RPG.Runtime.asmdef`). It compiles faster and makes separating server and client code easier later.
+- **The scene is generated by a tool** (`RPG > Build Test Scene`), so it can be rebuilt from scratch at any time.
+- **The server has the last word.** The client predicts its own movement, but the server checks and corrects it. Combat, items and progress work the same way.
+- **Presentation is separate from movement.** `CharacterAnimator` reads the `ICharacterMotionSource` interface, so the same component works for the player, monsters and network characters.
 
-## Žaidimas naršyklėje
+## The game in the browser
 
-Naujausia versija po kiekvieno push'o į `main` automatiškai sukuriama ir paskelbiama: **https://cocomelionas-netizen.github.io/RPG-s/** (Offline režimas). Kaip tai paruošti: [WebGL.md](WebGL.md).
+The latest version is built and published automatically after every push to `main`: **https://cocomelionas-netizen.github.io/RPG-s/** (Offline mode). How to set it up: [WebGL.md](WebGL.md).
 
-## Etapų planas
+## Stage plan
 
-| # | Etapas | Būsena |
-|---|--------|--------|
-| 1 | Projekto struktūra, izometrinis žemėlapis, kamera, judėjimas pele ir WASD | ✅ [Stage1.md](Stage1.md) |
-| 2 | Veikėjo pateikimas: 8 krypčių animacijos, paspaudimo žymeklis, aukštų objektų rūšiavimas, HD tapytos grafikos importo taisyklės | ✅ [Stage2.md](Stage2.md) |
-| 3 | Multiplayer pagrindas: dedikuotas serveris, serverio autoritetas judėjimui, prisijungimas | ✅ [Stage3.md](Stage3.md) |
-| 4 | Taikinio pasirinkimas ir realaus laiko kova (HP, žala, auto-attack) | ✅ [Stage4.md](Stage4.md) |
-| 5 | Monstrai ir jų AI (spawn, aggro, kelio paieška tilemap'e) | ✅ [Stage5.md](Stage5.md) |
-| 6 | Gebėjimai, klasės, lygiai ir patirtis | ✅ [Stage6.md](Stage6.md) |
-| 7 | Inventorius, ginklai, šarvai, loot | ✅ [Stage7.md](Stage7.md) |
-| 8 | Saugus progreso išsaugojimas serveryje (paskyros, duomenų bazė) | ✅ [Stage8.md](Stage8.md) |
-| ~~9~~ | ~~Užduotys ir NPC~~ | ✖ atsisakyta |
-| 10 | Požemiai (instancijos) | ✅ [Stage10.md](Stage10.md) |
-| ~~11~~ | ~~PvP~~ | ✖ atsisakyta |
-| + | Didesnis žemėlapis, miestelis, klasių prekeiviai, auksas (įkvėpta Dreadmyst) | ✅ [Town.md](Town.md) |
-| + | Mana, šlamštas iš monstrų, atsitiktiniai afiksai ir 6 kokybės lygiai, atributai (įkvėpta Dreadmyst) | ✅ [Attributes.md](Attributes.md) |
-| + | Naujas HUD: portretų rėmeliai, minimapas, žinučių langas, veiksmų juosta su gėrimais, vardai virš monstrų (įkvėpta Dreadmyst) | ✅ [Hud.md](Hud.md) |
-| + | Požemio raktas ir lygio reikalavimas, grupės dydis, ribotos prekeivių atsargos (įkvėpta Dreadmyst) | ✅ [Stage10.md](Stage10.md#įėjimo-sąlygos) |
-| + | Pavadintos zonos ir teleportų akmenys (Waystones) (įkvėpta Dreadmyst) | ✅ [Waystones.md](Waystones.md) |
-| + | Brangakmeniai: lizdai, įstatymas, juvelyras ir jungimas (įkvėpta Dreadmyst) | ✅ [Gems.md](Gems.md) |
-| + | Skrynios pasaulyje, elitiniai monstrai, laipsniai ir 25 lygiai (įkvėpta Dreadmyst) | ✅ [Chests.md](Chests.md) |
-| + | Pasaulis, monstrų ir skrynių išdėstymas bei balansas pagal Dreadmyst | ✅ [DreadmystLayout.md](DreadmystLayout.md) |
+| # | Stage | State |
+|---|-------|-------|
+| 1 | Project structure, isometric map, camera, mouse and WASD movement | ✅ [Stage1.md](Stage1.md) |
+| 2 | Character presentation: 8-direction animations, click marker, sorting of tall objects, import rules for painted HD art | ✅ [Stage2.md](Stage2.md) |
+| 3 | Multiplayer foundation: dedicated server, server authority over movement, connecting | ✅ [Stage3.md](Stage3.md) |
+| 4 | Targeting and real-time combat (HP, damage, auto-attack) | ✅ [Stage4.md](Stage4.md) |
+| 5 | Monsters and their AI (spawning, aggro, pathfinding on the tilemap) | ✅ [Stage5.md](Stage5.md) |
+| 6 | Abilities, classes, levels and experience | ✅ [Stage6.md](Stage6.md) |
+| 7 | Inventory, weapons, armor, loot | ✅ [Stage7.md](Stage7.md) |
+| 8 | Saving progress safely on the server (accounts, database) | ✅ [Stage8.md](Stage8.md) |
+| ~~9~~ | ~~Quests and NPCs~~ | ✖ dropped |
+| 10 | Dungeons (instances) | ✅ [Stage10.md](Stage10.md) |
+| ~~11~~ | ~~PvP~~ | ✖ dropped |
+| + | Bigger map, town, class vendors, gold | ✅ [Town.md](Town.md) |
+| + | Mana, junk from monsters, random affixes and 6 quality levels, attributes | ✅ [Attributes.md](Attributes.md) |
+| + | New HUD: portrait frames, minimap, message log, action bar with potions, names above monsters | ✅ [Hud.md](Hud.md) |
+| + | Dungeon key and level requirement, group size, limited vendor stock | ✅ [Stage10.md](Stage10.md#entry-requirements) |
+| + | Named zones and waystones | ✅ [Waystones.md](Waystones.md) |
+| + | Gems: sockets, setting, the jeweler and combining | ✅ [Gems.md](Gems.md) |
+| + | Chests in the world, elite monsters, ranks and 25 levels | ✅ [Chests.md](Chests.md) |
+| + | World, monster and chest layout, balance, gear, affixes, spells and dungeons from the source game's data | ✅ [GameData.md](GameData.md) |
 
-Multiplayer'is planuojamas anksti (3 etapas) sąmoningai. Kovą, monstrus ir daiktus iškart rašysime serverio autoriteto principu, kad vėliau nereikėtų jų perrašinėti.
+Multiplayer was planned early (stage 3) on purpose. Combat, monsters and items are written server-authoritative from the start, so they do not need rewriting later.

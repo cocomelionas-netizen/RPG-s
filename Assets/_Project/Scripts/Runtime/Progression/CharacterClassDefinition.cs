@@ -18,7 +18,7 @@ namespace RPG.Progression
         public Attribute primaryAttribute = Attribute.Strength;
 
         [Header("Health and mana (attributes add more)")]
-        [Tooltip("Health at level 1; grows like Dreadmyst's (LevelCurve.HealthGrowth): times the level, half again from 21.")]
+        [Tooltip("Health at level 1; grows like the source game's (LevelCurve.HealthGrowth): times the level, half again from 21.")]
         [Min(1)] public int baseHealth = 100;
         [Tooltip("Mana at level 1; grows like health.")]
         [Min(0)] public int baseMana = 20;

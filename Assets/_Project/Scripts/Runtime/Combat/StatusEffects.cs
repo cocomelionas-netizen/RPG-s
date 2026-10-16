@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace RPG.Combat
 {
-    /// <summary>What a status effect does (Dreadmyst's aura types that this project has).</summary>
+    /// <summary>What a status effect does (the source game's aura types that this project has).</summary>
     public enum StatusKind : byte
     {
         /// <summary>Cannot move, attack or cast.</summary>
@@ -95,7 +95,7 @@ namespace RPG.Combat
 
     /// <summary>
     /// Buffs and debuffs on a unit: stuns, roots, slows, damage and healing over time, damage and attribute changes
-    /// (Dreadmyst's auras). The server applies, ticks and removes them; everyone sees them (for icons, and the owner
+    /// (the source game's auras). The server applies, ticks and removes them; everyone sees them (for icons, and the owner
     /// stops moving while stunned).
     /// </summary>
     [RequireComponent(typeof(Health))]

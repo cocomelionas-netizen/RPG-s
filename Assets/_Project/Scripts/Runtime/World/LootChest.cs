@@ -9,7 +9,7 @@ using UnityEngine;
 namespace RPG.World
 {
     /// <summary>
-    /// A crate, barrel or chest in the world, a Dreadmyst container: crates only hold gold; chests are locked (pick
+    /// A crate, barrel or chest in the world, a source-game container: crates only hold gold; chests are locked (pick
     /// the lock with Lockpicking of at least twice the chest's level, which takes <see cref="PickSeconds"/>) and hold
     /// a piece of gear that may come out blue, gold or purple, often a potion and a gem, and more gold. The player
     /// who opens it gets the gold and a loot window with the rest; the chest then disappears until its
@@ -17,10 +17,10 @@ namespace RPG.World
     /// </summary>
     public class LootChest : NetworkBehaviour
     {
-        /// <summary>How long picking a lock takes (Dreadmyst's Pick Lock: 2 seconds).</summary>
+        /// <summary>How long picking a lock takes (the source game's Pick Lock: 2 seconds).</summary>
         public const float PickSeconds = 2f;
 
-        /// <summary>Lockpicking needed per level of a locked chest (Dreadmyst's "Lv2xForLockpick").</summary>
+        /// <summary>Lockpicking needed per level of a locked chest (the source game's "Lv2xForLockpick").</summary>
         public const int LockpickingPerLevel = 2;
 
         [SerializeField] private string displayName = "Wooden Crate";
@@ -32,7 +32,7 @@ namespace RPG.World
         [SerializeField, Range(0f, 1f)] private float socketChance = 0.25f;
         [SerializeField, Min(0.3f)] private float openRange = 1.2f;
 
-        [Header("Dreadmyst container")]
+        [Header("Source-game container")]
         [Tooltip("Needs Lockpicking of twice its level to open.")]
         [SerializeField] private bool locked;
         [Tooltip("Chance (%) of a piece of gear (green), and of it being blue, gold or purple instead.")]
@@ -83,7 +83,7 @@ namespace RPG.World
             goldRatio = Mathf.Max(0f, gold);
         }
 
-        /// <summary>Makes it a locked Dreadmyst chest with these chances (in %), potions and gems.</summary>
+        /// <summary>Makes it a locked source-game chest with these chances (in %), potions and gems.</summary>
         public void ConfigureLocked(float green, float blue, float goldQuality, float purple, int assured, float potion, float gem,
             ItemDefinition[] potionItems, ItemDefinition[] gemItems)
         {
@@ -172,7 +172,7 @@ namespace RPG.World
             int pieces = assuredGear + (Random.value * 100f < greenChance ? 1 : 0);
             for (int i = 0; i < pieces; i++)
             {
-                // Like Dreadmyst's container chances: green, sometimes blue, gold or (rarely) purple instead.
+                // Like the source game's container chances: green, sometimes blue, gold or (rarely) purple instead.
                 float roll = Random.value * 100f;
                 ItemRarity quality = roll < purpleChance ? ItemRarity.Legendary
                     : roll < purpleChance + goldChance ? ItemRarity.Epic

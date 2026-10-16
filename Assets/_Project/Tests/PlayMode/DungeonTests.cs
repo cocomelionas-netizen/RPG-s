@@ -17,7 +17,7 @@ using UnityEngine.TestTools;
 namespace RPG.Tests
 {
     /// <summary>
-    /// Dreadmyst's dungeons on a real host: entering (level, key), its monsters and containers, the bosses and their
+    /// The source game's dungeons on a real host: entering (level, key), its monsters and containers, the bosses and their
     /// keys, leaving through the exits, closing, the boss slam, and the key recipes.
     /// </summary>
     public class DungeonTests
@@ -26,7 +26,7 @@ namespace RPG.Tests
         private const string LootBagPrefabPath = "Assets/_Project/Prefabs/World/LootBag.prefab";
         private const string DungeonsFolder = "Assets/_Project/Data/Dungeons";
         private const string ItemsFolder = "Assets/_Project/Data/Items";
-        // Dreadmyst's Decrepit Tower: level 25, a Tower Key, two bosses, many containers.
+        // The source game's Decrepit Tower: level 25, a Tower Key, two bosses, many containers.
         private const string TowerPath = DungeonsFolder + "/DecrepitTower.asset";
         private const string GarrisonPath = DungeonsFolder + "/TheLowerGarrison.asset";
 
@@ -121,7 +121,7 @@ namespace RPG.Tests
         }
 
         [Test]
-        public void Plan_IsDreadmystsMap_WithEverythingOnTheFloor()
+        public void Plan_IsTheSourceMap_WithEverythingOnTheFloor()
         {
             DungeonLayout layout = dungeon.Layout;
             Assert.AreEqual(80, layout.Width, "fort_amir.map is 80 x 80.");
@@ -136,7 +136,7 @@ namespace RPG.Tests
         }
 
         [Test]
-        public void Rules_AreDreadmysts()
+        public void Rules_AreTheSourceGames()
         {
             Assert.AreEqual(25, dungeon.minLevel);
             Assert.AreEqual(4, dungeon.maxPlayers);
@@ -174,7 +174,7 @@ namespace RPG.Tests
         }
 
         [UnityTest]
-        public IEnumerator Bosses_HaveDreadmystsNamesAndLevels()
+        public IEnumerator Bosses_HaveTheirNamesAndLevels()
         {
             Assert.IsTrue(manager.ServerUsePortal(playerHealth));
             yield return null;
@@ -231,7 +231,7 @@ namespace RPG.Tests
             foreach (Portal portal in Portal.Portals)
                 if (portal.Kind == PortalKind.DungeonExit && portal.Instance == instance) exit = portal;
             Assert.IsNotNull(exit, "The tower has an exit.");
-            Assert.IsTrue(exit.IsOpen, "Exits are always open, like Dreadmyst's.");
+            Assert.IsTrue(exit.IsOpen, "Exits are always open, like the source game's.");
 
             Assert.IsTrue(manager.ServerLeave(playerHealth, exit));
             yield return null;
@@ -286,7 +286,7 @@ namespace RPG.Tests
                 if (Vector2.Distance(bag.transform.position, at) < 1f)
                     foreach (LootItem item in bag.Contents)
                         if (item.Item == dungeon.key) towerKeys += item.Count;
-            Assert.AreEqual(10, towerKeys, "Melchon drops 10 Tower Keys, like in Dreadmyst.");
+            Assert.AreEqual(10, towerKeys, "Melchon drops 10 Tower Keys, like in the source game.");
         }
 
         [UnityTest]

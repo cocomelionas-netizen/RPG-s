@@ -22,7 +22,7 @@ namespace RPG.Tests
     public class LevelCurveTests
     {
         [Test]
-        public void LevelCurve_NeedsMoreExperienceEachLevel_LikeDreadmyst()
+        public void LevelCurve_NeedsMoreExperienceEachLevel_LikeTheSourceGame()
         {
             for (int level = 1; level < LevelCurve.MaxLevel - 1; level++)
                 Assert.LessOrEqual(LevelCurve.ExperienceToNext(level), LevelCurve.ExperienceToNext(level + 1));
@@ -34,9 +34,9 @@ namespace RPG.Tests
         }
 
         [Test]
-        public void HealthGrowth_IsTheLevel_AndHalfAgainFrom21_LikeDreadmyst()
+        public void HealthGrowth_IsTheLevel_AndHalfAgainFrom21_LikeTheSourceGame()
         {
-            // Dreadmyst warrior: 75, 150 ... 1500 at 20, 2362.5 at 21, 2812.5 at 25.
+            // The source game's warrior: 75, 150 ... 1500 at 20, 2362.5 at 21, 2812.5 at 25.
             Assert.AreEqual(1f, LevelCurve.HealthGrowth(1));
             Assert.AreEqual(20f, LevelCurve.HealthGrowth(20));
             Assert.AreEqual(31.5f, LevelCurve.HealthGrowth(21));

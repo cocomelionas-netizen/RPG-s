@@ -33,7 +33,7 @@ namespace RPG.Progression
             0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
         private readonly NetworkVariable<AttributeSet> spentPoints = new NetworkVariable<AttributeSet>(
             default, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
-        // Experience earned and not yet spent on attributes (like Dreadmyst: experience levels you up and is also
+        // Experience earned and not yet spent on attributes (like the source game: experience levels you up and is also
         // the currency for attribute points).
         private readonly NetworkVariable<int> experienceToSpend = new NetworkVariable<int>(
             0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
