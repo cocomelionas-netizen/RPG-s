@@ -542,7 +542,7 @@ namespace RPG.Progression
                     Help(ability, rank, attributes, health);
                     break;
                 case AbilityKind.Recall:
-                    Waystone town = FindTown();
+                    Waystone town = Waystone.MainTown;
                     if (town != null && TryGetComponent(out PlayerNetworkMovement traveller))
                     {
                         traveller.ServerTeleport(town.ArrivalPoint);
@@ -624,19 +624,6 @@ namespace RPG.Progression
                 return to;
             }
             return self;
-        }
-
-        /// <summary>St. Revere's waystone (Illusion Gate's way home).</summary>
-        private static Waystone FindTown()
-        {
-            Waystone first = null;
-            foreach (Waystone stone in Waystone.All)
-            {
-                if (stone == null) continue;
-                if (stone.DisplayName == "St. Revere") return stone;
-                if (first == null) first = stone;
-            }
-            return first;
         }
 
         private Health NearestFallenFriend(Vector2 self, float range)

@@ -92,7 +92,6 @@ namespace RPG.EditorTools
         private const int StartSquareRadius = 3;
         private const int StartClearRadius = 6;
         private const int Seed = 12345;
-        private const int TreeSeed = 777;
 
         [MenuItem("RPG/Build Test Scene")]
         public static void Build()
@@ -111,6 +110,7 @@ namespace RPG.EditorTools
             };
             Tile pathTile = CreateTile("Path", PlaceholderArtGenerator.GroundTile("Path", new Color(0.5f, 0.41f, 0.29f), new Color(0.64f, 0.55f, 0.4f), 4));
             Tile rockTile = CreateTile("Rock", PlaceholderArtGenerator.Rock("Rock", 5), Tile.ColliderType.Grid);
+            Tile blockedTile = CreateTile("Blocked", null, Tile.ColliderType.Grid);
             Sprite treeSprite = PlaceholderArtGenerator.Tree("Tree", 6);
             Sprite markerSprite = PlaceholderArtGenerator.GroundRing("ClickMarker", new Color(1f, 0.85f, 0.4f, 0.9f));
             CharacterAnimationSet playerAnimations = CreateCharacterAnimationSet("Player", PlayerArtFolder, PlayerAnimationSetPath, new Color(0.2f, 0.32f, 0.62f), null);
@@ -170,8 +170,8 @@ namespace RPG.EditorTools
             Tilemap ground = CreateTilemap(grid, "Ground", -100, TilemapRenderer.Mode.Chunk);
             Tilemap obstacles = CreateTilemap(grid, "Obstacles", 0, TilemapRenderer.Mode.Individual);
             obstacles.gameObject.AddComponent<TilemapCollider2D>();
-            PaintTestMap(ground, obstacles, grassTiles, pathTile, rockTile);
-            PlaceTrees(grid, obstacles, treePrefab);
+            PaintTestMap(ground, obstacles, grassTiles, pathTile, rockTile, blockedTile);
+            PlaceTrees(grid, treePrefab);
             var navigation = grid.gameObject.AddComponent<WorldNavigation>();
             navigation.Configure(grid, ground, obstacles);
             navigation.ZoneName = "Fanadin";
@@ -194,7 +194,8 @@ namespace RPG.EditorTools
             PlaceChests(grid, obstacles, chests);
             PlaceEdgeMonsters(grid, obstacles, orcPrefab);
             PlaceDungeons(grid, obstacles, dungeons);
-            PlaceVendors(grid, CreateVendors(items, potion, manaPotion));
+            VendorDefinition[] vendors = CreateVendors(items, out Vector3Int[] vendorCells);
+            PlaceVendors(grid, vendors, vendorCells, affixes);
             PlaceZonesAndWaystones(grid, obstacles, PlaceholderArtGenerator.Waystone("Waystone"));
             CreateHud();
 
@@ -285,30 +286,33 @@ namespace RPG.EditorTools
             return tilemap;
         }
 
-        private static void PaintTestMap(Tilemap ground, Tilemap obstacles, Tile[] grassTiles, Tile pathTile, Tile rockTile)
+        /// <summary>
+        /// The source game's ground (<see cref="WorldMapData"/>, from its fanadin.map): its walls, fences and rocks as rock
+        /// tiles, its trees and other blocked objects as tree cells (drawn by <see cref="PlaceTrees"/>), everything else
+        /// grass, with a paved square in the middle of St. Revere and at the start.
+        /// </summary>
+        private static void PaintTestMap(Tilemap ground, Tilemap obstacles, Tile[] grassTiles, Tile pathTile, Tile rockTile, Tile blockedTile)
         {
             var random = new System.Random(Seed);
-            Vector3Int town = TownCell;
-            Vector3Int start = StartCell;
-
-            for (int x = 0; x < MapWidth; x++)
+            TreeCells.Clear();
             for (int y = 0; y < MapHeight; y++)
             {
-                var cell = new Vector3Int(x, y, 0);
-                // Roads cross at the start and in town.
-                bool isPath = x == town.x || y == town.y || x == start.x || y == start.y;
-                bool square = Within(cell, town, TownSquareRadius) || Within(cell, start, StartSquareRadius);
-                ground.SetTile(cell, isPath || square ? pathTile : grassTiles[random.Next(grassTiles.Length)]);
-
-                bool isBorder = x == 0 || y == 0 || x == MapWidth - 1 || y == MapHeight - 1;
-                bool scatteredRock = !isPath && !IsCleared(cell, 0) && random.NextDouble() < 0.05;
-                if (isBorder || scatteredRock)
-                    obstacles.SetTile(cell, rockTile);
+                string row = WorldMapData.Rows[y];
+                for (int x = 0; x < MapWidth; x++)
+                {
+                    var cell = new Vector3Int(x, y, 0);
+                    char kind = x < row.Length ? row[x] : WorldMapData.Wall;
+                    bool square = Within(cell, TownCell, TownSquareRadius) || Within(cell, StartCell, StartSquareRadius);
+                    ground.SetTile(cell, square && kind == WorldMapData.Walkable ? pathTile : grassTiles[random.Next(grassTiles.Length)]);
+                    if (kind == WorldMapData.Wall) obstacles.SetTile(cell, rockTile);
+                    else if (kind == WorldMapData.Tree)
+                    {
+                        // Blocked by an invisible tile; the tree itself is a prop on some of these cells.
+                        obstacles.SetTile(cell, blockedTile);
+                        TreeCells.Add(cell);
+                    }
+                }
             }
-
-            // A small wall near the start to test collisions and sorting (walk behind / in front of it).
-            for (int i = 0; i < 4; i++)
-                obstacles.SetTile(new Vector3Int(start.x + 3 + i, start.y + 2, 0), rockTile);
         }
 
         private static bool Within(Vector3Int cell, Vector3Int center, int radius) =>
@@ -478,7 +482,7 @@ namespace RPG.EditorTools
             return prefab;
         }
 
-        // Cells with a tree trunk, so chests are not put inside one.
+        // The source game's tree cells (blocked), so nothing is put inside one.
         private static readonly HashSet<Vector3Int> TreeCells = new HashSet<Vector3Int>();
 
         /// <summary>The free cell (no rock, no tree) nearest to <paramref name="cell"/>, searching a few cells around it.</summary>
@@ -495,31 +499,27 @@ namespace RPG.EditorTools
             return cell;
         }
 
-        private static void PlaceTrees(Grid grid, Tilemap obstacles, GameObject treePrefab)
+        /// <summary>
+        /// A tree on the source game's tree cells: one per little clump (no two closer than two cells), so a wood looks like
+        /// a wood and not a wall of trunks. The cells block through their tiles; the trees' own trunks are not needed.
+        /// </summary>
+        private static void PlaceTrees(Grid grid, GameObject treePrefab)
         {
-            var random = new System.Random(TreeSeed);
             var props = new GameObject("Props").transform;
-            TreeCells.Clear();
-            Vector3Int town = TownCell;
-            Vector3Int start = StartCell;
-
-            for (int x = 2; x < MapWidth - 2; x++)
-            for (int y = 2; y < MapHeight - 2; y++)
+            var drawn = new HashSet<Vector3Int>();
+            foreach (Vector3Int cell in TreeCells.OrderBy(c => c.y).ThenBy(c => c.x))
             {
-                var cell = new Vector3Int(x, y, 0);
-                bool isPath = x == town.x || y == town.y || x == start.x || y == start.y;
-                // A little sparser than before: the world is much bigger now.
-                if (isPath || IsCleared(cell, 1) || obstacles.HasTile(cell) || random.NextDouble() >= 0.02)
-                    continue;
-
+                bool crowded = false;
+                for (int dx = -1; dx <= 1 && !crowded; dx++)
+                for (int dy = -1; dy <= 1 && !crowded; dy++)
+                    crowded = (dx != 0 || dy != 0) && drawn.Contains(new Vector3Int(cell.x + dx, cell.y + dy, 0));
+                if (crowded) continue;
+                drawn.Add(cell);
                 var tree = (GameObject)PrefabUtility.InstantiatePrefab(treePrefab, props);
                 tree.transform.position = grid.GetCellCenterWorld(cell);
-                TreeCells.Add(cell);
+                // The cell already blocks; a trunk collider would only make paths around it tighter.
+                foreach (Collider2D trunk in tree.GetComponents<Collider2D>()) UnityEngine.Object.DestroyImmediate(trunk);
             }
-
-            // One tree right next to the start to test walking behind and in front of tall objects.
-            var nearTree = (GameObject)PrefabUtility.InstantiatePrefab(treePrefab, props);
-            nearTree.transform.position = grid.GetCellCenterWorld(new Vector3Int(start.x - 2, start.y + 1, 0));
         }
 
         private static void CreateClickMarker(Sprite sprite, PlayerMovement movement)
@@ -786,66 +786,6 @@ namespace RPG.EditorTools
             return prefab;
         }
 
-        private static VendorDefinition[] CreateVendors(ItemCatalog catalog, ItemDefinition potion, ItemDefinition manaPotion)
-        {
-            VendorDefinition MakeVendor(string fileName, string vendorName, string title, params string[] items)
-            {
-                var vendor = LoadOrCreateAsset<VendorDefinition>($"{VendorsFolder}/{fileName}.asset");
-                vendor.displayName = vendorName;
-                vendor.title = title;
-                var stock = new ItemDefinition[items.Length + 2];
-                for (int i = 0; i < items.Length; i++)
-                    stock[i] = AssetDatabase.LoadAssetAtPath<ItemDefinition>($"{ItemsFolder}/{items[i]}.asset");
-                stock[items.Length] = potion;
-                stock[items.Length + 1] = manaPotion;
-                vendor.stock = stock;
-                // Like the source game's vendors: better gear is scarce (1 rare, 3 uncommon) and comes back every minute;
-                // common gear and potions never run out.
-                var limits = new int[stock.Length];
-                for (int i = 0; i < stock.Length; i++)
-                    limits[i] = stock[i] == null ? 0 : stock[i].rarity >= ItemRarity.Rare ? 1 : stock[i].rarity == ItemRarity.Uncommon ? 3 : 0;
-                vendor.stockLimits = limits;
-                vendor.restockSeconds = 60f;
-                vendor.combinesGems = false;
-                vendor.combinesPotions = false;
-                vendor.crafts = Array.Empty<ItemDefinition>();
-                vendor.recipes = Array.Empty<Recipe>();
-                EditorUtility.SetDirty(vendor);
-                return vendor;
-            }
-
-            return new[]
-            {
-                // Starting gear and one rare piece each; everything better is crafted from materials.
-                Crafter(MakeVendor("WarriorVendor", "Thorin Ironhand", "Warrior weapons and armor, crafting",
-                        GearFile("Bronze Sword", 1), "WarAxe", GearFile("Leather Cap", 1), GearFile("Leather Jerkin", 1), GearFile("Leather Boots", 1)),
-                    catalog, WarriorClass, GearData.ArmorKind.Leather, GearData.ArmorKind.Chain, GearData.ArmorKind.Plate),
-                Crafter(MakeVendor("RangerVendor", "Sylva Swiftarrow", "Ranger bows and leather, crafting",
-                        GearFile("Aspen Bow", 1), "ElvenBow", GearFile("Leather Cap", 1), GearFile("Leather Jerkin", 1), GearFile("Leather Boots", 1)),
-                    catalog, RangerClass, GearData.ArmorKind.Leather, GearData.ArmorKind.Chain),
-                Crafter(MakeVendor("MageVendor", "Elara the Arcanist", "Mage staves and robes, crafting",
-                        GearFile("Aspen Staff", 1), "StaffOfEmbers", GearFile("Linen Hood", 1), GearFile("Linen Vestments", 1), GearFile("Linen Slippers", 1)),
-                    catalog, MageClass, GearData.ArmorKind.Robe),
-                // Also the source game's Major Treasury Gold, which the Demiplane Key is made with.
-                Jeweler(MakeVendor("JewelerVendor", "Gemma Brightstone", "Jeweler: gems, gem combining",
-                    "ChippedRuby", "ChippedTopaz", "ChippedSapphire", "ChippedEmerald", "MajorTreasuryGold")),
-                Trainer("WarriorTrainer", "Halfrid", "Warrior trainer: spell Tomes", WarriorClass),
-                Trainer("RangerTrainer", "Kelda", "Ranger trainer: spell Tomes", RangerClass),
-                Trainer("MageTrainer", "Gyldan", "Mage trainer: spell Tomes", MageClass),
-            };
-
-            // The source game's trainers sell their class's Tomes (as many as wanted).
-            VendorDefinition Trainer(string fileName, string trainerName, string title, int classIndex)
-            {
-                string[] tomes = ClassTomes.TryGetValue(classIndex, out List<ItemDefinition> list)
-                    ? list.Select(tome => AssetDatabase.GetAssetPath(tome).Substring(ItemsFolder.Length + 1).Replace(".asset", "")).ToArray()
-                    : Array.Empty<string>();
-                VendorDefinition trainer = MakeVendor(fileName, trainerName, title, tomes);
-                trainer.stockLimits = new int[trainer.stock.Length];
-                return trainer;
-            }
-        }
-
         /// <summary>
         /// Lets a vendor craft its class's weapons and the armor of <paramref name="armorKinds"/> (the source game's desirable
         /// armor of the class) from materials.
@@ -875,39 +815,6 @@ namespace RPG.EditorTools
             return vendor;
         }
 
-        private static void PlaceVendors(Grid grid, VendorDefinition[] vendors)
-        {
-            // In St. Revere, where the source game's heavy armor, ranged, staves merchants and jeweler stand.
-            // The class trainers (the source game's Halfrid, Kelda and Gyldan) stand on the town square.
-            Vector3Int[] places = StartAreaData.Vendors
-                .Concat(new[] { TownCell + new Vector3Int(4, -3, 0), TownCell + new Vector3Int(4, 3, 0), TownCell + new Vector3Int(-4, 3, 0) })
-                .ToArray();
-            var cloaks = new[]
-            {
-                new Color(0.55f, 0.15f, 0.12f), new Color(0.15f, 0.4f, 0.18f), new Color(0.3f, 0.2f, 0.6f), new Color(0.2f, 0.55f, 0.6f),
-                new Color(0.85f, 0.75f, 0.35f), new Color(0.25f, 0.5f, 0.2f), new Color(0.5f, 0.3f, 0.75f),
-            };
-            var parent = new GameObject("Town Vendors").transform;
-
-            for (int i = 0; i < vendors.Length; i++)
-            {
-                var npc = new GameObject($"Vendor {i + 1} {vendors[i].displayName}");
-                npc.transform.SetParent(parent, false);
-                npc.transform.position = grid.GetCellCenterWorld(places[i]);
-
-                var spriteRenderer = npc.AddComponent<SpriteRenderer>();
-                spriteRenderer.sprite = PlaceholderArtGenerator.CharacterFrame(VendorArtFolder, $"Vendor_{i + 1}", cloaks[i], Vector2.down, 0f, 0f);
-                spriteRenderer.spriteSortPoint = SpriteSortPoint.Pivot;
-
-                // Clicked to trade; does not block walking.
-                var box = npc.AddComponent<BoxCollider2D>();
-                box.isTrigger = true;
-                box.size = new Vector2(0.4f, 0.7f);
-                box.offset = new Vector2(0f, 0.35f);
-                npc.AddComponent<Vendor>().Configure(vendors[i]);
-            }
-        }
-
         /// <summary>
         /// The source game's named places of the start region, with a waystone where the source game has a waypoint (and in town).
         /// Waystone ids are saved with characters: keep them, only add new ones.
@@ -935,7 +842,7 @@ namespace RPG.EditorTools
                 zone.AddComponent<Zone>().Configure(places[i].name, places[i].zoneRadius * cellToWorld);
 
                 // At the start the stone stands at the corner of the square, not in the middle of it.
-                Vector3Int stoneCell = places[i].cell == StartCell ? StartCell + new Vector3Int(-3, 3, 0) : OpenCellNear(obstacles, places[i].cell);
+                Vector3Int stoneCell = OpenCellNear(obstacles, places[i].cell == StartCell ? StartCell + new Vector3Int(-3, 3, 0) : places[i].cell);
                 var stone = new GameObject($"Waystone {i} {places[i].name}");
                 stone.transform.SetParent(stones, false);
                 stone.transform.position = grid.GetCellCenterWorld(stoneCell);
@@ -1058,6 +965,7 @@ namespace RPG.EditorTools
             all.AddRange(materials);
             all.AddRange(CreatePotions(potion, manaPotion));
             all.AddRange(CreateDungeonItems());
+            all.AddRange(CreateTownSupplies());
             catalog.items = all.ToArray();
             EditorUtility.SetDirty(catalog);
             return catalog;
@@ -1313,6 +1221,8 @@ namespace RPG.EditorTools
             item.description = null;
             item.combineWith = Array.Empty<ItemDefinition>();
             item.combineResult = null;
+            item.castSeconds = 0f;
+            item.useCooldown = 0f;
             EditorUtility.SetDirty(item);
             return item;
         }

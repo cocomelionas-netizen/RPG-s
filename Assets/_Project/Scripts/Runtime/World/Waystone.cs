@@ -33,6 +33,20 @@ namespace RPG.World
             return null;
         }
 
+        /// <summary>The name of the main town, where Scrolls of Returning and Illusion Gate lead.</summary>
+        public const string MainTownName = "St. Revere";
+
+        /// <summary>The main town's stone (the first stone when there is none of that name; null without stones).</summary>
+        public static Waystone MainTown
+        {
+            get
+            {
+                foreach (Waystone stone in Stones)
+                    if (stone != null && stone.displayName == MainTownName) return stone;
+                return Stones.Count > 0 ? Stones[0] : null;
+            }
+        }
+
         /// <summary>The stone within reach of a position (null when none).</summary>
         public static Waystone Near(Vector2 position, float extraRange)
         {

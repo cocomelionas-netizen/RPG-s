@@ -71,7 +71,8 @@ namespace RPG.UI
             shown = stone;
             var traveller = UIFactory.LocalPlayer<WaystoneTraveller>();
             int cost = traveller != null ? traveller.TravelCost : 0;
-            title.text = $"{stone.DisplayName}\n<size=14>Travel to a discovered waystone for {cost} gold.</size>";
+            title.text = cost > 0 ? $"{stone.DisplayName}\n<size=14>Travel to a discovered waypoint for {cost} gold.</size>"
+                : $"{stone.DisplayName}\n<size=14>Teleport to a discovered waypoint.</size>";
 
             foreach (var row in rows) Destroy(row.button.gameObject);
             rows.Clear();
@@ -130,14 +131,14 @@ namespace RPG.UI
             }
 
             var inventory = traveller.GetComponent<Inventory>();
-            bool canPay = inventory == null || inventory.Gold >= traveller.TravelCost;
+            bool canPay = traveller.TravelCost <= 0 || inventory == null || inventory.Gold >= traveller.TravelCost;
             foreach (var (button, name, info, stone) in rows)
             {
                 bool here = stone == shown;
                 bool known = traveller.IsDiscovered(stone.Id);
                 name.text = known || here ? stone.DisplayName : "Undiscovered";
                 name.color = here ? HereColor : known ? Color.white : LockedColor;
-                info.text = here ? "You are here" : known ? $"Travel  {traveller.TravelCost} g" : "";
+                info.text = here ? "You are here" : !known ? "" : traveller.TravelCost > 0 ? $"Travel  {traveller.TravelCost} g" : "Teleport";
                 info.color = here ? HereColor : canPay ? GoldColor : new Color(1f, 0.4f, 0.3f);
                 button.interactable = known && !here;
             }

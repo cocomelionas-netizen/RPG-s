@@ -47,6 +47,19 @@ namespace RPG.Items
         private readonly NetworkVariable<double> potionReadyAt = new NetworkVariable<double>(
             0.0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
 
+        // Scrolls of Returning: server time when another can be read, and the cast being read (end 0: none).
+        private readonly NetworkVariable<double> returnReadyAt = new NetworkVariable<double>(
+            0.0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+        private readonly NetworkVariable<double> returnCastStart = new NetworkVariable<double>(
+            0.0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+        private readonly NetworkVariable<double> returnCastEnd = new NetworkVariable<double>(
+            0.0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+        private const float ReturnMoveTolerance = 0.2f;
+        // Food: server time when the next can be eaten; not within this many seconds of taking damage.
+        private readonly NetworkVariable<double> foodReadyAt = new NetworkVariable<double>(
+            0.0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+        public const float FoodCombatSeconds = 5f;
+
         /// <summary>Raised on every peer when the bag or the equipment changed.</summary>
         public event Action Changed;
 
@@ -134,7 +147,15 @@ namespace RPG.Items
         }
 
         /// <summary>What a vendor charges for an item, less Bartering.</summary>
-        public int BuyPrice(ItemDefinition item) => item != null ? Mathf.CeilToInt(item.price * (1f - BarteringBonus)) : 0;
+        public int BuyPrice(ItemDefinition item) => BuyPrice(item, null);
+
+        /// <summary>What a vendor asks for an item with a random affix (better affixes cost more), after Bartering.</summary>
+        public int BuyPrice(ItemDefinition item, AffixDefinition affix)
+        {
+            if (item == null) return 0;
+            float price = item.price * (affix != null ? Mathf.Max(1f, affix.priceMultiplier) : 1f);
+            return Mathf.CeilToInt(price * (1f - BarteringBonus));
+        }
 
         /// <summary>Tooltip text of a stack, with its affix, socket and real sell price.</summary>
         public string Describe(ItemStack stack, string className)
@@ -261,6 +282,30 @@ namespace RPG.Items
 
         /// <summary>Share of the potion cooldown still to wait, 1 right after drinking.</summary>
         public float PotionCooldownFraction => potionCooldown > 0f ? Mathf.Clamp01(PotionCooldownRemaining / potionCooldown) : 0f;
+
+        private double ServerNow => IsSpawned ? NetworkManager.ServerTime.Time : 0.0;
+
+        /// <summary>Seconds until a Scroll of Returning can be read again (0 when ready).</summary>
+        public float ReturnCooldownRemaining => IsSpawned ? Mathf.Max(0f, (float)(returnReadyAt.Value - ServerNow)) : 0f;
+
+        /// <summary>Share of the scroll cooldown still to wait (1 right after reading one), for a cooldown of <paramref name="cooldown"/>.</summary>
+        public float ReturnCooldownFraction(float cooldown) => cooldown > 0f ? Mathf.Clamp01(ReturnCooldownRemaining / cooldown) : 0f;
+
+        /// <summary>Seconds until food can be eaten again (0 when ready).</summary>
+        public float FoodCooldownRemaining => IsSpawned ? Mathf.Max(0f, (float)(foodReadyAt.Value - ServerNow)) : 0f;
+
+        /// <summary>Whether a Scroll of Returning is being read.</summary>
+        public bool IsReturning => IsSpawned && returnCastEnd.Value > 0.0;
+
+        /// <summary>0..1 of the scroll being read (0 when none).</summary>
+        public float ReturnProgress
+        {
+            get
+            {
+                if (!IsReturning || returnCastEnd.Value <= returnCastStart.Value) return 0f;
+                return Mathf.Clamp01((float)((ServerNow - returnCastStart.Value) / (returnCastEnd.Value - returnCastStart.Value)));
+            }
+        }
 
         /// <summary>
         /// The bag slot of the best item used this way that the player's level allows: the highest tier, a serum
@@ -503,14 +548,14 @@ namespace RPG.Items
         {
             Vendor vendor = Vendor.Get(vendorIndex);
             if (rpcParams.Receive.SenderClientId == OwnerClientId && vendor != null && vendor.Definition != null)
-                VendorStockRpc(vendorIndex, vendor.ServerStockSnapshot());
+                VendorStockRpc(vendorIndex, vendor.ServerStockSnapshot(), vendor.ServerAffixSnapshot());
         }
 
         [Rpc(SendTo.Owner)]
-        private void VendorStockRpc(int vendorIndex, int[] counts)
+        private void VendorStockRpc(int vendorIndex, int[] counts, int[] affixIds)
         {
             Vendor vendor = Vendor.Get(vendorIndex);
-            if (vendor != null) vendor.SetKnownStock(counts);
+            if (vendor != null) vendor.SetKnownStock(counts, affixIds);
         }
 
         public void RequestSell(Vendor vendor, int bagIndex)
@@ -739,6 +784,20 @@ namespace RPG.Items
                     MessageLog.Add($"Lockpicking not high enough: this lock needs {itemId}, you have {affixId}. " +
                                    "Raise Lockpicking in the character sheet (C, Combat page).", MessageLog.WarningColor);
                     break;
+                case InventoryMessage.Returning:
+                    MessageLog.Add($"You read the {(item != null ? item.displayName : "scroll")}... stand still.", new Color(0.55f, 0.85f, 1f));
+                    break;
+                case InventoryMessage.ReturnInterrupted:
+                    CombatTextLayer.ShowText(above, "Interrupted", new Color(1f, 0.4f, 0.3f), 0.8f);
+                    MessageLog.Add("Interrupted.", MessageLog.WarningColor);
+                    break;
+                case InventoryMessage.InCombat:
+                    CombatTextLayer.ShowText(above, "Cannot be used in combat", new Color(1f, 0.4f, 0.3f), 0.8f);
+                    MessageLog.Add("You cannot eat in combat.", MessageLog.WarningColor);
+                    break;
+                case InventoryMessage.Returned:
+                    MessageLog.Add($"You return to {Waystone.MainTownName}.", new Color(0.55f, 0.85f, 1f));
+                    break;
                 case InventoryMessage.Gold:
                     CombatTextLayer.ShowText(above, $"+{itemId} gold", GoldColor, 0.8f);
                     MessageLog.Add($"You receive {itemId} gold.", GoldColor);
@@ -836,6 +895,8 @@ namespace RPG.Items
             if (item == null || item.use == ItemUse.None) return false;
             if (item.use == ItemUse.LearnSpell) return ServerLearnFrom(bagIndex, stack, item);
             if (item.use == ItemUse.Combine) return ServerCombineFrom(item);
+            if (item.use == ItemUse.Return) return ServerStartReturn(item);
+            if (item.use == ItemUse.Food) return ServerEat(bagIndex, stack, item);
             if (item.use == ItemUse.RestoreMana && mana == null) return false;
             if (progress != null && !item.CanBeUsedAtLevel(progress.Level))
             {
@@ -860,6 +921,71 @@ namespace RPG.Items
 
             bag[bagIndex] = stack.Count > 1 ? stack.WithCount(stack.Count - 1) : ItemStack.Empty;
             return true;
+        }
+
+        /// <summary>
+        /// Server: starts reading a Scroll of Returning: after its cast time, if the player stood still and lives, they are
+        /// taken to the main town and the scroll is used up. False when it is cooling down or one is already being read.
+        /// </summary>
+        public bool ServerStartReturn(ItemDefinition scroll)
+        {
+            if (!IsServer || scroll == null || scroll.use != ItemUse.Return || health.IsDead || CountOf(scroll) <= 0) return false;
+            double now = ServerNow;
+            if (IsReturning || now < returnReadyAt.Value)
+            {
+                MessageRpc(InventoryMessage.NotReady, catalog.IdOf(scroll), 0);
+                return false;
+            }
+            if (Waystone.MainTown == null) return false;
+            returnCastStart.Value = now;
+            returnCastEnd.Value = now + Mathf.Max(0.01f, scroll.castSeconds);
+            MessageRpc(InventoryMessage.Returning, catalog.IdOf(scroll), 0);
+            StartCoroutine(ReadReturnScroll(scroll, AutoAttack.ServerPosition(health)));
+            return true;
+        }
+
+        /// <summary>Server: eats food: health and mana back at once, not in combat, its own cooldown.</summary>
+        private bool ServerEat(int bagIndex, ItemStack stack, ItemDefinition food)
+        {
+            double now = ServerNow;
+            if (Time.time - health.LastDamageTime < FoodCombatSeconds)
+            {
+                MessageRpc(InventoryMessage.InCombat, stack.ItemId, 0);
+                return false;
+            }
+            if (now < foodReadyAt.Value)
+            {
+                MessageRpc(InventoryMessage.NotReady, stack.ItemId, 0);
+                return false;
+            }
+            health.Heal(food.restoreAmount, true);
+            if (mana != null) mana.ServerRestore(food.restoreAmount);
+            foodReadyAt.Value = now + food.useCooldown;
+            bag[bagIndex] = stack.Count > 1 ? stack.WithCount(stack.Count - 1) : ItemStack.Empty;
+            return true;
+        }
+
+        private System.Collections.IEnumerator ReadReturnScroll(ItemDefinition scroll, Vector2 start)
+        {
+            while (IsSpawned && ServerNow < returnCastEnd.Value)
+            {
+                bool moved = Vector2.Distance(AutoAttack.ServerPosition(health), start) > ReturnMoveTolerance;
+                bool stopped = health.IsDead || (health.Effects != null && health.Effects.IsSilenced);
+                if (moved || stopped)
+                {
+                    returnCastEnd.Value = 0.0;
+                    MessageRpc(InventoryMessage.ReturnInterrupted, catalog.IdOf(scroll), 0);
+                    yield break;
+                }
+                yield return null;
+            }
+            if (!IsSpawned) yield break;
+            returnCastEnd.Value = 0.0;
+            Waystone town = Waystone.MainTown;
+            if (town == null || !ServerRemoveItem(scroll, 1)) yield break;
+            returnReadyAt.Value = ServerNow + scroll.useCooldown;
+            if (TryGetComponent(out RPG.Networking.PlayerNetworkMovement movement)) movement.ServerTeleport(town.ArrivalPoint);
+            MessageRpc(InventoryMessage.Returned, catalog.IdOf(scroll), 0);
         }
 
         /// <summary>
@@ -964,19 +1090,21 @@ namespace RPG.Items
             if (vendor.ServerRemaining(stockIndex) == 0)
             {
                 MessageRpc(InventoryMessage.SoldOut, 0, 0);
-                VendorStockRpc(vendor.Index, vendor.ServerStockSnapshot());
+                VendorStockRpc(vendor.Index, vendor.ServerStockSnapshot(), vendor.ServerAffixSnapshot());
                 return false;
             }
-            int price = BuyPrice(item);
+            int affixId = vendor.ServerAffix(stockIndex);
+            AffixDefinition affix = affixes != null ? affixes.Get(affixId) : null;
+            int price = BuyPrice(item, affix);
             if (gold.Value < price)
             {
                 MessageRpc(InventoryMessage.NotEnoughGold, 0, 0);
                 return false;
             }
-            if (ServerAddItem(item, 1) <= 0) return false;
+            if (ServerAddItem(item, 1, true, affix != null ? affixId : 0) <= 0) return false;
             gold.Value -= price;
             vendor.ServerTake(stockIndex);
-            VendorStockRpc(vendor.Index, vendor.ServerStockSnapshot());
+            VendorStockRpc(vendor.Index, vendor.ServerStockSnapshot(), vendor.ServerAffixSnapshot());
             return true;
         }
 
@@ -1136,6 +1264,12 @@ namespace RPG.Items
             /// <summary>A Tome was read; it travels in the item id field.</summary>
             LearnedSpell,
             AlreadyKnown,
+            /// <summary>A Scroll of Returning is being read; it travels in the item id field.</summary>
+            Returning,
+            ReturnInterrupted,
+            Returned,
+            /// <summary>Food cannot be eaten in combat.</summary>
+            InCombat,
         }
     }
 }

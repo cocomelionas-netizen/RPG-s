@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Compiles the editor scripts too (the scene builder and its data) with the runtime, the tests and the stubs,
+       against Unity's reference DLLs and UnityEditor.dll from setup.sh. Run by ../editor-check.sh. -->
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <LangVersion>9.0</LangVersion>
+    <Nullable>disable</Nullable>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <NoWarn>CS0067;CS0414;CS0649;CS0169;CS0108;CS0618;CS8632;CS1701;CS1702</NoWarn>
+    <DefineConstants>UNITY_EDITOR</DefineConstants>
+    <RefsDir Condition="'$(RPG_REFS)' == ''">/tmp/rpgrefs</RefsDir>
+    <RefsDir Condition="'$(RPG_REFS)' != ''">$(RPG_REFS)</RefsDir>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="src/*.cs" />
+    <Compile Include="../Stubs.cs" />
+    <Compile Include="EditorStubs.cs" />
+    <Reference Include="$(RefsDir)/unityref/lib/net35/*.dll" />
+    <Reference Include="$(RefsDir)/uiref/lib/UnityEngine.UI.dll" />
+    <Reference Include="$(RefsDir)/sdk/lib/UnityEditor.dll" />
+    <PackageReference Include="NUnit" Version="3.13.3" />
+  </ItemGroup>
+</Project>

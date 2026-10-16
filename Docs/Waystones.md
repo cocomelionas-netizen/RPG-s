@@ -12,9 +12,10 @@
 ## Waystones
 
 - A stone with glowing runes stands in every zone (a light blue dot on the minimap).
-- Coming within 3 units **discovers** the stone ("Waystone discovered: ...").
-- Clicking the stone opens a list: discovered stones can be travelled to for **10 gold**, undiscovered ones are grey.
-- The server checks: the player stands at the stone, the destination is discovered, there is enough gold (`WaystoneTraveller.ServerTravel`).
+- Coming within 3 units **discovers** the stone ("You've discovered a new waypoint! ...").
+- Clicking the stone opens a list: discovered stones can be teleported to **for free** (as the source game's waypoints), undiscovered ones are grey.
+  `WaystoneTraveller.travelCost` can still set a price (0 by default).
+- The server checks: the player stands at the stone, the destination is discovered, and the price if there is one (`WaystoneTraveller.ServerTravel`).
 - Discovered stones are saved with the account (`CharacterRecord.waystones`, bits by the stone's `Id`; never change ids).
 
 Tests: `Tests/PlayMode/WaystoneTests.cs`, extended `AccountTests`.

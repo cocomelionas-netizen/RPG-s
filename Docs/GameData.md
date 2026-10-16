@@ -10,17 +10,57 @@ Generated data lives in `Scripts/Editor/*Data.cs` (`StartAreaData`, `GearData`, 
 
 - The world covers the source map "fanadin" from the start to the main town: x 0–560, y 30–340
   (568 × 318 cells here). Data: `Scripts/Editor/StartAreaData.cs` (generated from `game.db`).
+- **Ground** – cell by cell from the source game's `maps/fanadin.map` (`Tools/GameData/world.py` →
+  `Scripts/Editor/WorldMapData.cs`): its walls, fences and rock walls (flag 0x20) are rocks here, its trees and other
+  blocked objects (0x60) are trees (one drawn per little clump, every cell of it blocks), everything else is grass.
+  Cells the file does not list are open ground. So the towns, the walls of St. Revere and its houses, the fences and the
+  woods stand where the source game has them. From the start, 474 of the region's 485 NPC and object spots can be walked
+  to; the rest stand in fenced pens or behind gates (a few Horned Beasts, Mahogany Crates and pigs), as in the source game.
 - **Start** – Pilgrim's Refuge (its `start` teleport 17, 106): new characters appear here, and after death.
-- **Main town** – St. Revere (524, 250): the vendors stand where the source game has its heavy armor, ranged and
-  staves merchants and the jeweler.
+- **Main town** – St. Revere (524, 250).
+- **Vendors** – every vendor of the region where the source game stands it (see "Vendors" below).
 - **Monsters** – 277 at their spots (outside the towns), with their levels (1–25) and respawn times (up to 10 min).
   Look: levels 1–2 – Goblin, 3–5 – Goblin Brute, higher – Orc. HP and damage grow with the level
   (`MonsterAI.HealthScaleBetween`); its elites and bosses are elites here.
 - **Chests** – 97 at their spots, with their levels and respawn times (60 s / 5 min).
-- **Waystones** – at its waypoints and teleports: Pilgrim's Refuge, Merchant's Way, Fields of Dreams,
-  Howler's Valley, Thicket of the Wanderer, St. Revere, Kandorys Passage, Kandorys Castle.
+- **Waypoints** – at its waypoints and teleports: Pilgrim's Refuge, Merchant's Way, Fields of Dreams,
+  Howler's Valley, Thicket of the Wanderer, St. Revere, Kandorys Passage, Kandorys Castle. Walking up to one discovers it
+  ("You've discovered a new waypoint!"); from any of them you teleport to a discovered one **for free**, as in the source
+  game ("Teleport to this waypoint?").
 - **Dungeon entrances** – where the source game has them (see "Dungeons" below).
 - **M** – the map of the whole world (places, stones, vendors, portals, players and you), as in the source game.
+
+## Vendors
+
+From `npc`, `npc_template`, `npc_vendor` and `npc_vendor_random` (`Tools/GameData/world.py` → `Scripts/Editor/VendorData.cs`):
+23 vendors with their names, subnames and spots; 22 of them sell something that exists here and stand in the world.
+
+| Who | Where | Sells |
+|---|---|---|
+| Aedis, Innkeeper | St. Revere | Life and Mana Potion, Fresh Apple Pie, **Scroll of Returning** |
+| Osraed, Alchemist | St. Revere | every potion and serum (and combines 5 into the next tier) |
+| Calder, Gems | St. Revere | the gems that exist here (Ruby, Emerald, Topaz, Sapphire), 3 of each, back every 60 s |
+| Argas, Butcher | St. Revere | Gourmet Ham Sandwich, Oven Baked Turkey, Roasted Pork |
+| Harold, Banker | St. Revere | Major Treasury Gold, Treasury Gold, Treasury Coins |
+| Halfrid (Paladin), Kelda (Ranger), Gyldan (Mage) | St. Revere | their class's Tomes; for now also the crafting window |
+| Emitt (Paymaster), Clive (Soldier), Stefan (Explorer) | on the way | low Tomes, Minor potions, Military Ration |
+| Huldria, Helbred, Ruth, Earnest | around | Minor Life and Mana Potions |
+| Karl (Heavy Armor), Robin (Cloth Armor), Hezakoth (Blades), Lowe (Axe & Mace), Selena (Ranged & Shield), Dragos (Staves and Wands) | St. Revere | gear of their kind for every second level: chain and plate / leather and robes (head, chest, feet), swords (also for axes and maces: the warrior's weapon here), bows, staves |
+| Vikram, Jeweler | St. Revere | Chipped gems and gem combining (its necklaces and rings do not exist here) |
+
+- The gear merchants hold one of each piece; at every restock (5 min) each piece gets a **random quality** with the source
+  game's chances (green 100 %, blue 50 %, gold 5 %, purple 1 %, best first), shown with its affix and a higher price.
+- Prices of the new supplies: the source game's buy price (sell price × its buy cost ratio): Scroll of Returning 300.
+  Treasury gold sells back for the source price.
+- Boltar (Cleric) only sells Cleric Tomes, which do not exist here; he is not placed.
+
+## Scroll of Returning and food
+
+- **Scroll of Returning** (`item_template` 1126, spell 282): 2 s cast standing still, then you are in St. Revere (the source
+  game: the nearest waypoint); moving or being stunned breaks it off, and only a finished scroll is used up.
+  5 min cooldown, stacks to 5. Sold by Aedis. It can be put on the action bar (the bar shows "Returning" while reading).
+- **Food** (Military Ration, Fresh Apple Pie, Gourmet Ham Sandwich, Oven Baked Turkey, Roasted Pork): health and mana at
+  once (half the source's 25–400, like our health), not within 5 s of taking damage, 30 s cooldown of its own.
 
 ## Balance
 

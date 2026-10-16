@@ -12,14 +12,6 @@ namespace RPG.EditorTools
         public static readonly Vector3Int Start = new Vector3Int(19, 78, 0);
         /// <summary>The main town, St. Revere: the middle of its market (524, 250).</summary>
         public static readonly Vector3Int Town = new Vector3Int(526, 222, 0);
-        /// <summary>Vendors where the source game has them in Revere: heavy armor (warrior), ranged (ranger), staves (mage), jeweler.</summary>
-        public static readonly Vector3Int[] Vendors =
-        {
-            new Vector3Int(523, 220, 0), // Karl
-            new Vector3Int(531, 207, 0), // Selena
-            new Vector3Int(522, 207, 0), // Dragos
-            new Vector3Int(523, 216, 0), // Vikram
-        };
         /// <summary>Wolf's Den: the dungeon entrance.</summary>
         public static readonly Vector3Int DungeonEntrance = new Vector3Int(79, 139, 0);
 

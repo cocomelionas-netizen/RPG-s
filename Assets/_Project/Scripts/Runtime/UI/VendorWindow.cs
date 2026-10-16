@@ -40,6 +40,13 @@ namespace RPG.UI
         private int stockColumns = 1;
         private int stockPerColumn = 1;
         private int StockRows => rows.Count > 0 ? stockPerColumn : 0;
+        // Long stock lists (the merchants' gear for every level) are shown a page at a time.
+        private const int RowsPerColumn = 10;
+        private const int PageSize = RowsPerColumn * 2;
+        private int page;
+        private int pageCount = 1;
+        private RectTransform pager;
+        private Text pageText;
 
         private class Row
         {
@@ -47,6 +54,7 @@ namespace RPG.UI
             public Text Name;
             public Text Details;
             public Text Price;
+            public int StockIndex;
         }
 
         /// <summary>The vendor whose window is open (null when closed).</summary>
@@ -109,6 +117,18 @@ namespace RPG.UI
             craftRect.sizeDelta = new Vector2(width - 28f, 38f);
             craftButton.onClick.AddListener(OpenCrafting);
 
+            pager = UIFactory.CreateRect("Pager", rect);
+            pager.anchorMin = pager.anchorMax = pager.pivot = new Vector2(0f, 1f);
+            pager.sizeDelta = new Vector2(width - 28f, 32f);
+            Button previous = UIFactory.CreateButton("Previous", pager, RowColor, "<", 18);
+            UIFactory.Place((RectTransform)previous.transform, new Vector2(0f, 0.5f), new Vector2(0f, 0f), new Vector2(60f, 30f));
+            previous.onClick.AddListener(() => TurnPage(-1));
+            Button next = UIFactory.CreateButton("Next", pager, RowColor, ">", 18);
+            UIFactory.Place((RectTransform)next.transform, new Vector2(0f, 0.5f), new Vector2(200f, 0f), new Vector2(60f, 30f));
+            next.onClick.AddListener(() => TurnPage(1));
+            pageText = UIFactory.CreateText("Page", pager, 15, TextAnchor.MiddleCenter);
+            UIFactory.Place(pageText.rectTransform, new Vector2(0f, 0.5f), new Vector2(64f, 0f), new Vector2(132f, 30f));
+
             list = UIFactory.CreateRect("Goods", rect);
             list.anchorMin = list.anchorMax = list.pivot = new Vector2(0f, 1f);
             list.anchoredPosition = new Vector2(14f, -92f);
@@ -134,6 +154,8 @@ namespace RPG.UI
 
         private void Show(Vendor vendor)
         {
+            bool fresh = vendor != shown || !window.activeSelf;
+            if (fresh) page = 0;
             shown = vendor;
             VendorDefinition definition = vendor.Definition;
             title.text = definition != null && !string.IsNullOrEmpty(definition.title)
@@ -143,10 +165,19 @@ namespace RPG.UI
             foreach (Row row in rows) Destroy(row.Root);
             rows.Clear();
             ItemDefinition[] stock = definition != null ? definition.stock : Array.Empty<ItemDefinition>();
-            stockColumns = stock.Length > 12 ? 2 : 1;
-            stockPerColumn = Mathf.Max(1, (stock.Length + stockColumns - 1) / stockColumns);
-            for (int i = 0; i < stock.Length; i++)
-                rows.Add(CreateRow(i));
+            pageCount = Mathf.Max(1, (stock.Length + PageSize - 1) / PageSize);
+            page = Mathf.Clamp(page, 0, pageCount - 1);
+            int first = page * PageSize;
+            int onPage = Mathf.Clamp(stock.Length - first, 0, PageSize);
+            stockColumns = onPage > RowsPerColumn ? 2 : 1;
+            stockPerColumn = Mathf.Max(1, Mathf.Min(onPage, RowsPerColumn));
+            for (int i = 0; i < onPage; i++)
+                rows.Add(CreateRow(i, first + i));
+
+            bool paged = pageCount > 1;
+            pager.gameObject.SetActive(paged);
+            pager.anchoredPosition = new Vector2(14f, -92f - StockRows * (rowHeight + 4f) - 4f);
+            pageText.text = $"Page {page + 1} / {pageCount}";
 
             bool combines = definition != null && (definition.combinesGems || definition.combinesPotions);
             combineButton.gameObject.SetActive(combines);
@@ -158,12 +189,20 @@ namespace RPG.UI
             craftButton.gameObject.SetActive(crafts);
             // The combine button sits above the craft button when there are both.
             ((RectTransform)combineButton.transform).anchoredPosition = new Vector2(0f, crafts ? 58f : 12f);
-            float height = 92f + StockRows * (rowHeight + 4f) + 16f + (crafts ? 46f : 0f) + (combines ? 46f : 0f);
+            float height = 92f + StockRows * (rowHeight + 4f) + 16f + (paged ? 38f : 0f) + (crafts ? 46f : 0f) + (combines ? 46f : 0f);
             ((RectTransform)window.transform).sizeDelta = new Vector2(width * stockColumns, height);
             window.SetActive(true);
+            if (!fresh) return;
             Inventory inventory = UIFactory.LocalPlayer<Inventory>();
             if (inventory != null) inventory.RequestVendorStock(vendor);
             Opened?.Invoke();
+        }
+
+        private void TurnPage(int step)
+        {
+            if (shown == null) return;
+            page = Mathf.Clamp(page + step, 0, pageCount - 1);
+            Show(shown);
         }
 
         private void Hide()
@@ -172,11 +211,12 @@ namespace RPG.UI
             shown = null;
         }
 
-        private Row CreateRow(int index)
+        private Row CreateRow(int position, int stockIndex)
         {
             // Long stock lists (a trainer's Tomes) in two columns.
-            Row row = CreateRowAt(-(index % stockPerColumn) * (rowHeight + 4f), RowColor, out Button button, index / stockPerColumn * width);
-            button.onClick.AddListener(() => Buy(index));
+            Row row = CreateRowAt(-(position % stockPerColumn) * (rowHeight + 4f), RowColor, out Button button, position / stockPerColumn * width);
+            row.StockIndex = stockIndex;
+            button.onClick.AddListener(() => Buy(stockIndex));
             return row;
         }
 
@@ -231,44 +271,69 @@ namespace RPG.UI
             goldText.text = $"Your gold: {inventory.Gold}      Click an item to buy. While this is open, click items in your bag to sell them.";
             var progress = inventory.GetComponent<CharacterProgress>();
             ItemDefinition[] stock = shown.Definition.stock;
-            for (int i = 0; i < rows.Count && i < stock.Length; i++)
+            AffixCatalog affixCatalog = inventory.Affixes;
+            foreach (Row row in rows)
             {
-                ItemDefinition item = stock[i];
-                Row row = rows[i];
+                int i = row.StockIndex;
+                ItemDefinition item = i >= 0 && i < stock.Length ? stock[i] : null;
                 if (item == null) continue;
+                AffixDefinition affix = affixCatalog != null ? affixCatalog.Get(shown.KnownAffix(i)) : null;
+                string itemName = item.NameWith(affix);
                 int left = shown.KnownRemaining(i);
-                row.Name.text = left == Vendor.Unlimited ? item.displayName
-                    : left > 0 ? $"{item.displayName}  <size=13><color=#bbbbbb>({left} left)</color></size>"
-                    : $"{item.displayName}  <size=13><color=#ff6655>(sold out)</color></size>";
-                row.Name.color = ItemDefinition.RarityColor(item.rarity);
-                row.Details.text = Summary(item, progress);
-                int price = inventory.BuyPrice(item);
+                row.Name.text = left == Vendor.Unlimited ? itemName
+                    : left > 0 ? $"{itemName}  <size=13><color=#bbbbbb>({left} left)</color></size>"
+                    : $"{itemName}  <size=13><color=#ff6655>(sold out)</color></size>";
+                row.Name.color = ItemDefinition.RarityColor(item.QualityWith(affix));
+                row.Details.text = Summary(item, progress, affix);
+                int price = inventory.BuyPrice(item, affix);
                 row.Price.text = $"{price} g";
                 row.Price.color = inventory.Gold >= price && left != 0 ? GoldColor : Unaffordable;
             }
         }
 
-        /// <summary>One line: slot, bonuses and which class may use it.</summary>
-        public static string Summary(ItemDefinition item, CharacterProgress progress)
+        /// <summary>One line: slot, bonuses (with an affix's) and which class may use it.</summary>
+        public static string Summary(ItemDefinition item, CharacterProgress progress, AffixDefinition affix = null)
         {
             var parts = new List<string>();
-            if (item.IsEquippable) parts.Add(item.slot.ToString());
-            if (item.damageBonus > 0) parts.Add($"+{item.damageBonus} dmg");
-            if (item.healthBonus > 0) parts.Add($"+{item.healthBonus} HP");
-            if (item.armor > 0) parts.Add($"{item.armor} armor");
-            if (item.manaBonus > 0) parts.Add($"+{item.manaBonus} mana");
-            if (!item.attributes.IsZero) parts.Add(item.attributes.Describe("  "));
-            if (item.isGem) parts.Add("gem: set into a socket");
-            if (item.use != ItemUse.None)
+            if (item.IsEquippable)
             {
-                string pool = item.use == ItemUse.Heal ? "health" : "mana";
-                string amount = item.restoreAmount > 0 ? $"{item.restoreAmount} {pool}" : $"{Mathf.RoundToInt(item.healFraction * 100f)}% {pool}";
-                parts.Add(item.restoreSeconds > 0f ? $"{amount} over {item.restoreSeconds:0}s" : amount);
-                if (item.itemLevel > 1)
-                {
-                    bool usable = progress == null || item.CanBeUsedAtLevel(progress.Level);
-                    parts.Add(usable ? $"level {item.itemLevel}" : $"<color=#ff6655>level {item.itemLevel}</color>");
-                }
+                parts.Add(item.weaponType != WeaponType.None ? item.weaponType.ToString() : item.slot.ToString());
+                bool wearable = progress == null || item.CanBeWornAtLevel(progress.Level);
+                parts.Add(wearable ? $"level {item.itemLevel}" : $"<color=#ff6655>level {item.itemLevel}</color>");
+            }
+            int damage = item.damageBonus + (affix != null ? affix.damageBonus : 0);
+            int health = item.healthBonus + (affix != null ? affix.healthBonus : 0);
+            int armor = item.armor + (affix != null ? affix.armor : 0);
+            int mana = item.manaBonus + (affix != null ? affix.manaBonus : 0);
+            AttributeSet attributes = item.attributes + (affix != null ? affix.attributes : default);
+            if (damage > 0) parts.Add($"+{damage} dmg");
+            if (health > 0) parts.Add($"+{health} HP");
+            if (armor > 0) parts.Add($"{armor} armor");
+            if (mana > 0) parts.Add($"+{mana} mana");
+            if (!attributes.IsZero) parts.Add(attributes.Describe("  "));
+            if (item.isGem) parts.Add("gem: set into a socket");
+            switch (item.use)
+            {
+                case ItemUse.Heal:
+                case ItemUse.RestoreMana:
+                    string pool = item.use == ItemUse.Heal ? "health" : "mana";
+                    string amount = item.restoreAmount > 0 ? $"{item.restoreAmount} {pool}" : $"{Mathf.RoundToInt(item.healFraction * 100f)}% {pool}";
+                    parts.Add(item.restoreSeconds > 0f ? $"{amount} over {item.restoreSeconds:0}s" : amount);
+                    break;
+                case ItemUse.Food:
+                    parts.Add($"{item.restoreAmount} health and mana, out of combat");
+                    break;
+                case ItemUse.Return:
+                    parts.Add("returns you to St. Revere");
+                    break;
+                case ItemUse.LearnSpell:
+                    if (item.teachesSpell != null) parts.Add($"teaches {item.teachesSpell.displayName}");
+                    break;
+            }
+            if (!item.IsEquippable && item.use != ItemUse.None && item.itemLevel > 1)
+            {
+                bool usable = progress == null || item.CanBeUsedAtLevel(progress.Level);
+                parts.Add(usable ? $"level {item.itemLevel}" : $"<color=#ff6655>level {item.itemLevel}</color>");
             }
             string className = ClassName(item, progress);
             if (className != null)

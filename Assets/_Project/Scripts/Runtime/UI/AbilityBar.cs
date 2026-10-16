@@ -232,11 +232,17 @@ namespace RPG.UI
             }
 
             AbilityDefinition casting = caster != null ? caster.CastingAbility : null;
-            castBar.SetActive(casting != null);
+            bool returning = inventory != null && inventory.IsReturning;
+            castBar.SetActive(casting != null || returning);
             if (casting != null)
             {
                 castFill.anchorMax = new Vector2(caster.CastProgress, 1f);
                 castText.text = casting.displayName;
+            }
+            else if (returning)
+            {
+                castFill.anchorMax = new Vector2(inventory.ReturnProgress, 1f);
+                castText.text = "Returning";
             }
 
             messageTimer -= Time.deltaTime;
@@ -285,12 +291,21 @@ namespace RPG.UI
             slot.Background.color = tint;
             slot.Name.text = $"{item.displayName}\nx{count}";
             bool potion = item.use == ItemUse.Heal || item.use == ItemUse.RestoreMana;
-            // Potions share one cooldown.
-            float remaining = potion ? inventory.PotionCooldownRemaining : 0f;
-            slot.Cooldown.anchorMax = new Vector2(1f, potion && count > 0 ? inventory.PotionCooldownFraction : 0f);
-            slot.Countdown.text = potion && count > 0 && remaining >= 0.05f ? Mathf.CeilToInt(remaining).ToString() : "";
+            bool scroll = item.use == ItemUse.Return;
+            bool food = item.use == ItemUse.Food;
+            // Potions share one cooldown; Scrolls of Returning and food have their own.
+            float remaining = potion ? inventory.PotionCooldownRemaining : scroll ? inventory.ReturnCooldownRemaining
+                : food ? inventory.FoodCooldownRemaining : 0f;
+            float fraction = potion ? inventory.PotionCooldownFraction : scroll ? inventory.ReturnCooldownFraction(item.useCooldown)
+                : food && item.useCooldown > 0f ? Mathf.Clamp01(remaining / item.useCooldown) : 0f;
+            slot.Cooldown.anchorMax = new Vector2(1f, count > 0 ? fraction : 0f);
+            slot.Countdown.text = count > 0 && remaining >= 0.05f ? CountdownText(remaining) : "";
             SetHighlighted(slot, false);
         }
+
+        /// <summary>"45" seconds, or "5m" for long cooldowns.</summary>
+        private static string CountdownText(float seconds) =>
+            seconds >= 60f ? $"{Mathf.CeilToInt(seconds / 60f)}m" : Mathf.CeilToInt(seconds).ToString();
 
         private void ShowEmpty(Slot slot, bool dropping)
         {

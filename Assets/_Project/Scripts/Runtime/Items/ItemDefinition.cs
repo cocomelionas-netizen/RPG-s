@@ -51,6 +51,10 @@ namespace RPG.Items
         LearnSpell,
         /// <summary>Put together with the items it combines with into another (the source game's key recipes); all are used up.</summary>
         Combine,
+        /// <summary>A Scroll of Returning: after its cast (standing still) takes the player to the main town; used up.</summary>
+        Return,
+        /// <summary>Food: restores Restore Amount of health and of mana at once, not in combat; used up.</summary>
+        Food,
     }
 
     /// <summary>One kind of item: its slot, rarity, stats and use. Players' bags refer to it by catalog index.</summary>
@@ -97,6 +101,10 @@ namespace RPG.Items
         [Min(1)] public int maxStack = 1;
         [Tooltip("A stronger version that sometimes drops in its place (a serum for a potion).")]
         public ItemDefinition strongerVariant;
+        [Tooltip("Return scrolls: seconds of standing still before it works (the source game: 2).")]
+        [Min(0f)] public float castSeconds;
+        [Tooltip("Return scrolls and food: seconds before another can be used (the source game: 300 and 30).")]
+        [Min(0f)] public float useCooldown;
         [Tooltip("Tomes: the spell it teaches.")]
         public AbilityDefinition teachesSpell;
 
@@ -143,7 +151,7 @@ namespace RPG.Items
         }
 
         /// <summary>Whether a player of <paramref name="playerLevel"/> may drink it (potions have a level like gear).</summary>
-        public bool CanBeUsedAtLevel(int playerLevel) => use == ItemUse.None || use == ItemUse.Combine || playerLevel >= itemLevel;
+        public bool CanBeUsedAtLevel(int playerLevel) => use == ItemUse.None || use == ItemUse.Combine || use == ItemUse.Return || use == ItemUse.Food || playerLevel >= itemLevel;
 
         /// <summary>Seconds between restoring ticks of potions that work over time.</summary>
         public const float RestoreInterval = 2f;
@@ -233,6 +241,17 @@ namespace RPG.Items
                 foreach (ItemDefinition other in combineWith)
                     if (other != null) others.Append(others.Length > 0 ? " and " : "").Append(other.displayName);
                 text.AppendLine(others.Length > 0 ? $"Use: combine with {others} into {combineResult.displayName}" : $"Use: turn into {combineResult.displayName}");
+            }
+            else if (use == ItemUse.Return)
+            {
+                text.AppendLine("Use: returns you to St. Revere");
+                if (castSeconds > 0f) text.AppendLine($"{castSeconds:0.#} sec cast, {Mathf.RoundToInt(useCooldown / 60f)} min cooldown");
+            }
+            else if (use == ItemUse.Food)
+            {
+                text.AppendLine($"Use: restores {restoreAmount} health and {restoreAmount} mana");
+                text.AppendLine("Cannot be used in combat");
+                if (useCooldown > 0f) text.AppendLine($"{useCooldown:0} sec cooldown");
             }
             else if (use != ItemUse.None && use != ItemUse.Combine)
             {
