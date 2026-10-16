@@ -39,8 +39,9 @@ generators are in `Tools/GameData/` (`dungeons.py`, `recipes.py`, `world.py` →
 World: the source game's start region (Pilgrim's Refuge → St. Revere): its ground from `fanadin.map` (walls, woods), its
 monsters (source names, junk loot by model)/chests, free waypoints, all its vendors at their spots with their stock (random-quality gear merchants),
 Scroll of Returning (back to St. Revere), food, M world map.
-Stats: all source stats bought with experience (C, three pages). Equipment: the source's 11 slots (weapon, helm, chest,
-feet, necklace, belt, legs, hands, two rings, shield), up to 4 sockets by quality. Items: source gear by level and material, dropped
+Stats: all source stats bought with experience (C: GENERAL / COMBAT / SKILLS tabs with the worn gear on both sides). Equipment: the source's 11 slots (weapon, helm, chest,
+feet, necklace, belt, legs, hands, two rings, shield), up to 4 sockets by quality, class gear (bows ranger, staves mage,
+plate warrior, robes mage). Items: source gear by level and material, dropped
 finished by monsters/chests and sold by the merchants; 7145 affixes; potions/serums; the source's gems (5 kinds, Rough →
 plain → Refined); loot window with sparkles.
 Chests: crates (gold), locked chests (Lockpicking 2 × level). Spells: Paladin/Ranger/Mage spells to level 20,

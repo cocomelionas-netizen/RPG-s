@@ -328,12 +328,24 @@ namespace RPG.UI
             return string.Join("   ", parts);
         }
 
-        /// <summary>The name of the class an item is limited to (null when anyone may use it).</summary>
+        /// <summary>The names of the classes an item is limited to, "Warrior" or "Warrior/Ranger" (null when anyone may use it).</summary>
         public static string ClassName(ItemDefinition item, CharacterProgress progress)
         {
-            if (item == null || item.requiredClass < 0) return null;
-            CharacterClassDefinition definition = progress != null && progress.Catalog != null ? progress.Catalog.Get(item.requiredClass) : null;
-            return definition != null ? definition.displayName : "Class";
+            if (item == null || (item.requiredClass < 0 && item.classMask == 0)) return null;
+            ClassCatalog catalog = progress != null ? progress.Catalog : null;
+            if (item.requiredClass >= 0)
+            {
+                CharacterClassDefinition definition = catalog != null ? catalog.Get(item.requiredClass) : null;
+                return definition != null ? definition.displayName : "Class";
+            }
+            var names = new List<string>();
+            for (int i = 0; i < 31; i++)
+            {
+                if ((item.classMask & (1 << i)) == 0) continue;
+                CharacterClassDefinition definition = catalog != null ? catalog.Get(i) : null;
+                names.Add(definition != null ? definition.displayName : $"Class {i + 1}");
+            }
+            return string.Join("/", names);
         }
     }
 }

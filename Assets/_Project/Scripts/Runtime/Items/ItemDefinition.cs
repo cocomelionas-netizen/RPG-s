@@ -99,6 +99,8 @@ namespace RPG.Items
         [Min(0)] public int sellValue;
         [Tooltip("Index of the class (in the class catalog) that may equip it; -1 for every class.")]
         public int requiredClass = -1;
+        [Tooltip("Classes that may wear it, one bit per class index (the source game's class armor); 0: every class.")]
+        public int classMask;
         [Tooltip("The item's level: monsters drop gear around their own level, and a player needs this level to wear (or drink) it.")]
         [Range(1, 25)] public int itemLevel = 1;
         [Tooltip("How often it drops among the gear of its level, like the source game's material chance; 0: never drops by level (only from loot tables and vendors).")]
@@ -205,7 +207,8 @@ namespace RPG.Items
             return affix != null && affix.quality > rarity ? affix.quality : rarity;
         }
 
-        public bool CanBeUsedByClass(int classIndex) => requiredClass < 0 || requiredClass == classIndex;
+        public bool CanBeUsedByClass(int classIndex) =>
+            requiredClass >= 0 ? requiredClass == classIndex : classMask == 0 || (classIndex >= 0 && (classMask & (1 << classIndex)) != 0);
 
         /// <summary>Whether a player of <paramref name="playerLevel"/> may wear it (only gear has a level requirement).</summary>
         public bool CanBeWornAtLevel(int playerLevel) => !IsEquippable || playerLevel >= itemLevel;

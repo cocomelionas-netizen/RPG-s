@@ -869,10 +869,10 @@ namespace RPG.EditorTools
             {
                 potion,
                 // Dropped by monsters; any class can use them.
-                CreateItem("RustySword", "Rusty Sword", ItemSlot.Weapon, ItemRarity.Common, 2, 0, 0, metal * 0.8f, 8, itemLevel: 1),
-                CreateItem("IronSword", "Iron Sword", ItemSlot.Weapon, ItemRarity.Uncommon, 4, 0, 0, metal, 40, itemLevel: 3),
-                CreateItem("GoblinCleaver", "Goblin Cleaver", ItemSlot.Weapon, ItemRarity.Rare, 7, 10, 0, new Color(0.5f, 0.6f, 0.4f), 160, itemLevel: 5),
-                CreateItem("OrcishGreataxe", "Orcish Greataxe", ItemSlot.Weapon, ItemRarity.Epic, 12, 20, 0, orcish, 500, itemLevel: 8),
+                CreateItem("RustySword", "Rusty Sword", ItemSlot.Weapon, ItemRarity.Common, 2, 0, 0, metal * 0.8f, 8, WarriorClass, itemLevel: 1),
+                CreateItem("IronSword", "Iron Sword", ItemSlot.Weapon, ItemRarity.Uncommon, 4, 0, 0, metal, 40, WarriorClass, itemLevel: 3),
+                CreateItem("GoblinCleaver", "Goblin Cleaver", ItemSlot.Weapon, ItemRarity.Rare, 7, 10, 0, new Color(0.5f, 0.6f, 0.4f), 160, WarriorClass, itemLevel: 5),
+                CreateItem("OrcishGreataxe", "Orcish Greataxe", ItemSlot.Weapon, ItemRarity.Epic, 12, 20, 0, orcish, 500, WarriorClass, itemLevel: 8),
                 CreateItem("LeatherCap", "Leather Cap", ItemSlot.Head, ItemRarity.Common, 0, 0, 4, leather, 6, itemLevel: 1),
                 CreateItem("IronHelm", "Iron Helm", ItemSlot.Head, ItemRarity.Uncommon, 0, 5, 8, metal, 40, itemLevel: 3),
                 CreateItem("OrcSkullHelm", "Orc Skull Helm", ItemSlot.Head, ItemRarity.Rare, 0, 15, 12, new Color(0.85f, 0.82f, 0.7f), 150, itemLevel: 6),
@@ -1113,6 +1113,7 @@ namespace RPG.EditorTools
                 ItemDefinition piece = Piece($"{GearData.ArmorMaterials[type]} {baseName}", slot, level, chance, 0,
                     Mathf.Max(1, Mathf.RoundToInt(armor * share)), Mathf.RoundToInt(mana * share), ArmorColor(type), sell, -1, into);
                 GearArmorKinds[piece] = GearData.KindOf(type);
+                piece.classMask = ArmorClasses(GearData.KindOf(type));
             }
         }
 
@@ -1141,6 +1142,7 @@ namespace RPG.EditorTools
                     piece.manaBonus = Mathf.RoundToInt(mana * share);
                     piece.dropWeight = chance / 100f;
                     GearArmorKinds[piece] = GearData.KindOf(type);
+                    piece.classMask = ArmorClasses(GearData.KindOf(type));
                     gear.Add(piece);
                 }
             }
@@ -1216,6 +1218,24 @@ namespace RPG.EditorTools
             int itemLevel = Mathf.Clamp(level, 1, 25);
             return kinds.Where(kind => SourceJunk.ContainsKey((kind, itemLevel)))
                 .Select(kind => new LootEntry(SourceJunk[(kind, itemLevel)], JunkChance / kinds.Length)).ToArray();
+        }
+
+        /// <summary>
+        /// Who may wear an armor kind, from the source game's class armor (player_desirable_armor): the paladin (our warrior)
+        /// leather, chain and plate; the ranger leather and chain; the mage cloth and robes.
+        /// </summary>
+        private static int ArmorClasses(GearData.ArmorKind kind)
+        {
+            const int warrior = 1 << WarriorClass, ranger = 1 << RangerClass, mage = 1 << MageClass;
+            switch (kind)
+            {
+                case GearData.ArmorKind.Leather:
+                case GearData.ArmorKind.Chain: return warrior | ranger;
+                case GearData.ArmorKind.Plate: return warrior;
+                case GearData.ArmorKind.Robe:
+                case GearData.ArmorKind.Cloth: return mage;
+                default: return 0;
+            }
         }
 
         /// <summary>The source game's base name and sell price of a plain piece (GearSourceData), or the fallbacks.</summary>
@@ -1343,6 +1363,7 @@ namespace RPG.EditorTools
             item.castSeconds = 0f;
             item.useCooldown = 0f;
             item.alwaysAffix = false;
+            item.classMask = 0;
             item.sellValue = 0;
             EditorUtility.SetDirty(item);
             return item;

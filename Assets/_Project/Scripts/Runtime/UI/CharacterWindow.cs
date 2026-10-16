@@ -10,19 +10,20 @@ using UnityEngine.UI;
 namespace RPG.UI
 {
     /// <summary>
-    /// The local player's character sheet (C, or the Character button), laid out like the source game's: three pages
-    /// (attributes, combat ratings, weapon skills) of "Label: value" rows, a small purple + to spend a point on every
-    /// stat, and a tooltip for every row (what the stat does; on a + what a point costs and how many are invested).
+    /// The local player's character sheet (C, or the Character button), laid out like the source game's: the GENERAL,
+    /// COMBAT and SKILLS tabs; the worn gear down both sides (click to take off, drag gear from the bag to put it on), the
+    /// name, level, progression and experience between them; "Label: value" rows of the tab's stats, a small purple + on
+    /// every stat while SPEND EXP is on, and a tooltip for every row and item.
     /// Builds its own UI; place it on a RectTransform that fills the HUD canvas.
     /// </summary>
     [RequireComponent(typeof(RectTransform))]
     public class CharacterWindow : MonoBehaviour
     {
-        private const float Width = 330f;
+        private const float Width = 640f;
         private const float RowHeight = 24f;
-        private const float LabelX = 22f;
-        private const float ValueX = 170f;
-        private const float PlusX = 262f;
+        private const float LabelX = 340f;
+        private const float ValueX = 470f;
+        private const float PlusX = 604f;
 
         // Colours taken from the source game's character panel.
         private static readonly Color PanelColor = new Color32(0x12, 0x13, 0x06, 0xF2);
@@ -35,6 +36,7 @@ namespace RPG.UI
         private static readonly Color PlusBorder = new Color32(0x2F, 0x04, 0x47, 0xFF);
         private static readonly Color TooltipColor = new Color32(0x0D, 0x15, 0x1A, 0xF5);
         private static readonly Color TooltipBorder = new Color32(0x2B, 0x3A, 0x40, 0xFF);
+        private static readonly Color EmptySlotColor = new Color32(0x1E, 0x1C, 0x14, 0xF2);
         private const string TooltipHeaderHex = "d3c370";
         // The exact colour the source game's client draws the "5xp" price in (181, 0, 175).
         private const string CostHex = "b500af";
@@ -55,7 +57,6 @@ namespace RPG.UI
         private GameObject toggleButton;
         private Text title;
         private Text points;
-        private Text pageText;
         private readonly List<List<Row>> pages = new List<List<Row>>();
         private readonly List<GameObject> pageRoots = new List<GameObject>();
         private int page;
@@ -149,7 +150,24 @@ namespace RPG.UI
             pages.Add(skills);
         }
 
-        private static readonly string[] PageNames = { "Attributes", "Combat", "Weapon Skills" };
+        private static readonly string[] PageNames = { "GENERAL", "COMBAT", "SKILLS" };
+
+        // The source game's paperdoll: equipment indices (Inventory.SlotAt) down the left and the right of the sheet.
+        private static readonly int[] LeftSlots = { 1, 4, 2, 7, 10, 0 };
+        private static readonly int[] RightSlots = { 8, 9, 5, 6, 3 };
+        private static readonly string[] SlotNames = { "Weapon", "Helm", "Chest", "Feet", "Necklace", "Belt", "Legs", "Hands", "Ring", "Ring", "Offhand" };
+        private const float SlotSize = 50f;
+        private const float SlotGap = 8f;
+        private const float PaperdollWidth = 320f;
+
+        private readonly List<Button> tabs = new List<Button>();
+        private readonly ItemSlotView[] slotViews = new ItemSlotView[Inventory.EquipmentSlots];
+        private readonly List<GameObject> plusButtons = new List<GameObject>();
+        private Text nameText;
+        private Text levelText;
+        private Text progressionText;
+        private Text experienceText;
+        private bool spending;
 
         private void Awake()
         {
@@ -165,23 +183,35 @@ namespace RPG.UI
             window = panel.gameObject;
             panel.gameObject.AddComponent<Outline>().effectColor = BorderColor;
             RectTransform rect = panel.rectTransform;
-            rect.anchorMin = rect.anchorMax = rect.pivot = new Vector2(0.5f, 0.5f);
-            rect.anchoredPosition = new Vector2(0f, 60f);
+            rect.anchorMin = rect.anchorMax = rect.pivot = new Vector2(0f, 0.5f);
+            rect.anchoredPosition = new Vector2(20f, 40f);
 
-            title = AddText(rect, "", 19, TextAnchor.UpperLeft, new Vector2(LabelX, -12f), new Vector2(Width - 40f, 48f));
+            title = AddText(rect, "CHARACTER", 20, TextAnchor.UpperCenter, new Vector2(0f, -10f), new Vector2(Width, 28f));
             title.color = TitleColor;
             Button close = UIFactory.CreateButton("Close", rect, new Color(0.35f, 0.12f, 0.1f, 0.95f), "X", 15);
             UIFactory.Place((RectTransform)close.transform, new Vector2(1f, 1f), new Vector2(-8f, -8f), new Vector2(26f, 26f));
             close.onClick.AddListener(Toggle);
 
+            // The tabs, like the source game's: GENERAL, COMBAT, SKILLS.
+            for (int i = 0; i < PageNames.Length; i++)
+            {
+                int index = i;
+                Button tab = UIFactory.CreateButton(PageNames[i], rect, Color.clear, PageNames[i], 14);
+                UIFactory.Place((RectTransform)tab.transform, new Vector2(0f, 1f), new Vector2(40f + i * 100f, -44f), new Vector2(96f, 26f));
+                tab.onClick.AddListener(() => ShowPage(index));
+                tabs.Add(tab);
+            }
+
+            BuildPaperdoll(rect);
+
             BuildPages();
-            float lowest = 0f;
+            float lowest = -86f - 6f * (SlotSize + SlotGap);
             foreach (List<Row> rows in pages)
             {
                 RectTransform root = UIFactory.CreateRect("Page", rect);
                 UIFactory.Stretch(root);
                 pageRoots.Add(root.gameObject);
-                float y = -66f;
+                float y = -86f;
                 foreach (Row row in rows)
                 {
                     if (row == null)
@@ -195,30 +225,138 @@ namespace RPG.UI
                 lowest = Mathf.Min(lowest, y);
             }
 
-            float bottom = lowest - 8f;
-            Button previous = UIFactory.CreateButton("Previous", rect, PlusColor, "<", 15);
-            UIFactory.Place((RectTransform)previous.transform, new Vector2(0f, 1f), new Vector2(LabelX, bottom), new Vector2(26f, 22f));
-            previous.onClick.AddListener(() => ShowPage(page - 1));
-            Button next = UIFactory.CreateButton("Next", rect, PlusColor, ">", 15);
-            UIFactory.Place((RectTransform)next.transform, new Vector2(0f, 1f), new Vector2(Width - LabelX - 26f, bottom), new Vector2(26f, 22f));
-            next.onClick.AddListener(() => ShowPage(page + 1));
-            pageText = AddText(rect, "", 15, TextAnchor.MiddleCenter, new Vector2(LabelX + 30f, bottom), new Vector2(Width - 2f * LabelX - 60f, 22f));
-            pageText.color = LabelColor;
-
-            points = AddText(rect, "", 15, TextAnchor.UpperLeft, new Vector2(LabelX, bottom - 30f), new Vector2(Width - 40f, 22f));
+            float bottom = lowest - 12f;
+            Button spend = UIFactory.CreateButton("Spend Exp", rect, new Color32(0x4A, 0x1E, 0x14, 0xF2), "SPEND EXP", 14);
+            UIFactory.Place((RectTransform)spend.transform, new Vector2(0f, 1f), new Vector2(14f, bottom), new Vector2(120f, 28f));
+            spend.gameObject.AddComponent<Outline>().effectColor = BorderColor;
+            spend.onClick.AddListener(() => SetSpending(!spending));
+            points = AddText(rect, "", 15, TextAnchor.MiddleLeft, new Vector2(146f, bottom), new Vector2(Width - 160f, 28f));
             points.color = TitleColor;
-            rect.sizeDelta = new Vector2(Width, -bottom + 30f + 34f);
+            rect.sizeDelta = new Vector2(Width, -bottom + 28f + 14f);
 
             BuildTooltip();
             ShowPage(0);
+            SetSpending(false);
             window.SetActive(false);
+        }
+
+        /// <summary>The worn gear down both sides, and between them the name, level and experience, like the source game's.</summary>
+        private void BuildPaperdoll(RectTransform rect)
+        {
+            Image divider = UIFactory.CreateImage("Divider", rect, BorderColor);
+            UIFactory.Place(divider.rectTransform, new Vector2(0f, 1f), new Vector2(PaperdollWidth, -80f), new Vector2(2f, 6f * (SlotSize + SlotGap)));
+            for (int column = 0; column < 2; column++)
+            {
+                int[] slots = column == 0 ? LeftSlots : RightSlots;
+                float x = column == 0 ? 18f : PaperdollWidth - 18f - SlotSize;
+                for (int i = 0; i < slots.Length; i++)
+                    slotViews[slots[i]] = CreateEquipmentSlot(rect, slots[i], new Vector2(x, -86f - i * (SlotSize + SlotGap)));
+            }
+
+            float center = 18f + SlotSize + 8f;
+            float centerWidth = PaperdollWidth - 2f * center;
+            nameText = AddText(rect, "", 17, TextAnchor.UpperCenter, new Vector2(center, -90f), new Vector2(centerWidth, 24f));
+            nameText.color = ValueColor;
+            levelText = AddText(rect, "", 12, TextAnchor.UpperCenter, new Vector2(center, -114f), new Vector2(centerWidth, 34f));
+            levelText.color = LabelColor;
+            Text progressionLabel = AddText(rect, "PROGRESSION", 14, TextAnchor.UpperCenter, new Vector2(center, -170f), new Vector2(centerWidth, 20f));
+            progressionLabel.color = TitleColor;
+            progressionText = AddText(rect, "", 14, TextAnchor.UpperCenter, new Vector2(center, -190f), new Vector2(centerWidth, 20f));
+            progressionText.color = ValueColor;
+            Text experienceLabel = AddText(rect, "EXPERIENCE", 14, TextAnchor.UpperCenter, new Vector2(center, -224f), new Vector2(centerWidth, 20f));
+            experienceLabel.color = TitleColor;
+            experienceText = AddText(rect, "", 14, TextAnchor.UpperCenter, new Vector2(center, -244f), new Vector2(centerWidth, 20f));
+            experienceText.color = ValueColor;
+        }
+
+        private ItemSlotView CreateEquipmentSlot(RectTransform parent, int equipIndex, Vector2 topLeft)
+        {
+            Button button = UIFactory.CreateButton(SlotNames[equipIndex], parent, EmptySlotColor, null, 0);
+            var rect = (RectTransform)button.transform;
+            UIFactory.Place(rect, new Vector2(0f, 1f), topLeft, new Vector2(SlotSize, SlotSize));
+            ItemSlotView view = button.gameObject.AddComponent<ItemSlotView>();
+            view.Background = (Image)button.targetGraphic;
+            view.Border = button.gameObject.AddComponent<Outline>();
+            view.Border.effectDistance = new Vector2(2f, -2f);
+            view.Label = UIFactory.CreateText("Name", rect, 10, TextAnchor.MiddleCenter);
+            UIFactory.Stretch(view.Label.rectTransform);
+            view.Label.rectTransform.offsetMin = new Vector2(2f, 2f);
+            view.Label.rectTransform.offsetMax = new Vector2(-2f, -2f);
+            button.onClick.AddListener(() => OnSlotClicked(equipIndex));
+            view.PointerEntered += _ => ShowTooltip(() => SlotTooltip(equipIndex));
+            view.PointerExited += _ => HideTooltip();
+
+            // Gear dragged from the bag onto its slot is put on.
+            var drop = button.gameObject.AddComponent<DropTarget>();
+            drop.Accepts = payload => payload.Kind == DragKind.Item && payload.BagIndex >= 0;
+            drop.Dropped = payload =>
+            {
+                if (inventory != null) inventory.RequestEquip(payload.BagIndex);
+            };
+            return view;
+        }
+
+        private void OnSlotClicked(int equipIndex)
+        {
+            if (inventory == null) return;
+            // A gem picked in the bag goes into the clicked worn item; otherwise the item comes off.
+            int gem = InventoryWindow.PendingGem;
+            if (gem >= 0)
+            {
+                inventory.RequestSocketGem(gem, true, equipIndex);
+                InventoryWindow.ClearPendingGem();
+                return;
+            }
+            inventory.RequestUnequipAt(equipIndex);
+        }
+
+        private string SlotTooltip(int equipIndex)
+        {
+            if (inventory == null) return SlotNames[equipIndex];
+            ItemStack stack = inventory.GetEquippedAt(equipIndex);
+            ItemDefinition item = inventory.Definition(stack);
+            if (item == null) return $"<color=#{TooltipHeaderHex}>{SlotNames[equipIndex]}</color>\nEmpty. Drag gear here from the bag (I).";
+            string text = inventory.Describe(stack, VendorWindow.ClassName(item, progress));
+            return text.Replace("Click to equip", "Click to take off");
+        }
+
+        private void SetSpending(bool on)
+        {
+            spending = on;
+            foreach (GameObject plus in plusButtons) plus.SetActive(on);
+        }
+
+        private void ShowEquipment()
+        {
+            for (int i = 0; i < slotViews.Length; i++)
+            {
+                ItemSlotView view = slotViews[i];
+                if (view == null) continue;
+                ItemStack stack = inventory != null ? inventory.GetEquippedAt(i) : ItemStack.Empty;
+                ItemDefinition item = inventory != null ? inventory.Definition(stack) : null;
+                if (item == null)
+                {
+                    view.Background.color = EmptySlotColor;
+                    view.Border.effectColor = new Color(0f, 0f, 0f, 0.5f);
+                    view.Label.text = $"<color=#{ColorUtility.ToHtmlStringRGB(LabelColor)}>{SlotNames[i]}</color>";
+                    continue;
+                }
+                Color rarity = ItemDefinition.RarityColor(inventory.Quality(stack));
+                Color background = item.iconColor * 0.55f;
+                background.a = 0.95f;
+                view.Background.color = background;
+                view.Border.effectColor = rarity;
+                view.Label.text = inventory.DisplayName(stack);
+                view.Label.color = rarity;
+            }
         }
 
         private void ShowPage(int index)
         {
             page = (index % pages.Count + pages.Count) % pages.Count;
             for (int i = 0; i < pageRoots.Count; i++) pageRoots[i].SetActive(i == page);
-            pageText.text = $"{PageNames[page]}  ({page + 1}/{pages.Count})";
+            for (int i = 0; i < tabs.Count; i++)
+                tabs[i].GetComponentInChildren<Text>().color = i == page ? new Color32(0xC0, 0x3A, 0x2A, 0xFF) : LabelColor;
             HideTooltip();
         }
 
@@ -246,6 +384,7 @@ namespace RPG.UI
             plus.gameObject.AddComponent<Outline>().effectColor = PlusBorder;
             plus.GetComponentInChildren<Text>().color = new Color32(0xE6, 0xD6, 0xF2, 0xFF);
             plus.onClick.AddListener(() => Spend(attribute));
+            plusButtons.Add(plus.gameObject);
 
             HoverArea hover = plus.gameObject.AddComponent<HoverArea>();
             hover.Entered += _ => ShowTooltip(() => PointTooltip(attribute));
@@ -332,14 +471,17 @@ namespace RPG.UI
             mana = progress.GetComponent<Mana>();
             attack = progress.GetComponent<AutoAttack>();
             inventory = progress.GetComponent<Inventory>();
-            title.text = $"{health.DisplayName}\n<size=15><color=#{ColorUtility.ToHtmlStringRGB(LabelColor)}>Level {progress.Level} {progress.ClassName}, " +
-                         $"{LevelCurve.RankName(progress.Level)}</color></size>";
+            nameText.text = health.DisplayName.ToUpperInvariant();
+            levelText.text = $"Level {progress.Level} {progress.ClassName} ({LevelCurve.RankName(progress.Level)})";
+            progressionText.text = progress.ExperienceToNext > 0 ? $"{progress.Experience} / {progress.ExperienceToNext}" : "Max level";
+            experienceText.text = progress.ExperienceToSpend.ToString();
+            ShowEquipment();
 
             total = progress.TotalAttributes;
             fromItems = inventory != null ? inventory.Attributes : default;
             foreach (Row row in pages[page])
                 if (row != null) row.ValueText.text = row.Value();
-            points.text = $"Experience to spend: <color=#{CostHex}>{progress.ExperienceToSpend}xp</color>";
+            points.text = spending ? $"Click + to raise a stat. Experience to spend: <color=#{CostHex}>{progress.ExperienceToSpend}xp</color>" : "";
 
             UpdateTooltip();
         }

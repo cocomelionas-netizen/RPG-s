@@ -23,8 +23,6 @@ namespace RPG.UI
 
         private static readonly Color PanelColor = new Color(0.07f, 0.06f, 0.05f, 0.94f);
         private static readonly Color EmptySlot = new Color(0.16f, 0.14f, 0.12f, 0.95f);
-        /// <summary>Short labels of the equipment slots, in equipment index order (<see cref="Inventory.SlotAt"/>).</summary>
-        private static readonly string[] EquipmentLabels = { "Weapon", "Helm", "Chest", "Feet", "Neck", "Belt", "Legs", "Hands", "Ring", "Ring", "Offhand" };
 
         private GameObject window;
         private GameObject toggleButton;
@@ -37,6 +35,15 @@ namespace RPG.UI
         private Inventory inventory;
         // Bag slot of the gem waiting for the item to go into (-1 when none).
         private int pendingGem = -1;
+        private static InventoryWindow instance;
+
+        /// <summary>The bag slot of a gem waiting for the item to go into (-1 when none); the character sheet uses it for worn gear.</summary>
+        public static int PendingGem => instance != null ? instance.pendingGem : -1;
+
+        public static void ClearPendingGem()
+        {
+            if (instance != null) instance.pendingGem = -1;
+        }
         private static readonly Color PendingGemBorder = new Color(1f, 1f, 0.4f);
 
         private void Awake()
@@ -49,6 +56,7 @@ namespace RPG.UI
             toggle.onClick.AddListener(Toggle);
             toggleButton = toggle.gameObject;
 
+            instance = this;
             BuildWindow();
             BuildTooltip();
             window.SetActive(false);
@@ -82,18 +90,7 @@ namespace RPG.UI
             title.fontStyle = FontStyle.Bold;
             y -= 34f;
 
-            // The source game's equipment slots, a row of the bag's width at a time, each with its name just above it.
-            for (int i = 0; i < Inventory.EquipmentSlots; i++)
-            {
-                int index = i;
-                if (i % columns == 0) y -= 16f + (i > 0 ? slotSize + spacing : 0f);
-                ItemSlotView view = CreateSlot(rect, new Vector2(14f + i % columns * (slotSize + spacing), y));
-                view.Count.text = "";
-                AddText((RectTransform)view.transform, EquipmentLabels[i], 11, TextAnchor.UpperCenter, new Vector2(0f, 15f), new Vector2(slotSize, 14f));
-                view.GetComponent<Button>().onClick.AddListener(() => OnEquipmentClicked(index));
-                equipmentSlots.Add(view);
-            }
-            y -= slotSize + 10f;
+            // Worn gear is on the character sheet (C), as in the source game.
 
             statsText = AddText(rect, "", 14, TextAnchor.UpperLeft, new Vector2(14f, y), new Vector2(gridWidth, 20f));
             y -= 28f;
@@ -240,22 +237,10 @@ namespace RPG.UI
             if (item != null && item.isGem)
             {
                 pendingGem = index;
-                MessageLog.Add($"Click the item to set [{item.displayName}] into (Esc to cancel).", ItemDefinition.RarityColor(item.rarity));
+                MessageLog.Add($"Click the item to set [{item.displayName}] into, in the bag or on the character sheet (C) (Esc to cancel).", ItemDefinition.RarityColor(item.rarity));
                 return;
             }
             inventory.RequestActivate(index);
-        }
-
-        private void OnEquipmentClicked(int equipIndex)
-        {
-            if (inventory == null) return;
-            if (pendingGem >= 0)
-            {
-                inventory.RequestSocketGem(pendingGem, true, equipIndex);
-                pendingGem = -1;
-                return;
-            }
-            inventory.RequestUnequipAt(equipIndex);
         }
 
         private void Update()
@@ -291,8 +276,6 @@ namespace RPG.UI
                 Show(bagSlots[i], inventory.GetBagSlot(i));
                 if (i == pendingGem) bagSlots[i].Border.effectColor = PendingGemBorder;
             }
-            for (int i = 0; i < equipmentSlots.Count; i++)
-                Show(equipmentSlots[i], inventory.GetEquippedAt(i));
 
             ShowStats();
             ShowTooltip();
