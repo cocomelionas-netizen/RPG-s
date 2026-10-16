@@ -2,7 +2,8 @@
 
 ## Crafting window (laid out like Throne and Liberty's)
 
-Talk to a class vendor in St. Revere and press **Craft** in its window. The crafting window opens:
+Talk to a class trainer in St. Revere (Halfrid – warrior, Kelda – ranger, Gyldan – mage) and press **Craft** in its window.
+(This moves to the source game's transmuter, Reginald, next.) The crafting window opens:
 
 | Part | What it does |
 |---|---|

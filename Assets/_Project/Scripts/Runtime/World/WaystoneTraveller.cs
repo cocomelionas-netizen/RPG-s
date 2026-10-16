@@ -16,7 +16,8 @@ namespace RPG.World
     {
         [Tooltip("Walking this close to a waystone discovers it.")]
         [SerializeField, Min(0.5f)] private float discoverRadius = 3f;
-        [SerializeField, Min(0)] private int travelCost = 10;
+        [Tooltip("Gold a trip costs; the source game's waypoints are free.")]
+        [SerializeField, Min(0)] private int travelCost;
 
         private const float CheckInterval = 0.25f;
         private const float RangeTolerance = 0.6f;
@@ -31,6 +32,9 @@ namespace RPG.World
         private float nextCheck;
 
         public int TravelCost => travelCost;
+
+        /// <summary>Sets what a trip costs (0: free, like the source game).</summary>
+        public void SetTravelCost(int cost) => travelCost = Mathf.Max(0, cost);
 
         /// <summary>Discovered waystones as bits by id (for saving).</summary>
         public int DiscoveredMask => discovered.Value;
@@ -60,7 +64,7 @@ namespace RPG.World
             {
                 if (IsDiscovered(stone.Id) || Vector2.Distance(position, stone.transform.position) > discoverRadius) continue;
                 ServerDiscover(stone.Id);
-                AnnounceRpc($"Waystone discovered: {stone.DisplayName}");
+                AnnounceRpc($"You've discovered a new waypoint! {stone.DisplayName}");
             }
         }
 
@@ -90,16 +94,16 @@ namespace RPG.World
             if (from == null || to == null || from == to) return false;
             if (!IsDiscovered(id))
             {
-                AnnounceRpc("You have not discovered that waystone yet");
+                AnnounceRpc("You have not discovered that waypoint yet");
                 return false;
             }
-            if (inventory != null && inventory.Gold < travelCost)
+            if (travelCost > 0 && inventory != null && inventory.Gold < travelCost)
             {
                 AnnounceRpc($"You need {travelCost} gold to travel");
                 return false;
             }
 
-            if (inventory != null) inventory.ServerAddGold(-travelCost, false);
+            if (travelCost > 0 && inventory != null) inventory.ServerAddGold(-travelCost, false);
             if (networkMovement != null) networkMovement.ServerTeleport(to.ArrivalPoint);
             AnnounceRpc($"Travelled to {to.DisplayName}");
             return true;

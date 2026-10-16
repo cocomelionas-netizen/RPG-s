@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using RPG.Items;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -15,6 +16,8 @@ namespace RPG.Vendors
     public class Vendor : MonoBehaviour
     {
         [SerializeField] private VendorDefinition definition;
+        [Tooltip("Where random qualities of gear in stock come from (vendors with Random Quality).")]
+        [SerializeField] private AffixCatalog affixes;
         [Tooltip("How close a player must be to trade (the server allows a little more).")]
         [SerializeField, Min(0.5f)] private float tradeRange = 1.6f;
 
@@ -24,8 +27,10 @@ namespace RPG.Vendors
         public const int Unlimited = -1;
 
         private int[] remaining;
+        private int[] affixIds;
         private float nextRestock;
         private int[] known;
+        private int[] knownAffixes;
 
         public VendorDefinition Definition => definition;
         public float TradeRange => tradeRange;
@@ -39,12 +44,33 @@ namespace RPG.Vendors
         public static Vendor Get(int index) => index >= 0 && index < Vendors.Count ? Vendors[index] : null;
 
         /// <summary>Sets what it sells (used by the scene builder).</summary>
-        public void Configure(VendorDefinition vendorDefinition)
+        public void Configure(VendorDefinition vendorDefinition, AffixCatalog affixCatalog = null)
         {
             definition = vendorDefinition;
+            affixes = affixCatalog;
             remaining = null;
             known = null;
+            knownAffixes = null;
         }
+
+        public AffixCatalog Affixes => affixes;
+
+        /// <summary>Server: the random affix the stock item has now (0 for none).</summary>
+        public int ServerAffix(int index)
+        {
+            EnsureStock();
+            return index >= 0 && index < affixIds.Length ? affixIds[index] : 0;
+        }
+
+        /// <summary>Server: every stock item's affix, for sending to a client.</summary>
+        public int[] ServerAffixSnapshot()
+        {
+            EnsureStock();
+            return (int[])affixIds.Clone();
+        }
+
+        /// <summary>Client: the affix of a stock item as last heard from the server (0 for none or unknown).</summary>
+        public int KnownAffix(int index) => knownAffixes != null && index >= 0 && index < knownAffixes.Length ? knownAffixes[index] : 0;
 
         /// <summary>Server: how many of a stock item are left (<see cref="Unlimited"/> when there is no limit).</summary>
         public int ServerRemaining(int index)
@@ -71,9 +97,10 @@ namespace RPG.Vendors
         }
 
         /// <summary>Client: stores the counts the server sent.</summary>
-        public void SetKnownStock(int[] counts)
+        public void SetKnownStock(int[] counts, int[] affixesInStock = null)
         {
             known = counts;
+            knownAffixes = affixesInStock;
         }
 
         /// <summary>Client: how many are left as last heard from the server (<see cref="Unlimited"/> when unlimited or unknown).</summary>
@@ -88,6 +115,7 @@ namespace RPG.Vendors
             int count = definition != null ? definition.stock.Length : 0;
             if (remaining != null && remaining.Length == count) return;
             remaining = new int[count];
+            affixIds = new int[count];
             Restock();
         }
 
@@ -97,8 +125,19 @@ namespace RPG.Vendors
             {
                 int limit = definition.LimitOf(i);
                 remaining[i] = limit > 0 ? limit : Unlimited;
+                affixIds[i] = RollAffix(definition.stock[i]);
             }
             nextRestock = Time.time + (definition != null ? definition.restockSeconds : 300f);
+        }
+
+        /// <summary>A random quality for a piece in stock (0 for plain or when the vendor has none).</summary>
+        private int RollAffix(ItemDefinition item)
+        {
+            if (definition == null || !definition.randomQuality || affixes == null || item == null || !item.IsEquippable || !item.canHaveAffix)
+                return 0;
+            ItemRarity quality = definition.RollQuality(UnityEngine.Random.value, UnityEngine.Random.value, UnityEngine.Random.value,
+                UnityEngine.Random.value);
+            return quality > item.rarity ? affixes.RollQuality(item, item.itemLevel, quality) : 0;
         }
 
         private void Update()

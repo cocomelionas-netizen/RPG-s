@@ -8,4 +8,10 @@ errors; real tests run in CI.
     bash Tools/CompileCheck/check.sh   # "0 Error(s)" is good
 
 New runtime files outside the folders listed in `sync.sh` must be added there. When code uses a new API of a stubbed
-package, add it to `Stubs.cs`. Editor scripts are not compiled here.
+package, add it to `Stubs.cs`.
+
+`editor-check.sh` also compiles the editor scripts (the scene builder and its generated data, not `BuildMenu.cs`) against
+`UnityEditor.dll` (from the `Unity3D.SDK` NuGet package, fetched by `setup.sh`), with `Editor/EditorStubs.cs` for URP and the
+Input System UI module. Run it after builder changes: CI fails on any editor error.
+
+    bash Tools/CompileCheck/editor-check.sh   # "0 Error(s)" is good

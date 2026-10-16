@@ -19,7 +19,8 @@ Players test the WebGL build at https://cocomelionas-netizen.github.io/RPG-s/ (O
 - New tests go in `Assets/_Project/Tests/PlayMode`.
 - Before pushing, run `bash Tools/CompileCheck/check.sh` (setup once: `bash Tools/CompileCheck/setup.sh`; its
   `CompileCheck.csproj` is committed with `git add -f`, the root `.gitignore` ignores `*.csproj`).
-  Editor scripts are not compiled there — re-read builder changes carefully (CI fails on any editor error).
+  After builder changes also run `bash Tools/CompileCheck/editor-check.sh` (compiles the editor scripts; CI fails on any
+  editor error; its `Editor/EditorCheck.csproj` is committed with `git add -f` too).
 - Do not try to get data from the source game's live server (not allowed). Client data is fine.
 
 ## Source data
@@ -29,17 +30,20 @@ Client files come from `https://github.com/DreadmystRPG/steam` (blobless clone i
 `player_class_stats`, `npc_vendor`, `dungeon_template`, `loot`, `quest_template`...), `bin/*.exe` (strings, stat
 ids/costs), `maps/*.map`. What was taken and how it maps is documented in `Docs/GameData.md`. Generated data lives in
 `Scripts/Editor/*Data.cs` (`StartAreaData`, `GearData`, `AffixData`, `DungeonData`) and `TestSceneBuilder.Spells.cs`;
-generators are in `Tools/GameData/` (`dungeons.py`, `recipes.py`, `.map` reader `map_file.py`).
+generators are in `Tools/GameData/` (`dungeons.py`, `recipes.py`, `world.py` → `WorldMapData`/`VendorData`, `.map` reader
+`map_file.py`).
 
 ## What exists (short)
 
-World: the source game's start region (Pilgrim's Refuge → St. Revere), its monsters/chests/waystones, M world map.
+World: the source game's start region (Pilgrim's Refuge → St. Revere): its ground from `fanadin.map` (walls, woods), its
+monsters/chests, free waypoints, all its vendors at their spots with their stock (random-quality gear merchants),
+Scroll of Returning (back to St. Revere), food, M world map.
 Stats: all source stats bought with experience (C, three pages). Items: source gear by level and material,
 crafted at class vendors from materials monsters drop; 7145 affixes; potions/serums; gems; loot window with sparkles.
 Chests: crates (gold), locked chests (Lockpicking 2 × level). Spells: Paladin/Ranger/Mage spells to level 20,
 Tomes at trainers (Halfrid, Kelda, Gyldan), ranks for experience, spellbook (P), status effects (`StatusEffects`).
 Action bar: 12 slots (keys 1-9, 0, -, =) holding Attack, spells and items, arranged by drag and drop.
-Crafting: a Throne and Liberty style window at the class vendors (categories, list, materials, quantity, fee): gear from
+Crafting: a Throne and Liberty style window at the class trainers (to be replaced by the source's transmuter, Reginald) (categories, list, materials, quantity, fee): gear from
 materials and the source game's recipes (`Tools/GameData/recipes.py` → `RecipeData.cs`).
 Dungeons: all 10 source dungeons reachable from this region, laid out from their `.map` files (Wolf's Den, Trog Cave,
 Lower Garrison, Decrepit Tower, Abandoned Barracks, Kandorys Undercourse, Desecrated Altar, Salmaster's Descent,

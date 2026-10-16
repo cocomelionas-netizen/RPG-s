@@ -25,6 +25,24 @@ namespace RPG.Vendors
         [Tooltip("Other recipes this vendor crafts (potion tiers, orbs, keys).")]
         public Recipe[] recipes = Array.Empty<Recipe>();
 
+        [Header("Random quality (the source game's merchants)")]
+        [Tooltip("Gear in stock gets a random quality at every restock, rolled best first with the chances below.")]
+        public bool randomQuality;
+        [Range(0f, 100f)] public float greenChance = 100f;
+        [Range(0f, 100f)] public float blueChance = 50f;
+        [Range(0f, 100f)] public float goldChance = 5f;
+        [Range(0f, 100f)] public float purpleChance = 1f;
+
+        /// <summary>A quality for a piece in stock: purple, gold, blue or green at their chances (best first), else plain.</summary>
+        public ItemRarity RollQuality(float roll0, float roll1, float roll2, float roll3)
+        {
+            if (roll0 * 100f < purpleChance) return ItemRarity.Legendary;
+            if (roll1 * 100f < goldChance) return ItemRarity.Epic;
+            if (roll2 * 100f < blueChance) return ItemRarity.Rare;
+            if (roll3 * 100f < greenChance) return ItemRarity.Uncommon;
+            return ItemRarity.Common;
+        }
+
         /// <summary>Whether it has a crafting window.</summary>
         public bool Crafts => (crafts != null && crafts.Length > 0) || (recipes != null && recipes.Length > 0);
 

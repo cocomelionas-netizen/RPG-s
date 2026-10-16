@@ -103,28 +103,34 @@ namespace RPG.Tests
         }
 
         [UnityTest]
-        public IEnumerator Travel_CostsGoldAndMovesThePlayer()
-        {
-            traveller.ServerDiscover(far.Id);
-            inventory.ServerAddGold(100, false);
-            int goldBefore = inventory.Gold;
-            yield return null;
-
-            Assert.IsTrue(traveller.ServerTravel(far.Id));
-            yield return null;
-            yield return null;
-
-            Assert.AreEqual(goldBefore - traveller.TravelCost, inventory.Gold);
-            Assert.Less(Vector2.Distance(player.transform.position, far.ArrivalPoint), 0.5f);
-        }
-
-        [UnityTest]
-        public IEnumerator Travel_WithoutEnoughGold_Fails()
+        public IEnumerator Travel_IsFree_AndMovesThePlayer()
         {
             traveller.ServerDiscover(far.Id);
             inventory.ServerSetGold(0);
             yield return null;
+
+            Assert.AreEqual(0, traveller.TravelCost, "The source game's waypoints are free");
+            Assert.IsTrue(traveller.ServerTravel(far.Id));
+            yield return null;
+            yield return null;
+
+            Assert.AreEqual(0, inventory.Gold);
+            Assert.Less(Vector2.Distance(player.transform.position, far.ArrivalPoint), 0.5f);
+        }
+
+        [UnityTest]
+        public IEnumerator Travel_WithACost_TakesGold_OrFailsWithoutIt()
+        {
+            traveller.SetTravelCost(10);
+            traveller.ServerDiscover(far.Id);
+            inventory.ServerSetGold(5);
+            yield return null;
             Assert.IsFalse(traveller.ServerTravel(far.Id));
+
+            inventory.ServerSetGold(100);
+            yield return null;
+            Assert.IsTrue(traveller.ServerTravel(far.Id));
+            Assert.AreEqual(90, inventory.Gold);
         }
 
         [Test]

@@ -52,7 +52,7 @@ Assets/_Project/
   Tests/
     PlayMode/          automatic tests (assembly RPG.Tests.PlayMode)
 .github/workflows/     GitHub Actions: WebGL build and publishing on GitHub Pages
-Tools/                 CompileCheck (C# check without Unity), GameData (generators for the editor data)
+Tools/                 CompileCheck (C# checks without Unity), GameData (generators for the editor data)
 Docs/                  this documentation (Unity does not import it)
 Builds/                builds (ignored by git)
 ```
@@ -92,5 +92,6 @@ The latest version is built and published automatically after every push to `mai
 | + | Chests in the world, elite monsters, ranks and 25 levels | ✅ [Chests.md](Chests.md) |
 | + | World, monster and chest layout, balance, gear, affixes, spells and dungeons from the source game's data | ✅ [GameData.md](GameData.md) |
 | + | Crafting window (Throne and Liberty style), 12-slot action bar with drag and drop | ✅ [Crafting.md](Crafting.md) |
+| + | The source game's ground (walls, woods), all its vendors and their stock, free waypoints, Scroll of Returning, food | ✅ [GameData.md](GameData.md#vendors) |
 
 Multiplayer was planned early (stage 3) on purpose. Combat, monsters and items are written server-authoritative from the start, so they do not need rewriting later.
