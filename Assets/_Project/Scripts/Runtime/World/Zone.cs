@@ -5,8 +5,9 @@ using UnityEngine;
 namespace RPG.World
 {
     /// <summary>
-    /// A named area of a map (a town, a valley). Only for show: the minimap and the "Entering ..." banner use it.
-    /// Where zones overlap the smallest wins; outside every zone the map's own name is used.
+    /// A named area of a map (a town, a valley) around a point. Only for show: the minimap and the "Entering ..." banner use
+    /// it. A <see cref="ZoneMap"/> zone comes first; where zones overlap the smallest wins; outside every zone the map's
+    /// own name is used.
     /// </summary>
     public class Zone : MonoBehaviour
     {
@@ -34,6 +35,12 @@ namespace RPG.World
         /// <summary>The name of the place at a world position ("" when on no map).</summary>
         public static string NameAt(Vector2 position)
         {
+            foreach (ZoneMap zoneMap in ZoneMap.All)
+            {
+                string zoneName = zoneMap.NameAt(position);
+                if (!string.IsNullOrEmpty(zoneName)) return zoneName;
+            }
+
             Zone best = null;
             foreach (Zone zone in Zones)
             {

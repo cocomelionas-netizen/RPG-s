@@ -54,3 +54,44 @@ def read(path):
 
 def walkable(flags, x, y):
     return flags.get((x, y)) == WALKABLE
+
+
+ZONE_BLOCK = 13
+ZONE_COLUMNS = 53
+
+
+def read_zones(path):
+    """The zone (zone_template id) of every 13 x 13 cell block: {(block x, block y): zone}. Blocks not listed have none.
+
+    After the cells: int32 count + count texture names, int32 count + count (int32, int32) ground pairs, then int32 count +
+    count (int32 block index = block y * 53 + block x, int32 zone) pairs.
+    """
+    data = open(path, 'rb').read()
+    pos = 0
+
+    def i32():
+        nonlocal pos
+        value = struct.unpack_from('<i', data, pos)[0]
+        pos += 4
+        return value
+
+    def skip_names():
+        nonlocal pos
+        for _ in range(i32()):
+            pos = data.index(b'\0', pos) + 1
+
+    i32()
+    skip_names()
+    for _ in range(i32()):
+        pos += 5
+        for _layer in range(3):
+            pos += 9 if data[pos] else 1
+    skip_names()
+    pairs = i32()
+    pos += 8 * pairs
+    zones = {}
+    for _ in range(i32()):
+        index, zone = struct.unpack_from('<ii', data, pos)
+        pos += 8
+        zones[(index % ZONE_COLUMNS, index // ZONE_COLUMNS)] = zone
+    return zones

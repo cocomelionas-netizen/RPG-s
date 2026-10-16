@@ -14,6 +14,9 @@ import re
 import sqlite3
 import sys
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import island  # noqa: E402
+
 
 def cs(text):
     return '"' + text.replace('\\', '\\\\').replace('"', '\\"') + '"'
@@ -59,7 +62,7 @@ def main(root):
     spots = re.findall(r'\(new Vector3Int\((\d+), (\d+), 0\), \d+, (?:true|false), [\d.]+f\), // (.+)', source[start:end])
     npc_cells = {}
     for x, y, name in q('select n.position_x, n.position_y, t.name from npc n join npc_template t on t.entry = n.entry where n.map = 1'):
-        npc_cells.setdefault((int(x) + 2, int(y) - 28), []).append(name.strip())
+        npc_cells.setdefault(island.cell_of(x, y), []).append(name.strip())
     spot_names = []
     for cx, cy, name in spots:
         name = name.strip()
