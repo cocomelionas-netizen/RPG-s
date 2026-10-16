@@ -9,22 +9,22 @@ namespace RPG.Items
     {
         public ItemDefinition Item;
         public int AffixId;
-        /// <summary>0 or <see cref="ItemStack.EmptySocket"/>.</summary>
-        public int Socket;
+        /// <summary>How many empty sockets the piece has (0 to <see cref="ItemStack.MaxSockets"/>).</summary>
+        public int Sockets;
         private int count;
 
         /// <summary>How many (at least 1).</summary>
         public int Count => Mathf.Max(1, count);
 
-        public LootItem(ItemDefinition item, int affixId, int socket = 0, int count = 1)
+        public LootItem(ItemDefinition item, int affixId, int sockets = 0, int count = 1)
         {
             Item = item;
             AffixId = affixId;
-            Socket = socket;
+            Sockets = sockets;
             this.count = count;
         }
 
-        public LootItem WithCount(int newCount) => new LootItem(Item, AffixId, Socket, newCount);
+        public LootItem WithCount(int newCount) => new LootItem(Item, AffixId, Sockets, newCount);
     }
 
     /// <summary>
@@ -122,7 +122,7 @@ namespace RPG.Items
         private bool GiveStack(Inventory inventory, int index)
         {
             LootItem item = contents[index];
-            int taken = inventory.ServerAddItem(item.Item, item.Count, true, item.AffixId, item.Socket);
+            int taken = inventory.ServerAddItemWithSockets(item.Item, item.Count, true, item.AffixId, item.Sockets);
             if (taken <= 0) return false;
             if (taken >= item.Count) contents.RemoveAt(index);
             else contents[index] = item.WithCount(item.Count - taken);

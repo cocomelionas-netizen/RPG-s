@@ -193,7 +193,7 @@ namespace RPG.Tests
             for (int level = 1; level <= 6; level++)
             for (int i = 0; i < 40; i++)
             {
-                Assert.IsTrue(LootDrop.PickGear(catalog, null, level, ItemRarity.Legendary, 0f, out LootItem drop));
+                Assert.IsTrue(LootDrop.PickGear(catalog, null, level, ItemRarity.Legendary, out LootItem drop));
                 Assert.LessOrEqual(drop.Item.itemLevel, level + LootDrop.LevelsAbove, $"Level {level} dropped {drop.Item.displayName}.");
                 Assert.GreaterOrEqual(drop.Item.itemLevel, level - LootDrop.LevelsBelow, $"Level {level} dropped {drop.Item.displayName}.");
             }
@@ -205,13 +205,13 @@ namespace RPG.Tests
             var catalog = AssetDatabase.LoadAssetAtPath<ItemCatalog>("Assets/_Project/Data/Items/ItemCatalog.asset");
             for (int i = 0; i < 200; i++)
             {
-                Assert.IsTrue(LootDrop.PickGear(catalog, null, 1, ItemRarity.Legendary, 0f, out LootItem low));
+                Assert.IsTrue(LootDrop.PickGear(catalog, null, 1, ItemRarity.Legendary, out LootItem low));
                 Assert.Greater(low.Item.dropWeight, 0f, $"{low.Item.displayName} is only sold, it should not drop.");
                 StringAssert.DoesNotContain("Mythril", low.Item.displayName, "Mythril starts at level 6.");
                 StringAssert.DoesNotContain("Titanium", low.Item.displayName);
 
-                Assert.IsTrue(LootDrop.PickGear(catalog, null, 25, ItemRarity.Legendary, 0f, out LootItem high));
-                StringAssert.DoesNotContain("Bronze Sword", high.Item.displayName, "Bronze weapons stop at level 5.");
+                Assert.IsTrue(LootDrop.PickGear(catalog, null, 25, ItemRarity.Legendary, out LootItem high));
+                StringAssert.DoesNotContain("Bronze Slicer", high.Item.displayName, "Bronze weapons stop at level 5.");
             }
         }
 
@@ -221,7 +221,7 @@ namespace RPG.Tests
             var catalog = AssetDatabase.LoadAssetAtPath<ItemCatalog>("Assets/_Project/Data/Items/ItemCatalog.asset");
             for (int i = 0; i < 200; i++)
             {
-                Assert.IsTrue(LootDrop.PickGear(catalog, null, 1, ItemRarity.Common, 0f, out LootItem low));
+                Assert.IsTrue(LootDrop.PickGear(catalog, null, 1, ItemRarity.Common, out LootItem low));
                 Assert.IsTrue(low.Item.IsEquippable, $"{low.Item.displayName} is gear, as in the source game.");
                 Assert.LessOrEqual(low.Item.itemLevel, 2);
             }

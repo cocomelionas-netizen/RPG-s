@@ -30,7 +30,8 @@ Client files come from `https://github.com/DreadmystRPG/steam` (blobless clone i
 `player_class_stats`, `npc_vendor`, `dungeon_template`, `loot`, `quest_template`...), `bin/*.exe` (strings, stat
 ids/costs), `maps/*.map`. What was taken and how it maps is documented in `Docs/GameData.md`. Generated data lives in
 `Scripts/Editor/*Data.cs` (`StartAreaData`, `GearData`, `AffixData`, `DungeonData`) and `TestSceneBuilder.Spells.cs`;
-generators are in `Tools/GameData/` (`dungeons.py`, `recipes.py`, `world.py` → `WorldMapData`/`VendorData`, `.map` reader
+generators are in `Tools/GameData/` (`dungeons.py`, `recipes.py`, `world.py` → `WorldMapData`/`VendorData`, `gear.py` →
+`GearSourceData`, `.map` reader
 `map_file.py`).
 
 ## What exists (short)
@@ -38,7 +39,8 @@ generators are in `Tools/GameData/` (`dungeons.py`, `recipes.py`, `world.py` →
 World: the source game's start region (Pilgrim's Refuge → St. Revere): its ground from `fanadin.map` (walls, woods), its
 monsters/chests, free waypoints, all its vendors at their spots with their stock (random-quality gear merchants),
 Scroll of Returning (back to St. Revere), food, M world map.
-Stats: all source stats bought with experience (C, three pages). Items: source gear by level and material, dropped
+Stats: all source stats bought with experience (C, three pages). Equipment: the source's 11 slots (weapon, helm, chest,
+feet, necklace, belt, legs, hands, two rings, shield), up to 4 sockets by quality. Items: source gear by level and material, dropped
 finished by monsters/chests and sold by the merchants; 7145 affixes; potions/serums; the source's gems (5 kinds, Rough →
 plain → Refined); loot window with sparkles.
 Chests: crates (gold), locked chests (Lockpicking 2 × level). Spells: Paladin/Ranger/Mage spells to level 20,

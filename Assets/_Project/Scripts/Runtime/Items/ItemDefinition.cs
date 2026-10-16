@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace RPG.Items
 {
-    /// <summary>Where an item is worn. None: not equippable (potions, materials).</summary>
+    /// <summary>Where an item is worn (the source game's equipment slots). None: not equippable (potions, materials).</summary>
     public enum ItemSlot
     {
         None,
@@ -12,6 +12,16 @@ namespace RPG.Items
         Head,
         Chest,
         Feet,
+        /// <summary>The source game's Necklace.</summary>
+        Neck,
+        /// <summary>The source game's Belt.</summary>
+        Waist,
+        Legs,
+        Hands,
+        /// <summary>Worn on either of the two ring slots.</summary>
+        Ring,
+        /// <summary>The source game's Offhand.</summary>
+        Shield,
     }
 
     /// <summary>What kind of weapon a weapon is: its source-game weapon skill raises its damage.</summary>
@@ -79,6 +89,8 @@ namespace RPG.Items
         public AttributeSet attributes;
         [Tooltip("Random affixes can be rolled on it when it drops (weapons and armor).")]
         public bool canHaveAffix = true;
+        [Tooltip("Always rolls an affix when it drops (the source game's necklaces, belts and rings are worth their stats).")]
+        public bool alwaysAffix;
 
         [Header("Trade and restrictions")]
         [Tooltip("Price at vendors in gold (the source game's: its sell price times its buy cost ratio).")]

@@ -29,7 +29,6 @@ namespace RPG.World
         [SerializeField] private AffixCatalog affixes;
         [Tooltip("The gear a chest's piece is picked from, around the chest's level.")]
         [SerializeField] private ItemCatalog gear;
-        [SerializeField, Range(0f, 1f)] private float socketChance = 0.25f;
         [SerializeField, Min(0.3f)] private float openRange = 1.2f;
 
         [Header("Source-game container")]
@@ -178,7 +177,7 @@ namespace RPG.World
                     : roll < purpleChance + goldChance ? ItemRarity.Epic
                     : roll < purpleChance + goldChance + blueChance ? ItemRarity.Rare
                     : ItemRarity.Uncommon;
-                if (LootDrop.PickGear(gear, affixes, level, quality, socketChance, out LootItem piece)) rolled.Add(piece);
+                if (LootDrop.PickGear(gear, affixes, level, quality, out LootItem piece)) rolled.Add(piece);
             }
             if (potions.Length > 0 && Random.value * 100f < potionChance)
                 rolled.Add(new LootItem(LootDrop.PotionForLevel(potions[Random.Range(0, potions.Length)], level), 0));

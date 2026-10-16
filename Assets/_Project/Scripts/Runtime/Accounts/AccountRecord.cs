@@ -45,15 +45,21 @@ namespace RPG.Accounts
         public int count;
         /// <summary>Random affix (0 for none).</summary>
         public int affix;
-        /// <summary>0: no socket, -1: empty socket, above 0: the gem's item id.</summary>
+        /// <summary>Each socket: 0 none, -1 empty, above 0 the gem's item id (older saves have only the first).</summary>
         public int socket;
+        public int socket2;
+        public int socket3;
+        public int socket4;
 
-        public ItemRecord(int id, int count, int affix, int socket = 0)
+        public ItemRecord(int id, int count, int affix, int socket = 0, int socket2 = 0, int socket3 = 0, int socket4 = 0)
         {
             this.id = id;
             this.count = count;
             this.affix = affix;
             this.socket = socket;
+            this.socket2 = socket2;
+            this.socket3 = socket3;
+            this.socket4 = socket4;
         }
     }
 }

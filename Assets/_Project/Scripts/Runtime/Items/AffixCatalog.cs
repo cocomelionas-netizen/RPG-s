@@ -39,7 +39,7 @@ namespace RPG.Items
         /// <summary>An affix id for an item dropped by a monster of <paramref name="monsterLevel"/> (0 for none).</summary>
         public int Roll(ItemDefinition item, int monsterLevel)
         {
-            if (item == null || !item.IsEquippable || !item.canHaveAffix || Random.value >= affixChance) return 0;
+            if (item == null || !item.IsEquippable || !item.canHaveAffix || (!item.alwaysAffix && Random.value >= affixChance)) return 0;
 
             candidates.Clear();
             float total = 0f;

@@ -88,12 +88,20 @@ the client – we use our own, stepped like its bosses'.
 
 ## Items by level
 
+- **Equipment slots** like the source game's: Weapon, Helm, Chest, Feet, Necklace, Belt, Legs, Hands, two Rings and the
+  Offhand (shield) (`Inventory.EquipmentSlots`; the inventory (I) shows them all).
+- **Gear names and prices** are the source game's plain pieces (`item_template`, generated; `Tools/GameData/gear.py` →
+  `Scripts/Editor/GearSourceData.cs`): Bronze Slicer, Aspen Shortbow, Aspen Stave, Leather Trousers, Bronze Grips,
+  Pendant, Girdle, Ring, Barricade... Legs (80 % of a chest's armor) and hands (50 %) in every armor type; a necklace, belt
+  and ring for every level, always with an affix; the warrior's shield (Barricade) for every level.
+- **Sockets** follow the quality, like the source game's `num_sockets`: plain none, green 0–1, blue 0–2, gold 1–3, purple
+  2–4 (`LootDrop.RollSockets`). Gems go into the first empty socket and all of them count.
 - Every weapon and armor piece has a level (`ItemDefinition.itemLevel`, the source's `required_level`):
   it can only be worn from that level; the description says "Requires level N".
 - **Gear drops finished**, as in the source game: monsters and chests drop pieces **by their level**, the material picked
   the way the source game picks it (`material_chance_*`): from 3 levels below to 1 above, most often its own level
   (`LootDrop.LevelWeight`, `LootDrop.PickGear`). E.g. a level 1 monster – Bronze Sword, Aspen Bow, Leather Cap, Linen
-  Hood; Mythril only from level 6. A piece may have a random affix (green or better) and a socket.
+  Hood; Mythril only from level 6. A piece may have a random affix (green or better) and the sockets of its quality.
 - A piece drops with a 12 % chance per roll (the source game keeps its drop chances on its server). Elites roll twice + 3
   extra rolls, bosses + 6 extra and a guaranteed gold piece (+25 % purple). Chests: see "Chests" below.
 - The gear merchants of St. Revere sell the same pieces with random qualities (see "Vendors"). There is no gear

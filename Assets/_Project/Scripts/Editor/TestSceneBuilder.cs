@@ -930,6 +930,7 @@ namespace RPG.EditorTools
             all.AddRange(CreateTownSupplies());
             (string amethyst, RPG.Progression.Attribute intelligence, Color purple) = GemKinds[4];
             all.AddRange(CreateGemTiers(amethyst, intelligence, purple, $"Rough{amethyst}", $"Refined{amethyst}"));
+            all.AddRange(CreateMoreGear());
             catalog.items = all.ToArray();
             EditorUtility.SetDirty(catalog);
             return catalog;
@@ -1059,7 +1060,7 @@ namespace RPG.EditorTools
             }
 
             ItemDefinition Piece(string displayName, ItemSlot slot, int level, float chance, int damage, int armor, int mana,
-                Color color, float sourceSellPrice, int requiredClass, ItemDefinition material)
+                Color color, float sourceSellPrice, int requiredClass, List<ItemDefinition> into)
             {
                 // The source game's prices: vendors pay its sell price and ask three times that.
                 int sell = Mathf.Max(1, Mathf.RoundToInt(sourceSellPrice));
@@ -1068,41 +1069,115 @@ namespace RPG.EditorTools
                 item.sellValue = sell;
                 item.manaBonus = mana;
                 item.dropWeight = chance / 100f;
-                gear.Add(item);
+                into.Add(item);
                 return item;
             }
 
+            // Weapons: the source game's base names and sell prices (GearSourceData), damage from the price.
             foreach ((int tier, int level, float chance) in GearData.WeaponChances)
             {
-                int sell = GearData.WeaponSellPrice(tier, level);
-                int damage = Mathf.RoundToInt(2f + (sell - 50) * 0.035f);
-                Piece($"{GearData.Metals[tier - 1]} Sword", ItemSlot.Weapon, level, chance, damage, 0, 0, MetalColors[tier - 1], sell,
-                    WarriorClass, ingots[tier - 1]);
-                Piece($"{GearData.Woods[tier - 1]} Bow", ItemSlot.Weapon, level, chance, damage, 0, 0, WoodColors[tier - 1], sell * 1.1f,
-                    RangerClass, logs[tier - 1]);
-                Piece($"{GearData.Woods[tier - 1]} Staff", ItemSlot.Weapon, level, chance, damage, 0, Mathf.RoundToInt(damage * 0.5f),
-                    WoodColors[tier - 1] * 0.9f, sell * 1.1f, MageClass, logs[tier - 1]);
+                foreach ((int weaponType, int equip, int material, string fallback, int classIndex, Color color) in new[]
+                         {
+                             (4, 9, tier, "Sword", WarriorClass, MetalColors[tier - 1]),
+                             (2, 11, 7 + tier, "Bow", RangerClass, WoodColors[tier - 1]),
+                             (5, 9, 7 + tier, "Staff", MageClass, WoodColors[tier - 1] * 0.9f),
+                         })
+                {
+                    (string baseName, float sell) = SourcePiece(equip, weaponType, material, level, fallback, GearData.WeaponSellPrice(tier, level));
+                    int damage = Mathf.RoundToInt(2f + (sell - 50f) * 0.035f);
+                    string materialName = weaponType == 4 ? GearData.Metals[tier - 1] : GearData.Woods[tier - 1];
+                    ItemDefinition weapon = Piece($"{materialName} {baseName}", ItemSlot.Weapon, level, chance, damage, 0,
+                        weaponType == 5 ? Mathf.RoundToInt(damage * 0.5f) : 0, color, sell, classIndex, gear);
+                    weapon.weaponType = weaponType == 4 ? WeaponType.Sword : weaponType == 2 ? WeaponType.Ranged : WeaponType.Staff;
+                }
             }
 
+            // Armor: head, chest and feet first (their places in the catalog are saved with characters), then legs and hands
+            // at the end (CreateMoreGear). Armor grows with the chest's price, shared by slot; the price is each piece's own.
             foreach ((int type, int level, float chance) in GearData.ArmorChances)
+                foreach ((int equip, ItemSlot slot, float share) in new[] { (1, ItemSlot.Head, 0.7f), (3, ItemSlot.Chest, 1f), (6, ItemSlot.Feet, 0.5f) })
+                    ArmorPiece(type, level, chance, equip, slot, share, gear);
+            return gear;
+
+            void ArmorPiece(int type, int level, float chance, int equip, ItemSlot slot, float share, List<ItemDefinition> into)
             {
-                float sell = GearData.ArmorSellPrice(type, level);
-                float power = sell - 50f;
+                float power = SourcePiece(3, 0, type, level, null, GearData.ArmorSellPrice(type, level)).sell - 50f;
                 bool robe = GearData.KindOf(type) == GearData.ArmorKind.Robe;
                 // Robes cost like armor but give mana: little armor, a mana pool that grows with their price.
                 float armor = robe ? 1f + level * 0.15f : 3f + power * 0.06f;
                 float mana = robe ? 4f + power * 0.12f : 0f;
                 (string head, string chest, string feet) = GearData.NamesOf(GearData.KindOf(type));
-                string material = GearData.ArmorMaterials[type];
-                Color color = ArmorColor(type);
-                foreach ((string baseName, ItemSlot slot, float share) in new[] { (head, ItemSlot.Head, 0.7f), (chest, ItemSlot.Chest, 1f), (feet, ItemSlot.Feet, 0.5f) })
+                string fallback = slot == ItemSlot.Head ? head : slot == ItemSlot.Chest ? chest : feet;
+                (string baseName, float sell) = SourcePiece(equip, 0, type, level, fallback, GearData.ArmorSellPrice(type, level));
+                ItemDefinition piece = Piece($"{GearData.ArmorMaterials[type]} {baseName}", slot, level, chance, 0,
+                    Mathf.Max(1, Mathf.RoundToInt(armor * share)), Mathf.RoundToInt(mana * share), ArmorColor(type), sell, -1, into);
+                GearArmorKinds[piece] = GearData.KindOf(type);
+            }
+        }
+
+        /// <summary>
+        /// The source game's other equipment slots, at the end of the catalog: legs and hands of every armor type, a
+        /// necklace, belt and ring for every level (green or better: they always roll an affix), and the warrior's shield
+        /// for every level (armor from its price). Names and prices are the source game's plain pieces.
+        /// </summary>
+        private static List<ItemDefinition> CreateMoreGear()
+        {
+            var gear = new List<ItemDefinition>();
+            foreach ((int type, int level, float chance) in GearData.ArmorChances)
+            {
+                float power = SourcePiece(3, 0, type, level, null, GearData.ArmorSellPrice(type, level)).sell - 50f;
+                bool robe = GearData.KindOf(type) == GearData.ArmorKind.Robe;
+                float armor = robe ? 1f + level * 0.15f : 3f + power * 0.06f;
+                float mana = robe ? 4f + power * 0.12f : 0f;
+                foreach ((int equip, ItemSlot slot, float share) in new[] { (5, ItemSlot.Legs, 0.8f), (7, ItemSlot.Hands, 0.5f) })
                 {
-                    ItemDefinition piece = Piece($"{material} {baseName}", slot, level, chance, 0, Mathf.Max(1, Mathf.RoundToInt(armor * share)),
-                        Mathf.RoundToInt(mana * share), color, sell * (0.6f + 0.4f * share), -1, armorMaterials[type]);
+                    (string baseName, float sell) = SourcePiece(equip, 0, type, level, slot.ToString(), GearData.ArmorSellPrice(type, level));
+                    string name = $"{GearData.ArmorMaterials[type]} {baseName}";
+                    int price = Mathf.Max(1, Mathf.RoundToInt(sell));
+                    ItemDefinition piece = CreateItem(GearFile(name, level), name, slot, ItemRarity.Common, 0, 0,
+                        Mathf.Max(1, Mathf.RoundToInt(armor * share)), ArmorColor(type), price * 3, -1, level);
+                    piece.sellValue = price;
+                    piece.manaBonus = Mathf.RoundToInt(mana * share);
+                    piece.dropWeight = chance / 100f;
                     GearArmorKinds[piece] = GearData.KindOf(type);
+                    gear.Add(piece);
+                }
+            }
+
+            for (int level = 1; level <= 25; level++)
+            {
+                foreach ((int equip, ItemSlot slot, string fallback, Color color) in new[]
+                         {
+                             (2, ItemSlot.Neck, "Pendant", new Color(0.95f, 0.85f, 0.45f)),
+                             (4, ItemSlot.Waist, "Girdle", new Color(0.6f, 0.45f, 0.3f)),
+                             (8, ItemSlot.Ring, "Ring", new Color(0.9f, 0.8f, 0.35f)),
+                             (10, ItemSlot.Shield, "Barricade", new Color(0.55f, 0.45f, 0.35f)),
+                         })
+                {
+                    (string name, float sell) = SourcePiece(equip, 0, 0, level, fallback, 50f + 10f * level);
+                    int price = Mathf.Max(1, Mathf.RoundToInt(sell));
+                    bool shield = slot == ItemSlot.Shield;
+                    ItemDefinition piece = CreateItem(GearFile(name, level), name, slot, ItemRarity.Common, 0, 0,
+                        shield ? Mathf.Max(1, Mathf.RoundToInt(3f + (sell - 50f) * 0.06f)) : 0, color, price * 3,
+                        shield ? WarriorClass : -1, level);
+                    piece.sellValue = price;
+                    // Jewelry is worth its affix: it always has one. About as common as one armor material of the level.
+                    piece.alwaysAffix = !shield;
+                    piece.dropWeight = 0.5f;
+                    if (shield) piece.weaponType = WeaponType.Shield;
+                    gear.Add(piece);
                 }
             }
             return gear;
+        }
+
+        /// <summary>The source game's base name and sell price of a plain piece (GearSourceData), or the fallbacks.</summary>
+        private static (string name, float sell) SourcePiece(int equip, int weaponType, int key, int level, string fallbackName, float fallbackSell)
+        {
+            foreach (var piece in GearSourceData.Pieces)
+                if (piece.equip == equip && piece.weapon == weaponType && piece.key == key && piece.level == level)
+                    return (piece.name, piece.sell);
+            return (fallbackName, fallbackSell);
         }
 
         private static readonly Color LifeColor = new Color(0.85f, 0.15f, 0.2f);
@@ -1220,6 +1295,7 @@ namespace RPG.EditorTools
             item.combineResult = null;
             item.castSeconds = 0f;
             item.useCooldown = 0f;
+            item.alwaysAffix = false;
             item.sellValue = 0;
             EditorUtility.SetDirty(item);
             return item;

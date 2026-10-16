@@ -13,10 +13,11 @@ Reginald (see [Crafting.md](Crafting.md)).
 
 - Values: the source game's 1 / 2 / 3, doubled for our attribute scale. Recipes: 5 Rough → plain; 5 plain + Treasury
   Coins → Refined. Vendors pay the source sell price (62 / 250 / 500).
-- **Sockets:** 25% of the weapons and armor monsters drop have a socket (`ItemStack.Socket`: 0 – none, -1 – empty,
-  >0 – the item id of the gem set in it). The socket is shown in the description ("Socket: empty" / "Socket: Ruby (+4 Strength)").
+- **Sockets:** up to 4, by quality like the source game's: plain none, green 0–1, blue 0–2, gold 1–3, purple 2–4
+  (`ItemStack.Socket` … `Socket4`: 0 – none, -1 – empty, >0 – the item id of the gem set in it). Each socket is shown in the
+  description ("Socket: empty" / "Socket: Ruby (+4 Strength)").
 - **Setting:** click a gem (its frame turns yellow), then an item – worn or in the bag. If it has an empty socket,
-  the gem is set; if not, it says there is no room. Esc cancels. The gem stays for good.
+  the gem goes into its first empty socket; if none is left, it says there is no room. Esc cancels. The gem stays for good.
 - **Calder** ("Gems", St. Revere) sells the plain gems, three of each, as in the source game.
 - **Drops:** Rough – from all outdoor monsters (2–5%) and chests, plain – from orcs, Refined – from bosses; dungeon bosses
   also drop plain and Refined gems (see [GameData.md](GameData.md#dungeons)).
