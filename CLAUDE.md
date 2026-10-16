@@ -29,7 +29,7 @@ Client files come from `https://github.com/DreadmystRPG/steam` (blobless clone i
 `player_class_stats`, `npc_vendor`, `dungeon_template`, `loot`, `quest_template`...), `bin/*.exe` (strings, stat
 ids/costs), `maps/*.map`. What was taken and how it maps is documented in `Docs/GameData.md`. Generated data lives in
 `Scripts/Editor/*Data.cs` (`StartAreaData`, `GearData`, `AffixData`, `DungeonData`) and `TestSceneBuilder.Spells.cs`;
-generators are in `Tools/GameData/` (`dungeons.py`, `.map` reader `map_file.py`).
+generators are in `Tools/GameData/` (`dungeons.py`, `recipes.py`, `.map` reader `map_file.py`).
 
 ## What exists (short)
 
@@ -37,8 +37,10 @@ World: the source game's start region (Pilgrim's Refuge → St. Revere), its mon
 Stats: all source stats bought with experience (C, three pages). Items: source gear by level and material,
 crafted at class vendors from materials monsters drop; 7145 affixes; potions/serums; gems; loot window with sparkles.
 Chests: crates (gold), locked chests (Lockpicking 2 × level). Spells: Paladin/Ranger/Mage spells to level 20,
-Tomes at trainers (Halfrid, Kelda, Gyldan), ranks for experience, spellbook (P), bar keys 1-4 and 7-0, potions 5-6,
-status effects (`StatusEffects`).
+Tomes at trainers (Halfrid, Kelda, Gyldan), ranks for experience, spellbook (P), status effects (`StatusEffects`).
+Action bar: 12 slots (keys 1-9, 0, -, =) holding Attack, spells and items, arranged by drag and drop.
+Crafting: a Throne and Liberty style window at the class vendors (categories, list, materials, quantity, fee): gear from
+materials and the source game's recipes (`Tools/GameData/recipes.py` → `RecipeData.cs`).
 Dungeons: all 10 source dungeons reachable from this region, laid out from their `.map` files (Wolf's Den, Trog Cave,
 Lower Garrison, Decrepit Tower, Abandoned Barracks, Kandorys Undercourse, Desecrated Altar, Salmaster's Descent,
 Telamont's Demiplane and Sanctuary) with their monsters, bosses, containers, entry rules and the key chain.

@@ -91,5 +91,6 @@ The latest version is built and published automatically after every push to `mai
 | + | Gems: sockets, setting, the jeweler and combining | ✅ [Gems.md](Gems.md) |
 | + | Chests in the world, elite monsters, ranks and 25 levels | ✅ [Chests.md](Chests.md) |
 | + | World, monster and chest layout, balance, gear, affixes, spells and dungeons from the source game's data | ✅ [GameData.md](GameData.md) |
+| + | Crafting window (Throne and Liberty style), 12-slot action bar with drag and drop | ✅ [Crafting.md](Crafting.md) |
 
 Multiplayer was planned early (stage 3) on purpose. Combat, monsters and items are written server-authoritative from the start, so they do not need rewriting later.

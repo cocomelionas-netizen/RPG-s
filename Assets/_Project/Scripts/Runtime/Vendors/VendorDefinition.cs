@@ -22,6 +22,11 @@ namespace RPG.Vendors
         public bool combinesPotions;
         [Tooltip("Gear this vendor crafts from materials (each piece's craftMaterial and craftCount).")]
         public ItemDefinition[] crafts = Array.Empty<ItemDefinition>();
+        [Tooltip("Other recipes this vendor crafts (potion tiers, orbs, keys).")]
+        public Recipe[] recipes = Array.Empty<Recipe>();
+
+        /// <summary>Whether it has a crafting window.</summary>
+        public bool Crafts => (crafts != null && crafts.Length > 0) || (recipes != null && recipes.Length > 0);
 
         /// <summary>The most of a stock item the vendor holds (0 for unlimited).</summary>
         public int LimitOf(int index) => index >= 0 && index < stockLimits.Length ? Mathf.Max(0, stockLimits[index]) : 0;

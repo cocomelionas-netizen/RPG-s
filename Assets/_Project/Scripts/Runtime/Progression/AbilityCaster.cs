@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using RPG.Characters;
 using RPG.Combat;
 using RPG.Controls;
+using RPG.Items;
 using RPG.Monsters;
 using RPG.Navigation;
 using RPG.Networking;
@@ -47,8 +48,6 @@ namespace RPG.Progression
     public class AbilityCaster : NetworkBehaviour
     {
         public const float GlobalCooldown = 1f;
-        /// <summary>Key 1 is Attack; spells start at the second key.</summary>
-        public const int FirstAbilityKey = 1;
         private const int MaxSpells = 64;
         private const float ApproachRangeFactor = 0.9f;
         /// <summary>Moving further than this while casting breaks the cast off.</summary>
@@ -129,8 +128,8 @@ namespace RPG.Progression
         {
             if (IsServer && IsSpawned) UpdateCasting();
             if (!IsSpawned || !IsOwner || input == null || !input.enabled) return;
-            for (int key = FirstAbilityKey; key < PlayerInputReader.AbilityKeyCount; key++)
-                if (input.AbilityPressed(key)) TryCast(key - FirstAbilityKey);
+            for (int slot = 0; slot < PlayerInputReader.AbilityKeyCount; slot++)
+                if (input.AbilityPressed(slot)) UseSlot(slot);
 
             if (pendingSlot >= 0) UpdateApproach();
         }
@@ -208,6 +207,27 @@ namespace RPG.Progression
         }
 
         // ---------- Owner ----------
+
+        /// <summary>
+        /// Owner: does what a bar slot holds, as its key or a click on it: Attack attacks the selected target, an item is
+        /// used from the bag, a spell is cast.
+        /// </summary>
+        public void UseSlot(int slot)
+        {
+            if (!IsOwner) return;
+            if (spellbook != null && spellbook.IsAttackSlot(slot))
+            {
+                if (TryGetComponent(out PlayerTargeting targeting)) targeting.AttackSelected();
+                return;
+            }
+            int itemId = spellbook != null ? spellbook.ItemInSlot(slot) : 0;
+            if (itemId > 0)
+            {
+                if (TryGetComponent(out Inventory inventory)) inventory.RequestUseItem(itemId);
+                return;
+            }
+            TryCast(slot);
+        }
 
         /// <summary>Owner: casts the spell in a bar slot on the selected target (when it needs one).</summary>
         public void TryCast(int slot)

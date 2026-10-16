@@ -8,22 +8,18 @@ using UnityEngine.UI;
 namespace RPG.UI
 {
     /// <summary>
-    /// The local player's action bar: Attack (key 1), spells on keys 2, 3, 4, the healing and mana potions (keys 5, 6)
-    /// with how many are left, and more spells on keys 7, 8, 9, 0; each with a cooldown overlay and countdown, a cast
-    /// bar while casting, and a line for messages such as "No enemy target". Clicking a button does the same as its
-    /// key; while a spell is picked in the spellbook, clicking a spell slot puts it there.
-    /// Attack and a spell being walked into range are highlighted.
+    /// The local player's action bar, like the source game's: 12 slots on keys 1 to 9, 0, - and =. Each holds Attack, a
+    /// spell or a usable item (potions, with how many are left), with a cooldown overlay and countdown; a cast bar shows
+    /// while casting, and a line shows messages such as "No enemy target". Clicking a slot does the same as its key.
+    /// Spells are dragged onto it from the spellbook, items from the bag; slots are dragged to move them, and off the bar
+    /// to empty them. (Picking a spell in the spellbook and clicking a slot also puts it there.)
     /// Builds its own UI; place it on an empty RectTransform in the HUD canvas.
     /// </summary>
     [RequireComponent(typeof(RectTransform))]
     public class AbilityBar : MonoBehaviour
     {
-        [Tooltip("Buttons in total: Attack plus this many minus one spells.")]
-        [SerializeField, Min(1)] private int slotCount = PlayerInputReader.AbilityKeyCount;
-        [SerializeField, Min(16f)] private float slotSize = 62f;
-        [SerializeField, Min(0f)] private float spacing = 6f;
-        [Tooltip("Extra space between the abilities and the potions.")]
-        [SerializeField, Min(0f)] private float potionGap = 22f;
+        [SerializeField, Min(16f)] private float slotSize = 58f;
+        [SerializeField, Min(0f)] private float spacing = 5f;
         [SerializeField, Min(0.1f)] private float messageSeconds = 1.6f;
 
         private class Slot
@@ -37,8 +33,8 @@ namespace RPG.UI
         }
 
         private Slot[] slots;
-        private Slot[] potions;
         private Inventory inventory;
+        private Spellbook spellbook;
         private Text message;
         private GameObject castBar;
         private RectTransform castFill;
@@ -50,13 +46,15 @@ namespace RPG.UI
         private static readonly Color AttackColor = new Color(0.55f, 0.18f, 0.12f, 0.92f);
         private static readonly Color ActiveOutline = new Color(1f, 0.85f, 0.3f);
         private static readonly Color IdleOutline = new Color(0f, 0f, 0f, 0.6f);
-        private static readonly Color EmptyPotion = new Color(0.12f, 0.1f, 0.09f, 0.9f);
+        private static readonly Color EmptyColor = new Color(0.08f, 0.07f, 0.06f, 0.6f);
+        private static readonly Color DropColor = new Color(0.25f, 0.18f, 0.35f, 0.9f);
+
+        private int SlotCount => Spellbook.BarSlots;
 
         private void Awake()
         {
-            int potionCount = PlayerInputReader.PotionKeyCount;
-            int buttons = slotCount + potionCount;
-            float width = buttons * slotSize + (buttons - 1) * spacing + potionGap;
+            int count = SlotCount;
+            float width = count * slotSize + (count - 1) * spacing;
 
             // A dark frame behind all buttons.
             Image frame = UIFactory.CreateImage("Frame", transform, new Color(0.06f, 0.05f, 0.04f, 0.88f));
@@ -67,23 +65,9 @@ namespace RPG.UI
             frame.rectTransform.anchoredPosition = new Vector2(0f, -10f);
             frame.gameObject.AddComponent<Outline>().effectColor = new Color(0.45f, 0.34f, 0.18f, 0.95f);
 
-            // Keys in order on the bar: 1 2 3 4, the potions 5 6, then 7 8 9 0.
-            const int beforePotions = 4;
-            slots = new Slot[slotCount];
-            potions = new Slot[potionCount];
-            float x = -width * 0.5f;
-            for (int i = 0; i < slotCount + potionCount; i++)
-            {
-                if (i == beforePotions) x += potionGap * 0.5f;
-                if (i == beforePotions + potionCount) x += potionGap * 0.5f;
-                bool potion = i >= beforePotions && i < beforePotions + potionCount;
-                int index = potion ? slotCount + (i - beforePotions) : i < beforePotions ? i : i - potionCount;
-                string key = potion ? PlayerInputReader.PotionKeys[i - beforePotions] : PlayerInputReader.AbilityKeys[index];
-                Slot slot = CreateSlot(index, key, x);
-                if (potion) potions[i - beforePotions] = slot;
-                else slots[index] = slot;
-                x += slotSize + spacing;
-            }
+            slots = new Slot[count];
+            for (int i = 0; i < count; i++)
+                slots[i] = CreateSlot(i, PlayerInputReader.AbilityKeys[i], -width * 0.5f + i * (slotSize + spacing));
 
             Image castBack = UIFactory.CreateImage("Cast Bar", transform, new Color(0.05f, 0.04f, 0.03f, 0.9f));
             castBack.raycastTarget = false;
@@ -114,7 +98,7 @@ namespace RPG.UI
 
         private Slot CreateSlot(int index, string key, float x)
         {
-            Button button = UIFactory.CreateButton($"Ability {index + 1}", transform, new Color(0.12f, 0.1f, 0.09f, 0.9f), null, 0);
+            Button button = UIFactory.CreateButton($"Slot {index + 1}", transform, EmptyColor, null, 0);
             var rect = (RectTransform)button.transform;
             rect.anchorMin = rect.anchorMax = new Vector2(0.5f, 0f);
             rect.pivot = new Vector2(0f, 0f);
@@ -122,6 +106,17 @@ namespace RPG.UI
             rect.anchoredPosition = new Vector2(x, 0f);
             int slotIndex = index;
             button.onClick.AddListener(() => OnSlotClicked(slotIndex));
+
+            // Dragged to move it to another slot, or off the bar to empty it.
+            var source = button.gameObject.AddComponent<DragSource>();
+            source.Payload = () => SlotPayload(slotIndex);
+            source.Ended = dropped =>
+            {
+                if (!dropped && spellbook != null && spellbook.EntryInSlot(slotIndex) != -1) spellbook.RequestAssign(slotIndex, -1);
+            };
+            var target = button.gameObject.AddComponent<DropTarget>();
+            target.Accepts = payload => payload.Kind != DragKind.Item || IsUsable(payload.Value);
+            target.Dropped = payload => OnDropped(slotIndex, payload);
 
             var slot = new Slot { Root = button.gameObject, Background = (Image)button.targetGraphic };
 
@@ -149,27 +144,52 @@ namespace RPG.UI
             return slot;
         }
 
-        private void OnSlotClicked(int button)
+        private bool IsUsable(int itemId)
         {
-            if (button >= slotCount)
+            ItemDefinition item = inventory != null && inventory.Catalog != null ? inventory.Catalog.Get(itemId) : null;
+            return item != null && item.use != ItemUse.None;
+        }
+
+        private DragPayload? SlotPayload(int slot)
+        {
+            if (spellbook == null || spellbook.EntryInSlot(slot) == -1) return null;
+            return new DragPayload
             {
-                int bagSlot = inventory != null ? inventory.FindUsable(Inventory.PotionKeyUse(button - slotCount)) : -1;
-                if (bagSlot >= 0) inventory.RequestUse(bagSlot);
-            }
-            else if (button == 0)
+                Kind = DragKind.BarSlot,
+                Value = slot,
+                Label = slots[slot].Name.text,
+                Color = slots[slot].Background.color,
+            };
+        }
+
+        private void OnDropped(int slot, DragPayload payload)
+        {
+            if (spellbook == null) return;
+            switch (payload.Kind)
             {
-                if (targeting != null) targeting.AttackSelected();
+                case DragKind.Spell:
+                    spellbook.RequestAssign(slot, payload.Value);
+                    break;
+                case DragKind.Item:
+                    spellbook.RequestAssignItem(slot, payload.Value);
+                    break;
+                case DragKind.BarSlot:
+                    if (payload.Value != slot) spellbook.RequestMove(payload.Value, slot);
+                    break;
             }
-            else if (caster != null && SpellbookWindow.PendingSpell >= 0 && caster.Spellbook != null)
+        }
+
+        private void OnSlotClicked(int slot)
+        {
+            if (caster == null) return;
+            if (SpellbookWindow.PendingSpell >= 0 && spellbook != null)
             {
                 // A spell picked in the spellbook goes into this slot.
-                caster.Spellbook.RequestAssign(button - 1, SpellbookWindow.PendingSpell);
+                spellbook.RequestAssign(slot, SpellbookWindow.PendingSpell);
                 SpellbookWindow.ClearPending();
+                return;
             }
-            else if (caster != null)
-            {
-                caster.TryCast(button - 1);
-            }
+            caster.UseSlot(slot);
         }
 
         private void OnCastFailed(int slot, CastFailure failure)
@@ -192,52 +212,23 @@ namespace RPG.UI
                 if (targeting != null) targeting.AttackFailed -= ShowMessage;
                 caster = local;
                 targeting = caster != null ? caster.GetComponent<PlayerTargeting>() : null;
+                spellbook = caster != null ? caster.GetComponent<Spellbook>() : null;
+                inventory = caster != null ? caster.GetComponent<Inventory>() : null;
                 if (caster != null) caster.CastFailed += OnCastFailed;
                 if (targeting != null) targeting.AttackFailed += ShowMessage;
             }
 
+            bool dropping = DragSource.IsDragging || SpellbookWindow.PendingSpell >= 0;
             for (int i = 0; i < slots.Length; i++)
             {
                 Slot slot = slots[i];
-                if (i == 0)
-                {
-                    slot.Root.SetActive(targeting != null);
-                    if (targeting == null) continue;
-                    slot.Background.color = AttackColor;
-                    slot.Name.text = "Attack";
-                    slot.Cooldown.anchorMax = new Vector2(1f, 0f);
-                    slot.Countdown.text = "";
-                    SetHighlighted(slot, targeting.IsAttacking);
-                    continue;
-                }
-
-                int abilitySlot = i - 1;
-                AbilityDefinition ability = caster != null ? caster.GetAbility(abilitySlot) : null;
-                // Empty slots stay visible (dim) so spells can be put there.
                 slot.Root.SetActive(caster != null);
-                if (ability == null)
-                {
-                    slot.Background.color = SpellbookWindow.PendingSpell >= 0 ? new Color(0.25f, 0.18f, 0.35f, 0.9f) : new Color(0.08f, 0.07f, 0.06f, 0.6f);
-                    slot.Name.text = "";
-                    slot.Countdown.text = "";
-                    slot.Cooldown.anchorMax = new Vector2(1f, 0f);
-                    SetHighlighted(slot, false);
-                    continue;
-                }
+                if (caster == null) continue;
 
-                Color tint = ability.effectColor * 0.45f;
-                tint.a = 0.92f;
-                slot.Background.color = tint;
-                bool enoughMana = caster.HasManaFor(ability);
-                int cost = caster.ManaCost(ability);
-                slot.Name.text = cost > 0
-                    ? $"{ability.displayName}\n<color={(enoughMana ? "#8fb3ff" : "#ff6655")}>{cost} mana</color>"
-                    : ability.displayName;
-                SetHighlighted(slot, caster.PendingSlot == abilitySlot);
-
-                float remaining = caster.CooldownRemaining(abilitySlot);
-                slot.Cooldown.anchorMax = new Vector2(1f, caster.CooldownFraction(abilitySlot));
-                slot.Countdown.text = remaining >= 1f ? Mathf.CeilToInt(remaining).ToString() : "";
+                if (spellbook != null && spellbook.IsAttackSlot(i)) ShowAttack(slot);
+                else if (spellbook != null && spellbook.ItemInSlot(i) > 0) ShowItem(slot, spellbook.ItemInSlot(i));
+                else if (caster.GetAbility(i) != null) ShowSpell(slot, i, caster.GetAbility(i));
+                else ShowEmpty(slot, dropping);
             }
 
             AbilityDefinition casting = caster != null ? caster.CastingAbility : null;
@@ -248,33 +239,66 @@ namespace RPG.UI
                 castText.text = casting.displayName;
             }
 
-            inventory = caster != null ? caster.GetComponent<Inventory>() : null;
-            for (int i = 0; i < potions.Length; i++)
-                UpdatePotion(potions[i], Inventory.PotionKeyUse(i));
-
             messageTimer -= Time.deltaTime;
             Color color = message.color;
             color.a = Mathf.Clamp01(messageTimer / 0.4f);
             message.color = color;
         }
 
-        private void UpdatePotion(Slot slot, ItemUse use)
+        private void ShowAttack(Slot slot)
         {
-            slot.Root.SetActive(inventory != null);
-            if (inventory == null) return;
+            slot.Background.color = AttackColor;
+            slot.Name.text = "Attack";
+            slot.Cooldown.anchorMax = new Vector2(1f, 0f);
+            slot.Countdown.text = "";
+            SetHighlighted(slot, targeting != null && targeting.IsAttacking);
+        }
 
-            int bagSlot = inventory.FindUsable(use);
-            ItemDefinition potion = bagSlot >= 0 ? inventory.Definition(inventory.GetBagSlot(bagSlot)) : null;
-            int count = potion != null ? inventory.CountOf(potion) : 0;
-            Color tint = potion != null ? potion.iconColor * 0.7f : EmptyPotion;
+        private void ShowSpell(Slot slot, int index, AbilityDefinition ability)
+        {
+            Color tint = ability.effectColor * 0.45f;
             tint.a = 0.92f;
             slot.Background.color = tint;
-            string label = use == ItemUse.Heal ? "Health" : "Mana";
-            slot.Name.text = count > 0 ? $"{label}  x{count}" : label;
+            bool enoughMana = caster.HasManaFor(ability);
+            int cost = caster.ManaCost(ability);
+            slot.Name.text = cost > 0
+                ? $"{ability.displayName}\n<color={(enoughMana ? "#8fb3ff" : "#ff6655")}>{cost} mana</color>"
+                : ability.displayName;
+            SetHighlighted(slot, caster.PendingSlot == index);
+
+            float remaining = caster.CooldownRemaining(index);
+            slot.Cooldown.anchorMax = new Vector2(1f, caster.CooldownFraction(index));
+            slot.Countdown.text = remaining >= 1f ? Mathf.CeilToInt(remaining).ToString() : "";
+        }
+
+        private void ShowItem(Slot slot, int itemId)
+        {
+            ItemDefinition item = inventory != null && inventory.Catalog != null ? inventory.Catalog.Get(itemId) : null;
+            if (item == null)
+            {
+                ShowEmpty(slot, false);
+                return;
+            }
+            int count = inventory.CountForBarItem(item);
+            Color tint = count > 0 ? item.iconColor * 0.7f : item.iconColor * 0.3f;
+            tint.a = 0.92f;
+            slot.Background.color = tint;
+            slot.Name.text = $"{item.displayName}\nx{count}";
+            bool potion = item.use == ItemUse.Heal || item.use == ItemUse.RestoreMana;
             // Potions share one cooldown.
-            float remaining = inventory.PotionCooldownRemaining;
-            slot.Cooldown.anchorMax = new Vector2(1f, count > 0 ? inventory.PotionCooldownFraction : 0f);
-            slot.Countdown.text = count > 0 && remaining >= 0.05f ? Mathf.CeilToInt(remaining).ToString() : "";
+            float remaining = potion ? inventory.PotionCooldownRemaining : 0f;
+            slot.Cooldown.anchorMax = new Vector2(1f, potion && count > 0 ? inventory.PotionCooldownFraction : 0f);
+            slot.Countdown.text = potion && count > 0 && remaining >= 0.05f ? Mathf.CeilToInt(remaining).ToString() : "";
+            SetHighlighted(slot, false);
+        }
+
+        private void ShowEmpty(Slot slot, bool dropping)
+        {
+            // Empty slots stay visible (dim) so things can be put there.
+            slot.Background.color = dropping ? DropColor : EmptyColor;
+            slot.Name.text = "";
+            slot.Countdown.text = "";
+            slot.Cooldown.anchorMax = new Vector2(1f, 0f);
             SetHighlighted(slot, false);
         }
 

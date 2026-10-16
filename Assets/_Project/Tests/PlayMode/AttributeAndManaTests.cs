@@ -109,8 +109,8 @@ namespace RPG.Tests
         [UnityTest]
         public IEnumerator Ability_CostsMana_AndFailsWithoutEnough()
         {
-            // Mighty Blow (bar slot 0): the source game's mana, base plus per level.
-            AbilityDefinition mightyBlow = caster.GetAbility(0);
+            // Mighty Blow (bar slot 1, key 2; Attack is on key 1): the source game's mana, base plus per level.
+            AbilityDefinition mightyBlow = caster.GetAbility(1);
             int cost = caster.ManaCost(mightyBlow);
             Assert.Greater(cost, 0);
             Assert.AreEqual(mightyBlow.ManaCostAt(progress.Level), cost);
@@ -119,12 +119,12 @@ namespace RPG.Tests
             yield return null;
             int before = mana.Current;
 
-            Assert.IsTrue(caster.ServerTryCast(0, dummy.GetComponent<Health>(), out CastFailure failure), failure.ToString());
+            Assert.IsTrue(caster.ServerTryCast(1, dummy.GetComponent<Health>(), out CastFailure failure), failure.ToString());
             Assert.AreEqual(before - cost, mana.Current);
             yield return new WaitForSeconds(mightyBlow.cooldown + 0.1f);
 
             Assert.IsTrue(mana.ServerSpend(mana.Current));
-            Assert.IsFalse(caster.ServerTryCast(0, dummy.GetComponent<Health>(), out failure));
+            Assert.IsFalse(caster.ServerTryCast(1, dummy.GetComponent<Health>(), out failure));
             Assert.AreEqual(CastFailure.NoMana, failure);
         }
 

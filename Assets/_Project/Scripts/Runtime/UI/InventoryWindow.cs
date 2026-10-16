@@ -119,12 +119,31 @@ namespace RPG.UI
                 ItemSlotView view = CreateSlot(windowRect, new Vector2(14f + column * (slotSize + spacing), bagGridTop - row * (slotSize + spacing)));
                 int index = i;
                 view.GetComponent<Button>().onClick.AddListener(() => OnBagClicked(index));
+                // Usable items (potions) are dragged onto the action bar.
+                var source = view.gameObject.AddComponent<DragSource>();
+                source.Payload = () => BagPayload(index);
                 bagSlots.Add(view);
             }
 
             int rows = (count + columns - 1) / columns;
             float height = -bagGridTop + rows * (slotSize + spacing) + 14f;
             windowRect.sizeDelta = new Vector2(windowRect.sizeDelta.x, height);
+        }
+
+        private DragPayload? BagPayload(int index)
+        {
+            if (inventory == null) return null;
+            ItemStack stack = inventory.GetBagSlot(index);
+            ItemDefinition item = inventory.Definition(stack);
+            if (item == null) return null;
+            return new DragPayload
+            {
+                Kind = DragKind.Item,
+                Value = stack.ItemId,
+                BagIndex = index,
+                Label = item.displayName,
+                Color = item.iconColor * 0.7f,
+            };
         }
 
         private ItemSlotView CreateSlot(RectTransform parent, Vector2 topLeft)

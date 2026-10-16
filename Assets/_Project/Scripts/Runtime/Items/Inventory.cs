@@ -43,7 +43,6 @@ namespace RPG.Items
         private Health health;
         private Mana mana;
         private CharacterProgress progress;
-        private PlayerInputReader input;
         // Server time when potions can be used again (shared by all potions); replicated so the bar can show it.
         private readonly NetworkVariable<double> potionReadyAt = new NetworkVariable<double>(
             0.0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
@@ -286,21 +285,34 @@ namespace RPG.Items
             return best;
         }
 
-        /// <summary>The potion keys: 5 drinks a healing potion, 6 a mana potion.</summary>
-        public static ItemUse PotionKeyUse(int index) => index == 0 ? ItemUse.Heal : ItemUse.RestoreMana;
-
-        private void Update()
+        /// <summary>
+        /// The bag slot an action bar item uses: that item when the bag has it; for a potion that ran out, the best potion
+        /// of the same kind the player can drink (-1 when there is none).
+        /// </summary>
+        public int BagSlotForBarItem(ItemDefinition item)
         {
-            if (!IsSpawned || !IsOwner) return;
-            if (input == null) input = GetComponent<PlayerInputReader>();
-            if (input == null || !input.enabled) return;
-            for (int i = 0; i < PlayerInputReader.PotionKeyCount; i++)
-            {
-                if (!input.PotionPressed(i)) continue;
-                int slot = FindUsable(PotionKeyUse(i));
-                if (slot >= 0) RequestUse(slot);
-                else MessageLog.Add(i == 0 ? "You have no healing potions." : "You have no mana potions.", MessageLog.WarningColor);
-            }
+            if (item == null) return -1;
+            int id = catalog != null ? catalog.IdOf(item) : 0;
+            for (int i = 0; i < bag.Count; i++)
+                if (!bag[i].IsEmpty && bag[i].ItemId == id) return i;
+            return item.use == ItemUse.Heal || item.use == ItemUse.RestoreMana ? FindUsable(item.use) : -1;
+        }
+
+        /// <summary>How many of an action bar item the bag holds (counting the potions of its kind it would fall back to).</summary>
+        public int CountForBarItem(ItemDefinition item)
+        {
+            int slot = BagSlotForBarItem(item);
+            return slot >= 0 ? CountOf(Definition(bag[slot])) : 0;
+        }
+
+        /// <summary>Owner: uses an item from the action bar (by catalog id).</summary>
+        public void RequestUseItem(int itemId)
+        {
+            ItemDefinition item = catalog != null ? catalog.Get(itemId) : null;
+            if (!IsOwner || item == null) return;
+            int slot = BagSlotForBarItem(item);
+            if (slot >= 0) RequestUse(slot);
+            else MessageLog.Add($"You have no {item.displayName}.", MessageLog.WarningColor);
         }
 
         private void OnListChanged(NetworkListEvent<ItemStack> change)
@@ -457,15 +469,27 @@ namespace RPG.Items
         }
 
         /// <summary>Owner: asks a vendor to craft a piece from its craft list out of materials in the bag.</summary>
-        public void RequestCraft(Vendor vendor, int craftIndex)
+        public void RequestCraft(Vendor vendor, int craftIndex, int quantity = 1)
         {
-            if (IsOwner && vendor != null) CraftRpc(vendor.Index, craftIndex);
+            if (IsOwner && vendor != null) CraftRpc(vendor.Index, craftIndex, quantity);
+        }
+
+        /// <summary>Owner: asks a vendor to make one of its other recipes (potion tiers, orbs, keys) this many times.</summary>
+        public void RequestCraftRecipe(Vendor vendor, int recipeIndex, int quantity = 1)
+        {
+            if (IsOwner && vendor != null) CraftRecipeRpc(vendor.Index, recipeIndex, quantity);
         }
 
         [Rpc(SendTo.Server)]
-        private void CraftRpc(int vendorIndex, int craftIndex, RpcParams rpcParams = default)
+        private void CraftRecipeRpc(int vendorIndex, int recipeIndex, int quantity, RpcParams rpcParams = default)
         {
-            if (rpcParams.Receive.SenderClientId == OwnerClientId) ServerCraft(Vendor.Get(vendorIndex), craftIndex);
+            if (rpcParams.Receive.SenderClientId == OwnerClientId) ServerCraftRecipe(Vendor.Get(vendorIndex), recipeIndex, Mathf.Clamp(quantity, 1, 100));
+        }
+
+        [Rpc(SendTo.Server)]
+        private void CraftRpc(int vendorIndex, int craftIndex, int quantity, RpcParams rpcParams = default)
+        {
+            if (rpcParams.Receive.SenderClientId == OwnerClientId) ServerCraft(Vendor.Get(vendorIndex), craftIndex, Mathf.Clamp(quantity, 1, 100));
         }
 
         /// <summary>Owner: asks how many of each item a vendor has left (the answer updates <see cref="Vendor.KnownRemaining"/>).</summary>
@@ -956,14 +980,17 @@ namespace RPG.Items
             return true;
         }
 
+        /// <summary>The gold a vendor takes for crafting one of <paramref name="item"/> (a tenth of its price, at least 1).</summary>
+        public static int CraftFee(ItemDefinition item) => item != null ? Mathf.Max(1, item.price / 10) : 0;
+
         /// <summary>
-        /// Server: a vendor the player stands next to crafts a piece from its craft list: it takes the materials and
-        /// gives the piece, which may come out better (<see cref="LootDrop.CraftChances"/>) and with a socket.
-        /// The player must be of the piece's level.
+        /// Server: a vendor the player stands next to crafts <paramref name="quantity"/> pieces from its craft list: it
+        /// takes the materials and its fee and gives the pieces, each of which may come out better
+        /// (<see cref="LootDrop.CraftChances"/>) and with a socket. Nothing happens when anything is missing.
         /// </summary>
-        public bool ServerCraft(Vendor vendor, int craftIndex)
+        public bool ServerCraft(Vendor vendor, int craftIndex, int quantity = 1)
         {
-            if (!IsServer || health.IsDead || !IsNear(vendor)) return false;
+            if (!IsServer || health.IsDead || !IsNear(vendor) || quantity < 1) return false;
             ItemDefinition[] crafts = vendor.Definition.crafts;
             if (crafts == null || craftIndex < 0 || craftIndex >= crafts.Length) return false;
             ItemDefinition item = crafts[craftIndex];
@@ -973,27 +1000,81 @@ namespace RPG.Items
                 MessageRpc(InventoryMessage.LevelTooLow, catalog.IdOf(item), 0);
                 return false;
             }
-            if (CountOf(item.craftMaterial) < item.craftCount)
+            if (CountOf(item.craftMaterial) < item.craftCount * quantity)
             {
-                MessageRpc(InventoryMessage.NotEnoughMaterials, catalog.IdOf(item.craftMaterial), item.craftCount);
+                MessageRpc(InventoryMessage.NotEnoughMaterials, catalog.IdOf(item.craftMaterial), item.craftCount * quantity);
+                return false;
+            }
+            int fee = CraftFee(item) * quantity;
+            if (gold.Value < fee)
+            {
+                MessageRpc(InventoryMessage.NotEnoughGold, 0, 0);
                 return false;
             }
 
             int level = progress != null ? progress.Level : item.itemLevel;
-            ItemRarity? better = LootDrop.RollQuality(LootDrop.CraftChances);
-            int affix = 0;
-            if (affixes != null)
-                affix = better.HasValue && better.Value > item.rarity ? affixes.RollQuality(item, level, better.Value) : affixes.Roll(item, level);
-            int socket = UnityEngine.Random.value < CraftSocketChance ? ItemStack.EmptySocket : 0;
-
-            ServerRemoveItem(item.craftMaterial, item.craftCount);
-            if (ServerAddItem(item, 1, false, affix, socket) <= 0)
+            int made = 0;
+            for (int i = 0; i < quantity; i++)
             {
-                // No room: the materials go back.
-                ServerAddItem(item.craftMaterial, item.craftCount, false);
+                ItemRarity? better = LootDrop.RollQuality(LootDrop.CraftChances);
+                int affix = 0;
+                if (affixes != null)
+                    affix = better.HasValue && better.Value > item.rarity ? affixes.RollQuality(item, level, better.Value) : affixes.Roll(item, level);
+                int socket = UnityEngine.Random.value < CraftSocketChance ? ItemStack.EmptySocket : 0;
+
+                ServerRemoveItem(item.craftMaterial, item.craftCount);
+                if (ServerAddItem(item, 1, false, affix, socket) <= 0)
+                {
+                    // No room: these materials go back, and crafting stops.
+                    ServerAddItem(item.craftMaterial, item.craftCount, false);
+                    MessageRpc(InventoryMessage.BagFull, catalog.IdOf(item), 0);
+                    break;
+                }
+                gold.Value -= CraftFee(item);
+                made++;
+                MessageRpc(InventoryMessage.Crafted, catalog.IdOf(item), affix);
+            }
+            return made > 0;
+        }
+
+        /// <summary>
+        /// Server: a vendor the player stands next to makes <paramref name="quantity"/> times one of its other recipes
+        /// (potion tiers, orbs, keys): it takes the materials and its fee and gives the results.
+        /// </summary>
+        public bool ServerCraftRecipe(Vendor vendor, int recipeIndex, int quantity = 1)
+        {
+            if (!IsServer || health.IsDead || !IsNear(vendor) || quantity < 1) return false;
+            Recipe[] recipes = vendor.Definition.recipes;
+            if (recipes == null || recipeIndex < 0 || recipeIndex >= recipes.Length || !recipes[recipeIndex].IsValid) return false;
+            Recipe recipe = recipes[recipeIndex];
+            foreach (RecipeIngredient ingredient in recipe.ingredients)
+            {
+                if (ingredient.item == null || CountOf(ingredient.item) >= ingredient.count * quantity) continue;
+                MessageRpc(InventoryMessage.NotEnoughMaterials, catalog.IdOf(ingredient.item), ingredient.count * quantity);
                 return false;
             }
-            MessageRpc(InventoryMessage.Crafted, catalog.IdOf(item), affix);
+            int fee = CraftFee(recipe.result) * quantity;
+            if (gold.Value < fee)
+            {
+                MessageRpc(InventoryMessage.NotEnoughGold, 0, 0);
+                return false;
+            }
+
+            foreach (RecipeIngredient ingredient in recipe.ingredients)
+                if (ingredient.item != null) ServerRemoveItem(ingredient.item, ingredient.count * quantity);
+            int count = Mathf.Max(1, recipe.resultCount) * quantity;
+            int added = ServerAddItem(recipe.result, count, false);
+            if (added < count)
+            {
+                // No room for all of it: take back what went in and return the materials.
+                if (added > 0) ServerRemoveItem(recipe.result, added);
+                foreach (RecipeIngredient ingredient in recipe.ingredients)
+                    if (ingredient.item != null) ServerAddItem(ingredient.item, ingredient.count * quantity, false);
+                MessageRpc(InventoryMessage.BagFull, catalog.IdOf(recipe.result), 0);
+                return false;
+            }
+            gold.Value -= fee;
+            MessageRpc(InventoryMessage.Crafted, catalog.IdOf(recipe.result), 0);
             return true;
         }
 
