@@ -147,6 +147,13 @@ namespace RPG.EditorTools
             },
             new Vendor
             {
+                entry = 148, name = "Reginald", title = "Transmutation",
+                cell = new Vector3Int(536, 174, 0),
+                items = System.Array.Empty<(string, int, int, int, int)>(),
+                gear = System.Array.Empty<GearKind>(),
+            },
+            new Vendor
+            {
                 entry = 164, name = "Earnest", title = "",
                 cell = new Vector3Int(513, 111, 0),
                 items = new (string, int, int, int, int)[] { ("Minor Life Potion", 0, 0, 5, 15), ("Minor Mana Potion", 0, 0, 5, 15) },

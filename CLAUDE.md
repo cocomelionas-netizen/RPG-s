@@ -38,18 +38,19 @@ generators are in `Tools/GameData/` (`dungeons.py`, `recipes.py`, `world.py` →
 World: the source game's start region (Pilgrim's Refuge → St. Revere): its ground from `fanadin.map` (walls, woods), its
 monsters/chests, free waypoints, all its vendors at their spots with their stock (random-quality gear merchants),
 Scroll of Returning (back to St. Revere), food, M world map.
-Stats: all source stats bought with experience (C, three pages). Items: source gear by level and material,
-crafted at class vendors from materials monsters drop; 7145 affixes; potions/serums; gems; loot window with sparkles.
+Stats: all source stats bought with experience (C, three pages). Items: source gear by level and material, dropped
+finished by monsters/chests and sold by the merchants; 7145 affixes; potions/serums; the source's gems (5 kinds, Rough →
+plain → Refined); loot window with sparkles.
 Chests: crates (gold), locked chests (Lockpicking 2 × level). Spells: Paladin/Ranger/Mage spells to level 20,
 Tomes at trainers (Halfrid, Kelda, Gyldan), ranks for experience, spellbook (P), status effects (`StatusEffects`).
 Action bar: 12 slots (keys 1-9, 0, -, =) holding Attack, spells and items, arranged by drag and drop.
-Crafting: a Throne and Liberty style window at the class trainers (to be replaced by the source's transmuter, Reginald) (categories, list, materials, quantity, fee): gear from
-materials and the source game's recipes (`Tools/GameData/recipes.py` → `RecipeData.cs`).
+Transmutation (the source game's crafting): Reginald's TRANSMUTE window (4 × 3 grid + Confirm) makes the source game's
+recipes (`Tools/GameData/recipes.py` → `RecipeData.cs`): potion tiers, gems, orbs, keys. No gear crafting.
 Dungeons: all 10 source dungeons reachable from this region, laid out from their `.map` files (Wolf's Den, Trog Cave,
 Lower Garrison, Decrepit Tower, Abandoned Barracks, Kandorys Undercourse, Desecrated Altar, Salmaster's Descent,
 Telamont's Demiplane and Sanctuary) with their monsters, bosses, containers, entry rules and the key chain.
 
 ## Possible next steps (owner picks)
 
-Quests (14 in `quest_template`), gems like the source game (5 kinds, combine by 5), orbs (enchanting with the
-Divine/Major orbs the bosses drop).
+Quests (14 in `quest_template`), orbs (enchanting with the Divine/Major orbs the bosses drop), the source game's whole
+balance (health, damage, gold) — in progress.

@@ -94,7 +94,7 @@ namespace RPG.EditorTools
             GameObject lootBagPrefab)
         {
             ItemDefinition[] potions = Loot(items, ("HealingPotion", 1f), ("ManaPotion", 1f)).Select(entry => entry.item).ToArray();
-            ItemDefinition[] gems = Loot(items, ("ChippedRuby", 1f), ("ChippedTopaz", 1f), ("ChippedSapphire", 1f), ("ChippedEmerald", 1f))
+            ItemDefinition[] gems = Loot(items, ("ChippedRuby", 1f), ("ChippedTopaz", 1f), ("ChippedSapphire", 1f), ("ChippedEmerald", 1f), ("RoughAmethyst", 1f))
                 .Select(entry => entry.item).ToArray();
             var prefabs = new Dictionary<string, GameObject>();
             foreach (DungeonData.Dungeon data in DungeonData.All)

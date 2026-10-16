@@ -179,9 +179,9 @@ namespace RPG.Monsters
         public const float EliteHealthScale = 5.6f;
         public const float EliteDamageScale = 1.5f;
         public const int EliteRewardScale = 3;
-        /// <summary>Extra rolls of the material chance for an elite, and for a boss (a monster with guaranteed gear).</summary>
-        public const int EliteMaterialRolls = 3;
-        public const int BossMaterialRolls = 6;
+        /// <summary>Extra rolls of the gear chance for an elite, and for a boss (a monster with guaranteed gear).</summary>
+        public const int EliteGearRolls = 3;
+        public const int BossGearRolls = 6;
         private const float EliteSizeScale = 1.25f;
 
         private readonly NetworkVariable<bool> elite = new NetworkVariable<bool>(
@@ -432,8 +432,8 @@ namespace RPG.Monsters
 
         private void DropLoot()
         {
-            // Gear is crafted from the materials monsters drop: elites roll the table twice and drop more
-            // materials; bosses drop the most, plus their guaranteed finished gear (gold, sometimes purple).
+            // Gear drops around the monster's level: elites roll the table twice and the gear chance more often;
+            // bosses the most, plus their guaranteed gear (gold, sometimes purple).
             var guaranteed = new List<ItemRarity>();
             for (int i = 0; i < guaranteedGear; i++) guaranteed.Add(guaranteedQuality);
             if (purpleChance > 0f && Random.value < purpleChance) guaranteed.Add(ItemRarity.Legendary);
@@ -441,16 +441,16 @@ namespace RPG.Monsters
             if (Random.value < qualityChances.y) guaranteed.Add(ItemRarity.Epic);
             if (Random.value < qualityChances.z) guaranteed.Add(ItemRarity.Legendary);
             bool boss = guaranteedGear > 0 || qualityChances != Vector3.zero;
-            int extraMaterialRolls = (IsElite ? EliteMaterialRolls : 0) + (boss ? BossMaterialRolls : 0);
+            int extraGearRolls = (IsElite ? EliteGearRolls : 0) + (boss ? BossGearRolls : 0);
             var bonus = new List<LootItem>();
             LootDrop.RollEntries(bonusLoot, level, affixes, socketChance, bonus);
             LootDrop.Spawn(lootBagPrefab, transform.position, loot, gear, affixes, level, socketChance, IsElite ? 2 : 1,
-                extraMaterialRolls, bonus, guaranteed.ToArray());
+                extraGearRolls, bonus, guaranteed.ToArray());
         }
 
         /// <summary>
         /// Like the source game's boss loot chances: one piece of blue, one of gold and one of purple gear, each with its own
-        /// chance (0-1). Also gives it a boss's extra material rolls.
+        /// chance (0-1). Also gives it a boss's extra gear rolls.
         /// </summary>
         public void ConfigureQualityDrops(float blue, float gold, float purple)
         {

@@ -5,12 +5,12 @@ using UnityEngine;
 
 namespace RPG.EditorTools
 {
-    /// <summary>The source game's crafting recipes (RecipeData) that this project has every item of.</summary>
+    /// <summary>The source game's crafting recipes (RecipeData) that this project has every item of, for the transmuter.</summary>
     public static partial class TestSceneBuilder
     {
         /// <summary>
-        /// The recipes of <see cref="RecipeData"/> whose result and materials are all in the catalog (by name): potion
-        /// tiers and serums, Divine orbs from Major ones and Magic Dust, the Demiplane Key. Gear is crafted separately.
+        /// The recipes of <see cref="RecipeData"/> whose result and items are all in the catalog (by name): potion
+        /// tiers and serums, gem tiers, Divine orbs, the Demiplane Key. The transmuter makes them.
         /// </summary>
         private static Recipe[] CreateRecipes(ItemCatalog catalog)
         {

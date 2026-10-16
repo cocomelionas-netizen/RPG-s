@@ -10,8 +10,8 @@ using UnityEngine.UI;
 namespace RPG.UI
 {
     /// <summary>
-    /// The window of the vendor the local player is talking to: its goods with prices (click to buy), a Craft button that
-    /// opens its <see cref="CraftingWindow"/> when it crafts, and the player's gold. While it is open,
+    /// The window of the vendor the local player is talking to: its goods with prices (click to buy), a Transmute button
+    /// that opens its <see cref="TransmuteWindow"/> when it transmutes, and the player's gold. While it is open,
     /// clicking items in the bag sells them. Closes on Esc, the X button, or when the player walks away. Builds its own UI; place it on a RectTransform that fills the HUD canvas.
     /// </summary>
     [RequireComponent(typeof(RectTransform))]
@@ -33,7 +33,6 @@ namespace RPG.UI
         private Text title;
         private Text goldText;
         private RectTransform list;
-        private Button combineButton;
         private readonly List<Row> rows = new List<Row>();
         private Button craftButton;
         private Vendor shown;
@@ -68,11 +67,11 @@ namespace RPG.UI
             if (instance != null) instance.requested = vendor;
         }
 
-        /// <summary>Opens the crafting window of the vendor whose window is open.</summary>
-        private void OpenCrafting()
+        /// <summary>Opens the transmute window of the vendor whose window is open.</summary>
+        private void OpenTransmute()
         {
             if (shown == null) return;
-            CraftingWindow.Open(shown);
+            TransmuteWindow.Open(shown);
             Hide();
         }
 
@@ -103,19 +102,12 @@ namespace RPG.UI
             closeRect.sizeDelta = new Vector2(34f, 34f);
             close.onClick.AddListener(Hide);
 
-            combineButton = UIFactory.CreateButton("Combine", rect, new Color(0.2f, 0.35f, 0.45f, 0.95f), "Combine gems (3 of a kind = 1 better)", 15);
-            var combineRect = (RectTransform)combineButton.transform;
-            combineRect.anchorMin = combineRect.anchorMax = combineRect.pivot = new Vector2(0.5f, 0f);
-            combineRect.anchoredPosition = new Vector2(0f, 12f);
-            combineRect.sizeDelta = new Vector2(width - 28f, 34f);
-            combineButton.onClick.AddListener(CombineGems);
-
-            craftButton = UIFactory.CreateButton("Craft", rect, new Color(0.35f, 0.26f, 0.45f, 0.95f), "Craft: make gear, potions and more", 16);
+            craftButton = UIFactory.CreateButton("Transmute", rect, new Color(0.35f, 0.26f, 0.45f, 0.95f), "Transmute", 16);
             var craftRect = (RectTransform)craftButton.transform;
             craftRect.anchorMin = craftRect.anchorMax = craftRect.pivot = new Vector2(0.5f, 0f);
             craftRect.anchoredPosition = new Vector2(0f, 12f);
             craftRect.sizeDelta = new Vector2(width - 28f, 38f);
-            craftButton.onClick.AddListener(OpenCrafting);
+            craftButton.onClick.AddListener(OpenTransmute);
 
             pager = UIFactory.CreateRect("Pager", rect);
             pager.anchorMin = pager.anchorMax = pager.pivot = new Vector2(0f, 1f);
@@ -179,17 +171,17 @@ namespace RPG.UI
             pager.anchoredPosition = new Vector2(14f, -92f - StockRows * (rowHeight + 4f) - 4f);
             pageText.text = $"Page {page + 1} / {pageCount}";
 
-            bool combines = definition != null && (definition.combinesGems || definition.combinesPotions);
-            combineButton.gameObject.SetActive(combines);
-            if (combines)
-                combineButton.GetComponentInChildren<Text>().text = definition.combinesGems
-                    ? "Combine gems (3 of a kind = 1 better)"
-                    : "Combine potions (5 of a kind = 1 stronger)";
-            bool crafts = definition != null && definition.Crafts;
-            craftButton.gameObject.SetActive(crafts);
-            // The combine button sits above the craft button when there are both.
-            ((RectTransform)combineButton.transform).anchoredPosition = new Vector2(0f, crafts ? 58f : 12f);
-            float height = 92f + StockRows * (rowHeight + 4f) + 16f + (paged ? 38f : 0f) + (crafts ? 46f : 0f) + (combines ? 46f : 0f);
+            bool transmutes = definition != null && definition.Transmutes;
+            // A transmuter with nothing to sell (the source game's Reginald) opens its transmute window at once.
+            if (transmutes && stock.Length == 0)
+            {
+                TransmuteWindow.Open(vendor);
+                shown = null;
+                window.SetActive(false);
+                return;
+            }
+            craftButton.gameObject.SetActive(transmutes);
+            float height = 92f + StockRows * (rowHeight + 4f) + 16f + (paged ? 38f : 0f) + (transmutes ? 46f : 0f);
             ((RectTransform)window.transform).sizeDelta = new Vector2(width * stockColumns, height);
             window.SetActive(true);
             if (!fresh) return;
@@ -233,14 +225,6 @@ namespace RPG.UI
             row.Details = AddText(rect, 12, TextAnchor.UpperLeft, new Vector2(8f, -24f), new Vector2(width - 176f, 20f));
             row.Price = AddText(rect, 16, TextAnchor.MiddleRight, new Vector2(width - 172f, 0f), new Vector2(136f, rowHeight));
             return row;
-        }
-
-        private void CombineGems()
-        {
-            Inventory inventory = UIFactory.LocalPlayer<Inventory>();
-            if (inventory == null || shown == null) return;
-            if (shown.Definition.combinesGems) inventory.RequestCombineGems(shown);
-            else inventory.RequestCombinePotions(shown);
         }
 
         private void Buy(int index)

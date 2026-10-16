@@ -33,26 +33,27 @@ Generated data lives in `Scripts/Editor/*Data.cs` (`StartAreaData`, `GearData`, 
 ## Vendors
 
 From `npc`, `npc_template`, `npc_vendor` and `npc_vendor_random` (`Tools/GameData/world.py` → `Scripts/Editor/VendorData.cs`):
-23 vendors with their names, subnames and spots; 22 of them sell something that exists here and stand in the world.
+23 vendors and the transmuter with their names, subnames and spots; 21 vendors sell something that exists here and stand in
+the world, with Reginald.
 
 | Who | Where | Sells |
 |---|---|---|
 | Aedis, Innkeeper | St. Revere | Life and Mana Potion, Fresh Apple Pie, **Scroll of Returning** |
-| Osraed, Alchemist | St. Revere | every potion and serum (and combines 5 into the next tier) |
-| Calder, Gems | St. Revere | the gems that exist here (Ruby, Emerald, Topaz, Sapphire), 3 of each, back every 60 s |
+| Osraed, Alchemist | St. Revere | every potion and serum |
+| Calder, Gems | St. Revere | Ruby, Emerald, Topaz, Sapphire, Amethyst, 3 of each, back every 60 s (its orbs and Rough gems do not exist as stock here) |
 | Argas, Butcher | St. Revere | Gourmet Ham Sandwich, Oven Baked Turkey, Roasted Pork |
 | Harold, Banker | St. Revere | Major Treasury Gold, Treasury Gold, Treasury Coins |
-| Halfrid (Paladin), Kelda (Ranger), Gyldan (Mage) | St. Revere | their class's Tomes; for now also the crafting window |
+| Halfrid (Paladin), Kelda (Ranger), Gyldan (Mage) | St. Revere | their class's Tomes |
+| Reginald, Transmutation | St. Revere | nothing: the TRANSMUTE window ([Crafting.md](Crafting.md)) |
 | Emitt (Paymaster), Clive (Soldier), Stefan (Explorer) | on the way | low Tomes, Minor potions, Military Ration |
 | Huldria, Helbred, Ruth, Earnest | around | Minor Life and Mana Potions |
 | Karl (Heavy Armor), Robin (Cloth Armor), Hezakoth (Blades), Lowe (Axe & Mace), Selena (Ranged & Shield), Dragos (Staves and Wands) | St. Revere | gear of their kind for every second level: chain and plate / leather and robes (head, chest, feet), swords (also for axes and maces: the warrior's weapon here), bows, staves |
-| Vikram, Jeweler | St. Revere | Chipped gems and gem combining (its necklaces and rings do not exist here) |
 
 - The gear merchants hold one of each piece; at every restock (5 min) each piece gets a **random quality** with the source
   game's chances (green 100 %, blue 50 %, gold 5 %, purple 1 %, best first), shown with its affix and a higher price.
 - Prices of the new supplies: the source game's buy price (sell price × its buy cost ratio): Scroll of Returning 300.
   Treasury gold sells back for the source price.
-- Boltar (Cleric) only sells Cleric Tomes, which do not exist here; he is not placed.
+- Not placed: Boltar (Cleric) only sells Cleric Tomes, Vikram (Jeweler) only necklaces and rings – neither exists here.
 
 ## Scroll of Returning and food
 
@@ -75,7 +76,7 @@ From `npc`, `npc_template`, `npc_vendor` and `npc_vendor_random` (`Tools/GameDat
 | HP and mana grow × level, from level 21 another ×1.5 | `player_class_stats` | `LevelCurve.HealthGrowth` |
 | Monster damage grows like player HP (a monster of your level is as dangerous at 1 as at 25) | – | `MonsterAI.DamageScaleBetween` |
 | Affixes ("of the Novice", "of Magical Vim"...) with their level ranges and stats | `affix_template` | `AffixData`, `AffixCatalog` |
-| Potions: Minor/Lesser/–/Greater/Major Life and Mana Potion (levels 1, 5, 12, 18, 24, over 20 s) and Serum (at once), a shared 60 s cooldown, 5 → 1 combining | `item_template`, `spell_template`, `crafting_recipes` | `TestSceneBuilder.CreatePotions`, `Inventory` |
+| Potions: Minor/Lesser/–/Greater/Major Life and Mana Potion (levels 1, 5, 12, 18, 24, over 20 s) and Serum (at once), a shared 60 s cooldown, 5 → 1 at the transmuter | `item_template`, `spell_template`, `crafting_recipes` | `TestSceneBuilder.CreatePotions`, `Inventory` |
 
 The default drop chances of ordinary monsters live on the source game's server, so they are neither in `game.db` nor in
 the client – we use our own, stepped like its bosses'.
@@ -84,19 +85,16 @@ the client – we use our own, stepped like its bosses'.
 
 - Every weapon and armor piece has a level (`ItemDefinition.itemLevel`, the source's `required_level`):
   it can only be worn from that level; the description says "Requires level N".
-- **Finished gear does not drop – it is crafted from materials.** Monsters and chests drop materials
-  **by their level**, in the same way the source game picks the material of its gear (`material_chance_*`):
-  from 3 levels below to 1 above, most often its own level (`LootDrop.LevelWeight`, `LootDrop.PickMaterial`).
-  E.g. a level 1 monster – Bronze Ingot, Aspen Log, Leather Hide, Linen Cloth; Mythril only from level 6.
-- Materials drop with a 40 % chance per roll, sometimes 2. Elites roll twice + 3 extra rolls,
-  bosses + 6 extra and a guaranteed gold piece (+25 % purple) – only bosses drop finished gear.
-  Chests roll 1 (crate), 2 (Oak Chest) or 3 (Strongbox) times.
-- **Crafting** – the St. Revere class vendors (the Craft button opens the crafting window, see [Crafting.md](Crafting.md)):
-  sword/bow/staff and chest – 6 materials, head and feet – 4, at any level you can wear. The same window has the source
-  game's other recipes (`crafting_recipes`: potion tiers, orbs, the Demiplane Key).
+- **Gear drops finished**, as in the source game: monsters and chests drop pieces **by their level**, the material picked
+  the way the source game picks it (`material_chance_*`): from 3 levels below to 1 above, most often its own level
+  (`LootDrop.LevelWeight`, `LootDrop.PickGear`). E.g. a level 1 monster – Bronze Sword, Aspen Bow, Leather Cap, Linen
+  Hood; Mythril only from level 6. A piece may have a random affix (green or better) and a socket.
+- A piece drops with a 12 % chance per roll (the source game keeps its drop chances on its server). Elites roll twice + 3
+  extra rolls, bosses + 6 extra and a guaranteed gold piece (+25 % purple). Chests: see "Chests" below.
+- The gear merchants of St. Revere sell the same pieces with random qualities (see "Vendors"). There is no gear
+  crafting; Reginald transmutes potions, gems, orbs and keys ([Crafting.md](Crafting.md)).
   Warrior – swords, leather, chain, plate; ranger – bows, leather, chain; mage – staves, robes
-  (the source's `player_desirable_armor`). A crafted piece is sometimes better: gold 2 %, blue 8 %,
-  green 25 % (`LootDrop.CraftChances`), 20 % with a socket for a gem.
+  (the source's `player_desirable_armor`).
 - Monster and chest levels come from the source data (every spot has its own level).
 - **Gear** (`Scripts/Editor/GearData.cs`): for every level 1–25 – the materials that
   `material_chance_weapon` / `material_chance_armor` allow at that level, with the same chance
@@ -108,7 +106,7 @@ the client – we use our own, stepped like its bosses'.
     Helmet/Breastplate/Sabatons), robes (Linen, Wool, Silk, Spiritsilk – Hood/Vestments/Slippers, give mana);
   - damage and armor grow with the source sell price (weapon 50 + 10 × level + 2 × level × (tier − 1),
     chest 50 + 2.5 × tier × level). E.g. a level 1 Bronze Sword – +2 damage, a level 25 Titanium Sword – +21.
-  - Materials: metals – "Ingot" (for weapons, chain and plate), wood – "Log", leather – "Hide", cloth – "Cloth".
+  - The former crafting materials (Ingot, Log, Hide, Cloth) no longer drop; they only sell.
   - The old hand-made items stay only with vendors (the rare ones) and in old saves.
 - Colours as in the source game: green → blue → **gold** (Epic) → **purple** (Legendary, the top).
   A boss – a guaranteed gold piece + 25 % purple.
@@ -166,7 +164,7 @@ The source game's containers (`gameobject_template`, field names from the client
 - Clicking a locked chest: with too little Lockpicking – "Lockpicking not high enough" (how much is needed and how much you have);
   with enough – 2 s of picking (Pick Lock), then the loot window opens with what is inside. Walking away breaks it off.
 - Above a locked chest it says "Locked (Lockpicking N)". Lockpicking is raised in the C window, Combat page (2x + 1 XP).
-- Chests are the second source (after bosses) of finished gear; everything else is crafted from materials.
+- Chests hold finished gear like monsters do (more of it, and better).
 
 ## Spells (up to level 20)
 

@@ -131,19 +131,19 @@ namespace RPG.EditorTools
             {
                 Name = "Goblin", Animations = goblinAnimations, Scale = 0.85f, Health = 45, MinDamage = 3, MaxDamage = 5,
                 AttackInterval = 2f, Level = 2, Experience = LevelCurve.KillExperienceFor(2), MoveSpeed = 1.8f, Gold = new Vector2Int(3, 6),
-                Loot = Loot(items, ("GoblinEar", 0.6f), ("ChippedRuby", 0.02f), ("ChippedTopaz", 0.02f), ("ChippedSapphire", 0.02f), ("ChippedEmerald", 0.02f), ("HealingPotion", 0.3f), ("ManaPotion", 0.15f)),
+                Loot = Loot(items, ("GoblinEar", 0.6f), ("ChippedRuby", 0.02f), ("ChippedTopaz", 0.02f), ("ChippedSapphire", 0.02f), ("ChippedEmerald", 0.02f), ("RoughAmethyst", 0.02f), ("HealingPotion", 0.3f), ("ManaPotion", 0.15f)),
             }, barSprite, lootBagPrefab, affixes);
             GameObject brutePrefab = CreateMonsterPrefab(new MonsterSpec
             {
                 Name = "Goblin Brute", Animations = bruteAnimations, Scale = 1.05f, Health = 120, MinDamage = 6, MaxDamage = 10,
                 AttackInterval = 2.2f, Level = 4, Experience = LevelCurve.KillExperienceFor(4), MoveSpeed = 1.6f, Gold = new Vector2Int(10, 16),
-                Loot = Loot(items, ("BruteTusk", 0.6f), ("ChippedRuby", 0.04f), ("ChippedTopaz", 0.04f), ("ChippedSapphire", 0.04f), ("ChippedEmerald", 0.04f), ("HealingPotion", 0.5f), ("ManaPotion", 0.25f)),
+                Loot = Loot(items, ("BruteTusk", 0.6f), ("ChippedRuby", 0.04f), ("ChippedTopaz", 0.04f), ("ChippedSapphire", 0.04f), ("ChippedEmerald", 0.04f), ("RoughAmethyst", 0.04f), ("HealingPotion", 0.5f), ("ManaPotion", 0.25f)),
             }, barSprite, lootBagPrefab, affixes);
             GameObject orcPrefab = CreateMonsterPrefab(new MonsterSpec
             {
                 Name = "Orc", Animations = orcAnimations, Scale = 1.15f, Health = 220, MinDamage = 10, MaxDamage = 15,
                 AttackInterval = 2f, Level = 6, Experience = LevelCurve.KillExperienceFor(6), MoveSpeed = 1.7f, Gold = new Vector2Int(20, 30),
-                Loot = Loot(items, ("OrcFang", 0.6f), ("ChippedRuby", 0.05f), ("ChippedTopaz", 0.05f), ("ChippedSapphire", 0.05f), ("ChippedEmerald", 0.05f), ("Ruby", 0.01f), ("Sapphire", 0.01f), ("HealingPotion", 0.6f), ("ManaPotion", 0.3f)),
+                Loot = Loot(items, ("OrcFang", 0.6f), ("ChippedRuby", 0.05f), ("ChippedTopaz", 0.05f), ("ChippedSapphire", 0.05f), ("ChippedEmerald", 0.05f), ("RoughAmethyst", 0.05f), ("Ruby", 0.01f), ("Sapphire", 0.01f), ("HealingPotion", 0.6f), ("ManaPotion", 0.3f)),
             }, barSprite, lootBagPrefab, affixes);
             CharacterAnimationSet kingAnimations = CreateCharacterAnimationSet("GoblinKing", KingArtFolder, KingAnimationSetPath,
                 new Color(0.75f, 0.58f, 0.15f), new Color(0.4f, 0.58f, 0.25f));
@@ -153,7 +153,7 @@ namespace RPG.EditorTools
             {
                 Name = "Dungeon Boss", Animations = kingAnimations, Scale = 1.5f, Health = 220, MinDamage = 10, MaxDamage = 15,
                 AttackInterval = 2f, Level = 6, Experience = LevelCurve.KillExperienceFor(6), MoveSpeed = 1.7f, Gold = new Vector2Int(20, 30),
-                Loot = Loot(items, ("OrcFang", 0.6f), ("ChippedRuby", 0.05f), ("ChippedTopaz", 0.05f), ("ChippedSapphire", 0.05f), ("ChippedEmerald", 0.05f), ("Ruby", 0.01f), ("Sapphire", 0.01f), ("HealingPotion", 0.6f), ("ManaPotion", 0.3f)),
+                Loot = Loot(items, ("OrcFang", 0.6f), ("ChippedRuby", 0.05f), ("ChippedTopaz", 0.05f), ("ChippedSapphire", 0.05f), ("ChippedEmerald", 0.05f), ("RoughAmethyst", 0.05f), ("Ruby", 0.01f), ("Sapphire", 0.01f), ("HealingPotion", 0.6f), ("ManaPotion", 0.3f)),
             }, barSprite, lootBagPrefab, affixes, boss => boss.AddComponent<BossMechanics>());
             ChestPrefabs chests = CreateChestPrefabs(items, affixes, lootBagPrefab);
             DungeonDefinition[] dungeons = CreateDungeons(goblinPrefab, brutePrefab, orcPrefab, bossPrefab,
@@ -787,35 +787,6 @@ namespace RPG.EditorTools
         }
 
         /// <summary>
-        /// Lets a vendor craft its class's weapons and the armor of <paramref name="armorKinds"/> (the source game's desirable
-        /// armor of the class) from materials.
-        /// </summary>
-        private static VendorDefinition Crafter(VendorDefinition vendor, ItemCatalog catalog, int classIndex, params GearData.ArmorKind[] armorKinds)
-        {
-            var crafts = new List<ItemDefinition>();
-            foreach (ItemDefinition item in catalog.items)
-            {
-                if (item == null || !item.IsCraftable) continue;
-                bool classWeapon = item.slot == ItemSlot.Weapon && item.requiredClass == classIndex;
-                bool armor = GearArmorKinds.TryGetValue(item, out GearData.ArmorKind kind) && Array.IndexOf(armorKinds, kind) >= 0;
-                if (classWeapon || armor) crafts.Add(item);
-            }
-            vendor.crafts = crafts.ToArray();
-            // And the source game's other recipes: potion tiers, orbs, keys.
-            vendor.recipes = CreateRecipes(catalog);
-            vendor.combinesPotions = true;
-            EditorUtility.SetDirty(vendor);
-            return vendor;
-        }
-
-        private static VendorDefinition Jeweler(VendorDefinition vendor)
-        {
-            vendor.combinesGems = true;
-            EditorUtility.SetDirty(vendor);
-            return vendor;
-        }
-
-        /// <summary>
         /// The source game's named places of the start region, with a waystone where the source game has a waypoint (and in town).
         /// Waystone ids are saved with characters: keep them, only add new ones.
         /// </summary>
@@ -939,23 +910,11 @@ namespace RPG.EditorTools
                 manaPotion,
                 CreateKey("DenKey", "Den Key", new Color(0.85f, 0.65f, 0.25f), 20),
             };
-            // Gems: three of a kind combine into the next tier at the jeweler.
+            // The source game's gems: Rough, plain and Refined, five of a kind transmute into the next tier. The files keep
+            // their old names (Chipped, Flawless) so item ids stay; Amethyst came later and is at the end of the catalog.
             var gems = new List<ItemDefinition>();
-            foreach ((string gemName, RPG.Progression.Attribute attribute, Color color) in new[]
-                     {
-                         ("Ruby", RPG.Progression.Attribute.Strength, new Color(0.85f, 0.1f, 0.15f)),
-                         ("Topaz", RPG.Progression.Attribute.Agility, new Color(0.95f, 0.65f, 0.15f)),
-                         ("Sapphire", RPG.Progression.Attribute.Intelligence, new Color(0.15f, 0.35f, 0.95f)),
-                         ("Emerald", RPG.Progression.Attribute.Vitality, new Color(0.15f, 0.75f, 0.3f)),
-                     })
-            {
-                ItemDefinition flawless = CreateGem($"Flawless{gemName}", $"Flawless {gemName}", ItemRarity.Epic, attribute, 7, color * 1.15f, 600, null);
-                ItemDefinition normal = CreateGem(gemName, gemName, ItemRarity.Rare, attribute, 4, color, 200, flawless);
-                ItemDefinition chipped = CreateGem($"Chipped{gemName}", $"Chipped {gemName}", ItemRarity.Uncommon, attribute, 2, color * 0.8f, 60, normal);
-                gems.Add(chipped);
-                gems.Add(normal);
-                gems.Add(flawless);
-            }
+            foreach ((string gemName, RPG.Progression.Attribute attribute, Color color) in GemKinds.Take(4))
+                gems.AddRange(CreateGemTiers(gemName, attribute, color, $"Chipped{gemName}", $"Flawless{gemName}"));
             var all = new List<ItemDefinition>(catalog.items);
             // The hand-made gear is only sold now: drops by level come from the source game's gear below.
             foreach (ItemDefinition item in all)
@@ -966,9 +925,40 @@ namespace RPG.EditorTools
             all.AddRange(CreatePotions(potion, manaPotion));
             all.AddRange(CreateDungeonItems());
             all.AddRange(CreateTownSupplies());
+            (string amethyst, RPG.Progression.Attribute intelligence, Color purple) = GemKinds[4];
+            all.AddRange(CreateGemTiers(amethyst, intelligence, purple, $"Rough{amethyst}", $"Refined{amethyst}"));
             catalog.items = all.ToArray();
             EditorUtility.SetDirty(catalog);
             return catalog;
+        }
+
+        /// <summary>The source game's gems and their stats (item_template): Ruby Strength, Topaz Courage, Sapphire Willpower,
+        /// Emerald Agility, Amethyst Intelligence.</summary>
+        private static readonly (string name, RPG.Progression.Attribute attribute, Color color)[] GemKinds =
+        {
+            ("Ruby", RPG.Progression.Attribute.Strength, new Color(0.85f, 0.1f, 0.15f)),
+            ("Topaz", RPG.Progression.Attribute.Vitality, new Color(0.95f, 0.65f, 0.15f)),
+            ("Sapphire", RPG.Progression.Attribute.Willpower, new Color(0.15f, 0.35f, 0.95f)),
+            ("Emerald", RPG.Progression.Attribute.Agility, new Color(0.15f, 0.75f, 0.3f)),
+            ("Amethyst", RPG.Progression.Attribute.Intelligence, new Color(0.6f, 0.3f, 0.85f)),
+        };
+
+        /// <summary>
+        /// One gem's tiers like the source game's: Rough (green, stat 1 there), plain (blue, 2), Refined (gold, 3); here
+        /// twice that (2, 4, 6) for our attribute scale. Vendors pay the source sell price (62, 250, 500).
+        /// </summary>
+        private static List<ItemDefinition> CreateGemTiers(string gemName, RPG.Progression.Attribute attribute, Color color,
+            string roughFile, string refinedFile)
+        {
+            ItemDefinition refined = CreateGem(refinedFile, $"Refined {gemName}", ItemRarity.Epic, attribute, 6, color * 1.15f, 2000, null);
+            ItemDefinition normal = CreateGem(gemName, gemName, ItemRarity.Rare, attribute, 4, color, 1000, refined);
+            ItemDefinition rough = CreateGem(roughFile, $"Rough {gemName}", ItemRarity.Uncommon, attribute, 2, color * 0.8f, 248, normal);
+            foreach (ItemDefinition gem in new[] { rough, normal, refined })
+            {
+                gem.combineCount = 5;
+                gem.maxStack = 5;
+            }
+            return new List<ItemDefinition> { rough, normal, refined };
         }
 
         private static readonly Color[] MetalColors =
@@ -1003,10 +993,10 @@ namespace RPG.EditorTools
         private static readonly Dictionary<ItemDefinition, GearData.ArmorKind> GearArmorKinds =
             new Dictionary<ItemDefinition, GearData.ArmorKind>();
 
-        /// <summary>How many of its material a piece takes to craft.</summary>
-        private static int CraftCount(ItemSlot slot) => slot == ItemSlot.Weapon || slot == ItemSlot.Chest ? 6 : 4;
-
-        /// <summary>A crafting material: rarer (colored) the later it starts dropping.</summary>
+        /// <summary>
+        /// A former crafting material (ingots, logs, hides, cloth): gear drops finished now, as in the source game, so these no
+        /// longer drop; they stay in the catalog (saved item ids) and sell to vendors.
+        /// </summary>
         private static ItemDefinition CreateMaterial(string displayName, int firstLevel, Color color)
         {
             ItemRarity rarity = firstLevel < 6 ? ItemRarity.Common : firstLevel < 13 ? ItemRarity.Uncommon
@@ -1015,6 +1005,7 @@ namespace RPG.EditorTools
                 rarity, 0, 0, 0, color, 2 + firstLevel);
             material.maxStack = 50;
             material.canHaveAffix = false;
+            material.description = "Once used for crafting; sell it to a vendor.";
             return material;
         }
 
@@ -1029,8 +1020,8 @@ namespace RPG.EditorTools
         /// <summary>
         /// The source game's gear (<see cref="GearData"/>): for every level, each material its chance tables can drop
         /// there, as a sword (warriors), bow (rangers) and staff (mages), and as head, chest and feet armor anyone may
-        /// wear. Stats grow with the source game's sell price of the piece, the drop weight is its material chance.
-        /// Every piece is crafted from its material (ingots, logs, hides, cloth), which is what monsters drop.
+        /// wear. Stats grow with the source game's sell price of the piece, the drop weight is its material chance: monsters,
+        /// chests and merchants give these pieces. The old materials stay in the catalog.
         /// </summary>
         private static List<ItemDefinition> CreateGearData(out List<ItemDefinition> materials)
         {
@@ -1071,8 +1062,6 @@ namespace RPG.EditorTools
                     color, price, requiredClass, level);
                 item.manaBonus = mana;
                 item.dropWeight = chance / 100f;
-                item.craftMaterial = material;
-                item.craftCount = CraftCount(slot);
                 gear.Add(item);
                 return item;
             }
@@ -1216,8 +1205,6 @@ namespace RPG.EditorTools
             item.restoreAmount = 0;
             item.restoreSeconds = 0f;
             item.strongerVariant = null;
-            item.craftMaterial = null;
-            item.craftCount = 1;
             item.description = null;
             item.combineWith = Array.Empty<ItemDefinition>();
             item.combineResult = null;
@@ -1425,7 +1412,7 @@ namespace RPG.EditorTools
             var iron = new Color(0.45f, 0.47f, 0.52f);
             var gold = new Color(0.95f, 0.78f, 0.3f);
             ItemDefinition[] potions = Loot(items, ("HealingPotion", 1f), ("ManaPotion", 1f)).Select(entry => entry.item).ToArray();
-            ItemDefinition[] gems = Loot(items, ("ChippedRuby", 1f), ("ChippedTopaz", 1f), ("ChippedSapphire", 1f), ("ChippedEmerald", 1f))
+            ItemDefinition[] gems = Loot(items, ("ChippedRuby", 1f), ("ChippedTopaz", 1f), ("ChippedSapphire", 1f), ("ChippedEmerald", 1f), ("RoughAmethyst", 1f))
                 .Select(entry => entry.item).ToArray();
 
             GameObject chest = CreateChestPrefab("OakChest", "Oak Chest", 4, 2f,
@@ -1551,10 +1538,10 @@ namespace RPG.EditorTools
             Stretch((RectTransform)vendorWindow.transform);
             vendorWindow.AddComponent<VendorWindow>();
 
-            var craftingWindow = new GameObject("Crafting Window", typeof(RectTransform));
-            craftingWindow.transform.SetParent(canvasObject.transform, false);
-            Stretch((RectTransform)craftingWindow.transform);
-            craftingWindow.AddComponent<CraftingWindow>();
+            var transmuteWindow = new GameObject("Transmute Window", typeof(RectTransform));
+            transmuteWindow.transform.SetParent(canvasObject.transform, false);
+            Stretch((RectTransform)transmuteWindow.transform);
+            transmuteWindow.AddComponent<TransmuteWindow>();
 
             var lootWindow = new GameObject("Loot Window", typeof(RectTransform));
             lootWindow.transform.SetParent(canvasObject.transform, false);

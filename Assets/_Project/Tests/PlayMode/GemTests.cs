@@ -14,11 +14,11 @@ using UnityEngine.TestTools;
 
 namespace RPG.Tests
 {
-    /// <summary>Sockets, setting gems and combining them at the jeweler, on a real host.</summary>
+    /// <summary>Sockets, setting gems and the source game's gem tiers, on a real host.</summary>
     public class GemTests
     {
         private const string PlayerPrefabPath = "Assets/_Project/Prefabs/Characters/Player.prefab";
-        private const string JewelerPath = "Assets/_Project/Data/Vendors/Vikram.asset";
+        private const string JewelerPath = "Assets/_Project/Data/Vendors/Calder.asset";
         private const string ItemsFolder = "Assets/_Project/Data/Items";
 
         private GameObject cameraObject;
@@ -85,7 +85,9 @@ namespace RPG.Tests
         public IEnumerator Gem_SetIntoAnEmptySocket_AddsItsAttributes()
         {
             ItemDefinition sword = Item("IronSword");
-            ItemDefinition emerald = Item("ChippedEmerald");
+            // Topaz: Courage, which is health here.
+            ItemDefinition emerald = Item("ChippedTopaz");
+            Assert.Greater(AttributeRules.HealthBonus(emerald.attributes), 0);
             inventory.ServerAddItem(sword, 1, false, 0, ItemStack.EmptySocket);
             // High enough to wear the sword.
             player.GetComponent<CharacterProgress>().ServerLoad(0, sword.itemLevel, 0, default, 0);
@@ -133,17 +135,19 @@ namespace RPG.Tests
             Assert.AreEqual(0, inventory.CountOf(topaz));
         }
 
-        [UnityTest]
-        public IEnumerator Jeweler_CombinesThreeGemsIntoABetterOne()
+        [Test]
+        public void Gems_AreTheSourceGamesFiveKinds_InThreeTiers()
         {
-            ItemDefinition chipped = Item("ChippedRuby");
-            Assert.IsNotNull(chipped.combinesInto);
-            inventory.ServerAddItem(chipped, 7, false);
-            yield return null;
-
-            Assert.AreEqual(2, inventory.ServerCombineGems(jeweler));
-            Assert.AreEqual(1, inventory.CountOf(chipped));
-            Assert.AreEqual(2, inventory.CountOf(chipped.combinesInto));
+            foreach (string gem in new[] { "Ruby", "Emerald", "Topaz", "Sapphire", "Amethyst" })
+            {
+                ItemDefinition normal = Item(gem);
+                Assert.IsTrue(normal.isGem);
+                Assert.AreEqual(5, normal.combineCount, "Five of a kind transmute into the next tier.");
+                Assert.AreEqual($"Refined {gem}", normal.combinesInto.displayName);
+                Assert.Less(Item(gem == "Amethyst" ? "RoughAmethyst" : $"Chipped{gem}").attributes.Total, normal.attributes.Total);
+            }
+            Assert.AreEqual(4, Item("Ruby").attributes.strength, "Ruby: Strength.");
+            Assert.AreEqual(4, Item("Amethyst").attributes.intelligence, "Amethyst: Intelligence.");
         }
 
         [UnityTest]

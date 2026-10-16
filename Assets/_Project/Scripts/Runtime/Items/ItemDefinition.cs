@@ -115,23 +115,15 @@ namespace RPG.Items
         [Header("Gem")]
         [Tooltip("A gem: clicking it sets it into an empty socket of worn gear, where its attributes count.")]
         public bool isGem;
-        [Tooltip("A vendor turns Combine Count of this (a gem at a jeweler, a potion at a class vendor) into one of these. For potions also the next tier that drops at its level.")]
+        [Tooltip("The next tier (Combine Count of this make one at the transmuter). For potions also the next tier that drops at its level.")]
         public ItemDefinition combinesInto;
         [Min(2)] public int combineCount = 3;
-
-        [Header("Crafting")]
-        [Tooltip("Crafted by a vendor from this material (null: cannot be crafted). Also what drops instead of the piece: monsters drop materials, not gear.")]
-        public ItemDefinition craftMaterial;
-        [Tooltip("How many of the material crafting takes.")]
-        [Min(1)] public int craftCount = 1;
 
         [Header("Look")]
         [Tooltip("Color of the item's square in the bag until it has an icon.")]
         public Color iconColor = new Color(0.5f, 0.5f, 0.5f);
 
         public bool IsEquippable => slot != ItemSlot.None;
-
-        public bool IsCraftable => craftMaterial != null;
 
         /// <summary>The weapon skill of a weapon type (null for none).</summary>
         public static Attribute? SkillOf(WeaponType type)
@@ -228,7 +220,7 @@ namespace RPG.Items
             if (!totalAttributes.IsZero) text.AppendLine(totalAttributes.Describe("\n"));
             if (!string.IsNullOrEmpty(socketLine)) text.AppendLine(socketLine);
             if (isGem) text.AppendLine("Set into gear with an empty socket");
-            if (isGem && combinesInto != null) text.AppendLine($"{combineCount} combine into {combinesInto.displayName} at a jeweler");
+            if (isGem && combinesInto != null) text.AppendLine($"{combineCount} transmute into {combinesInto.displayName}");
             if (use == ItemUse.LearnSpell && teachesSpell != null)
             {
                 text.AppendLine($"Use: learn {teachesSpell.displayName}");
@@ -259,13 +251,12 @@ namespace RPG.Items
                 string amount = restoreAmount > 0 ? $"{restoreAmount} {pool}" : $"{Mathf.RoundToInt(healFraction * 100f)}% {pool}";
                 text.AppendLine(restoreSeconds > 0f ? $"Use: restores {amount} over {restoreSeconds:0} sec" : $"Use: restores {amount}");
                 if (itemLevel > 1) text.AppendLine($"Requires level {itemLevel}");
-                if (combinesInto != null) text.AppendLine($"{combineCount} combine into {combinesInto.displayName} at a vendor");
+                if (combinesInto != null) text.AppendLine($"{combineCount} transmute into {combinesInto.displayName}");
             }
             if (!string.IsNullOrEmpty(description)) text.AppendLine(description);
             if (maxStack > 1) text.AppendLine($"Stacks up to {maxStack}");
             if (!string.IsNullOrEmpty(className)) text.AppendLine($"{className} only");
             if (IsEquippable) text.AppendLine($"Requires level {itemLevel}");
-            if (IsCraftable) text.AppendLine($"Crafted from {craftCount} {craftMaterial.displayName}");
             if (price > 0) text.AppendLine($"Sells for {(sellPrice >= 0 ? sellPrice : SellPriceWith(affix))} gold");
             text.Append(IsEquippable ? "Click to equip" : use != ItemUse.None ? "Click to use" : isGem ? "Click, then click the item to set it into" : "");
             return text.ToString().TrimEnd();

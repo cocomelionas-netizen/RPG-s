@@ -216,17 +216,14 @@ namespace RPG.Tests
         }
 
         [Test]
-        public void Monsters_DropMaterialsOfTheirLevel()
+        public void Monsters_DropFinishedGearOfTheirLevel()
         {
             var catalog = AssetDatabase.LoadAssetAtPath<ItemCatalog>("Assets/_Project/Data/Items/ItemCatalog.asset");
             for (int i = 0; i < 200; i++)
             {
-                Assert.IsTrue(LootDrop.PickMaterial(catalog, 1, out ItemDefinition low));
-                Assert.IsFalse(low.IsEquippable, $"{low.displayName} is a material.");
-                StringAssert.DoesNotContain("Mythril", low.displayName, "Mythril starts at level 6.");
-
-                Assert.IsTrue(LootDrop.PickMaterial(catalog, 25, out ItemDefinition high));
-                StringAssert.DoesNotContain("Bronze", high.displayName, "Bronze stops at level 20.");
+                Assert.IsTrue(LootDrop.PickGear(catalog, null, 1, ItemRarity.Common, 0f, out LootItem low));
+                Assert.IsTrue(low.Item.IsEquippable, $"{low.Item.displayName} is gear, as in the source game.");
+                Assert.LessOrEqual(low.Item.itemLevel, 2);
             }
         }
 

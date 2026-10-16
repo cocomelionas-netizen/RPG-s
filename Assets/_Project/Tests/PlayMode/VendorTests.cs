@@ -20,9 +20,10 @@ namespace RPG.Tests
     {
         private const string PlayerPrefabPath = "Assets/_Project/Prefabs/Characters/Player.prefab";
         private const string GoblinPrefabPath = "Assets/_Project/Prefabs/Monsters/Goblin.prefab";
-        // The source game's vendors: the paladin (warrior) trainer crafts for now, the innkeeper sells potions, food and
-        // the Scroll of Returning, the gem trader has limited stock, the heavy armor merchant random qualities.
+        // The source game's vendors: the paladin (warrior) trainer sells Tomes, the innkeeper potions, food and the Scroll
+        // of Returning, the gem trader has limited stock, the heavy armor merchant random qualities, Reginald transmutes.
         private const string WarriorVendorPath = "Assets/_Project/Data/Vendors/Halfrid.asset";
+        private const string TransmuterPath = "Assets/_Project/Data/Vendors/Reginald.asset";
         private const string InnkeeperPath = "Assets/_Project/Data/Vendors/Aedis.asset";
         private const string GemTraderPath = "Assets/_Project/Data/Vendors/Calder.asset";
         private const string ArmorMerchantPath = "Assets/_Project/Data/Vendors/Karl.asset";
@@ -290,21 +291,6 @@ namespace RPG.Tests
         }
 
         [UnityTest]
-        public IEnumerator FivePotions_CombineIntoTheNextTier()
-        {
-            ItemDefinition minor = Item("HealingPotion");
-            Assert.IsNotNull(minor.combinesInto, "Minor Life Potion combines into Lesser Life Potion.");
-            int before = inventory.CountOf(minor);
-            inventory.ServerAddItem(minor, 5 - before % 5, false);
-            int expected = inventory.CountOf(minor) / 5;
-
-            Assert.AreEqual(expected, inventory.ServerCombinePotions(vendor));
-            yield return null;
-            Assert.AreEqual(0, inventory.CountOf(minor));
-            Assert.AreEqual(expected, inventory.CountOf(minor.combinesInto));
-        }
-
-        [UnityTest]
         public IEnumerator PotionAboveYourLevel_CannotBeUsed()
         {
             ItemDefinition lesser = Item("HealingPotion").combinesInto;
@@ -331,101 +317,62 @@ namespace RPG.Tests
             }
         }
 
-        private int FirstLevelCraft()
+        private int[] SlotsOf(params ItemDefinition[] items)
         {
-            ItemDefinition[] crafts = vendor.Definition.crafts;
-            for (int i = 0; i < crafts.Length; i++)
-                if (crafts[i] != null && crafts[i].itemLevel == 1 && crafts[i].IsCraftable) return i;
-            return -1;
+            var slots = new System.Collections.Generic.List<int>();
+            for (int i = 0; i < inventory.BagSize; i++)
+                if (System.Array.IndexOf(items, inventory.Definition(inventory.GetBagSlot(i))) >= 0) slots.Add(i);
+            return slots.ToArray();
         }
 
         [UnityTest]
-        public IEnumerator Crafting_TakesTheMaterials_AndGivesThePiece()
+        public IEnumerator Transmuter_FiveMinorPotions_MakeALesserOne()
         {
-            int index = FirstLevelCraft();
-            Assert.GreaterOrEqual(index, 0, "The warrior vendor crafts level 1 gear.");
-            ItemDefinition piece = vendor.Definition.crafts[index];
-            inventory.ServerAddItem(piece.craftMaterial, piece.craftCount + 1, false);
-
-            Assert.IsTrue(inventory.ServerCraft(vendor, index));
+            UseVendor(TransmuterPath);
+            Assert.IsTrue(vendor.Definition.Transmutes, "Reginald makes the source game's crafting recipes.");
+            ItemDefinition minor = Item("HealingPotion");
+            inventory.ServerAddItem(minor, 6 - inventory.CountOf(minor), false);
             yield return null;
-            Assert.AreEqual(1, inventory.CountOf(piece.craftMaterial), "Only the recipe's materials are used.");
-            Assert.AreEqual(1, inventory.CountOf(piece));
+            Assert.AreEqual(6, inventory.CountOf(minor));
+
+            Assert.IsTrue(inventory.ServerTransmute(vendor, SlotsOf(minor)));
+            yield return null;
+            Assert.AreEqual(1, inventory.CountOf(minor), "One batch of five is used.");
+            Assert.AreEqual(1, inventory.CountOf(minor.combinesInto));
+            Assert.AreEqual("Lesser Life Potion", minor.combinesInto.displayName);
         }
 
         [UnityTest]
-        public IEnumerator Crafting_WithTooFewMaterials_Fails()
+        public IEnumerator Transmuter_ItemsThatMakeNothing_AreKept()
         {
-            int index = FirstLevelCraft();
-            ItemDefinition piece = vendor.Definition.crafts[index];
-            inventory.ServerAddItem(piece.craftMaterial, piece.craftCount - 1, false);
-
-            Assert.IsFalse(inventory.ServerCraft(vendor, index));
+            UseVendor(TransmuterPath);
+            ItemDefinition minor = Item("HealingPotion");
+            ItemDefinition mana = Item("ManaPotion");
+            inventory.ServerAddItem(minor, 5, false);
+            inventory.ServerAddItem(mana, 5, false);
+            int life = inventory.CountOf(minor);
+            int manaCount = inventory.CountOf(mana);
             yield return null;
-            Assert.AreEqual(piece.craftCount - 1, inventory.CountOf(piece.craftMaterial));
-            Assert.AreEqual(0, inventory.CountOf(piece));
+
+            Assert.IsFalse(inventory.ServerTransmute(vendor, SlotsOf(minor, mana)), "Life and mana potions together make nothing.");
+            Assert.IsFalse(inventory.ServerTransmute(vendor, new int[0]));
+            Assert.AreEqual(life, inventory.CountOf(minor));
+            Assert.AreEqual(manaCount, inventory.CountOf(mana));
         }
 
         [UnityTest]
-        public IEnumerator Crafting_SeveralAtOnce_TakesTheMaterialsAndTheFee()
+        public IEnumerator Transmuter_RoughGems_MakeAGem()
         {
-            int index = FirstLevelCraft();
-            ItemDefinition piece = vendor.Definition.crafts[index];
-            inventory.ServerAddItem(piece.craftMaterial, piece.craftCount * 3, false);
-            inventory.ServerSetGold(1000);
-
-            Assert.IsTrue(inventory.ServerCraft(vendor, index, 3));
+            UseVendor(TransmuterPath);
+            ItemDefinition rough = Item("ChippedRuby");
+            Assert.AreEqual("Rough Ruby", rough.displayName);
+            inventory.ServerAddItem(rough, 7, false);
             yield return null;
-            Assert.AreEqual(0, inventory.CountOf(piece.craftMaterial));
-            Assert.AreEqual(3, inventory.CountOf(piece), "Three pieces (each may have its own affix).");
-            Assert.AreEqual(1000 - Inventory.CraftFee(piece) * 3, inventory.Gold, "The vendor takes its fee for each.");
-        }
 
-        [UnityTest]
-        public IEnumerator Crafting_WithoutTheFee_Fails()
-        {
-            int index = FirstLevelCraft();
-            ItemDefinition piece = vendor.Definition.crafts[index];
-            inventory.ServerAddItem(piece.craftMaterial, piece.craftCount, false);
-            inventory.ServerSetGold(0);
-
-            Assert.IsFalse(inventory.ServerCraft(vendor, index));
+            Assert.IsTrue(inventory.ServerTransmute(vendor, SlotsOf(rough)));
             yield return null;
-            Assert.AreEqual(piece.craftCount, inventory.CountOf(piece.craftMaterial), "Nothing is used up.");
-        }
-
-        [UnityTest]
-        public IEnumerator Recipes_MakePotionTiers_LikeTheSourceGame()
-        {
-            Recipe[] recipes = vendor.Definition.recipes;
-            int index = System.Array.FindIndex(recipes, recipe => recipe.result != null && recipe.result.displayName == "Lesser Life Potion");
-            Assert.GreaterOrEqual(index, 0, "The crafting vendor makes Lesser Life Potions from Minor ones.");
-            RecipeIngredient minor = recipes[index].ingredients[0];
-            Assert.AreEqual("Minor Life Potion", minor.item.displayName);
-            Assert.AreEqual(5, minor.count);
-
-            int before = inventory.CountOf(minor.item);
-            inventory.ServerAddItem(minor.item, minor.count * 2, false);
-            inventory.ServerSetGold(1000);
-            Assert.IsTrue(inventory.ServerCraftRecipe(vendor, index, 2));
-            yield return null;
-            Assert.AreEqual(before, inventory.CountOf(minor.item));
-            Assert.AreEqual(2, inventory.CountOf(recipes[index].result));
-
-            Assert.IsFalse(inventory.ServerCraftRecipe(vendor, index, 1), "Without the materials nothing is made.");
-        }
-
-        [UnityTest]
-        public IEnumerator Crafting_AboveYourLevel_Fails()
-        {
-            ItemDefinition[] crafts = vendor.Definition.crafts;
-            int index = System.Array.FindIndex(crafts, item => item != null && item.itemLevel >= 10);
-            Assert.GreaterOrEqual(index, 0);
-            inventory.ServerAddItem(crafts[index].craftMaterial, crafts[index].craftCount, false);
-
-            Assert.IsFalse(inventory.ServerCraft(vendor, index));
-            yield return null;
-            Assert.AreEqual(0, inventory.CountOf(crafts[index]));
+            Assert.AreEqual(2, inventory.CountOf(rough));
+            Assert.AreEqual(1, inventory.CountOf(Item("Ruby")));
         }
 
         [UnityTest]
@@ -437,6 +384,8 @@ namespace RPG.Tests
 
             Assert.IsFalse(inventory.ServerBuy(vendor, 0));
             Assert.IsFalse(inventory.ServerSell(vendor, FindInBag(Item("HealingPotion"))));
+            UseVendor(TransmuterPath);
+            Assert.IsFalse(inventory.ServerTransmute(vendor, SlotsOf(Item("HealingPotion"))));
         }
 
         [UnityTest]
