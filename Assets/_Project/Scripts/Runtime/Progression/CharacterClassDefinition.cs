@@ -16,6 +16,13 @@ namespace RPG.Progression
         public AttributeSet baseAttributes = new AttributeSet(10, 10, 10, 10);
         [Tooltip("Adds a quarter of itself to damage.")]
         public Attribute primaryAttribute = Attribute.Strength;
+        [Tooltip("The weapon skills the class can train (the source game's paladin: maces, axes, swords, shields); empty: all.")]
+        public Attribute[] weaponSkills = Array.Empty<Attribute>();
+
+        /// <summary>Whether the class can buy points in a stat: every stat but the weapon skills of other classes' weapons.</summary>
+        public bool CanTrain(Attribute attribute) =>
+            attribute < Attribute.Staves || attribute > Attribute.Shields || weaponSkills == null || weaponSkills.Length == 0
+            || Array.IndexOf(weaponSkills, attribute) >= 0;
 
         [Header("Health and mana (attributes add more)")]
         [Tooltip("Health at level 1; grows like the source game's (LevelCurve.HealthGrowth): times the level, half again from 21.")]

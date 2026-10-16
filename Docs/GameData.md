@@ -91,7 +91,12 @@ the client – we use our own, stepped like its bosses'.
 - **Equipment slots** like the source game's: Weapon, Helm, Chest, Feet, Necklace, Belt, Legs, Hands, two Rings and the
   Offhand (shield) (`Inventory.EquipmentSlots`). As in the source game they are on the character sheet (C): the GENERAL,
   COMBAT and SKILLS tabs, the worn gear down both sides (click to take off, drag from the bag to put on), name, level,
-  progression and experience between them, the stats on the right and SPEND EXP showing the + buttons. The inventory (I) is
+  progression and experience between them, the stats on the right. Laid out like the source game's panel: Helm, Necklace,
+  Chest, Ranged (shows a worn bow), Offhand, Weapon on the left; two Rings, Hands, Belt, Legs, Feet on the right. SPEND EXP
+  starts editing: + buttons add pending points (purple), COST shows their price, CONFIRM buys them, CANCEL drops them, and
+  the ABILITIES window (P: SPELLS and ACTIONS tabs, a purple + raises a spell's rank) opens beside it. Each class trains
+  only its own weapon skills (`CharacterClassDefinition.weaponSkills`: warrior Maces/Axes/Swords/Shields, ranger
+  Ranged/Daggers, mage Staves/Wands); the others show red with no +, and the server refuses them. The inventory (I) is
   only the bag.
 - **Class gear** like the source game's: swords for the warrior, bows for the ranger, staves for the mage; armor by the
   source's class armor (`player_desirable_armor`): warrior (its paladin) leather, chain, plate and the shield; ranger

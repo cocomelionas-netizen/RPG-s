@@ -74,6 +74,18 @@ namespace RPG.Progression
 
         public bool CanAfford(Attribute attribute) => experienceToSpend.Value >= PointCost(attribute);
 
+        /// <summary>Whether this character's class can train a stat (weapon skills only of its own weapons).</summary>
+        public bool CanTrain(Attribute attribute) => Class == null || Class.CanTrain(attribute);
+
+        /// <summary>What <paramref name="count"/> more points in a stat cost on top of the ones already bought.</summary>
+        public int PointsCost(Attribute attribute, int count)
+        {
+            int total = 0;
+            int invested = spentPoints.Value[attribute];
+            for (int i = 0; i < count; i++) total += AttributeRules.PointCost(attribute, invested + i);
+            return total;
+        }
+
         /// <summary>Class attributes plus spent points plus the equipment's.</summary>
         public AttributeSet TotalAttributes
         {
@@ -253,21 +265,27 @@ namespace RPG.Progression
         }
 
         /// <summary>Owner: buys one point in an attribute with experience.</summary>
-        public void RequestSpendPoint(Attribute attribute)
+        public void RequestSpendPoint(Attribute attribute) => RequestSpendPoints(attribute, 1);
+
+        /// <summary>Owner: buys several points in an attribute (the character sheet's Confirm).</summary>
+        public void RequestSpendPoints(Attribute attribute, int count)
         {
-            if (IsOwner) SpendPointRpc(attribute);
+            if (IsOwner && count > 0) SpendPointsRpc(attribute, count);
         }
 
         [Rpc(SendTo.Server)]
-        private void SpendPointRpc(Attribute attribute, RpcParams rpcParams = default)
+        private void SpendPointsRpc(Attribute attribute, int count, RpcParams rpcParams = default)
         {
-            if (rpcParams.Receive.SenderClientId == OwnerClientId) ServerSpendPoint(attribute);
+            if (rpcParams.Receive.SenderClientId != OwnerClientId) return;
+            for (int i = 0; i < Mathf.Min(count, 1000); i++)
+                if (!ServerSpendPoint(attribute)) break;
         }
+
 
         /// <summary>Server only: buys one point in an attribute at <see cref="PointCost"/>. False when the experience does not cover it.</summary>
         public bool ServerSpendPoint(Attribute attribute)
         {
-            if (!IsServer || attribute < 0 || (int)attribute >= AttributeSet.Count) return false;
+            if (!IsServer || attribute < 0 || (int)attribute >= AttributeSet.Count || !CanTrain(attribute)) return false;
             int cost = PointCost(attribute);
             if (experienceToSpend.Value < cost) return false;
             AttributeSet spent = spentPoints.Value;

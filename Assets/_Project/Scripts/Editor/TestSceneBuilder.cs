@@ -641,6 +641,13 @@ namespace RPG.EditorTools
                 new AttributeSet(10, 15, 10, 10), RPG.Progression.Attribute.Agility, 45, rangerSpells);
             CharacterClassDefinition mage = CreateClass("Mage", mageLook, 40, 0, 3, 0.8f, 1.8f, 4.5f, 0.08f, new Color(0.7f, 0.5f, 1f),
                 new AttributeSet(5, 5, 20, 10), RPG.Progression.Attribute.Intelligence, 70, mageSpells);
+            // The weapon skills each class trains: the paladin's maces, axes, swords and shields; the ranger's bows and daggers;
+            // the mage's staves and wands.
+            warrior.weaponSkills = new[] { RPG.Progression.Attribute.Maces, RPG.Progression.Attribute.Axes, RPG.Progression.Attribute.Swords,
+                RPG.Progression.Attribute.Shields };
+            ranger.weaponSkills = new[] { RPG.Progression.Attribute.Ranged, RPG.Progression.Attribute.Daggers };
+            mage.weaponSkills = new[] { RPG.Progression.Attribute.Staves, RPG.Progression.Attribute.Wands };
+            foreach (CharacterClassDefinition definition in new[] { warrior, ranger, mage }) EditorUtility.SetDirty(definition);
 
             // Their Tomes go at the end of the item catalog (players keep item ids).
             ClassTomes.Clear();
