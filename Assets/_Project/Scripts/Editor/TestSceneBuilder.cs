@@ -131,19 +131,19 @@ namespace RPG.EditorTools
             {
                 Name = "Goblin", Animations = goblinAnimations, Scale = 0.85f, Health = SourceHealth(2), MinDamage = 6, MaxDamage = 10,
                 AttackInterval = 2f, Level = 2, Experience = LevelCurve.KillExperienceFor(2), MoveSpeed = 1.8f, Gold = new Vector2Int(3, 6),
-                Loot = Loot(items, ("GoblinEar", 0.6f), ("ChippedRuby", 0.02f), ("ChippedTopaz", 0.02f), ("ChippedSapphire", 0.02f), ("ChippedEmerald", 0.02f), ("RoughAmethyst", 0.02f), ("HealingPotion", 0.3f), ("ManaPotion", 0.15f)),
+                Loot = Loot(items, ("ChippedRuby", 0.02f), ("ChippedTopaz", 0.02f), ("ChippedSapphire", 0.02f), ("ChippedEmerald", 0.02f), ("RoughAmethyst", 0.02f), ("HealingPotion", 0.3f), ("ManaPotion", 0.15f)),
             }, barSprite, lootBagPrefab, affixes);
             GameObject brutePrefab = CreateMonsterPrefab(new MonsterSpec
             {
                 Name = "Goblin Brute", Animations = bruteAnimations, Scale = 1.05f, Health = SourceHealth(4), MinDamage = 12, MaxDamage = 20,
                 AttackInterval = 2.2f, Level = 4, Experience = LevelCurve.KillExperienceFor(4), MoveSpeed = 1.6f, Gold = new Vector2Int(10, 16),
-                Loot = Loot(items, ("BruteTusk", 0.6f), ("ChippedRuby", 0.04f), ("ChippedTopaz", 0.04f), ("ChippedSapphire", 0.04f), ("ChippedEmerald", 0.04f), ("RoughAmethyst", 0.04f), ("HealingPotion", 0.5f), ("ManaPotion", 0.25f)),
+                Loot = Loot(items, ("ChippedRuby", 0.04f), ("ChippedTopaz", 0.04f), ("ChippedSapphire", 0.04f), ("ChippedEmerald", 0.04f), ("RoughAmethyst", 0.04f), ("HealingPotion", 0.5f), ("ManaPotion", 0.25f)),
             }, barSprite, lootBagPrefab, affixes);
             GameObject orcPrefab = CreateMonsterPrefab(new MonsterSpec
             {
                 Name = "Orc", Animations = orcAnimations, Scale = 1.15f, Health = SourceHealth(6), MinDamage = 20, MaxDamage = 30,
                 AttackInterval = 2f, Level = 6, Experience = LevelCurve.KillExperienceFor(6), MoveSpeed = 1.7f, Gold = new Vector2Int(20, 30),
-                Loot = Loot(items, ("OrcFang", 0.6f), ("ChippedRuby", 0.05f), ("ChippedTopaz", 0.05f), ("ChippedSapphire", 0.05f), ("ChippedEmerald", 0.05f), ("RoughAmethyst", 0.05f), ("Ruby", 0.01f), ("Sapphire", 0.01f), ("HealingPotion", 0.6f), ("ManaPotion", 0.3f)),
+                Loot = Loot(items, ("ChippedRuby", 0.05f), ("ChippedTopaz", 0.05f), ("ChippedSapphire", 0.05f), ("ChippedEmerald", 0.05f), ("RoughAmethyst", 0.05f), ("Ruby", 0.01f), ("Sapphire", 0.01f), ("HealingPotion", 0.6f), ("ManaPotion", 0.3f)),
             }, barSprite, lootBagPrefab, affixes);
             CharacterAnimationSet kingAnimations = CreateCharacterAnimationSet("GoblinKing", KingArtFolder, KingAnimationSetPath,
                 new Color(0.75f, 0.58f, 0.15f), new Color(0.4f, 0.58f, 0.25f));
@@ -153,7 +153,7 @@ namespace RPG.EditorTools
             {
                 Name = "Dungeon Boss", Animations = kingAnimations, Scale = 1.5f, Health = SourceHealth(6), MinDamage = 20, MaxDamage = 30,
                 AttackInterval = 2f, Level = 6, Experience = LevelCurve.KillExperienceFor(6), MoveSpeed = 1.7f, Gold = new Vector2Int(20, 30),
-                Loot = Loot(items, ("OrcFang", 0.6f), ("ChippedRuby", 0.05f), ("ChippedTopaz", 0.05f), ("ChippedSapphire", 0.05f), ("ChippedEmerald", 0.05f), ("RoughAmethyst", 0.05f), ("Ruby", 0.01f), ("Sapphire", 0.01f), ("HealingPotion", 0.6f), ("ManaPotion", 0.3f)),
+                Loot = Loot(items, ("ChippedRuby", 0.05f), ("ChippedTopaz", 0.05f), ("ChippedSapphire", 0.05f), ("ChippedEmerald", 0.05f), ("RoughAmethyst", 0.05f), ("Ruby", 0.01f), ("Sapphire", 0.01f), ("HealingPotion", 0.6f), ("ManaPotion", 0.3f)),
             }, barSprite, lootBagPrefab, affixes, boss => boss.AddComponent<BossMechanics>());
             ChestPrefabs chests = CreateChestPrefabs(items, affixes, lootBagPrefab);
             DungeonDefinition[] dungeons = CreateDungeons(goblinPrefab, brutePrefab, orcPrefab, bossPrefab,
@@ -931,6 +931,7 @@ namespace RPG.EditorTools
             (string amethyst, RPG.Progression.Attribute intelligence, Color purple) = GemKinds[4];
             all.AddRange(CreateGemTiers(amethyst, intelligence, purple, $"Rough{amethyst}", $"Refined{amethyst}"));
             all.AddRange(CreateMoreGear());
+            all.AddRange(CreateSourceJunk());
             catalog.items = all.ToArray();
             EditorUtility.SetDirty(catalog);
             return catalog;
@@ -1169,6 +1170,52 @@ namespace RPG.EditorTools
                 }
             }
             return gear;
+        }
+
+        /// <summary>The source game's junk (MonsterData.Junk) by kind and item level 1-25.</summary>
+        private static readonly Dictionary<(int kind, int level), ItemDefinition> SourceJunk = new Dictionary<(int, int), ItemDefinition>();
+
+        /// <summary>
+        /// The source game's junk loot (npc_models_junkloot): every kind ("Hoof", "Insect Scale") for item levels 1-25, sold
+        /// for the source price. At the end of the catalog.
+        /// </summary>
+        private static List<ItemDefinition> CreateSourceJunk()
+        {
+            SourceJunk.Clear();
+            var created = new List<ItemDefinition>();
+            for (int kind = 0; kind < MonsterData.Junk.Length; kind++)
+            {
+                (string kindName, (string name, int sell, int stack)[] levels) = MonsterData.Junk[kind];
+                for (int level = 1; level <= levels.Length; level++)
+                {
+                    (string name, int sell, int stack) = levels[level - 1];
+                    ItemDefinition item = CreateJunk($"Junk/{name.Replace(" ", "")}", name, new Color(0.6f, 0.55f, 0.45f), Mathf.Max(1, sell) * 4);
+                    item.sellValue = Mathf.Max(1, sell);
+                    item.maxStack = Mathf.Max(1, stack);
+                    item.itemLevel = level;
+                    SourceJunk[(kind, level)] = item;
+                    created.Add(item);
+                }
+            }
+            return created;
+        }
+
+        /// <summary>Chance a monster drops a piece of junk (the source game rolls it on its server).</summary>
+        private const float JunkChance = 0.6f;
+
+        /// <summary>
+        /// The junk a monster of the source game drops (by its name, MonsterData.JunkByMonster), as loot entries at its
+        /// level: one of its kinds at <see cref="JunkChance"/>. Empty for monsters without junk.
+        /// </summary>
+        private static LootEntry[] JunkLoot(string monsterName, int level)
+        {
+            int[] kinds = null;
+            foreach ((string monster, int[] junk) in MonsterData.JunkByMonster)
+                if (monster == monsterName) kinds = junk;
+            if (kinds == null || kinds.Length == 0) return Array.Empty<LootEntry>();
+            int itemLevel = Mathf.Clamp(level, 1, 25);
+            return kinds.Where(kind => SourceJunk.ContainsKey((kind, itemLevel)))
+                .Select(kind => new LootEntry(SourceJunk[(kind, itemLevel)], JunkChance / kinds.Length)).ToArray();
         }
 
         /// <summary>The source game's base name and sell price of a plain piece (GearSourceData), or the fallbacks.</summary>
@@ -1470,9 +1517,11 @@ namespace RPG.EditorTools
                 spawner.Configure(prefab, 1, 0.6f, respawn);
                 spawner.EliteChance = elite ? 1f : 0f;
                 spawner.Level = level;
-                // Horned beasts and Lesser Wyrms sometimes drop Keys to the Barracks.
+                // The source game's name, and its junk; horned beasts and Lesser Wyrms sometimes drop Keys to the Barracks.
+                string sourceName = i < MonsterData.SpotNames.Length ? MonsterData.SpotNames[i] : null;
+                if (!string.IsNullOrEmpty(sourceName)) spawner.DisplayName = sourceName;
                 int keyLoot = KeyDropperLoot(cell);
-                if (keyLoot > 0) spawner.BonusLoot = DungeonLoot(keyLoot);
+                spawner.BonusLoot = JunkLoot(sourceName, level).Concat(keyLoot > 0 ? DungeonLoot(keyLoot) : Array.Empty<LootEntry>()).ToArray();
                 // From level 3 every fourth spot (and every elite) hits with magic: frost, fire, shadow or holy,
                 // so the resists matter.
                 if (level >= 3 && (elite || i % 4 == 0)) spawner.School = (DamageSchool)(1 + i / 4 % 4);

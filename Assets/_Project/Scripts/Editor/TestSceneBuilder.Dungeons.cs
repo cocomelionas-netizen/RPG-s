@@ -163,7 +163,7 @@ namespace RPG.EditorTools
                     healthScale = m.health,
                     damageScale = m.damage,
                     goldScale = m.gold,
-                    loot = DungeonLoot(m.loot),
+                    loot = DungeonLoot(m.loot).Concat(JunkLoot(m.name.Trim(), m.level)).ToArray(),
                     blueChance = m.blue,
                     goldChance = m.goldQuality,
                     purpleChance = m.purple,
@@ -250,7 +250,7 @@ namespace RPG.EditorTools
                 spawner.EliteChance = edge.elite ? 1f : 0f;
                 spawner.Level = edge.level;
                 spawner.DisplayName = edge.name;
-                spawner.BonusLoot = DungeonLoot(edge.loot);
+                spawner.BonusLoot = DungeonLoot(edge.loot).Concat(JunkLoot(edge.name, edge.level)).ToArray();
             }
         }
     }
