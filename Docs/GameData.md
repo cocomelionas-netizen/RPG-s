@@ -89,7 +89,13 @@ the client – we use our own, stepped like its bosses'.
 ## Items by level
 
 - **Equipment slots** like the source game's: Weapon, Helm, Chest, Feet, Necklace, Belt, Legs, Hands, two Rings and the
-  Offhand (shield) (`Inventory.EquipmentSlots`; the inventory (I) shows them all).
+  Offhand (shield) (`Inventory.EquipmentSlots`). As in the source game they are on the character sheet (C): the GENERAL,
+  COMBAT and SKILLS tabs, the worn gear down both sides (click to take off, drag from the bag to put on), name, level,
+  progression and experience between them, the stats on the right and SPEND EXP showing the + buttons. The inventory (I) is
+  only the bag.
+- **Class gear** like the source game's: swords for the warrior, bows for the ranger, staves for the mage; armor by the
+  source's class armor (`player_desirable_armor`): warrior (its paladin) leather, chain, plate and the shield; ranger
+  leather and chain; mage robes (`ItemDefinition.classMask`). Necklaces, belts and rings for everyone.
 - **Gear names and prices** are the source game's plain pieces (`item_template`, generated; `Tools/GameData/gear.py` →
   `Scripts/Editor/GearSourceData.cs`): Bronze Slicer, Aspen Shortbow, Aspen Stave, Leather Trousers, Bronze Grips,
   Pendant, Girdle, Ring, Barricade... Legs (80 % of a chest's armor) and hands (50 %) in every armor type; a necklace, belt
@@ -124,7 +130,7 @@ the client – we use our own, stepped like its bosses'.
 - Colours as in the source game: green → blue → **gold** (Epic) → **purple** (Legendary, the top).
   A boss – a guaranteed gold piece + 25 % purple.
 
-## Stats (C window, 3 pages)
+## Stats (C window: GENERAL, COMBAT, SKILLS)
 
 All of the source game's stats (names, ids and XP prices from the client executable); points can be bought with XP for each:
 

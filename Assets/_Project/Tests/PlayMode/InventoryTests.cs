@@ -324,6 +324,20 @@ namespace RPG.Tests
             Assert.AreEqual(3 * ruby.attributes.strength, inventory.Attributes.strength);
         }
 
+        [UnityTest]
+        public IEnumerator ClassArmor_LikeTheSourceGame()
+        {
+            // New characters are warriors (the source game's paladin): leather, chain and plate, no robes.
+            ItemDefinition robe = Item("Generated/LinenHood_L01");
+            ItemDefinition leather = Item("Generated/LeatherCap_L01");
+            Assert.IsFalse(robe.CanBeUsedByClass(0));
+            Assert.IsTrue(robe.CanBeUsedByClass(2), "Robes are the mage's.");
+            Assert.IsTrue(leather.CanBeUsedByClass(0) && leather.CanBeUsedByClass(1) && !leather.CanBeUsedByClass(2));
+            inventory.ServerAddItem(robe, 1, false);
+            yield return null;
+            Assert.IsFalse(inventory.ServerEquip(FindInBag(robe)));
+        }
+
         [Test]
         public void SourceJunk_HasAPieceForEveryLevel()
         {
