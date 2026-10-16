@@ -588,7 +588,8 @@ namespace RPG.Progression
             if (ability.UsesSpellPower)
             {
                 critical = UnityEngine.Random.value < Mathf.Max(0f, autoAttack.SpellCritChance);
-                float amount = ability.SpellPowerAt(rank, attributes, UnityEngine.Random.value) * autoAttack.AbilityPower;
+                float amount = ability.SpellPowerAt(rank, attributes, UnityEngine.Random.value) * autoAttack.AbilityPower
+                               * AbilityDefinition.SpellDamageScale * autoAttack.DamageScale;
                 return Mathf.Max(1, Mathf.RoundToInt(amount * (critical ? CriticalMultiplier : 1f)));
             }
             // Old-style ability: auto-attack damage times its multiplier.
@@ -690,10 +691,12 @@ namespace RPG.Progression
                 Health on = effect.onCaster ? health : target;
                 if (on == null || on.Effects == null || on.IsDead) continue;
                 float value = effect.ValueAt(rank, attributes);
-                // Damage and healing over time follow our health scale, like the spell's own amounts.
-                if (effect.kind == StatusKind.DamageOverTime || effect.kind == StatusKind.HealOverTime || effect.kind == StatusKind.Absorb
-                    || effect.kind == StatusKind.ManaBurn || effect.kind == StatusKind.ManaOverTime)
-                    value *= AbilityDefinition.PowerScale * autoAttack.AbilityPower;
+                // Damage over time grows like the spell's own damage; healing, shields and mana over time are the source's.
+                if (effect.kind == StatusKind.DamageOverTime)
+                    value *= AbilityDefinition.SpellDamageScale * autoAttack.AbilityPower * autoAttack.DamageScale;
+                else if (effect.kind == StatusKind.HealOverTime || effect.kind == StatusKind.Absorb
+                         || effect.kind == StatusKind.ManaBurn || effect.kind == StatusKind.ManaOverTime)
+                    value *= autoAttack.AbilityPower;
                 bool harmful = health.IsHostileTo(on);
                 on.Effects.ServerApply(ability.displayName, ability.effectColor, effect.kind, value, effect.duration, health,
                     effect.school, effect.anySchool && !effect.magicOnly, effect.interval, effect.maxStacks, harmful, effect.magicOnly);

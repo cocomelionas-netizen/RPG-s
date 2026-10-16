@@ -442,7 +442,7 @@ namespace RPG.EditorTools
                 },
                 Monsters = new[]
                 {
-                    (new Vector3Int(12, 68, 0), "Melchon", 28, true, true, 16.546f, 0f, 15f, 30, 0f, 1f, 0.1f),
+                    (new Vector3Int(12, 68, 0), "Melchon", 28, true, true, 15.337f, 0f, 15f, 30, 0f, 1f, 0.1f),
                     (new Vector3Int(43, 79, 0), "Forgotten Guard", 25, true, false, 0f, 0f, 0.5f, 0, 0f, 0f, 0f),
                     (new Vector3Int(52, 79, 0), "Forgotten Guard", 25, true, false, 0f, 0f, 0.5f, 0, 0f, 0f, 0f),
                     (new Vector3Int(47, 77, 0), "Forgotten Loyalist", 25, true, false, 0f, 0f, 0.5f, 0, 0f, 0f, 0f),
@@ -778,8 +778,8 @@ namespace RPG.EditorTools
                     (new Vector3Int(11, 32, 0), "Sorcerer", 25, true, false, 0f, 0f, 0.75f, 0, 0f, 0f, 0f),
                     (new Vector3Int(12, 59, 0), "Sorcerer", 25, true, false, 0f, 0f, 0.75f, 0, 0f, 0f, 0f),
                     (new Vector3Int(17, 60, 0), "Undead Horror", 25, true, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
-                    (new Vector3Int(39, 55, 0), "Lord Zargan", 30, true, true, 28.787f, 4.688f, 20f, 36, 0f, 0f, 1f),
-                    (new Vector3Int(7, 14, 0), "Tchazzar", 30, true, true, 16.517f, 0f, 17.5f, 34, 0f, 1f, 0.25f),
+                    (new Vector3Int(39, 55, 0), "Lord Zargan", 30, true, true, 25.501f, 4.688f, 20f, 36, 0f, 0f, 1f),
+                    (new Vector3Int(7, 14, 0), "Tchazzar", 30, true, true, 14.631f, 0f, 17.5f, 34, 0f, 1f, 0.25f),
                     (new Vector3Int(44, 33, 0), "Forgotten Loyalist", 25, true, false, 0f, 0f, 0.5f, 0, 0f, 0f, 0f),
                     (new Vector3Int(44, 35, 0), "Forgotten Loyalist", 25, true, false, 0f, 0f, 0.5f, 0, 0f, 0f, 0f),
                     (new Vector3Int(40, 34, 0), "Forgotten Guard", 25, true, false, 0f, 0f, 0.5f, 0, 0f, 0f, 0f),
@@ -945,7 +945,7 @@ namespace RPG.EditorTools
                     (new Vector3Int(55, 27, 0), "Undead Horror", 25, true, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
                     (new Vector3Int(19, 6, 0), "Undead Horror", 25, true, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
                     (new Vector3Int(60, 42, 0), "Undead Horror", 25, true, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
-                    (new Vector3Int(71, 8, 0), "Knight Maximus", 28, true, true, 3.04f, 1.5f, 5f, 32, 1f, 1f, 0.15f),
+                    (new Vector3Int(71, 8, 0), "Knight Maximus", 28, true, true, 2.818f, 1.5f, 5f, 32, 1f, 1f, 0.15f),
                 },
                 Chests = new[]
                 {
@@ -1050,16 +1050,16 @@ namespace RPG.EditorTools
                 },
                 Monsters = new[]
                 {
-                    (new Vector3Int(66, 84, 0), "Kandoryrs Knight", 30, true, false, 10.485f, 7.5f, 1f, 0, 0f, 0f, 0f),
+                    (new Vector3Int(66, 84, 0), "Kandoryrs Knight", 30, true, false, 9.288f, 7.5f, 1f, 0, 0f, 0f, 0f),
                     (new Vector3Int(70, 85, 0), "Conjured Frostmite", 30, true, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
                     (new Vector3Int(67, 79, 0), "Conjured Firemite", 30, true, false, 0f, 0f, 0.75f, 0, 0f, 0f, 0f),
-                    (new Vector3Int(34, 83, 0), "Kandoryrs Knight", 30, true, false, 10.485f, 7.5f, 1f, 0, 0f, 0f, 0f),
-                    (new Vector3Int(34, 79, 0), "Kandoryrs Knight", 30, true, false, 10.485f, 7.5f, 1f, 0, 0f, 0f, 0f),
-                    (new Vector3Int(48, 74, 0), "Kandoryrs Knight", 30, true, false, 10.485f, 7.5f, 1f, 0, 0f, 0f, 0f),
+                    (new Vector3Int(34, 83, 0), "Kandoryrs Knight", 30, true, false, 9.288f, 7.5f, 1f, 0, 0f, 0f, 0f),
+                    (new Vector3Int(34, 79, 0), "Kandoryrs Knight", 30, true, false, 9.288f, 7.5f, 1f, 0, 0f, 0f, 0f),
+                    (new Vector3Int(48, 74, 0), "Kandoryrs Knight", 30, true, false, 9.288f, 7.5f, 1f, 0, 0f, 0f, 0f),
                     (new Vector3Int(44, 75, 0), "Conjured Frostmite", 30, true, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
                     (new Vector3Int(48, 79, 0), "Conjured Firemite", 30, true, false, 0f, 0f, 0.75f, 0, 0f, 0f, 0f),
-                    (new Vector3Int(10, 32, 0), "Kandoryrs Knight", 30, true, false, 10.485f, 7.5f, 1f, 0, 0f, 0f, 0f),
-                    (new Vector3Int(17, 32, 0), "Kandoryrs Knight", 30, true, false, 10.485f, 7.5f, 1f, 0, 0f, 0f, 0f),
+                    (new Vector3Int(10, 32, 0), "Kandoryrs Knight", 30, true, false, 9.288f, 7.5f, 1f, 0, 0f, 0f, 0f),
+                    (new Vector3Int(17, 32, 0), "Kandoryrs Knight", 30, true, false, 9.288f, 7.5f, 1f, 0, 0f, 0f, 0f),
                     (new Vector3Int(13, 28, 0), "Conjured Firemite", 30, true, false, 0f, 0f, 0.75f, 0, 0f, 0f, 0f),
                     (new Vector3Int(67, 63, 0), "Conjured Frostmite", 30, true, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
                     (new Vector3Int(77, 67, 0), "Conjured Frostmite", 30, true, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
@@ -1077,7 +1077,7 @@ namespace RPG.EditorTools
                     (new Vector3Int(22, 19, 0), "Telamont's Watcher", 30, true, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
                     (new Vector3Int(56, 91, 0), "Telamont's Watcher", 30, true, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
                     (new Vector3Int(56, 89, 0), "Telamont's Watcher", 30, true, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
-                    (new Vector3Int(38, 54, 0), "Demiplanar Guardian", 30, true, true, 81.454f, 11.25f, 50f, 50, 0f, 0f, 1f),
+                    (new Vector3Int(38, 54, 0), "Demiplanar Guardian", 30, true, true, 72.155f, 11.25f, 50f, 50, 0f, 0f, 1f),
                     (new Vector3Int(75, 62, 0), "Telamont's Watcher", 30, true, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
                     (new Vector3Int(69, 18, 0), "Telamont's Watcher", 30, true, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
                     (new Vector3Int(88, 20, 0), "Telamont's Watcher", 30, true, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
@@ -1224,7 +1224,7 @@ namespace RPG.EditorTools
                 },
                 Monsters = new[]
                 {
-                    (new Vector3Int(8, 11, 0), "Ebondeath", 30, true, true, 4.861f, 0.75f, 8.5f, 37, 0f, 1f, 0.75f),
+                    (new Vector3Int(8, 11, 0), "Ebondeath", 30, true, true, 4.306f, 0.75f, 8.5f, 37, 0f, 1f, 0.75f),
                     (new Vector3Int(37, 52, 0), "Fallen Guard", 25, true, false, 2.663f, 1.5f, 1f, 0, 0f, 0f, 0f),
                     (new Vector3Int(5, 33, 0), "Fallen Guard", 25, true, false, 2.663f, 1.5f, 1f, 0, 0f, 0f, 0f),
                     (new Vector3Int(5, 24, 0), "Fallen Guard", 25, true, false, 2.663f, 1.5f, 1f, 0, 0f, 0f, 0f),
@@ -1349,7 +1349,7 @@ namespace RPG.EditorTools
                 },
                 Monsters = new[]
                 {
-                    (new Vector3Int(17, 5, 0), "Prince Telamont", 30, true, true, 49.843f, 0f, 60f, 51, 0f, 0f, 1f),
+                    (new Vector3Int(17, 5, 0), "Prince Telamont", 30, true, true, 44.153f, 0f, 60f, 51, 0f, 0f, 1f),
                 },
                 Chests = System.Array.Empty<(Vector3Int cell, int kind, int level, string name)>(),
                 Rows = new[]
@@ -1428,7 +1428,7 @@ namespace RPG.EditorTools
                 },
                 Monsters = new[]
                 {
-                    (new Vector3Int(13, 14, 0), "Balagos", 30, true, true, 6.033f, 1.875f, 8.5f, 39, 0f, 1f, 0.75f),
+                    (new Vector3Int(13, 14, 0), "Balagos", 30, true, true, 5.344f, 1.875f, 8.5f, 39, 0f, 1f, 0.75f),
                     (new Vector3Int(49, 68, 0), "Corrupt Cleric", 25, true, false, 2.663f, 0.75f, 1f, 0, 0f, 0f, 0f),
                     (new Vector3Int(48, 66, 0), "Skeletal Mage", 25, false, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
                     (new Vector3Int(51, 66, 0), "Skeletal Mage", 25, false, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
@@ -1439,12 +1439,12 @@ namespace RPG.EditorTools
                     (new Vector3Int(69, 70, 0), "Undead Horror", 25, true, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
                     (new Vector3Int(70, 53, 0), "Undead Horror", 25, true, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
                     (new Vector3Int(43, 53, 0), "Undead Horror", 25, true, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
-                    (new Vector3Int(15, 29, 0), "Salmaster", 30, true, true, 6.2f, 1.125f, 9.5f, 38, 0f, 0f, 1f),
-                    (new Vector3Int(23, 59, 0), "Salmaster's Watcher", 30, true, false, 1.822f, 1.125f, 1f, 0, 0f, 0f, 0f),
-                    (new Vector3Int(8, 59, 0), "Salmaster's Watcher", 30, true, false, 1.822f, 1.125f, 1f, 0, 0f, 0f, 0f),
+                    (new Vector3Int(15, 29, 0), "Salmaster", 30, true, true, 5.492f, 1.125f, 9.5f, 38, 0f, 0f, 1f),
+                    (new Vector3Int(23, 59, 0), "Salmaster's Watcher", 30, true, false, 1.614f, 1.125f, 1f, 0, 0f, 0f, 0f),
+                    (new Vector3Int(8, 59, 0), "Salmaster's Watcher", 30, true, false, 1.614f, 1.125f, 1f, 0, 0f, 0f, 0f),
                     (new Vector3Int(15, 45, 0), "Undead Horror", 25, true, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
-                    (new Vector3Int(56, 28, 0), "Salmaster's Watcher", 30, true, false, 1.822f, 1.125f, 1f, 0, 0f, 0f, 0f),
-                    (new Vector3Int(56, 40, 0), "Salmaster's Watcher", 30, true, false, 1.822f, 1.125f, 1f, 0, 0f, 0f, 0f),
+                    (new Vector3Int(56, 28, 0), "Salmaster's Watcher", 30, true, false, 1.614f, 1.125f, 1f, 0, 0f, 0f, 0f),
+                    (new Vector3Int(56, 40, 0), "Salmaster's Watcher", 30, true, false, 1.614f, 1.125f, 1f, 0, 0f, 0f, 0f),
                     (new Vector3Int(65, 12, 0), "Lesser Wyrm", 25, true, false, 0f, 0f, 1f, 31, 0f, 0f, 0f),
                     (new Vector3Int(30, 44, 0), "Fallen Guard", 25, true, false, 2.663f, 1.5f, 1f, 0, 0f, 0f, 0f),
                     (new Vector3Int(32, 12, 0), "Fallen Guard", 25, true, false, 2.663f, 1.5f, 1f, 0, 0f, 0f, 0f),

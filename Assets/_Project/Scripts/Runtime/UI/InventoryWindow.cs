@@ -324,7 +324,7 @@ namespace RPG.UI
         {
             var attack = inventory.GetComponent<AutoAttack>();
             var health = inventory.GetComponent<Health>();
-            string damage = attack != null ? $"{attack.MinDamage}-{attack.MaxDamage}" : "-";
+            string damage = attack != null ? $"{attack.ScaledMinDamage}-{attack.ScaledMaxDamage}" : "-";
             string maxHealth = health != null ? health.Max.ToString() : "-";
             ItemDefinition gem = pendingGem >= 0 ? inventory.Definition(inventory.GetBagSlot(pendingGem)) : null;
             statsText.text = gem != null

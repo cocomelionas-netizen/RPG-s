@@ -53,6 +53,14 @@ namespace RPG.Progression
             return level > 20 ? level * 1.5f : level;
         }
 
+        /// <summary>
+        /// How much harder players hit at a level (all their damage: weapons, abilities, spells, damage over time). The
+        /// source game's monsters have far more health at high levels (60 at level 1, 7340 at 25) than ours had, and its
+        /// server keeps the formulas that make players hit that hard; this keeps a fight with a monster of your level as
+        /// long as it was: 1.5 times at level 1, about 12.7 times at 25.
+        /// </summary>
+        public static float DamageGrowth(int level) => 1.54f * Mathf.Pow(Mathf.Clamp(level, 1, MaxLevel), 0.656f);
+
         public static int KillExperienceFor(int monsterLevel) => KillExperienceTable[Mathf.Clamp(monsterLevel, 1, MaxLevel) - 1];
 
         /// <summary>

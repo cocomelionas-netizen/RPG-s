@@ -55,15 +55,18 @@ ACTIVATORS = {1135, 1136, 1153}
 QUALITY = {0: 'Common', 1: 'Common', 2: 'Common', 3: 'Uncommon', 4: 'Rare', 5: 'Epic', 6: 'Legendary'}
 
 # A normal level 25 monster (Zhendale Brute) has 7340 health; bosses are measured against it. Health then grows
-# with level like this project's monsters (MonsterAI.HealthScaleBetween).
+# with level like this project's monsters (MonsterAI.HealthScaleBetween: the source game's 60 at level 1 to 7340 at 25).
 NORMAL_HEALTH_25 = 7340.0
 # Weapon value of the source game's ordinary dungeon elites (400); damage is measured against an elite's.
 ELITE_WEAPON_VALUE = 400.0
 ELITE_DAMAGE_SCALE = 1.5
 
 
+HEALTH_EXPONENT = math.log(7340.0 / 60.0) / math.log(25.0)
+
+
 def health_scale_between(a, b):
-    return (1 + 0.15 * (b - 1)) / (1 + 0.15 * (a - 1))
+    return (b / a) ** HEALTH_EXPONENT
 
 
 def ident(name):

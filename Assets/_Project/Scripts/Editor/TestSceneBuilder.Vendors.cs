@@ -24,8 +24,8 @@ namespace RPG.EditorTools
 
         /// <summary>
         /// The source game's town supplies that were missing (item_template and their spells): the Scroll of Returning
-        /// (2 s cast, 5 min cooldown, back to St. Revere), food (health and mana at once, out of combat, 30 s cooldown;
-        /// half the source's amounts, like our health) and treasury gold (sold back for the source price). At the end
+        /// (2 s cast, 5 min cooldown, back to St. Revere), food (health and mana at once, out of combat, 30 s cooldown)
+        /// and treasury gold (sold back for the source price). At the end
         /// of the catalog.
         /// </summary>
         private static List<ItemDefinition> CreateTownSupplies()
@@ -40,6 +40,7 @@ namespace RPG.EditorTools
             scroll.maxStack = 5;
             scroll.canHaveAffix = false;
             scroll.description = "Returns you to St. Revere. The scroll is consumed when used.";
+            scroll.sellValue = 100;
             created.Add(scroll);
 
             foreach ((string name, int amount, int sell) in new[]
@@ -51,22 +52,24 @@ namespace RPG.EditorTools
                 ItemDefinition food = CreateItem($"Supplies/{name.Replace(" ", "")}", name, ItemSlot.None, ItemRarity.Common, 0, 0, 0,
                     new Color(0.8f, 0.55f, 0.3f), sell * 3);
                 food.use = ItemUse.Food;
-                food.restoreAmount = Mathf.RoundToInt(amount * 0.5f);
+                food.restoreAmount = amount;
                 food.useCooldown = 30f;
                 food.maxStack = 10;
+                food.sellValue = sell;
                 food.canHaveAffix = false;
                 created.Add(food);
             }
 
-            foreach ((string name, int sell, string description) in new[]
+            foreach ((string name, int sell, int ratio, string description) in new[]
                      {
-                         ("Treasury Gold", 499, "One golden bar, prized by merchants and alchemists alike."),
-                         ("Treasury Coins", 100, "Coins of St. Revere used by merchants and alchemists alike."),
+                         ("Treasury Gold", 499, 80, "One golden bar, prized by merchants and alchemists alike."),
+                         ("Treasury Coins", 100, 40, "Coins of St. Revere used by merchants and alchemists alike."),
                      })
             {
-                // Vendors pay a quarter of the price: four times the source game's sell price.
+                // The banker asks the source game's buy price (sell price times its buy cost ratio) and pays the sell price.
                 ItemDefinition treasure = CreateItem($"Supplies/{name.Replace(" ", "")}", name, ItemSlot.None, ItemRarity.Uncommon, 0, 0, 0,
-                    new Color(1f, 0.82f, 0.25f), sell * 4);
+                    new Color(1f, 0.82f, 0.25f), sell * ratio);
+                treasure.sellValue = sell;
                 treasure.canHaveAffix = false;
                 treasure.description = description;
                 created.Add(treasure);

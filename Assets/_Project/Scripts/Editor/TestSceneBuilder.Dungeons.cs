@@ -32,8 +32,9 @@ namespace RPG.EditorTools
             foreach (var entry in DungeonData.Items)
             {
                 var rarity = (ItemRarity)Enum.Parse(typeof(ItemRarity), entry.quality);
-                // Vendors pay a quarter of the price: four times the source game's sell price.
+                // Vendors pay the source game's sell price and ask four times it.
                 ItemDefinition item = CreateItem(entry.id, entry.name, ItemSlot.None, rarity, 0, 0, 0, DungeonItemColor(entry.id), entry.sellPrice * 4);
+                item.sellValue = entry.sellPrice;
                 item.maxStack = Mathf.Max(1, entry.stack);
                 item.canHaveAffix = false;
                 item.description = entry.description;

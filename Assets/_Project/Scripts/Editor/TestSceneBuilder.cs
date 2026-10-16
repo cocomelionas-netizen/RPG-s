@@ -129,19 +129,19 @@ namespace RPG.EditorTools
             GameObject lootBagPrefab = CreateLootBagPrefab(PlaceholderArtGenerator.LootSack("LootSack"));
             GameObject goblinPrefab = CreateMonsterPrefab(new MonsterSpec
             {
-                Name = "Goblin", Animations = goblinAnimations, Scale = 0.85f, Health = 45, MinDamage = 3, MaxDamage = 5,
+                Name = "Goblin", Animations = goblinAnimations, Scale = 0.85f, Health = SourceHealth(2), MinDamage = 6, MaxDamage = 10,
                 AttackInterval = 2f, Level = 2, Experience = LevelCurve.KillExperienceFor(2), MoveSpeed = 1.8f, Gold = new Vector2Int(3, 6),
                 Loot = Loot(items, ("GoblinEar", 0.6f), ("ChippedRuby", 0.02f), ("ChippedTopaz", 0.02f), ("ChippedSapphire", 0.02f), ("ChippedEmerald", 0.02f), ("RoughAmethyst", 0.02f), ("HealingPotion", 0.3f), ("ManaPotion", 0.15f)),
             }, barSprite, lootBagPrefab, affixes);
             GameObject brutePrefab = CreateMonsterPrefab(new MonsterSpec
             {
-                Name = "Goblin Brute", Animations = bruteAnimations, Scale = 1.05f, Health = 120, MinDamage = 6, MaxDamage = 10,
+                Name = "Goblin Brute", Animations = bruteAnimations, Scale = 1.05f, Health = SourceHealth(4), MinDamage = 12, MaxDamage = 20,
                 AttackInterval = 2.2f, Level = 4, Experience = LevelCurve.KillExperienceFor(4), MoveSpeed = 1.6f, Gold = new Vector2Int(10, 16),
                 Loot = Loot(items, ("BruteTusk", 0.6f), ("ChippedRuby", 0.04f), ("ChippedTopaz", 0.04f), ("ChippedSapphire", 0.04f), ("ChippedEmerald", 0.04f), ("RoughAmethyst", 0.04f), ("HealingPotion", 0.5f), ("ManaPotion", 0.25f)),
             }, barSprite, lootBagPrefab, affixes);
             GameObject orcPrefab = CreateMonsterPrefab(new MonsterSpec
             {
-                Name = "Orc", Animations = orcAnimations, Scale = 1.15f, Health = 220, MinDamage = 10, MaxDamage = 15,
+                Name = "Orc", Animations = orcAnimations, Scale = 1.15f, Health = SourceHealth(6), MinDamage = 20, MaxDamage = 30,
                 AttackInterval = 2f, Level = 6, Experience = LevelCurve.KillExperienceFor(6), MoveSpeed = 1.7f, Gold = new Vector2Int(20, 30),
                 Loot = Loot(items, ("OrcFang", 0.6f), ("ChippedRuby", 0.05f), ("ChippedTopaz", 0.05f), ("ChippedSapphire", 0.05f), ("ChippedEmerald", 0.05f), ("RoughAmethyst", 0.05f), ("Ruby", 0.01f), ("Sapphire", 0.01f), ("HealingPotion", 0.6f), ("ManaPotion", 0.3f)),
             }, barSprite, lootBagPrefab, affixes);
@@ -151,7 +151,7 @@ namespace RPG.EditorTools
             // dungeon spot, measured against a normal monster), drawn bigger, with the ground slam.
             GameObject bossPrefab = CreateMonsterPrefab(new MonsterSpec
             {
-                Name = "Dungeon Boss", Animations = kingAnimations, Scale = 1.5f, Health = 220, MinDamage = 10, MaxDamage = 15,
+                Name = "Dungeon Boss", Animations = kingAnimations, Scale = 1.5f, Health = SourceHealth(6), MinDamage = 20, MaxDamage = 30,
                 AttackInterval = 2f, Level = 6, Experience = LevelCurve.KillExperienceFor(6), MoveSpeed = 1.7f, Gold = new Vector2Int(20, 30),
                 Loot = Loot(items, ("OrcFang", 0.6f), ("ChippedRuby", 0.05f), ("ChippedTopaz", 0.05f), ("ChippedSapphire", 0.05f), ("ChippedEmerald", 0.05f), ("RoughAmethyst", 0.05f), ("Ruby", 0.01f), ("Sapphire", 0.01f), ("HealingPotion", 0.6f), ("ManaPotion", 0.3f)),
             }, barSprite, lootBagPrefab, affixes, boss => boss.AddComponent<BossMechanics>());
@@ -629,18 +629,18 @@ namespace RPG.EditorTools
             ItemCatalog items)
         {
 
-            // Attributes, and health and mana at level 1 (half of the source game's player_class_stats, as the attributes add
-            // the rest), are the source game's: warrior 75/30, ranger 60/45, mage 40/70. Both grow with LevelCurve.HealthGrowth.
+            // Attributes, and health and mana at level 1, are the source game's (player_class_stats): warrior 75/30,
+            // ranger 60/45, mage 40/70. Both grow with LevelCurve.HealthGrowth; attributes and gear add more.
             // Spells are the source game's too (TestSceneBuilder.Spells.cs): the Paladin's for the warrior.
             AbilityDefinition[] warriorSpells = CreateWarriorSpells();
             AbilityDefinition[] rangerSpells = CreateRangerSpells();
             AbilityDefinition[] mageSpells = CreateMageSpells();
-            CharacterClassDefinition warrior = CreateClass("Warrior", warriorLook, 38, 5, 9, 1f, 1.5f, 0.9f, 0.06f, Color.clear,
-                new AttributeSet(15, 10, 5, 15), RPG.Progression.Attribute.Strength, 15, warriorSpells);
-            CharacterClassDefinition ranger = CreateClass("Ranger", rangerLook, 30, 3, 6, 0.8f, 1.7f, 5f, 0.09f, new Color(0.85f, 0.75f, 0.45f),
-                new AttributeSet(10, 15, 10, 10), RPG.Progression.Attribute.Agility, 23, rangerSpells);
-            CharacterClassDefinition mage = CreateClass("Mage", mageLook, 20, 0, 3, 0.8f, 1.8f, 4.5f, 0.08f, new Color(0.7f, 0.5f, 1f),
-                new AttributeSet(5, 5, 20, 10), RPG.Progression.Attribute.Intelligence, 35, mageSpells);
+            CharacterClassDefinition warrior = CreateClass("Warrior", warriorLook, 75, 5, 9, 1f, 1.5f, 0.9f, 0.06f, Color.clear,
+                new AttributeSet(15, 10, 5, 15), RPG.Progression.Attribute.Strength, 30, warriorSpells);
+            CharacterClassDefinition ranger = CreateClass("Ranger", rangerLook, 60, 3, 6, 0.8f, 1.7f, 5f, 0.09f, new Color(0.85f, 0.75f, 0.45f),
+                new AttributeSet(10, 15, 10, 10), RPG.Progression.Attribute.Agility, 45, rangerSpells);
+            CharacterClassDefinition mage = CreateClass("Mage", mageLook, 40, 0, 3, 0.8f, 1.8f, 4.5f, 0.08f, new Color(0.7f, 0.5f, 1f),
+                new AttributeSet(5, 5, 20, 10), RPG.Progression.Attribute.Intelligence, 70, mageSpells);
 
             // Their Tomes go at the end of the item catalog (players keep item ids).
             ClassTomes.Clear();
@@ -713,6 +713,9 @@ namespace RPG.EditorTools
             }
             return asset;
         }
+
+        /// <summary>The source game's normal monster health at a level (<see cref="MonsterAI.SourceHealthAt"/>).</summary>
+        private static int SourceHealth(int level) => Mathf.RoundToInt(MonsterAI.SourceHealthAt(level));
 
         /// <summary>What makes one monster type different from another.</summary>
         private struct MonsterSpec
@@ -945,18 +948,20 @@ namespace RPG.EditorTools
 
         /// <summary>
         /// One gem's tiers like the source game's: Rough (green, stat 1 there), plain (blue, 2), Refined (gold, 3); here
-        /// twice that (2, 4, 6) for our attribute scale. Vendors pay the source sell price (62, 250, 500).
+        /// twice that (2, 4, 6) for our attribute scale. Vendors pay the source sell price (62, 250, 500) and ask six times it.
         /// </summary>
         private static List<ItemDefinition> CreateGemTiers(string gemName, RPG.Progression.Attribute attribute, Color color,
             string roughFile, string refinedFile)
         {
-            ItemDefinition refined = CreateGem(refinedFile, $"Refined {gemName}", ItemRarity.Epic, attribute, 6, color * 1.15f, 2000, null);
-            ItemDefinition normal = CreateGem(gemName, gemName, ItemRarity.Rare, attribute, 4, color, 1000, refined);
-            ItemDefinition rough = CreateGem(roughFile, $"Rough {gemName}", ItemRarity.Uncommon, attribute, 2, color * 0.8f, 248, normal);
-            foreach (ItemDefinition gem in new[] { rough, normal, refined })
+            // The source game's prices: sell 62, 250, 500; vendors ask six times that.
+            ItemDefinition refined = CreateGem(refinedFile, $"Refined {gemName}", ItemRarity.Epic, attribute, 6, color * 1.15f, 3000, null);
+            ItemDefinition normal = CreateGem(gemName, gemName, ItemRarity.Rare, attribute, 4, color, 1500, refined);
+            ItemDefinition rough = CreateGem(roughFile, $"Rough {gemName}", ItemRarity.Uncommon, attribute, 2, color * 0.8f, 372, normal);
+            foreach ((ItemDefinition gem, int sell) in new[] { (rough, 62), (normal, 250), (refined, 500) })
             {
                 gem.combineCount = 5;
                 gem.maxStack = 5;
+                gem.sellValue = sell;
             }
             return new List<ItemDefinition> { rough, normal, refined };
         }
@@ -1056,10 +1061,11 @@ namespace RPG.EditorTools
             ItemDefinition Piece(string displayName, ItemSlot slot, int level, float chance, int damage, int armor, int mana,
                 Color color, float sourceSellPrice, int requiredClass, ItemDefinition material)
             {
-                // Our gold is about a tenth of theirs: vendors pay a quarter of the price.
-                int price = Mathf.Max(1, Mathf.RoundToInt(sourceSellPrice * 0.4f));
+                // The source game's prices: vendors pay its sell price and ask three times that.
+                int sell = Mathf.Max(1, Mathf.RoundToInt(sourceSellPrice));
                 ItemDefinition item = CreateItem(GearFile(displayName, level), displayName, slot, ItemRarity.Common, damage, 0, armor,
-                    color, price, requiredClass, level);
+                    color, sell * 3, requiredClass, level);
+                item.sellValue = sell;
                 item.manaBonus = mana;
                 item.dropWeight = chance / 100f;
                 gear.Add(item);
@@ -1105,19 +1111,20 @@ namespace RPG.EditorTools
         /// <summary>
         /// The source game's potions (item_template and their spells): Minor, Lesser, plain, Greater and Major Life and Mana
         /// Potions (levels 1, 5, 12, 18, 24) restore over 20 seconds; their Serums (green) restore at once. Amounts are
-        /// half of the source game's, like our health. Five of a kind combine into the next tier, a Major Potion into its
+        /// the source game's (a Minor Life Potion 9 every 2 s, 90 in all; a Major Life Serum 600). Five of a kind combine into the next tier, a Major Potion into its
         /// Serum (the source game's crafting recipes). Fills in the given Minor potions and returns the new ones.
         /// </summary>
         private static List<ItemDefinition> CreatePotions(ItemDefinition minorLife, ItemDefinition minorMana)
         {
             string[] tiers = { "Minor", "Lesser", "", "Greater", "Major" };
             int[] levels = { 1, 5, 12, 18, 24 };
-            int[] lifePotion = { 45, 70, 100, 150, 200 };
-            int[] lifeSerum = { 68, 109, 150, 225, 300 };
-            int[] manaPotion = { 55, 90, 125, 185, 250 };
-            int[] manaSerum = { 81, 136, 188, 270, 360 };
-            int[] potionPrice = { 10, 50, 120, 180, 240 };
-            int[] serumPrice = { 14, 74, 180, 270, 360 };
+            int[] lifePotion = { 90, 140, 200, 300, 400 };
+            int[] lifeSerum = { 135, 217, 300, 450, 600 };
+            int[] manaPotion = { 110, 180, 250, 370, 500 };
+            int[] manaSerum = { 162, 271, 375, 540, 720 };
+            // The source game's sell prices; vendors ask three times that (its buy cost ratio).
+            int[] potionSell = { 5, 25, 60, 90, 120 };
+            int[] serumSell = { 7, 37, 90, 135, 180 };
             var created = new List<ItemDefinition>();
 
             void Chain(string kind, ItemUse use, int[] potionAmounts, int[] serumAmounts, Color color, ItemDefinition minor)
@@ -1128,9 +1135,12 @@ namespace RPG.EditorTools
                     string prefix = tiers[tier].Length > 0 ? tiers[tier] + " " : "";
                     ItemDefinition potion = tier == 0 ? minor
                         : CreateItem($"{tiers[tier]}{kind}Potion", $"{prefix}{kind} Potion", ItemSlot.None, ItemRarity.Common, 0, 0, 0,
-                            color * (1f + tier * 0.06f), potionPrice[tier]);
+                            color * (1f + tier * 0.06f), potionSell[tier] * 3);
                     ItemDefinition serum = CreateItem($"{tiers[tier]}{kind}Serum", $"{prefix}{kind} Serum", ItemSlot.None, ItemRarity.Uncommon,
-                        0, 0, 0, Color.Lerp(color, Color.white, 0.3f), serumPrice[tier]);
+                        0, 0, 0, Color.Lerp(color, Color.white, 0.3f), serumSell[tier] * 3);
+                    potion.price = potionSell[tier] * 3;
+                    potion.sellValue = potionSell[tier];
+                    serum.sellValue = serumSell[tier];
                     foreach ((ItemDefinition item, int amount, float seconds) in new[] { (potion, potionAmounts[tier], 20f), (serum, serumAmounts[tier], 0f) })
                     {
                         item.use = use;
@@ -1210,6 +1220,7 @@ namespace RPG.EditorTools
             item.combineResult = null;
             item.castSeconds = 0f;
             item.useCooldown = 0f;
+            item.sellValue = 0;
             EditorUtility.SetDirty(item);
             return item;
         }

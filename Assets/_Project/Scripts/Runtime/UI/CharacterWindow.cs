@@ -111,7 +111,7 @@ namespace RPG.UI
                 Stat(Attribute.Meditate, "Mana regained every second: 1 every 5 seconds per point.",
                     () => $"{AttributeRules.ManaRegenPerSecond(total):0.#}/s"),
                 null,
-                new Row { Label = "Damage:", Value = () => $"{attack.MinDamage} - {attack.MaxDamage}",
+                new Row { Label = "Damage:", Value = () => $"{attack.ScaledMinDamage} - {attack.ScaledMaxDamage}",
                     Description = "The damage of your attacks; abilities multiply it. Your weapon's skill raises it." },
                 new Row { Label = "Critical Chance:", Value = () => Percent(progress.CritChance),
                     Description = "The chance for an attack to deal double damage: your class, Agility and the melee or ranged critical rating." },
