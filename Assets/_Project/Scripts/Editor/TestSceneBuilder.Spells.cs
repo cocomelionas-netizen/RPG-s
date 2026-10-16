@@ -415,7 +415,11 @@ namespace RPG.EditorTools
             {
                 if (spell.learnLevel <= 1) continue;
                 RPG.Items.ItemDefinition tome = CreateItem($"Tomes/TomeOf{spell.name}", $"Tome of {spell.displayName}", RPG.Items.ItemSlot.None,
-                    RPG.Items.ItemRarity.Uncommon, 0, 0, 0, spell.effectColor * 0.7f, 10 * spell.learnLevel, classIndex, spell.learnLevel);
+                    RPG.Items.ItemRarity.Uncommon, 0, 0, 0, spell.effectColor * 0.7f, 5 * spell.learnLevel * spell.learnLevel, classIndex,
+                    spell.learnLevel);
+                // The source game's Tomes sell for 5 x their level and cost that times their level (Holy Wrath 5, Divine
+                // Protection at 20: 2000).
+                tome.sellValue = 5 * spell.learnLevel;
                 tome.use = RPG.Items.ItemUse.LearnSpell;
                 tome.teachesSpell = spell;
                 tome.canHaveAffix = false;

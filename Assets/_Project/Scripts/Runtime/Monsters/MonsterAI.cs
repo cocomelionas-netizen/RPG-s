@@ -143,24 +143,35 @@ namespace RPG.Monsters
 
         /// <summary>
         /// Server, before spawning: gives this monster another level (a source-game spawn spot's), with the experience
-        /// a kill of that level is worth.
+        /// a kill of that level is worth and gold in proportion to the level.
         /// </summary>
         public void ServerOverrideLevel(int newLevel)
         {
+            int previous = Mathf.Max(1, level);
             level = Mathf.Clamp(newLevel, 1, MaxLevel);
             experienceReward = LevelCurve.KillExperienceFor(level);
+            if (level != previous && goldReward.y > 0)
+            {
+                float scale = level / (float)previous;
+                GoldReward = new Vector2Int(Mathf.Max(1, Mathf.RoundToInt(goldReward.x * scale)), Mathf.Max(1, Mathf.RoundToInt(goldReward.y * scale)));
+            }
         }
 
         /// <summary>Monsters go above the players' top level: the source game's dungeon bosses are 28 and 30.</summary>
         public const int MaxLevel = 30;
 
-        // How much tougher a monster gets per level. Its damage grows as fast as players' health does
-        // (LevelCurve.HealthGrowth, the source game's), so a monster of your level is as dangerous at 25 as at 1.
-        private const float HealthPerLevel = 0.15f;
+        // The source game's normal monsters: 60 health at level 1 (Antling) and 7340 at level 25 (Zhendale Brute); its
+        // server works out the rest, so between and beyond those a power curve through both. Their damage grows as fast as
+        // players' health does (LevelCurve.HealthGrowth, the source game's), so a monster of your level is as dangerous
+        // at 25 as at 1.
+        public const float SourceHealthAtLevelOne = 60f;
+        public static readonly float SourceHealthExponent = Mathf.Log(7340f / SourceHealthAtLevelOne) / Mathf.Log(25f);
+
+        /// <summary>The health of the source game's normal monster of <paramref name="level"/> (60 at 1, 7340 at 25).</summary>
+        public static float SourceHealthAt(int level) => SourceHealthAtLevelOne * Mathf.Pow(Mathf.Max(1, level), SourceHealthExponent);
 
         /// <summary>How much more health a monster of <paramref name="toLevel"/> has than the same monster of <paramref name="fromLevel"/>.</summary>
-        public static float HealthScaleBetween(int fromLevel, int toLevel) =>
-            (1f + HealthPerLevel * (toLevel - 1)) / (1f + HealthPerLevel * (fromLevel - 1));
+        public static float HealthScaleBetween(int fromLevel, int toLevel) => SourceHealthAt(toLevel) / SourceHealthAt(fromLevel);
 
         public static float DamageScaleBetween(int fromLevel, int toLevel) =>
             LevelCurve.HealthGrowth(toLevel) / LevelCurve.HealthGrowth(fromLevel);
@@ -175,8 +186,8 @@ namespace RPG.Monsters
 
         // ---------- Elites ----------
 
-        // The source game's elites have about 5.6 times the health of normal monsters.
-        public const float EliteHealthScale = 5.6f;
+        // The source game's elites have three times the health of normal monsters (Zhendale Elite 22025, Brute 7340).
+        public const float EliteHealthScale = 3f;
         public const float EliteDamageScale = 1.5f;
         public const int EliteRewardScale = 3;
         /// <summary>Extra rolls of the gear chance for an elite, and for a boss (a monster with guaranteed gear).</summary>

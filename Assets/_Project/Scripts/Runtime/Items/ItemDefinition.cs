@@ -81,8 +81,10 @@ namespace RPG.Items
         public bool canHaveAffix = true;
 
         [Header("Trade and restrictions")]
-        [Tooltip("Price at vendors in gold; vendors buy it back for a quarter of this.")]
+        [Tooltip("Price at vendors in gold (the source game's: its sell price times its buy cost ratio).")]
         [Min(0)] public int price = 10;
+        [Tooltip("What vendors pay for it (the source game's sell price); 0: a quarter of the price.")]
+        [Min(0)] public int sellValue;
         [Tooltip("Index of the class (in the class catalog) that may equip it; -1 for every class.")]
         public int requiredClass = -1;
         [Tooltip("The item's level: monsters drop gear around their own level, and a player needs this level to wear (or drink) it.")]
@@ -168,8 +170,8 @@ namespace RPG.Items
             }
         }
 
-        /// <summary>What a vendor pays for one (a quarter of the price, at least 1 for anything with a price).</summary>
-        public int SellPrice => price > 0 ? Mathf.Max(1, price / 4) : 0;
+        /// <summary>What a vendor pays for one: its sell value, or a quarter of the price (at least 1 for anything with a price).</summary>
+        public int SellPrice => sellValue > 0 ? sellValue : price > 0 ? Mathf.Max(1, price / 4) : 0;
 
         /// <summary>Sell price with an affix: better affixes make an item worth more.</summary>
         public int SellPriceWith(AffixDefinition affix)

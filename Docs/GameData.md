@@ -51,8 +51,8 @@ the world, with Reginald.
 
 - The gear merchants hold one of each piece; at every restock (5 min) each piece gets a **random quality** with the source
   game's chances (green 100 %, blue 50 %, gold 5 %, purple 1 %, best first), shown with its affix and a higher price.
-- Prices of the new supplies: the source game's buy price (sell price × its buy cost ratio): Scroll of Returning 300.
-  Treasury gold sells back for the source price.
+- Prices: the source game's buy price (sell price × its buy cost ratio), e.g. Scroll of Returning 300, Minor Life Potion 15,
+  Ruby 1500, Treasury Gold 39920; vendors pay the source sell price (100, 5, 250, 499).
 - Not placed: Boltar (Cleric) only sells Cleric Tomes, Vikram (Jeweler) only necklaces and rings – neither exists here.
 
 ## Scroll of Returning and food
@@ -61,20 +61,25 @@ the world, with Reginald.
   game: the nearest waypoint); moving or being stunned breaks it off, and only a finished scroll is used up.
   5 min cooldown, stacks to 5. Sold by Aedis. It can be put on the action bar (the bar shows "Returning" while reading).
 - **Food** (Military Ration, Fresh Apple Pie, Gourmet Ham Sandwich, Oven Baked Turkey, Roasted Pork): health and mana at
-  once (half the source's 25–400, like our health), not within 5 s of taking damage, 30 s cooldown of its own.
+  once (the source's 25–400), not within 5 s of taking damage, 30 s cooldown of its own.
 
 ## Balance
 
 | What | Source | Where |
 |---|---|---|
 | XP per level (1→2: 100, 10→11: 1087, 24→25: 97 380) and per kill (level 1: 20 … 25: 2389) | `player_exp_levels` | `LevelCurve` |
-| Elite HP ~5.6× | `npc_template` | `MonsterAI.EliteHealthScale` |
-| Elites: more materials; boss: a guaranteed gold piece + 25 % purple | `npc_template` loot chances | `MonsterAI`, `LootDrop`, `AffixCatalog.RollQuality` |
+| Normal monster HP: 60 at level 1 (Antling), 7340 at 25 (Zhendale Brute), a power curve through both (the server works out the rest) | `npc_template` | `MonsterAI.SourceHealthAt` |
+| Elite HP ×3 (Zhendale Elite 22025 / Brute 7340); bosses their own HP (Sarloch 18515, Lord Zargan 245750...) | `npc_template` | `MonsterAI.EliteHealthScale`, `DungeonData` |
+| Elites: more gear rolls; boss: a guaranteed gold piece + 25 % purple | `npc_template` loot chances | `MonsterAI`, `LootDrop`, `AffixCatalog.RollQuality` |
 | Vendors: Rare 1, Uncommon 3, restock every 60 s | `npc_vendor` | `VendorDefinition` |
 | Attribute prices in XP | client executable | `AttributeRules.PointCost` |
-| Class attributes and HP/mana at level 1 (warrior 75/30, ranger 60/45, mage 40/70 – half here, the attributes add the rest) | `player_class_stats` | `CharacterClassDefinition` |
+| Class attributes and HP/mana at level 1 (warrior 75/30, ranger 60/45, mage 40/70; attributes and gear add more) | `player_class_stats` | `CharacterClassDefinition` |
 | HP and mana grow × level, from level 21 another ×1.5 | `player_class_stats` | `LevelCurve.HealthGrowth` |
 | Monster damage grows like player HP (a monster of your level is as dangerous at 1 as at 25) | – | `MonsterAI.DamageScaleBetween` |
+| Player damage (weapons, abilities, spell damage, damage over time) × 1.5 at level 1 … 12.7 at 25, so fights last as long against the source game's monster health (its server formulas are not in the client) | – | `LevelCurve.DamageGrowth` |
+| Spells: the source game's formulas (`effect*_scale_formula`): healing, shields and mana as they are; damage half the formula × the damage growth | `spell_template` | `AbilityDefinition.SpellPowerAt`, `SpellDamageScale` |
+| Prices: vendors ask the source game's buy price (sell price × buy cost ratio: potions and gear ×3, gems ×6, Tomes × their level) and pay its sell price | `item_template` | `ItemDefinition.price`, `sellValue` |
+| Monster gold grows with its level (goblin 3–6 at level 2, an orc 20–30 at 6, the same orc at 25: 83–125) | – | `MonsterAI.ServerOverrideLevel` |
 | Affixes ("of the Novice", "of Magical Vim"...) with their level ranges and stats | `affix_template` | `AffixData`, `AffixCatalog` |
 | Potions: Minor/Lesser/–/Greater/Major Life and Mana Potion (levels 1, 5, 12, 18, 24, over 20 s) and Serum (at once), a shared 60 s cooldown, 5 → 1 at the transmuter | `item_template`, `spell_template`, `crafting_recipes` | `TestSceneBuilder.CreatePotions`, `Inventory` |
 
@@ -147,8 +152,8 @@ colour), so resists matter.
 - 5 tiers: Minor (level 1), Lesser (5), – (12), Greater (18), Major (24). They can only be drunk from that level;
   a potion on the action bar drinks that one, or the best of its kind once it runs out.
 - A Potion heals over 20 s (every 2 s), a Serum (green) at once and more. All potions share a 60 s cooldown, as in the source game.
-- Amounts are half the source's (like our HP): Minor Life Potion 45, Major 200; Minor Life Serum 68, Major 300.
-- Monsters drop potions by their level, 15 % a Serum instead of a Potion. Class vendors combine 5 of a kind into the next tier
+- Amounts are the source game's: Minor Life Potion 9 every 2 s (90), Major 400; Minor Life Serum 135, Major 600; mana 110 … 500, serums 162 … 720.
+- Monsters drop potions by their level, 15 % a Serum instead of a Potion. Reginald transmutes 5 of a kind into the next tier
   (5 Major Potions → a Major Serum).
 
 ## Chests
@@ -170,8 +175,8 @@ The source game's containers (`gameobject_template`, field names from the client
 
 The source game's spells (`spell_template`, the Tomes in `item_template`): the Warrior has the Paladin's spells, the Ranger the
 Ranger's, the Mage the Mage's (`Scripts/Editor/TestSceneBuilder.Spells.cs`). Cooldowns, cast times, mana (base + per level), weapon
-damage percentages and spell formulas (rank + (stat + stat2 × k) × coef. / (105 − rank × d)) are the source's; amounts are
-halved, like our HP. Ranges: source yards / 120 (melee 130 → 1.1; spells 610 → 5.1).
+damage percentages and spell formulas (rank + (stat + stat2 × k) × coef. / (105 − rank × d)) are the source's; healing,
+shields and mana as they are, damage half the formula × `LevelCurve.DamageGrowth` (see "Balance"). Ranges: source yards / 120 (melee 130 → 1.1; spells 610 → 5.1).
 
 | Class | Spells (level) |
 |---|---|

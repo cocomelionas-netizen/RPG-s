@@ -332,6 +332,7 @@ namespace RPG.Progression
             autoAttack.SetStats(Mathf.RoundToInt((definition.MinDamageAt(currentLevel) + damageBonus) * skill),
                 Mathf.RoundToInt((definition.MaxDamageAt(currentLevel) + damageBonus) * skill),
                 definition.attackInterval, definition.attackRange, CritChance, definition.projectileColor);
+            autoAttack.DamageScale = LevelCurve.DamageGrowth(currentLevel);
             if (characterAnimator != null && definition.animations != null)
                 characterAnimator.AnimationSet = definition.animations;
             if (IsServer && IsSpawned)

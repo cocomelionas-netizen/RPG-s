@@ -70,8 +70,12 @@ namespace RPG.Progression
     [CreateAssetMenu(menuName = "RPG/Progression/Ability", fileName = "Ability")]
     public class AbilityDefinition : ScriptableObject
     {
-        /// <summary>The source game's spell numbers are for its health; ours is half of it, so its amounts are halved too.</summary>
-        public const float PowerScale = 0.5f;
+        /// <summary>
+        /// Healing, shields and mana from spells are the source game's formula as it is (our health is the source game's).
+        /// Spell damage is half the formula times the caster's <see cref="LevelCurve.DamageGrowth"/> (the source server's
+        /// own multipliers are not in its client), so spells keep pace with the source game's monster health.
+        /// </summary>
+        public const float SpellDamageScale = 0.5f;
 
         public string displayName = "Ability";
         [TextArea] public string description = "";
@@ -162,7 +166,7 @@ namespace RPG.Progression
 
         /// <summary>
         /// The source game's spell formula: rank + (stat + stat 2 x factor) x coefficient / (105 - rank x divisor), plus the
-        /// base amount and a roll up to the spread; halved for our health (<see cref="PowerScale"/>).
+        /// base amount and a roll up to the spread (damage is scaled further, see <see cref="SpellDamageScale"/>).
         /// </summary>
         public float SpellPowerAt(int rank, AttributeSet attributes, float roll01)
         {
@@ -170,7 +174,7 @@ namespace RPG.Progression
             float stats = attributes[spellStat] + attributes[spellStat2] * spellStat2Factor;
             float divisor = Mathf.Max(5f, 105f - rank * rankDivisor);
             float scaled = spellCoefficient > 0f ? rank + stats * spellCoefficient / divisor : 0f;
-            return (scaled + spellAmount + spellSpread * Mathf.Clamp01(roll01)) * PowerScale;
+            return scaled + spellAmount + spellSpread * Mathf.Clamp01(roll01);
         }
 
         /// <summary>Experience the next rank costs (from <paramref name="rank"/> to the next): 10 x its level + 10 x rank^1.5.</summary>

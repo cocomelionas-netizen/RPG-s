@@ -42,6 +42,10 @@ namespace RPG.Combat
         public float RangeTolerance => rangeTolerance;
         public int MinDamage => minDamage;
         public int MaxDamage => maxDamage;
+
+        /// <summary>The damage of a normal hit as it lands (with <see cref="DamageScale"/>), for the character sheet.</summary>
+        public int ScaledMinDamage => Mathf.RoundToInt(minDamage * DamageScale);
+        public int ScaledMaxDamage => Mathf.RoundToInt(maxDamage * DamageScale);
         public float CritChance => critChance;
 
         /// <summary>Server only: what this unit is attacking.</summary>
