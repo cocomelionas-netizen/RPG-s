@@ -281,7 +281,7 @@ namespace RPG.Tests
         [Test]
         public void AffixRoll_UsesAffixDataOfTheLevel()
         {
-            ItemDefinition sword = Item("Generated/BronzeSword_L03");
+            ItemDefinition sword = Item("Generated/BronzeSlicer_L03");
             int rolled = 0;
             for (int i = 0; i < 200; i++)
             {

@@ -23,7 +23,8 @@ namespace RPG.UI
 
         private static readonly Color PanelColor = new Color(0.07f, 0.06f, 0.05f, 0.94f);
         private static readonly Color EmptySlot = new Color(0.16f, 0.14f, 0.12f, 0.95f);
-        private static readonly ItemSlot[] EquipmentOrder = { ItemSlot.Weapon, ItemSlot.Head, ItemSlot.Chest, ItemSlot.Feet };
+        /// <summary>Short labels of the equipment slots, in equipment index order (<see cref="Inventory.SlotAt"/>).</summary>
+        private static readonly string[] EquipmentLabels = { "Weapon", "Helm", "Chest", "Feet", "Neck", "Belt", "Legs", "Hands", "Ring", "Ring", "Offhand" };
 
         private GameObject window;
         private GameObject toggleButton;
@@ -81,15 +82,15 @@ namespace RPG.UI
             title.fontStyle = FontStyle.Bold;
             y -= 34f;
 
-            // Each equipment slot has its name just above it.
-            y -= 16f;
-            for (int i = 0; i < EquipmentOrder.Length; i++)
+            // The source game's equipment slots, a row of the bag's width at a time, each with its name just above it.
+            for (int i = 0; i < Inventory.EquipmentSlots; i++)
             {
-                ItemSlot slot = EquipmentOrder[i];
-                ItemSlotView view = CreateSlot(rect, new Vector2(14f + i * (slotSize + spacing), y));
+                int index = i;
+                if (i % columns == 0) y -= 16f + (i > 0 ? slotSize + spacing : 0f);
+                ItemSlotView view = CreateSlot(rect, new Vector2(14f + i % columns * (slotSize + spacing), y));
                 view.Count.text = "";
-                AddText((RectTransform)view.transform, slot.ToString(), 11, TextAnchor.UpperCenter, new Vector2(0f, 15f), new Vector2(slotSize, 14f));
-                view.GetComponent<Button>().onClick.AddListener(() => OnEquipmentClicked(slot));
+                AddText((RectTransform)view.transform, EquipmentLabels[i], 11, TextAnchor.UpperCenter, new Vector2(0f, 15f), new Vector2(slotSize, 14f));
+                view.GetComponent<Button>().onClick.AddListener(() => OnEquipmentClicked(index));
                 equipmentSlots.Add(view);
             }
             y -= slotSize + 10f;
@@ -245,16 +246,16 @@ namespace RPG.UI
             inventory.RequestActivate(index);
         }
 
-        private void OnEquipmentClicked(ItemSlot slot)
+        private void OnEquipmentClicked(int equipIndex)
         {
             if (inventory == null) return;
             if (pendingGem >= 0)
             {
-                inventory.RequestSocketGem(pendingGem, true, (int)slot - 1);
+                inventory.RequestSocketGem(pendingGem, true, equipIndex);
                 pendingGem = -1;
                 return;
             }
-            inventory.RequestUnequip(slot);
+            inventory.RequestUnequipAt(equipIndex);
         }
 
         private void Update()
@@ -291,7 +292,7 @@ namespace RPG.UI
                 if (i == pendingGem) bagSlots[i].Border.effectColor = PendingGemBorder;
             }
             for (int i = 0; i < equipmentSlots.Count; i++)
-                Show(equipmentSlots[i], inventory.GetEquipped(EquipmentOrder[i]));
+                Show(equipmentSlots[i], inventory.GetEquippedAt(i));
 
             ShowStats();
             ShowTooltip();
@@ -341,7 +342,7 @@ namespace RPG.UI
                 int bagIndex = bagSlots.IndexOf(hovered);
                 int equipIndex = equipmentSlots.IndexOf(hovered);
                 ItemStack stack = bagIndex >= 0 ? inventory.GetBagSlot(bagIndex)
-                    : equipIndex >= 0 ? inventory.GetEquipped(EquipmentOrder[equipIndex]) : ItemStack.Empty;
+                    : equipIndex >= 0 ? inventory.GetEquippedAt(equipIndex) : ItemStack.Empty;
                 item = inventory.Definition(stack);
                 hoveredStack = stack;
                 string className = VendorWindow.ClassName(item, inventory.GetComponent<CharacterProgress>());

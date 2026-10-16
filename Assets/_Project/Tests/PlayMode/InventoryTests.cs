@@ -240,6 +240,90 @@ namespace RPG.Tests
             player.GetComponent<RPG.Progression.CharacterProgress>().ServerLoad(0, level, 0, default, 0);
         }
 
+        [Test]
+        public void Equipment_HasTheSourceGamesSlots()
+        {
+            Assert.AreEqual(11, Inventory.EquipmentSlots);
+            Assert.AreEqual(ItemSlot.Weapon, Inventory.SlotAt(0), "The first four keep their places (saves).");
+            Assert.AreEqual(ItemSlot.Feet, Inventory.SlotAt(3));
+            Assert.AreEqual(ItemSlot.Ring, Inventory.SlotAt(8));
+            Assert.AreEqual(ItemSlot.Ring, Inventory.SlotAt(9));
+            Assert.AreEqual(ItemSlot.Shield, Inventory.SlotAt(10));
+        }
+
+        [UnityTest]
+        public IEnumerator TwoRings_GoOnBothHands_AndLegsHaveArmor()
+        {
+            ItemDefinition ring = Item("Generated/Ring_L01");
+            ItemDefinition legs = Item("Generated/LeatherTrousers_L01");
+            Assert.AreEqual(ItemSlot.Ring, ring.slot);
+            Assert.IsTrue(ring.alwaysAffix, "Rings are worth their affix.");
+            Assert.AreEqual(ItemSlot.Legs, legs.slot);
+            Assert.Greater(legs.armor, 0);
+            inventory.ServerAddItem(ring, 2, false);
+            inventory.ServerAddItem(legs, 1, false);
+            yield return null;
+
+            Assert.IsTrue(inventory.ServerEquip(FindInBag(ring)));
+            Assert.IsTrue(inventory.ServerEquip(FindInBag(ring)));
+            Assert.IsTrue(inventory.ServerEquip(FindInBag(legs)));
+            yield return null;
+            Assert.AreEqual(ring, inventory.Definition(inventory.GetEquippedAt(8)));
+            Assert.AreEqual(ring, inventory.Definition(inventory.GetEquippedAt(9)));
+            Assert.AreEqual(legs, inventory.Definition(inventory.GetEquipped(ItemSlot.Legs)));
+            Assert.AreEqual(legs.armor, inventory.Armor);
+
+            Assert.IsTrue(inventory.ServerUnequipAt(9));
+            Assert.AreEqual(1, inventory.CountOf(ring));
+        }
+
+        [UnityTest]
+        public IEnumerator Shield_IsForTheWarrior()
+        {
+            ItemDefinition shield = Item("Generated/Barricade_L01");
+            Assert.AreEqual(ItemSlot.Shield, shield.slot);
+            Assert.Greater(shield.armor, 0);
+            inventory.ServerAddItem(shield, 1, false);
+            yield return null;
+            // New characters are warriors.
+            Assert.IsTrue(inventory.ServerEquip(FindInBag(shield)));
+            Assert.AreEqual(shield, inventory.Definition(inventory.GetEquipped(ItemSlot.Shield)));
+        }
+
+        [Test]
+        public void Sockets_FollowTheQuality_LikeTheSourceGame()
+        {
+            for (int i = 0; i < 200; i++)
+            {
+                Assert.AreEqual(0, LootDrop.RollSockets(ItemRarity.Common));
+                Assert.That(LootDrop.RollSockets(ItemRarity.Uncommon), Is.InRange(0, 1));
+                Assert.That(LootDrop.RollSockets(ItemRarity.Rare), Is.InRange(0, 2));
+                Assert.That(LootDrop.RollSockets(ItemRarity.Epic), Is.InRange(1, 3));
+                Assert.That(LootDrop.RollSockets(ItemRarity.Legendary), Is.InRange(2, 4));
+            }
+        }
+
+        [UnityTest]
+        public IEnumerator Gems_FillEverySocket_AndAllCount()
+        {
+            ItemDefinition legs = Item("Generated/LeatherTrousers_L01");
+            ItemDefinition ruby = Item("Ruby");
+            Assert.AreEqual(1, inventory.ServerAddItemWithSockets(legs, 1, false, 0, 3));
+            inventory.ServerAddItem(ruby, 3, false);
+            yield return null;
+            int legsIndex = FindInBag(legs);
+            Assert.AreEqual(3, inventory.GetBagSlot(legsIndex).SocketCount);
+            for (int i = 0; i < 3; i++) Assert.IsTrue(inventory.ServerSocketGem(FindInBag(ruby), false, legsIndex));
+            Assert.IsFalse(inventory.ServerSocketGem(FindInBag(Item("HealingPotion")), false, legsIndex), "A potion is no gem.");
+            ItemStack socketed = inventory.GetBagSlot(legsIndex);
+            Assert.AreEqual(-1, socketed.FirstEmptySocket, "All three are full.");
+            Assert.AreEqual(legs.SellPrice + 3 * ruby.SellPrice, inventory.SellPrice(socketed));
+
+            Assert.IsTrue(inventory.ServerEquip(legsIndex));
+            yield return null;
+            Assert.AreEqual(3 * ruby.attributes.strength, inventory.Attributes.strength);
+        }
+
         private static ItemDefinition Item(string fileName)
         {
             var item = AssetDatabase.LoadAssetAtPath<ItemDefinition>($"{ItemsFolder}/{fileName}.asset");

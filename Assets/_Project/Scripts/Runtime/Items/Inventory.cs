@@ -20,7 +20,23 @@ namespace RPG.Items
     [RequireComponent(typeof(Health))]
     public class Inventory : NetworkBehaviour
     {
-        public const int EquipmentSlots = 4;
+        /// <summary>
+        /// The source game's equipment: Weapon, Helm, Chest, Feet, Necklace, Belt, Legs, Hands, two Rings and the Offhand
+        /// (shield). Index order: <see cref="SlotAt"/> (the first four keep their old places, so saves stay).
+        /// </summary>
+        public const int EquipmentSlots = 11;
+
+        private static readonly ItemSlot[] SlotOrder =
+        {
+            ItemSlot.Weapon, ItemSlot.Head, ItemSlot.Chest, ItemSlot.Feet, ItemSlot.Neck, ItemSlot.Waist, ItemSlot.Legs,
+            ItemSlot.Hands, ItemSlot.Ring, ItemSlot.Ring, ItemSlot.Shield,
+        };
+
+        /// <summary>What kind of item an equipment index holds.</summary>
+        public static ItemSlot SlotAt(int index) => index >= 0 && index < SlotOrder.Length ? SlotOrder[index] : ItemSlot.None;
+
+        /// <summary>The (first) equipment index of a slot; -1 for none.</summary>
+        public static int IndexOf(ItemSlot slot) => slot == ItemSlot.None ? -1 : Array.IndexOf(SlotOrder, slot);
 
         [SerializeField] private ItemCatalog catalog;
         [SerializeField] private AffixCatalog affixes;
@@ -111,26 +127,44 @@ namespace RPG.Items
 
         public ItemStack GetBagSlot(int index) => index >= 0 && index < bag.Count ? bag[index] : ItemStack.Empty;
 
-        public ItemStack GetEquipped(ItemSlot slot)
-        {
-            int index = (int)slot - 1;
-            return index >= 0 && index < equipment.Count ? equipment[index] : ItemStack.Empty;
-        }
+        /// <summary>The item worn in a slot (for rings: the first ring).</summary>
+        public ItemStack GetEquipped(ItemSlot slot) => GetEquippedAt(IndexOf(slot));
+
+        /// <summary>The item worn at an equipment index (see <see cref="SlotAt"/>).</summary>
+        public ItemStack GetEquippedAt(int index) => index >= 0 && index < equipment.Count ? equipment[index] : ItemStack.Empty;
 
         public ItemDefinition Definition(ItemStack stack) => catalog != null && !stack.IsEmpty ? catalog.Get(stack.ItemId) : null;
 
         /// <summary>The random affix of a stack (null when it has none).</summary>
         public AffixDefinition Affix(ItemStack stack) => affixes != null && !stack.IsEmpty ? affixes.Get(stack.AffixId) : null;
 
-        /// <summary>The gem set in an item's socket (null when none).</summary>
-        public ItemDefinition Gem(ItemStack stack) => stack.HasGem && catalog != null ? catalog.Get(stack.Socket) : null;
+        /// <summary>The first gem set in an item (null when none).</summary>
+        public ItemDefinition Gem(ItemStack stack)
+        {
+            for (int i = 0; i < ItemStack.MaxSockets; i++)
+                if (GemAt(stack, i) is ItemDefinition gem) return gem;
+            return null;
+        }
 
-        /// <summary>"Socket: empty" or "Socket: Ruby (+4 Strength)"; null when the item has no socket.</summary>
+        /// <summary>The gem in socket <paramref name="index"/> (null when it is empty or missing).</summary>
+        public ItemDefinition GemAt(ItemStack stack, int index)
+        {
+            int socket = stack.SocketAt(index);
+            return socket > 0 && catalog != null ? catalog.Get(socket) : null;
+        }
+
+        /// <summary>"Socket: empty" / "Socket: Ruby (+4 Strength)", a line per socket; null when the item has none.</summary>
         public string SocketText(ItemStack stack)
         {
             if (!stack.HasSocket) return null;
-            ItemDefinition gem = Gem(stack);
-            return gem == null ? "Socket: empty" : $"Socket: {gem.displayName} ({gem.attributes.Describe(", ")})";
+            var lines = new List<string>();
+            for (int i = 0; i < ItemStack.MaxSockets; i++)
+            {
+                if (stack.SocketAt(i) == 0) continue;
+                ItemDefinition gem = GemAt(stack, i);
+                lines.Add(gem == null ? "Socket: empty" : $"Socket: {gem.displayName} ({gem.attributes.Describe(", ")})");
+            }
+            return string.Join("\n", lines);
         }
 
         /// <summary>Share Bartering takes off what vendors charge and adds to what they pay.</summary>
@@ -141,8 +175,9 @@ namespace RPG.Items
         {
             ItemDefinition item = Definition(stack);
             if (item == null) return 0;
-            ItemDefinition gem = Gem(stack);
-            int price = item.SellPriceWith(Affix(stack)) + (gem != null ? gem.SellPrice : 0);
+            int price = item.SellPriceWith(Affix(stack));
+            for (int i = 0; i < ItemStack.MaxSockets; i++)
+                if (GemAt(stack, i) is ItemDefinition gem) price += gem.SellPrice;
             return Mathf.FloorToInt(price * (1f + BarteringBonus));
         }
 
@@ -189,7 +224,8 @@ namespace RPG.Items
 
         /// <summary>
         /// Server: sets a gem from the bag into the chosen item: a worn one (<paramref name="intoEquipment"/>, index in
-        /// slot order Weapon, Head, Chest, Feet) or one in the bag. Only works when that item has an empty socket.
+        /// equipment index order, see <see cref="SlotAt"/>) or one in the bag, into its first empty socket. Only works when
+        /// that item has one.
         /// Gems stay there for good.
         /// </summary>
         public bool ServerSocketGem(int gemBagIndex, bool intoEquipment, int targetIndex)
@@ -203,13 +239,14 @@ namespace RPG.Items
             if (targetIndex < 0 || targetIndex >= list.Count || (!intoEquipment && targetIndex == gemBagIndex)) return false;
             ItemStack target = list[targetIndex];
             if (target.IsEmpty) return false;
-            if (target.Socket != ItemStack.EmptySocket)
+            int socket = target.FirstEmptySocket;
+            if (socket < 0)
             {
                 MessageRpc(InventoryMessage.NoEmptySocket, target.ItemId, 0);
                 return false;
             }
 
-            list[targetIndex] = target.WithSocket(gemStack.ItemId);
+            list[targetIndex] = target.WithSocketAt(socket, gemStack.ItemId);
             bag[gemBagIndex] = gemStack.Count > 1 ? gemStack.WithCount(gemStack.Count - 1) : ItemStack.Empty;
             // The item the gem went into travels in the affix field.
             MessageRpc(InventoryMessage.GemSocketed, gemStack.ItemId, target.ItemId);
@@ -336,9 +373,10 @@ namespace RPG.Items
                 manaBonus += item.manaBonus;
                 attributes += item.attributes;
 
-                ItemDefinition gem = Gem(equipment[i]);
-                if (gem != null)
+                for (int socket = 0; socket < ItemStack.MaxSockets; socket++)
                 {
+                    ItemDefinition gem = GemAt(equipment[i], socket);
+                    if (gem == null) continue;
                     damage += gem.damageBonus;
                     healthBonus += gem.healthBonus;
                     armor += gem.armor;
@@ -372,7 +410,7 @@ namespace RPG.Items
                 ItemStack stack = savedEquipment != null && i < savedEquipment.Count ? savedEquipment[i] : ItemStack.Empty;
                 ItemDefinition item = Definition(stack);
                 // Only something that belongs in this slot.
-                equipment[i] = item != null && (int)item.slot - 1 == i && IsKnown(stack) ? new ItemStack(stack.ItemId, 1, stack.AffixId, stack.Socket) : ItemStack.Empty;
+                equipment[i] = item != null && item.slot == SlotAt(i) && IsKnown(stack) ? stack.WithCount(1) : ItemStack.Empty;
             }
         }
 
@@ -380,8 +418,9 @@ namespace RPG.Items
         {
             ItemDefinition item = Definition(stack);
             bool affixKnown = stack.AffixId == 0 || Affix(stack) != null;
-            ItemDefinition gem = Gem(stack);
-            bool socketValid = !stack.HasSocket || (item != null && item.IsEquippable && (!stack.HasGem || (gem != null && gem.isGem)));
+            bool socketValid = !stack.HasSocket || (item != null && item.IsEquippable);
+            for (int i = 0; i < ItemStack.MaxSockets && socketValid; i++)
+                if (stack.SocketAt(i) > 0 && (GemAt(stack, i) == null || !GemAt(stack, i).isGem)) socketValid = false;
             return item != null && affixKnown && socketValid && stack.Count <= item.maxStack;
         }
 
@@ -393,7 +432,7 @@ namespace RPG.Items
             return copy;
         }
 
-        /// <summary>The worn items, in slot order (Weapon, Head, Chest, Feet).</summary>
+        /// <summary>The worn items, in equipment index order (<see cref="SlotAt"/>).</summary>
         public ItemStack[] EquipmentSnapshot()
         {
             var copy = new ItemStack[equipment.Count];
@@ -404,7 +443,8 @@ namespace RPG.Items
         // ---------- Owner ----------
 
         public void RequestEquip(int bagIndex) { if (IsOwner) EquipRpc(bagIndex); }
-        public void RequestUnequip(ItemSlot slot) { if (IsOwner) UnequipRpc(slot); }
+        public void RequestUnequip(ItemSlot slot) => RequestUnequipAt(IndexOf(slot));
+        public void RequestUnequipAt(int equipIndex) { if (IsOwner) UnequipRpc(equipIndex); }
         public void RequestUse(int bagIndex) { if (IsOwner) UseRpc(bagIndex); }
 
         /// <summary>Owner: equips an equippable item or uses a usable one.</summary>
@@ -568,7 +608,7 @@ namespace RPG.Items
                 ids[i] = catalog.IdOf(item.Item);
                 counts[i] = item.Count;
                 affixIds[i] = item.AffixId;
-                sockets[i] = item.Socket;
+                sockets[i] = item.Sockets;
             }
             LootContentsRpc(loot.NetworkObjectId, ids, counts, affixIds, sockets);
         }
@@ -577,7 +617,7 @@ namespace RPG.Items
         private void LootContentsRpc(ulong lootId, int[] ids, int[] counts, int[] affixIds, int[] sockets)
         {
             var stacks = new ItemStack[ids.Length];
-            for (int i = 0; i < ids.Length; i++) stacks[i] = new ItemStack(ids[i], counts[i], affixIds[i], sockets[i]);
+            for (int i = 0; i < ids.Length; i++) stacks[i] = ItemStack.WithEmptySockets(ids[i], counts[i], affixIds[i], sockets[i]);
             LootContentsReceived?.Invoke(lootId, stacks);
         }
 
@@ -588,9 +628,9 @@ namespace RPG.Items
         }
 
         [Rpc(SendTo.Server)]
-        private void UnequipRpc(ItemSlot slot, RpcParams rpcParams = default)
+        private void UnequipRpc(int equipIndex, RpcParams rpcParams = default)
         {
-            if (rpcParams.Receive.SenderClientId == OwnerClientId) ServerUnequip(slot);
+            if (rpcParams.Receive.SenderClientId == OwnerClientId) ServerUnequipAt(equipIndex);
         }
 
         [Rpc(SendTo.Server)]
@@ -721,16 +761,40 @@ namespace RPG.Items
 
         // ---------- Server ----------
 
-        /// <summary>Server: adds items (with an optional random affix id), filling stacks first. Returns how many fitted.</summary>
+        /// <summary>
+        /// Server: adds items (with an optional random affix id and a first socket: <see cref="ItemStack.EmptySocket"/> or a
+        /// gem), filling stacks first. Returns how many fitted.
+        /// </summary>
         public int ServerAddItem(ItemDefinition item, int count = 1, bool announce = true, int affixId = 0, int socket = 0)
         {
+            if (!IsServer || catalog == null || item == null) return 0;
+            return ServerAddStack(new ItemStack(catalog.IdOf(item), 1, affixId, socket), count, announce);
+        }
+
+        /// <summary>Server: adds gear with <paramref name="sockets"/> empty sockets (or anything else without).</summary>
+        public int ServerAddItemWithSockets(ItemDefinition item, int count, bool announce, int affixId, int sockets)
+        {
+            if (!IsServer || catalog == null || item == null) return 0;
+            return ServerAddStack(ItemStack.WithEmptySockets(catalog.IdOf(item), 1, affixId, sockets), count, announce);
+        }
+
+        /// <summary>Server: adds <paramref name="count"/> of an item like <paramref name="kind"/> (its affix and sockets). Returns how many fitted.</summary>
+        public int ServerAddStack(ItemStack kind, int count, bool announce)
+        {
+            ItemDefinition item = Definition(kind.WithCount(1));
             if (!IsServer || catalog == null || item == null || count <= 0) return 0;
-            int id = catalog.IdOf(item);
-            if (id == 0) return 0;
-            if (affixes == null || affixes.Get(affixId) == null) affixId = 0;
-            ItemDefinition gem = socket > 0 ? catalog.Get(socket) : null;
-            if (!item.IsEquippable || (socket > 0 && (gem == null || !gem.isGem))) socket = item.IsEquippable && socket != 0 ? ItemStack.EmptySocket : 0;
-            var kind = new ItemStack(id, 1, affixId, socket);
+            int id = kind.ItemId;
+            int affixId = affixes != null && affixes.Get(kind.AffixId) != null ? kind.AffixId : 0;
+            // Sockets only on gear, and only gems in them.
+            var cleaned = new ItemStack(id, 1, affixId);
+            for (int i = 0, kept = 0; i < ItemStack.MaxSockets && item.IsEquippable; i++)
+            {
+                int socket = kind.SocketAt(i);
+                if (socket == 0) continue;
+                ItemDefinition gem = socket > 0 ? catalog.Get(socket) : null;
+                cleaned = cleaned.WithSocketAt(kept++, socket > 0 && (gem == null || !gem.isGem) ? ItemStack.EmptySocket : socket);
+            }
+            kind = cleaned;
 
             int remaining = count;
             for (int i = 0; i < bag.Count && remaining > 0; i++)
@@ -773,19 +837,23 @@ namespace RPG.Items
                 return false;
             }
 
-            int equipIndex = (int)item.slot - 1;
+            int equipIndex = IndexOf(item.slot);
+            // A second ring goes on the other hand when that one is free.
+            if (item.slot == ItemSlot.Ring && !equipment[equipIndex].IsEmpty && equipment[equipIndex + 1].IsEmpty) equipIndex++;
             ItemStack worn = equipment[equipIndex];
             equipment[equipIndex] = stack.WithCount(1);
             bag[bagIndex] = stack.Count > 1 ? stack.WithCount(stack.Count - 1) : worn;
-            if (stack.Count > 1 && !worn.IsEmpty) ServerAddItem(Definition(worn), 1, false, worn.AffixId, worn.Socket);
+            if (stack.Count > 1 && !worn.IsEmpty) ServerAddStack(worn, 1, false);
             return true;
         }
 
-        /// <summary>Server: takes off the item in a slot and puts it in the bag (fails when the bag is full).</summary>
-        public bool ServerUnequip(ItemSlot slot)
+        /// <summary>Server: takes off the item in a slot (for rings: the first) and puts it in the bag.</summary>
+        public bool ServerUnequip(ItemSlot slot) => ServerUnequipAt(IndexOf(slot));
+
+        /// <summary>Server: takes off the item at an equipment index and puts it in the bag (fails when the bag is full).</summary>
+        public bool ServerUnequipAt(int equipIndex)
         {
-            if (!IsServer || slot == ItemSlot.None || health.IsDead) return false;
-            int equipIndex = (int)slot - 1;
+            if (!IsServer || equipIndex < 0 || equipIndex >= equipment.Count || health.IsDead) return false;
             ItemStack worn = equipment[equipIndex];
             if (worn.IsEmpty) return false;
 
@@ -1015,7 +1083,9 @@ namespace RPG.Items
                 MessageRpc(InventoryMessage.NotEnoughGold, 0, 0);
                 return false;
             }
-            if (ServerAddItem(item, 1, true, affix != null ? affixId : 0) <= 0) return false;
+            // Gear comes with the sockets of its quality, like the source game's.
+            int bought = affix != null ? affixId : 0;
+            if (ServerAddItemWithSockets(item, 1, true, bought, LootDrop.RollSockets(item, affixes, bought)) <= 0) return false;
             gold.Value -= price;
             vendor.ServerTake(stockIndex);
             VendorStockRpc(vendor.Index, vendor.ServerStockSnapshot(), vendor.ServerAffixSnapshot());

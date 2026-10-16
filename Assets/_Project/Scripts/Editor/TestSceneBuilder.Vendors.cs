@@ -150,9 +150,9 @@ namespace RPG.EditorTools
         /// <summary>
         /// The gear a random-stock merchant sells: in its kind's level range, or for every second level when the source game
         /// gives none. Swords for blades, axes and maces (the warrior's weapon here), bows for ranged, staves for staves and
-        /// wands; head, chest and feet armor of the light (leather, robes) or heavy kinds (chain, plate). Of each kind and
-        /// level the piece with the best material chance. Necklaces, rings, belts, legs, hands and shields do not exist here
-        /// and are left out.
+        /// wands; armor of the light (leather, robes) or heavy kinds (chain, plate) for each slot; necklaces, belts, rings and
+        /// shields. Of each kind and level the piece with the best material chance. Axes, maces, daggers and wands do not
+        /// exist here.
         /// </summary>
         private static List<ItemDefinition> MerchantGear(ItemCatalog catalog, VendorData.GearKind[] kinds)
         {
@@ -179,8 +179,13 @@ namespace RPG.EditorTools
                             .OrderByDescending(item => item.dropWeight).FirstOrDefault());
                         continue;
                     }
-                    ItemSlot slot = kind.equip == 1 ? ItemSlot.Head : kind.equip == 3 ? ItemSlot.Chest : kind.equip == 6 ? ItemSlot.Feet : ItemSlot.None;
+                    ItemSlot slot = SlotOfEquipType(kind.equip);
                     if (slot == ItemSlot.None) continue;
+                    if (slot == ItemSlot.Neck || slot == ItemSlot.Waist || slot == ItemSlot.Ring || slot == ItemSlot.Shield)
+                    {
+                        Add(catalog.items.FirstOrDefault(item => item != null && item.dropWeight > 0f && item.slot == slot && item.itemLevel == level));
+                        continue;
+                    }
                     GearData.ArmorKind[] armorKinds = kind.armor == 2
                         ? new[] { GearData.ArmorKind.Chain, GearData.ArmorKind.Plate }
                         : new[] { GearData.ArmorKind.Leather, GearData.ArmorKind.Robe };
@@ -192,6 +197,24 @@ namespace RPG.EditorTools
                 }
             }
             return gear.OrderBy(item => item.itemLevel).ThenBy(item => item.slot).ToList();
+        }
+
+        /// <summary>Our slot of the source game's equip type (1 helm ... 10 shield); None for weapons and the rest.</summary>
+        private static ItemSlot SlotOfEquipType(int equip)
+        {
+            switch (equip)
+            {
+                case 1: return ItemSlot.Head;
+                case 2: return ItemSlot.Neck;
+                case 3: return ItemSlot.Chest;
+                case 4: return ItemSlot.Waist;
+                case 5: return ItemSlot.Legs;
+                case 6: return ItemSlot.Feet;
+                case 7: return ItemSlot.Hands;
+                case 8: return ItemSlot.Ring;
+                case 10: return ItemSlot.Shield;
+                default: return ItemSlot.None;
+            }
         }
 
         private static void PlaceVendors(Grid grid, VendorDefinition[] vendors, Vector3Int[] cells, AffixCatalog affixes)

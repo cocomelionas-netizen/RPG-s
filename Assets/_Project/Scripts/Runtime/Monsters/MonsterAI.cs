@@ -50,8 +50,6 @@ namespace RPG.Monsters
         [SerializeField] private AffixCatalog affixes;
         [Tooltip("Gear dropped by level: weapons and armor from here around the monster's level (none when empty).")]
         [SerializeField] private ItemCatalog gear;
-        [Tooltip("Chance that a dropped weapon or armor piece has a socket for a gem.")]
-        [SerializeField, Range(0f, 1f)] private float socketChance = 0.25f;
         [Tooltip("Bosses: pieces of gear always dropped, with an affix of the quality below (the source game's bosses always drop gold).")]
         [SerializeField, Min(0)] private int guaranteedGear;
         [SerializeField] private ItemRarity guaranteedQuality = ItemRarity.Rare;
@@ -454,8 +452,8 @@ namespace RPG.Monsters
             bool boss = guaranteedGear > 0 || qualityChances != Vector3.zero;
             int extraGearRolls = (IsElite ? EliteGearRolls : 0) + (boss ? BossGearRolls : 0);
             var bonus = new List<LootItem>();
-            LootDrop.RollEntries(bonusLoot, level, affixes, socketChance, bonus);
-            LootDrop.Spawn(lootBagPrefab, transform.position, loot, gear, affixes, level, socketChance, IsElite ? 2 : 1,
+            LootDrop.RollEntries(bonusLoot, level, affixes, bonus);
+            LootDrop.Spawn(lootBagPrefab, transform.position, loot, gear, affixes, level, IsElite ? 2 : 1,
                 extraGearRolls, bonus, guaranteed.ToArray());
         }
 
