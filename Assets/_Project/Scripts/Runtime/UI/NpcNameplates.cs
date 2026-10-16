@@ -28,7 +28,7 @@ namespace RPG.UI
         private readonly List<Portal> gonePortals = new List<Portal>();
         private static readonly Color PortalColor = new Color(0.85f, 0.7f, 1f);
         private const float PortalNameHeight = 1f;
-        // Off-white, as Source writes container names.
+        // Off-white, as the source game writes container names.
         private static readonly Color ChestColor = new Color32(0xE8, 0xED, 0xE1, 0xFF);
         private const float ChestNameHeight = 0.55f;
         private Canvas canvas;

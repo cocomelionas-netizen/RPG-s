@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace RPG.Combat
 {
-    /// <summary>What kind of damage a hit is: armor works on all of it, resists on their own school (Source's schools).</summary>
+    /// <summary>What kind of damage a hit is: armor works on all of it, resists on their own school (the source game's schools).</summary>
     public enum DamageSchool : byte
     {
         Physical,

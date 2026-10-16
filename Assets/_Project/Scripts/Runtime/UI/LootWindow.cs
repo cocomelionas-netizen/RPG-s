@@ -9,7 +9,7 @@ namespace RPG.UI
 {
     /// <summary>
     /// The small window of a loot bag the local player opened (by clicking the sparkles a monster left), like
-    /// Source's loot window: every item in it as a square with its tooltip; click one to take it, or take all.
+    /// The source game's loot window: every item in it as a square with its tooltip; click one to take it, or take all.
     /// Closes on Esc, the X, walking away, or when the bag is empty. Builds its own UI; place it on a
     /// RectTransform that fills the HUD canvas.
     /// </summary>

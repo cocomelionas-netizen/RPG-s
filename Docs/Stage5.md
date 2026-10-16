@@ -1,111 +1,111 @@
-# 5 etapas – monstrai, jų AI ir kelio paieška
+# Stage 5 – monsters, their AI and pathfinding
 
-## Ką padarėme
+## What we did
 
-- **Goblinai.** Trys stovyklos po 3 goblinus, 5–9 vienetai nuo starto. Goblinas yra mažesnis už žaidėją, žaliu veidu ir rudu apsiaustu. Turi 45 HP, kerta 3–5 žalos kas 2 s, juda 8 kryptimis su ėjimo ir atakos animacija.
-- **Viską sprendžia serveris.** Monstro AI, judėjimas, ataka ir žala veikia tik serveryje. Klientai mato:
-  - poziciją, kryptį ir ar monstras eina – 0.15 s „praeityje“, sklandžiai, kaip kitus žaidėjus;
-  - HP ir atakos animacijas – per tuos pačius `Health` ir `AutoAttack`, kaip žaidėjo.
-- **Monstro elgsena (`MonsterAI`):**
+- **Goblins.** Three camps of 3 goblins, 5–9 units from the start. A goblin is smaller than the player, with a green face and a brown cloak. It has 45 HP, hits for 3–5 every 2 s, and moves in 8 directions with walk and attack animations.
+- **The server decides everything.** Monster AI, movement, attacks and damage run only on the server. Clients see:
+  - the position, direction and whether the monster walks – 0.15 s "in the past", smoothly, like other players;
+  - HP and attack animations – through the same `Health` and `AutoAttack` as the player's.
+- **Monster behaviour (`MonsterAI`):**
 
-  | Būsena | Kas vyksta |
-  |--------|-----------|
-  | **Ramybė** | Lėtai vaikšto aplink savo vietą (iki 1.2 vieneto), stabteli 3–8 s. |
-  | **Kova** | Žaidėjas priartėja per 3 vienetus arba smogia goblinui. Goblinas eina prie jo ir muša. Netoliese ramiai stovintys goblinai (iki 2.5 vieneto) prisijungia. |
-  | **Grįžimas** | Goblinas grįžta namo ir atgauna visą HP. Grįždamas jis nekreipia dėmesio į smūgius ir jų nejaučia. Jei kelyje kažkur užstringa ilgiau nei 10 s, perkeliamas namo. |
-  | **Mirtis** | Pilkas kūnas guli 3 s ir dingsta. Po 20 s stovykla atsiunčia naują gobliną. |
+  | State | What happens |
+  |-------|--------------|
+  | **Idle** | Walks slowly around its spot (up to 1.2 units), pauses 3–8 s. |
+  | **Fight** | A player comes within 3 units or hits the goblin. The goblin walks up and attacks. Idle goblins nearby (within 2.5 units) join in. |
+  | **Return** | The goblin walks home and gets all its HP back. On the way home it ignores hits and takes no damage. If it gets stuck on the way for more than 10 s, it is moved home. |
+  | **Death** | The grey body lies for 3 s and disappears. After 20 s the camp sends a new goblin. |
 
-  Goblinas grįžta namo, kai:
-  - **12 s nepataiko** į savo taikinį (žaidėjas bėga ir goblinas jo nepasiveja);
-  - nubėga daugiau nei 25 vienetus nuo vietos, kur prasidėjo kova. Kiekvienas goblino smūgis tau perkelia šią vietą ten, kur jis smogė, todėl kol goblinas tave pasiveja ir muša, jis seka toliau (pakeista pagal tavo pastabą, anksčiau buvo 9 vienetai nuo namų);
-  - visi, su kuriais kovojo, mirė arba pabėgo;
-  - 3 s neranda kelio iki taikinio.
+  A goblin goes home when:
+  - it has **not hit** its target **for 12 s** (the player runs and the goblin does not catch up);
+  - it runs more than 25 units from where the fight started. Every hit the goblin lands moves that point to where it hit, so while it keeps catching and hitting you it keeps following (changed after your note; it used to be 9 units from home);
+  - everyone it fought died or ran away;
+  - it cannot find a way to its target for 3 s.
 
-- **Grėsmės lentelė (threat).** Goblinas puola tą, kuris jam padarė daugiausia žalos. Jei žaidėjas tik pateko į matymo zoną, grėsmė maža. Jei kitas žaidėjas muša stipriau, goblinas persijungia į jį.
-- **Kelio paieška tilemap'e** (`WorldNavigation` + `NavGrid`). A* ieško kelio per izometrinius langelius 8 kryptimis:
-  - aplenkia uolas, medžius ir manekenus;
-  - nekerta kampų tarp kliūčių;
-  - kelias išlyginamas: kur niekas netrukdo, einama tiesiai, o ne laiptuotai per langelių centrus.
+- **Threat table.** A goblin attacks whoever did it the most damage. A player who only came into sight has little threat. If another player hits harder, the goblin switches to them.
+- **Pathfinding on the tilemap** (`WorldNavigation` + `NavGrid`). A* searches a path over isometric cells in 8 directions:
+  - goes around rocks, trees and dummies;
+  - does not cut corners between obstacles;
+  - the path is smoothed: where nothing is in the way it goes straight, not in steps through the cell centers.
 
-  Paieška 40×40 žemėlapyje trunka apie 0.5 ms.
-- **Žaidėjo click-to-move dabar irgi apeina kliūtis.** Paspaudus už uolų sienos, veikėjas ją apeina, o ne įsiremia. Paspaudus ant pačios uolos, nueinama iki artimiausios laisvos vietos. Tą patį kelią naudoja ir priėjimas prie taikinio.
-- **Monstrai susiskirsto aplink taikinį.** Keli goblinai nestovi viename taške.
-- **Žaidėjo HP atsistato** (`HealthRegeneration`). Po 5 s be žalos atsistato 5 % HP per sekundę.
+  A search on the 40×40 map takes about 0.5 ms.
+- **The player's click-to-move also goes around obstacles now.** Clicking behind a rock wall, the character walks around it instead of pushing into it. Clicking on a rock walks to the nearest free spot. Walking up to a target uses the same path.
+- **Monsters spread around their target.** Several goblins do not stand on one spot.
+- **Player HP regenerates** (`HealthRegeneration`). After 5 s without damage, 5 % of HP per second.
 
-> **Šiuo metu monstrai iš toli nepuola** (`aggroRadius` = 0, nustatyta scenos įrankyje). Jie kovoja tik tada, kai juos užpuoli, o jų stovyklos draugai prisideda.
+> **For now monsters do not attack from a distance** (`aggroRadius` = 0, set in the scene tool). They only fight when attacked, and their camp mates join in.
 
-## Failai
+## Files
 
-| Failas | Paskirtis |
-|--------|-----------|
-| `Scripts/Runtime/Navigation/NavGrid.cs` | A* langelių tinklelyje, artimiausio laisvo langelio paieška (gryna C#, testuojama be scenos) |
-| `Scripts/Runtime/Navigation/WorldNavigation.cs` | Iš tilemap'ų ir kliūčių sukuria `NavGrid`, ieško ir išlygina kelią pasaulio koordinatėmis |
-| `Scripts/Runtime/Monsters/MonsterMotion.cs` | Serveris veda monstrą keliu, klientai interpoliuoja (kaip kitus žaidėjus) |
-| `Scripts/Runtime/Monsters/MonsterAI.cs` | Būsenos, grėsmės lentelė, pagalbos šauksmas, grįžimas namo, mirtis |
-| `Scripts/Runtime/Monsters/MonsterSpawner.cs` | Stovykla: atsiunčia monstrus serveriui pasileidus ir po mirties |
-| `Scripts/Runtime/Combat/HealthRegeneration.cs` | HP atsistatymas ne kovoje |
-| `Prefabs/Monsters/Goblin.prefab` | Goblinas (sukuria scenos įrankis) |
-| `Data/Characters/Goblin_AnimationSet.asset`, `Art/Placeholder/Goblin/*.png` | Goblino animacijos ir laikini kadrai (sukuria scenos įrankis) |
-| `Tests/PlayMode/NavigationTests.cs`, `MonsterTests.cs` | Nauji testai |
+| File | Purpose |
+|------|---------|
+| `Scripts/Runtime/Navigation/NavGrid.cs` | A* on a cell grid, nearest free cell search (plain C#, tested without a scene) |
+| `Scripts/Runtime/Navigation/WorldNavigation.cs` | Builds a `NavGrid` from the tilemaps and obstacles, finds and smooths paths in world coordinates |
+| `Scripts/Runtime/Monsters/MonsterMotion.cs` | The server leads the monster along a path, clients interpolate (like other players) |
+| `Scripts/Runtime/Monsters/MonsterAI.cs` | States, threat table, calling for help, going home, death |
+| `Scripts/Runtime/Monsters/MonsterSpawner.cs` | Camp: sends monsters when the server starts and after deaths |
+| `Scripts/Runtime/Combat/HealthRegeneration.cs` | HP regeneration out of combat |
+| `Prefabs/Monsters/Goblin.prefab` | Goblin (created by the scene tool) |
+| `Data/Characters/Goblin_AnimationSet.asset`, `Art/Placeholder/Goblin/*.png` | Goblin animations and temporary frames (created by the scene tool) |
+| `Tests/PlayMode/NavigationTests.cs`, `MonsterTests.cs` | New tests |
 
-Pakeisti failai:
+Changed files:
 - `Health`:
-  - `ApplyDamage` dabar priima, kas smogė;
-  - pridėti įvykis `DamageTaken`, `ServerInvulnerable` ir `Heal()`.
-- `AutoAttack`: perduoda puoliką į `ApplyDamage`.
-- `PlayerMovement`: click-to-move eina keliu, kurį randa `WorldNavigation`. Jei scenoje navigacijos nėra, eina tiesiai, kaip anksčiau.
-- Scenos įrankis:
-  - sukuria goblino prefab'ą ir įregistruoja jį `DefaultNetworkPrefabs`;
-  - prie `Grid` prideda `WorldNavigation`;
-  - sukuria 3 stovyklas (`Monster Camps`);
-  - žaidėjui prideda `HealthRegeneration`.
-- `PlaceholderArtGenerator.CharacterFrame`: galima nurodyti veido spalvą.
+  - `ApplyDamage` now takes who hit;
+  - added the `DamageTaken` event, `ServerInvulnerable` and `Heal()`.
+- `AutoAttack`: passes the attacker to `ApplyDamage`.
+- `PlayerMovement`: click-to-move follows the path `WorldNavigation` finds. Without navigation in the scene it walks straight, as before.
+- Scene tool:
+  - creates the goblin prefab and registers it in `DefaultNetworkPrefabs`;
+  - adds `WorldNavigation` to the `Grid`;
+  - creates 3 camps (`Monster Camps`);
+  - adds `HealthRegeneration` to the player.
+- `PlaceholderArtGenerator.CharacterFrame`: the face colour can be given.
 
-## Kaip patikrinti naršyklėje
+## How to check in the browser
 
-https://cocomelionas-netizen.github.io/RPG-s/ (jei rodo seną versiją, perkrauk su Ctrl+F5)
+https://cocomelionas-netizen.github.io/RPG-s/ (if it shows an old version, reload with Ctrl+F5)
 
-1. **Rask goblinus.** Nuo starto eik į viršų ir truputį į dešinę (~5 vienetai), į kairę arba į dešinę žemyn (~7 vienetai). Goblinai lėtai vaikštinėja savo stovyklose.
-2. **Priartėk per ~3 vienetus.** Goblinas turi tave pastebėti, ateiti ir pradėti kirsti: matysi raudonus žalos skaičius ir mažėjantį HP apačioje. Kartu turėtų atbėgti ir jo draugai.
-3. **Kovok:** pažymėk gobliną (pele arba **Tab**) ir spausk **1** (Attack). Numuštas goblinas papilkėja ir po 3 s dingsta. Po ~20 s stovykloje atsiranda naujas.
-4. **Pabėk toli** (daugiau nei ~25 vienetus nuo vietos, kur goblinas tau paskutinį kartą smogė). Goblinas apsisuka, grįžta namo, jo HP užsipildo, o grįžtančio jo sužeisti nepavyksta.
-5. **Leisk goblinams tave nugalėti.** Atgimsi prie starto, o goblinai grįš į stovyklą.
-6. **Pailsėk** – po 5 s be žalos tavo HP pamažu atsistato.
-7. **Kelio paieška:**
-   - spausk už uolų sienelės (dešinėje virš starto) arba už medžio – veikėjas turi ją apeiti, o ne įsiremti;
-   - pasivyk gobliną už kliūties – jis irgi apeina.
+1. **Find the goblins.** From the start go up and a little right (~5 units), left, or right and down (~7 units). Goblins wander slowly in their camps.
+2. **Come within ~3 units.** The goblin must notice you, come and start hitting: you see red damage numbers and your HP at the bottom going down. Its friends should come running too.
+3. **Fight:** select a goblin (mouse or **Tab**) and press **1** (Attack). A killed goblin turns grey and disappears after 3 s. After ~20 s a new one appears in the camp.
+4. **Run far away** (more than ~25 units from where the goblin last hit you). The goblin turns around, goes home, its HP fills up, and you cannot hurt it on the way.
+5. **Let the goblins beat you.** You respawn at the start and the goblins go back to their camp.
+6. **Rest** – after 5 s without damage your HP slowly comes back.
+7. **Pathfinding:**
+   - click behind the little rock wall (right of and above the start) or behind a tree – the character must walk around it, not push into it;
+   - chase a goblin behind an obstacle – it walks around too.
 
-## Automatiniai testai
+## Automatic tests
 
-Unity redaktoriuje: pirma `RPG > Build Test Scene` (testai naudoja goblino prefab'ą), tada `Window > General > Test Runner` → **PlayMode** → **Run All**. Turi būti **57** testai, iš jų 14 naujų:
+In the Unity editor: first `RPG > Build Test Scene` (the tests use the goblin prefab), then `Window > General > Test Runner` → **PlayMode** → **Run All**. There must be **57** tests, 14 of them new:
 - `NavigationTests` (6):
-  - kelias per tarpą sienoje;
-  - užblokuotas tikslas;
-  - nekertami kampai;
-  - artimiausias laisvas langelis;
-  - kelias aplink uolas tikrame tilemap'e;
-  - paspaudimas ant uolos.
+  - a path through a gap in a wall;
+  - a blocked target;
+  - corners are not cut;
+  - nearest free cell;
+  - a path around rocks on a real tilemap;
+  - a click on a rock.
 - `MonsterTests` (8):
-  - goblinas puola artimą žaidėją ir nepuola tolimo;
-  - vejasi žaidėją;
-  - atsisuka į tą, kuris smogė;
-  - grįžta namo nesužeidžiamas ir pagyja;
-  - miręs dingsta;
-  - stovykla atsiunčia naują;
-  - žaidėjo HP atsistato.
+  - a goblin attacks a nearby player and not a far one;
+  - chases the player;
+  - turns to whoever hit it;
+  - goes home invulnerable and heals;
+  - disappears when dead;
+  - the camp sends a new one;
+  - the player's HP regenerates.
 
-Šie testai parašyti debesyje be Unity. Kodas patikrintas .NET kompiliatoriumi, o `NavGrid` logika – atskirais testais. PlayMode testų paleisti negalėjau, todėl pirmą kartą juos paleisk pats.
+These tests were written in the cloud without Unity. The code was checked with the .NET compiler and the `NavGrid` logic with separate tests. I could not run the PlayMode tests, so run them yourself the first time.
 
-## Kur keisti skaičius
-- Goblino HP, žala, atakos greitis: `Goblin.prefab` → `Health`, `AutoAttack`.
-- Matymo atstumas, pagalbos spindulys, pririšimo atstumas, vaikštinėjimas, kūno laikas: `Goblin.prefab` → `MonsterAI`.
-- Greitis: `Goblin.prefab` → `MonsterMotion`.
-- Stovyklos vieta, kiek monstrų ir per kiek laiko jie atsiranda iš naujo: `TestSceneBuilder.PlaceMonsterCamps`.
+## Where to change the numbers
+- Goblin HP, damage, attack speed: `Goblin.prefab` → `Health`, `AutoAttack`.
+- Sight range, help radius, leash distance, wandering, corpse time: `Goblin.prefab` → `MonsterAI`.
+- Speed: `Goblin.prefab` → `MonsterMotion`.
+- Camp location, how many monsters and how fast they come back: `TestSceneBuilder.PlaceMonsterCamps`.
 
-Prefab'us ir sceną sukuria `RPG > Build Test Scene`, ir CI tai daro prieš kiekvieną build'ą. Todėl skaičius keisk scenos įrankyje, o ne prefab'e rankomis.
+The prefabs and the scene are created by `RPG > Build Test Scene`, and CI does it before every build. So change numbers in the scene tool, not in the prefab by hand.
 
-## Žinomi apribojimai
-- Monstrai pereina vienas pro kitą ir pro žaidėjus, kaip ir žaidėjai tarpusavyje. Kliūtis jie apeina kelio paieška, o ne fizika.
-- Kol kas yra tik vienas monstro tipas. Daugiau tipų, loot ir patirtis bus 6–7 etapuose.
-- Monstrų nerodome tik artimiems žaidėjams (interest management). To prireiks, kai pasaulis išaugs.
-- Žemėlapio navigacija sukuriama vieną kartą. Jei vėliau žemėlapis keisis žaidimo metu (pvz. durys), reikės iškviesti `WorldNavigation.Build()`.
+## Known limitations
+- Monsters pass through each other and through players, like players among themselves. They go around obstacles by pathfinding, not physics.
+- There is only one monster type for now. More types, loot and experience come in stages 6–7.
+- Monsters are not limited to nearby players (interest management). That will be needed when the world grows.
+- Map navigation is built once. If the map later changes during play (e.g. doors), `WorldNavigation.Build()` must be called.

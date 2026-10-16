@@ -15,7 +15,7 @@ namespace RPG.Tests
 {
     /// <summary>
     /// Levels, experience, classes and abilities on a real host. Needs the prefabs and class assets
-    /// from RPG > Build Test Scene (Warrior: Source's Paladin spells, on the bar Mighty Blow, Holy Wrath, Radiance;
+    /// from RPG > Build Test Scene (Warrior: the source game's Paladin spells, on the bar Mighty Blow, Holy Wrath, Radiance;
     /// Ranger is class 1).
     /// </summary>
     public class ProgressionTests

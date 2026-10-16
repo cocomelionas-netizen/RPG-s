@@ -1,59 +1,59 @@
-# Žaidimas naršyklėje (WebGL) ir automatinis build'as
+# The game in the browser (WebGL) and the automatic build
 
-## Kaip tai veikia
+## How it works
 
-1. Kiekvienas push'as į `main` (mano iš šio kompiuterio arba debesų sesijos, kai kompiuteris išjungtas) paleidžia **GitHub Actions**.
-2. Actions su Unity 6000.6.4f1 pirmiausia iš naujo sugeneruoja sceną ir prefab'us (`TestSceneBuilder`, tas pats kaip `RPG > Build Test Scene`), tada sukuria **WebGL** versiją ir paskelbia ją **GitHub Pages**. Tai užtrunka maždaug 15–25 min; pirmą kartą ilgiau.
-3. Žaidimą atsidarai bet kuriame kompiuteryje: **https://cocomelionas-netizen.github.io/RPG-s/**
-4. Jei kodas nesikompiliuoja, build'as nepavyksta ir senoji versija lieka. Klaidą matysi GitHub → **Actions** skiltyje.
+1. Every push to `main` (mine from this computer, or from a cloud session while the computer is off) starts **GitHub Actions**.
+2. Actions, with Unity 6000.6.4f1, first regenerates the scene and prefabs (`TestSceneBuilder`, the same as `RPG > Build Test Scene`), then builds the **WebGL** version and publishes it on **GitHub Pages**. It takes about 15–25 min; longer the first time.
+3. You open the game on any computer: **https://cocomelionas-netizen.github.io/RPG-s/**
+4. If the code does not compile, the build fails and the old version stays. You see the error under GitHub → **Actions**.
 
-Naršyklėje pirmiausia prisijungi (vardas ir slaptažodis, žr. [Stage8.md](Stage8.md)), tada spaudi **Play offline**. Žaidimas veikia **Offline** režimu: serveris ir tavo veikėjas veikia toje pačioje naršyklėje, todėl išorinio serverio nereikia. Taip gali bandyti judėjimą, kovą ir manekenus. Multiplayer'iui naršyklėje reikės viešo serverio – žr. toliau.
+In the browser you first log in (name and password, see [Stage8.md](Stage8.md)), then press **Play offline**. The game runs in **Offline** mode: the server and your character run in the same browser, so no outside server is needed. That way you can try movement, combat and the dummies. Multiplayer in the browser needs a public server – see below.
 
-## Vienkartinis paruošimas (tai padaryti turi tu)
+## One-time setup (you have to do this)
 
-### 1. Padaryk repo viešą
-GitHub → repo **RPG-s** → **Settings** → apačioje **Danger Zone** → **Change repository visibility** → **Change to public** → patvirtink.
+### 1. Make the repo public
+GitHub → repo **RPG-s** → **Settings** → at the bottom **Danger Zone** → **Change repository visibility** → **Change to public** → confirm.
 
-Repo patikrinau: kode ir istorijoje nėra slaptažodžių ar raktų. Viešai bus matomas visas kodas ir commit'ų autorių el. paštas.
+I checked the repo: there are no passwords or keys in the code or history. All code and the commit authors' e-mail will be public.
 
-### 2. Įjunk GitHub Pages
-**Settings** → **Pages** → **Build and deployment** → **Source**: pasirink **GitHub Actions**.
+### 2. Turn on GitHub Pages
+**Settings** → **Pages** → **Build and deployment** → **Source**: choose **GitHub Actions**.
 
-### 3. Pridėk Unity licenciją (GitHub Secrets)
-Unity build'ui GitHub'e reikia tavo Unity paskyros. Šių duomenų man neduok – įvesk juos pats.
+### 3. Add the Unity license (GitHub Secrets)
+The Unity build on GitHub needs your Unity account. Do not give me these details – enter them yourself.
 
-Pirmiausia sukurk licencijos failą. Tavo kompiuteryje jo dar nėra, nes naujesnis Unity Hub jo pats nesukuria:
-Unity Hub → ⚙ **Preferences** → **Licenses** → **Add** → **Get a free personal license**. Po to atsiras failas `C:\ProgramData\Unity\Unity_lic.ulf`. Aplankas `ProgramData` paslėptas: File Explorer'yje įjunk **View → Show → Hidden items** arba įvesk kelią tiesiai į adreso juostą.
+First create the license file. Your computer does not have it yet, because newer Unity Hub does not create it by itself:
+Unity Hub → ⚙ **Preferences** → **Licenses** → **Add** → **Get a free personal license**. Then the file `C:\ProgramData\Unity\Unity_lic.ulf` appears. The `ProgramData` folder is hidden: in File Explorer turn on **View → Show → Hidden items** or type the path straight into the address bar.
 
-Tada GitHub: **Settings** → **Secrets and variables** → **Actions** → **New repository secret**. Sukurk tris:
+Then on GitHub: **Settings** → **Secrets and variables** → **Actions** → **New repository secret**. Create three:
 
-| Pavadinimas | Reikšmė |
-|-------------|---------|
-| `UNITY_EMAIL` | Unity paskyros el. paštas |
-| `UNITY_PASSWORD` | Unity paskyros slaptažodis |
-| `UNITY_LICENSE` | Viso failo `C:\ProgramData\Unity\Unity_lic.ulf` turinys (atidaryk Notepad, kopijuok viską) |
+| Name | Value |
+|------|-------|
+| `UNITY_EMAIL` | Unity account e-mail |
+| `UNITY_PASSWORD` | Unity account password |
+| `UNITY_LICENSE` | The whole content of `C:\ProgramData\Unity\Unity_lic.ulf` (open it in Notepad, copy everything) |
 
-Secrets yra užšifruoti. Jų nemato nei kiti žmonės, nei viešo repo lankytojai.
+Secrets are encrypted. Neither other people nor visitors of a public repo can see them.
 
-### 4. Paleisk pirmą build'ą
-**Actions** → **WebGL build** → **Run workflow**. Po to jis pasileis pats po kiekvieno push'o.
+### 4. Start the first build
+**Actions** → **WebGL build** → **Run workflow**. After that it starts by itself after every push.
 
-## Lokalus WebGL build'as
-`RPG > Build > WebGL (browser)` sukuria `Builds/WebGL/`. Atidaryti tiesiai iš failo naršyklė neleidžia, reikia vietinio serverio:
+## Local WebGL build
+`RPG > Build > WebGL (browser)` creates `Builds/WebGL/`. The browser will not open it straight from the file; it needs a local server:
 
 ```
 cd Builds/WebGL
 python -m http.server 8080
 ```
 
-Tada atsidaryk http://localhost:8080.
+Then open http://localhost:8080.
 
-## Valdymas naršyklėje
-Toks pat kaip kompiuteryje: WASD / pelė, Tab, F, Esc, pelės ratukas. Esc naršyklėje taip pat išjungia pilno ekrano režimą. Prisijungimo langas (ekrano viduryje, F1) rodo tik **Play offline** ir **Join**, nes naršyklė negali būti serveriu.
+## Controls in the browser
+The same as on the computer: WASD / mouse, Tab, F, Esc, mouse wheel. In the browser Esc also leaves full-screen mode. The login window (middle of the screen, F1) shows only **Play offline** and **Join**, because a browser cannot be a server.
 
-## Multiplayer naršyklėje (vėliau)
-Naršyklė gali jungtis tik per **WebSocket**, o žaidimo puslapis yra `https`, todėl serveriui reikės:
-- viešo kompiuterio, pvz. VPS (apie 5 €/mėn.), kuriame veiktų Linux serverio build'as;
-- WebSocket su TLS (`wss://`), domeno ir sertifikato.
+## Multiplayer in the browser (later)
+A browser can only connect through **WebSocket**, and the game page is `https`, so the server will need:
+- a public computer, e.g. a VPS (about 5 €/month), running the Linux server build;
+- WebSocket with TLS (`wss://`), a domain and a certificate.
 
-Kliento pusė jau paruošta: WebGL'e `Client` automatiškai jungiasi per WebSocket. Serverio pusę darysime, kai ateis laikas.
+The client side is ready: in WebGL `Client` connects through WebSocket automatically. The server side comes when it is time.

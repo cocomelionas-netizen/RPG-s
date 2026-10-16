@@ -10,7 +10,7 @@ using UnityEngine.UI;
 namespace RPG.UI
 {
     /// <summary>
-    /// The local player's character sheet (C, or the Character button), laid out like Source's: three pages
+    /// The local player's character sheet (C, or the Character button), laid out like the source game's: three pages
     /// (attributes, combat ratings, weapon skills) of "Label: value" rows, a small purple + to spend a point on every
     /// stat, and a tooltip for every row (what the stat does; on a + what a point costs and how many are invested).
     /// Builds its own UI; place it on a RectTransform that fills the HUD canvas.
@@ -24,7 +24,7 @@ namespace RPG.UI
         private const float ValueX = 170f;
         private const float PlusX = 262f;
 
-        // Colours taken from Source's character panel.
+        // Colours taken from the source game's character panel.
         private static readonly Color PanelColor = new Color32(0x12, 0x13, 0x06, 0xF2);
         private static readonly Color BorderColor = new Color32(0x4A, 0x3E, 0x26, 0xFF);
         private static readonly Color LabelColor = new Color32(0x8C, 0x86, 0x76, 0xFF);
@@ -36,7 +36,7 @@ namespace RPG.UI
         private static readonly Color TooltipColor = new Color32(0x0D, 0x15, 0x1A, 0xF5);
         private static readonly Color TooltipBorder = new Color32(0x2B, 0x3A, 0x40, 0xFF);
         private const string TooltipHeaderHex = "d3c370";
-        // The exact colour Source's client draws the "5xp" price in (181, 0, 175).
+        // The exact colour the source game's client draws the "5xp" price in (181, 0, 175).
         private const string CostHex = "b500af";
         private const string TooExpensiveHex = "7a6a7a";
 

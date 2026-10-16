@@ -18,7 +18,7 @@ namespace RPG.UI
         [Tooltip("Names of units further than this from the camera's center are hidden.")]
         [SerializeField, Min(1f)] private float visibleDistance = 11f;
 
-        // Colours taken from Source: monsters (bosses too) red, players and the line under their name light blue.
+        // Colours taken from the source game: monsters (bosses too) red, players and the line under their name light blue.
         private static readonly Color MonsterColor = new Color32(0xB6, 0x3E, 0x3D, 0xFF);
         private static readonly Color PlayerColor = new Color32(0x8E, 0xAC, 0xD2, 0xFF);
 

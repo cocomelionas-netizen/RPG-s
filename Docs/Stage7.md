@@ -1,93 +1,93 @@
-# 7 etapas – inventorius, ginklai, šarvai, loot
+# Stage 7 – inventory, weapons, armor, loot
 
-## Ką padarėme
+## What we did
 
-- **Daiktai** (`ItemDefinition`, `ItemCatalog`):
-  - keturios ekipiruotės vietos: ginklas, šalmas, šarvai ir batai, plius gydymo gėrimai;
-  - retumas pažymėtas spalva: Common (balta), Uncommon (žalia), Rare (mėlyna), Epic (violetinė);
-  - daiktai duoda papildomos **žalos**, **HP** ir **armor**. Armor mažina gaunamą žalą: 100 armor perpus, 12 armor – apie 11 %.
+- **Items** (`ItemDefinition`, `ItemCatalog`):
+  - four equipment slots: weapon, helmet, armor and boots, plus healing potions;
+  - rarity is shown by colour: Common (white), Uncommon (green), Rare (blue), Epic (purple);
+  - items add **damage**, **HP** and **armor**. Armor reduces damage taken: 100 armor halves it, 12 armor about 11 %.
 
-  | Vieta | Common | Uncommon | Rare | Epic |
-  |-------|--------|----------|------|------|
-  | Ginklas | Rusty Sword +2 žalos | Iron Sword +4 | Goblin Cleaver +7, +10 HP | Orcish Greataxe +12, +20 HP |
-  | Šalmas | Leather Cap 4 armor | Iron Helm 8, +5 HP | Orc Skull Helm 12, +15 HP | |
-  | Šarvai | Padded Vest 6 | Chainmail 12, +10 HP | | Orcish Plate 22, +30 HP |
-  | Batai | Worn Boots 3 | Iron Boots 6, +5 HP | | |
+  | Slot | Common | Uncommon | Rare | Epic |
+  |------|--------|----------|------|------|
+  | Weapon | Rusty Sword +2 damage | Iron Sword +4 | Goblin Cleaver +7, +10 HP | Orcish Greataxe +12, +20 HP |
+  | Helmet | Leather Cap 4 armor | Iron Helm 8, +5 HP | Orc Skull Helm 12, +15 HP | |
+  | Armor | Padded Vest 6 | Chainmail 12, +10 HP | | Orcish Plate 22, +30 HP |
+  | Boots | Worn Boots 3 | Iron Boots 6, +5 HP | | |
 
-  **Healing Potion** atstato 35 % HP. Gėrimai kraunami į krūvą iki 10, o tarp jų išgėrimų yra 5 s cooldown. Kiekvienas naujas veikėjas gauna 3 gėrimus.
-- **Inventorius** (`Inventory`): 20 vietų krepšys ir 4 ekipiruotės vietos. Visą turinį laiko serveris. Klientas tik paprašo užsidėti, nusiimti, išgerti ar pasiimti, o serveris patikrina, ar tai galima.
-- **Inventoriaus langas**: klavišas **I** (arba **B**) arba mygtukas **Bag (I)** dešinėje apačioje.
-  - **Spustelėk daiktą krepšyje**, kad jį užsidėtum. Gėrimas tokiu atveju išgeriamas. Jei toje vietoje jau buvo daiktas, jis grįžta į krepšį.
-  - **Spustelėk užsidėtą daiktą**, kad jį nusiimtum.
-  - Užvedus pelę, matyti daikto aprašymas.
-  - Viršuje rodoma dabartinė žala, HP ir armor.
-- **Loot.** Nužudytas monstras pagal savo loot lentelę gali palikti **krepšelį** ant žemės. Spustelėk jį: veikėjas prieina ir pasiima viską, kas telpa. Rodomas užrašas „+ Iron Helm“ daikto retumo spalva. Krepšelis dingsta, kai ištuštinamas, arba po 90 s. Ar žaidėjas pakankamai arti, tikrina serveris.
-- **Stipresni monstrai ir jų stovyklos:**
+  A **Healing Potion** restores 35 % HP. Potions stack up to 10 and have a 5 s cooldown between drinks. Every new character gets 3 potions.
+- **Inventory** (`Inventory`): a 20-slot bag and 4 equipment slots. The server holds all of it. The client only asks to equip, unequip, drink or pick up, and the server checks whether that is allowed.
+- **Inventory window**: key **I** (or **B**) or the **Bag (I)** button bottom right.
+  - **Click an item in the bag** to equip it. A potion is drunk instead. If the slot already had an item, it goes back to the bag.
+  - **Click an equipped item** to take it off.
+  - Hovering shows the item's description.
+  - The current damage, HP and armor are shown at the top.
+- **Loot.** A killed monster may leave a **bag** on the ground according to its loot table. Click it: the character walks up and takes everything that fits. "+ Iron Helm" is shown in the item's rarity colour. The bag disappears when emptied or after 90 s. The server checks that the player is close enough.
+- **Stronger monsters and their camps:**
 
-  | Monstras | Lygis | HP | Žala | XP | Stovykla | Geriausias loot |
-  |----------|-------|----|------|----|----------|-----------------|
-  | Goblin | 2 | 45 | 3–5 | 20 | 3 stovyklos po 3, 5–7 vnt. nuo starto | Iron Sword (3 %) |
-  | Goblin Brute (pilkas, didesnis) | 4 | 120 | 6–10 | 45 | 2, ~10 vnt. į dešinę | Goblin Cleaver (4 %) |
-  | Orc (raudonas, didžiausias) | 6 | 220 | 10–15 | 90 | 2, ~10 vnt. į kairę | Orcish Plate, Orcish Greataxe (po 5 %) |
+  | Monster | Level | HP | Damage | XP | Camp | Best loot |
+  |---------|-------|----|--------|----|------|-----------|
+  | Goblin | 2 | 45 | 3–5 | 20 | 3 camps of 3, 5–7 units from the start | Iron Sword (3 %) |
+  | Goblin Brute (grey, bigger) | 4 | 120 | 6–10 | 45 | 2, ~10 units to the right | Goblin Cleaver (4 %) |
+  | Orc (red, biggest) | 6 | 220 | 10–15 | 90 | 2, ~10 units to the left | Orcish Plate, Orcish Greataxe (5 % each) |
 
-  Stipresni monstrai atsiranda iš naujo po 40 s, goblinai – po 20 s.
+  Stronger monsters come back after 40 s, goblins after 20 s.
 
-## Failai
+## Files
 
-| Failas | Paskirtis |
-|--------|-----------|
-| `Scripts/Runtime/Items/ItemDefinition.cs`, `ItemCatalog.cs`, `ItemStack.cs`, `LootEntry.cs` | Daiktai, jų katalogas (daiktas saugomas kaip numeris), krūva, loot įrašas |
-| `Scripts/Runtime/Items/Inventory.cs` | Krepšys ir ekipiruotė (serveris), daiktų bonusai, gėrimai, pasiėmimas |
-| `Scripts/Runtime/Items/LootBag.cs`, `LootPicker.cs` | Krepšelis ant žemės; spustelėjimas, priėjimas ir pasiėmimas |
-| `Scripts/Runtime/UI/InventoryWindow.cs`, `ItemSlotView.cs` | Inventoriaus langas |
-| `Data/Items/*.asset`, `Prefabs/World/LootBag.prefab`, `Prefabs/Monsters/*.prefab` | Sukuria scenos įrankis |
-| `Tests/PlayMode/InventoryTests.cs` | Nauji testai |
+| File | Purpose |
+|------|---------|
+| `Scripts/Runtime/Items/ItemDefinition.cs`, `ItemCatalog.cs`, `ItemStack.cs`, `LootEntry.cs` | Items, their catalog (an item is stored as a number), stacks, loot entries |
+| `Scripts/Runtime/Items/Inventory.cs` | Bag and equipment (server), item bonuses, potions, pickup |
+| `Scripts/Runtime/Items/LootBag.cs`, `LootPicker.cs` | Bag on the ground; clicking, walking up and picking up |
+| `Scripts/Runtime/UI/InventoryWindow.cs`, `ItemSlotView.cs` | Inventory window |
+| `Data/Items/*.asset`, `Prefabs/World/LootBag.prefab`, `Prefabs/Monsters/*.prefab` | Created by the scene tool |
+| `Tests/PlayMode/InventoryTests.cs` | New tests |
 
-Pakeisti failai:
-- `Health`: `ServerArmor` ir `ReduceByArmor` (žalos mažinimas).
-- `CharacterProgress`: prie klasės ir lygio prideda daiktų žalą, HP ir armor.
-- `MonsterAI`: loot lentelė ir krepšelis po mirties.
-- `PlayerInputReader`: klavišai I ir B.
-- Scenos įrankis:
-  - daiktai ir katalogas;
-  - bendras monstrų prefab'ų kūrimas (`MonsterSpec`);
-  - Goblin Brute ir Orc su stovyklomis;
-  - loot krepšelis;
-  - žaidėjui `Inventory` su 3 gėrimais ir `LootPicker`;
-  - inventoriaus langas.
+Changed files:
+- `Health`: `ServerArmor` and `ReduceByArmor` (damage reduction).
+- `CharacterProgress`: adds item damage, HP and armor to the class and level.
+- `MonsterAI`: loot table and a bag on death.
+- `PlayerInputReader`: keys I and B.
+- Scene tool:
+  - items and the catalog;
+  - shared monster prefab creation (`MonsterSpec`);
+  - Goblin Brute and Orc with camps;
+  - the loot bag;
+  - `Inventory` with 3 potions and `LootPicker` for the player;
+  - the inventory window.
 
-## Kaip patikrinti naršyklėje
+## How to check in the browser
 
-https://cocomelionas-netizen.github.io/RPG-s/ (jei rodo seną versiją, perkrauk su Ctrl+F5)
+https://cocomelionas-netizen.github.io/RPG-s/ (if it shows an old version, reload with Ctrl+F5)
 
-1. **I** – atsidaro inventorius su 3 Healing Potion. Užvesk pelę, kad pamatytum aprašymą.
-2. Gauk žalos nuo goblino ir spustelėk gėrimą: pasirodo žalias „+N“, gėrimų lieka 2. Antrą iš karto išgerti nepavyks („Not ready yet“).
-3. Mušk goblinus, kol vienas paliks krepšelį (gėrimas iškrenta 30 % atvejų, daiktai rečiau). Spustelėk krepšelį: veikėjas prieina, pasirodo „+ daiktas“.
-4. Spustelėk daiktą krepšyje: jis atsiranda ekipiruotės vietoje, o viršuje padidėja Damage, Health ar Armor. Spustelėk jį ten, kad nusiimtum.
-5. Aplankyk Goblin Brute (dešinėje) ir Orc (kairėje) stovyklas. Jos pavojingesnės, bet duoda daugiau XP ir geresnį loot.
+1. **I** – the inventory opens with 3 Healing Potions. Hover to see the description.
+2. Take damage from a goblin and click a potion: a green "+N" shows, 2 potions are left. Drinking a second at once fails ("Not ready yet").
+3. Fight goblins until one leaves a bag (a potion drops 30 % of the time, items more rarely). Click the bag: the character walks up and "+ item" shows.
+4. Click an item in the bag: it appears in its equipment slot and Damage, Health or Armor at the top goes up. Click it there to take it off.
+5. Visit the Goblin Brute (right) and Orc (left) camps. They are more dangerous but give more XP and better loot.
 
-## Automatiniai testai
+## Automatic tests
 
-`RPG > Build Test Scene`, tada **PlayMode** → **Run All**. Pridėti 7 nauji `InventoryTests` testai:
-- pradiniai gėrimai;
-- ginklas prideda žalos, o nusiėmus ji dingsta;
-- šarvai prideda HP ir sumažina žalą;
-- gėrimas gydo, sunaudojamas ir turi cooldown;
-- pilnas krepšys nebepriima daiktų;
-- monstras palieka krepšelį, kurį galima pasiimti;
-- per toli esančio krepšelio pasiimti negalima.
+`RPG > Build Test Scene`, then **PlayMode** → **Run All**. 7 new `InventoryTests`:
+- starting potions;
+- a weapon adds damage, and taking it off removes it;
+- armor adds HP and reduces damage;
+- a potion heals, is used up and has a cooldown;
+- a full bag takes no more items;
+- a monster leaves a bag that can be picked up;
+- a bag too far away cannot be picked up.
 
-Kartu su 5–6 etapų pataisymų testais iš viso yra **78** testai. Kaip ir anksčiau, kodas patikrintas .NET kompiliatoriumi, bet PlayMode testai debesyje nepaleisti.
+With the tests of the stage 5–6 fixes there are **78** tests in all. As before, the code was checked with the .NET compiler, but PlayMode tests were not run in the cloud.
 
-## Kur keisti skaičius
-- Daiktai ir jų rodikliai: `TestSceneBuilder.CreateItems`. Naujus daiktus visada dėk į sąrašo galą, nes žaidėjai saugo daikto numerį.
-- Monstrai, jų loot tikimybės ir stovyklos: `TestSceneBuilder` (`MonsterSpec`, `PlaceMonsterCamps`).
-- Krepšio dydis, gėrimų cooldown, pasiėmimo atstumas: `Player.prefab` → `Inventory`.
-- Armor formulė: `Health.ReduceByArmor`.
+## Where to change the numbers
+- Items and their stats: `TestSceneBuilder.CreateItems`. Always add new items at the end of the list, because players store the item number.
+- Monsters, their loot chances and camps: `TestSceneBuilder` (`MonsterSpec`, `PlaceMonsterCamps`).
+- Bag size, potion cooldown, pickup range: `Player.prefab` → `Inventory`.
+- Armor formula: `Health.ReduceByArmor`.
 
-## Žinomi apribojimai
-- **Daiktai neišsaugomi.** Perkrovus puslapį, jie dingsta. Išsaugojimas serveryje bus 8 etape.
-- Daiktai rodomi spalvotais kvadratais su pavadinimu, nes ikonų dar nėra.
-- Daiktų negalima išmesti, perkelti tarp krepšio vietų ar parduoti. Pirkliai buvo numatyti su NPC (9 etapas), kurio atsisakėme.
-- Užsidėti daiktai nekeičia veikėjo išvaizdos.
-- Loot nepriklauso konkrečiam žaidėjui: pasiimti gali bet kas, kas pirmas prieina.
+## Known limitations
+- **Items are not saved.** They disappear after a page reload. Saving on the server comes in stage 8.
+- Items are shown as coloured squares with a name, because there are no icons yet.
+- Items cannot be dropped, moved between bag slots or sold. Merchants were planned with NPCs (stage 9), which was dropped.
+- Equipped items do not change the character's look.
+- Loot does not belong to a particular player: whoever gets there first can take it.

@@ -1,81 +1,81 @@
-# 8 etapas – paskyros ir progreso išsaugojimas
+# Stage 8 – accounts and saving progress
 
-## Ką padarėme
+## What we did
 
-- **Prisijungimo langas** (ekrano viduryje, F1 slepia):
-  - **Name** ir **Password**;
-  - **New character** – sukuria naują veikėją. Pasirenki klasę (Warrior / Ranger / Mage), ir jos pakeisti vėliau nebegalima. Testiniai klasės mygtukai pašalinti;
-  - **Play offline**, **Host**, **Join** (prisijungti prie serverio), **Server only**. Naršyklėje rodomi tik Offline ir Join;
-  - klaidos rodomos raudonai: „Wrong name or password.“, „That name is taken.“, „This character is already in the game.“;
-  - vardas įsimenamas šiame įrenginyje, slaptažodis – niekada;
-  - prisijungus panelė susitraukia į būsenos eilutę su **Log out**.
-- **Paskyras tikrina serveris** (`AccountService`, prisijungimo patvirtinimas `NetworkBootstrap.ApproveConnection`):
-  - vardas: 3–16 raidžių, skaičių arba _. Didžiosios ir mažosios raidės nesiskiria;
-  - slaptažodis: bent 4 simboliai. Saugomas tik druskos ir PBKDF2 hash'o pora (10 000 iteracijų), ne pats slaptažodis;
-  - tuo pačiu vardu vienu metu prisijungti galima tik kartą;
-  - klientas be teisingo prisijungimo į žaidimą neįleidžiamas.
-- **Kas išsaugoma** (`CharacterPersistence`): klasė, lygis, XP, krepšys, ekipiruotė ir vieta pasaulyje. Virš veikėjo ir rėmeliuose rodomas paskyros vardas.
-- **Kada išsaugoma:** 2 s po pakeitimo (lygis, daiktai), kas 15 s žaidžiant (vieta) ir atsijungiant (Log out, išjungus serverį).
-- **Kur saugoma:**
+- **Login window** (in the middle of the screen, F1 hides it):
+  - **Name** and **Password**;
+  - **New character** – creates a new character. You choose the class (Warrior / Ranger / Mage) and it cannot be changed later. The test class buttons were removed;
+  - **Play offline**, **Host**, **Join** (connect to a server), **Server only**. In the browser only Offline and Join are shown;
+  - errors are shown in red: "Wrong name or password.", "That name is taken.", "This character is already in the game.";
+  - the name is remembered on this device, the password never;
+  - once logged in the panel shrinks to a status line with **Log out**.
+- **The server checks accounts** (`AccountService`, connection approval in `NetworkBootstrap.ApproveConnection`):
+  - name: 3–16 letters, digits or _. Upper and lower case are the same;
+  - password: at least 4 characters. Only a salt and PBKDF2 hash pair (10 000 iterations) is stored, never the password itself;
+  - the same name can be logged in only once at a time;
+  - a client without a valid login is not let into the game.
+- **What is saved** (`CharacterPersistence`): class, level, XP, bag, equipment and position in the world. The account name is shown above the character and in the frames.
+- **When it is saved:** 2 s after a change (level, items), every 15 s while playing (position) and on disconnect (Log out, server shutdown).
+- **Where it is saved:**
 
-  | Kur žaidi | Kur saugoma |
-  |-----------|-------------|
-  | Naršyklėje (Offline) | Naršyklės atmintyje (IndexedDB per PlayerPrefs). Išlieka perkrovus puslapį, bet tik toje naršyklėje ir tame kompiuteryje. |
-  | Host / dedikuotas serveris | JSON failai `Application.persistentDataPath/Accounts/<vardas>.json`. Įrašoma pirma į laikiną failą, todėl lūžus serveriui paskyra nesugadinama. |
+  | Where you play | Where it is saved |
+  |----------------|-------------------|
+  | In the browser (Offline) | Browser storage (IndexedDB through PlayerPrefs). Survives a page reload, but only in that browser on that computer. |
+  | Host / dedicated server | JSON files `Application.persistentDataPath/Accounts/<name>.json`. Written to a temporary file first, so a server crash does not corrupt an account. |
 
-  Saugykla yra už `IAccountStore` sąsajos, todėl vėliau ją galima pakeisti tikra duomenų baze (pvz. PostgreSQL), nekeičiant žaidimo kodo.
-- Paleidus iš komandinės eilutės (`-host`, `-client`, `-bot`), automatiškai sukuriamas vienkartinis veikėjas „BotNNNNN“, todėl testavimo botas veikia kaip anksčiau.
+  Storage is behind the `IAccountStore` interface, so it can later be replaced by a real database (e.g. PostgreSQL) without changing game code.
+- Started from the command line (`-host`, `-client`, `-bot`), a throwaway character "BotNNNNN" is created automatically, so the test bot works as before.
 
-## Failai
+## Files
 
-| Failas | Paskirtis |
-|--------|-----------|
-| `Scripts/Runtime/Accounts/AccountService.cs` | Prisijungimų tikrinimas, paskyrų kūrimas, kas prisijungęs |
-| `Scripts/Runtime/Accounts/AccountRecord.cs`, `LoginRequest.cs` | Saugomi duomenys ir prisijungimo užklausa (JSON) |
-| `Scripts/Runtime/Accounts/PasswordHasher.cs` | Druska ir PBKDF2 hash |
-| `Scripts/Runtime/Accounts/AccountStores.cs` | `IAccountStore`: failai, PlayerPrefs (naršyklė), atmintis (testai) |
-| `Scripts/Runtime/Accounts/CharacterPersistence.cs` | Veikėjo įkėlimas prisijungus ir išsaugojimas |
-| `Tests/PlayMode/AccountTests.cs` | Nauji testai |
+| File | Purpose |
+|------|---------|
+| `Scripts/Runtime/Accounts/AccountService.cs` | Login checks, account creation, who is logged in |
+| `Scripts/Runtime/Accounts/AccountRecord.cs`, `LoginRequest.cs` | Saved data and the login request (JSON) |
+| `Scripts/Runtime/Accounts/PasswordHasher.cs` | Salt and PBKDF2 hash |
+| `Scripts/Runtime/Accounts/AccountStores.cs` | `IAccountStore`: files, PlayerPrefs (browser), memory (tests) |
+| `Scripts/Runtime/Accounts/CharacterPersistence.cs` | Loading the character on login and saving it |
+| `Tests/PlayMode/AccountTests.cs` | New tests |
 
-Pakeisti failai:
+Changed files:
 - `NetworkBootstrap`:
-  - prisijungimo tikrinimas;
+  - login checks;
   - `SetLogin`;
-  - naršyklėje Offline nebepasileidžia savaime, o laukia prisijungimo.
-- `DevConnectionPanel`: prisijungimo langas.
+  - in the browser Offline no longer starts by itself but waits for a login.
+- `DevConnectionPanel`: the login window.
 - `CharacterProgress`:
   - `ServerLoad`;
-  - pašalintas klasės keitimas iš kliento.
+  - removed class changes from the client.
 - `Inventory`: `ServerLoad`, `BagSnapshot`, `EquipmentSnapshot`.
 - `Health`: `ServerSetDisplayName`.
-- Pašalintas `ClassPicker`.
-- Scenos įrankis: `AccountService` prie NetworkManager, `CharacterPersistence` žaidėjui.
+- Removed `ClassPicker`.
+- Scene tool: `AccountService` on the NetworkManager, `CharacterPersistence` for the player.
 
-## Kaip patikrinti naršyklėje
+## How to check in the browser
 
-https://cocomelionas-netizen.github.io/RPG-s/ (jei rodo seną versiją, perkrauk su Ctrl+F5)
+https://cocomelionas-netizen.github.io/RPG-s/ (if it shows an old version, reload with Ctrl+F5)
 
-1. Ekrano viduryje atsiranda prisijungimo langas. Įvesk vardą ir slaptažodį, pažymėk **New character**, pasirink klasę ir spausk **Play offline**.
-2. Pakilk lygiu, pasiimk ir užsidėk kokį daiktą, nueik kur nors toliau nuo starto.
-3. Palauk kelias sekundes ir **perkrauk puslapį** (F5).
-4. Įvesk tą patį vardą ir slaptažodį, **nežymėk** New character ir spausk **Play offline**. Turi atsirasti tas pats veikėjas: lygis, klasė, daiktai ir vieta.
-5. Bandyk prisijungti su neteisingu slaptažodžiu – turi būti „Wrong name or password.“
-6. Bandyk sukurti veikėją tuo pačiu vardu – turi būti „That name is taken.“
+1. A login window appears in the middle of the screen. Enter a name and password, tick **New character**, choose a class and press **Play offline**.
+2. Level up, pick up and equip an item, walk somewhere further from the start.
+3. Wait a few seconds and **reload the page** (F5).
+4. Enter the same name and password, **do not** tick New character and press **Play offline**. The same character must appear: level, class, items and position.
+5. Try to log in with a wrong password – it must say "Wrong name or password."
+6. Try to create a character with the same name – it must say "That name is taken."
 
-## Automatiniai testai
+## Automatic tests
 
-**PlayMode** → **Run All**. Pridėti 5 nauji `AccountTests` testai:
-- slaptažodžio hash;
-- paskyros kūrimas, prisijungimas ir atmetimai (blogas slaptažodis, užimtas vardas, jau žaidime, netinkamas vardas ar slaptažodis);
-- išsaugotas veikėjas atkuriamas ir vėl išsaugomas;
-- naujas veikėjas gauna pasirinktą klasę ir yra išsaugomas;
-- su neteisingu slaptažodžiu žaidimas nepasileidžia.
+**PlayMode** → **Run All**. 5 new `AccountTests`:
+- password hash;
+- account creation, login and refusals (wrong password, name taken, already in the game, invalid name or password);
+- a saved character is restored and saved again;
+- a new character gets the chosen class and is saved;
+- with a wrong password the game does not start.
 
-Iš viso **83** testai.
+**83** tests in all.
 
-## Žinomi apribojimai
-- **Naršyklėje saugoma tik toje naršyklėje.** Kitame kompiuteryje to paties veikėjo nebus, kol žaidimas neveiks per viešą serverį (VPS, žr. `WebGL.md`). Tada viską saugos serveris.
-- Viena paskyra – vienas veikėjas. Kelių veikėjų pasirinkimą galima pridėti vėliau.
-- Slaptažodžio pakeitimo ir atkūrimo nėra.
-- Kai jungiamasi per tinklą (Join), slaptažodis siunčiamas prisijungimo metu. Saugu bus tik su `wss://` (TLS), kai bus viešas serveris.
-- Uždarius naršyklės skirtuką, gali dingti paskutinės ~2–15 s progreso, nes uždarymo momentu naršyklė neleidžia patikimai išsaugoti.
+## Known limitations
+- **In the browser it is saved only in that browser.** On another computer the same character is not there until the game runs on a public server (VPS, see `WebGL.md`). Then the server saves everything.
+- One account – one character. Choosing between several characters can be added later.
+- There is no password change or recovery.
+- When connecting over the network (Join), the password is sent at login. It is only safe with `wss://` (TLS), once there is a public server.
+- Closing the browser tab can lose the last ~2–15 s of progress, because the browser does not allow saving reliably at that moment.

@@ -1,62 +1,62 @@
-# 1 etapas – izometrinis žemėlapis, kamera, judėjimas
+# Stage 1 – isometric map, camera, movement
 
-## Ką padarėme
+## What we did
 
-- **Izometrinis pasaulis.** `Grid` su Isometric layout ir 1 × 0.5 langeliu. Joje du tilemap'ai:
-  - `Ground` – žolė ir takai, be fizikos, sorting order -100;
-  - `Obstacles` – uolos su `TilemapCollider2D`, kraštai uždaryti, kad žaidėjas neišeitų iš žemėlapio.
-- **Izometrinis rūšiavimas.** Transparency Sort Mode = Custom Axis (0, 1, 0). Kas žemiau ekrane, tas piešiamas priekyje, todėl veikėjas gali užeiti už uolos.
-- **Veikėjas** (`Player.prefab`). `Rigidbody2D` be gravitacijos, mažas `CircleCollider2D` ties kojomis (izometrijoje susiduria tik „pėdos“), `PlayerInputReader` ir `PlayerMovement`.
-- **Judėjimas:**
-  - WASD arba rodyklės – judama ekrano kryptimis;
-  - kairys pelės mygtukas – click-to-move; laikant mygtuką veikėjas seka žymeklį;
-  - klaviatūra visada atšaukia pelės tikslą;
-  - jei veikėjas atsitrenkia į kliūtį ilgiau nei 0.25 s, pelės tikslas atšaukiamas.
-- **Kamera** (`CameraFollow`). Ortografinė, sklandžiai seka žaidėją (SmoothDamp), pelės ratukas keičia priartinimą nuo 2.5 iki 8.
-- **Global Light 2D** ir **EventSystem**. EventSystem reikalingas tam, kad paspaudimai per UI nejudintų veikėjo.
+- **Isometric world.** A `Grid` with the Isometric layout and 1 × 0.5 cells. It holds two tilemaps:
+  - `Ground` – grass and paths, no physics, sorting order -100;
+  - `Obstacles` – rocks with a `TilemapCollider2D`; the edges are closed so the player cannot leave the map.
+- **Isometric sorting.** Transparency Sort Mode = Custom Axis (0, 1, 0). Whatever is lower on screen is drawn in front, so the character can walk behind a rock.
+- **Character** (`Player.prefab`). A `Rigidbody2D` without gravity, a small `CircleCollider2D` at the feet (in isometric view only the "feet" collide), `PlayerInputReader` and `PlayerMovement`.
+- **Movement:**
+  - WASD or arrow keys – moves in screen directions;
+  - left mouse button – click-to-move; holding the button makes the character follow the cursor;
+  - the keyboard always cancels a mouse target;
+  - if the character is blocked by an obstacle for more than 0.25 s, the mouse target is cancelled.
+- **Camera** (`CameraFollow`). Orthographic, follows the player smoothly (SmoothDamp); the mouse wheel zooms from 2.5 to 8.
+- **Global Light 2D** and **EventSystem**. The EventSystem is needed so that clicks on the UI do not move the character.
 
-## Failai
+## Files
 
-| Failas | Paskirtis |
-|--------|-----------|
-| `Assets/_Project/Scripts/Runtime/Controls/PlayerInputReader.cs` | Skaito klaviatūrą ir pelę per Input System |
-| `Assets/_Project/Scripts/Runtime/Player/PlayerMovement.cs` | WASD ir click-to-move judėjimas per `Rigidbody2D` |
-| `Assets/_Project/Scripts/Runtime/CameraSystem/CameraFollow.cs` | Kameros sekimas ir priartinimas |
-| `Assets/_Project/Scripts/Runtime/RPG.Runtime.asmdef` | Runtime kodo assembly |
-| `Assets/_Project/Scripts/Editor/TestSceneBuilder.cs` | Meniu `RPG > Build Test Scene`: sukuria 2D Renderer nustatymus, tile'us, prefab'ą ir sceną (2 etape pervadintas iš `Stage1SceneBuilder`) |
-| `Assets/_Project/Scripts/Editor/PlaceholderArtGenerator.cs` | Generuoja laikinus sprite'us |
-| `Assets/_Project/Tests/PlayMode/*.cs` | Automatiniai judėjimo ir kameros testai |
-| `Assets/_Project/Scenes/World_Test.unity` | Testinė scena |
+| File | Purpose |
+|------|---------|
+| `Assets/_Project/Scripts/Runtime/Controls/PlayerInputReader.cs` | Reads the keyboard and mouse through the Input System |
+| `Assets/_Project/Scripts/Runtime/Player/PlayerMovement.cs` | WASD and click-to-move movement through `Rigidbody2D` |
+| `Assets/_Project/Scripts/Runtime/CameraSystem/CameraFollow.cs` | Camera follow and zoom |
+| `Assets/_Project/Scripts/Runtime/RPG.Runtime.asmdef` | Runtime code assembly |
+| `Assets/_Project/Scripts/Editor/TestSceneBuilder.cs` | Menu `RPG > Build Test Scene`: creates the 2D Renderer settings, tiles, the prefab and the scene (renamed from `Stage1SceneBuilder` in stage 2) |
+| `Assets/_Project/Scripts/Editor/PlaceholderArtGenerator.cs` | Generates temporary sprites |
+| `Assets/_Project/Tests/PlayMode/*.cs` | Automatic movement and camera tests |
+| `Assets/_Project/Scenes/World_Test.unity` | Test scene |
 
-## Kaip patikrinti
+## How to check
 
-### Rankinis patikrinimas
-1. Atidaryk `Assets/_Project/Scenes/World_Test.unity` ir spausk **Play**.
-2. **WASD / rodyklės** – veikėjas juda, kamera sklandžiai seka.
-3. **Kairys pelės paspaudimas** ant žemės – veikėjas nueina į tą vietą ir sustoja.
-4. **Laikyk pelės mygtuką** ir vedžiok – veikėjas seka žymeklį.
-5. **Paspausk už uolos** – veikėjas atsitrenkia, trumpai pastovi ir tikslas atšaukiamas (neina „į sieną“ amžinai).
-6. **Prieik prie uolų sienelės** (dešinėje virš starto) iš viršaus ir iš apačios. Iš viršaus veikėjas turi būti uždengtas uolos, iš apačios – priekyje jos.
-7. **Pelės ratukas** – priartina ir nutolina.
-8. **Console** – neturi būti raudonų klaidų. Pranešimas „GPUResidentDrawer Disabled…“ yra normalus su 2D Renderer.
+### By hand
+1. Open `Assets/_Project/Scenes/World_Test.unity` and press **Play**.
+2. **WASD / arrows** – the character moves, the camera follows smoothly.
+3. **Left click** on the ground – the character walks there and stops.
+4. **Hold the mouse button** and move it – the character follows the cursor.
+5. **Click behind a rock** – the character bumps into it, stands briefly and the target is cancelled (it does not walk "into the wall" forever).
+6. **Walk up to the little rock wall** (right of and above the start) from above and from below. From above the character must be covered by the rock, from below it must be in front of it.
+7. **Mouse wheel** – zooms in and out.
+8. **Console** – no red errors. The message "GPUResidentDrawer Disabled…" is normal with the 2D Renderer.
 
-### Automatiniai testai
-`Window > General > Test Runner` → skirtukas **PlayMode** → **Run All**. 1 etapo pabaigoje buvo 6 testai (2 etape jų 24):
-- `PlayerMovementTests`: nueina į tikslą, atnaujina žiūrėjimo kryptį, nepraeina pro sieną ir atšaukia tikslą, `Stop()` sustabdo;
-- `CameraFollowTests`: kamera pasiveja taikinį ir išlaiko Z gylį, `Follow(..., snap: true)` peršoka iškart.
+### Automatic tests
+`Window > General > Test Runner` → tab **PlayMode** → **Run All**. At the end of stage 1 there were 6 tests (24 in stage 2):
+- `PlayerMovementTests`: reaches the target, updates the facing, does not pass through a wall and cancels the target, `Stop()` stops;
+- `CameraFollowTests`: the camera catches up with the target and keeps the Z depth, `Follow(..., snap: true)` jumps at once.
 
-### Scenos atkūrimas
-Jei scena sugadinta: `RPG > Build Test Scene`. Įrankis viską sugeneruos iš naujo (žemėlapis kaskart toks pats, seed 12345).
+### Rebuilding the scene
+If the scene is broken: `RPG > Build Test Scene`. The tool generates everything again (the map is the same every time, seed 12345).
 
-## Tikros grafikos keitimas
+## Replacing the art
 
-Placeholder'iai jau paruošti HD tapytai grafikai, todėl tikrus failus galima tiesiog įdėti vietoj jų:
-- **256 pixels per unit**, Filter Mode Bilinear, be pixel-art nustatymų;
-- **žemės tile'as** – 256 × 128 px rombas, pivot centre;
-- **aukšti objektai** (uolos, medžiai) – pivot ties pagrindu, kad rūšiavimas būtų teisingas;
-- **veikėjas** – pivot ties kojomis (`SpriteSortPoint.Pivot`).
+The placeholders are already set up for painted HD art, so real files can simply take their place:
+- **256 pixels per unit**, Filter Mode Bilinear, no pixel-art settings;
+- **ground tile** – a 256 × 128 px diamond, pivot in the center;
+- **tall objects** (rocks, trees) – pivot at the base so sorting is correct;
+- **character** – pivot at the feet (`SpriteSortPoint.Pivot`).
 
-## Žinomi apribojimai (spręsime vėliau)
-- ~~Veikėjas be animacijų~~ – padaryta 2 etape.
-- ~~Click-to-move eina tiesia linija~~ – kelio paieška padaryta 5 etape.
-- Viskas veikia tik lokaliai, be tinklo (3 etapas).
+## Known limitations (to solve later)
+- ~~The character has no animations~~ – done in stage 2.
+- ~~Click-to-move walks in a straight line~~ – pathfinding done in stage 5.
+- Everything works only locally, without networking (stage 3).

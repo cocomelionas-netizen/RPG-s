@@ -80,12 +80,12 @@ namespace RPG.EditorTools
             "Assets/Settings/Mobile_RPAsset.asset",
         };
 
-        // The world is the size of Source's start region, laid out from its data (SourceStartArea).
-        private const int MapWidth = SourceStartArea.Width;
-        private const int MapHeight = SourceStartArea.Height;
-        // New characters start in Pilgrim's Refuge; the main town with the vendors is St. Revere, like in Source.
-        private static Vector3Int StartCell => SourceStartArea.Start;
-        private static Vector3Int TownCell => SourceStartArea.Town;
+        // The world is the size of the source game's start region, laid out from its data (StartAreaData).
+        private const int MapWidth = StartAreaData.Width;
+        private const int MapHeight = StartAreaData.Height;
+        // New characters start in Pilgrim's Refuge; the main town with the vendors is St. Revere, like in the source game.
+        private static Vector3Int StartCell => StartAreaData.Start;
+        private static Vector3Int TownCell => StartAreaData.Town;
         // Paved squares, and areas without rocks or trees, around both.
         private const int TownSquareRadius = 6;
         private const int TownClearRadius = 18;
@@ -147,7 +147,7 @@ namespace RPG.EditorTools
             }, barSprite, lootBagPrefab, affixes);
             CharacterAnimationSet kingAnimations = CreateCharacterAnimationSet("GoblinKing", KingArtFolder, KingAnimationSetPath,
                 new Color(0.75f, 0.58f, 0.15f), new Color(0.4f, 0.58f, 0.25f));
-            // Source's dungeon bosses: an orc's numbers (each boss's own health, damage, level and loot are set per
+            // The source game's dungeon bosses: an orc's numbers (each boss's own health, damage, level and loot are set per
             // dungeon spot, measured against a normal monster), drawn bigger, with the ground slam.
             GameObject bossPrefab = CreateMonsterPrefab(new MonsterSpec
             {
@@ -629,9 +629,9 @@ namespace RPG.EditorTools
             ItemCatalog items)
         {
 
-            // Attributes, and health and mana at level 1 (half of Source's player_class_stats, as the attributes add
-            // the rest), are Source's: warrior 75/30, ranger 60/45, mage 40/70. Both grow with LevelCurve.HealthGrowth.
-            // Spells are Source's too (SourceSpells.cs): the Paladin's for the warrior.
+            // Attributes, and health and mana at level 1 (half of the source game's player_class_stats, as the attributes add
+            // the rest), are the source game's: warrior 75/30, ranger 60/45, mage 40/70. Both grow with LevelCurve.HealthGrowth.
+            // Spells are the source game's too (TestSceneBuilder.Spells.cs): the Paladin's for the warrior.
             AbilityDefinition[] warriorSpells = CreateWarriorSpells();
             AbilityDefinition[] rangerSpells = CreateRangerSpells();
             AbilityDefinition[] mageSpells = CreateMageSpells();
@@ -799,7 +799,7 @@ namespace RPG.EditorTools
                 stock[items.Length] = potion;
                 stock[items.Length + 1] = manaPotion;
                 vendor.stock = stock;
-                // Like Source's vendors: better gear is scarce (1 rare, 3 uncommon) and comes back every minute;
+                // Like the source game's vendors: better gear is scarce (1 rare, 3 uncommon) and comes back every minute;
                 // common gear and potions never run out.
                 var limits = new int[stock.Length];
                 for (int i = 0; i < stock.Length; i++)
@@ -818,14 +818,14 @@ namespace RPG.EditorTools
                 // Starting gear and one rare piece each; everything better is crafted from materials.
                 Crafter(MakeVendor("WarriorVendor", "Thorin Ironhand", "Warrior weapons and armor, crafting",
                         GearFile("Bronze Sword", 1), "WarAxe", GearFile("Leather Cap", 1), GearFile("Leather Jerkin", 1), GearFile("Leather Boots", 1)),
-                    catalog, WarriorClass, SourceGear.ArmorKind.Leather, SourceGear.ArmorKind.Chain, SourceGear.ArmorKind.Plate),
+                    catalog, WarriorClass, GearData.ArmorKind.Leather, GearData.ArmorKind.Chain, GearData.ArmorKind.Plate),
                 Crafter(MakeVendor("RangerVendor", "Sylva Swiftarrow", "Ranger bows and leather, crafting",
                         GearFile("Aspen Bow", 1), "ElvenBow", GearFile("Leather Cap", 1), GearFile("Leather Jerkin", 1), GearFile("Leather Boots", 1)),
-                    catalog, RangerClass, SourceGear.ArmorKind.Leather, SourceGear.ArmorKind.Chain),
+                    catalog, RangerClass, GearData.ArmorKind.Leather, GearData.ArmorKind.Chain),
                 Crafter(MakeVendor("MageVendor", "Elara the Arcanist", "Mage staves and robes, crafting",
                         GearFile("Aspen Staff", 1), "StaffOfEmbers", GearFile("Linen Hood", 1), GearFile("Linen Vestments", 1), GearFile("Linen Slippers", 1)),
-                    catalog, MageClass, SourceGear.ArmorKind.Robe),
-                // Also Source's Major Treasury Gold, which the Demiplane Key is made with.
+                    catalog, MageClass, GearData.ArmorKind.Robe),
+                // Also the source game's Major Treasury Gold, which the Demiplane Key is made with.
                 Jeweler(MakeVendor("JewelerVendor", "Gemma Brightstone", "Jeweler: gems, gem combining",
                     "ChippedRuby", "ChippedTopaz", "ChippedSapphire", "ChippedEmerald", "MajorTreasuryGold")),
                 Trainer("WarriorTrainer", "Halfrid", "Warrior trainer: spell Tomes", WarriorClass),
@@ -833,7 +833,7 @@ namespace RPG.EditorTools
                 Trainer("MageTrainer", "Gyldan", "Mage trainer: spell Tomes", MageClass),
             };
 
-            // Source's trainers sell their class's Tomes (as many as wanted).
+            // The source game's trainers sell their class's Tomes (as many as wanted).
             VendorDefinition Trainer(string fileName, string trainerName, string title, int classIndex)
             {
                 string[] tomes = ClassTomes.TryGetValue(classIndex, out List<ItemDefinition> list)
@@ -846,17 +846,17 @@ namespace RPG.EditorTools
         }
 
         /// <summary>
-        /// Lets a vendor craft its class's weapons and the armor of <paramref name="armorKinds"/> (Source's desirable
+        /// Lets a vendor craft its class's weapons and the armor of <paramref name="armorKinds"/> (the source game's desirable
         /// armor of the class) from materials.
         /// </summary>
-        private static VendorDefinition Crafter(VendorDefinition vendor, ItemCatalog catalog, int classIndex, params SourceGear.ArmorKind[] armorKinds)
+        private static VendorDefinition Crafter(VendorDefinition vendor, ItemCatalog catalog, int classIndex, params GearData.ArmorKind[] armorKinds)
         {
             var crafts = new List<ItemDefinition>();
             foreach (ItemDefinition item in catalog.items)
             {
                 if (item == null || !item.IsCraftable) continue;
                 bool classWeapon = item.slot == ItemSlot.Weapon && item.requiredClass == classIndex;
-                bool armor = GearArmorKinds.TryGetValue(item, out SourceGear.ArmorKind kind) && Array.IndexOf(armorKinds, kind) >= 0;
+                bool armor = GearArmorKinds.TryGetValue(item, out GearData.ArmorKind kind) && Array.IndexOf(armorKinds, kind) >= 0;
                 if (classWeapon || armor) crafts.Add(item);
             }
             vendor.crafts = crafts.ToArray();
@@ -874,9 +874,9 @@ namespace RPG.EditorTools
 
         private static void PlaceVendors(Grid grid, VendorDefinition[] vendors)
         {
-            // In St. Revere, where Source's heavy armor, ranged, staves merchants and jeweler stand.
-            // The class trainers (Source's Halfrid, Kelda and Gyldan) stand on the town square.
-            Vector3Int[] places = SourceStartArea.Vendors
+            // In St. Revere, where the source game's heavy armor, ranged, staves merchants and jeweler stand.
+            // The class trainers (the source game's Halfrid, Kelda and Gyldan) stand on the town square.
+            Vector3Int[] places = StartAreaData.Vendors
                 .Concat(new[] { TownCell + new Vector3Int(4, -3, 0), TownCell + new Vector3Int(4, 3, 0), TownCell + new Vector3Int(-4, 3, 0) })
                 .ToArray();
             var cloaks = new[]
@@ -906,7 +906,7 @@ namespace RPG.EditorTools
         }
 
         /// <summary>
-        /// Source's named places of the start region, with a waystone where Source has a waypoint (and in town).
+        /// The source game's named places of the start region, with a waystone where the source game has a waypoint (and in town).
         /// Waystone ids are saved with characters: keep them, only add new ones.
         /// </summary>
         private static void PlaceZonesAndWaystones(Grid grid, Tilemap obstacles, Sprite waystoneSprite)
@@ -914,7 +914,7 @@ namespace RPG.EditorTools
             // One cell step is about 0.56 world units diagonally.
             const float cellToWorld = 0.56f;
             var zones = new GameObject("Zones").transform;
-            foreach ((string name, Vector3Int cell, float radius) in SourceStartArea.OtherZones)
+            foreach ((string name, Vector3Int cell, float radius) in StartAreaData.OtherZones)
             {
                 var zone = new GameObject($"Zone {name}");
                 zone.transform.SetParent(zones, false);
@@ -922,7 +922,7 @@ namespace RPG.EditorTools
                 zone.AddComponent<Zone>().Configure(name, radius * cellToWorld);
             }
 
-            var places = SourceStartArea.Places;
+            var places = StartAreaData.Places;
             var stones = new GameObject("Waystones").transform;
             for (int i = 0; i < places.Length; i++)
             {
@@ -975,7 +975,7 @@ namespace RPG.EditorTools
             var cloth = new Color(0.55f, 0.4f, 0.7f);
             var arcane = new Color(0.45f, 0.35f, 0.9f);
 
-            // The first tier of Source's potions keeps the old files (and so the ids in saved bags).
+            // The first tier of the source game's potions keeps the old files (and so the ids in saved bags).
             potion = CreateItem("HealingPotion", "Minor Life Potion", ItemSlot.None, ItemRarity.Common, 0, 0, 0, LifeColor, 10);
             manaPotion = CreateItem("ManaPotion", "Minor Mana Potion", ItemSlot.None, ItemRarity.Common, 0, 0, 0, ManaColor, 10);
 
@@ -1047,11 +1047,11 @@ namespace RPG.EditorTools
                 gems.Add(flawless);
             }
             var all = new List<ItemDefinition>(catalog.items);
-            // The hand-made gear is only sold now: drops by level come from Source's gear below.
+            // The hand-made gear is only sold now: drops by level come from the source game's gear below.
             foreach (ItemDefinition item in all)
                 if (item.IsEquippable) item.dropWeight = 0f;
             all.AddRange(gems);
-            all.AddRange(CreateSourceGear(out List<ItemDefinition> materials));
+            all.AddRange(CreateGearData(out List<ItemDefinition> materials));
             all.AddRange(materials);
             all.AddRange(CreatePotions(potion, manaPotion));
             all.AddRange(CreateDungeonItems());
@@ -1074,23 +1074,23 @@ namespace RPG.EditorTools
 
         private static Color ArmorColor(int armorType)
         {
-            switch (SourceGear.KindOf(armorType))
+            switch (GearData.KindOf(armorType))
             {
-                case SourceGear.ArmorKind.Leather: return new Color(0.55f, 0.38f, 0.22f) * (0.9f + 0.1f * (armorType - 2));
-                case SourceGear.ArmorKind.Chain:
-                case SourceGear.ArmorKind.Plate: return MetalColors[armorType - 5];
-                case SourceGear.ArmorKind.Robe:
+                case GearData.ArmorKind.Leather: return new Color(0.55f, 0.38f, 0.22f) * (0.9f + 0.1f * (armorType - 2));
+                case GearData.ArmorKind.Chain:
+                case GearData.ArmorKind.Plate: return MetalColors[armorType - 5];
+                case GearData.ArmorKind.Robe:
                     return new[] { new Color(0.85f, 0.8f, 0.7f), new Color(0.6f, 0.55f, 0.5f), new Color(0.7f, 0.5f, 0.85f), new Color(0.5f, 0.8f, 0.95f) }[armorType - 12];
                 default: return new Color(0.8f, 0.8f, 0.75f);
             }
         }
 
-        /// <summary>Asset file name of a generated piece, e.g. "Source/SteelSword_L04".</summary>
-        private static string GearFile(string displayName, int level) => $"Source/{displayName.Replace(" ", "")}_L{level:00}";
+        /// <summary>Asset file name of a generated piece, e.g. "Generated/SteelSword_L04".</summary>
+        private static string GearFile(string displayName, int level) => $"Generated/{displayName.Replace(" ", "")}_L{level:00}";
 
         /// <summary>What kind of armor each generated armor piece is (which class vendor crafts it); weapons are not in it.</summary>
-        private static readonly Dictionary<ItemDefinition, SourceGear.ArmorKind> GearArmorKinds =
-            new Dictionary<ItemDefinition, SourceGear.ArmorKind>();
+        private static readonly Dictionary<ItemDefinition, GearData.ArmorKind> GearArmorKinds =
+            new Dictionary<ItemDefinition, GearData.ArmorKind>();
 
         /// <summary>How many of its material a piece takes to craft.</summary>
         private static int CraftCount(ItemSlot slot) => slot == ItemSlot.Weapon || slot == ItemSlot.Chest ? 6 : 4;
@@ -1100,7 +1100,7 @@ namespace RPG.EditorTools
         {
             ItemRarity rarity = firstLevel < 6 ? ItemRarity.Common : firstLevel < 13 ? ItemRarity.Uncommon
                 : firstLevel < 20 ? ItemRarity.Rare : ItemRarity.Epic;
-            ItemDefinition material = CreateItem($"Source/Materials/{displayName.Replace(" ", "")}", displayName, ItemSlot.None,
+            ItemDefinition material = CreateItem($"Generated/Materials/{displayName.Replace(" ", "")}", displayName, ItemSlot.None,
                 rarity, 0, 0, 0, color, 2 + firstLevel);
             material.maxStack = 50;
             material.canHaveAffix = false;
@@ -1116,46 +1116,46 @@ namespace RPG.EditorTools
         }
 
         /// <summary>
-        /// Source's gear (<see cref="SourceGear"/>): for every level, each material its chance tables can drop
+        /// The source game's gear (<see cref="GearData"/>): for every level, each material its chance tables can drop
         /// there, as a sword (warriors), bow (rangers) and staff (mages), and as head, chest and feet armor anyone may
-        /// wear. Stats grow with Source's sell price of the piece, the drop weight is its material chance.
+        /// wear. Stats grow with the source game's sell price of the piece, the drop weight is its material chance.
         /// Every piece is crafted from its material (ingots, logs, hides, cloth), which is what monsters drop.
         /// </summary>
-        private static List<ItemDefinition> CreateSourceGear(out List<ItemDefinition> materials)
+        private static List<ItemDefinition> CreateGearData(out List<ItemDefinition> materials)
         {
             GearArmorKinds.Clear();
             var gear = new List<ItemDefinition>();
             materials = new List<ItemDefinition>();
-            var ingots = new ItemDefinition[SourceGear.Metals.Length];
-            var logs = new ItemDefinition[SourceGear.Woods.Length];
+            var ingots = new ItemDefinition[GearData.Metals.Length];
+            var logs = new ItemDefinition[GearData.Woods.Length];
             for (int tier = 1; tier <= ingots.Length; tier++)
             {
-                (int, int, float)[] weaponTable = SourceGear.WeaponChances;
-                ingots[tier - 1] = CreateMaterial($"{SourceGear.Metals[tier - 1]} Ingot", FirstLevel(weaponTable, tier), MetalColors[tier - 1]);
-                logs[tier - 1] = CreateMaterial($"{SourceGear.Woods[tier - 1]} Log", FirstLevel(weaponTable, tier), WoodColors[tier - 1]);
+                (int, int, float)[] weaponTable = GearData.WeaponChances;
+                ingots[tier - 1] = CreateMaterial($"{GearData.Metals[tier - 1]} Ingot", FirstLevel(weaponTable, tier), MetalColors[tier - 1]);
+                logs[tier - 1] = CreateMaterial($"{GearData.Woods[tier - 1]} Log", FirstLevel(weaponTable, tier), WoodColors[tier - 1]);
             }
             materials.AddRange(ingots);
             materials.AddRange(logs);
             // Armor: hides for leather, the metal ingots for chain (Bronze-Emerald) and plate (Crystal-Titanium), cloth for robes.
-            var armorMaterials = new ItemDefinition[SourceGear.ArmorMaterials.Length];
+            var armorMaterials = new ItemDefinition[GearData.ArmorMaterials.Length];
             for (int type = 2; type < armorMaterials.Length; type++)
             {
-                SourceGear.ArmorKind kind = SourceGear.KindOf(type);
-                if (kind == SourceGear.ArmorKind.Chain || kind == SourceGear.ArmorKind.Plate)
+                GearData.ArmorKind kind = GearData.KindOf(type);
+                if (kind == GearData.ArmorKind.Chain || kind == GearData.ArmorKind.Plate)
                 {
                     armorMaterials[type] = ingots[type - 5];
                     continue;
                 }
-                string name = SourceGear.ArmorMaterials[type] + (kind == SourceGear.ArmorKind.Leather ? " Hide" : " Cloth");
-                armorMaterials[type] = CreateMaterial(name, FirstLevel(SourceGear.ArmorChances, type), ArmorColor(type));
+                string name = GearData.ArmorMaterials[type] + (kind == GearData.ArmorKind.Leather ? " Hide" : " Cloth");
+                armorMaterials[type] = CreateMaterial(name, FirstLevel(GearData.ArmorChances, type), ArmorColor(type));
                 materials.Add(armorMaterials[type]);
             }
 
             ItemDefinition Piece(string displayName, ItemSlot slot, int level, float chance, int damage, int armor, int mana,
-                Color color, float SourceSellPrice, int requiredClass, ItemDefinition material)
+                Color color, float sourceSellPrice, int requiredClass, ItemDefinition material)
             {
                 // Our gold is about a tenth of theirs: vendors pay a quarter of the price.
-                int price = Mathf.Max(1, Mathf.RoundToInt(SourceSellPrice * 0.4f));
+                int price = Mathf.Max(1, Mathf.RoundToInt(sourceSellPrice * 0.4f));
                 ItemDefinition item = CreateItem(GearFile(displayName, level), displayName, slot, ItemRarity.Common, damage, 0, armor,
                     color, price, requiredClass, level);
                 item.manaBonus = mana;
@@ -1166,34 +1166,34 @@ namespace RPG.EditorTools
                 return item;
             }
 
-            foreach ((int tier, int level, float chance) in SourceGear.WeaponChances)
+            foreach ((int tier, int level, float chance) in GearData.WeaponChances)
             {
-                int sell = SourceGear.WeaponSellPrice(tier, level);
+                int sell = GearData.WeaponSellPrice(tier, level);
                 int damage = Mathf.RoundToInt(2f + (sell - 50) * 0.035f);
-                Piece($"{SourceGear.Metals[tier - 1]} Sword", ItemSlot.Weapon, level, chance, damage, 0, 0, MetalColors[tier - 1], sell,
+                Piece($"{GearData.Metals[tier - 1]} Sword", ItemSlot.Weapon, level, chance, damage, 0, 0, MetalColors[tier - 1], sell,
                     WarriorClass, ingots[tier - 1]);
-                Piece($"{SourceGear.Woods[tier - 1]} Bow", ItemSlot.Weapon, level, chance, damage, 0, 0, WoodColors[tier - 1], sell * 1.1f,
+                Piece($"{GearData.Woods[tier - 1]} Bow", ItemSlot.Weapon, level, chance, damage, 0, 0, WoodColors[tier - 1], sell * 1.1f,
                     RangerClass, logs[tier - 1]);
-                Piece($"{SourceGear.Woods[tier - 1]} Staff", ItemSlot.Weapon, level, chance, damage, 0, Mathf.RoundToInt(damage * 0.5f),
+                Piece($"{GearData.Woods[tier - 1]} Staff", ItemSlot.Weapon, level, chance, damage, 0, Mathf.RoundToInt(damage * 0.5f),
                     WoodColors[tier - 1] * 0.9f, sell * 1.1f, MageClass, logs[tier - 1]);
             }
 
-            foreach ((int type, int level, float chance) in SourceGear.ArmorChances)
+            foreach ((int type, int level, float chance) in GearData.ArmorChances)
             {
-                float sell = SourceGear.ArmorSellPrice(type, level);
+                float sell = GearData.ArmorSellPrice(type, level);
                 float power = sell - 50f;
-                bool robe = SourceGear.KindOf(type) == SourceGear.ArmorKind.Robe;
+                bool robe = GearData.KindOf(type) == GearData.ArmorKind.Robe;
                 // Robes cost like armor but give mana: little armor, a mana pool that grows with their price.
                 float armor = robe ? 1f + level * 0.15f : 3f + power * 0.06f;
                 float mana = robe ? 4f + power * 0.12f : 0f;
-                (string head, string chest, string feet) = SourceGear.NamesOf(SourceGear.KindOf(type));
-                string material = SourceGear.ArmorMaterials[type];
+                (string head, string chest, string feet) = GearData.NamesOf(GearData.KindOf(type));
+                string material = GearData.ArmorMaterials[type];
                 Color color = ArmorColor(type);
                 foreach ((string baseName, ItemSlot slot, float share) in new[] { (head, ItemSlot.Head, 0.7f), (chest, ItemSlot.Chest, 1f), (feet, ItemSlot.Feet, 0.5f) })
                 {
                     ItemDefinition piece = Piece($"{material} {baseName}", slot, level, chance, 0, Mathf.Max(1, Mathf.RoundToInt(armor * share)),
                         Mathf.RoundToInt(mana * share), color, sell * (0.6f + 0.4f * share), -1, armorMaterials[type]);
-                    GearArmorKinds[piece] = SourceGear.KindOf(type);
+                    GearArmorKinds[piece] = GearData.KindOf(type);
                 }
             }
             return gear;
@@ -1203,10 +1203,10 @@ namespace RPG.EditorTools
         private static readonly Color ManaColor = new Color(0.2f, 0.35f, 0.95f);
 
         /// <summary>
-        /// Source's potions (item_template and their spells): Minor, Lesser, plain, Greater and Major Life and Mana
+        /// The source game's potions (item_template and their spells): Minor, Lesser, plain, Greater and Major Life and Mana
         /// Potions (levels 1, 5, 12, 18, 24) restore over 20 seconds; their Serums (green) restore at once. Amounts are
-        /// half of Source's, like our health. Five of a kind combine into the next tier, a Major Potion into its
-        /// Serum (Source's crafting recipes). Fills in the given Minor potions and returns the new ones.
+        /// half of the source game's, like our health. Five of a kind combine into the next tier, a Major Potion into its
+        /// Serum (the source game's crafting recipes). Fills in the given Minor potions and returns the new ones.
         /// </summary>
         private static List<ItemDefinition> CreatePotions(ItemDefinition minorLife, ItemDefinition minorMana)
         {
@@ -1395,10 +1395,10 @@ namespace RPG.EditorTools
                 Affix("OfTheGuardian", "of the Guardian", false, ItemRarity.Epic, 5, 99, new AttributeSet(0, 0, 0, 8), health: 20, armor: 6),
                 Affix("Kingslayer", "Kingslayer's", true, ItemRarity.Legendary, 7, 99, new AttributeSet(6, 6, 6, 6), damage: 6, armor: 5),
             };
-            // Our first affixes stay for items that have them; only Source's roll now.
+            // Our first affixes stay for items that have them; only the source game's roll now.
             foreach (AffixDefinition old in catalog.affixes) old.retired = true;
 
-            // Source's affixes, all 7145 (all suffixes: "Steel Sword of the Novice", "of Magical Vim"), kept inside the
+            // The source game's affixes, all 7145 (all suffixes: "Steel Sword of the Novice", "of Magical Vim"), kept inside the
             // catalog asset. Its values are multipliers (0.3-3.0) of a level-based amount the server works out; here a
             // stat gets multiplier x (level + 2) / 2 at the middle of the affix's levels (Novice, levels 1-5: +5),
             // health and mana three times that. More stats make it rarer: 1 green, 2 blue, 3 gold, 4+ or level 25 purple.
@@ -1408,9 +1408,9 @@ namespace RPG.EditorTools
                 if (asset is AffixDefinition sub && AssetDatabase.IsSubAsset(sub)) existing[sub.name] = sub;
 
             var all = new List<AffixDefinition>(catalog.affixes);
-            for (int i = 0; i < SourceAffixes.All.Length; i++)
+            for (int i = 0; i < AffixData.All.Length; i++)
             {
-                (string name, bool singleNoun, int minLevel, int maxLevel, string stats) = SourceAffixes.All[i];
+                (string name, bool singleNoun, int minLevel, int maxLevel, string stats) = AffixData.All[i];
                 float middle = (minLevel + maxLevel) / 2f;
                 var attributes = new AttributeSet();
                 int health = 0, mana = 0, armor = 0, damage = 0, count = 0;
@@ -1421,17 +1421,17 @@ namespace RPG.EditorTools
                     float multiplier = float.Parse(pair[1], System.Globalization.CultureInfo.InvariantCulture);
                     int points = Mathf.Max(1, Mathf.RoundToInt(multiplier * (middle + 2f) / 2f));
                     count++;
-                    RPG.Progression.Attribute? attribute = SourceAffixes.AttributeOf(type);
+                    RPG.Progression.Attribute? attribute = AffixData.AttributeOf(type);
                     if (attribute.HasValue) attributes[attribute.Value] += points;
-                    else if (type == SourceAffixes.Mana) mana += points * 3;
-                    else if (type == SourceAffixes.Health) health += points * 3;
-                    else if (type == SourceAffixes.Armor) armor += points;
+                    else if (type == AffixData.Mana) mana += points * 3;
+                    else if (type == AffixData.Health) health += points * 3;
+                    else if (type == AffixData.Armor) armor += points;
                     else damage += points;
                 }
                 ItemRarity quality = minLevel >= 25 || count >= 4 ? ItemRarity.Legendary
                     : count == 3 ? ItemRarity.Epic : count == 2 ? ItemRarity.Rare : ItemRarity.Uncommon;
 
-                string key = $"Source{i:0000}";
+                string key = $"Affix{i:0000}";
                 if (!existing.TryGetValue(key, out AffixDefinition affix))
                 {
                     affix = ScriptableObject.CreateInstance<AffixDefinition>();
@@ -1463,14 +1463,14 @@ namespace RPG.EditorTools
         }
 
         /// <summary>
-        /// One monster on every spot Source has one between the start and St. Revere, coming back as fast as there.
-        /// Source levels 1-2 look like goblins, 3-5 brutes, higher orcs, and keep the Source level (health, damage,
+        /// One monster on every spot the source game has one between the start and St. Revere, coming back as fast as there.
+        /// The source game's levels 1-2 look like goblins, 3-5 brutes, higher orcs, and keep the source-game level (health, damage,
         /// experience and gear drops follow it); its elites and bosses are elites here. None inside the towns.
         /// </summary>
         private static void PlaceMonsters(Grid grid, Tilemap obstacles, GameObject goblin, GameObject brute, GameObject orc)
         {
             var parent = new GameObject("Monster Spots").transform;
-            var monsters = SourceStartArea.Monsters;
+            var monsters = StartAreaData.Monsters;
             for (int i = 0; i < monsters.Length; i++)
             {
                 (Vector3Int cell, int level, bool elite, float respawn) = monsters[i];
@@ -1500,7 +1500,7 @@ namespace RPG.EditorTools
         }
 
         /// <summary>
-        /// Source's containers (gameobject_template): crates and barrels hold only gold; chests ("Aspen Chest" and
+        /// The source game's containers (gameobject_template): crates and barrels hold only gold; chests ("Aspen Chest" and
         /// the like) are locked for Lockpicking of twice their level and hold a piece of gear (green 100%, blue 12%,
         /// gold 5%, purple 1%), a potion (75%), a gem (75%) and twice the gold; strongboxes two more pieces, a potion
         /// and a gem for sure and three times the gold.
@@ -1553,17 +1553,17 @@ namespace RPG.EditorTools
         }
 
         /// <summary>
-        /// A container on every spot Source has one in its start region, back after the same time
+        /// A container on every spot the source game has one in its start region, back after the same time
         /// (crates and barrels 60 s, chests 5 min). Crates and barrels become wooden crates, chests locked oak chests.
         /// </summary>
         private static void PlaceChests(Grid grid, Tilemap obstacles, ChestPrefabs chests)
         {
             var parent = new GameObject("Chests").transform;
-            var spots = SourceStartArea.Chests;
+            var spots = StartAreaData.Chests;
             for (int i = 0; i < spots.Length; i++)
             {
                 (Vector3Int cell, int kind, int level, float respawn) = spots[i];
-                // Source's start region has crates, barrels and chests (its strongboxes are further on).
+                // The source game's start region has crates, barrels and chests (its strongboxes are further on).
                 GameObject prefab = kind == 0 ? chests.Crate : chests.Chest;
                 var spawner = new GameObject($"Chest Spot {i + 1}");
                 spawner.transform.SetParent(parent, false);

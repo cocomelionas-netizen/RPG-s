@@ -61,7 +61,7 @@ namespace RPG.Items
         }
 
         /// <summary>
-        /// An affix of exactly <paramref name="quality"/> for a guaranteed drop (Source's bosses always drop a gold
+        /// An affix of exactly <paramref name="quality"/> for a guaranteed drop (the source game's bosses always drop a gold
         /// item, for example). Prefers affixes meant for <paramref name="monsterLevel"/>, otherwise those of that quality
         /// closest to the level, otherwise the best quality there is.
         /// </summary>

@@ -14,7 +14,7 @@ using UnityEngine.Tilemaps;
 namespace RPG.EditorTools
 {
     /// <summary>
-    /// Source's dungeons (SourceDungeons): their keys and treasures, the dungeon assets with their plans, monsters
+    /// The source game's dungeons (DungeonData): their keys and treasures, the dungeon assets with their plans, monsters
     /// and containers, the entrances in the world, and the outdoor monsters that drop keys.
     /// </summary>
     public static partial class TestSceneBuilder
@@ -22,17 +22,17 @@ namespace RPG.EditorTools
         private const string DungeonsFolder = "Assets/_Project/Data/Dungeons";
 
         /// <summary>
-        /// Source's dungeon keys and treasures, sold back for Source's price. The items clicked to put a recipe
+        /// The source game's dungeon keys and treasures, sold back for the source game's price. The items clicked to put a recipe
         /// together (Dale Gem on a Depleted Key, an Inactive Demiplane Key with Magic Dust and Major Treasury Gold) combine.
         /// They go at the end of the catalog (item ids are saved with characters).
         /// </summary>
         private static List<ItemDefinition> CreateDungeonItems()
         {
             var created = new Dictionary<string, ItemDefinition>();
-            foreach (var entry in SourceDungeons.Items)
+            foreach (var entry in DungeonData.Items)
             {
                 var rarity = (ItemRarity)Enum.Parse(typeof(ItemRarity), entry.quality);
-                // Vendors pay a quarter of the price: four times Source's sell price.
+                // Vendors pay a quarter of the price: four times the source game's sell price.
                 ItemDefinition item = CreateItem(entry.id, entry.name, ItemSlot.None, rarity, 0, 0, 0, DungeonItemColor(entry.id), entry.sellPrice * 4);
                 item.maxStack = Mathf.Max(1, entry.stack);
                 item.canHaveAffix = false;
@@ -40,9 +40,9 @@ namespace RPG.EditorTools
                 created[entry.id] = item;
             }
 
-            foreach (var recipe in SourceDungeons.Recipes)
+            foreach (var recipe in DungeonData.Recipes)
             {
-                foreach (var entry in SourceDungeons.Items)
+                foreach (var entry in DungeonData.Items)
                 {
                     if (!entry.combines || Array.IndexOf(recipe.ingredients, entry.id) < 0) continue;
                     ItemDefinition item = created[entry.id];
@@ -52,7 +52,7 @@ namespace RPG.EditorTools
                     EditorUtility.SetDirty(item);
                 }
             }
-            return SourceDungeons.Items.Select(entry => created[entry.id]).ToList();
+            return DungeonData.Items.Select(entry => created[entry.id]).ToList();
         }
 
         private static Color DungeonItemColor(string id)
@@ -67,10 +67,10 @@ namespace RPG.EditorTools
             return new Color(0.95f, 0.8f, 0.3f);
         }
 
-        /// <summary>A Source loot table (SourceDungeons.Loot) as loot entries (none for 0).</summary>
+        /// <summary>A source-game loot table (DungeonData.Loot) as loot entries (none for 0).</summary>
         private static LootEntry[] DungeonLoot(int lootId)
         {
-            if (lootId <= 0 || !SourceDungeons.Loot.TryGetValue(lootId, out var rows)) return Array.Empty<LootEntry>();
+            if (lootId <= 0 || !DungeonData.Loot.TryGetValue(lootId, out var rows)) return Array.Empty<LootEntry>();
             var entries = new List<LootEntry>();
             foreach (var row in rows)
             {
@@ -86,7 +86,7 @@ namespace RPG.EditorTools
         }
 
         /// <summary>
-        /// Source's containers in the dungeons, one prefab per name ("Rosewood Chest"): crates and barrels hold gold;
+        /// The source game's containers in the dungeons, one prefab per name ("Rosewood Chest"): crates and barrels hold gold;
         /// chests are locked and hold gear (green 100%, blue 12%, gold 5%, purple 1%), a potion and a gem (75%) and twice
         /// the gold; strongboxes two more pieces, a potion and a gem for sure and three times the gold.
         /// </summary>
@@ -97,7 +97,7 @@ namespace RPG.EditorTools
             ItemDefinition[] gems = Loot(items, ("ChippedRuby", 1f), ("ChippedTopaz", 1f), ("ChippedSapphire", 1f), ("ChippedEmerald", 1f))
                 .Select(entry => entry.item).ToArray();
             var prefabs = new Dictionary<string, GameObject>();
-            foreach (SourceDungeons.Dungeon data in SourceDungeons.All)
+            foreach (DungeonData.Dungeon data in DungeonData.All)
             {
                 foreach (var spot in data.Chests)
                 {
@@ -116,9 +116,9 @@ namespace RPG.EditorTools
         }
 
         /// <summary>
-        /// One asset per Source dungeon: its plan, arrival, exits (destinations are set when the world is placed),
+        /// One asset per source-game dungeon: its plan, arrival, exits (destinations are set when the world is placed),
         /// monsters (goblins, brutes or orcs by level like outdoors; bosses look like the boss), containers and entry
-        /// rules, and doors into the dungeons entered from inside it. In SourceDungeons' order.
+        /// rules, and doors into the dungeons entered from inside it. In DungeonData' order.
         /// </summary>
         private static DungeonDefinition[] CreateDungeons(GameObject goblin, GameObject brute, GameObject orc, GameObject boss,
             Dictionary<string, GameObject> containers)
@@ -138,7 +138,7 @@ namespace RPG.EditorTools
 
             var byId = new Dictionary<string, DungeonDefinition>();
             var all = new List<DungeonDefinition>();
-            foreach (SourceDungeons.Dungeon data in SourceDungeons.All)
+            foreach (DungeonData.Dungeon data in DungeonData.All)
             {
                 var dungeon = LoadOrCreateAsset<DungeonDefinition>($"{DungeonsFolder}/{data.Id}.asset");
                 dungeon.displayName = data.Name;
@@ -178,7 +178,7 @@ namespace RPG.EditorTools
             }
 
             // Salmaster's Descent opens inside the Desecrated Altar, Telamont's Sanctuary inside the Demiplane.
-            foreach (SourceDungeons.Dungeon data in SourceDungeons.All)
+            foreach (DungeonData.Dungeon data in DungeonData.All)
             {
                 if (data.Parent == null) continue;
                 DungeonDefinition parent = byId[data.Parent];
@@ -189,14 +189,14 @@ namespace RPG.EditorTools
         }
 
         /// <summary>
-        /// The dungeon manager, an entrance where Source has each dungeon's (at the world's south edge for those
+        /// The dungeon manager, an entrance where the source game has each dungeon's (at the world's south edge for those
         /// further south), and where every exit leads in this world.
         /// </summary>
         private static void PlaceDungeons(Grid grid, Tilemap obstacles, DungeonDefinition[] dungeons)
         {
             new GameObject("Dungeon Manager").AddComponent<DungeonManager>().Configure(dungeons);
             var parent = new GameObject("Dungeon Entrances").transform;
-            SourceDungeons.Dungeon[] all = SourceDungeons.All;
+            DungeonData.Dungeon[] all = DungeonData.All;
             for (int i = 0; i < all.Length; i++)
             {
                 DungeonDefinition dungeon = dungeons[i];
@@ -224,22 +224,22 @@ namespace RPG.EditorTools
             }
         }
 
-        /// <summary>The Source loot table of an outdoor monster spot that drops keys (Keys to the Barracks), or 0.</summary>
+        /// <summary>The source-game loot table of an outdoor monster spot that drops keys (Keys to the Barracks), or 0.</summary>
         private static int KeyDropperLoot(Vector3Int cell)
         {
-            foreach (var dropper in SourceDungeons.KeyDroppers)
+            foreach (var dropper in DungeonData.KeyDroppers)
                 if (dropper.cell == cell) return dropper.loot;
             return 0;
         }
 
         /// <summary>
-        /// Source's outdoor key droppers that it has further south than this world reaches stand at its south edge:
+        /// The source game's outdoor key droppers that it has further south than this world reaches stand at its south edge:
         /// the Zhendale camp (Dale Gems) and the roaming bosses Tantorus and Fasthorn (Inactive Demiplane Keys).
         /// </summary>
         private static void PlaceEdgeMonsters(Grid grid, Tilemap obstacles, GameObject orc)
         {
             var parent = new GameObject("Edge Monster Spots").transform;
-            foreach (var edge in SourceDungeons.EdgeMonsters)
+            foreach (var edge in DungeonData.EdgeMonsters)
             {
                 var spot = new GameObject($"Edge Spot {edge.name}");
                 spot.transform.SetParent(parent, false);

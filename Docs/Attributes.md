@@ -1,53 +1,53 @@
-# Mana, loot kokybė ir atributai
+# Mana, loot quality and attributes
 
-Įkvėpta Source mechanikų (tik idėjos — jokie jų failai ar duomenys nenaudojami).
+Inspired by the source game's mechanics.
 
 ## Mana
 
-- `Mana` komponentas žaidėjui: serveris valdo reikšmę, atsistato 3% per sekundę, mirus ir prisikėlus — pilna.
-- Max mana = klasės `baseMana` + `manaPerLevel` × (lygis − 1) + Intelligence × 4 + daiktų `manaBonus`.
-- Kiekvienas gebėjimas turi `manaCost`; be manos — „Not enough mana“ (`CastFailure.NoMana`).
-  Veiksmų juostoje kaina rodoma po pavadinimu (raudona, kai neužtenka).
-- Mana Potion (`ItemUse.RestoreMana`, 40%) — pardavėjuose, monstrų loot'e, 2 vnt. pradžioje.
-- Mėlyna mana juosta virš patirties juostos.
+- A `Mana` component on the player: the server owns the value, it regenerates 3% per second, and is full after dying and respawning.
+- Max mana = the class's `baseMana` + `manaPerLevel` × (level − 1) + Intelligence × 4 + items' `manaBonus`.
+- Every ability has a `manaCost`; without mana – "Not enough mana" (`CastFailure.NoMana`).
+  The action bar shows the cost under the name (red when there is not enough).
+- Mana Potion (`ItemUse.RestoreMana`, 40%) – at vendors, in monster loot, 2 at the start.
+- A blue mana bar above the experience bar.
 
-## Šlamštas ir kokybė
+## Junk and quality
 
-- `ItemRarity`: Poor (pilka), Common, Uncommon, Rare, Epic, Legendary.
-- Monstrai ~60% numeta šlamšto (Goblin Ear, Brute Tusk, Orc Fang, Crown Shard), kuris tinka tik parduoti.
+- `ItemRarity`: Poor (grey), Common, Uncommon, Rare, Epic, Legendary.
+- Monsters drop junk ~60% of the time (Goblin Ear, Brute Tusk, Orc Fang, Crown Shard), only good for selling.
 
-## Atsitiktiniai afiksai
+## Random affixes
 
-- `AffixDefinition` (priešdėlis „Sturdy Iron Helm“ arba priesaga „Iron Sword of the Bear“) su atributais,
-  žala, HP, šarvais, mana, kokybe, lygių intervalu ir kainos daugikliu.
-- `AffixCatalog` (`Data/Items/Affixes`): 60% šansas, kad numestas ginklas/šarvas gaus afiksą;
-  retesnės kokybės renkamos rečiau (60/28/10/2), stipresni afiksai — tik iš aukštesnio lygio monstrų.
-- Afiksas saugomas `ItemStack.AffixId` (id = indeksas + 1, sąrašą tik papildyti), išsaugomas paskyroje,
-  daiktai su skirtingais afiksais nesikrauna į vieną krūvą. Kokybė = geresnė iš daikto ir afikso.
+- `AffixDefinition` (a prefix "Sturdy Iron Helm" or a suffix "Iron Sword of the Bear") with attributes,
+  damage, HP, armor, mana, quality, a level range and a price multiplier.
+- `AffixCatalog` (`Data/Items/Affixes`): a 60% chance that a dropped weapon or armor piece gets an affix;
+  rarer qualities roll less often (60/28/10/2), stronger affixes only from higher-level monsters.
+- The affix is stored in `ItemStack.AffixId` (id = index + 1; only append to the list), saved with the account;
+  items with different affixes do not stack. Quality = the better of the item's and the affix's.
 
-## Atributai
+## Attributes
 
-- Strength, Agility, Intelligence, Vitality. Klasė turi bazinius atributus ir pagrindinį atributą.
-- Pagrindinis atributas / 4 → žala; Vitality × 4 + Strength → HP; Intelligence × 4 → mana; Agility × 0,4% → kritinis smūgis.
-- Kiekvienas lygis duoda 5 taškus. Langas **C** (arba mygtukas „Character (C)“) — „+“ prideda tašką (serveris tikrina).
-- Atributus duoda ir daiktai bei afiksai. Seni veikėjai gauna taškus už jau pasiektus lygius prisijungę.
-- Lygio 1 bendri skaičiai nepasikeitė (bazinis HP ir žala sumažinti tiek, kiek prideda atributai).
+- Strength, Agility, Intelligence, Vitality. A class has base attributes and a main attribute.
+- Main attribute / 4 → damage; Vitality × 4 + Strength → HP; Intelligence × 4 → mana; Agility × 0.4% → critical chance.
+- Every level gives 5 points. Window **C** (or the "Character (C)" button) – "+" adds a point (the server checks).
+- Items and affixes give attributes too. Old characters get points for the levels they already reached when they log in.
+- The overall numbers at level 1 did not change (base HP and damage were lowered by what the attributes add).
 
-## Testai
+## Tests
 
-`Tests/PlayMode/AttributeAndManaTests.cs`, papildyti `AccountTests` ir `ProgressionTests`.
+`Tests/PlayMode/AttributeAndManaTests.cs`, extended `AccountTests` and `ProgressionTests`.
 
-## Veikėjo langas (C) — Source stiliumi
+## Character window (C) – in the source game's style
 
-- Eilutės „Pavadinimas: reikšmė“ (Health, Mana, Armor Value, Strength, Agility, Intelligence, Vitality, Damage,
-  Critical Chance), spalvos paimtos iš Source lango: pilkai smėlinės etiketės, šviesios reikšmės, mana mėlyna.
-- Prie Health, Mana ir keturių atributų — mažas violetinis „+“. Užvedus pelę: „+1 Strength: 1 point“ ir
-  „You have invested N points.“ / „You haven't invested anything.“ (kaip Source). Užvedus ant eilutės — aprašymas.
-- Taškai **perkami už patirtį (XP)**, kaip Source: gauta XP kelia lygį ir kartu kaupiasi „Experience to spend“;
-  išleidus XP lygis nemažėja. Taškų už lygį nebėra.
-- Kainos — iš Source kliento (`Source.exe`, funkcija `0x558b50`), kai jau investuota `x` taškų:
+- "Name: value" rows (Health, Mana, Armor Value, Strength, Agility, Intelligence, Vitality, Damage,
+  Critical Chance), colours taken from the source game's window: grey-sand labels, light values, mana blue.
+- Next to Health, Mana and the four attributes – a small purple "+". Hovering: "+1 Strength: 1 point" and
+  "You have invested N points." / "You haven't invested anything." (as in the source game). Hovering a row shows its description.
+- Points are **bought with experience (XP)**, as in the source game: XP earned raises the level and also adds up in "Experience to spend";
+  spending XP does not lower the level. There are no more points per level.
+- Prices come from the source game's client (the client executable, function `0x558b50`), with `x` points already invested:
   - Strength, Agility, Intelligence, Vitality: `x^1.5 + 5` → 5, 6, 7, 10, 13, 16, 19, 23, 27, 32, 36…
-  - Health, Mana (+1 už tašką): `x^(x/1500)`, mažiausiai 1 — ilgai po 1 XP, brangsta tik turint šimtus taškų.
-  - (Kliente dar: Regeneration/Meditate `x^1.4 + 4`, kritiniai `x/2 + 1` ar `x/3 + 1`, Dodge/Block `x + 1`,
-    atsparumai `x/3 + 1`, Bartering/Lockpicking `2x + 1`, ginklų įgūdžiai `3 × Strength kaina` — mes jų neturime.)
-- Kainos spalva tokia pati kaip Source (#B500AF), kai XP neužtenka — pilka.
+  - Health, Mana (+1 per point): `x^(x/1500)`, at least 1 – 1 XP for a long time, only expensive with hundreds of points.
+  - (The client also has: Regeneration/Meditate `x^1.4 + 4`, criticals `x/2 + 1` or `x/3 + 1`, Dodge/Block `x + 1`,
+    resists `x/3 + 1`, Bartering/Lockpicking `2x + 1`, weapon skills `3 × the Strength price`; see [GameData.md](GameData.md).)
+- The price colour is the same as the source game's (#B500AF); grey when there is not enough XP.

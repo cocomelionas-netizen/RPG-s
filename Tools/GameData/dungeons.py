@@ -1,6 +1,6 @@
-"""Generates Assets/_Project/Scripts/Editor/SourceDungeons.cs from Source's client data.
+"""Generates Assets/_Project/Scripts/Editor/DungeonData.cs from the source game's client data.
 
-Usage: python3 -I Tools/SourceData/dungeons.py <path to the Source steam clone> > Assets/_Project/Scripts/Editor/SourceDungeons.cs
+Usage: python3 -I Tools/GameData/dungeons.py <path to the client data clone> > Assets/_Project/Scripts/Editor/DungeonData.cs
 
 Takes every dungeon whose entrance is in the start region (and the dungeons entered from inside those): its plan
 (walkable cells of maps/<map>.map), where players arrive, its exits, its monsters (npc + npc_template) and containers
@@ -14,13 +14,13 @@ import sqlite3
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-import Source_map  # noqa: E402
+import map_file  # noqa: E402
 
 STEAM = sys.argv[1]
 db = sqlite3.connect(os.path.join(STEAM, 'game.db'))
 db.row_factory = sqlite3.Row
 
-# This project's world is Source's "fanadin" from x 0-560, y 30-340, shifted like SourceStartArea.
+# This project's world is the source game's "fanadin" from x 0-560, y 30-340, shifted like StartAreaData.
 WORLD_DX, WORLD_DY = 2, -28
 WORLD_MAX_X, WORLD_MAX_Y = 564, 309
 
@@ -36,8 +36,8 @@ def in_world(x, y):
     return 0 <= x <= 560 and 30 <= y <= 340
 
 
-# Source items the dungeons need, under this project's asset names. Gems are this project's own (Refined: the
-# middle tier, Flawless: the top); Source's amethysts and stat scrolls have nothing here and are left out.
+# The source game's items the dungeons need, under this project's asset names. Gems are this project's own (Refined: the
+# middle tier, Flawless: the top); the source game's amethysts and stat scrolls have nothing here and are left out.
 ITEM_IDS = {
     1127: 'TowerKey', 1131: 'KeysToTheBarracks', 1134: 'UndercourseKey', 1135: 'DepletedKey', 1136: 'DaleGem',
     1139: 'DemiplaneKey', 1147: 'SanctumKey', 1153: 'InactiveDemiplaneKey', 1155: 'SalmastersKey',
@@ -51,13 +51,13 @@ GEMS = {
 # Items a player clicks to put a recipe together (the others are only ingredients).
 ACTIVATORS = {1135, 1136, 1153}
 
-# Source's quality numbers: 3 green, 4 blue, 5 gold, 6 purple.
+# The source game's quality numbers: 3 green, 4 blue, 5 gold, 6 purple.
 QUALITY = {0: 'Common', 1: 'Common', 2: 'Common', 3: 'Uncommon', 4: 'Rare', 5: 'Epic', 6: 'Legendary'}
 
 # A normal level 25 monster (Zhendale Brute) has 7340 health; bosses are measured against it. Health then grows
 # with level like this project's monsters (MonsterAI.HealthScaleBetween).
 NORMAL_HEALTH_25 = 7340.0
-# Weapon value of Source's ordinary dungeon elites (400); damage is measured against an elite's.
+# Weapon value of the source game's ordinary dungeon elites (400); damage is measured against an elite's.
 ELITE_WEAPON_VALUE = 400.0
 ELITE_DAMAGE_SCALE = 1.5
 
@@ -114,20 +114,20 @@ for map_id in dungeon_maps:
     entrance = entrance_of[map_id]
     info = maps[map_id]
     rule = rules[map_id] if map_id in rules else None
-    size, _, flags = Source_map.read(os.path.join(STEAM, 'maps', info['name'] + '.map'))
-    rows = [''.join('.' if Source_map.walkable(flags, x, y) else '#' for x in range(size)) for y in range(size)]
+    size, _, flags = map_file.read(os.path.join(STEAM, 'maps', info['name'] + '.map'))
+    rows = [''.join('.' if map_file.walkable(flags, x, y) else '#' for x in range(size)) for y in range(size)]
     name = entrance['name'].replace(' (Group)', '')
 
     def floor_cell(x, y):
         """The cell of a position, moved to the nearest walkable cell when it is not walkable."""
         cx, cy = int(math.floor(x)), int(math.floor(y))
-        if Source_map.walkable(flags, cx, cy):
+        if map_file.walkable(flags, cx, cy):
             return cx, cy
         best = None
         for r in range(1, 6):
             for dx in range(-r, r + 1):
                 for dy in range(-r, r + 1):
-                    if Source_map.walkable(flags, cx + dx, cy + dy):
+                    if map_file.walkable(flags, cx + dx, cy + dy):
                         d = dx * dx + dy * dy
                         if best is None or d < best[0]:
                             best = (d, (cx + dx, cy + dy))
@@ -175,7 +175,7 @@ for map_id in dungeon_maps:
     for o in db.execute('select o.position_x x, o.position_y y, g.name, g.flags, g.data3 level from gameobject o '
                         'join gameobject_template g on g.entry = o.entry where o.map = ? and g.type = 1 order by o.guid',
                         (map_id,)):
-        # Source's container flags: 1 crate or barrel (gold only), 9 chest (locked), 25 strongbox (locked, more).
+        # The source game's container flags: 1 crate or barrel (gold only), 9 chest (locked), 25 strongbox (locked, more).
         kind = 2 if o['flags'] == 25 else 1 if o['flags'] == 9 else 0
         chests.append((floor_cell(o['x'], o['y']), kind, o['level'], re.sub(r'\s+[Ll]v\d+$', '', o['name'])))
     dungeon['chests'] = chests
@@ -209,14 +209,14 @@ for d in dungeons:
         outer = home(d)
         if p['target'] == 1:
             original = outer['entrance']
-            # Back at the entrance, also when Source's target lies beyond this world.
+            # Back at the entrance, also when the source game's target lies beyond this world.
             near = abs(p['tx'] - original['x']) <= 8 and abs(p['ty'] - original['y']) <= 8 or not in_world(p['tx'], p['ty'])
             world = outer['world'] if near else world_cell(p['tx'], p['ty'])
             label = outer['name'] if near else None
         else:
             world, label = home(by_map[p['target']])['world'], None
         if label is None:
-            label = p['name'] if p['name'] != 'Source Island' else 'Leave'
+            label = p['name'] if not p['name'].endswith(' Island') else 'Leave'
         exits.append((cell, world, label))
     d['exits'] = exits
 
@@ -255,7 +255,7 @@ for n in outdoor:
         extra_monsters.append((n['x'], n['y'], n))
 
 # Outdoor key droppers beyond the edge of this world come to its edge, each group keeping its shape, when nothing in
-# this world drops their key (Source's far east, past St. Revere, stays out).
+# this world drops their key (the source game's far east, past St. Revere, stays out).
 groups = {}
 for x, y, n in extra_monsters:
     if x > 560 or any(loot_id == n['custom_loot'] for _, loot_id, _ in key_spots):
@@ -289,7 +289,7 @@ for row in db.execute('select * from crafting_recipes where result_item in (%s)'
 
 out = []
 w = out.append
-w('// Generated by Tools/SourceData/dungeons.py from Source\'s game.db and maps/*.map: the dungeons entered from')
+w('// Generated by Tools/GameData/dungeons.py from the source game\'s game.db and maps/*.map: the dungeons entered from')
 w('// the start region (and from inside them), their plans, monsters, containers and entry rules, the bosses\' loot,')
 w('// the keys and treasures, and the outdoor monsters that drop keys. Do not edit by hand.')
 w('using System.Collections.Generic;')
@@ -297,14 +297,14 @@ w('using UnityEngine;')
 w('')
 w('namespace RPG.EditorTools')
 w('{')
-w('    internal static class SourceDungeons')
+w('    internal static class DungeonData')
 w('    {')
 w('        internal sealed class Dungeon')
 w('        {')
 w('            /// <summary>Asset name.</summary>')
 w('            public string Id;')
 w('            public string Name;')
-w('            /// <summary>Source\'s map file.</summary>')
+w('            /// <summary>The source game\'s map file.</summary>')
 w('            public string Map;')
 w('            public int MinLevel;')
 w('            public int MaxPlayers;')
@@ -312,7 +312,7 @@ w('            /// <summary>The key one player uses up to open it (an id in <see
 w('            public string Key;')
 w('            /// <summary>Where its entrance stands in the world (when <see cref="Parent"/> is null).</summary>')
 w('            public Vector3Int WorldEntrance;')
-w('            /// <summary>Source has the entrance further south than this world reaches: it stands at the edge.</summary>')
+w('            /// <summary>The source game has the entrance further south than this world reaches: it stands at the edge.</summary>')
 w('            public bool MovedToEdge;')
 w('            /// <summary>The dungeon whose plan holds the entrance (null: the world), and the entrance\'s cell there.</summary>')
 w('            public string Parent;')
@@ -324,7 +324,7 @@ w('            public string[] Rows;')
 w('            /// <summary>Portals out: cell, the world cell they lead to, name.</summary>')
 w('            public (Vector3Int cell, Vector3Int world, string name)[] Exits;')
 w('            /// <summary>')
-w('            /// Monsters: cell, name, level, elite (Source elites and boss-flagged monsters), boss (with a loot table),')
+w('            /// Monsters: cell, name, level, elite (the source game\'s elites and boss-flagged monsters), boss (with a loot table),')
 w('            /// health as a multiple of a normal monster of its level (0: the usual), damage as a multiple of a normal')
 w('            /// monster\'s (0: the usual), gold multiple, loot table (0: none), chances of a blue, gold and purple piece.')
 w('            /// </summary>')
@@ -334,7 +334,7 @@ w('            /// <summary>Containers: cell, kind (0 crate or barrel, 1 chest, 
 w('            public (Vector3Int cell, int kind, int level, string name)[] Chests;')
 w('        }')
 w('')
-w('        /// <summary>Keys and treasures: id, name, quality, Source sell price, stack size, description, clicked to combine.</summary>')
+w('        /// <summary>Keys and treasures: id, name, quality, source-game sell price, stack size, description, clicked to combine.</summary>')
 w('        public static readonly (string id, string name, string quality, int sellPrice, int stack, string description, bool combines)[] Items =')
 w('        {')
 for i in items:
@@ -348,7 +348,7 @@ for result, ingredients in recipes:
     w(f'            ({cs(result)}, new[] {{ {", ".join(cs(x) for x in ingredients)} }}),')
 w('        };')
 w('')
-w('        /// <summary>Loot tables by Source loot id: item id (in <see cref="Items"/> or a gem), chance in %, count.</summary>')
+w('        /// <summary>Loot tables by source-game loot id: item id (in <see cref="Items"/> or a gem), chance in %, count.</summary>')
 w('        public static readonly Dictionary<int, (string item, float chance, int min, int max)[]> Loot =')
 w('            new Dictionary<int, (string item, float chance, int min, int max)[]>')
 w('        {')
@@ -360,7 +360,7 @@ for loot_id, rows in loot_tables.items():
     w('            },')
 w('        };')
 w('')
-w('        /// <summary>Outdoor monster spots (cells of SourceStartArea.Monsters) whose monster drops keys: loot table.</summary>')
+w('        /// <summary>Outdoor monster spots (cells of StartAreaData.Monsters) whose monster drops keys: loot table.</summary>')
 w('        public static readonly (Vector3Int cell, int loot)[] KeyDroppers =')
 w('        {')
 for cell, loot_id, name in key_spots:
@@ -368,7 +368,7 @@ for cell, loot_id, name in key_spots:
 w('        };')
 w('')
 w('        /// <summary>')
-w('        /// Outdoor key droppers that Source has further south than this world reaches, moved up to its edge (a camp')
+w('        /// Outdoor key droppers that the source game has further south than this world reaches, moved up to its edge (a camp')
 w('        /// keeps its shape): cell, name, level, elite, loot table, respawn seconds (capped at 10 minutes).')
 w('        /// </summary>')
 w('        public static readonly (Vector3Int cell, string name, int level, bool elite, int loot, float respawn)[] EdgeMonsters =')

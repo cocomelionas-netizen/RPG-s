@@ -1,82 +1,84 @@
-# Miestas, prekeiviai ir auksas (po 10 etapo)
+# Town, vendors and gold (after stage 10)
 
-Įkvėpta **Source** (2026 m. izometrinis tab-target MMORPG): mieste yra NPC, kiekviena klasė turi savo ekipiruotę, o ekonomika remiasi auksu.
+Inspired by the source game (an isometric tab-target MMORPG): the town has NPCs, every class has its own equipment, and the economy runs on gold.
 
-## Ką padarėme
+(Since then the world, vendors and gear follow the source game's data – see [GameData.md](GameData.md).)
 
-- **Žemėlapis 4 kartus didesnis:** 80×80 langelių vietoj 40×40. Per vidurį eina keliai. Monstrų stovyklų yra 9:
+## What we did
 
-  | Kur nuo miesto | Kas |
-  |----------------|-----|
-  | Aplink | 5 goblinų stovyklos |
-  | Rytuose | 2 Goblin Brute stovyklos |
-  | Vakaruose ir pietvakariuose | 2 Orc stovyklos |
+- **The map is 4 times bigger:** 80×80 cells instead of 40×40. Roads run through the middle. There are 9 monster camps:
 
-- **Miestelis starto vietoje:**
-  - grįsta aikštė, aplink kurią nėra uolų ir medžių;
-  - požemio portalas ir treniruočių manekenai;
-  - trys prekeiviai, virš kurių rodomas vardas ir ką jie parduoda.
-- **Prekeiviai** (spustelėk NPC – veikėjas prieina ir atsidaro prekeivio langas kairėje, o inventorius dešinėje):
+  | Where from the town | What |
+  |---------------------|------|
+  | Around | 5 goblin camps |
+  | East | 2 Goblin Brute camps |
+  | West and south-west | 2 Orc camps |
 
-  | NPC | Kur | Parduoda |
-  |-----|-----|----------|
-  | **Thorin Ironhand** | Šiaurės rytuose | **Warrior:** Militia Sword, Steel Longsword, War Axe, Steel Helm, Steel Breastplate, Steel Sabatons |
-  | **Sylva Swiftarrow** | Vakaruose | **Ranger:** Hunting Bow, Longbow, Elven Bow, Leather Hood, Studded Jerkin, Ranger Boots |
-  | **Elara the Arcanist** | Rytuose | **Mage:** Apprentice Staff, Runed Staff, Staff of Embers, Silk Hood, Apprentice Robe, Enchanted Robe, Silk Slippers |
+- **A town at the start:**
+  - a paved square without rocks and trees around it;
+  - the dungeon portal and training dummies;
+  - three vendors, with their name and what they sell shown above them.
+- **Vendors** (click the NPC – the character walks up and the vendor window opens on the left, the inventory on the right):
 
-  Visi trys parduoda ir **Healing Potion** (10 aukso).
-  - Kainos: Common 15–35, Uncommon 80–160, Rare 400 aukso.
-  - Klasės daiktų kita klasė užsidėti negali. Lange tai rodoma raudonai, o bandant užsidėti – „Your class cannot use that“.
-  - Kol prekeivio langas atidarytas, **spustelėjęs daiktą krepšyje jį parduodi už ¼ kainos**. Aprašyme matyti „Sells for N gold“.
-  - Langas užsidaro paspaudus X, Esc arba nuėjus nuo prekeivio.
-- **Auksas:**
-  - pradžioje turi 20;
-  - monstrai jo duoda **kiekvienam**, kas kovojo: goblinas 3–6, Goblin Brute 10–16, Orc 20–30, Goblin King 150–200;
-  - gavus rodomas geltonas „+N gold“, o inventoriuje matyti „Gold N“;
-  - auksas išsaugomas su veikėju.
-- **Viską tikrina serveris:** ar stovi prie prekeivio, ar užtenka aukso, ar krepšyje yra vietos, ar daiktas tinka tavo klasei.
+  | NPC | Where | Sells |
+  |-----|-------|-------|
+  | **Thorin Ironhand** | North-east | **Warrior:** Militia Sword, Steel Longsword, War Axe, Steel Helm, Steel Breastplate, Steel Sabatons |
+  | **Sylva Swiftarrow** | West | **Ranger:** Hunting Bow, Longbow, Elven Bow, Leather Hood, Studded Jerkin, Ranger Boots |
+  | **Elara the Arcanist** | East | **Mage:** Apprentice Staff, Runed Staff, Staff of Embers, Silk Hood, Apprentice Robe, Enchanted Robe, Silk Slippers |
 
-## Failai
+  All three also sell the **Healing Potion** (10 gold).
+  - Prices: Common 15–35, Uncommon 80–160, Rare 400 gold.
+  - Another class cannot equip a class's items. The window shows it in red, and trying to equip one says "Your class cannot use that".
+  - While the vendor window is open, **clicking an item in the bag sells it for ¼ of its price**. The description shows "Sells for N gold".
+  - The window closes with X, Esc or by walking away from the vendor.
+- **Gold:**
+  - you start with 20;
+  - monsters give it to **everyone** who fought: goblin 3–6, Goblin Brute 10–16, Orc 20–30, Goblin King 150–200;
+  - a yellow "+N gold" is shown, and the inventory shows "Gold N";
+  - gold is saved with the character.
+- **The server checks everything:** that you stand at the vendor, have enough gold, have room in the bag, and that the item suits your class.
 
-| Failas | Paskirtis |
-|--------|-----------|
-| `Scripts/Runtime/Vendors/VendorDefinition.cs`, `Vendor.cs` | Prekeivio prekės ir NPC pasaulyje |
-| `Scripts/Runtime/UI/VendorWindow.cs`, `NpcNameplates.cs` | Prekeivio langas, vardai virš NPC |
-| `Data/Vendors/*.asset` | Prekeiviai (sukuria scenos įrankis) |
-| `Tests/PlayMode/VendorTests.cs` | Nauji testai |
+## Files
 
-Pakeisti failai:
-- `ItemDefinition`: `price` (kaina) ir `requiredClass` (kuriai klasei skirta).
-- `Inventory`: auksas, pirkimas, pardavimas, klasės patikra užsidedant.
+| File | Purpose |
+|------|---------|
+| `Scripts/Runtime/Vendors/VendorDefinition.cs`, `Vendor.cs` | Vendor stock and the NPC in the world |
+| `Scripts/Runtime/UI/VendorWindow.cs`, `NpcNameplates.cs` | Vendor window, names above NPCs |
+| `Data/Vendors/*.asset` | Vendors (created by the scene tool) |
+| `Tests/PlayMode/VendorTests.cs` | New tests |
+
+Changed files:
+- `ItemDefinition`: `price` and `requiredClass` (which class it is for).
+- `Inventory`: gold, buying, selling, the class check when equipping.
 - `MonsterAI`: `goldReward`.
-- `CharacterRecord`, `CharacterPersistence`: auksas išsaugomas.
-- `LootPicker`: spustelėtas prekeivis – prieiti ir atidaryti langą.
-- `InventoryWindow`: auksas, pardavimas, klasė aprašyme.
-- Scenos įrankis: žemėlapis, miestelis, stovyklos, 19 naujų daiktų, prekeiviai, monstrų auksas.
+- `CharacterRecord`, `CharacterPersistence`: gold is saved.
+- `LootPicker`: a clicked vendor – walk up and open the window.
+- `InventoryWindow`: gold, selling, the class in the description.
+- Scene tool: the map, the town, the camps, 19 new items, vendors, monster gold.
 
-## Kaip patikrinti naršyklėje
+## How to check in the browser
 
-1. Prisijunk. Aplink startą turi būti grįsta aikštė ir trys NPC su vardais virš galvų.
-2. Spustelėk savo klasės prekeivį (pvz. Warrior – Thorin Ironhand). Atsidaro jo prekės ir tavo inventorius. Nusipirk Healing Potion arba Common daiktą už pradinį auksą.
-3. Spustelėk kitos klasės prekeivį: jo daiktai pažymėti raudonai „... only“. Jei tokį nusipirksi, užsidėti jo nepavyks.
-4. Kol prekeivio langas atidarytas, spustelėk daiktą krepšyje – jis parduodamas, o tavo auksas padidėja.
-5. Mušk monstrus: virš veikėjo pasirodo „+N gold“. Pasitaupęs, nusipirk Uncommon ar Rare daiktą.
-6. Pasivaikščiok po didesnį žemėlapį ir surask Brute (rytuose) bei Orc (vakaruose) stovyklas.
+1. Log in. Around the start there must be a paved square and three NPCs with names above their heads.
+2. Click your class's vendor (e.g. Warrior – Thorin Ironhand). Its stock and your inventory open. Buy a Healing Potion or a Common item with your starting gold.
+3. Click another class's vendor: its items are marked in red "... only". If you buy one, you cannot equip it.
+4. While the vendor window is open, click an item in the bag – it is sold and your gold goes up.
+5. Fight monsters: "+N gold" shows above the character. Once you have saved some, buy an Uncommon or Rare item.
+6. Walk around the bigger map and find the Brute (east) and Orc (west) camps.
 
-## Automatiniai testai
+## Automatic tests
 
-Pridėti 6 nauji `VendorTests` testai:
-- pirkimas kainuoja kainą ir įdeda daiktą į krepšį;
-- be pakankamo aukso nupirkti nepavyksta;
-- pardavimas duoda ¼ kainos;
-- toli nuo prekeivio prekiauti negalima;
-- klasės daiktas tinka tik savo klasei;
-- už nužudytą monstrą gaunamas auksas.
+6 new `VendorTests`:
+- buying costs the price and puts the item in the bag;
+- without enough gold buying fails;
+- selling gives ¼ of the price;
+- trading far from a vendor is not allowed;
+- a class item suits only its own class;
+- a killed monster gives gold.
 
-`AccountTests` dabar tikrina ir aukso išsaugojimą. Iš viso **94** testai.
+`AccountTests` now also checks that gold is saved. **94** tests in all.
 
-## Žinomi apribojimai
-- Prekeivių atsargos neribotos, o kainos fiksuotos.
-- Prekeivio NPC yra vieno kadro paveikslėlis, be animacijos.
-- Klasės daiktai neturi atskirų atakos animacijų: lankininkas vis dar mosuoja kardu, o sviedinys skrenda kaip anksčiau.
-- Senesni išsaugoti veikėjai, buvę toli nuo starto, žemėlapiui pasikeitus gali atsirasti kitoje vietoje. Jei ta vieta užstota, veikėjas atsiras prie starto.
+## Known limitations
+- Vendor stock is unlimited and prices are fixed.
+- The vendor NPC is a single-frame picture without animation.
+- Class items have no attack animations of their own: the ranger still swings a sword, and the projectile flies as before.
+- Older saved characters that were far from the start may appear elsewhere now that the map changed. If that spot is blocked, the character appears at the start.

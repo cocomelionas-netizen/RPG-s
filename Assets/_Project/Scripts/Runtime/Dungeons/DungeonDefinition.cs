@@ -13,7 +13,7 @@ namespace RPG.Dungeons
         public Vector3Int cell;
         public string displayName;
         [Min(1)] public int level;
-        [Tooltip("Tougher, bigger, rewards more (Source's elites and boss-flagged monsters).")]
+        [Tooltip("Tougher, bigger, rewards more (the source game's elites and boss-flagged monsters).")]
         public bool elite;
         [Tooltip("A boss: the dungeon counts as beaten when all its bosses are dead.")]
         public bool boss;
@@ -25,7 +25,7 @@ namespace RPG.Dungeons
         [Min(0f)] public float goldScale;
         [Tooltip("Rolled once on death on top of its usual drops (keys, treasures, gems).")]
         public LootEntry[] loot;
-        [Tooltip("Chances of a piece of gear of each quality (Source's boss loot chances).")]
+        [Tooltip("Chances of a piece of gear of each quality (the source game's boss loot chances).")]
         [Range(0f, 1f)] public float blueChance;
         [Range(0f, 1f)] public float goldChance;
         [Range(0f, 1f)] public float purpleChance;
@@ -58,7 +58,7 @@ namespace RPG.Dungeons
     }
 
     /// <summary>
-    /// Everything a dungeon is made of: its plan (Source's map: which cells are walkable), where players arrive,
+    /// Everything a dungeon is made of: its plan (the source game's map: which cells are walkable), where players arrive,
     /// its monsters, containers, exits and doors into deeper dungeons, and who may enter.
     /// </summary>
     [CreateAssetMenu(menuName = "RPG/Dungeons/Dungeon", fileName = "Dungeon")]

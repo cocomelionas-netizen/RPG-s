@@ -7,7 +7,7 @@ namespace RPG.Items
     /// <summary>
     /// Server: rolls loot and leaves it on the ground in a loot bag (monsters, chests). The loot table gives the
     /// fixed drops (junk, potions, keys, gems). Gear itself is crafted: what drops are crafting materials, picked
-    /// the way Source picks the material of its gear drops (by the dropper's level and its material chances).
+    /// the way the source game picks the material of its gear drops (by the dropper's level and its material chances).
     /// Only guaranteed pieces (bosses) drop as finished gear.
     /// </summary>
     public static class LootDrop
@@ -39,7 +39,7 @@ namespace RPG.Items
 
         /// <summary>
         /// How often gear of <paramref name="itemLevel"/> drops from a dropper of <paramref name="level"/>
-        /// (like Source's material tables: most often at its level, less the further off, none outside the window).
+        /// (like the source game's material tables: most often at its level, less the further off, none outside the window).
         /// </summary>
         public static float LevelWeight(int itemLevel, int level)
         {
@@ -199,7 +199,7 @@ namespace RPG.Items
         public const float SerumChance = 0.15f;
 
         /// <summary>
-        /// Like Source's world loot: a potion in a loot table drops as the highest tier the dropper's level allows
+        /// Like the source game's world loot: a potion in a loot table drops as the highest tier the dropper's level allows
         /// (Minor, Lesser, plain, Greater, Major), sometimes as its serum. Anything else is returned as it is.
         /// </summary>
         public static ItemDefinition PotionForLevel(ItemDefinition item, int level)

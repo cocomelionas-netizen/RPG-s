@@ -5,7 +5,7 @@ using UnityEngine;
 namespace RPG.Progression
 {
     /// <summary>
-    /// Every stat a character has, Source's list (its ids, names and prices come from Source.exe). Players buy
+    /// Every stat a character has, the source game's list (its ids, names and prices come from the client executable). Players buy
     /// points in all of them with experience; gear, affixes and gems add more. Only ever append: values are saved.
     /// </summary>
     public enum Attribute
@@ -16,9 +16,9 @@ namespace RPG.Progression
         Agility,
         /// <summary>Mana for everyone; damage for mages.</summary>
         Intelligence,
-        /// <summary>Health (Source's Courage).</summary>
+        /// <summary>Health (the source game's Courage).</summary>
         Vitality,
-        /// <summary>Points put straight into health (like Source lets you), +1 each.</summary>
+        /// <summary>Points put straight into health (like the source game lets you), +1 each.</summary>
         Health,
         /// <summary>Points put straight into mana, +1 each.</summary>
         Mana,
@@ -299,7 +299,7 @@ namespace RPG.Progression
             "Shields",
         };
 
-        /// <summary>The name players see (Source's: Vitality shows as Courage).</summary>
+        /// <summary>The name players see (the source game's: Vitality shows as Courage).</summary>
         public static string NameOf(Attribute attribute)
         {
             int index = (int)attribute;
@@ -308,7 +308,7 @@ namespace RPG.Progression
 
         /// <summary>
         /// Experience the next point costs when <paramref name="invested"/> points are already in the attribute,
-        /// Source's prices (its stat cost function): health and mana x^(x/1500), at least 1; Strength, Agility,
+        /// The source game's prices (its stat cost function): health and mana x^(x/1500), at least 1; Strength, Agility,
         /// Willpower, Intelligence and Courage x^1.5 + 5; Regeneration and Meditate x^1.4 + 4; melee and spell
         /// critical x/2 + 1; ranged critical and resists x/3 + 1; dodge and block x + 1; Bartering and Lockpicking
         /// 2x + 1; weapon skills three times Strength's.

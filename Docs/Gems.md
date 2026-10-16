@@ -1,19 +1,19 @@
-# Brangakmeniai ir lizdai
+# Gems and sockets
 
-| Brangakmenis | Atributas | Chipped | Paprastas | Flawless |
+| Gem | Attribute | Chipped | Plain | Flawless |
 |---|---|---|---|---|
 | Ruby | Strength | +2 | +4 | +7 |
 | Topaz | Agility | +2 | +4 | +7 |
 | Sapphire | Intelligence | +2 | +4 | +7 |
 | Emerald | Vitality | +2 | +4 | +7 |
 
-- **Lizdai:** 25% monstrų numestų ginklų ir šarvų turi lizdą (`ItemStack.Socket`: 0 — nėra, -1 — tuščias,
-  >0 — įstatyto brangakmenio daikto id). Lizdas rodomas aprašyme („Socket: empty“ / „Socket: Ruby (+4 Strength)“).
-- **Įstatymas:** paspaudi brangakmenį (rėmelis pagelsta), tada daiktą — dėvimą arba krepšyje. Jei jame yra tuščias lizdas,
-  brangakmenis įstatomas, jei ne — parašoma, kad vietos nėra. Esc atšaukia. Brangakmenis lieka visam laikui.
-- **Juvelyras** Gemma Brightstone (miestelio pietuose) parduoda Chipped brangakmenius ir mygtuku
-  „Combine gems“ sujungia kiekvienus 3 vienodus į geresnį (Chipped → paprastas → Flawless).
-- **Kritimas:** Chipped — iš visų lauko monstrų (2–5%), paprasti — iš orkų ir Goblin King, Flawless — iš Goblin King.
-- Daiktas su brangakmeniu parduodamas brangiau (pridedama brangakmenio kaina). Lizdai saugomi paskyroje.
+- **Sockets:** 25% of the weapons and armor monsters drop have a socket (`ItemStack.Socket`: 0 – none, -1 – empty,
+  >0 – the item id of the gem set in it). The socket is shown in the description ("Socket: empty" / "Socket: Ruby (+4 Strength)").
+- **Setting:** click a gem (its frame turns yellow), then an item – worn or in the bag. If it has an empty socket,
+  the gem is set; if not, it says there is no room. Esc cancels. The gem stays for good.
+- **The jeweler** Gemma Brightstone (in the south of the town) sells Chipped gems and with the
+  "Combine gems" button turns every 3 of a kind into a better one (Chipped → plain → Flawless).
+- **Drops:** Chipped – from all outdoor monsters (2–5%), plain – from orcs, Flawless – from bosses; dungeon bosses also drop plain and Flawless gems (see [GameData.md](GameData.md#dungeons)).
+- An item with a gem sells for more (the gem's price is added). Sockets are saved with the account.
 
-Testai: `Tests/PlayMode/GemTests.cs`.
+Tests: `Tests/PlayMode/GemTests.cs`.

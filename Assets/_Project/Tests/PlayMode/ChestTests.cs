@@ -156,7 +156,7 @@ namespace RPG.Tests
             Assert.IsNotNull(bag, "What it held waits in a loot bag.");
             bool hasGear = false;
             foreach (LootItem item in bag.Contents) hasGear |= item.Item.IsEquippable;
-            Assert.IsTrue(hasGear, "A Source chest always holds a piece of gear.");
+            Assert.IsTrue(hasGear, "A source-game chest always holds a piece of gear.");
         }
 
         [UnityTest]
@@ -200,7 +200,7 @@ namespace RPG.Tests
         }
 
         [Test]
-        public void GearDrops_UseSourceMaterialsOfTheirLevel()
+        public void GearDrops_UseMaterialsOfTheirLevel()
         {
             var catalog = AssetDatabase.LoadAssetAtPath<ItemCatalog>("Assets/_Project/Data/Items/ItemCatalog.asset");
             for (int i = 0; i < 200; i++)

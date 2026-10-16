@@ -27,7 +27,7 @@ namespace RPG.Items
         [SerializeField, Min(1)] private int bagSize = 20;
         [Tooltip("Given to every new character.")]
         [SerializeField] private ItemDefinition[] startingItems = Array.Empty<ItemDefinition>();
-        [Tooltip("Seconds between potions (shared by all of them); Source: 60.")]
+        [Tooltip("Seconds between potions (shared by all of them); the source game: 60.")]
         [SerializeField, Min(0f)] private float potionCooldown = 60f;
         [Tooltip("How close the player must be to pick up loot (the server allows a little more).")]
         [SerializeField, Min(0.1f)] private float pickupRange = 1.2f;
@@ -206,7 +206,7 @@ namespace RPG.Items
         }
 
         /// <summary>
-        /// Server: at a vendor that does it, turns every five of the same potion into one of the next tier (Source's
+        /// Server: at a vendor that does it, turns every five of the same potion into one of the next tier (the source game's
         /// recipes: 5 Minor Life Potions make a Lesser Life Potion, and so on). Returns how many were made.
         /// </summary>
         public int ServerCombinePotions(Vendor vendor)
@@ -839,7 +839,7 @@ namespace RPG.Items
         }
 
         /// <summary>
-        /// Server: puts an item together with the ones it combines with (one of each) into its result, like Source's
+        /// Server: puts an item together with the ones it combines with (one of each) into its result, like the source game's
         /// Dale Gem on a Depleted Key. Nothing is used up when one is missing or there is no room.
         /// </summary>
         public bool ServerCombineFrom(ItemDefinition item)

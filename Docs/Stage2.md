@@ -1,75 +1,75 @@
-# 2 etapas – veikėjo pateikimas
+# Stage 2 – character presentation
 
-## Ką padarėme
+## What we did
 
-- **8 krypčių animacijos.** Veikėjas rodomas ta kryptimi, kuria juda: E, NE, N, NW, W, SW, S arba SE (kryptys skaičiuojamos ekrane).
-  - Animacijos laikomos `CharacterAnimationSet` asset'e: kiekvienai animacijai (Idle, Walk ir kt.) nurodomi kadrai kiekvienai krypčiai.
-  - **Veidrodinis atspindys.** Jei vakarų pusės kryptis (NW, W, SW) neturi kadrų, naudojami rytų pusės kadrai, apversti horizontaliai. Dailininkui užtenka nupiešti 5 kryptis vietoj 8.
-  - Jei kryptis neturi kadrų visai, rodomi pietų (S) kadrai, todėl veikėjas niekada neišnyksta.
-  - `PlayOneShot("Attack")` paleidžia vienkartinę animaciją, kuri baigusi grįžta į Idle arba Walk. Ji bus naudojama kovoje (4 etapas).
-- **Animacija atskirta nuo valdymo.** `CharacterAnimator` neskaito `PlayerMovement`, o skaito sąsają `ICharacterMotionSource`. Tas pats komponentas tiks monstrams (AI) ir kitiems žaidėjams (tinklas).
-- **Žymeklis toje vietoje, kur paspaudei** (`ClickMarker`). Ant žemės pulsuoja auksinis žiedas. Kai veikėjas atvyksta, judėjimas atšaukiamas arba pradedamas judėti WASD, žiedas dingsta.
-- **Medžiai** (`Tree.prefab`). Aukšti objektai su pivot ties kamieno pagrindu, todėl veikėjas gali užeiti už lajos. Susiduriama tik su kamienu, ne su visa laja.
-- **Importo taisyklės HD grafikai** (`ArtImportRules`). Kai įmeti paveikslėlį į `Assets/_Project/Art/`, jam automatiškai nustatoma: Sprite, 256 PPU, Bilinear, aukštos kokybės suspaudimas ir teisingas pivot.
-- **Pataisyta judėjimo pele klaida.** Jei kadras užtrukdavo ilgiau nei 0.25 s (lagas arba nesufokusuotas langas), tikslas būdavo atšaukiamas, veikėjui dar nepajudėjus. Dabar judėjimas pele valdomas ir fizikos žingsnyje, o užstrigimas tikrinamas tik tada, kai buvo bandyta judėti.
-- Scenos įrankis pervadintas: dabar jis vadinasi **`RPG > Build Test Scene`** (anksčiau `RPG > Stage 1 > Build Test Scene`).
+- **8-direction animations.** The character is shown facing the way it moves: E, NE, N, NW, W, SW, S or SE (directions are computed on screen).
+  - Animations live in a `CharacterAnimationSet` asset: each animation (Idle, Walk and others) has frames for each direction.
+  - **Mirroring.** When a west-side direction (NW, W, SW) has no frames, the east-side frames are used, flipped horizontally. An artist only needs to draw 5 directions instead of 8.
+  - When a direction has no frames at all, the south (S) frames are shown, so the character never disappears.
+  - `PlayOneShot("Attack")` plays a one-off animation that returns to Idle or Walk when done. It is used in combat (stage 4).
+- **Animation is separate from control.** `CharacterAnimator` does not read `PlayerMovement`; it reads the `ICharacterMotionSource` interface. The same component works for monsters (AI) and other players (network).
+- **A marker where you clicked** (`ClickMarker`). A golden ring pulses on the ground. It disappears when the character arrives, the movement is cancelled or WASD movement starts.
+- **Trees** (`Tree.prefab`). Tall objects with the pivot at the base of the trunk, so the character can walk behind the crown. Only the trunk collides, not the whole crown.
+- **Import rules for HD art** (`ArtImportRules`). An image dropped into `Assets/_Project/Art/` automatically gets: Sprite, 256 PPU, Bilinear, high-quality compression and the right pivot.
+- **Fixed a mouse movement bug.** When a frame took longer than 0.25 s (lag or an unfocused window), the target was cancelled before the character had moved. Mouse movement is now also handled in the physics step, and being stuck is only checked when movement was attempted.
+- The scene tool was renamed: it is now **`RPG > Build Test Scene`** (previously `RPG > Stage 1 > Build Test Scene`).
 
-## Failai
+## Files
 
-| Failas | Paskirtis |
-|--------|-----------|
-| `Scripts/Runtime/Characters/Direction8.cs` | 8 krypčių enum ir vektoriaus pavertimas kryptimi |
-| `Scripts/Runtime/Characters/ICharacterMotionSource.cs` | Sąsaja „kas judina veikėją“ |
-| `Scripts/Runtime/Characters/CharacterAnimationSet.cs` | ScriptableObject su animacijų kadrais (`DirectionalClip`) |
-| `Scripts/Runtime/Characters/CharacterAnimator.cs` | Rodo teisingą kadrą pagal judėjimą ir kryptį |
-| `Scripts/Runtime/World/ClickMarker.cs` | Paspaudimo žymeklis |
-| `Scripts/Runtime/Player/PlayerMovement.cs` | Dabar realizuoja `ICharacterMotionSource`, pataisytas užstrigimo tikrinimas |
-| `Scripts/Editor/ArtImportRules.cs` | Automatiniai grafikos importo nustatymai |
-| `Scripts/Editor/TestSceneBuilder.cs` | Buvęs `Stage1SceneBuilder`, papildytas medžiais, animacijomis ir žymekliu |
-| `Scripts/Editor/PlaceholderArtGenerator.cs` | Generuoja veikėjo kadrus, medį ir žymeklio žiedą |
-| `Data/Characters/Player_AnimationSet.asset` | Žaidėjo animacijų rinkinys |
-| `Art/Placeholder/Player/*.png` | 30 laikinų veikėjo kadrų: 5 kryptys × (2 Idle + 4 Walk) |
-| `Prefabs/World/Tree.prefab` | Medis |
-| `Tests/PlayMode/CharacterAnimationTests.cs`, `ClickMarkerTests.cs` | Nauji testai |
+| File | Purpose |
+|------|---------|
+| `Scripts/Runtime/Characters/Direction8.cs` | 8-direction enum and turning a vector into a direction |
+| `Scripts/Runtime/Characters/ICharacterMotionSource.cs` | The "who moves the character" interface |
+| `Scripts/Runtime/Characters/CharacterAnimationSet.cs` | ScriptableObject with animation frames (`DirectionalClip`) |
+| `Scripts/Runtime/Characters/CharacterAnimator.cs` | Shows the right frame for the movement and direction |
+| `Scripts/Runtime/World/ClickMarker.cs` | Click marker |
+| `Scripts/Runtime/Player/PlayerMovement.cs` | Now implements `ICharacterMotionSource`; fixed stuck check |
+| `Scripts/Editor/ArtImportRules.cs` | Automatic art import settings |
+| `Scripts/Editor/TestSceneBuilder.cs` | Formerly `Stage1SceneBuilder`, now with trees, animations and the marker |
+| `Scripts/Editor/PlaceholderArtGenerator.cs` | Generates the character frames, the tree and the marker ring |
+| `Data/Characters/Player_AnimationSet.asset` | The player's animation set |
+| `Art/Placeholder/Player/*.png` | 30 temporary character frames: 5 directions × (2 Idle + 4 Walk) |
+| `Prefabs/World/Tree.prefab` | Tree |
+| `Tests/PlayMode/CharacterAnimationTests.cs`, `ClickMarkerTests.cs` | New tests |
 
-Visi keliai yra `Assets/_Project/` viduje.
+All paths are inside `Assets/_Project/`.
 
-## Kaip patikrinti
+## How to check
 
-### Rankinis patikrinimas
-1. Jei scena sena: `RPG > Build Test Scene`.
-2. Atidaryk `World_Test.unity` ir spausk **Play**.
-3. **Vaikščiok WASD visomis 8 kryptimis** (pvz. W+D = NE). Veikėjas turi žiūrėti judėjimo kryptimi:
-   - į kamerą (S, SE, SW, E, W) matyti akys ir auksinė sagtis;
-   - nuo kameros (N, NE, NW) matyti tik gobtuvas.
-4. **Einant** veikėjas kilnoja kojas ir siūbuoja, **stovint** lėtai „kvėpuoja“.
-5. **Paspausk pele ant žemės.** Ten atsiranda pulsuojantis žiedas, kuris dingsta, kai veikėjas atvyksta.
-6. **Medis kairėje nuo starto:**
-   - užeik **už** jo (aukščiau ekrane) – veikėją turi uždengti laja;
-   - praeik **priešais** jį – veikėjas turi būti priekyje;
-   - pro kamieną praeiti negalima, pro lają galima.
-7. **Console** – jokių raudonų klaidų.
+### By hand
+1. If the scene is old: `RPG > Build Test Scene`.
+2. Open `World_Test.unity` and press **Play**.
+3. **Walk with WASD in all 8 directions** (e.g. W+D = NE). The character must face the way it moves:
+   - towards the camera (S, SE, SW, E, W) the eyes and the golden buckle are visible;
+   - away from the camera (N, NE, NW) only the hood is visible.
+4. **Walking**, the character lifts its legs and sways; **standing**, it slowly "breathes".
+5. **Click the ground.** A pulsing ring appears there and disappears when the character arrives.
+6. **The tree left of the start:**
+   - walk **behind** it (higher on screen) – the crown must cover the character;
+   - walk **in front** of it – the character must be in front;
+   - you cannot pass through the trunk, but you can pass under the crown.
+7. **Console** – no red errors.
 
-### Automatiniai testai
-`Window > General > Test Runner` → **PlayMode** → **Run All**. Turi praeiti **24** testai:
+### Automatic tests
+`Window > General > Test Runner` → **PlayMode** → **Run All**. **24** tests must pass:
 - `CharacterAnimationTests`:
-  - 10 krypčių atvejų;
-  - Idle ir Walk perjungimas;
-  - vakarų pusės atspindys;
-  - atsarginė S kryptis;
-  - vienkartinė animacija.
-- `ClickMarkerTests`: žymeklis matomas tik tada, kai yra tikslas.
-- `PlayerMovementTests`: papildytas lėtų kadrų (frame hitch) testu.
+  - 10 direction cases;
+  - switching between Idle and Walk;
+  - west-side mirroring;
+  - S direction fallback;
+  - one-off animation.
+- `ClickMarkerTests`: the marker is visible only while there is a target.
+- `PlayerMovementTests`: now with a frame hitch test.
 
-## Kaip įdėti tikrą tapytą veikėją
+## How to add a real painted character
 
-1. Nupiešk 5 kryptis (E, NE, N, SE, S) kiekvienai animacijai. Vienas kadras – atskiras PNG arba lapas, kurio pavadinimas baigiasi `_Sheet`.
-2. Įmesk failus į `Assets/_Project/Art/Characters/<VeikėjoVardas>/`. Importo taisyklės pačios nustatys 256 PPU ir pivot apačioje per vidurį. Jei kojos nėra pačioje paveikslėlio apačioje, Sprite Editor'iuje patempk pivot iki kojų.
-3. Sukurk naują rinkinį: `Create > RPG > Characters > Animation Set`. Kiekvienai animacijai įrašyk `id` (`Idle`, `Walk`), fps ir sutempk kadrus į kryptis. Vakarų kryptis palik tuščias.
-4. Prefab'e `CharacterAnimator` komponente nurodyk naują rinkinį.
+1. Paint 5 directions (E, NE, N, SE, S) for each animation. One frame is a separate PNG, or a sheet whose name ends with `_Sheet`.
+2. Drop the files into `Assets/_Project/Art/Characters/<CharacterName>/`. The import rules set 256 PPU and a bottom-center pivot. If the feet are not at the very bottom of the image, drag the pivot to the feet in the Sprite Editor.
+3. Create a new set: `Create > RPG > Characters > Animation Set`. For each animation enter the `id` (`Idle`, `Walk`), fps and drag the frames into the directions. Leave the west directions empty.
+4. In the prefab's `CharacterAnimator` component, choose the new set.
 
-Vieno vieneto aukštis = 256 px. Žmogaus dydžio veikėjas turėtų būti maždaug 180–200 px aukščio, kaip placeholder'is.
+One unit is 256 px high. A human-sized character should be about 180–200 px high, like the placeholder.
 
-## Žinomi apribojimai
-- Click-to-move vis dar eina tiesia linija. Kelio paieška bus 5 etape.
-- Placeholder grafika yra tik laikina. Tikrą tapytą grafiką reikės nupiešti arba užsakyti.
+## Known limitations
+- Click-to-move still walks in a straight line. Pathfinding comes in stage 5.
+- The placeholder art is temporary. Real painted art has to be drawn or commissioned.

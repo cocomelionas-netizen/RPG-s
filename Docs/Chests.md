@@ -1,27 +1,29 @@
-# Skrynios, elitiniai monstrai ir laipsniai
+# Chests, elite monsters and ranks
 
-## Skrynios
+## Chests
 
-| Skrynia | Lygis | Auksas | Kas viduje | Atsiranda vėl |
+| Chest | Level | Gold | Inside | Comes back |
 |---|---|---|---|---|
-| Wooden Crate | 2 | 3–8 | gėrimai, šlamštas, paprasti daiktai | po 2 min |
-| Oak Chest | 4 | 10–25 | Uncommon daiktai, Chipped brangakmeniai, Den Key | po 4 min |
-| Iron Strongbox | 6 | 30–60 | Rare/Epic daiktai, brangakmeniai, Den Key | po 7 min |
+| Wooden Crate | 2 | 3–8 | potions, junk, plain items | after 2 min |
+| Oak Chest | 4 | 10–25 | Uncommon items, Chipped gems, Den Key | after 4 min |
+| Iron Strongbox | 6 | 30–60 | Rare/Epic items, gems, Den Key | after 7 min |
 
-- 8 dėžės prie goblinų stovyklų ir aplink miestelį, 2 skrynios Brute Hills, 2 seifai Orc Marsh.
-- Paspaudus prieinama ir atidaroma: auksas iškart į piniginę, daiktai — loot maiše (su afiksais ir lizdais).
-- Atidaryta skrynia dingsta, o jos `ChestSpawner` po kurio laiko pastato naują. Virš skrynios — pavadinimas ir lygis, minimape — oranžinis taškas.
+- 8 crates by the goblin camps and around the town, 2 chests in Brute Hills, 2 strongboxes in Orc Marsh.
+- Clicking walks up and opens it: the gold goes straight to the purse, items into a loot bag (with affixes and sockets).
+- An opened chest disappears, and its `ChestSpawner` puts a new one there after a while. Above the chest – its name and level; on the minimap – an orange dot.
 
-## Elitiniai monstrai
+(Since then chests stand where the source game has its containers, with its contents and locks – see [GameData.md](GameData.md#chests).)
 
-- ~8% stovyklų monstrų atsiranda elitiniai (`MonsterSpawner.eliteChance`): vardas „Elite …“,
-  25% didesni, 2,5× HP, 1,5× žala, 3× XP ir auksas, loot ridenamas du kartus.
+## Elite monsters
 
-## Laipsniai
+- ~8% of camp monsters appear as elites (`MonsterSpawner.eliteChance`): named "Elite …",
+  25% bigger, 2.5× HP, 1.5× damage, 3× XP and gold, loot rolled twice.
 
-- Didžiausias lygis — 25. Kiekvienas lygis turi laipsnį: Recruit, Private, Lance Corporal, … General,
+## Ranks
+
+- The top level is 25. Every level has a rank: Recruit, Private, Lance Corporal, … General,
   Field Marshal, Knight, Baron, Count, Earl, Champion (`LevelCurve.RankName`).
-- Virš kiekvieno žaidėjo galvos (ir tavo) — vardas, o po juo laipsnis, pvz. „<Corporal>“. Spalvos kaip Source: žaidėjai šviesiai mėlyni (#8EACD2), monstrai raudoni (#B63E3D), skrynios beveik baltos (#E8EDE1).
-- Laipsnis rodomas ir rėmelyje, veikėjo lange (C) bei žinutėje pakilus lygiu.
+- Above every player's head (yours too) – the name, and under it the rank, e.g. "<Corporal>". Colours as in the source game: players light blue (#8EACD2), monsters red (#B63E3D), chests nearly white (#E8EDE1).
+- The rank is also shown in the frame, the character window (C) and the level-up message.
 
-Testai: `ChestTests.cs` (skrynios ir elitai), `LevelCurveTests.cs` (laipsniai).
+Tests: `ChestTests.cs` (chests and elites), `LevelCurveTests.cs` (ranks).

@@ -1,12 +1,15 @@
 # RPG-s — notes for Claude
 
 Unity 6 (6000.6.4f1) 2D isometric MMORPG, URP 2D, Netcode for GameObjects 2.13, Input System, UI built in code
-(`UIFactory`), server authority. A personal test project that takes as much as it can from **Source**.
+(`UIFactory`), server authority. A personal test project that takes as much as it can from a **source game**'s client data.
 Players test the WebGL build at https://cocomelionas-netizen.github.io/RPG-s/ (Offline mode).
 
 ## Working rules (from the owner)
 
-- Answer the owner in **Lithuanian**; code, names and comments in English, matching the existing style.
+- Answer the owner in **Lithuanian** (chat only). **Everything in the repository is English**: documentation (`Docs/`,
+  READMEs), code, names, comments, commit messages.
+- **Never write the source game's name anywhere in the repository** (files, folders, identifiers, comments, docs, commit
+  messages). Call it "the source game" / "source data". The only exception is the data repository URL below.
 - After each change: commit and push straight to `main`. Never force-push. Never touch GitHub Secrets.
 - Check the CI build: `https://api.github.com/repos/cocomelionas-netizen/RPG-s/actions/runs?per_page=1`
   (and `/runs/{id}/jobs` on failure); builds take 10–15 min, a newer push cancels an older run.
@@ -17,30 +20,30 @@ Players test the WebGL build at https://cocomelionas-netizen.github.io/RPG-s/ (O
 - Before pushing, run `bash Tools/CompileCheck/check.sh` (setup once: `bash Tools/CompileCheck/setup.sh`; its
   `CompileCheck.csproj` is committed with `git add -f`, the root `.gitignore` ignores `*.csproj`).
   Editor scripts are not compiled there — re-read builder changes carefully (CI fails on any editor error).
-- Do not try to get data from Source's live server (not allowed). Client data is fine.
+- Do not try to get data from the source game's live server (not allowed). Client data is fine.
 
 ## Source data
 
 Client files come from `https://github.com/DreadmystRPG/steam` (blobless clone is enough): `game.db` (SQLite:
 `item_template`, `spell_template`, `npc_template`, `affix_template`, `gameobject_template`, `material_chance_*`,
-`player_class_stats`, `npc_vendor`, `quest_template`...), `bin/Source.exe` (strings, stat ids/costs), `maps/`.
-What was taken and how it maps is documented in `Docs/SourceLayout.md` (Lithuanian). Generated data lives in
-`Scripts/Editor/Source*.cs` (start area, gear, affixes, spells).
+`player_class_stats`, `npc_vendor`, `dungeon_template`, `loot`, `quest_template`...), `bin/*.exe` (strings, stat
+ids/costs), `maps/*.map`. What was taken and how it maps is documented in `Docs/GameData.md`. Generated data lives in
+`Scripts/Editor/*Data.cs` (`StartAreaData`, `GearData`, `AffixData`, `DungeonData`) and `TestSceneBuilder.Spells.cs`;
+generators are in `Tools/GameData/` (`dungeons.py`, `.map` reader `map_file.py`).
 
 ## What exists (short)
 
-World: Source's start region (Pilgrim's Refuge → St. Revere), its monsters/chests/waystones, M world map.
-Stats: all Source stats bought with experience (C, three pages). Items: Source gear by level and material,
+World: the source game's start region (Pilgrim's Refuge → St. Revere), its monsters/chests/waystones, M world map.
+Stats: all source stats bought with experience (C, three pages). Items: source gear by level and material,
 crafted at class vendors from materials monsters drop; 7145 affixes; potions/serums; gems; loot window with sparkles.
-Chests: crates (gold), locked chests (Lockpicking 2 × level). Spells: Source Paladin/Ranger/Mage spells to level 20,
+Chests: crates (gold), locked chests (Lockpicking 2 × level). Spells: Paladin/Ranger/Mage spells to level 20,
 Tomes at trainers (Halfrid, Kelda, Gyldan), ranks for experience, spellbook (P), bar keys 1-4 and 7-0, potions 5-6,
 status effects (`StatusEffects`).
-Dungeons: all 10 Source dungeons reachable from this region, laid out from their `.map` files (Wolf's Den, Trog Cave,
+Dungeons: all 10 source dungeons reachable from this region, laid out from their `.map` files (Wolf's Den, Trog Cave,
 Lower Garrison, Decrepit Tower, Abandoned Barracks, Kandorys Undercourse, Desecrated Altar, Salmaster's Descent,
-Telamont's Demiplane and Sanctuary) with their monsters, bosses, containers, entry rules and the key chain
-(`Tools/SourceData/dungeons.py` → `SourceDungeons.cs`; `.map` format in `Tools/SourceData/Source_map.py`).
+Telamont's Demiplane and Sanctuary) with their monsters, bosses, containers, entry rules and the key chain.
 
 ## Possible next steps (owner picks)
 
-Quests (Source has 14 in `quest_template`), gems like Source (5 kinds, combine by 5), orbs (enchanting with the
+Quests (14 in `quest_template`), gems like the source game (5 kinds, combine by 5), orbs (enchanting with the
 Divine/Major orbs the bosses drop).

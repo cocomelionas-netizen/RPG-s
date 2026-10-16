@@ -7,7 +7,7 @@ using UnityEngine.UI;
 namespace RPG.UI
 {
     /// <summary>
-    /// The local player's spellbook (P, or the Spellbook button), like Source's: every spell of the class with its
+    /// The local player's spellbook (P, or the Spellbook button), like the source game's: every spell of the class with its
     /// rank, level, mana, cooldown and what it does. Known spells have a purple + that ranks them up with experience
     /// (the price in the tooltip); clicking a known spell picks it, and clicking a slot of the action bar then puts it
     /// there. Spells not learned yet show the level of their Tome. Builds its own UI; place it on a RectTransform that
@@ -106,7 +106,7 @@ namespace RPG.UI
             rows.Clear();
             shownFor = spellbook;
             shownCount = spellbook.Spells.Count;
-            // Long spellbooks (Source classes have 20+ spells) in two columns.
+            // Long spellbooks (the source game's classes have 20+ spells) in two columns.
             columns = shownCount > 12 ? 2 : 1;
             perColumn = Mathf.Max(1, (shownCount + columns - 1) / columns);
             for (int i = 0; i < shownCount; i++) rows.Add(CreateRow(i));
