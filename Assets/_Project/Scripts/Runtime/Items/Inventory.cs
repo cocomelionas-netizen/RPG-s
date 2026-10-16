@@ -216,50 +216,6 @@ namespace RPG.Items
             return true;
         }
 
-        /// <summary>Server: at a jeweler, turns every three of the same gem into one better gem. Returns how many were made.</summary>
-        public int ServerCombineGems(Vendor jeweler)
-        {
-            if (!IsServer || health.IsDead || !IsNear(jeweler) || !jeweler.Definition.combinesGems) return 0;
-            int made = Combine(item => item.isGem);
-            MessageRpc(made > 0 ? InventoryMessage.GemsCombined : InventoryMessage.NothingToCombine, made, 0);
-            return made;
-        }
-
-        /// <summary>
-        /// Server: at a vendor that does it, turns every five of the same potion into one of the next tier (the source game's
-        /// recipes: 5 Minor Life Potions make a Lesser Life Potion, and so on). Returns how many were made.
-        /// </summary>
-        public int ServerCombinePotions(Vendor vendor)
-        {
-            if (!IsServer || health.IsDead || !IsNear(vendor) || !vendor.Definition.combinesPotions) return 0;
-            int made = Combine(item => item.use != ItemUse.None);
-            MessageRpc(made > 0 ? InventoryMessage.PotionsCombined : InventoryMessage.NothingToCombinePotions, made, 0);
-            return made;
-        }
-
-        /// <summary>Turns every Combine Count of the chosen items into what they combine into; how many were made.</summary>
-        private int Combine(Predicate<ItemDefinition> which)
-        {
-            int made = 0;
-            foreach (ItemDefinition item in catalog.items)
-            {
-                if (item == null || item.combinesInto == null || !which(item)) continue;
-                int count = item.combineCount;
-                while (CountOf(item) >= count && ServerRemoveItem(item, count))
-                {
-                    if (ServerAddItem(item.combinesInto, 1, true) > 0)
-                    {
-                        made++;
-                        continue;
-                    }
-                    // No room for the result: give them back and stop.
-                    ServerAddItem(item, count, false);
-                    break;
-                }
-            }
-            return made;
-        }
-
         /// <summary>Server: takes items out of the bag (keys, quest items). False, and nothing taken, when there are not enough.</summary>
         public bool ServerRemoveItem(ItemDefinition item, int count)
         {
@@ -485,59 +441,25 @@ namespace RPG.Items
             if (IsOwner) SocketGemRpc(gemBagIndex, intoEquipment, targetIndex);
         }
 
-        public void RequestCombineGems(Vendor jeweler)
-        {
-            if (IsOwner && jeweler != null) CombineGemsRpc(jeweler.Index);
-        }
-
-        public void RequestCombinePotions(Vendor vendor)
-        {
-            if (IsOwner && vendor != null) CombinePotionsRpc(vendor.Index);
-        }
-
-        [Rpc(SendTo.Server)]
-        private void CombinePotionsRpc(int vendorIndex, RpcParams rpcParams = default)
-        {
-            if (rpcParams.Receive.SenderClientId == OwnerClientId) ServerCombinePotions(Vendor.Get(vendorIndex));
-        }
-
         [Rpc(SendTo.Server)]
         private void SocketGemRpc(int gemBagIndex, bool intoEquipment, int targetIndex, RpcParams rpcParams = default)
         {
             if (rpcParams.Receive.SenderClientId == OwnerClientId) ServerSocketGem(gemBagIndex, intoEquipment, targetIndex);
         }
 
-        [Rpc(SendTo.Server)]
-        private void CombineGemsRpc(int vendorIndex, RpcParams rpcParams = default)
+        /// <summary>Owner: asks a transmuter to turn what is in these bag slots into a recipe's result.</summary>
+        public void RequestTransmute(Vendor vendor, int[] bagSlots)
         {
-            if (rpcParams.Receive.SenderClientId == OwnerClientId) ServerCombineGems(Vendor.Get(vendorIndex));
-        }
-
-        /// <summary>Owner: asks a vendor to craft a piece from its craft list out of materials in the bag.</summary>
-        public void RequestCraft(Vendor vendor, int craftIndex, int quantity = 1)
-        {
-            if (IsOwner && vendor != null) CraftRpc(vendor.Index, craftIndex, quantity);
-        }
-
-        /// <summary>Owner: asks a vendor to make one of its other recipes (potion tiers, orbs, keys) this many times.</summary>
-        public void RequestCraftRecipe(Vendor vendor, int recipeIndex, int quantity = 1)
-        {
-            if (IsOwner && vendor != null) CraftRecipeRpc(vendor.Index, recipeIndex, quantity);
+            if (IsOwner && vendor != null && bagSlots != null) TransmuteRpc(vendor.Index, bagSlots);
         }
 
         [Rpc(SendTo.Server)]
-        private void CraftRecipeRpc(int vendorIndex, int recipeIndex, int quantity, RpcParams rpcParams = default)
+        private void TransmuteRpc(int vendorIndex, int[] bagSlots, RpcParams rpcParams = default)
         {
-            if (rpcParams.Receive.SenderClientId == OwnerClientId) ServerCraftRecipe(Vendor.Get(vendorIndex), recipeIndex, Mathf.Clamp(quantity, 1, 100));
+            if (rpcParams.Receive.SenderClientId == OwnerClientId && bagSlots.Length <= TransmuteSlots)
+                ServerTransmute(Vendor.Get(vendorIndex), bagSlots);
         }
 
-        [Rpc(SendTo.Server)]
-        private void CraftRpc(int vendorIndex, int craftIndex, int quantity, RpcParams rpcParams = default)
-        {
-            if (rpcParams.Receive.SenderClientId == OwnerClientId) ServerCraft(Vendor.Get(vendorIndex), craftIndex, Mathf.Clamp(quantity, 1, 100));
-        }
-
-        /// <summary>Owner: asks how many of each item a vendor has left (the answer updates <see cref="Vendor.KnownRemaining"/>).</summary>
         public void RequestVendorStock(Vendor vendor)
         {
             if (IsOwner && vendor != null) VendorStockRequestRpc(vendor.Index);
@@ -734,18 +656,6 @@ namespace RPG.Items
                     MessageLog.Add(item != null ? $"[{item.displayName}] has no empty socket." : "That item has no empty socket.",
                         MessageLog.WarningColor);
                     break;
-                case InventoryMessage.GemsCombined:
-                    MessageLog.Add($"The jeweler made {itemId} better gem(s) for you.", GoldColor);
-                    break;
-                case InventoryMessage.NothingToCombine:
-                    MessageLog.Add("You need 3 of the same gem to combine them.", MessageLog.WarningColor);
-                    break;
-                case InventoryMessage.PotionsCombined:
-                    MessageLog.Add($"You combined your potions into {itemId} stronger one(s).", GoldColor);
-                    break;
-                case InventoryMessage.NothingToCombinePotions:
-                    MessageLog.Add("You need 5 of the same potion to combine them.", MessageLog.WarningColor);
-                    break;
                 case InventoryMessage.LevelTooLow:
                     CombatTextLayer.ShowText(above, "Your level is too low", new Color(1f, 0.4f, 0.3f), 0.8f);
                     if (item != null)
@@ -757,8 +667,12 @@ namespace RPG.Items
                     break;
                 case InventoryMessage.Crafted:
                     if (item == null) break;
-                    CombatTextLayer.ShowText(above, "Crafted " + item.NameWith(affix), ItemDefinition.RarityColor(item.QualityWith(affix)), 0.8f);
-                    MessageLog.Add($"You craft [{item.NameWith(affix)}].", ItemDefinition.RarityColor(item.QualityWith(affix)));
+                    CombatTextLayer.ShowText(above, "+ " + item.NameWith(affix), ItemDefinition.RarityColor(item.QualityWith(affix)), 0.8f);
+                    MessageLog.Add($"You create [{item.NameWith(affix)}].", ItemDefinition.RarityColor(item.QualityWith(affix)));
+                    break;
+                case InventoryMessage.NoRecipe:
+                    CombatTextLayer.ShowText(above, "Nothing to transmute", new Color(1f, 0.4f, 0.3f), 0.8f);
+                    MessageLog.Add("Those items make nothing together.", MessageLog.WarningColor);
                     break;
                 case InventoryMessage.NotEnoughMaterials:
                     CombatTextLayer.ShowText(above, "Not enough materials", new Color(1f, 0.4f, 0.3f), 0.8f);
@@ -1108,106 +1022,57 @@ namespace RPG.Items
             return true;
         }
 
-        /// <summary>The gold a vendor takes for crafting one of <paramref name="item"/> (a tenth of its price, at least 1).</summary>
-        public static int CraftFee(ItemDefinition item) => item != null ? Mathf.Max(1, item.price / 10) : 0;
+        /// <summary>How many slots the transmute window has (the source game's 4 x 3 grid).</summary>
+        public const int TransmuteSlots = 12;
 
-        /// <summary>
-        /// Server: a vendor the player stands next to crafts <paramref name="quantity"/> pieces from its craft list: it
-        /// takes the materials and its fee and gives the pieces, each of which may come out better
-        /// (<see cref="LootDrop.CraftChances"/>) and with a socket. Nothing happens when anything is missing.
-        /// </summary>
-        public bool ServerCraft(Vendor vendor, int craftIndex, int quantity = 1)
+        /// <summary>The items in these bag slots and how many of each (each slot counted once).</summary>
+        public Dictionary<ItemDefinition, int> CountItems(IEnumerable<int> bagSlots)
         {
-            if (!IsServer || health.IsDead || !IsNear(vendor) || quantity < 1) return false;
-            ItemDefinition[] crafts = vendor.Definition.crafts;
-            if (crafts == null || craftIndex < 0 || craftIndex >= crafts.Length) return false;
-            ItemDefinition item = crafts[craftIndex];
-            if (item == null || !item.IsCraftable) return false;
-            if (progress != null && progress.Level < item.itemLevel)
+            var counts = new Dictionary<ItemDefinition, int>();
+            var seen = new HashSet<int>();
+            foreach (int slot in bagSlots)
             {
-                MessageRpc(InventoryMessage.LevelTooLow, catalog.IdOf(item), 0);
-                return false;
+                if (slot < 0 || slot >= bag.Count || !seen.Add(slot)) continue;
+                ItemDefinition item = Definition(bag[slot]);
+                if (item == null) continue;
+                counts.TryGetValue(item, out int count);
+                counts[item] = count + bag[slot].Count;
             }
-            if (CountOf(item.craftMaterial) < item.craftCount * quantity)
-            {
-                MessageRpc(InventoryMessage.NotEnoughMaterials, catalog.IdOf(item.craftMaterial), item.craftCount * quantity);
-                return false;
-            }
-            int fee = CraftFee(item) * quantity;
-            if (gold.Value < fee)
-            {
-                MessageRpc(InventoryMessage.NotEnoughGold, 0, 0);
-                return false;
-            }
-
-            int level = progress != null ? progress.Level : item.itemLevel;
-            int made = 0;
-            for (int i = 0; i < quantity; i++)
-            {
-                ItemRarity? better = LootDrop.RollQuality(LootDrop.CraftChances);
-                int affix = 0;
-                if (affixes != null)
-                    affix = better.HasValue && better.Value > item.rarity ? affixes.RollQuality(item, level, better.Value) : affixes.Roll(item, level);
-                int socket = UnityEngine.Random.value < CraftSocketChance ? ItemStack.EmptySocket : 0;
-
-                ServerRemoveItem(item.craftMaterial, item.craftCount);
-                if (ServerAddItem(item, 1, false, affix, socket) <= 0)
-                {
-                    // No room: these materials go back, and crafting stops.
-                    ServerAddItem(item.craftMaterial, item.craftCount, false);
-                    MessageRpc(InventoryMessage.BagFull, catalog.IdOf(item), 0);
-                    break;
-                }
-                gold.Value -= CraftFee(item);
-                made++;
-                MessageRpc(InventoryMessage.Crafted, catalog.IdOf(item), affix);
-            }
-            return made > 0;
+            return counts;
         }
 
         /// <summary>
-        /// Server: a vendor the player stands next to makes <paramref name="quantity"/> times one of its other recipes
-        /// (potion tiers, orbs, keys): it takes the materials and its fee and gives the results.
+        /// Server: the source game's transmutation. The items the player put into the transmuter's grid (these bag slots)
+        /// make the recipe they match: exactly its kinds of items, at least as many of each. One batch is used up and
+        /// the result put in the bag. False (nothing used) when nothing matches or there is no room.
         /// </summary>
-        public bool ServerCraftRecipe(Vendor vendor, int recipeIndex, int quantity = 1)
+        public bool ServerTransmute(Vendor vendor, int[] bagSlots)
         {
-            if (!IsServer || health.IsDead || !IsNear(vendor) || quantity < 1) return false;
-            Recipe[] recipes = vendor.Definition.recipes;
-            if (recipes == null || recipeIndex < 0 || recipeIndex >= recipes.Length || !recipes[recipeIndex].IsValid) return false;
-            Recipe recipe = recipes[recipeIndex];
-            foreach (RecipeIngredient ingredient in recipe.ingredients)
+            if (!IsServer || health.IsDead || vendor == null || vendor.Definition == null || !vendor.Definition.Transmutes
+                || !IsNear(vendor) || bagSlots == null) return false;
+            Dictionary<ItemDefinition, int> placed = CountItems(bagSlots);
+            Recipe? match = Recipe.Match(vendor.Definition.recipes, placed);
+            if (match == null)
             {
-                if (ingredient.item == null || CountOf(ingredient.item) >= ingredient.count * quantity) continue;
-                MessageRpc(InventoryMessage.NotEnoughMaterials, catalog.IdOf(ingredient.item), ingredient.count * quantity);
+                MessageRpc(InventoryMessage.NoRecipe, 0, 0);
                 return false;
             }
-            int fee = CraftFee(recipe.result) * quantity;
-            if (gold.Value < fee)
-            {
-                MessageRpc(InventoryMessage.NotEnoughGold, 0, 0);
-                return false;
-            }
+            Recipe recipe = match.Value;
 
-            foreach (RecipeIngredient ingredient in recipe.ingredients)
-                if (ingredient.item != null) ServerRemoveItem(ingredient.item, ingredient.count * quantity);
-            int count = Mathf.Max(1, recipe.resultCount) * quantity;
+            foreach (RecipeIngredient ingredient in recipe.ingredients) ServerRemoveItem(ingredient.item, ingredient.count);
+            int count = Mathf.Max(1, recipe.resultCount);
             int added = ServerAddItem(recipe.result, count, false);
             if (added < count)
             {
-                // No room for all of it: take back what went in and return the materials.
+                // No room for all of it: take back what went in and return the items.
                 if (added > 0) ServerRemoveItem(recipe.result, added);
-                foreach (RecipeIngredient ingredient in recipe.ingredients)
-                    if (ingredient.item != null) ServerAddItem(ingredient.item, ingredient.count * quantity, false);
+                foreach (RecipeIngredient ingredient in recipe.ingredients) ServerAddItem(ingredient.item, ingredient.count, false);
                 MessageRpc(InventoryMessage.BagFull, catalog.IdOf(recipe.result), 0);
                 return false;
             }
-            gold.Value -= fee;
             MessageRpc(InventoryMessage.Crafted, catalog.IdOf(recipe.result), 0);
             return true;
         }
-
-        /// <summary>Chance that a crafted piece has an empty socket.</summary>
-        public const float CraftSocketChance = 0.2f;
 
         /// <summary>Server: sells one item from a bag slot to a vendor the player stands next to.</summary>
         public bool ServerSell(Vendor vendor, int bagIndex)
@@ -1246,18 +1111,15 @@ namespace RPG.Items
             GemSocketed,
             /// <summary>The chosen item has no empty socket; it travels in the item id field.</summary>
             NoEmptySocket,
-            /// <summary>Gems combined; how many new gems travels in the item id field.</summary>
-            GemsCombined,
-            NothingToCombine,
+
             /// <summary>The player's level is below the item's; the item travels in the item id field.</summary>
             LevelTooLow,
             /// <summary>A piece was crafted: the item and its affix.</summary>
             Crafted,
             /// <summary>Too few materials: the material travels in the item id field, how many are needed in the affix field.</summary>
             NotEnoughMaterials,
-            /// <summary>Potions combined; how many new potions travels in the item id field.</summary>
-            PotionsCombined,
-            NothingToCombinePotions,
+            /// <summary>The items in the transmuter match no recipe.</summary>
+            NoRecipe,
             /// <summary>Picking a lock: the Lockpicking needed travels in the item id field, the player's in the affix field.</summary>
             PickingLock,
             LockpickingTooLow,

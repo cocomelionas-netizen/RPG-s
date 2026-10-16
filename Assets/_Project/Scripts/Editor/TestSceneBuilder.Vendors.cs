@@ -12,7 +12,7 @@ namespace RPG.EditorTools
     /// The source game's vendors (<see cref="VendorData"/>): every vendor NPC of the region where it stands, with its name,
     /// subname and stock. Shopkeepers sell their npc_vendor items (matched by name); the merchants with random stock
     /// (npc_vendor_random) sell the gear of their kind for every second level, and each piece gets a random quality at
-    /// every restock with their chances. Also the town supplies the source game sells that had no item here yet:
+    /// every restock with their chances. Reginald, the transmuter, makes the source game's crafting recipes. Also the town supplies the source game sells that had no item here yet:
     /// the Scroll of Returning, food and treasury gold.
     /// </summary>
     public static partial class TestSceneBuilder
@@ -88,10 +88,8 @@ namespace RPG.EditorTools
                 var vendor = LoadOrCreateAsset<VendorDefinition>($"{VendorsFolder}/{source.name}.asset");
                 vendor.displayName = source.name;
                 vendor.title = source.title;
-                vendor.combinesGems = false;
-                vendor.combinesPotions = false;
-                vendor.crafts = Array.Empty<ItemDefinition>();
-                vendor.recipes = Array.Empty<Recipe>();
+                // The source game's transmuter (Reginald) makes its crafting recipes.
+                vendor.recipes = source.title == "Transmutation" ? CreateRecipes(catalog) : Array.Empty<Recipe>();
                 vendor.randomQuality = false;
 
                 var stock = new List<ItemDefinition>();
@@ -133,39 +131,11 @@ namespace RPG.EditorTools
                 vendor.restockSeconds = restock > 0f ? Mathf.Max(10f, restock) : ShopRestockSeconds;
                 EditorUtility.SetDirty(vendor);
 
-                // Until crafting moves to the transmuter: the class trainers craft their class's gear, the alchemist
-                // combines potions, the jeweler combines gems.
-                switch (source.name)
-                {
-                    case "Halfrid":
-                        Crafter(vendor, catalog, WarriorClass, GearData.ArmorKind.Leather, GearData.ArmorKind.Chain, GearData.ArmorKind.Plate);
-                        break;
-                    case "Kelda":
-                        Crafter(vendor, catalog, RangerClass, GearData.ArmorKind.Leather, GearData.ArmorKind.Chain);
-                        break;
-                    case "Gyldan":
-                        Crafter(vendor, catalog, MageClass, GearData.ArmorKind.Robe);
-                        break;
-                    case "Osraed":
-                        vendor.combinesPotions = true;
-                        break;
-                    case "Vikram":
-                        // The source game's jeweler sells necklaces and rings; here gems (and gem combining).
-                        vendor.stock = new[] { "ChippedRuby", "ChippedTopaz", "ChippedSapphire", "ChippedEmerald" }
-                            .Select(file => AssetDatabase.LoadAssetAtPath<ItemDefinition>($"{ItemsFolder}/{file}.asset"))
-                            .Where(item => item != null).ToArray();
-                        vendor.stockLimits = vendor.stock.Select(_ => 3).ToArray();
-                        vendor.randomQuality = false;
-                        Jeweler(vendor);
-                        break;
-                }
-                if (vendor.stock.Length == 0 && !vendor.Crafts)
+                if (vendor.stock.Length == 0 && !vendor.Transmutes)
                 {
                     Debug.Log($"[TestScene] {source.name} sells nothing that exists here; not placed.");
                     continue;
                 }
-                if (vendor.Crafts && !vendor.title.Contains("crafting"))
-                    vendor.title = string.IsNullOrEmpty(vendor.title) ? "Crafting" : $"{vendor.title} trainer, crafting";
                 EditorUtility.SetDirty(vendor);
                 vendors.Add(vendor);
                 places.Add(source.cell);
@@ -201,7 +171,7 @@ namespace RPG.EditorTools
                         int classIndex = kind.equip == 11 || kind.weapon == 2 ? RangerClass
                             : kind.weapon == 5 || kind.weapon == 7 ? MageClass : WarriorClass;
                         Add(catalog.items
-                            .Where(item => item != null && item.IsCraftable && item.slot == ItemSlot.Weapon && item.requiredClass == classIndex
+                            .Where(item => item != null && item.dropWeight > 0f && item.slot == ItemSlot.Weapon && item.requiredClass == classIndex
                                            && item.itemLevel == level)
                             .OrderByDescending(item => item.dropWeight).FirstOrDefault());
                         continue;

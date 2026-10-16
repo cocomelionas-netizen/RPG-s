@@ -7,7 +7,8 @@ WorldMapData: the ground of the start region (map "fanadin", x 0-560, y 30-340) 
 of the region blocked. Cells the .map file does not list are plain walkable ground.
 
 VendorData: every vendor NPC of the region where the source game stands it (npc), with its name, subname and what it
-sells (npc_vendor: item names, limits, restock; npc_vendor_random: the kinds of gear and the quality chances).
+sells (npc_vendor: item names, limits, restock; npc_vendor_random: the kinds of gear and the quality chances), and the
+transmuter (subname "Transmutation").
 
 Cells: (floor(x) + 2, floor(y) - 28), like StartAreaData.
 """
@@ -72,7 +73,9 @@ def read_vendors(db):
     vendors = []
     for entry, name, subname, x, y in q('select t.entry, t.name, t.subname, n.position_x, n.position_y from npc n '
                                         'join npc_template t on t.entry = n.entry where n.map = 1 order by n.guid'):
-        if not (X0 <= x <= X1 and Y0 <= y <= Y1) or (entry not in fixed and entry not in random):
+        # Vendors, and the transmuter (Reginald, "Transmutation"), who sells nothing but makes the crafting recipes.
+        transmuter = (subname or '').strip() == 'Transmutation'
+        if not (X0 <= x <= X1 and Y0 <= y <= Y1) or (entry not in fixed and entry not in random and not transmuter):
             continue
         kinds = sorted(set(random.get(entry, [])))
         vendors.append({

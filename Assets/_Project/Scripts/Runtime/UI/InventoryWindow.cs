@@ -52,16 +52,18 @@ namespace RPG.UI
             BuildTooltip();
             window.SetActive(false);
             VendorWindow.Opened += OnVendorOpened;
+            TransmuteWindow.Opened += OnVendorOpened;
         }
 
         private void OnDestroy()
         {
             VendorWindow.Opened -= OnVendorOpened;
+            TransmuteWindow.Opened -= OnVendorOpened;
         }
 
         private void OnVendorOpened()
         {
-            // Selling happens by clicking the bag, so show it next to the vendor.
+            // Selling (and putting items into the transmuter) happens by clicking the bag, so show it next to the vendor.
             if (!window.activeSelf) Toggle();
         }
 
@@ -213,6 +215,12 @@ namespace RPG.UI
         private void OnBagClicked(int index)
         {
             if (inventory == null) return;
+            if (TransmuteWindow.IsOpen)
+            {
+                pendingGem = -1;
+                TransmuteWindow.Add(index);
+                return;
+            }
             if (VendorWindow.CurrentVendor != null)
             {
                 pendingGem = -1;
@@ -340,6 +348,9 @@ namespace RPG.UI
                 string description = inventory.Describe(stack, className);
                 if (item != null && equipIndex >= 0)
                     tooltipText.text = description.Replace("Click to equip", "Click to take off");
+                else if (item != null && TransmuteWindow.IsOpen)
+                    tooltipText.text = description.Replace("Click to equip", "").Replace("Click to use", "").Replace("Click, then click the item to set it into", "").TrimEnd()
+                                       + "\nClick to put into the transmuter";
                 else if (item != null && VendorWindow.CurrentVendor != null)
                     tooltipText.text = description.Replace("Click to equip", "").Replace("Click to use", "").Replace("Click, then click the item to set it into", "").TrimEnd()
                                        + $"\nClick to sell for {inventory.SellPrice(stack)} gold";
