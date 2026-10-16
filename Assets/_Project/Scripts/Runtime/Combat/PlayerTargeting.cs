@@ -127,7 +127,7 @@ namespace RPG.Combat
             if (input.TargetNextPressed)
                 SetTarget(NextTarget());
 
-            if (input.AttackPressed || input.AbilityPressed(0))
+            if (input.AttackPressed)
                 AttackSelected();
 
             if (input.MoveClickPressed && !input.IsPointerOverUI)

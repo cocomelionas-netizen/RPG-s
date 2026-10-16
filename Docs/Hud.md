@@ -8,7 +8,7 @@ The layout follows a screenshot of the source game, but all the art is generated
 | Top center | Target frame, mirrored (portrait on the right), name red for enemies, blue for players | `UnitFrame` (Target) |
 | Top right | Zone name (Greenvale / the dungeon's name) and the minimap: ground, obstacles, dots – you (white), players (blue), monsters (red), vendors (yellow), portals (purple) | `Minimap` |
 | Bottom left | Message log: loot, gold, experience, levels, warnings (`MessageLog.Add`) | `MessageLog` |
-| Bottom center | Action bar in a frame: 1 attack, 2–4 abilities, 5 healing and 6 mana potion with the count left; a thin experience bar under it | `AbilityBar`, `ExperienceBar` |
+| Bottom center | Action bar in a frame: 12 slots (keys 1–9, 0, -, =) with Attack, spells and potions (with the count left), arranged by drag and drop (see [Crafting.md](Crafting.md)); a thin experience bar under it | `AbilityBar`, `ExperienceBar` |
 | Above monsters | Red names above the HP bar (the selected one with its level), other players' names blue; monster HP bars always visible | `UnitNameplates`, `HealthPresenter` |
 
 The minimap picture is drawn once per map from `WorldNavigation` (walkable / blocked),

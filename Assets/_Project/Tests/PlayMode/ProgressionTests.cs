@@ -145,11 +145,11 @@ namespace RPG.Tests
             Health dummy = Spawn(dummyPrefab, new Vector2(0.5f, 0f)).GetComponent<Health>();
             yield return null;
 
-            Assert.IsTrue(caster.ServerTryCast(0, dummy, out CastFailure failure), failure.ToString());
+            Assert.IsTrue(caster.ServerTryCast(1, dummy, out CastFailure failure), failure.ToString());
             Assert.Less(dummy.Current, dummy.Max);
 
             int afterFirst = dummy.Current;
-            Assert.IsFalse(caster.ServerTryCast(0, dummy, out failure));
+            Assert.IsFalse(caster.ServerTryCast(1, dummy, out failure));
             Assert.AreEqual(CastFailure.NotReady, failure);
             Assert.AreEqual(afterFirst, dummy.Current);
             Assert.Greater(caster.CooldownRemaining(0), 1f);
@@ -161,9 +161,9 @@ namespace RPG.Tests
             Health dummy = Spawn(dummyPrefab, new Vector2(5f, 0f)).GetComponent<Health>();
             yield return null;
 
-            Assert.IsFalse(caster.ServerTryCast(0, dummy, out CastFailure failure));
+            Assert.IsFalse(caster.ServerTryCast(1, dummy, out CastFailure failure));
             Assert.AreEqual(CastFailure.OutOfRange, failure);
-            Assert.IsFalse(caster.ServerTryCast(0, null, out failure));
+            Assert.IsFalse(caster.ServerTryCast(1, null, out failure));
             Assert.AreEqual(CastFailure.NoTarget, failure);
             Assert.AreEqual(dummy.Max, dummy.Current);
         }
@@ -174,10 +174,10 @@ namespace RPG.Tests
             // Holy Wrath: 1 sec cast, Holy damage, more over 3 sec.
             Health dummy = Spawn(dummyPrefab, new Vector2(2f, 0f)).GetComponent<Health>();
             yield return null;
-            AbilityDefinition holyWrath = caster.GetAbility(1);
+            AbilityDefinition holyWrath = caster.GetAbility(2);
             Assert.Greater(holyWrath.castTime, 0f);
 
-            Assert.IsTrue(caster.ServerTryCast(1, dummy, out CastFailure failure), failure.ToString());
+            Assert.IsTrue(caster.ServerTryCast(2, dummy, out CastFailure failure), failure.ToString());
             Assert.AreEqual(dummy.Max, dummy.Current, "Nothing lands while casting.");
             yield return new WaitForSeconds(holyWrath.castTime + 0.3f);
 
@@ -193,8 +193,8 @@ namespace RPG.Tests
             int hurt = playerHealth.Current;
             yield return null;
 
-            Assert.IsTrue(caster.ServerTryCast(2, null, out CastFailure failure), failure.ToString());
-            yield return new WaitForSeconds(caster.GetAbility(2).castTime + 0.3f);
+            Assert.IsTrue(caster.ServerTryCast(3, null, out CastFailure failure), failure.ToString());
+            yield return new WaitForSeconds(caster.GetAbility(3).castTime + 0.3f);
             Assert.Greater(playerHealth.Current, hurt);
         }
 
@@ -205,7 +205,7 @@ namespace RPG.Tests
             yield return null;
             Assert.IsTrue(playerHealth.Effects.ServerApply("Test Stun", Color.white, StatusKind.Stun, 0f, 3f));
 
-            Assert.IsFalse(caster.ServerTryCast(0, dummy, out CastFailure failure));
+            Assert.IsFalse(caster.ServerTryCast(1, dummy, out CastFailure failure));
             Assert.AreEqual(CastFailure.Disabled, failure);
             Assert.AreEqual(0f, playerHealth.Effects.SpeedMultiplier, "Stunned units cannot move.");
         }

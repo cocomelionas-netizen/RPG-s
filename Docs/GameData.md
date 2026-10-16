@@ -51,8 +51,9 @@ the client – we use our own, stepped like its bosses'.
 - Materials drop with a 40 % chance per roll, sometimes 2. Elites roll twice + 3 extra rolls,
   bosses + 6 extra and a guaranteed gold piece (+25 % purple) – only bosses drop finished gear.
   Chests roll 1 (crate), 2 (Oak Chest) or 3 (Strongbox) times.
-- **Crafting** – the St. Revere class vendors ("Craft" window): sword/bow/staff and chest – 6 materials,
-  head and feet – 4. It shows the pieces you have the materials for, at the highest level you can wear.
+- **Crafting** – the St. Revere class vendors (the Craft button opens the crafting window, see [Crafting.md](Crafting.md)):
+  sword/bow/staff and chest – 6 materials, head and feet – 4, at any level you can wear. The same window has the source
+  game's other recipes (`crafting_recipes`: potion tiers, orbs, the Demiplane Key).
   Warrior – swords, leather, chain, plate; ranger – bows, leather, chain; mage – staves, robes
   (the source's `player_desirable_armor`). A crafted piece is sometimes better: gold 2 %, blue 8 %,
   green 25 % (`LootDrop.CraftChances`), 20 % with a socket for a gem.
@@ -106,7 +107,7 @@ colour), so resists matter.
 ## Potions
 
 - 5 tiers: Minor (level 1), Lesser (5), – (12), Greater (18), Major (24). They can only be drunk from that level;
-  keys 5 and 6 drink the best one you can.
+  a potion on the action bar drinks that one, or the best of its kind once it runs out.
 - A Potion heals over 20 s (every 2 s), a Serum (green) at once and more. All potions share a 60 s cooldown, as in the source game.
 - Amounts are half the source's (like our HP): Minor Life Potion 45, Major 200; Minor Life Serum 68, Major 300.
 - Monsters drop potions by their level, 15 % a Serum instead of a Potion. Class vendors combine 5 of a kind into the next tier
@@ -151,8 +152,8 @@ halved, like our HP. Ranges: source yards / 120 (melee 130 → 1.1; spells 610 �
   attribute and Intelligence buffs, spell critical, dodge, "Evade", a shield (Absorb), "Incapacitate" (any damage breaks it),
   invisibility to monsters (Vanish), mana when it runs out (Devotion), stun immunity. Icons are under the player and target
   bars (green frame – buff, red – debuff).
-- **Bar**: 1 – Attack, spells 2, 3, 4, 7, 8, 9, 0; 5, 6 – potions. Clicking a spell in the book, then a bar slot, puts the
-  spell there. A bar shows while casting; moving breaks the cast.
+- **Bar**: 12 slots like the source game's (keys 1–9, 0, -, =): Attack, spells and items, arranged by dragging
+  (see [Crafting.md](Crafting.md)). A bar shows while casting; moving breaks the cast.
 - Second-batch effects: Pacify (cannot attack), haste, invulnerability, mana burn, less healing, faster attacks,
   block rating, Silence (cannot cast). Redemption revives the nearest fallen friend on the spot
   (40 % HP, 20 % mana); Illusion Gate – takes you to St. Revere after 10 s; Tactical Retreat – a leap back from the enemy.

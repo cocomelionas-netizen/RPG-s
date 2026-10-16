@@ -225,6 +225,55 @@ namespace RPG.Tests
         }
 
         [UnityTest]
+        public IEnumerator Crafting_SeveralAtOnce_TakesTheMaterialsAndTheFee()
+        {
+            int index = FirstLevelCraft();
+            ItemDefinition piece = vendor.Definition.crafts[index];
+            inventory.ServerAddItem(piece.craftMaterial, piece.craftCount * 3, false);
+            inventory.ServerSetGold(1000);
+
+            Assert.IsTrue(inventory.ServerCraft(vendor, index, 3));
+            yield return null;
+            Assert.AreEqual(0, inventory.CountOf(piece.craftMaterial));
+            Assert.AreEqual(3, inventory.CountOf(piece), "Three pieces (each may have its own affix).");
+            Assert.AreEqual(1000 - Inventory.CraftFee(piece) * 3, inventory.Gold, "The vendor takes its fee for each.");
+        }
+
+        [UnityTest]
+        public IEnumerator Crafting_WithoutTheFee_Fails()
+        {
+            int index = FirstLevelCraft();
+            ItemDefinition piece = vendor.Definition.crafts[index];
+            inventory.ServerAddItem(piece.craftMaterial, piece.craftCount, false);
+            inventory.ServerSetGold(0);
+
+            Assert.IsFalse(inventory.ServerCraft(vendor, index));
+            yield return null;
+            Assert.AreEqual(piece.craftCount, inventory.CountOf(piece.craftMaterial), "Nothing is used up.");
+        }
+
+        [UnityTest]
+        public IEnumerator Recipes_MakePotionTiers_LikeTheSourceGame()
+        {
+            Recipe[] recipes = vendor.Definition.recipes;
+            int index = System.Array.FindIndex(recipes, recipe => recipe.result != null && recipe.result.displayName == "Lesser Life Potion");
+            Assert.GreaterOrEqual(index, 0, "The crafting vendor makes Lesser Life Potions from Minor ones.");
+            RecipeIngredient minor = recipes[index].ingredients[0];
+            Assert.AreEqual("Minor Life Potion", minor.item.displayName);
+            Assert.AreEqual(5, minor.count);
+
+            int before = inventory.CountOf(minor.item);
+            inventory.ServerAddItem(minor.item, minor.count * 2, false);
+            inventory.ServerSetGold(1000);
+            Assert.IsTrue(inventory.ServerCraftRecipe(vendor, index, 2));
+            yield return null;
+            Assert.AreEqual(before, inventory.CountOf(minor.item));
+            Assert.AreEqual(2, inventory.CountOf(recipes[index].result));
+
+            Assert.IsFalse(inventory.ServerCraftRecipe(vendor, index, 1), "Without the materials nothing is made.");
+        }
+
+        [UnityTest]
         public IEnumerator Crafting_AboveYourLevel_Fails()
         {
             ItemDefinition[] crafts = vendor.Definition.crafts;

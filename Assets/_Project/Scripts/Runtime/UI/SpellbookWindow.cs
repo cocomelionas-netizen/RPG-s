@@ -120,6 +120,16 @@ namespace RPG.UI
             UIFactory.Place(rect, new Vector2(0f, 1f), new Vector2(14f + spell / perColumn * Width, -Top - spell % perColumn * (RowHeight + 4f)),
                 new Vector2(Width - 28f, RowHeight));
             button.onClick.AddListener(() => Pick(spell));
+            // A known spell is dragged onto the action bar.
+            var source = button.gameObject.AddComponent<DragSource>();
+            source.Payload = () =>
+            {
+                if (shownFor == null || !shownFor.Knows(spell)) return null;
+                AbilityDefinition ability = shownFor.Get(spell);
+                Color color = ability.effectColor * 0.45f;
+                color.a = 1f;
+                return new DragPayload { Kind = DragKind.Spell, Value = spell, Label = ability.displayName, Color = color };
+            };
             var row = new Row { Background = (Image)button.targetGraphic };
 
             row.Name = UIFactory.CreateText("Name", rect, 16, TextAnchor.UpperLeft);
@@ -141,7 +151,7 @@ namespace RPG.UI
             if (shownFor == null || !shownFor.Knows(spell)) return;
             PendingSpell = PendingSpell == spell ? -1 : spell;
             if (PendingSpell >= 0)
-                MessageLog.Add($"Click a slot on the action bar to put {shownFor.Get(spell).displayName} there.", new Color(0.75f, 0.55f, 1f));
+                MessageLog.Add($"Click a slot on the action bar to put {shownFor.Get(spell).displayName} there (or drag it there).", new Color(0.75f, 0.55f, 1f));
         }
 
         private void RankUp(int spell)

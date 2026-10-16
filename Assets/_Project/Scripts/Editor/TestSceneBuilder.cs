@@ -809,6 +809,7 @@ namespace RPG.EditorTools
                 vendor.combinesGems = false;
                 vendor.combinesPotions = false;
                 vendor.crafts = Array.Empty<ItemDefinition>();
+                vendor.recipes = Array.Empty<Recipe>();
                 EditorUtility.SetDirty(vendor);
                 return vendor;
             }
@@ -860,6 +861,8 @@ namespace RPG.EditorTools
                 if (classWeapon || armor) crafts.Add(item);
             }
             vendor.crafts = crafts.ToArray();
+            // And the source game's other recipes: potion tiers, orbs, keys.
+            vendor.recipes = CreateRecipes(catalog);
             vendor.combinesPotions = true;
             EditorUtility.SetDirty(vendor);
             return vendor;
@@ -1627,7 +1630,7 @@ namespace RPG.EditorTools
             CreateHudElement<Minimap>(canvasObject.transform, "Minimap", new Vector2(1f, 1f), new Vector2(1f, 1f), new Vector2(-20f, -10f), new Vector2(240f, 270f));
             CreateHudElement<MessageLog>(canvasObject.transform, "Message Log", new Vector2(0f, 0f), new Vector2(0f, 0f), new Vector2(12f, 12f), new Vector2(480f, 180f));
             CreateHudElement<ExperienceBar>(canvasObject.transform, "Experience Bar", new Vector2(0.5f, 0f), new Vector2(0.5f, 0f), new Vector2(0f, 4f), new Vector2(520f, 12f));
-            CreateHudElement<AbilityBar>(canvasObject.transform, "Ability Bar", new Vector2(0.5f, 0f), new Vector2(0.5f, 0f), new Vector2(0f, 32f), new Vector2(520f, 80f));
+            CreateHudElement<AbilityBar>(canvasObject.transform, "Ability Bar", new Vector2(0.5f, 0f), new Vector2(0.5f, 0f), new Vector2(0f, 32f), new Vector2(780f, 80f));
             var nameplates = new GameObject("NPC Nameplates", typeof(RectTransform));
             nameplates.transform.SetParent(canvasObject.transform, false);
             Stretch((RectTransform)nameplates.transform);
@@ -1637,6 +1640,11 @@ namespace RPG.EditorTools
             vendorWindow.transform.SetParent(canvasObject.transform, false);
             Stretch((RectTransform)vendorWindow.transform);
             vendorWindow.AddComponent<VendorWindow>();
+
+            var craftingWindow = new GameObject("Crafting Window", typeof(RectTransform));
+            craftingWindow.transform.SetParent(canvasObject.transform, false);
+            Stretch((RectTransform)craftingWindow.transform);
+            craftingWindow.AddComponent<CraftingWindow>();
 
             var lootWindow = new GameObject("Loot Window", typeof(RectTransform));
             lootWindow.transform.SetParent(canvasObject.transform, false);

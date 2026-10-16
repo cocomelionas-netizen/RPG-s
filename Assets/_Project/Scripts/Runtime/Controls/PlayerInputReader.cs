@@ -23,18 +23,15 @@ namespace RPG.Controls
         private InputAction mapAction;
         private InputAction spellbookAction;
         private readonly InputAction[] abilityActions = new InputAction[AbilityKeyCount];
-        private readonly InputAction[] potionActions = new InputAction[PotionKeyCount];
 
-        /// <summary>The action bar's keys: 1 is Attack, then the spells (2, 3, 4, 7, 8, 9, 0).</summary>
-        public static readonly string[] AbilityKeys = { "1", "2", "3", "4", "7", "8", "9", "0" };
+        /// <summary>The action bar's keys, one per slot, as shown on the bar.</summary>
+        public static readonly string[] AbilityKeys = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "=" };
 
-        /// <summary>Number of action bar keys.</summary>
-        public const int AbilityKeyCount = 8;
+        // Their Input System key names.
+        private static readonly string[] AbilityKeyPaths = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "minus", "equals" };
 
-        /// <summary>The potion keys (5: healing, 6: mana).</summary>
-        public static readonly string[] PotionKeys = { "5", "6" };
-
-        public const int PotionKeyCount = 2;
+        /// <summary>Number of action bar keys (the source game's bar has 12 slots).</summary>
+        public const int AbilityKeyCount = 12;
 
         /// <summary>Keyboard movement in screen space, each axis in [-1, 1].</summary>
         public Vector2 MoveInput => moveAction.ReadValue<Vector2>();
@@ -66,16 +63,10 @@ namespace RPG.Controls
         /// <summary>Esc: clear the target / cancel.</summary>
         public bool CancelPressed => cancelAction.WasPressedThisFrame();
 
-        /// <summary>True on the frame an action bar key went down; slot 0 is key 1 (Attack), then 2, 3, 4, 7, 8, 9, 0.</summary>
+        /// <summary>True on the frame an action bar key went down; slot 0 is key 1, then 2 ... 9, 0, - and =.</summary>
         public bool AbilityPressed(int slot)
         {
             return slot >= 0 && slot < abilityActions.Length && abilityActions[slot].WasPressedThisFrame();
-        }
-
-        /// <summary>True on the frame a potion key went down; 0 is key 5 (healing), 1 is key 6 (mana).</summary>
-        public bool PotionPressed(int index)
-        {
-            return index >= 0 && index < potionActions.Length && potionActions[index].WasPressedThisFrame();
         }
 
         /// <summary>Pointer position in screen pixels.</summary>
@@ -120,9 +111,7 @@ namespace RPG.Controls
             mapAction = new InputAction("Map", InputActionType.Button, "<Keyboard>/m");
             spellbookAction = new InputAction("Spellbook", InputActionType.Button, "<Keyboard>/p");
             for (int i = 0; i < abilityActions.Length; i++)
-                abilityActions[i] = new InputAction($"Ability{i + 1}", InputActionType.Button, $"<Keyboard>/{AbilityKeys[i]}");
-            for (int i = 0; i < potionActions.Length; i++)
-                potionActions[i] = new InputAction($"Potion{i + 1}", InputActionType.Button, $"<Keyboard>/{PotionKeys[i]}");
+                abilityActions[i] = new InputAction($"Ability{i + 1}", InputActionType.Button, $"<Keyboard>/{AbilityKeyPaths[i]}");
         }
 
         private void OnEnable()
@@ -139,7 +128,6 @@ namespace RPG.Controls
             mapAction.Enable();
             spellbookAction.Enable();
             foreach (InputAction action in abilityActions) action.Enable();
-            foreach (InputAction action in potionActions) action.Enable();
         }
 
         private void OnDisable()
@@ -156,7 +144,6 @@ namespace RPG.Controls
             mapAction.Disable();
             spellbookAction.Disable();
             foreach (InputAction action in abilityActions) action.Disable();
-            foreach (InputAction action in potionActions) action.Disable();
         }
 
         private void OnDestroy()
@@ -173,7 +160,6 @@ namespace RPG.Controls
             mapAction.Dispose();
             spellbookAction.Dispose();
             foreach (InputAction action in abilityActions) action.Dispose();
-            foreach (InputAction action in potionActions) action.Dispose();
         }
     }
 }

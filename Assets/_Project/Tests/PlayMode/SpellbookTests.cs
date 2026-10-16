@@ -130,13 +130,65 @@ namespace RPG.Tests
         [UnityTest]
         public IEnumerator Assigning_MovesASpellBetweenSlots()
         {
-            int spell = spellbook.SpellInSlot(0);
+            int spell = spellbook.SpellInSlot(1);
             Assert.GreaterOrEqual(spell, 0);
             Assert.IsTrue(spellbook.ServerAssign(5, spell));
             yield return null;
             Assert.AreEqual(spell, spellbook.SpellInSlot(5));
-            Assert.AreNotEqual(spell, spellbook.SpellInSlot(0), "A spell sits in one slot only.");
+            Assert.AreNotEqual(spell, spellbook.SpellInSlot(1), "A spell sits in one slot only.");
             Assert.IsFalse(spellbook.ServerAssign(1, spellbook.Spells.Count - 1), "Unknown spells cannot go on the bar.");
+        }
+
+        [UnityTest]
+        public IEnumerator NewBar_HasAttack_Spells_AndPotions()
+        {
+            yield return null;
+            Assert.AreEqual(Spellbook.BarSlots, 12, "Twelve slots, like the source game's bar.");
+            Assert.IsTrue(spellbook.IsAttackSlot(Spellbook.AttackSlot), "Attack is on key 1.");
+            Assert.GreaterOrEqual(spellbook.SpellInSlot(1), 0, "The first spell is on key 2.");
+            ItemDefinition healing = inventory.Catalog.Get(spellbook.ItemInSlot(Spellbook.HealingPotionSlot));
+            ItemDefinition mana = inventory.Catalog.Get(spellbook.ItemInSlot(Spellbook.ManaPotionSlot));
+            Assert.IsNotNull(healing, "A healing potion is on key 5.");
+            Assert.AreEqual(ItemUse.Heal, healing.use);
+            Assert.IsNotNull(mana, "A mana potion is on key 6.");
+            Assert.AreEqual(ItemUse.RestoreMana, mana.use);
+        }
+
+        [UnityTest]
+        public IEnumerator BarSlots_CanBeMoved_Emptied_AndTakeItems()
+        {
+            int potion = spellbook.EntryInSlot(Spellbook.HealingPotionSlot);
+            Assert.IsTrue(spellbook.ServerAssign(11, potion), "An item moves to another slot.");
+            yield return null;
+            Assert.AreEqual(potion, spellbook.EntryInSlot(11));
+            Assert.AreNotEqual(potion, spellbook.EntryInSlot(Spellbook.HealingPotionSlot), "An item sits in one slot only.");
+
+            Assert.IsTrue(spellbook.ServerMove(Spellbook.AttackSlot, 10), "Attack can be moved too.");
+            yield return null;
+            Assert.IsTrue(spellbook.IsAttackSlot(10));
+
+            Assert.IsTrue(spellbook.ServerAssign(10, -1), "A slot can be emptied.");
+            yield return null;
+            Assert.AreEqual(-1, spellbook.EntryInSlot(10));
+
+            int junk = 0;
+            foreach (ItemDefinition item in inventory.Catalog.items)
+                if (item != null && item.use == ItemUse.None) { junk = inventory.Catalog.IdOf(item); break; }
+            Assert.IsFalse(spellbook.ServerAssign(7, Spellbook.ItemEntry(junk)), "Only usable items go on the bar.");
+        }
+
+        [UnityTest]
+        public IEnumerator OldSavedBar_KeepsItsSpellsOnTheirKeys()
+        {
+            int[] ranks = spellbook.RanksSnapshot();
+            int first = spellbook.SpellInSlot(1);
+            // A bar saved with 7 spell slots (keys 2, 3, 4, 7, 8, 9, 0): the first spell on key 7.
+            var old = new[] { -1, -1, -1, first, -1, -1, -1 };
+            spellbook.ServerLoad(ranks, old);
+            yield return null;
+            Assert.AreEqual(first, spellbook.SpellInSlot(6), "Key 7 is slot 6 now.");
+            Assert.IsTrue(spellbook.IsAttackSlot(0));
+            Assert.Greater(spellbook.ItemInSlot(Spellbook.HealingPotionSlot), 0);
         }
 
         [UnityTest]
