@@ -31,13 +31,13 @@ Client files come from `https://github.com/DreadmystRPG/steam` (blobless clone i
 ids/costs), `maps/*.map`. What was taken and how it maps is documented in `Docs/GameData.md`. Generated data lives in
 `Scripts/Editor/*Data.cs` (`StartAreaData`, `GearData`, `AffixData`, `DungeonData`) and `TestSceneBuilder.Spells.cs`;
 generators are in `Tools/GameData/` (`dungeons.py`, `recipes.py`, `world.py` → `WorldMapData`/`VendorData`, `gear.py` →
-`GearSourceData`, `.map` reader
+`GearSourceData`, `monsters.py` → `MonsterData` (monster names, junk), `.map` reader
 `map_file.py`).
 
 ## What exists (short)
 
 World: the source game's start region (Pilgrim's Refuge → St. Revere): its ground from `fanadin.map` (walls, woods), its
-monsters/chests, free waypoints, all its vendors at their spots with their stock (random-quality gear merchants),
+monsters (source names, junk loot by model)/chests, free waypoints, all its vendors at their spots with their stock (random-quality gear merchants),
 Scroll of Returning (back to St. Revere), food, M world map.
 Stats: all source stats bought with experience (C, three pages). Equipment: the source's 11 slots (weapon, helm, chest,
 feet, necklace, belt, legs, hands, two rings, shield), up to 4 sockets by quality. Items: source gear by level and material, dropped

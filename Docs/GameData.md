@@ -152,6 +152,15 @@ colour), so resists matter.
 
 ## Loot
 
+- **Monster names** are the source game's (Timber Howler, Antling, Blightchosen Guardsman...): every spot of the world
+  and every dungeon monster (`Tools/GameData/monsters.py` → `Scripts/Editor/MonsterData.cs`).
+- **Junk** like the source game's `npc_models_junkloot`: each monster drops the kinds of junk of its model (a howler
+  Wolf Fangs and Patches of Fur, an insect Insect Scales...), at its level: 30 kinds × 25 levels ("Bizarre Hoof" at 1 …
+  "Noteworthy Hoof" at 25), sold for the source price (1 … 49 gold). 60 % per kill (the source game rolls it on its
+  server). The old Goblin Ears, Brute Tusks and Orc Fangs no longer drop.
+- What the client does not have (it lives on the source game's server): the ordinary monsters' chances of gear, its
+  quality and of junk, and the affix chance; ours are documented above (gear 12 % per roll, affix 60 %, junk 60 %).
+  The world-loot buff scrolls (Scroll of Strength I–V...) do not exist here yet.
 - Sparkles show where a monster left loot. Clicking walks up and opens a small loot window: the items with their
   descriptions; clicking an item takes it, "Take all" takes everything. An empty bag disappears. Stacks show "x10".
 

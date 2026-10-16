@@ -324,6 +324,17 @@ namespace RPG.Tests
             Assert.AreEqual(3 * ruby.attributes.strength, inventory.Attributes.strength);
         }
 
+        [Test]
+        public void SourceJunk_HasAPieceForEveryLevel()
+        {
+            ItemDefinition low = Item("Junk/BizarreHoof");
+            ItemDefinition high = Item("Junk/NoteworthyHoof");
+            Assert.AreEqual(1, low.itemLevel);
+            Assert.AreEqual(25, high.itemLevel);
+            Assert.AreEqual(ItemRarity.Poor, low.rarity);
+            Assert.Greater(high.SellPrice, low.SellPrice, "Junk of higher levels sells for more, as in the source game.");
+        }
+
         private static ItemDefinition Item(string fileName)
         {
             var item = AssetDatabase.LoadAssetAtPath<ItemDefinition>($"{ItemsFolder}/{fileName}.asset");
