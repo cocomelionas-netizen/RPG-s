@@ -34,6 +34,8 @@ namespace RPG.Progression
         BadPlace,
         /// <summary>A wall stands between the caster and the target.</summary>
         NotInSight,
+        /// <summary>The spell cannot be used in combat (Sleep).</summary>
+        InCombat,
     }
 
     /// <summary>
@@ -52,6 +54,8 @@ namespace RPG.Progression
         public const float GlobalCooldown = 1f;
         private const int MaxSpells = 64;
         private const float ApproachRangeFactor = 0.9f;
+        /// <summary>Seconds without taking damage before a spell that needs it counts as out of combat (Sleep).</summary>
+        private const float OutOfCombatSeconds = 5f;
         /// <summary>Moving further than this while casting breaks the cast off.</summary>
         private const float CastMoveTolerance = 0.2f;
         private const float CriticalMultiplier = 2f;
@@ -345,6 +349,7 @@ namespace RPG.Progression
                 case CastFailure.Interrupted: return "Interrupted";
                 case CastFailure.BadPlace: return "You can't teleport there";
                 case CastFailure.NotInSight: return "Target not in line of sight";
+                case CastFailure.InCombat: return "You can't do that in combat";
                 default: return "";
             }
         }
@@ -412,6 +417,11 @@ namespace RPG.Progression
         {
             failure = CastFailure.None;
             Vector2 self = AutoAttack.ServerPosition(this);
+            if (ability.requiresCasterOutOfCombat && Time.time - health.LastDamageTime < OutOfCombatSeconds)
+            {
+                failure = CastFailure.InCombat;
+                return false;
+            }
             if (ability.NeedsTarget)
             {
                 if (target == null || !target.IsSpawned || target.IsDead || !health.IsHostileTo(target))

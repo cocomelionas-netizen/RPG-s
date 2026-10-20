@@ -111,6 +111,10 @@ namespace RPG.Progression
                 bonus.willpower = Mathf.RoundToInt(total.willpower * percent);
             }
             bonus.intelligence += Mathf.RoundToInt(effects.Total(StatusKind.Intellect));
+            bonus.strength += Mathf.RoundToInt(effects.Total(StatusKind.StrengthBonus));
+            bonus.agility += Mathf.RoundToInt(effects.Total(StatusKind.AgilityBonus));
+            bonus.willpower += Mathf.RoundToInt(effects.Total(StatusKind.WillpowerBonus));
+            bonus.vitality += Mathf.RoundToInt(effects.Total(StatusKind.CourageBonus));
             bonus.spellCritical += Mathf.RoundToInt(effects.Total(StatusKind.SpellCritical));
             return bonus;
         }

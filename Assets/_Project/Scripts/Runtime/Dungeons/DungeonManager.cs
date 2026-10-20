@@ -405,6 +405,7 @@ namespace RPG.Dungeons
             if (ai != null && spot.elite) ai.ServerMakeElite();
             if (health != null)
             {
+                if (spot.controlImmune && health.Effects != null) health.Effects.ControlImmune = true;
                 // The source game's own health for a monster: a multiple of a normal monster of its level.
                 if (spot.healthScale > 0f)
                     health.ServerSetMaxHealth(Mathf.Max(1, Mathf.RoundToInt(NormalHealthAt(dungeon, spot.prefab, spot.level) * spot.healthScale)), true);

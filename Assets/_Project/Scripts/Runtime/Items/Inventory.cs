@@ -748,7 +748,7 @@ namespace RPG.Items
                     break;
                 case InventoryMessage.InCombat:
                     CombatTextLayer.ShowText(above, "Cannot be used in combat", new Color(1f, 0.4f, 0.3f), 0.8f);
-                    MessageLog.Add("You cannot eat in combat.", MessageLog.WarningColor);
+                    MessageLog.Add("You cannot use that in combat.", MessageLog.WarningColor);
                     break;
                 case InventoryMessage.Returned:
                     MessageLog.Add($"You return to {Waystone.MainTownName}.", new Color(0.55f, 0.85f, 1f));
@@ -880,6 +880,7 @@ namespace RPG.Items
             if (item.use == ItemUse.Combine) return ServerCombineFrom(item);
             if (item.use == ItemUse.Return) return ServerStartReturn(item);
             if (item.use == ItemUse.Food) return ServerEat(bagIndex, stack, item);
+            if (item.use == ItemUse.Buff) return ServerReadBuff(bagIndex, stack, item);
             if (item.use == ItemUse.RestoreMana && mana == null) return false;
             if (progress != null && !item.CanBeUsedAtLevel(progress.Level))
             {
@@ -944,6 +945,47 @@ namespace RPG.Items
             health.Heal(food.restoreAmount, true);
             if (mana != null) mana.ServerRestore(food.restoreAmount);
             foodReadyAt.Value = now + food.useCooldown;
+            bag[bagIndex] = stack.Count > 1 ? stack.WithCount(stack.Count - 1) : ItemStack.Empty;
+            return true;
+        }
+
+        /// <summary>The status effect an attribute scroll gives (Intelligence: the Intellect buff).</summary>
+        public static StatusKind BuffKindOf(RPG.Progression.Attribute attribute)
+        {
+            switch (attribute)
+            {
+                case RPG.Progression.Attribute.Strength: return StatusKind.StrengthBonus;
+                case RPG.Progression.Attribute.Agility: return StatusKind.AgilityBonus;
+                case RPG.Progression.Attribute.Intelligence: return StatusKind.Intellect;
+                case RPG.Progression.Attribute.Willpower: return StatusKind.WillpowerBonus;
+                default: return StatusKind.CourageBonus;
+            }
+        }
+
+        /// <summary>
+        /// Server: reads an attribute scroll: its attribute up for its time, not in combat and not while a scroll of the
+        /// same attribute still works (the source game's cooldown of each attribute equals the buff's time).
+        /// </summary>
+        private bool ServerReadBuff(int bagIndex, ItemStack stack, ItemDefinition scroll)
+        {
+            if (progress != null && !scroll.CanBeUsedAtLevel(progress.Level))
+            {
+                MessageRpc(InventoryMessage.LevelTooLow, stack.ItemId, 0);
+                return false;
+            }
+            if (Time.time - health.LastDamageTime < FoodCombatSeconds)
+            {
+                MessageRpc(InventoryMessage.InCombat, stack.ItemId, 0);
+                return false;
+            }
+            StatusKind kind = BuffKindOf(scroll.buffAttribute);
+            if (health.Effects == null || health.Effects.Has(kind))
+            {
+                MessageRpc(InventoryMessage.NotReady, stack.ItemId, 0);
+                return false;
+            }
+            if (!health.Effects.ServerApply(scroll.displayName, new Color(0.95f, 0.85f, 0.5f), kind, scroll.buffAmount,
+                    scroll.buffSeconds, health, harmful: false)) return false;
             bag[bagIndex] = stack.Count > 1 ? stack.WithCount(stack.Count - 1) : ItemStack.Empty;
             return true;
         }

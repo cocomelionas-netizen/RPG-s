@@ -45,10 +45,26 @@ ITEM_IDS = {
     1156: 'KeysToStRevere', 1128: 'DivineAccessoryOrb', 1129: 'DivineArmorOrb', 1130: 'DivineWeaponOrb',
     927: 'MajorAccessoryOrb', 931: 'MajorArmorOrb', 1154: 'MagicDust', 1144: 'ArcaneEssence', 1143: 'MajorTreasuryGold',
 }
+# The gems by tier: the source game's Refined is this project's top old tier (files "Flawless<Gem>", named "Refined"; the
+# amethyst's "RefinedAmethyst"); Flawless and Draconic are later items (TestSceneBuilder.LaterItems.cs).
 GEMS = {
-    919: 'Ruby', 920: 'Emerald', 921: 'Topaz', 922: 'Sapphire',
-    1148: 'FlawlessRuby', 1149: 'FlawlessEmerald', 1150: 'FlawlessTopaz', 1151: 'FlawlessSapphire',
+    919: 'FlawlessRuby', 920: 'FlawlessEmerald', 921: 'FlawlessTopaz', 922: 'FlawlessSapphire', 923: 'RefinedAmethyst',
 }
+# Items made after the catalog's first order (appended at its end: TestSceneBuilder.LaterItems.cs), by file under
+# Data/Items: the other orb tiers, the attribute scrolls, Flawless and Draconic gems, Draconic Treasure.
+LATER_ITEMS = {
+    924: 'Later/MinorAccessoryOrb', 925: 'Later/LesserAccessoryOrb', 926: 'Later/GreaterAccessoryOrb',
+    928: 'Later/MinorArmorOrb', 929: 'Later/LesserArmorOrb', 930: 'Later/GreaterArmorOrb',
+    932: 'Later/MinorWeaponOrb', 933: 'Later/LesserWeaponOrb', 934: 'Later/GreaterWeaponOrb', 935: 'Later/MajorWeaponOrb',
+    1140: 'Later/ArcaneAccessoryOrb', 1141: 'Later/ArcaneArmorOrb', 1142: 'Later/ArcaneWeaponOrb',
+    1237: 'Later/DraconicTreasure',
+}
+for number, gem in enumerate(('Ruby', 'Emerald', 'Topaz', 'Sapphire', 'Amethyst')):
+    LATER_ITEMS[1148 + number] = f'Later/Flawless{gem}'
+    LATER_ITEMS[1238 + number] = f'Later/Draconic{gem}'
+for number, stat in enumerate(('Intellect', 'Willpower', 'Courage', 'Agility', 'Strength')):
+    for tier, numeral in enumerate(('I', 'II', 'III', 'IV', 'V')):
+        LATER_ITEMS[1085 + number * 5 + tier] = f'Later/ScrollOf{stat}{numeral}'
 # Items a player clicks to put a recipe together (the others are only ingredients).
 ACTIVATORS = {1135, 1136, 1153}
 
@@ -240,12 +256,19 @@ KEY_LOOT = set()
 for row in db.execute('select lootId from loot where item in (1131, 1136, 1153)'):
     KEY_LOOT.add(row['lootId'])
 used_loot |= KEY_LOOT
+# Outdoor monsters with their own loot table that is not a key table (the wyrms' Draconic Treasure and Flawless gems).
+OUTDOOR_LOOT = {}
+for row in outdoor:
+    if row['custom_loot'] not in KEY_LOOT:
+        OUTDOOR_LOOT.setdefault(row['name'].strip(), row['custom_loot'])
+OUTDOOR_ONLY = set(OUTDOOR_LOOT.values()) - used_loot
+used_loot |= OUTDOOR_ONLY
 
 loot_tables = {}
 for loot_id in sorted(used_loot):
     rows, seen = [], set()
     for row in db.execute('select item, chance, count_min, count_max from loot where lootId = ? order by entry', (loot_id,)):
-        item = ITEM_IDS.get(row['item']) or GEMS.get(row['item'])
+        item = ITEM_IDS.get(row['item']) or GEMS.get(row['item']) or LATER_ITEMS.get(row['item'])
         if item is None:
             continue
         low = row['count_min'] or 1
@@ -365,11 +388,21 @@ w('        public static readonly Dictionary<int, (string item, float chance, in
 w('            new Dictionary<int, (string item, float chance, int min, int max)[]>')
 w('        {')
 for loot_id, rows in loot_tables.items():
+    if not rows and loot_id in OUTDOOR_ONLY:
+        continue
     w(f'            [{loot_id}] = new[]')
     w('            {')
     for item, chance, low, high in rows:
         w(f'                ({cs(item)}, {flt(chance)}, {low}, {high}),')
     w('            },')
+w('        };')
+w('')
+w('        /// <summary>Outdoor monsters (by name) with a loot table of their own besides junk (not keys).</summary>')
+w('        public static readonly Dictionary<string, int> OutdoorLoot = new Dictionary<string, int>')
+w('        {')
+for name, loot_id in sorted(OUTDOOR_LOOT.items()):
+    if loot_tables.get(loot_id):
+        w(f'            [{cs(name)}] = {loot_id},')
 w('        };')
 w('')
 w('        /// <summary>Outdoor monster spots (cells of StartAreaData.Monsters) whose monster drops keys: loot table.</summary>')

@@ -242,6 +242,13 @@ namespace RPG.Monsters
             set => aggroRadius = Mathf.Max(0f, value);
         }
 
+        /// <summary>How far it wanders around home when idle (0: stands still).</summary>
+        public float WanderRadius
+        {
+            get => wanderRadius;
+            set => wanderRadius = Mathf.Max(0f, value);
+        }
+
         /// <summary>Server only: where the leash is measured from (home, or where it last hit its target).</summary>
         public Vector2 LeashAnchor => State == MonsterState.Chase ? leashAnchor : home;
 

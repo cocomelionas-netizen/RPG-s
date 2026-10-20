@@ -133,30 +133,60 @@ namespace RPG.EditorTools
             },
             [39] = new[]
             {
-                ("Ruby", 50f, 1, 1),
-                ("Emerald", 50f, 1, 1),
-                ("Topaz", 50f, 1, 1),
-                ("Sapphire", 50f, 1, 1),
+                ("Later/ScrollOfStrengthV", 50f, 1, 1),
+                ("Later/ScrollOfCourageV", 50f, 1, 1),
+                ("Later/ScrollOfIntellectV", 50f, 1, 1),
+                ("Later/ScrollOfWillpowerV", 50f, 1, 1),
+                ("Later/ScrollOfAgilityV", 50f, 1, 1),
+                ("FlawlessRuby", 50f, 1, 1),
+                ("FlawlessEmerald", 50f, 1, 1),
+                ("FlawlessTopaz", 50f, 1, 1),
+                ("FlawlessSapphire", 50f, 1, 1),
+                ("RefinedAmethyst", 50f, 1, 1),
             },
             [50] = new[]
             {
                 ("SanctumKey", 100f, 20, 20),
-                ("FlawlessRuby", 50f, 1, 3),
-                ("FlawlessEmerald", 50f, 1, 3),
-                ("FlawlessTopaz", 50f, 1, 3),
-                ("FlawlessSapphire", 50f, 1, 3),
-                ("Emerald", 100f, 1, 5),
-                ("Topaz", 100f, 1, 5),
-                ("Sapphire", 100f, 1, 5),
+                ("Later/FlawlessRuby", 50f, 1, 3),
+                ("Later/FlawlessEmerald", 50f, 1, 3),
+                ("Later/FlawlessTopaz", 50f, 1, 3),
+                ("Later/FlawlessSapphire", 50f, 1, 3),
+                ("Later/FlawlessAmethyst", 50f, 1, 3),
+                ("FlawlessEmerald", 100f, 1, 5),
+                ("FlawlessTopaz", 100f, 1, 5),
+                ("FlawlessSapphire", 100f, 1, 5),
+                ("RefinedAmethyst", 100f, 1, 5),
             },
             [51] = new[]
             {
-                ("FlawlessRuby", 100f, 5, 5),
-                ("FlawlessEmerald", 100f, 5, 5),
-                ("FlawlessTopaz", 100f, 5, 5),
-                ("FlawlessSapphire", 100f, 5, 5),
+                ("Later/FlawlessRuby", 100f, 5, 5),
+                ("Later/FlawlessEmerald", 100f, 5, 5),
+                ("Later/FlawlessTopaz", 100f, 5, 5),
+                ("Later/FlawlessSapphire", 100f, 5, 5),
+                ("Later/FlawlessAmethyst", 100f, 5, 5),
                 ("ArcaneEssence", 100f, 1, 1),
             },
+            [60] = new[]
+            {
+                ("Later/DraconicTreasure", 1f, 1, 1),
+                ("Later/FlawlessAmethyst", 1f, 1, 1),
+                ("Later/FlawlessSapphire", 1f, 1, 1),
+                ("Later/FlawlessTopaz", 1f, 1, 1),
+                ("Later/FlawlessEmerald", 1f, 1, 1),
+                ("Later/FlawlessRuby", 1f, 1, 1),
+            },
+            [61] = new[]
+            {
+                ("Later/DraconicTreasure", 1f, 1, 1),
+            },
+        };
+
+        /// <summary>Outdoor monsters (by name) with a loot table of their own besides junk (not keys).</summary>
+        public static readonly Dictionary<string, int> OutdoorLoot = new Dictionary<string, int>
+        {
+            ["Adult Wyrm"] = 60,
+            ["Azure Hydra"] = 61,
+            ["Flame Serpent"] = 61,
         };
 
         /// <summary>Outdoor monster spots (cells of StartAreaData.Monsters) whose monster drops keys: loot table.</summary>

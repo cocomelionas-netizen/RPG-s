@@ -64,6 +64,7 @@ namespace RPG.EditorTools
             spell.breaksControl = false;
             spell.requiresTargetEffect = false;
             spell.requiresTargetOutOfCombat = false;
+            spell.requiresCasterOutOfCombat = false;
             spell.requiredEffectName = "";
             spell.restoreManaPercent = 0f;
             spell.restoreManaPerRank = 0f;
@@ -73,6 +74,21 @@ namespace RPG.EditorTools
             spell.effectColor = color;
             UnityEditor.EditorUtility.SetDirty(spell);
             return spell;
+        }
+
+        /// <summary>
+        /// Sleep (the source game's spell 245, every class starts with it): a 2.5 sec nap out of combat, then 40% of health
+        /// and mana back; 3 min cooldown, no ranks.
+        /// </summary>
+        private static AbilityDefinition Sleep()
+        {
+            AbilityDefinition sleep = Spell("Sleep", "Sleep", "Rest your eyes for a quick nap: after it, 40% of your health and mana come back. Cannot be used in combat.",
+                AbilityKind.Self, 1, DamageSchool.Physical, 180000, 0, 0f, 2500, 0, new Color(0.6f, 0.7f, 1f));
+            sleep.maxRank = 1;
+            sleep.healFraction = 0.4f;
+            sleep.restoreManaPercent = 40f;
+            sleep.requiresCasterOutOfCombat = true;
+            return sleep;
         }
 
         private static AbilityDefinition Weapon(this AbilityDefinition spell, float percent, float perRank)
@@ -191,6 +207,7 @@ namespace RPG.EditorTools
                 Spell("DivineProtection", "Divine Protection", "Immune to all damage for 4 sec, but deal 75% less damage.", AbilityKind.Self, 20,
                         DamageSchool.Holy, 180000, 5, 3.5f, 0, 0, HolyColor)
                     .With(Effect(StatusKind.Immune, 1f, 4000), Effect(StatusKind.DamageDealt, -75f, 4000)),
+                Sleep(),
             };
         }
 
@@ -267,6 +284,7 @@ namespace RPG.EditorTools
                 Spell("ArrowFlurry", "Arrow Flurry", "Your attacks come twice as fast for 10 sec.", AbilityKind.Self, 20,
                         DamageSchool.Holy, 60000, 0, 1f, 0, 0, NatureColor)
                     .With(Effect(StatusKind.AttackSpeed, 50f, 10000)),
+                Sleep(),
             };
         }
 
@@ -341,6 +359,7 @@ namespace RPG.EditorTools
                 Spell("Inferno", "Inferno", "Hurls an immense fiery boulder for great Fire damage.", AbilityKind.TargetDamage, 20,
                         DamageSchool.Fire, 60000, 3, 5f, 2500, 610, FireColor)
                     .Power(10f, 8f, 200f, Attribute.Intelligence, Courage, 0.5f),
+                Sleep(),
             };
         }
 
@@ -408,12 +427,14 @@ namespace RPG.EditorTools
         }
 
         /// <summary>Tomes for the spells above level 1 (the source game's: level of the spell, sold by the class's trainer).</summary>
-        private static List<RPG.Items.ItemDefinition> CreateTomes(AbilityDefinition[] spells, int classIndex)
+        /// <summary>The Tomes of a class's spells from level 2 (or, <paramref name="firstLevel"/>, of its level 1 spells).</summary>
+        private static List<RPG.Items.ItemDefinition> CreateTomes(AbilityDefinition[] spells, int classIndex, bool firstLevel = false)
         {
             var tomes = new List<RPG.Items.ItemDefinition>();
             foreach (AbilityDefinition spell in spells)
             {
-                if (spell.learnLevel <= 1) continue;
+                // Sleep is every class's own: no Tome.
+                if ((spell.learnLevel <= 1) != firstLevel || spell.name == "Sleep") continue;
                 RPG.Items.ItemDefinition tome = CreateItem($"Tomes/TomeOf{spell.name}", $"Tome of {spell.displayName}", RPG.Items.ItemSlot.None,
                     RPG.Items.ItemRarity.Uncommon, 0, 0, 0, spell.effectColor * 0.7f, 5 * spell.learnLevel * spell.learnLevel, classIndex,
                     spell.learnLevel);

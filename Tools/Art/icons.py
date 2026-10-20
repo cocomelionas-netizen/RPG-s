@@ -54,6 +54,8 @@ SPELLS = [
     'enchant-blue-3', 'horror-eerie-2', 'protect-blue-3', 'light-air-fire-2', 'air-burst-sky-2', 'ice-sky-3',
     'runes-blue-3', 'link-blue-3', 'air-burst-magenta-3', 'heal-sky-3', 'runes-magenta-2', 'beam-magenta-2',
     'wind-red-3',
+    # Every class: Sleep
+    'fog-blue-2',
     # Orbs and essences (items)
     'light-air-fire-2', 'light-blue-3', 'light-jade-2', 'light-royal-2', 'light-magenta-2', 'light-jade-3',
 ]

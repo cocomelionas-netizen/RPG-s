@@ -65,6 +65,11 @@ namespace RPG.Items
         Return,
         /// <summary>Food: restores Restore Amount of health and of mana at once, not in combat; used up.</summary>
         Food,
+        /// <summary>
+        /// An attribute scroll (the source game's Scroll of Strength and the like): raises Buff Attribute by Buff Amount for
+        /// Buff Seconds, not in combat, one of each attribute at a time; used up.
+        /// </summary>
+        Buff,
     }
 
     /// <summary>One kind of item: its slot, rarity, stats and use. Players' bags refer to it by catalog index.</summary>
@@ -117,6 +122,10 @@ namespace RPG.Items
         [Min(1)] public int maxStack = 1;
         [Tooltip("A stronger version that sometimes drops in its place (a serum for a potion).")]
         public ItemDefinition strongerVariant;
+        [Tooltip("Buff: the attribute it raises, by how much, for how long.")]
+        public RPG.Progression.Attribute buffAttribute;
+        [Min(0)] public int buffAmount;
+        [Min(0f)] public float buffSeconds = 300f;
         [Tooltip("Return scrolls: seconds of standing still before it works (the source game: 2).")]
         [Min(0f)] public float castSeconds;
         [Tooltip("Return scrolls and food: seconds before another can be used (the source game: 300 and 30).")]
@@ -163,6 +172,11 @@ namespace RPG.Items
         }
 
         /// <summary>Whether a player of <paramref name="playerLevel"/> may drink it (potions have a level like gear).</summary>
+        /// <summary>An attribute's name as players see it (the source game's: Courage, Intellect).</summary>
+        public static string AttributeName(RPG.Progression.Attribute attribute) =>
+            attribute == RPG.Progression.Attribute.Vitality ? "Courage"
+            : attribute == RPG.Progression.Attribute.Intelligence ? "Intellect" : attribute.ToString();
+
         public bool CanBeUsedAtLevel(int playerLevel) => use == ItemUse.None || use == ItemUse.Combine || use == ItemUse.Return || use == ItemUse.Food || playerLevel >= itemLevel;
 
         /// <summary>Seconds between restoring ticks of potions that work over time.</summary>
@@ -259,6 +273,12 @@ namespace RPG.Items
             {
                 text.AppendLine("Use: returns you to St. Revere");
                 if (castSeconds > 0f) text.AppendLine($"{castSeconds:0.#} sec cast, {Mathf.RoundToInt(useCooldown / 60f)} min cooldown");
+            }
+            else if (use == ItemUse.Buff)
+            {
+                text.AppendLine($"Use: +{buffAmount} {AttributeName(buffAttribute)} for {Mathf.RoundToInt(buffSeconds / 60f)} min");
+                text.AppendLine("Cannot be used in combat");
+                if (itemLevel > 1) text.AppendLine($"Requires level {itemLevel}");
             }
             else if (use == ItemUse.Food)
             {

@@ -138,6 +138,8 @@ namespace RPG.Progression
         public string requiredEffectName = "";
         [Tooltip("Only on monsters not fighting yet (Sabotage).")]
         public bool requiresTargetOutOfCombat;
+        [Tooltip("The caster must be out of combat (Sleep).")]
+        public bool requiresCasterOutOfCombat;
         [Tooltip("Percent of max mana restored at once (Wisdom of Lazarus), plus this per rank.")]
         [Min(0f)] public float restoreManaPercent;
         [Min(0f)] public float restoreManaPerRank;

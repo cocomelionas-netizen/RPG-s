@@ -540,6 +540,98 @@ namespace RPG.EditorTools
             "Antling",
         };
 
+        /// <summary>Whether each monster spot wanders (npc.movement_type 1) or stands still, in SpotNames order.</summary>
+        public static readonly bool[] SpotWanders =
+        {
+            false, false, false, false, true, false, false, true, true, true, true, false, false, true, false, true,
+            true, false, true, true, false, true, true, true, true, false, false, true, true, true, false, false,
+            true, false, true, true, false, true, true, true, true, false, false, true, false, true, true, true,
+            true, true, true, true, false, true, false, true, true, false, true, true, true, true, true, false,
+            false, true, true, true, false, true, true, true, true, false, true, true, false, true, true, false,
+            false, false, false, false, true, true, false, true, true, true, false, false, true, false, false, false,
+            false, false, false, true, true, true, true, true, true, false, false, true, false, false, true, false,
+            false, true, false, false, true, true, true, true, true, true, false, true, true, true, true, true,
+            true, true, true, false, true, false, true, true, true, true, true, true, true, true, false, true,
+            true, true, false, true, true, false, true, false, true, true, true, false, true, true, false, true,
+            true, true, true, true, false, true, true, true, false, false, true, true, true, false, true, true,
+            true, false, true, true, false, false, true, false, true, false, false, true, false, false, true, true,
+            false, true, false, false, true, false, true, true, false, false, true, true, true, false, false, false,
+            false, true, false, true, true, true, true, true, true, true, false, false, true, false, false, false,
+            true, false, true, true, true, false, true, false, true, true, false, true, true, false, true, true,
+            false, false, false, true, true, false, false, true, true, true, true, true, true, true, true, false,
+            true, false, true, false, true, false, true, false, true, true, true, false, false, true, false, false,
+            true, false, true, true, false, false, true, false, false, false, false, true, false, false, false, false,
+            true, true, false, true, true, true, true, false, true, true, true, true, true, true, true, false,
+            true, true, false, false, true, true, true, true, true, false, true, true, true, true, true, true,
+            false, true, true, false, true, true, false, true, true, true, true, true, false, false, true, true,
+            false, true, true, true, true, true, true, true, false, true, true, false, true, true, false, false,
+            true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true,
+            true, true, false, false, true, true, false, true, true, true, true, false, true, true, true, true,
+            false, true, true, true, true, true, true, true, true, false, false, true, true, true, true, false,
+            true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true,
+            true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, false,
+            true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true,
+            true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true,
+            true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true,
+            false, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true,
+            true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true,
+            true, true, true, true, false, false, true, true, true, false, true, false, true, true, false, true,
+            false, false, true,
+        };
+
+        /// <summary>Neutral monsters (npc_template faction 2): they fight only when attacked.</summary>
+        public static readonly string[] Passive =
+        {
+            "Antling",
+            "Antwig",
+            "Azure Hydra",
+            "Azure Roc",
+            "Azurex The Stormcloud",
+            "Bilewig",
+            "Cokatrice",
+            "Fire Antwig",
+            "Fire Cokatrice",
+            "Firewig",
+            "Flame Serpent",
+            "Flame Weaver",
+            "Ice Antwig",
+            "Petram Cokatrice",
+            "Plague Eater",
+            "Plaguepox The Pestilent",
+            "Quazit",
+            "Sand Pincer",
+            "Sneegro",
+            "Spiderite",
+            "Spiderling",
+            "Stormwig",
+            "Timber Howler",
+        };
+
+        /// <summary>Monsters with a mechanic immunity (mostly bosses): no stuns, incapacitates or roots.</summary>
+        public static readonly string[] ControlImmune =
+        {
+            "Dabbuz The Bushwhacker",
+            "Demiplanar Guardian",
+            "Drauglyen",
+            "Fasthorn the Fleshstomper",
+            "Gargantuan Defiler",
+            "Hissabal The Torturer",
+            "Kandoryrs Knight",
+            "Klauth",
+            "Loglan The Overseer",
+            "Lord Zargan",
+            "Melchon",
+            "Montagar The Hunter",
+            "Prince Telamont",
+            "Shav The Quick",
+            "Sorcerer",
+            "Tantorus the Crusher",
+            "Tchazzar",
+            "Telamont's Watcher",
+            "Tombshiver",
+            "Urzul The Trampling",
+        };
+
         /// <summary>Kinds of junk: for item levels 1-25 the full name, sell price and stack size.</summary>
         public static readonly (string kind, (string name, int sell, int stack)[] levels)[] Junk =
         {

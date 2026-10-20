@@ -29,6 +29,8 @@ namespace RPG.Dungeons
         [Range(0f, 1f)] public float blueChance;
         [Range(0f, 1f)] public float goldChance;
         [Range(0f, 1f)] public float purpleChance;
+        [Tooltip("Not stunned, incapacitated or rooted (the source game's mechanic immunity, mostly bosses).")]
+        public bool controlImmune;
     }
 
     /// <summary>A container at a spot of the dungeon's plan; opened once per instance.</summary>

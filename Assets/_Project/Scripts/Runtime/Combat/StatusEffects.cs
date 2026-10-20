@@ -61,6 +61,14 @@ namespace RPG.Combat
         BlockRating,
         /// <summary>Cannot cast spells (Antimagic).</summary>
         Silence,
+        /// <summary>Strength raised by Value points (Scroll of Strength).</summary>
+        StrengthBonus,
+        /// <summary>Agility raised by Value points (Scroll of Agility).</summary>
+        AgilityBonus,
+        /// <summary>Willpower raised by Value points (Scroll of Willpower).</summary>
+        WillpowerBonus,
+        /// <summary>Courage (vitality) raised by Value points (Scroll of Courage).</summary>
+        CourageBonus,
     }
 
     /// <summary>One effect as everyone sees it (for icons): the server keeps the rest.</summary>
@@ -213,6 +221,12 @@ namespace RPG.Combat
 
         public bool IsImmune => Has(StatusKind.Immune);
 
+        /// <summary>
+        /// Server: never stunned, incapacitated or rooted (the source game's mechanic immunity of bosses and a few
+        /// named monsters).
+        /// </summary>
+        public bool ControlImmune { get; set; }
+
         /// <summary>Multiplier of healing received.</summary>
         public float HealingTakenMultiplier => Mathf.Max(0f, 1f + Total(StatusKind.HealingTaken) / 100f);
 
@@ -274,6 +288,7 @@ namespace RPG.Combat
             if (!IsServer || health.IsDead || duration <= 0f) return false;
             if (harmful && IsImmune) return false;
             if ((kind == StatusKind.Stun || kind == StatusKind.Incapacitate) && Has(StatusKind.StunImmunity)) return false;
+            if (ControlImmune && (kind == StatusKind.Stun || kind == StatusKind.Incapacitate || kind == StatusKind.Root)) return false;
 
             double now = Now;
             var name = new FixedString32Bytes(effectName.Length > 29 ? effectName.Substring(0, 29) : effectName);

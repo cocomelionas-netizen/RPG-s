@@ -31,6 +31,13 @@ namespace RPG.Monsters
         [Tooltip("Rolled once when one of them dies, on top of its own drops (keys).")]
         [SerializeField] private RPG.Items.LootEntry[] bonusLoot = System.Array.Empty<RPG.Items.LootEntry>();
 
+        [Tooltip("Neutral: fights only when attacked (the source game's faction 2).")]
+        [SerializeField] private bool passive;
+        [Tooltip("Stands at its spot instead of wandering (the source game's movement type 0).")]
+        [SerializeField] private bool stationary;
+        [Tooltip("Never stunned, incapacitated or rooted (the source game's mechanic immunity).")]
+        [SerializeField] private bool controlImmune;
+
         [Tooltip("The camp exists only while a player is this close (world units); 0: always.")]
         [SerializeField, Min(0f)] private float activationRange;
 
@@ -86,6 +93,27 @@ namespace RPG.Monsters
         {
             get => bonusLoot;
             set => bonusLoot = value ?? System.Array.Empty<RPG.Items.LootEntry>();
+        }
+
+        /// <summary>Neutral monsters: they fight only when attacked.</summary>
+        public bool Passive
+        {
+            get => passive;
+            set => passive = value;
+        }
+
+        /// <summary>The monsters stand at their spot instead of wandering.</summary>
+        public bool Stationary
+        {
+            get => stationary;
+            set => stationary = value;
+        }
+
+        /// <summary>The monsters are never stunned, incapacitated or rooted.</summary>
+        public bool ControlImmune
+        {
+            get => controlImmune;
+            set => controlImmune = value;
         }
 
         /// <summary>The camp exists only while a player is this close (world units); 0: always.</summary>
@@ -240,13 +268,19 @@ namespace RPG.Monsters
                 ai.Home = point;
                 if (level > 0) ai.ServerOverrideLevel(level);
                 if (bonusLoot.Length > 0) ai.ServerAddBonusLoot(bonusLoot);
+                if (passive) ai.AggroRadius = 0f;
+                if (stationary) ai.WanderRadius = 0f;
             }
             if (damageSchool != DamageSchool.Physical && monster.TryGetComponent(out AutoAttack attack)) attack.School = damageSchool;
 
             var networkObject = monster.GetComponent<NetworkObject>();
             networkObject.Spawn(destroyWithScene: true);
             if (ai != null && Random.value < eliteChance) ai.ServerMakeElite();
-            if (!string.IsNullOrEmpty(displayName) && monster.TryGetComponent(out Health health)) health.ServerSetDisplayName(displayName);
+            if (monster.TryGetComponent(out Health health))
+            {
+                if (!string.IsNullOrEmpty(displayName)) health.ServerSetDisplayName(displayName);
+                if (controlImmune && health.Effects != null) health.Effects.ControlImmune = true;
+            }
             alive.Add(networkObject);
         }
     }

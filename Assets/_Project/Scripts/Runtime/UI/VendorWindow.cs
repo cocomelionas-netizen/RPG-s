@@ -332,6 +332,9 @@ namespace RPG.UI
                 case ItemUse.Return:
                     parts.Add("returns you to St. Revere");
                     break;
+                case ItemUse.Buff:
+                    parts.Add($"+{item.buffAmount} {ItemDefinition.AttributeName(item.buffAttribute)} for {Mathf.RoundToInt(item.buffSeconds / 60f)} min");
+                    break;
                 case ItemUse.LearnSpell:
                     if (item.teachesSpell != null) parts.Add($"teaches {item.teachesSpell.displayName}");
                     break;

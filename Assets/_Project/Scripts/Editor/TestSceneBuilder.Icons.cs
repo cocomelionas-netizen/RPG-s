@@ -5,6 +5,7 @@ using RPG.Progression;
 using RPG.UI;
 using UnityEditor;
 using UnityEngine;
+using Attribute = RPG.Progression.Attribute;
 
 namespace RPG.EditorTools
 {
@@ -76,6 +77,8 @@ namespace RPG.EditorTools
             { "DeepFreeze", "ice-sky-3" }, { "MagicalAmplification", "runes-blue-3" }, { "WisdomOfLazarus", "link-blue-3" },
             { "IllusionGate", "air-burst-magenta-3" }, { "RemoveCurse", "heal-sky-3" }, { "MagicalDampening", "runes-magenta-2" },
             { "Antimagic", "beam-magenta-2" }, { "Inferno", "wind-red-3" },
+            // Every class
+            { "Sleep", "fog-blue-2" },
         };
 
         private static void AssignSpellIcons(IEnumerable<AbilityDefinition> spells)
@@ -152,6 +155,12 @@ namespace RPG.EditorTools
                     return Flare(225);
                 case ItemUse.Return:
                     return Flare(224);
+                case ItemUse.Buff:
+                    item.iconTint = item.buffAttribute == Attribute.Strength ? new Color(1f, 0.7f, 0.6f)
+                        : item.buffAttribute == Attribute.Agility ? new Color(0.7f, 1f, 0.7f)
+                        : item.buffAttribute == Attribute.Intelligence ? new Color(0.7f, 0.8f, 1f)
+                        : item.buffAttribute == Attribute.Willpower ? new Color(0.9f, 0.7f, 1f) : new Color(1f, 0.95f, 0.6f);
+                    return Flare(72);
                 case ItemUse.Food:
                     foreach ((string word, string glyph) in FoodWords)
                         if (name.Contains(word)) return Icon($"glyph/{glyph}");
@@ -160,7 +169,7 @@ namespace RPG.EditorTools
             if (item.IsEquippable) return GearIcon(item, name, step);
 
             if (name.Contains("key")) return Flare(226);
-            if (name.Contains("treasury")) return Flare(88);
+            if (name.Contains("treasury") || name.Contains("treasure")) return Flare(88);
             if (name.Contains("orb"))
             {
                 bool divine = name.Contains("divine");

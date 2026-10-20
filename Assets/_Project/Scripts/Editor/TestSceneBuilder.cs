@@ -702,6 +702,12 @@ namespace RPG.EditorTools
             foreach (List<ItemDefinition> tomes in ClassTomes.Values)
                 foreach (ItemDefinition tome in tomes)
                     if (!allItems.Contains(tome)) allItems.Add(tome);
+            // Then the later items, then the level 1 Tomes (trainers sell them; reading one you know does nothing).
+            foreach (ItemDefinition item in LaterItems)
+                if (!allItems.Contains(item)) allItems.Add(item);
+            foreach ((AbilityDefinition[] spells, int classIndex) in new[] { (warriorSpells, WarriorClass), (rangerSpells, RangerClass), (mageSpells, MageClass) })
+                foreach (ItemDefinition tome in CreateTomes(spells, classIndex, firstLevel: true))
+                    if (!allItems.Contains(tome)) allItems.Add(tome);
             items.items = allItems.ToArray();
             EditorUtility.SetDirty(items);
             AssignItemIcons(items.items);
@@ -982,6 +988,8 @@ namespace RPG.EditorTools
             all.AddRange(CreateMoreGear());
             all.AddRange(CreateSourceJunk());
             catalog.items = all.ToArray();
+            // Made now (the dungeons' loot refers to them), put at the catalog's end after the Tomes (CreateClasses).
+            CreateLaterItems();
             EditorUtility.SetDirty(catalog);
             return catalog;
         }
@@ -1324,8 +1332,10 @@ namespace RPG.EditorTools
                 for (int tier = 0; tier < tiers.Length; tier++)
                 {
                     string prefix = tiers[tier].Length > 0 ? tiers[tier] + " " : "";
+                    // The plain tier's file is "Plain...": "ManaPotion" is the Minor Mana Potion's old file (kept for its id).
+                    string file = tiers[tier].Length > 0 ? tiers[tier] : "Plain";
                     ItemDefinition potion = tier == 0 ? minor
-                        : CreateItem($"{tiers[tier]}{kind}Potion", $"{prefix}{kind} Potion", ItemSlot.None, ItemRarity.Common, 0, 0, 0,
+                        : CreateItem($"{file}{kind}Potion", $"{prefix}{kind} Potion", ItemSlot.None, ItemRarity.Common, 0, 0, 0,
                             color * (1f + tier * 0.06f), potionSell[tier] * 3);
                     ItemDefinition serum = CreateItem($"{tiers[tier]}{kind}Serum", $"{prefix}{kind} Serum", ItemSlot.None, ItemRarity.Uncommon,
                         0, 0, 0, Color.Lerp(color, Color.white, 0.3f), serumSell[tier] * 3);
@@ -1636,8 +1646,15 @@ namespace RPG.EditorTools
                 spawner.Level = level;
                 // The source game's name, and its junk; horned beasts and Lesser Wyrms sometimes drop Keys to the Barracks.
                 if (!string.IsNullOrEmpty(sourceName)) spawner.DisplayName = sourceName;
+                // Like the source game: neutral kinds fight only when attacked, some spots stand still, bosses shrug off stuns.
+                spawner.Passive = Array.IndexOf(MonsterData.Passive, sourceName) >= 0;
+                spawner.Stationary = i < MonsterData.SpotWanders.Length && !MonsterData.SpotWanders[i];
+                spawner.ControlImmune = Array.IndexOf(MonsterData.ControlImmune, sourceName) >= 0;
                 int keyLoot = KeyDropperLoot(cell);
-                spawner.BonusLoot = JunkLoot(sourceName, level).Concat(keyLoot > 0 ? DungeonLoot(keyLoot) : Array.Empty<LootEntry>()).ToArray();
+                // ... and the wyrms Draconic Treasure and Flawless gems (DungeonData.OutdoorLoot).
+                int ownLoot = !string.IsNullOrEmpty(sourceName) && DungeonData.OutdoorLoot.TryGetValue(sourceName, out int loot) ? loot : 0;
+                spawner.BonusLoot = JunkLoot(sourceName, level).Concat(keyLoot > 0 ? DungeonLoot(keyLoot) : Array.Empty<LootEntry>())
+                    .Concat(ownLoot > 0 ? DungeonLoot(ownLoot) : Array.Empty<LootEntry>()).ToArray();
                 // From level 3 every fourth spot (and every elite) hits with magic: frost, fire, shadow or holy,
                 // so the resists matter.
                 if (level >= 3 && (elite || i % 4 == 0)) spawner.School = (DamageSchool)(1 + i / 4 % 4);

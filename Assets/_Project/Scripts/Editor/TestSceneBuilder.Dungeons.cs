@@ -157,6 +157,7 @@ namespace RPG.EditorTools
                     prefab = MonsterPrefabFor(m.name.Trim(), m.level, m.boss),
                     cell = m.cell,
                     displayName = m.name,
+                    controlImmune = Array.IndexOf(MonsterData.ControlImmune, m.name.Trim()) >= 0,
                     level = m.level,
                     elite = m.elite,
                     boss = m.boss,
@@ -251,6 +252,7 @@ namespace RPG.EditorTools
                 spawner.EliteChance = edge.elite ? 1f : 0f;
                 spawner.Level = edge.level;
                 spawner.DisplayName = edge.name;
+                spawner.ControlImmune = Array.IndexOf(MonsterData.ControlImmune, edge.name) >= 0;
                 spawner.BonusLoot = DungeonLoot(edge.loot).Concat(JunkLoot(edge.name, edge.level)).ToArray();
             }
         }
