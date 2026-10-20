@@ -149,6 +149,8 @@ namespace RPG.Progression
         [Header("Look")]
         [Tooltip("Color of the projectile, ring or glow shown when it is used.")]
         public Color effectColor = Color.white;
+        [Tooltip("The spell's icon on the action bar and in the ABILITIES window (none: a square of the effect color).")]
+        public Sprite icon;
 
         public bool NeedsTarget => kind == AbilityKind.TargetDamage || kind == AbilityKind.TargetArea || kind == AbilityKind.Charge;
 

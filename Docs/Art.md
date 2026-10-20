@@ -1,7 +1,7 @@
 # Art
 
 The world, heroes and monsters are drawn with art from the open game **Flare** (CC-BY-SA 3.0; authors and license in
-`Assets/_Project/Art/Flare/CREDITS.md`). UI, effects and a few props are still this project's own placeholders
+`Assets/_Project/Art/Flare/CREDITS.md`). Effects, the loot sack and a few props are still this project's own placeholders
 (`PlaceholderArtGenerator`).
 
 ## How it gets in
@@ -32,6 +32,23 @@ The world, heroes and monsters are drawn with art from the open game **Flare** (
   by its name (`TestSceneBuilder.MonsterLook`: ants and bugs, wyrms and drakes, the undead, zombies and lost souls,
   horned beasts and brutes, goblin folk; anything else by level) over its level tier's numbers; health bars and hitboxes
   follow the art's height.
+
+## Icons
+
+Items and spells have icons (`Assets/_Project/Art/Icons/Icons.png`, credits there), packed by
+`Tools/Art/icons.py <flare-game> <painterly spell icons> <game-icons.net png archive>` with
+`Scripts/Editor/IconArtData.cs`:
+
+- **Items**: Flare's item icons: weapons by type and level (swords, bows, staves, axes, maces), the armor set of each
+  armor kind (cloth, leather, chain, plate, robes) by slot, shields, rings, necklaces, belts, gems (Topaz and Amethyst
+  tinted), potion and serum tiers, scrolls, Tomes (a book), keys and coins; Flare's crafting crystals for Magic Dust.
+- **Spells and orbs**: J. W. Bjerk's Painterly Spell Icons (CC-BY-SA 3.0), one per spell (`TestSceneBuilder.Icons.cs`,
+  `SpellIcons`); Attack is Flare's crossed swords.
+- **Junk, materials and food**: game-icons.net glyphs (CC-BY 3.0) on Flare's blank stone, by a word of the name.
+
+The builder cuts them into `Resources/Icons.asset` (`IconSet`) and sets `ItemDefinition.icon` / `iconTint` and
+`AbilityDefinition.icon`. Bag, character sheet, loot, transmuter, vendor rows, the action bar, the ABILITIES window and
+dragging show the icon (counts and mana costs over it); anything without one still shows its name on its color.
 
 ## UI frames
 

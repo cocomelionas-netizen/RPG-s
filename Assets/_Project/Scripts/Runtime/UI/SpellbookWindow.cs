@@ -244,16 +244,32 @@ namespace RPG.UI
             return row;
         }
 
+        /// <summary>The row's picture: the spell's icon (greyed while not learned), or a square of its color.</summary>
+        private static void ShowRowIcon(Row row, Sprite sprite, Color color, bool known)
+        {
+            if (sprite != null)
+            {
+                if (row.Icon.sprite != sprite) row.Icon.sprite = sprite;
+                row.Icon.color = known ? Color.white : new Color(0.35f, 0.35f, 0.35f);
+                return;
+            }
+            row.Icon.sprite = null;
+            color.a = 1f;
+            row.Icon.color = known ? color : color * 0.35f;
+        }
+
         private DragPayload? Payload(int spell)
         {
             if (shownFor == null) return null;
             if (spell == Spellbook.AttackEntry)
-                return new DragPayload { Kind = DragKind.Spell, Value = Spellbook.AttackEntry, Label = "Attack", Color = new Color(0.45f, 0.2f, 0.15f) };
+                return new DragPayload { Kind = DragKind.Spell, Value = Spellbook.AttackEntry, Label = "Attack", Color = new Color(0.45f, 0.2f, 0.15f),
+                    Icon = IconSet.Attack, IconTint = Color.white };
             if (!shownFor.Knows(spell)) return null;
             AbilityDefinition ability = shownFor.Get(spell);
             Color color = ability.effectColor * 0.45f;
             color.a = 1f;
-            return new DragPayload { Kind = DragKind.Spell, Value = spell, Label = ability.displayName, Color = color };
+            return new DragPayload { Kind = DragKind.Spell, Value = spell, Label = ability.displayName, Color = color, Icon = ability.icon,
+                IconTint = Color.white };
         }
 
         private void Pick(int spell)
@@ -383,7 +399,7 @@ namespace RPG.UI
                 if (row.Spell == Spellbook.AttackEntry)
                 {
                     row.Background.color = PendingSpell == Spellbook.AttackEntry ? PickedRow : KnownRow;
-                    row.Icon.color = new Color(0.6f, 0.25f, 0.2f);
+                    ShowRowIcon(row, IconSet.Attack, new Color(0.6f, 0.25f, 0.2f), true);
                     row.Name.text = "ATTACK";
                     row.Name.color = TitleColor;
                     row.Details.text = "Attack the selected enemy with your weapon (F). Drag it onto the action bar.";
@@ -395,9 +411,7 @@ namespace RPG.UI
                 int rank = spellbook.RankOf(row.Spell);
                 bool known = rank > 0;
                 row.Background.color = PendingSpell == row.Spell ? PickedRow : known ? KnownRow : UnknownRow;
-                Color icon = ability.effectColor;
-                icon.a = 1f;
-                row.Icon.color = known ? icon : icon * 0.35f;
+                ShowRowIcon(row, ability.icon, ability.effectColor, known);
                 string numeral = Roman(rank);
                 row.Name.text = (ability.displayName.ToUpperInvariant() + (numeral.Length > 0 ? " " + numeral : ""));
                 row.Name.color = known ? TitleColor : new Color32(0x80, 0x78, 0x6C, 0xFF);

@@ -41,6 +41,7 @@ namespace RPG.UI
         private Text title;
         private readonly Image[] slotImages = new Image[Inventory.TransmuteSlots];
         private readonly Text[] slotTexts = new Text[Inventory.TransmuteSlots];
+        private readonly Image[] slotIcons = new Image[Inventory.TransmuteSlots];
         // The bag slot in each grid slot (-1: empty) and the item it held then (a changed bag slot falls out).
         private readonly int[] bagSlots = new int[Inventory.TransmuteSlots];
         private readonly int[] itemIds = new int[Inventory.TransmuteSlots];
@@ -100,6 +101,7 @@ namespace RPG.UI
                     new Vector2(14f + i % Columns * (SlotSize + Spacing), -80f - i / Columns * (SlotSize + Spacing)), new Vector2(SlotSize, SlotSize));
                 slot.onClick.AddListener(() => Clear(index));
                 slotImages[i] = slot.GetComponent<Image>();
+                slotIcons[i] = UIFactory.CreateIcon(slot.transform, 8f);
                 slotTexts[i] = UIFactory.CreateText("Item", slot.transform, 12, TextAnchor.MiddleCenter);
                 UIFactory.Stretch(slotTexts[i].rectTransform);
                 var drop = slot.gameObject.AddComponent<DropTarget>();
@@ -243,8 +245,12 @@ namespace RPG.UI
                     stack = ItemStack.Empty;
                 }
                 ItemDefinition item = inventory.Definition(stack);
-                slotImages[i].color = item != null ? Color.Lerp(SlotColor, item.iconColor, 0.55f) : SlotColor;
-                slotTexts[i].text = item != null ? (stack.Count > 1 ? $"{item.displayName}\nx{stack.Count}" : item.displayName) : "";
+                bool pictured = UIFactory.SetIcon(slotIcons[i], item != null ? item.icon : null, item != null ? item.iconTint : Color.white);
+                slotImages[i].color = item != null && !pictured ? Color.Lerp(SlotColor, item.iconColor, 0.55f) : SlotColor;
+                // With a picture only the count shows (lower right); without one the name.
+                slotTexts[i].alignment = pictured ? TextAnchor.LowerRight : TextAnchor.MiddleCenter;
+                slotTexts[i].text = item == null ? "" : pictured ? (stack.Count > 1 ? stack.Count.ToString() : "")
+                    : stack.Count > 1 ? $"{item.displayName}\nx{stack.Count}" : item.displayName;
                 slotTexts[i].color = item != null ? ItemDefinition.RarityColor(inventory.Quality(stack)) : Color.white;
             }
 

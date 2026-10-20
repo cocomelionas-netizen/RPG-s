@@ -1,4 +1,5 @@
 using System;
+using RPG.Items;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -12,9 +13,36 @@ namespace RPG.UI
     public class ItemSlotView : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         public Image Background;
+        /// <summary>The item's picture (hidden for none: the name shows instead).</summary>
+        public Image Icon;
         public Outline Border;
         public Text Label;
         public Text Count;
+
+        /// <summary>
+        /// Shows an item: its icon on a dark square tinted by its quality, or (an item without an icon) its name on its
+        /// color. The border is the quality color. Null shows an empty slot of <paramref name="empty"/>.
+        /// </summary>
+        public void Show(ItemDefinition item, string displayName, Color rarity, Color empty)
+        {
+            if (item == null)
+            {
+                Background.color = empty;
+                Border.effectColor = new Color(0f, 0f, 0f, 0.5f);
+                Label.text = "";
+                UIFactory.SetIcon(Icon, null, Color.white);
+                return;
+            }
+            bool pictured = UIFactory.SetIcon(Icon, item.icon, item.iconTint);
+            Color background = pictured ? Color.Lerp(FilledColor, rarity, 0.15f) : item.iconColor * 0.55f;
+            background.a = 0.95f;
+            Background.color = background;
+            Border.effectColor = rarity;
+            Label.text = pictured ? "" : displayName;
+            Label.color = rarity;
+        }
+
+        private static readonly Color FilledColor = new Color(0.07f, 0.065f, 0.06f);
 
         public event Action<ItemSlotView> PointerEntered;
         public event Action<ItemSlotView> PointerExited;

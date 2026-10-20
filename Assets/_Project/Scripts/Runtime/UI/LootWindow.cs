@@ -132,10 +132,14 @@ namespace RPG.UI
             view.Background = (Image)button.targetGraphic;
             view.Border = button.gameObject.AddComponent<Outline>();
             view.Border.effectDistance = new Vector2(2f, -2f);
+            view.Icon = UIFactory.CreateIcon(rect, 4f);
             view.Label = UIFactory.CreateText("Name", rect, 11, TextAnchor.MiddleCenter);
             UIFactory.Stretch(view.Label.rectTransform);
             view.Label.rectTransform.offsetMin = new Vector2(3f, 3f);
             view.Label.rectTransform.offsetMax = new Vector2(-3f, -3f);
+            view.Count = UIFactory.CreateText("Count", rect, 14, TextAnchor.LowerRight);
+            UIFactory.Stretch(view.Count.rectTransform);
+            view.Count.rectTransform.offsetMax = new Vector2(-4f, 0f);
             view.PointerEntered += v => hovered = v;
             view.PointerExited += v => { if (hovered == v) hovered = null; };
             return view;
@@ -192,19 +196,9 @@ namespace RPG.UI
             {
                 ItemSlotView view = slots[i];
                 ItemDefinition item = inventory.Definition(contents[i]);
-                if (item == null)
-                {
-                    view.Background.color = EmptySlot;
-                    view.Label.text = "";
-                    continue;
-                }
-                Color rarity = ItemDefinition.RarityColor(inventory.Quality(contents[i]));
-                Color background = item.iconColor * 0.55f;
-                background.a = 0.95f;
-                view.Background.color = background;
-                view.Border.effectColor = rarity;
-                view.Label.text = contents[i].Count > 1 ? $"{inventory.DisplayName(contents[i])} x{contents[i].Count}" : inventory.DisplayName(contents[i]);
-                view.Label.color = rarity;
+                view.Show(item, item != null ? inventory.DisplayName(contents[i]) : "",
+                    item != null ? ItemDefinition.RarityColor(inventory.Quality(contents[i])) : Color.white, EmptySlot);
+                view.Count.text = item != null && contents[i].Count > 1 ? contents[i].Count.ToString() : "";
             }
         }
 

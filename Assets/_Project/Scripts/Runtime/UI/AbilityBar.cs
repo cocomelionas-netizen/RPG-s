@@ -26,6 +26,8 @@ namespace RPG.UI
         {
             public GameObject Root;
             public Image Background;
+            /// <summary>The spell's or item's picture (with one, only the mana cost or count is written).</summary>
+            public Image Icon;
             public RectTransform Cooldown;
             public Text Key;
             public Text Name;
@@ -146,6 +148,7 @@ namespace RPG.UI
 
             var slot = new Slot { Root = button.gameObject, Background = (Image)button.targetGraphic };
 
+            slot.Icon = UIFactory.CreateIcon(rect, 3f);
             Image cooldown = UIFactory.CreateImage("Cooldown", rect, new Color(0f, 0f, 0f, 0.65f));
             cooldown.raycastTarget = false;
             slot.Cooldown = cooldown.rectTransform;
@@ -186,6 +189,8 @@ namespace RPG.UI
                 Value = slot,
                 Label = slots[slot].Name.text,
                 Color = slots[slot].Background.color,
+                Icon = slots[slot].Icon.enabled ? slots[slot].Icon.sprite : null,
+                IconTint = slots[slot].Icon.color,
             };
         }
 
@@ -281,7 +286,8 @@ namespace RPG.UI
         private void ShowAttack(Slot slot)
         {
             slot.Background.color = AttackColor;
-            if (NameChanged(slot, 0, 0, 0, false)) slot.Name.text = "Attack";
+            bool pictured = UIFactory.SetIcon(slot.Icon, IconSet.Attack, Color.white);
+            if (NameChanged(slot, 0, 0, 0, pictured)) slot.Name.text = pictured ? "" : "Attack";
             slot.Cooldown.anchorMax = new Vector2(1f, 0f);
             SetCountdown(slot, 0);
             SetHighlighted(slot, targeting != null && targeting.IsAttacking);
@@ -293,11 +299,15 @@ namespace RPG.UI
             tint.a = 0.92f;
             slot.Background.color = tint;
             bool enoughMana = caster.HasManaFor(ability);
+            // Not enough mana: the picture dims.
+            bool pictured = UIFactory.SetIcon(slot.Icon, ability.icon, enoughMana ? Color.white : new Color(0.45f, 0.45f, 0.6f));
             int cost = caster.ManaCost(ability);
-            if (NameChanged(slot, 1, ability.GetHashCode(), cost, enoughMana))
-                slot.Name.text = cost > 0
-                    ? $"{ability.displayName}\n<color={(enoughMana ? "#8fb3ff" : "#ff6655")}>{cost} mana</color>"
-                    : ability.displayName;
+            if (NameChanged(slot, pictured ? 4 : 1, ability.GetHashCode(), cost, enoughMana))
+            {
+                string costText = cost > 0 ? $"<color={(enoughMana ? "#8fb3ff" : "#ff6655")}>{cost}</color>" : "";
+                slot.Name.text = pictured ? costText
+                    : cost > 0 ? $"{ability.displayName}\n<color={(enoughMana ? "#8fb3ff" : "#ff6655")}>{cost} mana</color>" : ability.displayName;
+            }
             SetHighlighted(slot, caster.PendingSlot == index);
 
             float remaining = caster.CooldownRemaining(index);
@@ -316,8 +326,10 @@ namespace RPG.UI
             int count = inventory.CountForBarItem(item);
             Color tint = count > 0 ? item.iconColor * 0.7f : item.iconColor * 0.3f;
             tint.a = 0.92f;
-            slot.Background.color = tint;
-            if (NameChanged(slot, 2, itemId, count, false)) slot.Name.text = $"{item.displayName}\nx{count}";
+            // None left: the picture dims.
+            bool pictured = UIFactory.SetIcon(slot.Icon, item.icon, count > 0 ? item.iconTint : item.iconTint * 0.35f);
+            slot.Background.color = pictured ? EmptyColor : tint;
+            if (NameChanged(slot, 2, itemId, count, pictured)) slot.Name.text = pictured ? count.ToString() : $"{item.displayName}\nx{count}";
             bool potion = item.use == ItemUse.Heal || item.use == ItemUse.RestoreMana;
             bool scroll = item.use == ItemUse.Return;
             bool food = item.use == ItemUse.Food;
@@ -339,6 +351,7 @@ namespace RPG.UI
         {
             // Empty slots stay visible (dim) so things can be put there.
             slot.Background.color = dropping ? DropColor : EmptyColor;
+            UIFactory.SetIcon(slot.Icon, null, Color.white);
             if (NameChanged(slot, 3, 0, 0, false)) slot.Name.text = "";
             SetCountdown(slot, 0);
             slot.Cooldown.anchorMax = new Vector2(1f, 0f);

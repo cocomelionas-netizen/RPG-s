@@ -337,6 +337,7 @@ namespace RPG.UI
             view.Background = (Image)button.targetGraphic;
             view.Border = button.gameObject.AddComponent<Outline>();
             view.Border.effectDistance = new Vector2(2f, -2f);
+            view.Icon = UIFactory.CreateIcon(rect, 4f);
             view.Label = UIFactory.CreateText("Name", rect, 8, TextAnchor.MiddleCenter);
             UIFactory.Stretch(view.Label.rectTransform);
             view.Label.rectTransform.offsetMin = new Vector2(2f, 2f);
@@ -452,18 +453,11 @@ namespace RPG.UI
                 ItemDefinition item = inventory != null ? inventory.Definition(stack) : null;
                 if (item == null)
                 {
-                    view.Background.color = EmptySlotColor;
-                    view.Border.effectColor = new Color(0f, 0f, 0f, 0.5f);
+                    view.Show(null, "", Color.white, EmptySlotColor);
                     view.Label.text = $"<color=#{ColorUtility.ToHtmlStringRGB(LabelColor)}>{SlotName(i)}</color>";
                     continue;
                 }
-                Color rarity = ItemDefinition.RarityColor(inventory.Quality(stack));
-                Color background = item.iconColor * 0.55f;
-                background.a = 0.95f;
-                view.Background.color = background;
-                view.Border.effectColor = rarity;
-                view.Label.text = inventory.DisplayName(stack);
-                view.Label.color = rarity;
+                view.Show(item, inventory.DisplayName(stack), ItemDefinition.RarityColor(inventory.Quality(stack)), EmptySlotColor);
             }
         }
 

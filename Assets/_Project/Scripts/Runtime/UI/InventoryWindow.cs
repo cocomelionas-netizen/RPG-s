@@ -147,6 +147,8 @@ namespace RPG.UI
                 BagIndex = index,
                 Label = item.displayName,
                 Color = item.iconColor * 0.7f,
+                Icon = item.icon,
+                IconTint = item.iconTint,
             };
         }
 
@@ -162,6 +164,7 @@ namespace RPG.UI
             view.Background = (Image)button.targetGraphic;
             view.Border = button.gameObject.AddComponent<Outline>();
             view.Border.effectDistance = new Vector2(2f, -2f);
+            view.Icon = UIFactory.CreateIcon(rect, 4f);
 
             view.Label = UIFactory.CreateText("Name", rect, 11, TextAnchor.MiddleCenter);
             UIFactory.Stretch(view.Label.rectTransform);
@@ -323,20 +326,12 @@ namespace RPG.UI
             ItemDefinition item = inventory.Definition(stack);
             if (item == null)
             {
-                view.Background.color = EmptySlot;
-                view.Border.effectColor = new Color(0f, 0f, 0f, 0.5f);
-                view.Label.text = "";
+                view.Show(null, "", Color.white, EmptySlot);
                 view.Count.text = "";
                 return;
             }
 
-            Color rarity = ItemDefinition.RarityColor(inventory.Quality(stack));
-            Color background = item.iconColor * 0.55f;
-            background.a = 0.95f;
-            view.Background.color = background;
-            view.Border.effectColor = rarity;
-            view.Label.text = inventory.DisplayName(stack);
-            view.Label.color = rarity;
+            view.Show(item, inventory.DisplayName(stack), ItemDefinition.RarityColor(inventory.Quality(stack)), EmptySlot);
             if (view.Count != null && bagSlots.Contains(view))
                 view.Count.text = stack.Count > 1 ? stack.Count.ToString() : "";
         }

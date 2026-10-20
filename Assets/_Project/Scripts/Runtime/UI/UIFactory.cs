@@ -99,6 +99,33 @@ namespace RPG.UI
             return image;
         }
 
+        /// <summary>
+        /// An item or spell icon filling <paramref name="parent"/> less <paramref name="inset"/> on each side; hidden until
+        /// <see cref="SetIcon"/> gives it a sprite. Never catches the pointer.
+        /// </summary>
+        public static Image CreateIcon(Transform parent, float inset)
+        {
+            Image icon = CreateImage("Icon", parent, Color.white);
+            icon.raycastTarget = false;
+            icon.preserveAspect = true;
+            Stretch(icon.rectTransform);
+            icon.rectTransform.offsetMin = new Vector2(inset, inset);
+            icon.rectTransform.offsetMax = new Vector2(-inset, -inset);
+            icon.enabled = false;
+            return icon;
+        }
+
+        /// <summary>Shows a sprite in an icon (or hides it for none); true when there is a sprite to show.</summary>
+        public static bool SetIcon(Image icon, Sprite sprite, Color tint)
+        {
+            if (icon == null) return false;
+            bool shown = sprite != null;
+            if (icon.sprite != sprite) icon.sprite = sprite;
+            if (icon.color != tint) icon.color = tint;
+            if (icon.enabled != shown) icon.enabled = shown;
+            return shown;
+        }
+
         public static Text CreateText(string name, Transform parent, int size, TextAnchor alignment)
         {
             Text text = CreateRect(name, parent).gameObject.AddComponent<Text>();

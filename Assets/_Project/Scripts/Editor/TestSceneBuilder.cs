@@ -111,6 +111,7 @@ namespace RPG.EditorTools
             FlareSets.Clear();
             PruneMonsterPrefabs();
             WorldTiles worldTiles = CreateWorldTiles();
+            LoadIcons();
             ImportUiFrames();
             CharacterAnimationSet playerAnimations = FlareAnimationSet("HeroWarrior");
             CharacterAnimationSet goblinAnimations = FlareAnimationSet("Goblin");
@@ -703,6 +704,10 @@ namespace RPG.EditorTools
                     if (!allItems.Contains(tome)) allItems.Add(tome);
             items.items = allItems.ToArray();
             EditorUtility.SetDirty(items);
+            AssignItemIcons(items.items);
+            AssignSpellIcons(warriorSpells);
+            AssignSpellIcons(rangerSpells);
+            AssignSpellIcons(mageSpells);
 
             var catalog = LoadOrCreateAsset<ClassCatalog>($"{ClassesFolder}/ClassCatalog.asset");
             // Players store the index, so keep this order.

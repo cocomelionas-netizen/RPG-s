@@ -138,6 +138,10 @@ namespace RPG.Items
         [Header("Look")]
         [Tooltip("Color of the item's square in the bag until it has an icon.")]
         public Color iconColor = new Color(0.5f, 0.5f, 0.5f);
+        /// <summary>The picture in bags, slots and the action bar (none: the name on <see cref="iconColor"/>).</summary>
+        public Sprite icon;
+        /// <summary>Tints the icon (gems that share a picture: Topaz, Amethyst).</summary>
+        public Color iconTint = Color.white;
 
         public bool IsEquippable => slot != ItemSlot.None;
 

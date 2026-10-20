@@ -25,6 +25,9 @@ namespace RPG.UI
         public int BagIndex;
         public string Label;
         public Color Color;
+        /// <summary>The picture shown while dragging (none: the label on the color).</summary>
+        public Sprite Icon;
+        public Color IconTint;
     }
 
     /// <summary>
@@ -96,9 +99,11 @@ namespace RPG.UI
             RectTransform rect = image.rectTransform;
             rect.sizeDelta = new Vector2(58f, 58f);
             rect.pivot = new Vector2(0.5f, 0.5f);
+            bool pictured = UIFactory.SetIcon(UIFactory.CreateIcon(rect, 3f), payload.Icon,
+                payload.IconTint.a > 0f ? payload.IconTint : Color.white);
             Text label = UIFactory.CreateText("Label", rect, 11, TextAnchor.MiddleCenter);
             UIFactory.Stretch(label.rectTransform);
-            label.text = payload.Label;
+            label.text = pictured ? "" : payload.Label;
             rect.SetAsLastSibling();
             return rect;
         }

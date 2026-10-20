@@ -59,6 +59,7 @@ namespace RPG.UI
             public Text Name;
             public Text Details;
             public Text Price;
+            public Image Icon;
             public int StockIndex;
         }
 
@@ -230,8 +231,13 @@ namespace RPG.UI
             rect.sizeDelta = new Vector2(width - 28f, rowHeight);
 
             var row = new Row { Root = button.gameObject };
-            row.Name = AddText(rect, 16, TextAnchor.UpperLeft, new Vector2(8f, -3f), new Vector2(width - 176f, 22f));
-            row.Details = AddText(rect, 12, TextAnchor.UpperLeft, new Vector2(8f, -24f), new Vector2(width - 176f, 20f));
+            // The item's picture on the left, the texts beside it.
+            RectTransform iconBox = UIFactory.CreateRect("Icon Box", rect);
+            UIFactory.Place(iconBox, new Vector2(0f, 1f), new Vector2(4f, -4f), new Vector2(rowHeight - 8f, rowHeight - 8f));
+            row.Icon = UIFactory.CreateIcon(iconBox, 0f);
+            float textLeft = rowHeight;
+            row.Name = AddText(rect, 16, TextAnchor.UpperLeft, new Vector2(textLeft, -3f), new Vector2(width - 168f - textLeft, 22f));
+            row.Details = AddText(rect, 12, TextAnchor.UpperLeft, new Vector2(textLeft, -24f), new Vector2(width - 168f - textLeft, 20f));
             row.Price = AddText(rect, 16, TextAnchor.MiddleRight, new Vector2(width - 172f, 0f), new Vector2(136f, rowHeight));
             return row;
         }
@@ -283,6 +289,7 @@ namespace RPG.UI
                     : left > 0 ? $"{itemName}  <size=13><color=#bbbbbb>({left} left)</color></size>"
                     : $"{itemName}  <size=13><color=#ff6655>(sold out)</color></size>";
                 row.Name.color = ItemDefinition.RarityColor(item.QualityWith(affix));
+                UIFactory.SetIcon(row.Icon, item.icon, left == 0 ? item.iconTint * 0.4f : item.iconTint);
                 row.Details.text = Summary(item, progress, affix);
                 int price = inventory.BuyPrice(item, affix);
                 row.Price.text = $"{price} g";
