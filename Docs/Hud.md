@@ -22,3 +22,9 @@ the zone name comes from `WorldNavigation.ZoneName`.
 - Tooltips are drawn over every window (a canvas of their own sorted on top) and kept on the screen.
 - The HUD texts are rewritten only when what they show changes (the action bar, nameplates, frames, the bag, the
   character sheet, the vendor list a few times a second), to keep WebGL frames smooth.
+
+## Performance overlay (F3)
+
+F3 shows frames per second, the slowest frame of the last second (ms), the spawned units and monsters and the managed
+memory, updated once a second (`UI/PerformanceOverlay.cs`). Use it to check a change against a target such as a steady
+60 FPS: walk the same route before and after.

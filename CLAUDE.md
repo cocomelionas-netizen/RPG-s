@@ -31,10 +31,10 @@ Players test the WebGL build at https://cocomelionas-netizen.github.io/RPG-s/ (O
   the reference DLLs of the compile checks still accept them. `check.sh` also runs `Tools/CompileCheck/deprecations.sh`
   (a Stop hook in `.claude/settings.json` runs it too); add newly found obsolete APIs to that script.
 - **Map fidelity**: the world must match the source game's layout; check changes against the source data (and its
-  world map picture) before building on them.
+  world map picture) before building on them: `python3 -I Tools/GameData/verify_map.py <source data> out.png`.
 - **Performance**: when the world or the number of objects grows, keep only what is near players active (monster
   spawners' activation range), draw props as tiles, give moving HUD layers their own canvases, and rewrite UI texts
-  only when their values change.
+  only when their values change. Measure with the in-game F3 overlay (FPS, slowest frame) before and after.
 
 ## Source data
 

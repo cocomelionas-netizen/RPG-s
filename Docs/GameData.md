@@ -20,6 +20,9 @@ Generated data lives in `Scripts/Editor/*Data.cs` (`StartAreaData`, `GearData`, 
   Cells the file does not list are open ground. So the towns, the walls of St. Revere and its houses, the fences and the
   woods stand where the source game has them. From the start, 863 of the island's 870 NPC and object spots can be walked
   to; the rest stand in fenced pens (a few pigs), as in the source game.
+- **Check against the source** – `python3 -I Tools/GameData/verify_map.py <source data> [side_by_side.png]`: for every
+  zone, how much of our water/land agrees with the source game's world map picture (exits 1 under 95 %), whether each map
+  label stands in its zone and each waypoint on walkable ground, and a side-by-side picture of both maps.
 - **Zones** – the `.map` file ends with the zone (`zone_template`) of every 13 × 13 block (`map_file.read_zones`); they
   are the places here (`ZoneMap`): the minimap and the "Entering ..." banner show them. Its "Kandoryrs" is spelled
   "Kandorys".

@@ -21,4 +21,4 @@ namespace Unity.Netcode {
     public void Add(T v){} public void Clear(){} public void RemoveAt(int i){} public int Count => 0; public T this[int i] { get => default; set {} }
   }
 }
-namespace UnityEngine.InputSystem { public class Mouse { public static Mouse current; public PosCtl position; } public class PosCtl { public Vector2 ReadValue()=>default; } }
+namespace UnityEngine.InputSystem { public class Mouse { public static Mouse current; public PosCtl position; } public class PosCtl { public Vector2 ReadValue()=>default; } public class Keyboard { public static Keyboard current; public KeyCtl f3Key; } public class KeyCtl { public bool wasPressedThisFrame; } }
