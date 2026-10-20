@@ -23,6 +23,19 @@ Players test the WebGL build at https://cocomelionas-netizen.github.io/RPG-s/ (O
   editor error; its `Editor/EditorCheck.csproj` is committed with `git add -f` too).
 - Do not try to get data from the source game's live server (not allowed). Client data is fine.
 
+## Reviews, Unity version, map and performance
+
+- **Reviews**: when asked for a review, audit or list of findings, produce the list only (`/review`, see
+  `.claude/skills/review/SKILL.md`) and change nothing until the owner says which findings to fix.
+- **Unity 6.6**: CI builds with Unity 6000.6.4f1 and fails on APIs obsolete there (for example `GetInstanceID`), while
+  the reference DLLs of the compile checks still accept them. `check.sh` also runs `Tools/CompileCheck/deprecations.sh`
+  (a Stop hook in `.claude/settings.json` runs it too); add newly found obsolete APIs to that script.
+- **Map fidelity**: the world must match the source game's layout; check changes against the source data (and its
+  world map picture) before building on them.
+- **Performance**: when the world or the number of objects grows, keep only what is near players active (monster
+  spawners' activation range), draw props as tiles, give moving HUD layers their own canvases, and rewrite UI texts
+  only when their values change.
+
 ## Source data
 
 Client files come from `https://github.com/DreadmystRPG/steam` (blobless clone is enough): `game.db` (SQLite:
