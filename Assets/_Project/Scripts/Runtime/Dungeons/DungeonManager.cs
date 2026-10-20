@@ -394,6 +394,7 @@ namespace RPG.Dungeons
                 ai.AggroRadius = dungeon.monsterAggroRadius;
                 ai.ServerOverrideLevel(spot.level);
                 if (spot.loot != null && spot.loot.Length > 0) ai.ServerAddBonusLoot(spot.loot);
+                if (spot.spells != null && spot.spells.Length > 0 && monster.TryGetComponent(out MonsterCaster caster)) caster.Spells = spot.spells;
                 if (spot.blueChance > 0f || spot.goldChance > 0f || spot.purpleChance > 0f)
                     ai.ConfigureQualityDrops(spot.blueChance, spot.goldChance, spot.purpleChance);
                 if (spot.goldScale > 0f)

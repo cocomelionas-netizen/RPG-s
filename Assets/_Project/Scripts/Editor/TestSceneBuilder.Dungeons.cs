@@ -158,6 +158,7 @@ namespace RPG.EditorTools
                     cell = m.cell,
                     displayName = m.name,
                     controlImmune = Array.IndexOf(MonsterData.ControlImmune, m.name.Trim()) >= 0,
+                    spells = MonsterSpellsFor(m.name.Trim()),
                     level = m.level,
                     elite = m.elite,
                     boss = m.boss,
@@ -253,6 +254,7 @@ namespace RPG.EditorTools
                 spawner.Level = edge.level;
                 spawner.DisplayName = edge.name;
                 spawner.ControlImmune = Array.IndexOf(MonsterData.ControlImmune, edge.name) >= 0;
+                spawner.Spells = MonsterSpellsFor(edge.name);
                 spawner.BonusLoot = DungeonLoot(edge.loot).Concat(JunkLoot(edge.name, edge.level)).ToArray();
             }
         }

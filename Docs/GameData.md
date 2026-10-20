@@ -264,6 +264,15 @@ shields and mana as they are, damage half the formula × `LevelCurve.DamageGrowt
 - **Monsters** (`Tools/GameData/monsters.py` → `MonsterData`): neutral kinds (`npc_template.faction` 2: Antling, Timber
   Howler, Cokatrice...) fight only when attacked; spots whose `npc.movement_type` is 0 stand still; monsters with a
   `mechanic_immune_mask` (most bosses) are never stunned, incapacitated or rooted.
+- **Monster spells** (`Tools/GameData/monster_spells.py` → `MonsterSpellData`, `TestSceneBuilder.MonsterSpells.cs`,
+  `Monsters/MonsterCaster.cs`): 105 monsters cast the source game's spells (npc_template `spell_primary`, `spell_1..4`
+  with chance, try interval and cooldown): bolts (Frost Bolt slows, Storm Bolt stuns, Shadow Bolt makes you take more
+  damage), strikes (Hamstring, Mortal Wound halves healing), damage over time (Rend, Blight, Venomous Bite), fears
+  (Howl of Terror), War Stomp, enrages, heals of hurt allies, charges, and the bosses' volleys, Disintegrate, Finger of
+  Death and Forcecage. A primary spell (casters, archers) is cast from its range instead of swinging. Casting stands
+  still and is broken by stuns and silences; everyone sees the spell's name and its bolt or ring. Fixed source amounts
+  are measured against an ordinary elite's hit (400); the others scale with the monster's own hit. Bosses with spells no
+  longer use the generic ground slam.
 - **Sleep** (spell 245): every class knows it: a 2.5 sec cast out of combat, then 40% of health and mana; 3 min cooldown.
 
 ## Dungeons

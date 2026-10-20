@@ -31,6 +31,8 @@ namespace RPG.Monsters
         [Tooltip("Rolled once when one of them dies, on top of its own drops (keys).")]
         [SerializeField] private RPG.Items.LootEntry[] bonusLoot = System.Array.Empty<RPG.Items.LootEntry>();
 
+        [Tooltip("The spells the monsters here cast (the source game's npc_template spells).")]
+        [SerializeField] private MonsterSpell[] spells = System.Array.Empty<MonsterSpell>();
         [Tooltip("Neutral: fights only when attacked (the source game's faction 2).")]
         [SerializeField] private bool passive;
         [Tooltip("Stands at its spot instead of wandering (the source game's movement type 0).")]
@@ -93,6 +95,13 @@ namespace RPG.Monsters
         {
             get => bonusLoot;
             set => bonusLoot = value ?? System.Array.Empty<RPG.Items.LootEntry>();
+        }
+
+        /// <summary>The spells the monsters here cast.</summary>
+        public MonsterSpell[] Spells
+        {
+            get => spells;
+            set => spells = value ?? System.Array.Empty<MonsterSpell>();
         }
 
         /// <summary>Neutral monsters: they fight only when attacked.</summary>
@@ -269,6 +278,7 @@ namespace RPG.Monsters
                 if (level > 0) ai.ServerOverrideLevel(level);
                 if (bonusLoot.Length > 0) ai.ServerAddBonusLoot(bonusLoot);
                 if (passive) ai.AggroRadius = 0f;
+                if (spells.Length > 0 && monster.TryGetComponent(out MonsterCaster caster)) caster.Spells = spells;
                 if (stationary) ai.WanderRadius = 0f;
             }
             if (damageSchool != DamageSchool.Physical && monster.TryGetComponent(out AutoAttack attack)) attack.School = damageSchool;

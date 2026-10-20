@@ -26,6 +26,7 @@ namespace RPG.Dungeons
 
         private MonsterAI ai;
         private Health health;
+        private MonsterCaster caster;
         private float nextSlamAt = -1f;
         private float slamLandsAt = -1f;
         private Vector2 slamCenter;
@@ -38,6 +39,7 @@ namespace RPG.Dungeons
         {
             ai = GetComponent<MonsterAI>();
             health = GetComponent<Health>();
+            caster = GetComponent<MonsterCaster>();
         }
 
         private void Update()
@@ -47,6 +49,8 @@ namespace RPG.Dungeons
             // A slam that was already announced still lands.
             if (slamLandsAt >= 0f && Time.time >= slamLandsAt) Land();
 
+            // A boss with the source game's own spells casts those instead.
+            if (caster != null && caster.HasSpells) return;
             if (health.IsDead || ai.State != MonsterState.Chase)
             {
                 nextSlamAt = -1f;

@@ -100,6 +100,7 @@ namespace RPG.Monsters
         private Health health;
         private AutoAttack autoAttack;
         private MonsterMotion motion;
+        private MonsterCaster caster;
         private Vector2 home;
         private bool hasHome;
         private float nextScanTime;
@@ -277,6 +278,7 @@ namespace RPG.Monsters
             health = GetComponent<Health>();
             autoAttack = GetComponent<AutoAttack>();
             motion = GetComponent<MonsterMotion>();
+            caster = GetComponent<MonsterCaster>();
             normalScale = transform.localScale;
             prefabLevel = level;
         }
@@ -404,6 +406,9 @@ namespace RPG.Monsters
                     other.AddThreat(source, AssistThreat, false);
             }
         }
+
+        /// <summary>Server: a spell of it landed (casters keep fighting like a swing that hit).</summary>
+        public void ServerSpellLanded() => OnHitLanded(CurrentTarget, 0);
 
         private void OnHitLanded(Health target, int damage)
         {
@@ -536,8 +541,16 @@ namespace RPG.Monsters
 
             Vector2 self = Position;
             Vector2 target = AutoAttack.ServerPosition(CurrentTarget);
-            // Out of reach, or a wall in between: go around it.
-            if (Vector2.Distance(self, target) > autoAttack.Range * 0.85f || !WorldNavigation.LineOfSight(self, target))
+            // Casting: stands still facing the target.
+            if (caster != null && caster.IsCasting)
+            {
+                if (motion.Destination.HasValue) motion.ServerStop();
+                motion.ServerFace(target - self);
+                return;
+            }
+            // Out of reach (a caster's: its spell's range), or a wall in between: go around it.
+            float reach = Mathf.Max(autoAttack.Range * 0.85f, caster != null ? caster.PreferredRange : 0f);
+            if (Vector2.Distance(self, target) > reach || !WorldNavigation.LineOfSight(self, target))
             {
                 motion.ServerMoveTo(target);
                 if (motion.PathFailed)

@@ -827,6 +827,8 @@ namespace RPG.EditorTools
             attackObject.ApplyModifiedPropertiesWithoutUndo();
 
             var ai = monster.AddComponent<MonsterAI>();
+            // The source game's monster spells, given per spot (MonsterSpellsFor).
+            monster.AddComponent<MonsterCaster>();
             var aiObject = new SerializedObject(ai);
             aiObject.FindProperty("level").intValue = spec.Level;
             aiObject.FindProperty("experienceReward").intValue = spec.Experience;
@@ -1650,6 +1652,7 @@ namespace RPG.EditorTools
                 spawner.Passive = Array.IndexOf(MonsterData.Passive, sourceName) >= 0;
                 spawner.Stationary = i < MonsterData.SpotWanders.Length && !MonsterData.SpotWanders[i];
                 spawner.ControlImmune = Array.IndexOf(MonsterData.ControlImmune, sourceName) >= 0;
+                spawner.Spells = MonsterSpellsFor(sourceName);
                 int keyLoot = KeyDropperLoot(cell);
                 // ... and the wyrms Draconic Treasure and Flawless gems (DungeonData.OutdoorLoot).
                 int ownLoot = !string.IsNullOrEmpty(sourceName) && DungeonData.OutdoorLoot.TryGetValue(sourceName, out int loot) ? loot : 0;
