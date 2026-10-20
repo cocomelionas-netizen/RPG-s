@@ -264,6 +264,26 @@ namespace RPG.Tests
         }
 
         [UnityTest]
+        public IEnumerator Spawner_WithActivationRange_OnlyWhilePlayerNear()
+        {
+            spawnerObject = new GameObject("Test Spawner");
+            spawnerObject.transform.position = player.transform.position + new Vector3(60f, 0f, 0f);
+            var spawner = spawnerObject.AddComponent<MonsterSpawner>();
+            spawner.Configure(goblinPrefab, 2, 0f, 0.2f);
+            spawner.ActivationRange = 20f;
+            yield return new WaitForSeconds(1.2f);
+            Assert.AreEqual(0, spawner.Alive.Count, "No player near: nothing spawned.");
+
+            spawnerObject.transform.position = player.transform.position + new Vector3(10f, 0f, 0f);
+            yield return new WaitForSeconds(1.2f);
+            Assert.AreEqual(2, spawner.Alive.Count, "A player came near.");
+
+            player.GetComponent<PlayerNetworkMovement>().ServerTeleport((Vector2)player.transform.position - new Vector2(50f, 0f));
+            yield return new WaitForSeconds(7f);
+            Assert.AreEqual(0, spawner.Alive.Count, "Every player is far: the idle monsters went away.");
+        }
+
+        [UnityTest]
         public IEnumerator Player_RegeneratesOutOfCombat()
         {
             var regeneration = player.GetComponent<HealthRegeneration>();

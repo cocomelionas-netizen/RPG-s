@@ -81,6 +81,8 @@ namespace RPG.EditorTools
         };
 
         // The world is the size of the source game's start region, laid out from its data (StartAreaData).
+        /// <summary>World monsters exist only within this many world units of a player (the screen is about 16 across).</summary>
+        private const float MonsterActivationRange = 22f;
         private const int MapWidth = StartAreaData.Width;
         private const int MapHeight = StartAreaData.Height;
         // New characters start in Pilgrim's Refuge; the main town with the vendors is St. Revere, like in the source game.
@@ -1536,6 +1538,7 @@ namespace RPG.EditorTools
                 spot.transform.SetParent(parent, false);
                 spot.transform.position = grid.GetCellCenterWorld(OpenCellNear(obstacles, cell));
                 var spawner = spot.AddComponent<MonsterSpawner>();
+                spawner.ActivationRange = MonsterActivationRange;
                 spawner.Configure(prefab, 1, 0.6f, respawn);
                 spawner.EliteChance = elite ? 1f : 0f;
                 spawner.Level = level;

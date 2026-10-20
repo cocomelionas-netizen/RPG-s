@@ -27,6 +27,8 @@ Generated data lives in `Scripts/Editor/*Data.cs` (`StartAreaData`, `GearData`, 
 - **Vendors** – every vendor of the island where the source game stands it (see "Vendors" below).
 - **Monsters** – all 531 hostile NPCs of the island at their spots, with their levels (1–30) and respawn times (up to
   10 min). HP and damage grow with the level (`MonsterAI.HealthScaleBetween`); its elites and bosses are elites here.
+  A spot's monsters exist only while a player is within 22 world units (`MonsterSpawner.ActivationRange`); the idle
+  ones go away 5 s after every player has left, so the island only runs the monsters around its players.
 - **Chests** – 197 at their spots, with their levels and respawn times.
 - **Waypoints** – at the source game's 9 waypoints: Pilgrim's Refuge, St. Revere, Kandorys Beach, Fields of Dreams,
   Thicket of the Wanderer, Merchant's Way, Atmar's Fall, Deserters, Ruins of Atmar. Walking up to one discovers it

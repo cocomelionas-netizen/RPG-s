@@ -246,6 +246,7 @@ namespace RPG.EditorTools
                 spot.transform.SetParent(parent, false);
                 spot.transform.position = grid.GetCellCenterWorld(OpenCellNear(obstacles, edge.cell));
                 var spawner = spot.AddComponent<MonsterSpawner>();
+                spawner.ActivationRange = MonsterActivationRange;
                 spawner.Configure(orc, 1, 0.6f, edge.respawn);
                 spawner.EliteChance = edge.elite ? 1f : 0f;
                 spawner.Level = edge.level;
