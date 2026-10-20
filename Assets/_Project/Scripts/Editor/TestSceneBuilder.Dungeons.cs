@@ -104,7 +104,8 @@ namespace RPG.EditorTools
                 {
                     if (prefabs.ContainsKey(spot.name)) continue;
                     GameObject look = spot.kind == 2 ? chests.Strongbox : spot.kind == 1 ? chests.Chest : chests.Crate;
-                    Sprite sprite = look.GetComponent<SpriteRenderer>().sprite;
+                    Sprite sprite = spot.kind == 0 && spot.name.IndexOf("Barrel", StringComparison.OrdinalIgnoreCase) >= 0
+                        ? chests.Barrel : look.GetComponent<SpriteRenderer>().sprite;
                     Action<LootChest> configure = null;
                     if (spot.kind == 2) configure = chest => chest.ConfigureLocked(100f, 15f, 5f, 1f, 2, 100f, 100f, potions, gems);
                     else if (spot.kind == 1) configure = chest => chest.ConfigureLocked(100f, 12f, 5f, 1f, 0, 75f, 75f, potions, gems);

@@ -1,7 +1,7 @@
 # Art
 
 The world, heroes and monsters are drawn with art from the open game **Flare** (CC-BY-SA 3.0; authors and license in
-`Assets/_Project/Art/Flare/CREDITS.md`). UI, items, effects and a few props are still this project's own placeholders
+`Assets/_Project/Art/Flare/CREDITS.md`). UI, effects and a few props are still this project's own placeholders
 (`PlaceholderArtGenerator`).
 
 ## How it gets in
@@ -22,6 +22,8 @@ The world, heroes and monsters are drawn with art from the open game **Flare** (
 - **Lakes**: the source map has no water; `Tools/GameData/world.py` takes it from the source game's world map picture
   (blue there, not walkable in the `.map` file, groups of 30 cells or more). Where a lake would cut off a spot players
   can reach in the source game, the fewest water cells to it are opened, three wide (its fords).
+- **Containers**: Flare's dungeon crate, barrel, chest and spiked chest draw the wooden crates (barrels in dungeons),
+  the locked chests and the strongboxes, a little larger than the world's 2/3 scale so they are easy to spot.
 - **Heroes** (8 directions: idle, run, attack): Flare's male avatar layers drawn together in Flare's layer order per
   direction: the warrior in plate with longsword and kite shield, the ranger in leather with a longbow (attack: shoot),
   the mage in robes with a staff (attack: cast).

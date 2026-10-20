@@ -162,7 +162,7 @@ namespace RPG.EditorTools
             monsterLootBag = lootBagPrefab;
             monsterAffixes = affixes;
             LookPrefabs.Clear();
-            ChestPrefabs chests = CreateChestPrefabs(items, affixes, lootBagPrefab);
+            ChestPrefabs chests = CreateChestPrefabs(items, affixes, lootBagPrefab, worldTiles);
             DungeonDefinition[] dungeons = CreateDungeons(orcPrefab, worldTiles,
                 CreateDungeonContainers(chests, items, affixes, lootBagPrefab));
             CharacterAnimationSet rangerAnimations = FlareAnimationSet("HeroRanger");
@@ -1644,6 +1644,8 @@ namespace RPG.EditorTools
             public GameObject Crate;
             public GameObject Chest;
             public GameObject Strongbox;
+            /// <summary>The barrel's look (dungeon barrels are crates that look like one).</summary>
+            public Sprite Barrel;
         }
 
         /// <summary>
@@ -1652,28 +1654,25 @@ namespace RPG.EditorTools
         /// gold 5%, purple 1%), a potion (75%), a gem (75%) and twice the gold; strongboxes two more pieces, a potion
         /// and a gem for sure and three times the gold.
         /// </summary>
-        private static ChestPrefabs CreateChestPrefabs(ItemCatalog items, AffixCatalog affixes, GameObject lootBagPrefab)
+        private static ChestPrefabs CreateChestPrefabs(ItemCatalog items, AffixCatalog affixes, GameObject lootBagPrefab, WorldTiles tiles)
         {
-            var wood = new Color(0.55f, 0.38f, 0.22f);
-            var darkWood = new Color(0.42f, 0.26f, 0.14f);
-            var iron = new Color(0.45f, 0.47f, 0.52f);
-            var gold = new Color(0.95f, 0.78f, 0.3f);
+            // Flare's dungeon containers, drawn larger than the world's other art so they are easy to spot.
+            Sprite crate = tiles.Containers[0].sprite;
+            Sprite chestLook = tiles.Containers[2].sprite;
+            Sprite strongboxLook = tiles.Containers[3].sprite;
             ItemDefinition[] potions = Loot(items, ("HealingPotion", 1f), ("ManaPotion", 1f)).Select(entry => entry.item).ToArray();
             ItemDefinition[] gems = Loot(items, ("ChippedRuby", 1f), ("ChippedTopaz", 1f), ("ChippedSapphire", 1f), ("ChippedEmerald", 1f), ("RoughAmethyst", 1f))
                 .Select(entry => entry.item).ToArray();
 
-            GameObject chest = CreateChestPrefab("OakChest", "Oak Chest", 4, 2f,
-                PlaceholderArtGenerator.Container("OakChest", darkWood, iron, gold, 60f, 32f, true), lootBagPrefab, affixes, items,
+            GameObject chest = CreateChestPrefab("OakChest", "Oak Chest", 4, 2f, chestLook, lootBagPrefab, affixes, items,
                 lootChest => lootChest.ConfigureLocked(100f, 12f, 5f, 1f, 0, 75f, 75f, potions, gems));
-            GameObject strongbox = CreateChestPrefab("IronStrongbox", "Iron Strongbox", 6, 3f,
-                PlaceholderArtGenerator.Container("IronStrongbox", iron, new Color(0.3f, 0.31f, 0.35f), gold, 56f, 36f, false), lootBagPrefab, affixes,
-                items, lootChest => lootChest.ConfigureLocked(100f, 15f, 5f, 1f, 2, 100f, 100f, potions, gems));
+            GameObject strongbox = CreateChestPrefab("IronStrongbox", "Iron Strongbox", 6, 3f, strongboxLook, lootBagPrefab, affixes, items, lootChest => lootChest.ConfigureLocked(100f, 15f, 5f, 1f, 2, 100f, 100f, potions, gems));
             return new ChestPrefabs
             {
-                Crate = CreateChestPrefab("WoodenCrate", "Wooden Crate", 2, 1f,
-                    PlaceholderArtGenerator.Container("WoodenCrate", wood, darkWood, darkWood, 52f, 34f, false), lootBagPrefab, affixes, items, null),
+                Crate = CreateChestPrefab("WoodenCrate", "Wooden Crate", 2, 1f, crate, lootBagPrefab, affixes, items, null),
                 Chest = chest,
                 Strongbox = strongbox,
+                Barrel = tiles.Containers[1].sprite,
             };
         }
 
@@ -1688,8 +1687,8 @@ namespace RPG.EditorTools
             var lootChest = chest.AddComponent<LootChest>();
             lootChest.Configure(chestName, level, lootBagPrefab, affixes, gear, goldRatio);
             configure?.Invoke(lootChest);
-            // Clicked to open; does not block walking.
-            AddHitbox(chest, new Vector2(0.45f, 0.35f), new Vector2(0f, 0.15f));
+            // Clicked to open (the whole box); does not block walking.
+            AddHitbox(chest, new Vector2(0.7f, 0.55f), new Vector2(0f, 0.25f));
 
             string path = $"{ChestPrefabFolder}/{fileName}.prefab";
             Directory.CreateDirectory(ChestPrefabFolder);

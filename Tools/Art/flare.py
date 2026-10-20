@@ -30,7 +30,9 @@ FLARE_DIRECTION_NAMES = ['W', 'NW', 'N', 'NE', 'E', 'SE', 'S', 'SW']
 # This project's DirectionalClip fields in order: east, northEast, north, northWest, west, southWest, south, southEast.
 OUR_ORDER = [4, 3, 2, 1, 0, 7, 6, 5]
 
-# Tiles of tileset_grassland: (name, image, ids).
+# Tiles: (name, image, ids[, scale]). Prop0-3 are containers from tileset_dungeon (crate, barrel, chest, strongbox),
+# the chests drawn larger than the world's 2/3 so they stand out (CHEST_SCALES).
+CHEST_SCALES = [0.7, 0.7, 0.9, 0.75]
 TILES = [
     ('Grass', 'grassland', range(16, 32)),
     ('Path', 'grassland', range(32, 44)),
@@ -38,6 +40,7 @@ TILES = [
     ('Plant', 'grassland', list(range(112, 118)) + list(range(120, 128))),
     ('Tree', 'grassland', list(range(240, 244)) + list(range(248, 256))),
     ('Water', 'water', range(176, 192)),
+    ('Prop', 'dungeon', [147, 146, 144, 288], CHEST_SCALES),
 ]
 
 # Monsters: our look name, Flare enemy, the animation used for attacks.
@@ -182,21 +185,25 @@ def pivot_of(w, h, ox, oy):
 def pack_tiles(flare):
     base = os.path.join(flare, 'mods', 'fantasycore')
     sets = read_tileset(os.path.join(base, 'tilesetdefs', 'tileset_grassland.txt'))
+    dungeon = read_tileset(os.path.join(base, 'tilesetdefs', 'tileset_dungeon.txt'))
     sources = {
         'grassland': (Image.open(os.path.join(base, 'images', 'tilesets', 'tileset_grassland.png')).convert('RGBA'),
                       sets['tileset_grassland.png']),
         'water': (Image.open(os.path.join(base, 'images', 'tilesets', 'tileset_grassland_water.png')).convert('RGBA'),
                   sets['tileset_grassland_water.png']),
+        'dungeon': (Image.open(os.path.join(base, 'images', 'tilesets', 'tileset_dungeon.png')).convert('RGBA'),
+                    dungeon['tileset_dungeon.png']),
     }
     atlas, names = Atlas(), []
-    for name, source, ids in TILES:
+    for name, source, ids, *scales in TILES:
         image, rects = sources[source]
         for k, tile in enumerate(ids):
+            scale = scales[0][k] if scales else SCALE
             x, y, w, h, ox, oy = rects[tile]
             crop = image.crop((x, y, x + w, y + h))
             # Water lies a half tile lower in Flare; here it is level with the ground.
             pivot = (0.5, 0.5) if source == 'water' else pivot_of(w, h, ox, oy)
-            atlas.add(scaled(crop, SCALE), pivot)
+            atlas.add(scaled(crop, scale), pivot)
             names.append(f'{name}{k}')
     sheet, rects = atlas.pack(4096)
     sheet.save(os.path.join(OUT, 'Tiles.png'), optimize=True)

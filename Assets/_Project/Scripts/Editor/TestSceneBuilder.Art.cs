@@ -36,6 +36,8 @@ namespace RPG.EditorTools
             public Tile[] Plants;
             /// <summary>Grass tufts and flowers on open ground (no collider).</summary>
             public Tile[] Decor;
+            /// <summary>Containers from Flare's dungeon tiles (their sprites draw the chests): crate, barrel, chest, strongbox.</summary>
+            public Tile[] Containers;
         }
 
         /// <summary>
@@ -149,6 +151,7 @@ namespace RPG.EditorTools
                 Plants = Kind("Plant", Tile.ColliderType.Grid),
                 // Plant6-13: reeds and tall grass, drawn on open ground without blocking.
                 Decor = Kind("Plant", Tile.ColliderType.None, i => i >= 6),
+                Containers = Kind("Prop", Tile.ColliderType.None),
             };
         }
 

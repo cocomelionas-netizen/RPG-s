@@ -350,52 +350,6 @@ namespace RPG.EditorTools
             return SaveSprite(texture, Folder, name, new Vector2(0.5f, baseY / height));
         }
 
-        /// <summary>
-        /// A box on the ground seen from the front and a little above: a crate, chest or strongbox.
-        /// <paramref name="roundLid"/> gives it a domed chest lid.
-        /// </summary>
-        public static Sprite Container(string name, Color body, Color band, Color metal, float boxWidth, float boxHeight, bool roundLid)
-        {
-            const int width = 112;
-            const int height = 104;
-            const float baseY = 10f;
-            const float topDepth = 14f;
-            var texture = new Texture2D(width, height, TextureFormat.RGBA32, false);
-            float halfWidth = boxWidth * 0.5f;
-            float frontTop = baseY + boxHeight;
-            for (int y = 0; y < height; y++)
-            for (int x = 0; x < width; x++)
-            {
-                var p = new Vector2(x + 0.5f - width * 0.5f, y + 0.5f);
-                Color color = Color.clear;
-                float shadow = Mathf.Clamp01(1f - new Vector2(p.x / (halfWidth + 10f), (p.y - baseY) / 8f).magnitude) * 0.45f;
-                if (shadow > 0f) color = new Color(0f, 0f, 0f, shadow);
-
-                bool inX = Mathf.Abs(p.x) <= halfWidth;
-                float lidTop = roundLid ? frontTop + topDepth * Mathf.Sqrt(Mathf.Max(0f, 1f - (p.x * p.x) / (halfWidth * halfWidth))) : frontTop + topDepth;
-                if (inX && p.y >= baseY && p.y <= frontTop)
-                {
-                    // Front face with planks, bands near the edges and a clasp in the middle.
-                    float plank = Mathf.Repeat(p.y - baseY, 9f) < 1.2f ? 0.8f : 1f;
-                    color = body * plank * (0.85f + 0.15f * (p.x / halfWidth + 1f) * 0.5f);
-                    if (Mathf.Abs(Mathf.Abs(p.x) - (halfWidth - 6f)) < 3f) color = band;
-                    if (Mathf.Abs(p.x) < 6f && Mathf.Abs(p.y - (frontTop - 8f)) < 6f) color = metal;
-                    color.a = 1f;
-                }
-                else if (inX && p.y > frontTop && p.y <= lidTop)
-                {
-                    // Lid / top, lighter as it faces the light.
-                    color = Color.Lerp(body, Color.white, 0.18f);
-                    if (Mathf.Abs(Mathf.Abs(p.x) - (halfWidth - 6f)) < 3f) color = Color.Lerp(band, Color.white, 0.15f);
-                    color.a = 1f;
-                }
-                if (color.a > 0.99f && (Mathf.Abs(Mathf.Abs(p.x) - halfWidth) < 1.5f || Mathf.Abs(p.y - baseY) < 1.5f || Mathf.Abs(p.y - frontTop) < 1.2f))
-                    color = Color.Lerp(color, Color.black, 0.45f);
-                texture.SetPixel(x, y, color);
-            }
-            return SaveSprite(texture, Folder, name, new Vector2(0.5f, baseY / height));
-        }
-
         /// <summary>A small cloth sack with a golden glint, left on the ground as loot.</summary>
         public static Sprite LootSack(string name)
         {
