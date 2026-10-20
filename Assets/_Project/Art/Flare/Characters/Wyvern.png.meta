@@ -1,0 +1,5176 @@
+fileFormatVersion: 2
+guid: dd8d8b5e644c69f42aae47e4c4af9cca
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 6769161949333604898
+    second: Wyvern_0
+  - first:
+      213: 4238993812915594131
+    second: Wyvern_1
+  - first:
+      213: 3535422995495282894
+    second: Wyvern_2
+  - first:
+      213: 1816483480376002714
+    second: Wyvern_3
+  - first:
+      213: 4550425339330286299
+    second: Wyvern_4
+  - first:
+      213: 4868689959082546630
+    second: Wyvern_5
+  - first:
+      213: -5818906419266874372
+    second: Wyvern_6
+  - first:
+      213: -65219789302005280
+    second: Wyvern_7
+  - first:
+      213: -6651149914318664509
+    second: Wyvern_8
+  - first:
+      213: 4698384088289201871
+    second: Wyvern_9
+  - first:
+      213: -5045517793680310793
+    second: Wyvern_10
+  - first:
+      213: 5073700294106671884
+    second: Wyvern_11
+  - first:
+      213: 330864043664827396
+    second: Wyvern_12
+  - first:
+      213: 6121417413284916150
+    second: Wyvern_13
+  - first:
+      213: 6042722942321922586
+    second: Wyvern_14
+  - first:
+      213: -8014447417363338987
+    second: Wyvern_15
+  - first:
+      213: -2952189853845816330
+    second: Wyvern_16
+  - first:
+      213: 9016698249868880478
+    second: Wyvern_17
+  - first:
+      213: -48586981769938932
+    second: Wyvern_18
+  - first:
+      213: 442666832869616112
+    second: Wyvern_19
+  - first:
+      213: -7707769153139445054
+    second: Wyvern_20
+  - first:
+      213: -519305528949423494
+    second: Wyvern_21
+  - first:
+      213: -1295577864979928096
+    second: Wyvern_22
+  - first:
+      213: -4526002130180214890
+    second: Wyvern_23
+  - first:
+      213: -3880627697019614365
+    second: Wyvern_24
+  - first:
+      213: 5398951561996350399
+    second: Wyvern_25
+  - first:
+      213: 8675464810662474911
+    second: Wyvern_26
+  - first:
+      213: 6163970674817839888
+    second: Wyvern_27
+  - first:
+      213: -658611892323323018
+    second: Wyvern_28
+  - first:
+      213: 6690998153884423021
+    second: Wyvern_29
+  - first:
+      213: 2392520677059992822
+    second: Wyvern_30
+  - first:
+      213: 7772346764253753698
+    second: Wyvern_31
+  - first:
+      213: 3606983816121506306
+    second: Wyvern_32
+  - first:
+      213: 7491896321859215702
+    second: Wyvern_33
+  - first:
+      213: 5224661822090408259
+    second: Wyvern_34
+  - first:
+      213: -69878350813451749
+    second: Wyvern_35
+  - first:
+      213: 1479571523170129061
+    second: Wyvern_36
+  - first:
+      213: -1221280398366372366
+    second: Wyvern_37
+  - first:
+      213: -4346983217648465192
+    second: Wyvern_38
+  - first:
+      213: -2247572182234944404
+    second: Wyvern_39
+  - first:
+      213: 5579627708752013199
+    second: Wyvern_40
+  - first:
+      213: -4034709750348633713
+    second: Wyvern_41
+  - first:
+      213: 5618633919354364617
+    second: Wyvern_42
+  - first:
+      213: 1266840515850605869
+    second: Wyvern_43
+  - first:
+      213: -9021661763976130442
+    second: Wyvern_44
+  - first:
+      213: 7787418536109962000
+    second: Wyvern_45
+  - first:
+      213: 1847636850246015580
+    second: Wyvern_46
+  - first:
+      213: -7270214466512486519
+    second: Wyvern_47
+  - first:
+      213: 8897018512013079913
+    second: Wyvern_48
+  - first:
+      213: 771391408813221816
+    second: Wyvern_49
+  - first:
+      213: 5246141153405267394
+    second: Wyvern_50
+  - first:
+      213: 3539541182255521396
+    second: Wyvern_51
+  - first:
+      213: 1620925564132107411
+    second: Wyvern_52
+  - first:
+      213: 1949242946684815481
+    second: Wyvern_53
+  - first:
+      213: -58178673321446361
+    second: Wyvern_54
+  - first:
+      213: 1382994731731153766
+    second: Wyvern_55
+  - first:
+      213: 688099691401577818
+    second: Wyvern_56
+  - first:
+      213: 5181871900612747177
+    second: Wyvern_57
+  - first:
+      213: -1050818514901751968
+    second: Wyvern_58
+  - first:
+      213: -2019490685815984190
+    second: Wyvern_59
+  - first:
+      213: -1757482931161971733
+    second: Wyvern_60
+  - first:
+      213: -3328380165832972582
+    second: Wyvern_61
+  - first:
+      213: 181561908344054332
+    second: Wyvern_62
+  - first:
+      213: -8085933915307685108
+    second: Wyvern_63
+  - first:
+      213: -890160568491825429
+    second: Wyvern_64
+  - first:
+      213: 2824183117303665347
+    second: Wyvern_65
+  - first:
+      213: 2598088607452273668
+    second: Wyvern_66
+  - first:
+      213: 1006062034116446954
+    second: Wyvern_67
+  - first:
+      213: -5169854757956287906
+    second: Wyvern_68
+  - first:
+      213: -7208361353170638039
+    second: Wyvern_69
+  - first:
+      213: -120542287929522021
+    second: Wyvern_70
+  - first:
+      213: -5337049571321713540
+    second: Wyvern_71
+  - first:
+      213: 9211900708857098785
+    second: Wyvern_72
+  - first:
+      213: -4097604331630235871
+    second: Wyvern_73
+  - first:
+      213: 6919488005355632084
+    second: Wyvern_74
+  - first:
+      213: -5689409149188051202
+    second: Wyvern_75
+  - first:
+      213: -6140151785258134659
+    second: Wyvern_76
+  - first:
+      213: -1916653599204707353
+    second: Wyvern_77
+  - first:
+      213: 1837125670614813834
+    second: Wyvern_78
+  - first:
+      213: 1802306980721133701
+    second: Wyvern_79
+  - first:
+      213: -1100063360414097210
+    second: Wyvern_80
+  - first:
+      213: 2797127584822402174
+    second: Wyvern_81
+  - first:
+      213: 1836892983602873439
+    second: Wyvern_82
+  - first:
+      213: 3910092707035384647
+    second: Wyvern_83
+  - first:
+      213: -6068689286401390630
+    second: Wyvern_84
+  - first:
+      213: 8409448101658529220
+    second: Wyvern_85
+  - first:
+      213: -3205260436864886796
+    second: Wyvern_86
+  - first:
+      213: -5326318811293403930
+    second: Wyvern_87
+  - first:
+      213: 740379702539369945
+    second: Wyvern_88
+  - first:
+      213: 7540761182469040125
+    second: Wyvern_89
+  - first:
+      213: -6212214933495043382
+    second: Wyvern_90
+  - first:
+      213: -6018473232100618131
+    second: Wyvern_91
+  - first:
+      213: 6020037209068954137
+    second: Wyvern_92
+  - first:
+      213: 297167945824910262
+    second: Wyvern_93
+  - first:
+      213: -2076986933014018559
+    second: Wyvern_94
+  - first:
+      213: -3324661949302066153
+    second: Wyvern_95
+  - first:
+      213: 6076690155920071069
+    second: Wyvern_96
+  - first:
+      213: 5737366334082222310
+    second: Wyvern_97
+  - first:
+      213: 4362196777002090879
+    second: Wyvern_98
+  - first:
+      213: -6090662111758658363
+    second: Wyvern_99
+  - first:
+      213: 7793320378205309561
+    second: Wyvern_100
+  - first:
+      213: -300892490242579502
+    second: Wyvern_101
+  - first:
+      213: 4292554752043254205
+    second: Wyvern_102
+  - first:
+      213: 110708701065772607
+    second: Wyvern_103
+  - first:
+      213: 4786124357101455089
+    second: Wyvern_104
+  - first:
+      213: -5887006480922742957
+    second: Wyvern_105
+  - first:
+      213: -4673287888801147812
+    second: Wyvern_106
+  - first:
+      213: 32372615057906923
+    second: Wyvern_107
+  - first:
+      213: -1250248995109577902
+    second: Wyvern_108
+  - first:
+      213: -491339848603072605
+    second: Wyvern_109
+  - first:
+      213: -5020807397942868070
+    second: Wyvern_110
+  - first:
+      213: -1388018103810397252
+    second: Wyvern_111
+  - first:
+      213: 6132348963012581034
+    second: Wyvern_112
+  - first:
+      213: -5040344984250930059
+    second: Wyvern_113
+  - first:
+      213: 8635306912406655340
+    second: Wyvern_114
+  - first:
+      213: -916993455448923968
+    second: Wyvern_115
+  - first:
+      213: 604877704949037407
+    second: Wyvern_116
+  - first:
+      213: 2481495266252134374
+    second: Wyvern_117
+  - first:
+      213: 1612543953657269567
+    second: Wyvern_118
+  - first:
+      213: -9066479374827107138
+    second: Wyvern_119
+  - first:
+      213: 6784150630756559267
+    second: Wyvern_120
+  - first:
+      213: -2608665579260978085
+    second: Wyvern_121
+  - first:
+      213: 5619145288455867243
+    second: Wyvern_122
+  - first:
+      213: 5851012168201581910
+    second: Wyvern_123
+  - first:
+      213: -9034839904622475236
+    second: Wyvern_124
+  - first:
+      213: -6945756444877361558
+    second: Wyvern_125
+  - first:
+      213: 544946071002645821
+    second: Wyvern_126
+  - first:
+      213: -3887584272174599071
+    second: Wyvern_127
+  - first:
+      213: 9109286629062928270
+    second: Wyvern_128
+  - first:
+      213: 6583288780337221107
+    second: Wyvern_129
+  - first:
+      213: -2240965734949529940
+    second: Wyvern_130
+  - first:
+      213: 6150999779848385381
+    second: Wyvern_131
+  - first:
+      213: -4618414526387494183
+    second: Wyvern_132
+  - first:
+      213: -6463141424226673676
+    second: Wyvern_133
+  - first:
+      213: -5209139323123008096
+    second: Wyvern_134
+  - first:
+      213: -4674207787256945164
+    second: Wyvern_135
+  - first:
+      213: 4483914433078427999
+    second: Wyvern_136
+  - first:
+      213: 5413514008670373445
+    second: Wyvern_137
+  - first:
+      213: 6783271897502379636
+    second: Wyvern_138
+  - first:
+      213: -1386955372902785044
+    second: Wyvern_139
+  - first:
+      213: 5477964034512225551
+    second: Wyvern_140
+  - first:
+      213: 586614220081463800
+    second: Wyvern_141
+  - first:
+      213: 1743525893982528011
+    second: Wyvern_142
+  - first:
+      213: -374698466747728730
+    second: Wyvern_143
+  - first:
+      213: -7846506603312607998
+    second: Wyvern_144
+  - first:
+      213: 3386471140264660155
+    second: Wyvern_145
+  - first:
+      213: -4489946068588306700
+    second: Wyvern_146
+  - first:
+      213: 2087743461633886851
+    second: Wyvern_147
+  - first:
+      213: 3222105520582345212
+    second: Wyvern_148
+  - first:
+      213: 2909683635246209526
+    second: Wyvern_149
+  - first:
+      213: -2595707599583759687
+    second: Wyvern_150
+  - first:
+      213: -9046563672437399397
+    second: Wyvern_151
+  - first:
+      213: 1982981678060961127
+    second: Wyvern_152
+  - first:
+      213: 4774171070479201424
+    second: Wyvern_153
+  - first:
+      213: -7296231095923330985
+    second: Wyvern_154
+  - first:
+      213: 7639931447250708646
+    second: Wyvern_155
+  - first:
+      213: -3347083774647501902
+    second: Wyvern_156
+  - first:
+      213: -3832174331023879546
+    second: Wyvern_157
+  - first:
+      213: -2838073882961916649
+    second: Wyvern_158
+  - first:
+      213: -6862031707244544091
+    second: Wyvern_159
+  - first:
+      213: -6415662970042994386
+    second: Wyvern_160
+  - first:
+      213: -7521287608689934470
+    second: Wyvern_161
+  - first:
+      213: -5991909303279777226
+    second: Wyvern_162
+  - first:
+      213: 7601587021651629889
+    second: Wyvern_163
+  - first:
+      213: 3393077132475619470
+    second: Wyvern_164
+  - first:
+      213: -8280727092436041863
+    second: Wyvern_165
+  - first:
+      213: -7235577335772014703
+    second: Wyvern_166
+  - first:
+      213: -712518795292022159
+    second: Wyvern_167
+  - first:
+      213: -8272741654189537314
+    second: Wyvern_168
+  - first:
+      213: -3043037519976652145
+    second: Wyvern_169
+  - first:
+      213: 4087670517623916477
+    second: Wyvern_170
+  - first:
+      213: -2101739058096693134
+    second: Wyvern_171
+  - first:
+      213: -4880296685940661015
+    second: Wyvern_172
+  - first:
+      213: -3362811607098775716
+    second: Wyvern_173
+  - first:
+      213: 1070771659449105930
+    second: Wyvern_174
+  - first:
+      213: -973720797799528335
+    second: Wyvern_175
+  - first:
+      213: 2241331498187107470
+    second: Wyvern_176
+  - first:
+      213: -4298763467795700171
+    second: Wyvern_177
+  - first:
+      213: 4305917009543435978
+    second: Wyvern_178
+  - first:
+      213: 6393142469348034166
+    second: Wyvern_179
+  - first:
+      213: 5883012067349283205
+    second: Wyvern_180
+  - first:
+      213: 4007972167701592363
+    second: Wyvern_181
+  - first:
+      213: -4339366895354142614
+    second: Wyvern_182
+  - first:
+      213: 1480593726553831191
+    second: Wyvern_183
+  - first:
+      213: -6880448816759262273
+    second: Wyvern_184
+  - first:
+      213: -2638304569133286841
+    second: Wyvern_185
+  - first:
+      213: -421806829218514999
+    second: Wyvern_186
+  - first:
+      213: 841343161813004003
+    second: Wyvern_187
+  - first:
+      213: 2354133345033191381
+    second: Wyvern_188
+  - first:
+      213: 4232993857878712772
+    second: Wyvern_189
+  - first:
+      213: -7638991049719951858
+    second: Wyvern_190
+  - first:
+      213: 3647449353140554830
+    second: Wyvern_191
+  - first:
+      213: 92853043459830580
+    second: Wyvern_192
+  - first:
+      213: 6781645621355619769
+    second: Wyvern_193
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Wyvern_0
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 1877
+        width: 99
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 22ace19ade4e0fd50800000000000000
+      internalID: 6769161949333604898
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_1
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 1880
+        width: 87
+        height: 167
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 393a9e7e96ee3da30800000000000000
+      internalID: 4238993812915594131
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_2
+      rect:
+        serializedVersion: 2
+        x: 187
+        y: 1886
+        width: 156
+        height: 161
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ec86e31ab78501130800000000000000
+      internalID: 3535422995495282894
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_3
+      rect:
+        serializedVersion: 2
+        x: 343
+        y: 1887
+        width: 147
+        height: 160
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a984d2ce912753910800000000000000
+      internalID: 1816483480376002714
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_4
+      rect:
+        serializedVersion: 2
+        x: 490
+        y: 1887
+        width: 171
+        height: 160
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bd2d7b7acbb562f30800000000000000
+      internalID: 4550425339330286299
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_5
+      rect:
+        serializedVersion: 2
+        x: 661
+        y: 1888
+        width: 89
+        height: 159
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6c550ace8bf019340800000000000000
+      internalID: 4868689959082546630
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_6
+      rect:
+        serializedVersion: 2
+        x: 751
+        y: 1889
+        width: 175
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cf39b5a01771f3fa0800000000000000
+      internalID: -5818906419266874372
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_7
+      rect:
+        serializedVersion: 2
+        x: 926
+        y: 1890
+        width: 108
+        height: 157
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0e1045a72fa481ff0800000000000000
+      internalID: -65219789302005280
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_8
+      rect:
+        serializedVersion: 2
+        x: 1034
+        y: 1896
+        width: 109
+        height: 151
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3cc8a29646e52b3a0800000000000000
+      internalID: -6651149914318664509
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_9
+      rect:
+        serializedVersion: 2
+        x: 1143
+        y: 1897
+        width: 120
+        height: 150
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fce43d86f63043140800000000000000
+      internalID: 4698384088289201871
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_10
+      rect:
+        serializedVersion: 2
+        x: 1263
+        y: 1898
+        width: 125
+        height: 149
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7fdb5c78c48baf9b0800000000000000
+      internalID: -5045517793680310793
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_11
+      rect:
+        serializedVersion: 2
+        x: 1388
+        y: 1899
+        width: 161
+        height: 148
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c0be50f2987696640800000000000000
+      internalID: 5073700294106671884
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_12
+      rect:
+        serializedVersion: 2
+        x: 1552
+        y: 1899
+        width: 140
+        height: 148
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 404679f3817779400800000000000000
+      internalID: 330864043664827396
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_13
+      rect:
+        serializedVersion: 2
+        x: 1692
+        y: 1900
+        width: 145
+        height: 147
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6bbecb864b4a3f450800000000000000
+      internalID: 6121417413284916150
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_14
+      rect:
+        serializedVersion: 2
+        x: 1840
+        y: 1901
+        width: 153
+        height: 146
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a12933510801cd350800000000000000
+      internalID: 6042722942321922586
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_15
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 1733
+        width: 86
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 519e2094986f6c090800000000000000
+      internalID: -8014447417363338987
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_16
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 1734
+        width: 92
+        height: 143
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6fbf10428f6b707d0800000000000000
+      internalID: -2952189853845816330
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_17
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 1733
+        width: 172
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e5a2256294fb12d70800000000000000
+      internalID: 9016698249868880478
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_18
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 1734
+        width: 144
+        height: 143
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c08f4e2c562635ff0800000000000000
+      internalID: -48586981769938932
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_19
+      rect:
+        serializedVersion: 2
+        x: 498
+        y: 1735
+        width: 174
+        height: 142
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0f96a0f932ba42600800000000000000
+      internalID: 442666832869616112
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_20
+      rect:
+        serializedVersion: 2
+        x: 672
+        y: 1735
+        width: 132
+        height: 142
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2c2f860fac0880590800000000000000
+      internalID: -7707769153139445054
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_21
+      rect:
+        serializedVersion: 2
+        x: 804
+        y: 1735
+        width: 132
+        height: 142
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a72c2117f5e0bc8f0800000000000000
+      internalID: -519305528949423494
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_22
+      rect:
+        serializedVersion: 2
+        x: 936
+        y: 1735
+        width: 160
+        height: 142
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0eb230bcbce250ee0800000000000000
+      internalID: -1295577864979928096
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_23
+      rect:
+        serializedVersion: 2
+        x: 1096
+        y: 1736
+        width: 176
+        height: 141
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 69f62f9da096031c0800000000000000
+      internalID: -4526002130180214890
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_24
+      rect:
+        serializedVersion: 2
+        x: 1273
+        y: 1737
+        width: 122
+        height: 140
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 36b8a958bad352ac0800000000000000
+      internalID: -3880627697019614365
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_25
+      rect:
+        serializedVersion: 2
+        x: 1395
+        y: 1741
+        width: 168
+        height: 136
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fb3355c37ddecea40800000000000000
+      internalID: 5398951561996350399
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_26
+      rect:
+        serializedVersion: 2
+        x: 1563
+        y: 1740
+        width: 126
+        height: 137
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f9430fcd741756870800000000000000
+      internalID: 8675464810662474911
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_27
+      rect:
+        serializedVersion: 2
+        x: 1690
+        y: 1741
+        width: 151
+        height: 136
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 013317eaba2da8550800000000000000
+      internalID: 6163970674817839888
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_28
+      rect:
+        serializedVersion: 2
+        x: 1841
+        y: 1741
+        width: 172
+        height: 136
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 673783139f32cd6f0800000000000000
+      internalID: -658611892323323018
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_29
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 1597
+        width: 174
+        height: 136
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d63531bde533bdc50800000000000000
+      internalID: 6690998153884423021
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_30
+      rect:
+        serializedVersion: 2
+        x: 175
+        y: 1598
+        width: 110
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6fc10f131e0f33120800000000000000
+      internalID: 2392520677059992822
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_31
+      rect:
+        serializedVersion: 2
+        x: 285
+        y: 1599
+        width: 162
+        height: 134
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2617082d33cecdb60800000000000000
+      internalID: 7772346764253753698
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_32
+      rect:
+        serializedVersion: 2
+        x: 447
+        y: 1599
+        width: 163
+        height: 134
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 20a518e8ba49e0230800000000000000
+      internalID: 3606983816121506306
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_33
+      rect:
+        serializedVersion: 2
+        x: 610
+        y: 1599
+        width: 161
+        height: 134
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 651697ec20098f760800000000000000
+      internalID: 7491896321859215702
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_34
+      rect:
+        serializedVersion: 2
+        x: 772
+        y: 1600
+        width: 160
+        height: 133
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3417e39ee3ab18840800000000000000
+      internalID: 5224661822090408259
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_35
+      rect:
+        serializedVersion: 2
+        x: 933
+        y: 1599
+        width: 166
+        height: 134
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b1a264a920eb70ff0800000000000000
+      internalID: -69878350813451749
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_36
+      rect:
+        serializedVersion: 2
+        x: 1099
+        y: 1599
+        width: 165
+        height: 134
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5a4d652167e788410800000000000000
+      internalID: 1479571523170129061
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_37
+      rect:
+        serializedVersion: 2
+        x: 1264
+        y: 1599
+        width: 176
+        height: 134
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2fd8934c2f32d0fe0800000000000000
+      internalID: -1221280398366372366
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_38
+      rect:
+        serializedVersion: 2
+        x: 1441
+        y: 1600
+        width: 151
+        height: 133
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8da8a7b7bc96ca3c0800000000000000
+      internalID: -4346983217648465192
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_39
+      rect:
+        serializedVersion: 2
+        x: 1592
+        y: 1601
+        width: 92
+        height: 132
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c6c26d622050fc0e0800000000000000
+      internalID: -2247572182234944404
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_40
+      rect:
+        serializedVersion: 2
+        x: 1684
+        y: 1601
+        width: 88
+        height: 132
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f872717c6d1de6d40800000000000000
+      internalID: 5579627708752013199
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_41
+      rect:
+        serializedVersion: 2
+        x: 1772
+        y: 1602
+        width: 193
+        height: 131
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f892aaedbd4d108c0800000000000000
+      internalID: -4034709750348633713
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_42
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 1466
+        width: 147
+        height: 131
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9c2e316e7c569fd40800000000000000
+      internalID: 5618633919354364617
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_43
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 1467
+        width: 156
+        height: 130
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d251956bcb8b49110800000000000000
+      internalID: 1266840515850605869
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_44
+      rect:
+        serializedVersion: 2
+        x: 304
+        y: 1468
+        width: 186
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6709a7aac6e9cc280800000000000000
+      internalID: -9021661763976130442
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_45
+      rect:
+        serializedVersion: 2
+        x: 490
+        y: 1469
+        width: 159
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 013702a26e7721c60800000000000000
+      internalID: 7787418536109962000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_46
+      rect:
+        serializedVersion: 2
+        x: 649
+        y: 1470
+        width: 157
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c5ad5d41def14a910800000000000000
+      internalID: 1847636850246015580
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_47
+      rect:
+        serializedVersion: 2
+        x: 806
+        y: 1470
+        width: 163
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 98ffd9246720b1b90800000000000000
+      internalID: -7270214466512486519
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_48
+      rect:
+        serializedVersion: 2
+        x: 969
+        y: 1471
+        width: 125
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9653d90c23f887b70800000000000000
+      internalID: 8897018512013079913
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_49
+      rect:
+        serializedVersion: 2
+        x: 1095
+        y: 1470
+        width: 128
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8b7a919366884ba00800000000000000
+      internalID: 771391408813221816
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_50
+      rect:
+        serializedVersion: 2
+        x: 1223
+        y: 1470
+        width: 158
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2cd674275990ec840800000000000000
+      internalID: 5246141153405267394
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_51
+      rect:
+        serializedVersion: 2
+        x: 1381
+        y: 1470
+        width: 185
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 47ed434b3f9fe1130800000000000000
+      internalID: 3539541182255521396
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_52
+      rect:
+        serializedVersion: 2
+        x: 1566
+        y: 1471
+        width: 133
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 394a179663fae7610800000000000000
+      internalID: 1620925564132107411
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_53
+      rect:
+        serializedVersion: 2
+        x: 1699
+        y: 1471
+        width: 141
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 978851ae12a1d0b10800000000000000
+      internalID: 1949242946684815481
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_54
+      rect:
+        serializedVersion: 2
+        x: 1840
+        y: 1471
+        width: 140
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 724fb2b0ece413ff0800000000000000
+      internalID: -58178673321446361
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_55
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 1341
+        width: 138
+        height: 125
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 663721f8162613310800000000000000
+      internalID: 1382994731731153766
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_56
+      rect:
+        serializedVersion: 2
+        x: 139
+        y: 1341
+        width: 174
+        height: 125
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a550c0c060f9c8900800000000000000
+      internalID: 688099691401577818
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_57
+      rect:
+        serializedVersion: 2
+        x: 313
+        y: 1341
+        width: 171
+        height: 125
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9afd993f905b9e740800000000000000
+      internalID: 5181871900612747177
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_58
+      rect:
+        serializedVersion: 2
+        x: 485
+        y: 1343
+        width: 132
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 067a0efc02eba61f0800000000000000
+      internalID: -1050818514901751968
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_59
+      rect:
+        serializedVersion: 2
+        x: 617
+        y: 1341
+        width: 145
+        height: 125
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2cf6ab4cbe359f3e0800000000000000
+      internalID: -2019490685815984190
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_60
+      rect:
+        serializedVersion: 2
+        x: 762
+        y: 1341
+        width: 150
+        height: 125
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be3474de59a2c97e0800000000000000
+      internalID: -1757482931161971733
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_61
+      rect:
+        serializedVersion: 2
+        x: 912
+        y: 1341
+        width: 155
+        height: 125
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad6e11aafd73fc1d0800000000000000
+      internalID: -3328380165832972582
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_62
+      rect:
+        serializedVersion: 2
+        x: 1067
+        y: 1341
+        width: 68
+        height: 125
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c32e69bf799058200800000000000000
+      internalID: 181561908344054332
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_63
+      rect:
+        serializedVersion: 2
+        x: 1135
+        y: 1341
+        width: 72
+        height: 125
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c0b4dc4f1fdf8cf80800000000000000
+      internalID: -8085933915307685108
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_64
+      rect:
+        serializedVersion: 2
+        x: 1207
+        y: 1342
+        width: 160
+        height: 124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be62cf1eda385a3f0800000000000000
+      internalID: -890160568491825429
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_65
+      rect:
+        serializedVersion: 2
+        x: 1367
+        y: 1342
+        width: 155
+        height: 124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3c25a8ff493813720800000000000000
+      internalID: 2824183117303665347
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_66
+      rect:
+        serializedVersion: 2
+        x: 1523
+        y: 1342
+        width: 127
+        height: 124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 40c9e2eb2d34e0420800000000000000
+      internalID: 2598088607452273668
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_67
+      rect:
+        serializedVersion: 2
+        x: 1650
+        y: 1342
+        width: 113
+        height: 124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aea8485f61046fd00800000000000000
+      internalID: 1006062034116446954
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_68
+      rect:
+        serializedVersion: 2
+        x: 1763
+        y: 1343
+        width: 122
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e5207ab1d7cf048b0800000000000000
+      internalID: -5169854757956287906
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_69
+      rect:
+        serializedVersion: 2
+        x: 1885
+        y: 1342
+        width: 104
+        height: 124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 92b2c937a81c6fb90800000000000000
+      internalID: -7208361353170638039
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_70
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 1217
+        width: 148
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b984c838d6fb35ef0800000000000000
+      internalID: -120542287929522021
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_71
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 1217
+        width: 128
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c7ce7b811bdfee5b0800000000000000
+      internalID: -5337049571321713540
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_72
+      rect:
+        serializedVersion: 2
+        x: 277
+        y: 1219
+        width: 105
+        height: 121
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 122b89153ee37df70800000000000000
+      internalID: 9211900708857098785
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_73
+      rect:
+        serializedVersion: 2
+        x: 382
+        y: 1218
+        width: 90
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 12fe31702926227c0800000000000000
+      internalID: -4097604331630235871
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_74
+      rect:
+        serializedVersion: 2
+        x: 472
+        y: 1218
+        width: 146
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4d57cca0ea5f60060800000000000000
+      internalID: 6919488005355632084
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_75
+      rect:
+        serializedVersion: 2
+        x: 618
+        y: 1266
+        width: 125
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: efee9c8c5882b01b0800000000000000
+      internalID: -5689409149188051202
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_76
+      rect:
+        serializedVersion: 2
+        x: 621
+        y: 1218
+        width: 137
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d7355b4bb7cc9caa0800000000000000
+      internalID: -6140151785258134659
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_77
+      rect:
+        serializedVersion: 2
+        x: 758
+        y: 1218
+        width: 127
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7e3fde5d4bda665e0800000000000000
+      internalID: -1916653599204707353
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_78
+      rect:
+        serializedVersion: 2
+        x: 885
+        y: 1218
+        width: 141
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a8c4fbc5018ce7910800000000000000
+      internalID: 1837125670614813834
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_79
+      rect:
+        serializedVersion: 2
+        x: 1026
+        y: 1220
+        width: 86
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 588071266a4130910800000000000000
+      internalID: 1802306980721133701
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_80
+      rect:
+        serializedVersion: 2
+        x: 1112
+        y: 1219
+        width: 93
+        height: 121
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6c0681cb33acbb0f0800000000000000
+      internalID: -1100063360414097210
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_81
+      rect:
+        serializedVersion: 2
+        x: 1205
+        y: 1220
+        width: 141
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e7c19c4f7b461d620800000000000000
+      internalID: 2797127584822402174
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_82
+      rect:
+        serializedVersion: 2
+        x: 1346
+        y: 1219
+        width: 174
+        height: 121
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f548e02bf64fd7910800000000000000
+      internalID: 1836892983602873439
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_83
+      rect:
+        serializedVersion: 2
+        x: 1521
+        y: 1219
+        width: 130
+        height: 121
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 74b80b9b990734630800000000000000
+      internalID: 3910092707035384647
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_84
+      rect:
+        serializedVersion: 2
+        x: 1652
+        y: 1219
+        width: 136
+        height: 121
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad783df4f3fa7cba0800000000000000
+      internalID: -6068689286401390630
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_85
+      rect:
+        serializedVersion: 2
+        x: 1788
+        y: 1220
+        width: 80
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4cd80784e7c54b470800000000000000
+      internalID: 8409448101658529220
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_86
+      rect:
+        serializedVersion: 2
+        x: 1869
+        y: 1220
+        width: 72
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4f71e086d90a483d0800000000000000
+      internalID: -3205260436864886796
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_87
+      rect:
+        serializedVersion: 2
+        x: 1941
+        y: 1220
+        width: 84
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6e4306cd24d1516b0800000000000000
+      internalID: -5326318811293403930
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_88
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 1097
+        width: 112
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9ddb4c0ba6b564a00800000000000000
+      internalID: 740379702539369945
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_89
+      rect:
+        serializedVersion: 2
+        x: 113
+        y: 1097
+        width: 133
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: df72f11c75a26a860800000000000000
+      internalID: 7540761182469040125
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_90
+      rect:
+        serializedVersion: 2
+        x: 246
+        y: 1097
+        width: 140
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: acaa6a48e67c9c9a0800000000000000
+      internalID: -6212214933495043382
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_91
+      rect:
+        serializedVersion: 2
+        x: 386
+        y: 1098
+        width: 156
+        height: 119
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d60127e8b761a7ca0800000000000000
+      internalID: -6018473232100618131
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_92
+      rect:
+        serializedVersion: 2
+        x: 542
+        y: 1098
+        width: 126
+        height: 119
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 912603532f77b8350800000000000000
+      internalID: 6020037209068954137
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_93
+      rect:
+        serializedVersion: 2
+        x: 670
+        y: 1098
+        width: 136
+        height: 119
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6bbb6891ca0cf1400800000000000000
+      internalID: 297167945824910262
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_94
+      rect:
+        serializedVersion: 2
+        x: 806
+        y: 1099
+        width: 104
+        height: 118
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1064296836f0d23e0800000000000000
+      internalID: -2076986933014018559
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_95
+      rect:
+        serializedVersion: 2
+        x: 910
+        y: 1099
+        width: 95
+        height: 118
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 714b799629d6cd1d0800000000000000
+      internalID: -3324661949302066153
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_96
+      rect:
+        serializedVersion: 2
+        x: 1005
+        y: 1099
+        width: 89
+        height: 118
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d999ab9408db45450800000000000000
+      internalID: 6076690155920071069
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_97
+      rect:
+        serializedVersion: 2
+        x: 1094
+        y: 1099
+        width: 159
+        height: 118
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6e8814178483f9f40800000000000000
+      internalID: 5737366334082222310
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_98
+      rect:
+        serializedVersion: 2
+        x: 1253
+        y: 1099
+        width: 127
+        height: 118
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f7140955bd2a98c30800000000000000
+      internalID: 4362196777002090879
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_99
+      rect:
+        serializedVersion: 2
+        x: 1380
+        y: 1100
+        width: 138
+        height: 117
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c4d1bd341f997ba0800000000000000
+      internalID: -6090662111758658363
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_100
+      rect:
+        serializedVersion: 2
+        x: 1518
+        y: 1099
+        width: 149
+        height: 118
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 97a8dbbd79f672c60800000000000000
+      internalID: 7793320378205309561
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_101
+      rect:
+        serializedVersion: 2
+        x: 1667
+        y: 1099
+        width: 142
+        height: 118
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2d32283dfd303dbf0800000000000000
+      internalID: -300892490242579502
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_102
+      rect:
+        serializedVersion: 2
+        x: 1809
+        y: 1099
+        width: 153
+        height: 118
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: db10476ddc7329b30800000000000000
+      internalID: 4292554752043254205
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_103
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 979
+        width: 136
+        height: 118
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f3ef1902af0598100800000000000000
+      internalID: 110708701065772607
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_104
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 979
+        width: 151
+        height: 118
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f680ebaebabb6240800000000000000
+      internalID: 4786124357101455089
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_105
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 979
+        width: 137
+        height: 118
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 35f6d2adbc62d4ea0800000000000000
+      internalID: -5887006480922742957
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_106
+      rect:
+        serializedVersion: 2
+        x: 425
+        y: 979
+        width: 132
+        height: 118
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c545fdedc65252fb0800000000000000
+      internalID: -4673287888801147812
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_107
+      rect:
+        serializedVersion: 2
+        x: 557
+        y: 980
+        width: 131
+        height: 117
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bec1afcc8b2037000800000000000000
+      internalID: 32372615057906923
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_108
+      rect:
+        serializedVersion: 2
+        x: 688
+        y: 979
+        width: 134
+        height: 118
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 25b54bdb92936aee0800000000000000
+      internalID: -1250248995109577902
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_109
+      rect:
+        serializedVersion: 2
+        x: 822
+        y: 980
+        width: 88
+        height: 117
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3a7050cc2096e29f0800000000000000
+      internalID: -491339848603072605
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_110
+      rect:
+        serializedVersion: 2
+        x: 910
+        y: 980
+        width: 132
+        height: 117
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a9746ffd542825ab0800000000000000
+      internalID: -5020807397942868070
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_111
+      rect:
+        serializedVersion: 2
+        x: 1044
+        y: 980
+        width: 134
+        height: 117
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cbbe19c73e4ccbce0800000000000000
+      internalID: -1388018103810397252
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_112
+      rect:
+        serializedVersion: 2
+        x: 1178
+        y: 980
+        width: 125
+        height: 117
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa6991b24ea7a1550800000000000000
+      internalID: 6132348963012581034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_113
+      rect:
+        serializedVersion: 2
+        x: 1303
+        y: 981
+        width: 118
+        height: 116
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 57c2d4411f81d0ab0800000000000000
+      internalID: -5040344984250930059
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_114
+      rect:
+        serializedVersion: 2
+        x: 1422
+        y: 981
+        width: 115
+        height: 116
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c61597092e5c6d770800000000000000
+      internalID: 8635306912406655340
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_115
+      rect:
+        serializedVersion: 2
+        x: 1537
+        y: 981
+        width: 106
+        height: 116
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0c0eb9a8f4f2643f0800000000000000
+      internalID: -916993455448923968
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_116
+      rect:
+        serializedVersion: 2
+        x: 1643
+        y: 982
+        width: 89
+        height: 115
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f597a006115f46800800000000000000
+      internalID: 604877704949037407
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_117
+      rect:
+        serializedVersion: 2
+        x: 1732
+        y: 981
+        width: 119
+        height: 116
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6e795c01cca007220800000000000000
+      internalID: 2481495266252134374
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_118
+      rect:
+        serializedVersion: 2
+        x: 1851
+        y: 981
+        width: 113
+        height: 116
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f3d0276ae28e06610800000000000000
+      internalID: 1612543953657269567
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_119
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 863
+        width: 142
+        height: 116
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ebc460c7b056d2280800000000000000
+      internalID: -9066479374827107138
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_120
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 863
+        width: 150
+        height: 116
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3a9acf00e05262e50800000000000000
+      internalID: 6784150630756559267
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_121
+      rect:
+        serializedVersion: 2
+        x: 296
+        y: 863
+        width: 136
+        height: 116
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b5c5c5a1a782ccbd0800000000000000
+      internalID: -2608665579260978085
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_122
+      rect:
+        serializedVersion: 2
+        x: 432
+        y: 863
+        width: 128
+        height: 116
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b6bc8bb4ed63bfd40800000000000000
+      internalID: 5619145288455867243
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_123
+      rect:
+        serializedVersion: 2
+        x: 560
+        y: 863
+        width: 130
+        height: 116
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 655b4262198f23150800000000000000
+      internalID: 5851012168201581910
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_124
+      rect:
+        serializedVersion: 2
+        x: 690
+        y: 863
+        width: 126
+        height: 116
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c180472b9fccd9280800000000000000
+      internalID: -9034839904622475236
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_125
+      rect:
+        serializedVersion: 2
+        x: 816
+        y: 864
+        width: 72
+        height: 115
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a6e64b64057bb9f90800000000000000
+      internalID: -6945756444877361558
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_126
+      rect:
+        serializedVersion: 2
+        x: 888
+        y: 864
+        width: 68
+        height: 115
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d358bd77099009700800000000000000
+      internalID: 544946071002645821
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_127
+      rect:
+        serializedVersion: 2
+        x: 956
+        y: 864
+        width: 70
+        height: 115
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 16433a6a3b68c0ac0800000000000000
+      internalID: -3887584272174599071
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_128
+      rect:
+        serializedVersion: 2
+        x: 1026
+        y: 865
+        width: 84
+        height: 114
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e87e2821defaa6e70800000000000000
+      internalID: 9109286629062928270
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_129
+      rect:
+        serializedVersion: 2
+        x: 1110
+        y: 864
+        width: 122
+        height: 115
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3fd80d5144a8c5b50800000000000000
+      internalID: 6583288780337221107
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_130
+      rect:
+        serializedVersion: 2
+        x: 1232
+        y: 864
+        width: 133
+        height: 115
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ca6d286898d76e0e0800000000000000
+      internalID: -2240965734949529940
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_131
+      rect:
+        serializedVersion: 2
+        x: 1365
+        y: 865
+        width: 82
+        height: 114
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5637e5bd5bdbc5550800000000000000
+      internalID: 6150999779848385381
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_132
+      rect:
+        serializedVersion: 2
+        x: 1447
+        y: 865
+        width: 85
+        height: 114
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d26b29257818efb0800000000000000
+      internalID: -4618414526387494183
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_133
+      rect:
+        serializedVersion: 2
+        x: 1532
+        y: 865
+        width: 85
+        height: 114
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4fb5bdb2e1f4e46a0800000000000000
+      internalID: -6463141424226673676
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_134
+      rect:
+        serializedVersion: 2
+        x: 1617
+        y: 865
+        width: 82
+        height: 114
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0adfbb3826b65b7b0800000000000000
+      internalID: -5209139323123008096
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_135
+      rect:
+        serializedVersion: 2
+        x: 1699
+        y: 865
+        width: 87
+        height: 114
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4f56f2258c0e12fb0800000000000000
+      internalID: -4674207787256945164
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_136
+      rect:
+        serializedVersion: 2
+        x: 1786
+        y: 865
+        width: 114
+        height: 114
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f5103ea8b601a3e30800000000000000
+      internalID: 4483914433078427999
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_137
+      rect:
+        serializedVersion: 2
+        x: 1900
+        y: 865
+        width: 143
+        height: 114
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 54606611f4aa02b40800000000000000
+      internalID: 5413514008670373445
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_138
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 749
+        width: 161
+        height: 114
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 47ee489f9d5032e50800000000000000
+      internalID: 6783271897502379636
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_139
+      rect:
+        serializedVersion: 2
+        x: 162
+        y: 750
+        width: 118
+        height: 113
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cef5fcecf6b80cce0800000000000000
+      internalID: -1386955372902785044
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_140
+      rect:
+        serializedVersion: 2
+        x: 281
+        y: 750
+        width: 142
+        height: 113
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f0587711443a50c40800000000000000
+      internalID: 5477964034512225551
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_141
+      rect:
+        serializedVersion: 2
+        x: 423
+        y: 750
+        width: 161
+        height: 113
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8f106207682142800800000000000000
+      internalID: 586614220081463800
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_142
+      rect:
+        serializedVersion: 2
+        x: 584
+        y: 750
+        width: 125
+        height: 113
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b02268f109f323810800000000000000
+      internalID: 1743525893982528011
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_143
+      rect:
+        serializedVersion: 2
+        x: 709
+        y: 751
+        width: 88
+        height: 112
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6ac3e9fcabdcccaf0800000000000000
+      internalID: -374698466747728730
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_144
+      rect:
+        serializedVersion: 2
+        x: 797
+        y: 751
+        width: 112
+        height: 112
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 20d8bcd11db9b1390800000000000000
+      internalID: -7846506603312607998
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_145
+      rect:
+        serializedVersion: 2
+        x: 909
+        y: 751
+        width: 134
+        height: 112
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bbc469d4f892ffe20800000000000000
+      internalID: 3386471140264660155
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_146
+      rect:
+        serializedVersion: 2
+        x: 1043
+        y: 751
+        width: 133
+        height: 112
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4fed121e6d180b1c0800000000000000
+      internalID: -4489946068588306700
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_147
+      rect:
+        serializedVersion: 2
+        x: 1177
+        y: 751
+        width: 134
+        height: 112
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 38a05d4fd9729fc10800000000000000
+      internalID: 2087743461633886851
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_148
+      rect:
+        serializedVersion: 2
+        x: 1311
+        y: 751
+        width: 150
+        height: 112
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cf1c22746e737bc20800000000000000
+      internalID: 3222105520582345212
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_149
+      rect:
+        serializedVersion: 2
+        x: 1461
+        y: 751
+        width: 141
+        height: 112
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6f91e9f99d5416820800000000000000
+      internalID: 2909683635246209526
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_150
+      rect:
+        serializedVersion: 2
+        x: 1602
+        y: 751
+        width: 161
+        height: 112
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9b2370ad0b13afbd0800000000000000
+      internalID: -2595707599583759687
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_151
+      rect:
+        serializedVersion: 2
+        x: 1764
+        y: 752
+        width: 108
+        height: 111
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b906a6a4546247280800000000000000
+      internalID: -9046563672437399397
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_152
+      rect:
+        serializedVersion: 2
+        x: 1872
+        y: 752
+        width: 108
+        height: 111
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 76d7ee47457f48b10800000000000000
+      internalID: 1982981678060961127
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_153
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 638
+        width: 186
+        height: 111
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 094fbd04b43414240800000000000000
+      internalID: 4774171070479201424
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_154
+      rect:
+        serializedVersion: 2
+        x: 187
+        y: 638
+        width: 134
+        height: 111
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 750b450b9749eba90800000000000000
+      internalID: -7296231095923330985
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_155
+      rect:
+        serializedVersion: 2
+        x: 321
+        y: 639
+        width: 150
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6a8e6b55c2d760a60800000000000000
+      internalID: 7639931447250708646
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_156
+      rect:
+        serializedVersion: 2
+        x: 471
+        y: 639
+        width: 194
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2bb79a26a05cc81d0800000000000000
+      internalID: -3347083774647501902
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_157
+      rect:
+        serializedVersion: 2
+        x: 665
+        y: 639
+        width: 140
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 68293f9efb161dac0800000000000000
+      internalID: -3832174331023879546
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_158
+      rect:
+        serializedVersion: 2
+        x: 805
+        y: 640
+        width: 175
+        height: 109
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 71dcdb717d22d98d0800000000000000
+      internalID: -2838073882961916649
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_159
+      rect:
+        serializedVersion: 2
+        x: 980
+        y: 640
+        width: 185
+        height: 109
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5afb834d48a25c0a0800000000000000
+      internalID: -6862031707244544091
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_160
+      rect:
+        serializedVersion: 2
+        x: 1165
+        y: 640
+        width: 142
+        height: 109
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e21b5f7358cf6f6a0800000000000000
+      internalID: -6415662970042994386
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_161
+      rect:
+        serializedVersion: 2
+        x: 1308
+        y: 640
+        width: 142
+        height: 109
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a7f3d76f4c40f9790800000000000000
+      internalID: -7521287608689934470
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_162
+      rect:
+        serializedVersion: 2
+        x: 1451
+        y: 640
+        width: 172
+        height: 109
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 63a86a33c3678dca0800000000000000
+      internalID: -5991909303279777226
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_163
+      rect:
+        serializedVersion: 2
+        x: 1623
+        y: 641
+        width: 117
+        height: 108
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 147d3ca0f134e7960800000000000000
+      internalID: 7601587021651629889
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_164
+      rect:
+        serializedVersion: 2
+        x: 1740
+        y: 641
+        width: 132
+        height: 108
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e88d5b8bca1a61f20800000000000000
+      internalID: 3393077132475619470
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_165
+      rect:
+        serializedVersion: 2
+        x: 1872
+        y: 641
+        width: 139
+        height: 108
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 97f75652592f41d80800000000000000
+      internalID: -8280727092436041863
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_166
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 531
+        width: 108
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1971174bfb0169b90800000000000000
+      internalID: -7235577335772014703
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_167
+      rect:
+        serializedVersion: 2
+        x: 109
+        y: 531
+        width: 132
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 17a64d64eef9c16f0800000000000000
+      internalID: -712518795292022159
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_168
+      rect:
+        serializedVersion: 2
+        x: 241
+        y: 532
+        width: 132
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed7847fdb41513d80800000000000000
+      internalID: -8272741654189537314
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_169
+      rect:
+        serializedVersion: 2
+        x: 373
+        y: 532
+        width: 127
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f822b9f8f75f4c5d0800000000000000
+      internalID: -3043037519976652145
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_170
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 533
+        width: 132
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: db78fc9ada25ab830800000000000000
+      internalID: 4087670517623916477
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_171
+      rect:
+        serializedVersion: 2
+        x: 632
+        y: 533
+        width: 109
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 270259f467f15d2e0800000000000000
+      internalID: -2101739058096693134
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_172
+      rect:
+        serializedVersion: 2
+        x: 741
+        y: 533
+        width: 109
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9e4adf36504b54cb0800000000000000
+      internalID: -4880296685940661015
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_173
+      rect:
+        serializedVersion: 2
+        x: 850
+        y: 533
+        width: 187
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c57215809a4e451d0800000000000000
+      internalID: -3362811607098775716
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_174
+      rect:
+        serializedVersion: 2
+        x: 1037
+        y: 533
+        width: 121
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a0ef40da6252cde00800000000000000
+      internalID: 1070771659449105930
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_175
+      rect:
+        serializedVersion: 2
+        x: 1158
+        y: 533
+        width: 112
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 178cfb8e716ac72f0800000000000000
+      internalID: -973720797799528335
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_176
+      rect:
+        serializedVersion: 2
+        x: 1270
+        y: 577
+        width: 154
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e8c265d5f1fca1f10800000000000000
+      internalID: 2241331498187107470
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_177
+      rect:
+        serializedVersion: 2
+        x: 1276
+        y: 533
+        width: 167
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5366c90e669b754c0800000000000000
+      internalID: -4298763467795700171
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_178
+      rect:
+        serializedVersion: 2
+        x: 1444
+        y: 533
+        width: 162
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ac6162ad4b0b1cb30800000000000000
+      internalID: 4305917009543435978
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_179
+      rect:
+        serializedVersion: 2
+        x: 1606
+        y: 534
+        width: 175
+        height: 104
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 67604fb143109b850800000000000000
+      internalID: 6393142469348034166
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_180
+      rect:
+        serializedVersion: 2
+        x: 1782
+        y: 534
+        width: 171
+        height: 104
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 581c0b34e48a4a150800000000000000
+      internalID: 5883012067349283205
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_181
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 428
+        width: 179
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b29718d837d2f9730800000000000000
+      internalID: 4007972167701592363
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_182
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 428
+        width: 127
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a60a354bcc877c3c0800000000000000
+      internalID: -4339366895354142614
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_183
+      rect:
+        serializedVersion: 2
+        x: 307
+        y: 429
+        width: 162
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 717b9e756202c8410800000000000000
+      internalID: 1480593726553831191
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_184
+      rect:
+        serializedVersion: 2
+        x: 469
+        y: 429
+        width: 130
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fb3becd514cb380a0800000000000000
+      internalID: -6880448816759262273
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_185
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 429
+        width: 128
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 74a358309fbd26bd0800000000000000
+      internalID: -2638304569133286841
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_186
+      rect:
+        serializedVersion: 2
+        x: 728
+        y: 429
+        width: 125
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9c7b8947ce0752af0800000000000000
+      internalID: -421806829218514999
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_187
+      rect:
+        serializedVersion: 2
+        x: 853
+        y: 431
+        width: 161
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3ee6116e52d0dab00800000000000000
+      internalID: 841343161813004003
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_188
+      rect:
+        serializedVersion: 2
+        x: 1014
+        y: 433
+        width: 132
+        height: 98
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5dffa98fdcf8ba020800000000000000
+      internalID: 2354133345033191381
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_189
+      rect:
+        serializedVersion: 2
+        x: 1146
+        y: 435
+        width: 185
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4c165438c7d9eba30800000000000000
+      internalID: 4232993857878712772
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_190
+      rect:
+        serializedVersion: 2
+        x: 1331
+        y: 436
+        width: 186
+        height: 95
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e0ecd070d1adcf590800000000000000
+      internalID: -7638991049719951858
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_191
+      rect:
+        serializedVersion: 2
+        x: 1517
+        y: 437
+        width: 132
+        height: 94
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e4ccb269cd75e9230800000000000000
+      internalID: 3647449353140554830
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_192
+      rect:
+        serializedVersion: 2
+        x: 1649
+        y: 438
+        width: 193
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 433bcbfd951e94100800000000000000
+      internalID: 92853043459830580
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wyvern_193
+      rect:
+        serializedVersion: 2
+        x: 1842
+        y: 438
+        width: 194
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9b52c7d03ce3d1e50800000000000000
+      internalID: 6781645621355619769
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Wyvern_0: 6769161949333604898
+      Wyvern_1: 4238993812915594131
+      Wyvern_10: -5045517793680310793
+      Wyvern_100: 7793320378205309561
+      Wyvern_101: -300892490242579502
+      Wyvern_102: 4292554752043254205
+      Wyvern_103: 110708701065772607
+      Wyvern_104: 4786124357101455089
+      Wyvern_105: -5887006480922742957
+      Wyvern_106: -4673287888801147812
+      Wyvern_107: 32372615057906923
+      Wyvern_108: -1250248995109577902
+      Wyvern_109: -491339848603072605
+      Wyvern_11: 5073700294106671884
+      Wyvern_110: -5020807397942868070
+      Wyvern_111: -1388018103810397252
+      Wyvern_112: 6132348963012581034
+      Wyvern_113: -5040344984250930059
+      Wyvern_114: 8635306912406655340
+      Wyvern_115: -916993455448923968
+      Wyvern_116: 604877704949037407
+      Wyvern_117: 2481495266252134374
+      Wyvern_118: 1612543953657269567
+      Wyvern_119: -9066479374827107138
+      Wyvern_12: 330864043664827396
+      Wyvern_120: 6784150630756559267
+      Wyvern_121: -2608665579260978085
+      Wyvern_122: 5619145288455867243
+      Wyvern_123: 5851012168201581910
+      Wyvern_124: -9034839904622475236
+      Wyvern_125: -6945756444877361558
+      Wyvern_126: 544946071002645821
+      Wyvern_127: -3887584272174599071
+      Wyvern_128: 9109286629062928270
+      Wyvern_129: 6583288780337221107
+      Wyvern_13: 6121417413284916150
+      Wyvern_130: -2240965734949529940
+      Wyvern_131: 6150999779848385381
+      Wyvern_132: -4618414526387494183
+      Wyvern_133: -6463141424226673676
+      Wyvern_134: -5209139323123008096
+      Wyvern_135: -4674207787256945164
+      Wyvern_136: 4483914433078427999
+      Wyvern_137: 5413514008670373445
+      Wyvern_138: 6783271897502379636
+      Wyvern_139: -1386955372902785044
+      Wyvern_14: 6042722942321922586
+      Wyvern_140: 5477964034512225551
+      Wyvern_141: 586614220081463800
+      Wyvern_142: 1743525893982528011
+      Wyvern_143: -374698466747728730
+      Wyvern_144: -7846506603312607998
+      Wyvern_145: 3386471140264660155
+      Wyvern_146: -4489946068588306700
+      Wyvern_147: 2087743461633886851
+      Wyvern_148: 3222105520582345212
+      Wyvern_149: 2909683635246209526
+      Wyvern_15: -8014447417363338987
+      Wyvern_150: -2595707599583759687
+      Wyvern_151: -9046563672437399397
+      Wyvern_152: 1982981678060961127
+      Wyvern_153: 4774171070479201424
+      Wyvern_154: -7296231095923330985
+      Wyvern_155: 7639931447250708646
+      Wyvern_156: -3347083774647501902
+      Wyvern_157: -3832174331023879546
+      Wyvern_158: -2838073882961916649
+      Wyvern_159: -6862031707244544091
+      Wyvern_16: -2952189853845816330
+      Wyvern_160: -6415662970042994386
+      Wyvern_161: -7521287608689934470
+      Wyvern_162: -5991909303279777226
+      Wyvern_163: 7601587021651629889
+      Wyvern_164: 3393077132475619470
+      Wyvern_165: -8280727092436041863
+      Wyvern_166: -7235577335772014703
+      Wyvern_167: -712518795292022159
+      Wyvern_168: -8272741654189537314
+      Wyvern_169: -3043037519976652145
+      Wyvern_17: 9016698249868880478
+      Wyvern_170: 4087670517623916477
+      Wyvern_171: -2101739058096693134
+      Wyvern_172: -4880296685940661015
+      Wyvern_173: -3362811607098775716
+      Wyvern_174: 1070771659449105930
+      Wyvern_175: -973720797799528335
+      Wyvern_176: 2241331498187107470
+      Wyvern_177: -4298763467795700171
+      Wyvern_178: 4305917009543435978
+      Wyvern_179: 6393142469348034166
+      Wyvern_18: -48586981769938932
+      Wyvern_180: 5883012067349283205
+      Wyvern_181: 4007972167701592363
+      Wyvern_182: -4339366895354142614
+      Wyvern_183: 1480593726553831191
+      Wyvern_184: -6880448816759262273
+      Wyvern_185: -2638304569133286841
+      Wyvern_186: -421806829218514999
+      Wyvern_187: 841343161813004003
+      Wyvern_188: 2354133345033191381
+      Wyvern_189: 4232993857878712772
+      Wyvern_19: 442666832869616112
+      Wyvern_190: -7638991049719951858
+      Wyvern_191: 3647449353140554830
+      Wyvern_192: 92853043459830580
+      Wyvern_193: 6781645621355619769
+      Wyvern_2: 3535422995495282894
+      Wyvern_20: -7707769153139445054
+      Wyvern_21: -519305528949423494
+      Wyvern_22: -1295577864979928096
+      Wyvern_23: -4526002130180214890
+      Wyvern_24: -3880627697019614365
+      Wyvern_25: 5398951561996350399
+      Wyvern_26: 8675464810662474911
+      Wyvern_27: 6163970674817839888
+      Wyvern_28: -658611892323323018
+      Wyvern_29: 6690998153884423021
+      Wyvern_3: 1816483480376002714
+      Wyvern_30: 2392520677059992822
+      Wyvern_31: 7772346764253753698
+      Wyvern_32: 3606983816121506306
+      Wyvern_33: 7491896321859215702
+      Wyvern_34: 5224661822090408259
+      Wyvern_35: -69878350813451749
+      Wyvern_36: 1479571523170129061
+      Wyvern_37: -1221280398366372366
+      Wyvern_38: -4346983217648465192
+      Wyvern_39: -2247572182234944404
+      Wyvern_4: 4550425339330286299
+      Wyvern_40: 5579627708752013199
+      Wyvern_41: -4034709750348633713
+      Wyvern_42: 5618633919354364617
+      Wyvern_43: 1266840515850605869
+      Wyvern_44: -9021661763976130442
+      Wyvern_45: 7787418536109962000
+      Wyvern_46: 1847636850246015580
+      Wyvern_47: -7270214466512486519
+      Wyvern_48: 8897018512013079913
+      Wyvern_49: 771391408813221816
+      Wyvern_5: 4868689959082546630
+      Wyvern_50: 5246141153405267394
+      Wyvern_51: 3539541182255521396
+      Wyvern_52: 1620925564132107411
+      Wyvern_53: 1949242946684815481
+      Wyvern_54: -58178673321446361
+      Wyvern_55: 1382994731731153766
+      Wyvern_56: 688099691401577818
+      Wyvern_57: 5181871900612747177
+      Wyvern_58: -1050818514901751968
+      Wyvern_59: -2019490685815984190
+      Wyvern_6: -5818906419266874372
+      Wyvern_60: -1757482931161971733
+      Wyvern_61: -3328380165832972582
+      Wyvern_62: 181561908344054332
+      Wyvern_63: -8085933915307685108
+      Wyvern_64: -890160568491825429
+      Wyvern_65: 2824183117303665347
+      Wyvern_66: 2598088607452273668
+      Wyvern_67: 1006062034116446954
+      Wyvern_68: -5169854757956287906
+      Wyvern_69: -7208361353170638039
+      Wyvern_7: -65219789302005280
+      Wyvern_70: -120542287929522021
+      Wyvern_71: -5337049571321713540
+      Wyvern_72: 9211900708857098785
+      Wyvern_73: -4097604331630235871
+      Wyvern_74: 6919488005355632084
+      Wyvern_75: -5689409149188051202
+      Wyvern_76: -6140151785258134659
+      Wyvern_77: -1916653599204707353
+      Wyvern_78: 1837125670614813834
+      Wyvern_79: 1802306980721133701
+      Wyvern_8: -6651149914318664509
+      Wyvern_80: -1100063360414097210
+      Wyvern_81: 2797127584822402174
+      Wyvern_82: 1836892983602873439
+      Wyvern_83: 3910092707035384647
+      Wyvern_84: -6068689286401390630
+      Wyvern_85: 8409448101658529220
+      Wyvern_86: -3205260436864886796
+      Wyvern_87: -5326318811293403930
+      Wyvern_88: 740379702539369945
+      Wyvern_89: 7540761182469040125
+      Wyvern_9: 4698384088289201871
+      Wyvern_90: -6212214933495043382
+      Wyvern_91: -6018473232100618131
+      Wyvern_92: 6020037209068954137
+      Wyvern_93: 297167945824910262
+      Wyvern_94: -2076986933014018559
+      Wyvern_95: -3324661949302066153
+      Wyvern_96: 6076690155920071069
+      Wyvern_97: 5737366334082222310
+      Wyvern_98: 4362196777002090879
+      Wyvern_99: -6090662111758658363
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

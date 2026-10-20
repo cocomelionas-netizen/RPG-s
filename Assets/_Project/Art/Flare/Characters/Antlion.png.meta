@@ -1,0 +1,3460 @@
+fileFormatVersion: 2
+guid: bdd5bdce68103ab42ad17a283672ee93
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 5595941333004853397
+    second: Antlion_0
+  - first:
+      213: 8120342091664412684
+    second: Antlion_1
+  - first:
+      213: 1301942598027724577
+    second: Antlion_2
+  - first:
+      213: -1959290780448146107
+    second: Antlion_3
+  - first:
+      213: -15945242969691357
+    second: Antlion_4
+  - first:
+      213: -805378011553206265
+    second: Antlion_5
+  - first:
+      213: -3853198153544716480
+    second: Antlion_6
+  - first:
+      213: 1678468525531877207
+    second: Antlion_7
+  - first:
+      213: -2315922225364751518
+    second: Antlion_8
+  - first:
+      213: -817278158607854369
+    second: Antlion_9
+  - first:
+      213: 5573616774970794215
+    second: Antlion_10
+  - first:
+      213: 8833469941140494973
+    second: Antlion_11
+  - first:
+      213: 9169902568353377193
+    second: Antlion_12
+  - first:
+      213: -585749945296466307
+    second: Antlion_13
+  - first:
+      213: -5058473097668743800
+    second: Antlion_14
+  - first:
+      213: 9031830828914027031
+    second: Antlion_15
+  - first:
+      213: 1827580439727667396
+    second: Antlion_16
+  - first:
+      213: -2521542133187289678
+    second: Antlion_17
+  - first:
+      213: 7897591016621436697
+    second: Antlion_18
+  - first:
+      213: -1760349836461393616
+    second: Antlion_19
+  - first:
+      213: 7943641917828094663
+    second: Antlion_20
+  - first:
+      213: -3423519728036765381
+    second: Antlion_21
+  - first:
+      213: 311290010169156205
+    second: Antlion_22
+  - first:
+      213: 8596856123341808022
+    second: Antlion_23
+  - first:
+      213: -5688330560357939944
+    second: Antlion_24
+  - first:
+      213: 7453173976420540609
+    second: Antlion_25
+  - first:
+      213: -1681847465366416820
+    second: Antlion_26
+  - first:
+      213: -3234600861666710763
+    second: Antlion_27
+  - first:
+      213: -1981575436371746140
+    second: Antlion_28
+  - first:
+      213: 7375708433122120436
+    second: Antlion_29
+  - first:
+      213: 4017482754257608534
+    second: Antlion_30
+  - first:
+      213: 4138972202123142715
+    second: Antlion_31
+  - first:
+      213: -8149948313855571366
+    second: Antlion_32
+  - first:
+      213: 1384403104570557267
+    second: Antlion_33
+  - first:
+      213: -7661461051375305676
+    second: Antlion_34
+  - first:
+      213: -5994897072442058603
+    second: Antlion_35
+  - first:
+      213: -2468246507613994229
+    second: Antlion_36
+  - first:
+      213: -4769472782128202231
+    second: Antlion_37
+  - first:
+      213: 9022752342217120803
+    second: Antlion_38
+  - first:
+      213: 392388246181314326
+    second: Antlion_39
+  - first:
+      213: 929534042310456340
+    second: Antlion_40
+  - first:
+      213: -4740873541447217188
+    second: Antlion_41
+  - first:
+      213: -6997597673767225714
+    second: Antlion_42
+  - first:
+      213: -4637138058890921278
+    second: Antlion_43
+  - first:
+      213: -1395036156738947738
+    second: Antlion_44
+  - first:
+      213: -7576775004745552920
+    second: Antlion_45
+  - first:
+      213: -8457551882673460194
+    second: Antlion_46
+  - first:
+      213: -6497063947408718948
+    second: Antlion_47
+  - first:
+      213: 5198744545811340645
+    second: Antlion_48
+  - first:
+      213: -4031235942082294534
+    second: Antlion_49
+  - first:
+      213: -4366452650465417241
+    second: Antlion_50
+  - first:
+      213: -7858599279032084114
+    second: Antlion_51
+  - first:
+      213: -2059313223117598554
+    second: Antlion_52
+  - first:
+      213: 5609342100340595670
+    second: Antlion_53
+  - first:
+      213: -2060596168765113998
+    second: Antlion_54
+  - first:
+      213: 6044896121758920742
+    second: Antlion_55
+  - first:
+      213: -5475109540546540027
+    second: Antlion_56
+  - first:
+      213: 6674819140428357642
+    second: Antlion_57
+  - first:
+      213: 2604732556248589995
+    second: Antlion_58
+  - first:
+      213: -2172100165279097889
+    second: Antlion_59
+  - first:
+      213: 8501239173455672462
+    second: Antlion_60
+  - first:
+      213: 8463073069236449371
+    second: Antlion_61
+  - first:
+      213: -218697489528132749
+    second: Antlion_62
+  - first:
+      213: -7173747999815611451
+    second: Antlion_63
+  - first:
+      213: -1478648826951596533
+    second: Antlion_64
+  - first:
+      213: -442179627331934368
+    second: Antlion_65
+  - first:
+      213: 2968807000925915264
+    second: Antlion_66
+  - first:
+      213: -5065166747785589475
+    second: Antlion_67
+  - first:
+      213: -8896302043919817479
+    second: Antlion_68
+  - first:
+      213: -1994524267689098646
+    second: Antlion_69
+  - first:
+      213: -5380518414465073898
+    second: Antlion_70
+  - first:
+      213: 5031544026170117095
+    second: Antlion_71
+  - first:
+      213: 9093269581904547812
+    second: Antlion_72
+  - first:
+      213: 3909950078820576828
+    second: Antlion_73
+  - first:
+      213: -6154138126824239913
+    second: Antlion_74
+  - first:
+      213: -6207435435857499371
+    second: Antlion_75
+  - first:
+      213: -7375367071226324084
+    second: Antlion_76
+  - first:
+      213: -9114484089792997781
+    second: Antlion_77
+  - first:
+      213: -2834701401288096897
+    second: Antlion_78
+  - first:
+      213: 2129352084169131763
+    second: Antlion_79
+  - first:
+      213: 4118152383907841378
+    second: Antlion_80
+  - first:
+      213: -2471422160724078584
+    second: Antlion_81
+  - first:
+      213: -3972893898501224544
+    second: Antlion_82
+  - first:
+      213: 5756179176746607698
+    second: Antlion_83
+  - first:
+      213: 3542160963790908479
+    second: Antlion_84
+  - first:
+      213: 3002676878431265755
+    second: Antlion_85
+  - first:
+      213: -2780849468834768512
+    second: Antlion_86
+  - first:
+      213: 3852913003281733196
+    second: Antlion_87
+  - first:
+      213: 5031179464820849804
+    second: Antlion_88
+  - first:
+      213: -2718286499540564883
+    second: Antlion_89
+  - first:
+      213: 4253421967410140538
+    second: Antlion_90
+  - first:
+      213: -6562585241195032381
+    second: Antlion_91
+  - first:
+      213: -2684100320586803018
+    second: Antlion_92
+  - first:
+      213: -6895707333822705067
+    second: Antlion_93
+  - first:
+      213: -1646025436142513293
+    second: Antlion_94
+  - first:
+      213: 5009499341019730371
+    second: Antlion_95
+  - first:
+      213: 4556523251538863984
+    second: Antlion_96
+  - first:
+      213: 8400152461486038587
+    second: Antlion_97
+  - first:
+      213: 7109193760417927686
+    second: Antlion_98
+  - first:
+      213: -2129471867962910451
+    second: Antlion_99
+  - first:
+      213: -6408814266283199319
+    second: Antlion_100
+  - first:
+      213: -5445220235042928126
+    second: Antlion_101
+  - first:
+      213: -3725493535796133415
+    second: Antlion_102
+  - first:
+      213: 5401715277204223671
+    second: Antlion_103
+  - first:
+      213: -8599680442708201616
+    second: Antlion_104
+  - first:
+      213: 5041847380201319120
+    second: Antlion_105
+  - first:
+      213: 4933678600155986255
+    second: Antlion_106
+  - first:
+      213: 39610094658130417
+    second: Antlion_107
+  - first:
+      213: 4764352121846715247
+    second: Antlion_108
+  - first:
+      213: -5171634458262872235
+    second: Antlion_109
+  - first:
+      213: -358778707901082440
+    second: Antlion_110
+  - first:
+      213: -7512121233035328531
+    second: Antlion_111
+  - first:
+      213: 7331293223099191535
+    second: Antlion_112
+  - first:
+      213: 143664159141315522
+    second: Antlion_113
+  - first:
+      213: 1771197121614616796
+    second: Antlion_114
+  - first:
+      213: -8058674324779457551
+    second: Antlion_115
+  - first:
+      213: -3069344339309657957
+    second: Antlion_116
+  - first:
+      213: -7571267756506736400
+    second: Antlion_117
+  - first:
+      213: -5741656853751564876
+    second: Antlion_118
+  - first:
+      213: -7109153823264059667
+    second: Antlion_119
+  - first:
+      213: 5142440038850863623
+    second: Antlion_120
+  - first:
+      213: 4322588788316740500
+    second: Antlion_121
+  - first:
+      213: -5187664560075668989
+    second: Antlion_122
+  - first:
+      213: 4854240192519240121
+    second: Antlion_123
+  - first:
+      213: -7311431344550102347
+    second: Antlion_124
+  - first:
+      213: -2638299576525218706
+    second: Antlion_125
+  - first:
+      213: -7102198388501045954
+    second: Antlion_126
+  - first:
+      213: -8170766171749992384
+    second: Antlion_127
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Antlion_0
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 871
+        width: 85
+        height: 152
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5902ea96ef6c8ad40800000000000000
+      internalID: 5595941333004853397
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_1
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 872
+        width: 96
+        height: 151
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c005f44eb1041b070800000000000000
+      internalID: 8120342091664412684
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_2
+      rect:
+        serializedVersion: 2
+        x: 182
+        y: 874
+        width: 96
+        height: 149
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 127446915ed611210800000000000000
+      internalID: 1301942598027724577
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_3
+      rect:
+        serializedVersion: 2
+        x: 278
+        y: 880
+        width: 130
+        height: 143
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 54db0bb7a633fc4e0800000000000000
+      internalID: -1959290780448146107
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_4
+      rect:
+        serializedVersion: 2
+        x: 408
+        y: 883
+        width: 130
+        height: 140
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 32b2fe0d2e957cff0800000000000000
+      internalID: -15945242969691357
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_5
+      rect:
+        serializedVersion: 2
+        x: 539
+        y: 883
+        width: 125
+        height: 140
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 700f57f27f8b2d4f0800000000000000
+      internalID: -805378011553206265
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_6
+      rect:
+        serializedVersion: 2
+        x: 664
+        y: 892
+        width: 93
+        height: 131
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 04fa6c8c1b0b68ac0800000000000000
+      internalID: -3853198153544716480
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_7
+      rect:
+        serializedVersion: 2
+        x: 757
+        y: 894
+        width: 108
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 75f40072b3e1b4710800000000000000
+      internalID: 1678468525531877207
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_8
+      rect:
+        serializedVersion: 2
+        x: 865
+        y: 900
+        width: 141
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 26ba3bd91013cdfd0800000000000000
+      internalID: -2315922225364751518
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_9
+      rect:
+        serializedVersion: 2
+        x: 1006
+        y: 900
+        width: 127
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fd45e7948d178a4f0800000000000000
+      internalID: -817278158607854369
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_10
+      rect:
+        serializedVersion: 2
+        x: 1133
+        y: 901
+        width: 106
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7e0ea423de6795d40800000000000000
+      internalID: 5573616774970794215
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_11
+      rect:
+        serializedVersion: 2
+        x: 1239
+        y: 904
+        width: 121
+        height: 119
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d7a15c71c1ac69a70800000000000000
+      internalID: 8833469941140494973
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_12
+      rect:
+        serializedVersion: 2
+        x: 1360
+        y: 906
+        width: 153
+        height: 117
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9ab25ab3dc9024f70800000000000000
+      internalID: 9169902568353377193
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_13
+      rect:
+        serializedVersion: 2
+        x: 1513
+        y: 906
+        width: 71
+        height: 117
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d7e4667378ffed7f0800000000000000
+      internalID: -585749945296466307
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_14
+      rect:
+        serializedVersion: 2
+        x: 1584
+        y: 912
+        width: 141
+        height: 111
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 88da593c481bcc9b0800000000000000
+      internalID: -5058473097668743800
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_15
+      rect:
+        serializedVersion: 2
+        x: 1725
+        y: 913
+        width: 150
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 71aa7d44942875d70800000000000000
+      internalID: 9031830828914027031
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_16
+      rect:
+        serializedVersion: 2
+        x: 1875
+        y: 916
+        width: 117
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4c87b6c1abedc5910800000000000000
+      internalID: 1827580439727667396
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_17
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 766
+        width: 139
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2bdd0312acea10dd0800000000000000
+      internalID: -2521542133187289678
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_18
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 767
+        width: 117
+        height: 104
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 91f6907bf21e99d60800000000000000
+      internalID: 7897591016621436697
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_19
+      rect:
+        serializedVersion: 2
+        x: 257
+        y: 767
+        width: 150
+        height: 104
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0393d45862bf197e0800000000000000
+      internalID: -1760349836461393616
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_20
+      rect:
+        serializedVersion: 2
+        x: 407
+        y: 770
+        width: 132
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7cadb0fac3c7d3e60800000000000000
+      internalID: 7943641917828094663
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_21
+      rect:
+        serializedVersion: 2
+        x: 539
+        y: 770
+        width: 132
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b31a3d822f63d70d0800000000000000
+      internalID: -3423519728036765381
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_22
+      rect:
+        serializedVersion: 2
+        x: 671
+        y: 770
+        width: 132
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d62a24e6d9ce15400800000000000000
+      internalID: 311290010169156205
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_23
+      rect:
+        serializedVersion: 2
+        x: 803
+        y: 770
+        width: 132
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6912ee8981b2e4770800000000000000
+      internalID: 8596856123341808022
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_24
+      rect:
+        serializedVersion: 2
+        x: 935
+        y: 770
+        width: 151
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 815cdd05e7dfe01b0800000000000000
+      internalID: -5688330560357939944
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_25
+      rect:
+        serializedVersion: 2
+        x: 1086
+        y: 771
+        width: 133
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1c06bb13e3efe6760800000000000000
+      internalID: 7453173976420540609
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_26
+      rect:
+        serializedVersion: 2
+        x: 1219
+        y: 771
+        width: 133
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c42917c14a0e8a8e0800000000000000
+      internalID: -1681847465366416820
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_27
+      rect:
+        serializedVersion: 2
+        x: 1352
+        y: 771
+        width: 133
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 51bee2a67a36c13d0800000000000000
+      internalID: -3234600861666710763
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_28
+      rect:
+        serializedVersion: 2
+        x: 1485
+        y: 772
+        width: 133
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4a22c63b3a70084e0800000000000000
+      internalID: -1981575436371746140
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_29
+      rect:
+        serializedVersion: 2
+        x: 1618
+        y: 773
+        width: 145
+        height: 98
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4f2d813edb7cb5660800000000000000
+      internalID: 7375708433122120436
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_30
+      rect:
+        serializedVersion: 2
+        x: 1763
+        y: 773
+        width: 135
+        height: 98
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 65f58ca8747f0c730800000000000000
+      internalID: 4017482754257608534
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_31
+      rect:
+        serializedVersion: 2
+        x: 1898
+        y: 773
+        width: 135
+        height: 98
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b3624c2e945907930800000000000000
+      internalID: 4138972202123142715
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_32
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 668
+        width: 134
+        height: 98
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a5a48d6503195ee80800000000000000
+      internalID: -8149948313855571366
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_33
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 669
+        width: 135
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 35340e9e943663310800000000000000
+      internalID: 1384403104570557267
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_34
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 669
+        width: 132
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 43cb84414c50da590800000000000000
+      internalID: -7661461051375305676
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_35
+      rect:
+        serializedVersion: 2
+        x: 402
+        y: 669
+        width: 133
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 598df0cffd8ddcca0800000000000000
+      internalID: -5994897072442058603
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_36
+      rect:
+        serializedVersion: 2
+        x: 535
+        y: 669
+        width: 132
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b03c19fe0e60fbdd0800000000000000
+      internalID: -2468246507613994229
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_37
+      rect:
+        serializedVersion: 2
+        x: 667
+        y: 669
+        width: 133
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 90eba5f36cd6fcdb0800000000000000
+      internalID: -4769472782128202231
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_38
+      rect:
+        serializedVersion: 2
+        x: 800
+        y: 669
+        width: 74
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 32cdc2e5371473d70800000000000000
+      internalID: 9022752342217120803
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_39
+      rect:
+        serializedVersion: 2
+        x: 874
+        y: 670
+        width: 105
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 61ffcabe70b027500800000000000000
+      internalID: 392388246181314326
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_40
+      rect:
+        serializedVersion: 2
+        x: 979
+        y: 673
+        width: 104
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4143c8e594e56ec00800000000000000
+      internalID: 929534042310456340
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_41
+      rect:
+        serializedVersion: 2
+        x: 1083
+        y: 673
+        width: 93
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cdf8dfcd1a8053eb0800000000000000
+      internalID: -4740873541447217188
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_42
+      rect:
+        serializedVersion: 2
+        x: 1176
+        y: 673
+        width: 117
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e8631069df983ee90800000000000000
+      internalID: -6997597673767225714
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_43
+      rect:
+        serializedVersion: 2
+        x: 1293
+        y: 673
+        width: 115
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2cabc59018395afb0800000000000000
+      internalID: -4637138058890921278
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_44
+      rect:
+        serializedVersion: 2
+        x: 1408
+        y: 673
+        width: 132
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 665bfb4b106d3ace0800000000000000
+      internalID: -1395036156738947738
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_45
+      rect:
+        serializedVersion: 2
+        x: 1540
+        y: 673
+        width: 115
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8eb2513d643e9d690800000000000000
+      internalID: -7576775004745552920
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_46
+      rect:
+        serializedVersion: 2
+        x: 1655
+        y: 673
+        width: 132
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e1cefcb6f5db0aa80800000000000000
+      internalID: -8457551882673460194
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_47
+      rect:
+        serializedVersion: 2
+        x: 1788
+        y: 673
+        width: 117
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c93c4b343cac5d5a0800000000000000
+      internalID: -6497063947408718948
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_48
+      rect:
+        serializedVersion: 2
+        x: 1905
+        y: 673
+        width: 133
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 56d951bce96a52840800000000000000
+      internalID: 5198744545811340645
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_49
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 575
+        width: 133
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: afcc562e44c2e08c0800000000000000
+      internalID: -4031235942082294534
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_50
+      rect:
+        serializedVersion: 2
+        x: 134
+        y: 576
+        width: 102
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7e72278e27e3763c0800000000000000
+      internalID: -4366452650465417241
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_51
+      rect:
+        serializedVersion: 2
+        x: 236
+        y: 576
+        width: 93
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e69d625a795a0f290800000000000000
+      internalID: -7858599279032084114
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_52
+      rect:
+        serializedVersion: 2
+        x: 329
+        y: 576
+        width: 119
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6a09fc6c889db63e0800000000000000
+      internalID: -2059313223117598554
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_53
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 576
+        width: 115
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6dbd172bbe268dd40800000000000000
+      internalID: 5609342100340595670
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_54
+      rect:
+        serializedVersion: 2
+        x: 563
+        y: 576
+        width: 115
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2797937b3ba4763e0800000000000000
+      internalID: -2060596168765113998
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_55
+      rect:
+        serializedVersion: 2
+        x: 678
+        y: 576
+        width: 127
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 620b399def8c3e350800000000000000
+      internalID: 6044896121758920742
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_56
+      rect:
+        serializedVersion: 2
+        x: 805
+        y: 577
+        width: 109
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 50e0f5991e08404b0800000000000000
+      internalID: -5475109540546540027
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_57
+      rect:
+        serializedVersion: 2
+        x: 914
+        y: 577
+        width: 101
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a00e53db4a8b1ac50800000000000000
+      internalID: 6674819140428357642
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_58
+      rect:
+        serializedVersion: 2
+        x: 1015
+        y: 577
+        width: 92
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba6a71e957ed52420800000000000000
+      internalID: 2604732556248589995
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_59
+      rect:
+        serializedVersion: 2
+        x: 1107
+        y: 577
+        width: 107
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fdbd8ff68662bd1e0800000000000000
+      internalID: -2172100165279097889
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_60
+      rect:
+        serializedVersion: 2
+        x: 1214
+        y: 577
+        width: 109
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e84f57c9cf77af570800000000000000
+      internalID: 8501239173455672462
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_61
+      rect:
+        serializedVersion: 2
+        x: 1323
+        y: 577
+        width: 101
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b5073000e10e27570800000000000000
+      internalID: 8463073069236449371
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_62
+      rect:
+        serializedVersion: 2
+        x: 1424
+        y: 577
+        width: 92
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 37be76fbac707fcf0800000000000000
+      internalID: -218697489528132749
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_63
+      rect:
+        serializedVersion: 2
+        x: 1516
+        y: 577
+        width: 132
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5cb42dac33ab17c90800000000000000
+      internalID: -7173747999815611451
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_64
+      rect:
+        serializedVersion: 2
+        x: 1648
+        y: 578
+        width: 101
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b068002e9b8ca7be0800000000000000
+      internalID: -1478648826951596533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_65
+      rect:
+        serializedVersion: 2
+        x: 1749
+        y: 578
+        width: 91
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 06727f1c8ff0dd9f0800000000000000
+      internalID: -442179627331934368
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_66
+      rect:
+        serializedVersion: 2
+        x: 1840
+        y: 578
+        width: 94
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 088c1e8ec32533920800000000000000
+      internalID: 2968807000925915264
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_67
+      rect:
+        serializedVersion: 2
+        x: 1934
+        y: 579
+        width: 100
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d1d8e16eda9e4b9b0800000000000000
+      internalID: -5065166747785589475
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_68
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 486
+        width: 89
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9f4e399fc6cf98480800000000000000
+      internalID: -8896302043919817479
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_69
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 486
+        width: 99
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a62ce78feb60254e0800000000000000
+      internalID: -1994524267689098646
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_70
+      rect:
+        serializedVersion: 2
+        x: 189
+        y: 486
+        width: 91
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 61d7c5e520f8455b0800000000000000
+      internalID: -5380518414465073898
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_71
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 486
+        width: 101
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7ebcb9f22a2a3d540800000000000000
+      internalID: 5031544026170117095
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_72
+      rect:
+        serializedVersion: 2
+        x: 381
+        y: 486
+        width: 99
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4ef094ca188c13e70800000000000000
+      internalID: 9093269581904547812
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_73
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 486
+        width: 101
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c3e6c9181eee24630800000000000000
+      internalID: 3909950078820576828
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_74
+      rect:
+        serializedVersion: 2
+        x: 581
+        y: 486
+        width: 109
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7dc04fbcafb189aa0800000000000000
+      internalID: -6154138126824239913
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_75
+      rect:
+        serializedVersion: 2
+        x: 690
+        y: 487
+        width: 103
+        height: 88
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 51baa870c52cad9a0800000000000000
+      internalID: -6207435435857499371
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_76
+      rect:
+        serializedVersion: 2
+        x: 793
+        y: 487
+        width: 103
+        height: 88
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c8b117f99be65a990800000000000000
+      internalID: -7375367071226324084
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_77
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 488
+        width: 117
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b6650fcc209d28180800000000000000
+      internalID: -9114484089792997781
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_78
+      rect:
+        serializedVersion: 2
+        x: 1013
+        y: 488
+        width: 119
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f73cbeb281e19a8d0800000000000000
+      internalID: -2834701401288096897
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_79
+      rect:
+        serializedVersion: 2
+        x: 1132
+        y: 488
+        width: 115
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3f683a2507afc8d10800000000000000
+      internalID: 2129352084169131763
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_80
+      rect:
+        serializedVersion: 2
+        x: 1247
+        y: 488
+        width: 130
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 26541c536cd962930800000000000000
+      internalID: 4118152383907841378
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_81
+      rect:
+        serializedVersion: 2
+        x: 1377
+        y: 488
+        width: 129
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 800530493aeb3bdd0800000000000000
+      internalID: -2471422160724078584
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_82
+      rect:
+        serializedVersion: 2
+        x: 1506
+        y: 489
+        width: 97
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0a784817c027dd8c0800000000000000
+      internalID: -3972893898501224544
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_83
+      rect:
+        serializedVersion: 2
+        x: 1603
+        y: 489
+        width: 107
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2546b75b67e02ef40800000000000000
+      internalID: 5756179176746607698
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_84
+      rect:
+        serializedVersion: 2
+        x: 1710
+        y: 489
+        width: 103
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f3c230021a8482130800000000000000
+      internalID: 3542160963790908479
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_85
+      rect:
+        serializedVersion: 2
+        x: 1813
+        y: 489
+        width: 140
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bd3ac2a46b6aba920800000000000000
+      internalID: 3002676878431265755
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_86
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 401
+        width: 101
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 089154444207869d0800000000000000
+      internalID: -2780849468834768512
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_87
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 401
+        width: 109
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c46571f76fb487530800000000000000
+      internalID: 3852913003281733196
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_88
+      rect:
+        serializedVersion: 2
+        x: 211
+        y: 401
+        width: 91
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c8cf2e1211752d540800000000000000
+      internalID: 5031179464820849804
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_89
+      rect:
+        serializedVersion: 2
+        x: 302
+        y: 401
+        width: 91
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d64052da4d4b64ad0800000000000000
+      internalID: -2718286499540564883
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_90
+      rect:
+        serializedVersion: 2
+        x: 393
+        y: 401
+        width: 109
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a7513576eb0370b30800000000000000
+      internalID: 4253421967410140538
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_91
+      rect:
+        serializedVersion: 2
+        x: 502
+        y: 401
+        width: 102
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3c059524e730de4a0800000000000000
+      internalID: -6562585241195032381
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_92
+      rect:
+        serializedVersion: 2
+        x: 604
+        y: 401
+        width: 147
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6b859e9baf820cad0800000000000000
+      internalID: -2684100320586803018
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_93
+      rect:
+        serializedVersion: 2
+        x: 751
+        y: 401
+        width: 97
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 552117407b68d40a0800000000000000
+      internalID: -6895707333822705067
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_94
+      rect:
+        serializedVersion: 2
+        x: 848
+        y: 402
+        width: 114
+        height: 84
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 373d77b36942829e0800000000000000
+      internalID: -1646025436142513293
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_95
+      rect:
+        serializedVersion: 2
+        x: 962
+        y: 403
+        width: 115
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3c1d804fb11558540800000000000000
+      internalID: 5009499341019730371
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_96
+      rect:
+        serializedVersion: 2
+        x: 1077
+        y: 403
+        width: 99
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 07728ca71c50c3f30800000000000000
+      internalID: 4556523251538863984
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_97
+      rect:
+        serializedVersion: 2
+        x: 1176
+        y: 403
+        width: 99
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b3e9ff56826539470800000000000000
+      internalID: 8400152461486038587
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_98
+      rect:
+        serializedVersion: 2
+        x: 1275
+        y: 403
+        width: 109
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 60252291f0ee8a260800000000000000
+      internalID: 7109193760417927686
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_99
+      rect:
+        serializedVersion: 2
+        x: 1384
+        y: 404
+        width: 95
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d0912e65e989272e0800000000000000
+      internalID: -2129471867962910451
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_100
+      rect:
+        serializedVersion: 2
+        x: 1479
+        y: 404
+        width: 117
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9a4fbb251615f07a0800000000000000
+      internalID: -6408814266283199319
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_101
+      rect:
+        serializedVersion: 2
+        x: 1596
+        y: 404
+        width: 95
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 20a4f76db01be64b0800000000000000
+      internalID: -5445220235042928126
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_102
+      rect:
+        serializedVersion: 2
+        x: 1691
+        y: 404
+        width: 94
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d18bd12e536c4cc0800000000000000
+      internalID: -3725493535796133415
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_103
+      rect:
+        serializedVersion: 2
+        x: 1785
+        y: 405
+        width: 117
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7b6fe83dc6fb6fa40800000000000000
+      internalID: 5401715277204223671
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_104
+      rect:
+        serializedVersion: 2
+        x: 1902
+        y: 405
+        width: 94
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 07fe08e433cc7a880800000000000000
+      internalID: -8599680442708201616
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_105
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 320
+        width: 113
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0da22acba7d38f540800000000000000
+      internalID: 5041847380201319120
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_106
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 320
+        width: 134
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f497e3e0c82f77440800000000000000
+      internalID: 4933678600155986255
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_107
+      rect:
+        serializedVersion: 2
+        x: 248
+        y: 320
+        width: 103
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f11e95db29bc8000800000000000000
+      internalID: 39610094658130417
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_108
+      rect:
+        serializedVersion: 2
+        x: 351
+        y: 320
+        width: 112
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f635d8f13016e1240800000000000000
+      internalID: 4764352121846715247
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_109
+      rect:
+        serializedVersion: 2
+        x: 463
+        y: 320
+        width: 134
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 55f52175cd9aa38b0800000000000000
+      internalID: -5171634458262872235
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_110
+      rect:
+        serializedVersion: 2
+        x: 597
+        y: 321
+        width: 114
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8b415928aac550bf0800000000000000
+      internalID: -358778707901082440
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_111
+      rect:
+        serializedVersion: 2
+        x: 711
+        y: 321
+        width: 103
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: de3824b1a859fb790800000000000000
+      internalID: -7512121233035328531
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_112
+      rect:
+        serializedVersion: 2
+        x: 814
+        y: 321
+        width: 155
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fe05e03f75cfdb560800000000000000
+      internalID: 7331293223099191535
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_113
+      rect:
+        serializedVersion: 2
+        x: 969
+        y: 322
+        width: 115
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2c3c294aac56ef100800000000000000
+      internalID: 143664159141315522
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_114
+      rect:
+        serializedVersion: 2
+        x: 1084
+        y: 322
+        width: 117
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd8980dd56e849810800000000000000
+      internalID: 1771197121614616796
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_115
+      rect:
+        serializedVersion: 2
+        x: 1201
+        y: 322
+        width: 114
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f3a5f6f566d92090800000000000000
+      internalID: -8058674324779457551
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_116
+      rect:
+        serializedVersion: 2
+        x: 1315
+        y: 322
+        width: 102
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b908712e59f7765d0800000000000000
+      internalID: -3069344339309657957
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_117
+      rect:
+        serializedVersion: 2
+        x: 1417
+        y: 322
+        width: 113
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0f81c0af6147de690800000000000000
+      internalID: -7571267756506736400
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_118
+      rect:
+        serializedVersion: 2
+        x: 1530
+        y: 322
+        width: 115
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b573f913898150b0800000000000000
+      internalID: -5741656853751564876
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_119
+      rect:
+        serializedVersion: 2
+        x: 1645
+        y: 322
+        width: 97
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dee4cbe7346375d90800000000000000
+      internalID: -7109153823264059667
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_120
+      rect:
+        serializedVersion: 2
+        x: 1742
+        y: 322
+        width: 111
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 702a37238fd9d5740800000000000000
+      internalID: 5142440038850863623
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_121
+      rect:
+        serializedVersion: 2
+        x: 1853
+        y: 322
+        width: 131
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 49b94b5d99becfb30800000000000000
+      internalID: 4322588788316740500
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_122
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 241
+        width: 131
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3028eca6196b108b0800000000000000
+      internalID: -5187664560075668989
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_123
+      rect:
+        serializedVersion: 2
+        x: 132
+        y: 243
+        width: 114
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9b978897cb9bd5340800000000000000
+      internalID: 4854240192519240121
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_124
+      rect:
+        serializedVersion: 2
+        x: 246
+        y: 245
+        width: 135
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5ba3f640ee3988a90800000000000000
+      internalID: -7311431344550102347
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_125
+      rect:
+        serializedVersion: 2
+        x: 381
+        y: 245
+        width: 134
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e6c96227380e26bd0800000000000000
+      internalID: -2638299576525218706
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_126
+      rect:
+        serializedVersion: 2
+        x: 515
+        y: 249
+        width: 166
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e3d1b09d13cef6d90800000000000000
+      internalID: -7102198388501045954
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Antlion_127
+      rect:
+        serializedVersion: 2
+        x: 681
+        y: 252
+        width: 161
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0483016157b9b9e80800000000000000
+      internalID: -8170766171749992384
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Antlion_0: 5595941333004853397
+      Antlion_1: 8120342091664412684
+      Antlion_10: 5573616774970794215
+      Antlion_100: -6408814266283199319
+      Antlion_101: -5445220235042928126
+      Antlion_102: -3725493535796133415
+      Antlion_103: 5401715277204223671
+      Antlion_104: -8599680442708201616
+      Antlion_105: 5041847380201319120
+      Antlion_106: 4933678600155986255
+      Antlion_107: 39610094658130417
+      Antlion_108: 4764352121846715247
+      Antlion_109: -5171634458262872235
+      Antlion_11: 8833469941140494973
+      Antlion_110: -358778707901082440
+      Antlion_111: -7512121233035328531
+      Antlion_112: 7331293223099191535
+      Antlion_113: 143664159141315522
+      Antlion_114: 1771197121614616796
+      Antlion_115: -8058674324779457551
+      Antlion_116: -3069344339309657957
+      Antlion_117: -7571267756506736400
+      Antlion_118: -5741656853751564876
+      Antlion_119: -7109153823264059667
+      Antlion_12: 9169902568353377193
+      Antlion_120: 5142440038850863623
+      Antlion_121: 4322588788316740500
+      Antlion_122: -5187664560075668989
+      Antlion_123: 4854240192519240121
+      Antlion_124: -7311431344550102347
+      Antlion_125: -2638299576525218706
+      Antlion_126: -7102198388501045954
+      Antlion_127: -8170766171749992384
+      Antlion_13: -585749945296466307
+      Antlion_14: -5058473097668743800
+      Antlion_15: 9031830828914027031
+      Antlion_16: 1827580439727667396
+      Antlion_17: -2521542133187289678
+      Antlion_18: 7897591016621436697
+      Antlion_19: -1760349836461393616
+      Antlion_2: 1301942598027724577
+      Antlion_20: 7943641917828094663
+      Antlion_21: -3423519728036765381
+      Antlion_22: 311290010169156205
+      Antlion_23: 8596856123341808022
+      Antlion_24: -5688330560357939944
+      Antlion_25: 7453173976420540609
+      Antlion_26: -1681847465366416820
+      Antlion_27: -3234600861666710763
+      Antlion_28: -1981575436371746140
+      Antlion_29: 7375708433122120436
+      Antlion_3: -1959290780448146107
+      Antlion_30: 4017482754257608534
+      Antlion_31: 4138972202123142715
+      Antlion_32: -8149948313855571366
+      Antlion_33: 1384403104570557267
+      Antlion_34: -7661461051375305676
+      Antlion_35: -5994897072442058603
+      Antlion_36: -2468246507613994229
+      Antlion_37: -4769472782128202231
+      Antlion_38: 9022752342217120803
+      Antlion_39: 392388246181314326
+      Antlion_4: -15945242969691357
+      Antlion_40: 929534042310456340
+      Antlion_41: -4740873541447217188
+      Antlion_42: -6997597673767225714
+      Antlion_43: -4637138058890921278
+      Antlion_44: -1395036156738947738
+      Antlion_45: -7576775004745552920
+      Antlion_46: -8457551882673460194
+      Antlion_47: -6497063947408718948
+      Antlion_48: 5198744545811340645
+      Antlion_49: -4031235942082294534
+      Antlion_5: -805378011553206265
+      Antlion_50: -4366452650465417241
+      Antlion_51: -7858599279032084114
+      Antlion_52: -2059313223117598554
+      Antlion_53: 5609342100340595670
+      Antlion_54: -2060596168765113998
+      Antlion_55: 6044896121758920742
+      Antlion_56: -5475109540546540027
+      Antlion_57: 6674819140428357642
+      Antlion_58: 2604732556248589995
+      Antlion_59: -2172100165279097889
+      Antlion_6: -3853198153544716480
+      Antlion_60: 8501239173455672462
+      Antlion_61: 8463073069236449371
+      Antlion_62: -218697489528132749
+      Antlion_63: -7173747999815611451
+      Antlion_64: -1478648826951596533
+      Antlion_65: -442179627331934368
+      Antlion_66: 2968807000925915264
+      Antlion_67: -5065166747785589475
+      Antlion_68: -8896302043919817479
+      Antlion_69: -1994524267689098646
+      Antlion_7: 1678468525531877207
+      Antlion_70: -5380518414465073898
+      Antlion_71: 5031544026170117095
+      Antlion_72: 9093269581904547812
+      Antlion_73: 3909950078820576828
+      Antlion_74: -6154138126824239913
+      Antlion_75: -6207435435857499371
+      Antlion_76: -7375367071226324084
+      Antlion_77: -9114484089792997781
+      Antlion_78: -2834701401288096897
+      Antlion_79: 2129352084169131763
+      Antlion_8: -2315922225364751518
+      Antlion_80: 4118152383907841378
+      Antlion_81: -2471422160724078584
+      Antlion_82: -3972893898501224544
+      Antlion_83: 5756179176746607698
+      Antlion_84: 3542160963790908479
+      Antlion_85: 3002676878431265755
+      Antlion_86: -2780849468834768512
+      Antlion_87: 3852913003281733196
+      Antlion_88: 5031179464820849804
+      Antlion_89: -2718286499540564883
+      Antlion_9: -817278158607854369
+      Antlion_90: 4253421967410140538
+      Antlion_91: -6562585241195032381
+      Antlion_92: -2684100320586803018
+      Antlion_93: -6895707333822705067
+      Antlion_94: -1646025436142513293
+      Antlion_95: 5009499341019730371
+      Antlion_96: 4556523251538863984
+      Antlion_97: 8400152461486038587
+      Antlion_98: 7109193760417927686
+      Antlion_99: -2129471867962910451
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

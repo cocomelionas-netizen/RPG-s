@@ -1,0 +1,3252 @@
+fileFormatVersion: 2
+guid: 323b7ae97d646e04b9b5ed1d8df77e94
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 1136764345620783580
+    second: GoblinElite_0
+  - first:
+      213: -2975512383181412343
+    second: GoblinElite_1
+  - first:
+      213: 3054733565235433965
+    second: GoblinElite_2
+  - first:
+      213: 890315833485764530
+    second: GoblinElite_3
+  - first:
+      213: -13600748615302001
+    second: GoblinElite_4
+  - first:
+      213: 8921604885062452372
+    second: GoblinElite_5
+  - first:
+      213: -6882207783127979188
+    second: GoblinElite_6
+  - first:
+      213: -1945245689736487295
+    second: GoblinElite_7
+  - first:
+      213: -1468361146533931858
+    second: GoblinElite_8
+  - first:
+      213: -667466136874628313
+    second: GoblinElite_9
+  - first:
+      213: -9137565939645400472
+    second: GoblinElite_10
+  - first:
+      213: 7994416154540799124
+    second: GoblinElite_11
+  - first:
+      213: -2518847386526825603
+    second: GoblinElite_12
+  - first:
+      213: -4382422124314872278
+    second: GoblinElite_13
+  - first:
+      213: 5636355995085754197
+    second: GoblinElite_14
+  - first:
+      213: 3628427106535257952
+    second: GoblinElite_15
+  - first:
+      213: -4094485144380923022
+    second: GoblinElite_16
+  - first:
+      213: 1489689612192506765
+    second: GoblinElite_17
+  - first:
+      213: 2369650278957498929
+    second: GoblinElite_18
+  - first:
+      213: 6093868857246047511
+    second: GoblinElite_19
+  - first:
+      213: 4450738734531399747
+    second: GoblinElite_20
+  - first:
+      213: -8569671537542740118
+    second: GoblinElite_21
+  - first:
+      213: -5428198937705787061
+    second: GoblinElite_22
+  - first:
+      213: -5148198673191442046
+    second: GoblinElite_23
+  - first:
+      213: 5641613043241621829
+    second: GoblinElite_24
+  - first:
+      213: -8689857615478370779
+    second: GoblinElite_25
+  - first:
+      213: -5081191958968051191
+    second: GoblinElite_26
+  - first:
+      213: -5561482089302925925
+    second: GoblinElite_27
+  - first:
+      213: -9195026018897725527
+    second: GoblinElite_28
+  - first:
+      213: -1419005560413582144
+    second: GoblinElite_29
+  - first:
+      213: 995921645323146029
+    second: GoblinElite_30
+  - first:
+      213: -5976727812423274493
+    second: GoblinElite_31
+  - first:
+      213: 7712628277645871768
+    second: GoblinElite_32
+  - first:
+      213: 7454071926506174138
+    second: GoblinElite_33
+  - first:
+      213: 181529709775513160
+    second: GoblinElite_34
+  - first:
+      213: 8739673807612243918
+    second: GoblinElite_35
+  - first:
+      213: -626805189085211400
+    second: GoblinElite_36
+  - first:
+      213: -2645497532962738016
+    second: GoblinElite_37
+  - first:
+      213: -1399112441576402769
+    second: GoblinElite_38
+  - first:
+      213: 6350787231614691605
+    second: GoblinElite_39
+  - first:
+      213: -426856262075397296
+    second: GoblinElite_40
+  - first:
+      213: 6009068582636801197
+    second: GoblinElite_41
+  - first:
+      213: -330495875165631245
+    second: GoblinElite_42
+  - first:
+      213: -6057500240533814963
+    second: GoblinElite_43
+  - first:
+      213: 7829331331399987974
+    second: GoblinElite_44
+  - first:
+      213: -4088156747649865385
+    second: GoblinElite_45
+  - first:
+      213: 4348712911210221729
+    second: GoblinElite_46
+  - first:
+      213: 3420022413754826160
+    second: GoblinElite_47
+  - first:
+      213: -9024384342289585183
+    second: GoblinElite_48
+  - first:
+      213: -2480534643201538448
+    second: GoblinElite_49
+  - first:
+      213: -2518677433527624612
+    second: GoblinElite_50
+  - first:
+      213: -5435279123809415085
+    second: GoblinElite_51
+  - first:
+      213: -7590764704482854152
+    second: GoblinElite_52
+  - first:
+      213: -2732492134880515238
+    second: GoblinElite_53
+  - first:
+      213: 8249672745077977329
+    second: GoblinElite_54
+  - first:
+      213: -521538359490878486
+    second: GoblinElite_55
+  - first:
+      213: 2120796655734399277
+    second: GoblinElite_56
+  - first:
+      213: 1513832132219765991
+    second: GoblinElite_57
+  - first:
+      213: -862652527266193714
+    second: GoblinElite_58
+  - first:
+      213: -2096625869325478545
+    second: GoblinElite_59
+  - first:
+      213: 1299088277835318774
+    second: GoblinElite_60
+  - first:
+      213: 6945967406068368429
+    second: GoblinElite_61
+  - first:
+      213: -5351083442081848220
+    second: GoblinElite_62
+  - first:
+      213: -2929975882259792659
+    second: GoblinElite_63
+  - first:
+      213: 6454756708270599905
+    second: GoblinElite_64
+  - first:
+      213: -1116094201621986959
+    second: GoblinElite_65
+  - first:
+      213: 4365741975373578993
+    second: GoblinElite_66
+  - first:
+      213: -5881864236865705067
+    second: GoblinElite_67
+  - first:
+      213: 8115512913423042351
+    second: GoblinElite_68
+  - first:
+      213: -2343893308336535357
+    second: GoblinElite_69
+  - first:
+      213: -226531731974036046
+    second: GoblinElite_70
+  - first:
+      213: -6091373315165161672
+    second: GoblinElite_71
+  - first:
+      213: 1291804446415522665
+    second: GoblinElite_72
+  - first:
+      213: -2185750526161740811
+    second: GoblinElite_73
+  - first:
+      213: -5724498217674479407
+    second: GoblinElite_74
+  - first:
+      213: 1020317619632077063
+    second: GoblinElite_75
+  - first:
+      213: 239796034757735619
+    second: GoblinElite_76
+  - first:
+      213: -9081241966783845031
+    second: GoblinElite_77
+  - first:
+      213: 3165919236610465723
+    second: GoblinElite_78
+  - first:
+      213: 6610374907244127960
+    second: GoblinElite_79
+  - first:
+      213: 184466990885860274
+    second: GoblinElite_80
+  - first:
+      213: -6575761399222631021
+    second: GoblinElite_81
+  - first:
+      213: 2651981373330305909
+    second: GoblinElite_82
+  - first:
+      213: 2482253544359296583
+    second: GoblinElite_83
+  - first:
+      213: -2035855095388890700
+    second: GoblinElite_84
+  - first:
+      213: 1731091939973230686
+    second: GoblinElite_85
+  - first:
+      213: 5829788693394224279
+    second: GoblinElite_86
+  - first:
+      213: -7948390556098164935
+    second: GoblinElite_87
+  - first:
+      213: -1383460435437404464
+    second: GoblinElite_88
+  - first:
+      213: 7983571504623505681
+    second: GoblinElite_89
+  - first:
+      213: 2038344381265844477
+    second: GoblinElite_90
+  - first:
+      213: -7948380986888081621
+    second: GoblinElite_91
+  - first:
+      213: 7941327571599000172
+    second: GoblinElite_92
+  - first:
+      213: -657123485992066517
+    second: GoblinElite_93
+  - first:
+      213: -4306605867635298120
+    second: GoblinElite_94
+  - first:
+      213: 3942312567719277756
+    second: GoblinElite_95
+  - first:
+      213: -5385877944122545234
+    second: GoblinElite_96
+  - first:
+      213: 7342050212920759285
+    second: GoblinElite_97
+  - first:
+      213: 411333390095520140
+    second: GoblinElite_98
+  - first:
+      213: 4600694251262670054
+    second: GoblinElite_99
+  - first:
+      213: 4732295632257383530
+    second: GoblinElite_100
+  - first:
+      213: -6126986580496393877
+    second: GoblinElite_101
+  - first:
+      213: -1213636844628059949
+    second: GoblinElite_102
+  - first:
+      213: -8035391628056247412
+    second: GoblinElite_103
+  - first:
+      213: 4086149924611652288
+    second: GoblinElite_104
+  - first:
+      213: -8979468963419787493
+    second: GoblinElite_105
+  - first:
+      213: 7200892121830967802
+    second: GoblinElite_106
+  - first:
+      213: -7023051217508308884
+    second: GoblinElite_107
+  - first:
+      213: -1698448042267386356
+    second: GoblinElite_108
+  - first:
+      213: -6362835755552849081
+    second: GoblinElite_109
+  - first:
+      213: -892356571900892775
+    second: GoblinElite_110
+  - first:
+      213: 6973048194520358142
+    second: GoblinElite_111
+  - first:
+      213: 2629583011987130622
+    second: GoblinElite_112
+  - first:
+      213: 829413746980159271
+    second: GoblinElite_113
+  - first:
+      213: 7914123804969739098
+    second: GoblinElite_114
+  - first:
+      213: 309602469430832767
+    second: GoblinElite_115
+  - first:
+      213: -9137209466207595639
+    second: GoblinElite_116
+  - first:
+      213: -8246947938868530151
+    second: GoblinElite_117
+  - first:
+      213: 7510528692138260616
+    second: GoblinElite_118
+  - first:
+      213: 4673891226909549742
+    second: GoblinElite_119
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: GoblinElite_0
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 892
+        width: 78
+        height: 131
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd16e06462996cf00800000000000000
+      internalID: 1136764345620783580
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_1
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 893
+        width: 77
+        height: 130
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 90822bf904bd4b6d0800000000000000
+      internalID: -2975512383181412343
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_2
+      rect:
+        serializedVersion: 2
+        x: 156
+        y: 894
+        width: 78
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: de1125f2ef7946a20800000000000000
+      internalID: 3054733565235433965
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_3
+      rect:
+        serializedVersion: 2
+        x: 234
+        y: 894
+        width: 79
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2b723d098890b5c00800000000000000
+      internalID: 890315833485764530
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_4
+      rect:
+        serializedVersion: 2
+        x: 313
+        y: 894
+        width: 89
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f840b12f03eafcff0800000000000000
+      internalID: -13600748615302001
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_5
+      rect:
+        serializedVersion: 2
+        x: 402
+        y: 896
+        width: 86
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4948980df58efcb70800000000000000
+      internalID: 8921604885062452372
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_6
+      rect:
+        serializedVersion: 2
+        x: 488
+        y: 897
+        width: 93
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c4b6a381c7c7d70a0800000000000000
+      internalID: -6882207783127979188
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_7
+      rect:
+        serializedVersion: 2
+        x: 581
+        y: 898
+        width: 74
+        height: 125
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 18e956ef9591105e0800000000000000
+      internalID: -1945245689736487295
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_8
+      rect:
+        serializedVersion: 2
+        x: 655
+        y: 897
+        width: 84
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ea41cd221555f9be0800000000000000
+      internalID: -1468361146533931858
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_9
+      rect:
+        serializedVersion: 2
+        x: 740
+        y: 898
+        width: 89
+        height: 125
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 72b4cfbb51facb6f0800000000000000
+      internalID: -667466136874628313
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_10
+      rect:
+        serializedVersion: 2
+        x: 829
+        y: 898
+        width: 89
+        height: 125
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 86a3ab7d038d03180800000000000000
+      internalID: -9137565939645400472
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_11
+      rect:
+        serializedVersion: 2
+        x: 918
+        y: 899
+        width: 83
+        height: 124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4947c06e22fd1fe60800000000000000
+      internalID: 7994416154540799124
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_12
+      rect:
+        serializedVersion: 2
+        x: 1003
+        y: 900
+        width: 83
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d73c5aab5a14b0dd0800000000000000
+      internalID: -2518847386526825603
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_13
+      rect:
+        serializedVersion: 2
+        x: 1086
+        y: 900
+        width: 93
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a2636680c428e23c0800000000000000
+      internalID: -4382422124314872278
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_14
+      rect:
+        serializedVersion: 2
+        x: 1179
+        y: 900
+        width: 94
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 55fcab23aeb583e40800000000000000
+      internalID: 5636355995085754197
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_15
+      rect:
+        serializedVersion: 2
+        x: 1273
+        y: 900
+        width: 74
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 067be6aaa33ca5230800000000000000
+      internalID: 3628427106535257952
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_16
+      rect:
+        serializedVersion: 2
+        x: 1347
+        y: 900
+        width: 91
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 273af0764777d27c0800000000000000
+      internalID: -4094485144380923022
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_17
+      rect:
+        serializedVersion: 2
+        x: 1438
+        y: 901
+        width: 72
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d83e2504fc07ca410800000000000000
+      internalID: 1489689612192506765
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_18
+      rect:
+        serializedVersion: 2
+        x: 1510
+        y: 902
+        width: 103
+        height: 121
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 132ca2faf50b2e020800000000000000
+      internalID: 2369650278957498929
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_19
+      rect:
+        serializedVersion: 2
+        x: 1613
+        y: 902
+        width: 97
+        height: 121
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 71d57ff5075c19450800000000000000
+      internalID: 6093868857246047511
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_20
+      rect:
+        serializedVersion: 2
+        x: 1710
+        y: 902
+        width: 82
+        height: 121
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 340d0db4c4334cd30800000000000000
+      internalID: 4450738734531399747
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_21
+      rect:
+        serializedVersion: 2
+        x: 1792
+        y: 902
+        width: 67
+        height: 121
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a674df20429621980800000000000000
+      internalID: -8569671537542740118
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_22
+      rect:
+        serializedVersion: 2
+        x: 1859
+        y: 903
+        width: 72
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b41d4e373d92ba4b0800000000000000
+      internalID: -5428198937705787061
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_23
+      rect:
+        serializedVersion: 2
+        x: 1931
+        y: 906
+        width: 83
+        height: 117
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2896943459ced88b0800000000000000
+      internalID: -5148198673191442046
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_24
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 776
+        width: 81
+        height: 116
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 54990aa1c290b4e40800000000000000
+      internalID: 5641613043241621829
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_25
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 777
+        width: 83
+        height: 115
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 52e40b02a8c676780800000000000000
+      internalID: -8689857615478370779
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_26
+      rect:
+        serializedVersion: 2
+        x: 165
+        y: 777
+        width: 75
+        height: 115
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 90a532aa5dafb79b0800000000000000
+      internalID: -5081191958968051191
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_27
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 777
+        width: 75
+        height: 115
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b9dd66a7185a1d2b0800000000000000
+      internalID: -5561482089302925925
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_28
+      rect:
+        serializedVersion: 2
+        x: 315
+        y: 779
+        width: 96
+        height: 113
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9a7702b9d84b46080800000000000000
+      internalID: -9195026018897725527
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_29
+      rect:
+        serializedVersion: 2
+        x: 411
+        y: 779
+        width: 80
+        height: 113
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0cc8e3506fdae4ce0800000000000000
+      internalID: -1419005560413582144
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_30
+      rect:
+        serializedVersion: 2
+        x: 491
+        y: 779
+        width: 84
+        height: 113
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d23db95b57932dd00800000000000000
+      internalID: 995921645323146029
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_31
+      rect:
+        serializedVersion: 2
+        x: 575
+        y: 780
+        width: 100
+        height: 112
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 300305d78b56e0da0800000000000000
+      internalID: -5976727812423274493
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_32
+      rect:
+        serializedVersion: 2
+        x: 675
+        y: 781
+        width: 85
+        height: 111
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 89a07b52e82c80b60800000000000000
+      internalID: 7712628277645871768
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_33
+      rect:
+        serializedVersion: 2
+        x: 760
+        y: 781
+        width: 76
+        height: 111
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ab6bc9d7cee227760800000000000000
+      internalID: 7454071926506174138
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_34
+      rect:
+        serializedVersion: 2
+        x: 836
+        y: 782
+        width: 107
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 846695b2f4ce48200800000000000000
+      internalID: 181529709775513160
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_35
+      rect:
+        serializedVersion: 2
+        x: 943
+        y: 782
+        width: 97
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ecf6383f50f894970800000000000000
+      internalID: 8739673807612243918
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_36
+      rect:
+        serializedVersion: 2
+        x: 1040
+        y: 783
+        width: 85
+        height: 109
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8f4543160042d47f0800000000000000
+      internalID: -626805189085211400
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_37
+      rect:
+        serializedVersion: 2
+        x: 1125
+        y: 783
+        width: 83
+        height: 109
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0a0759d920e494bd0800000000000000
+      internalID: -2645497532962738016
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_38
+      rect:
+        serializedVersion: 2
+        x: 1208
+        y: 784
+        width: 78
+        height: 108
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa0520fa5aa559ce0800000000000000
+      internalID: -1399112441576402769
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_39
+      rect:
+        serializedVersion: 2
+        x: 1286
+        y: 784
+        width: 75
+        height: 108
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 519ea78d657822850800000000000000
+      internalID: 6350787231614691605
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_40
+      rect:
+        serializedVersion: 2
+        x: 1361
+        y: 785
+        width: 93
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 05b48d0cd70831af0800000000000000
+      internalID: -426856262075397296
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_41
+      rect:
+        serializedVersion: 2
+        x: 1454
+        y: 786
+        width: 76
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dacc60bd900846350800000000000000
+      internalID: 6009068582636801197
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_42
+      rect:
+        serializedVersion: 2
+        x: 1530
+        y: 786
+        width: 78
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3fc4509a0c7d96bf0800000000000000
+      internalID: -330495875165631245
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_43
+      rect:
+        serializedVersion: 2
+        x: 1608
+        y: 786
+        width: 67
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d41832010af6feba0800000000000000
+      internalID: -6057500240533814963
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_44
+      rect:
+        serializedVersion: 2
+        x: 1675
+        y: 787
+        width: 88
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 603bee44d5f57ac60800000000000000
+      internalID: 7829331331399987974
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_45
+      rect:
+        serializedVersion: 2
+        x: 1763
+        y: 787
+        width: 85
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 759a6361913f347c0800000000000000
+      internalID: -4088156747649865385
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_46
+      rect:
+        serializedVersion: 2
+        x: 1848
+        y: 789
+        width: 97
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a017de2a5bb95c30800000000000000
+      internalID: 4348712911210221729
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_47
+      rect:
+        serializedVersion: 2
+        x: 1945
+        y: 790
+        width: 68
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0bdfab7e34c567f20800000000000000
+      internalID: 3420022413754826160
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_48
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 674
+        width: 97
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1eb6b310142f2c280800000000000000
+      internalID: -9024384342289585183
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_49
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 675
+        width: 92
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0760cea62ee539dd0800000000000000
+      internalID: -2480534643201538448
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_50
+      rect:
+        serializedVersion: 2
+        x: 190
+        y: 676
+        width: 74
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c5c1bcef73cdb0dd0800000000000000
+      internalID: -2518677433527624612
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_51
+      rect:
+        serializedVersion: 2
+        x: 264
+        y: 676
+        width: 90
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3505e3a2f620294b0800000000000000
+      internalID: -5435279123809415085
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_52
+      rect:
+        serializedVersion: 2
+        x: 354
+        y: 676
+        width: 90
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8faf9b708bf28a690800000000000000
+      internalID: -7590764704482854152
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_53
+      rect:
+        serializedVersion: 2
+        x: 444
+        y: 676
+        width: 91
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a5be5e471ec341ad0800000000000000
+      internalID: -2732492134880515238
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_54
+      rect:
+        serializedVersion: 2
+        x: 535
+        y: 677
+        width: 75
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f0389b27a9bc7270800000000000000
+      internalID: 8249672745077977329
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_55
+      rect:
+        serializedVersion: 2
+        x: 610
+        y: 677
+        width: 88
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ae36ec110af13c8f0800000000000000
+      internalID: -521538359490878486
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_56
+      rect:
+        serializedVersion: 2
+        x: 698
+        y: 677
+        width: 96
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d21a2e962559e6d10800000000000000
+      internalID: 2120796655734399277
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_57
+      rect:
+        serializedVersion: 2
+        x: 794
+        y: 678
+        width: 74
+        height: 98
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7e4088abd46320510800000000000000
+      internalID: 1513832132219765991
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_58
+      rect:
+        serializedVersion: 2
+        x: 869
+        y: 678
+        width: 89
+        height: 98
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ece94b3d81e3704f0800000000000000
+      internalID: -862652527266193714
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_59
+      rect:
+        serializedVersion: 2
+        x: 958
+        y: 679
+        width: 75
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f65d5f751e947e2e0800000000000000
+      internalID: -2096625869325478545
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_60
+      rect:
+        serializedVersion: 2
+        x: 1033
+        y: 679
+        width: 91
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6f58f34e7e9470210800000000000000
+      internalID: 1299088277835318774
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_61
+      rect:
+        serializedVersion: 2
+        x: 1124
+        y: 680
+        width: 87
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d248524fd88056060800000000000000
+      internalID: 6945967406068368429
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_62
+      rect:
+        serializedVersion: 2
+        x: 1211
+        y: 680
+        width: 102
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 464ac3fe5f12db5b0800000000000000
+      internalID: -5351083442081848220
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_63
+      rect:
+        serializedVersion: 2
+        x: 1313
+        y: 680
+        width: 104
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dec71717572a657d0800000000000000
+      internalID: -2929975882259792659
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_64
+      rect:
+        serializedVersion: 2
+        x: 1417
+        y: 680
+        width: 88
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1eee9040707e39950800000000000000
+      internalID: 6454756708270599905
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_65
+      rect:
+        serializedVersion: 2
+        x: 1505
+        y: 681
+        width: 71
+        height: 95
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 171c278ac36d280f0800000000000000
+      internalID: -1116094201621986959
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_66
+      rect:
+        serializedVersion: 2
+        x: 1576
+        y: 681
+        width: 96
+        height: 95
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f28727223b369c30800000000000000
+      internalID: 4365741975373578993
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_67
+      rect:
+        serializedVersion: 2
+        x: 1672
+        y: 681
+        width: 75
+        height: 95
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 59bab88d3ab6f5ea0800000000000000
+      internalID: -5881864236865705067
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_68
+      rect:
+        serializedVersion: 2
+        x: 1747
+        y: 681
+        width: 85
+        height: 95
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f270da63ff710a070800000000000000
+      internalID: 8115512913423042351
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_69
+      rect:
+        serializedVersion: 2
+        x: 1832
+        y: 681
+        width: 105
+        height: 95
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3c88f2d5471d87fd0800000000000000
+      internalID: -2343893308336535357
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_70
+      rect:
+        serializedVersion: 2
+        x: 1937
+        y: 681
+        width: 89
+        height: 95
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2b5655907923bdcf0800000000000000
+      internalID: -226531731974036046
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_71
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 581
+        width: 85
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 837794b4e38177ba0800000000000000
+      internalID: -6091373315165161672
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_72
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 581
+        width: 72
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 96b0edbbc496de110800000000000000
+      internalID: 1291804446415522665
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_73
+      rect:
+        serializedVersion: 2
+        x: 158
+        y: 581
+        width: 83
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5fb91802a77aaa1e0800000000000000
+      internalID: -2185750526161740811
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_74
+      rect:
+        serializedVersion: 2
+        x: 241
+        y: 581
+        width: 81
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1d8e722633f7e80b0800000000000000
+      internalID: -5724498217674479407
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_75
+      rect:
+        serializedVersion: 2
+        x: 322
+        y: 582
+        width: 85
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 709fd3c1875e82e00800000000000000
+      internalID: 1020317619632077063
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_76
+      rect:
+        serializedVersion: 2
+        x: 407
+        y: 582
+        width: 101
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3c4384e193de35300800000000000000
+      internalID: 239796034757735619
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_77
+      rect:
+        serializedVersion: 2
+        x: 508
+        y: 583
+        width: 86
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 95daa72bb82f8f180800000000000000
+      internalID: -9081241966783845031
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_78
+      rect:
+        serializedVersion: 2
+        x: 594
+        y: 583
+        width: 71
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bbf1ebd95ca9feb20800000000000000
+      internalID: 3165919236610465723
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_79
+      rect:
+        serializedVersion: 2
+        x: 665
+        y: 584
+        width: 71
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d6217274f4ccbb50800000000000000
+      internalID: 6610374907244127960
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_80
+      rect:
+        serializedVersion: 2
+        x: 736
+        y: 583
+        width: 86
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2b3798830cb5f8200800000000000000
+      internalID: 184466990885860274
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_81
+      rect:
+        serializedVersion: 2
+        x: 822
+        y: 583
+        width: 66
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3950c97e8d33eb4a0800000000000000
+      internalID: -6575761399222631021
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_82
+      rect:
+        serializedVersion: 2
+        x: 888
+        y: 583
+        width: 117
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5733e4c120bbdc420800000000000000
+      internalID: 2651981373330305909
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_83
+      rect:
+        serializedVersion: 2
+        x: 1006
+        y: 583
+        width: 77
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 74e7df1727cb27220800000000000000
+      internalID: 2482253544359296583
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_84
+      rect:
+        serializedVersion: 2
+        x: 1083
+        y: 583
+        width: 73
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b91d21c3903fb3e0800000000000000
+      internalID: -2035855095388890700
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_85
+      rect:
+        serializedVersion: 2
+        x: 1156
+        y: 584
+        width: 71
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e5075ab92f2160810800000000000000
+      internalID: 1731091939973230686
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_86
+      rect:
+        serializedVersion: 2
+        x: 1227
+        y: 584
+        width: 108
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 794f959dde197e050800000000000000
+      internalID: 5829788693394224279
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_87
+      rect:
+        serializedVersion: 2
+        x: 1335
+        y: 584
+        width: 87
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 93703bfc6e4a1b190800000000000000
+      internalID: -7948390556098164935
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_88
+      rect:
+        serializedVersion: 2
+        x: 1422
+        y: 584
+        width: 111
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0de32f85016fccce0800000000000000
+      internalID: -1383460435437404464
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_89
+      rect:
+        serializedVersion: 2
+        x: 1533
+        y: 584
+        width: 81
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 111d3041cf75bce60800000000000000
+      internalID: 7983571504623505681
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_90
+      rect:
+        serializedVersion: 2
+        x: 1614
+        y: 584
+        width: 118
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: df893474a67a94c10800000000000000
+      internalID: 2038344381265844477
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_91
+      rect:
+        serializedVersion: 2
+        x: 1732
+        y: 585
+        width: 96
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b2f2111da9da1b190800000000000000
+      internalID: -7948380986888081621
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_92
+      rect:
+        serializedVersion: 2
+        x: 1828
+        y: 585
+        width: 96
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c628c26f953453e60800000000000000
+      internalID: 7941327571599000172
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_93
+      rect:
+        serializedVersion: 2
+        x: 1924
+        y: 585
+        width: 72
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b2260ebcbad61e6f0800000000000000
+      internalID: -657123485992066517
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_94
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 492
+        width: 109
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8b03cffd7ccdb34c0800000000000000
+      internalID: -4306605867635298120
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_95
+      rect:
+        serializedVersion: 2
+        x: 110
+        y: 492
+        width: 94
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cb43770a468e5b630800000000000000
+      internalID: 3942312567719277756
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_96
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 493
+        width: 73
+        height: 88
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eabe6f0ab848145b0800000000000000
+      internalID: -5385877944122545234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_97
+      rect:
+        serializedVersion: 2
+        x: 277
+        y: 494
+        width: 86
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5f31930d4c334e560800000000000000
+      internalID: 7342050212920759285
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_98
+      rect:
+        serializedVersion: 2
+        x: 363
+        y: 494
+        width: 87
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c8196e8f98955b500800000000000000
+      internalID: 411333390095520140
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_99
+      rect:
+        serializedVersion: 2
+        x: 450
+        y: 494
+        width: 96
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6e471b6cb03f8df30800000000000000
+      internalID: 4600694251262670054
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_100
+      rect:
+        serializedVersion: 2
+        x: 546
+        y: 494
+        width: 109
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a6c75d40ecd7ca140800000000000000
+      internalID: 4732295632257383530
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_101
+      rect:
+        serializedVersion: 2
+        x: 655
+        y: 494
+        width: 74
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b695dedca2298faa0800000000000000
+      internalID: -6126986580496393877
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_102
+      rect:
+        serializedVersion: 2
+        x: 729
+        y: 494
+        width: 107
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3d85e9d48bb482fe0800000000000000
+      internalID: -1213636844628059949
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_103
+      rect:
+        serializedVersion: 2
+        x: 836
+        y: 494
+        width: 108
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c834f8a33ed8c7090800000000000000
+      internalID: -8035391628056247412
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_104
+      rect:
+        serializedVersion: 2
+        x: 944
+        y: 495
+        width: 95
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0ca777305bbe4b830800000000000000
+      internalID: 4086149924611652288
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_105
+      rect:
+        serializedVersion: 2
+        x: 1039
+        y: 495
+        width: 116
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b1fe7b39d84826380800000000000000
+      internalID: -8979468963419787493
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_106
+      rect:
+        serializedVersion: 2
+        x: 1155
+        y: 496
+        width: 111
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: af9c4ab9b35bee360800000000000000
+      internalID: 7200892121830967802
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_107
+      rect:
+        serializedVersion: 2
+        x: 1266
+        y: 496
+        width: 88
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c68ea0d902c198e90800000000000000
+      internalID: -7023051217508308884
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_108
+      rect:
+        serializedVersion: 2
+        x: 1354
+        y: 496
+        width: 73
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c0ed13b1186ed68e0800000000000000
+      internalID: -1698448042267386356
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_109
+      rect:
+        serializedVersion: 2
+        x: 1427
+        y: 497
+        width: 85
+        height: 84
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7434e12979aa2b7a0800000000000000
+      internalID: -6362835755552849081
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_110
+      rect:
+        serializedVersion: 2
+        x: 1512
+        y: 498
+        width: 85
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 999acdefc66bd93f0800000000000000
+      internalID: -892356571900892775
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_111
+      rect:
+        serializedVersion: 2
+        x: 1597
+        y: 498
+        width: 97
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: efc901c536e35c060800000000000000
+      internalID: 6973048194520358142
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_112
+      rect:
+        serializedVersion: 2
+        x: 1694
+        y: 499
+        width: 78
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef805e831d72e7420800000000000000
+      internalID: 2629583011987130622
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_113
+      rect:
+        serializedVersion: 2
+        x: 1772
+        y: 500
+        width: 93
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 72ff390986ba28b00800000000000000
+      internalID: 829413746980159271
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_114
+      rect:
+        serializedVersion: 2
+        x: 1865
+        y: 500
+        width: 116
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a532fa77bad94dd60800000000000000
+      internalID: 7914123804969739098
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_115
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 412
+        width: 85
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f7e220c3ecdeb4400800000000000000
+      internalID: 309602469430832767
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_116
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 413
+        width: 93
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9831c58c66c123180800000000000000
+      internalID: -9137209466207595639
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_117
+      rect:
+        serializedVersion: 2
+        x: 179
+        y: 413
+        width: 130
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 914f9963b84fc8d80800000000000000
+      internalID: -8246947938868530151
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_118
+      rect:
+        serializedVersion: 2
+        x: 309
+        y: 415
+        width: 87
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 888b7429d02ca3860800000000000000
+      internalID: 7510528692138260616
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GoblinElite_119
+      rect:
+        serializedVersion: 2
+        x: 396
+        y: 419
+        width: 109
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ea422cabe4ffcd040800000000000000
+      internalID: 4673891226909549742
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      GoblinElite_0: 1136764345620783580
+      GoblinElite_1: -2975512383181412343
+      GoblinElite_10: -9137565939645400472
+      GoblinElite_100: 4732295632257383530
+      GoblinElite_101: -6126986580496393877
+      GoblinElite_102: -1213636844628059949
+      GoblinElite_103: -8035391628056247412
+      GoblinElite_104: 4086149924611652288
+      GoblinElite_105: -8979468963419787493
+      GoblinElite_106: 7200892121830967802
+      GoblinElite_107: -7023051217508308884
+      GoblinElite_108: -1698448042267386356
+      GoblinElite_109: -6362835755552849081
+      GoblinElite_11: 7994416154540799124
+      GoblinElite_110: -892356571900892775
+      GoblinElite_111: 6973048194520358142
+      GoblinElite_112: 2629583011987130622
+      GoblinElite_113: 829413746980159271
+      GoblinElite_114: 7914123804969739098
+      GoblinElite_115: 309602469430832767
+      GoblinElite_116: -9137209466207595639
+      GoblinElite_117: -8246947938868530151
+      GoblinElite_118: 7510528692138260616
+      GoblinElite_119: 4673891226909549742
+      GoblinElite_12: -2518847386526825603
+      GoblinElite_13: -4382422124314872278
+      GoblinElite_14: 5636355995085754197
+      GoblinElite_15: 3628427106535257952
+      GoblinElite_16: -4094485144380923022
+      GoblinElite_17: 1489689612192506765
+      GoblinElite_18: 2369650278957498929
+      GoblinElite_19: 6093868857246047511
+      GoblinElite_2: 3054733565235433965
+      GoblinElite_20: 4450738734531399747
+      GoblinElite_21: -8569671537542740118
+      GoblinElite_22: -5428198937705787061
+      GoblinElite_23: -5148198673191442046
+      GoblinElite_24: 5641613043241621829
+      GoblinElite_25: -8689857615478370779
+      GoblinElite_26: -5081191958968051191
+      GoblinElite_27: -5561482089302925925
+      GoblinElite_28: -9195026018897725527
+      GoblinElite_29: -1419005560413582144
+      GoblinElite_3: 890315833485764530
+      GoblinElite_30: 995921645323146029
+      GoblinElite_31: -5976727812423274493
+      GoblinElite_32: 7712628277645871768
+      GoblinElite_33: 7454071926506174138
+      GoblinElite_34: 181529709775513160
+      GoblinElite_35: 8739673807612243918
+      GoblinElite_36: -626805189085211400
+      GoblinElite_37: -2645497532962738016
+      GoblinElite_38: -1399112441576402769
+      GoblinElite_39: 6350787231614691605
+      GoblinElite_4: -13600748615302001
+      GoblinElite_40: -426856262075397296
+      GoblinElite_41: 6009068582636801197
+      GoblinElite_42: -330495875165631245
+      GoblinElite_43: -6057500240533814963
+      GoblinElite_44: 7829331331399987974
+      GoblinElite_45: -4088156747649865385
+      GoblinElite_46: 4348712911210221729
+      GoblinElite_47: 3420022413754826160
+      GoblinElite_48: -9024384342289585183
+      GoblinElite_49: -2480534643201538448
+      GoblinElite_5: 8921604885062452372
+      GoblinElite_50: -2518677433527624612
+      GoblinElite_51: -5435279123809415085
+      GoblinElite_52: -7590764704482854152
+      GoblinElite_53: -2732492134880515238
+      GoblinElite_54: 8249672745077977329
+      GoblinElite_55: -521538359490878486
+      GoblinElite_56: 2120796655734399277
+      GoblinElite_57: 1513832132219765991
+      GoblinElite_58: -862652527266193714
+      GoblinElite_59: -2096625869325478545
+      GoblinElite_6: -6882207783127979188
+      GoblinElite_60: 1299088277835318774
+      GoblinElite_61: 6945967406068368429
+      GoblinElite_62: -5351083442081848220
+      GoblinElite_63: -2929975882259792659
+      GoblinElite_64: 6454756708270599905
+      GoblinElite_65: -1116094201621986959
+      GoblinElite_66: 4365741975373578993
+      GoblinElite_67: -5881864236865705067
+      GoblinElite_68: 8115512913423042351
+      GoblinElite_69: -2343893308336535357
+      GoblinElite_7: -1945245689736487295
+      GoblinElite_70: -226531731974036046
+      GoblinElite_71: -6091373315165161672
+      GoblinElite_72: 1291804446415522665
+      GoblinElite_73: -2185750526161740811
+      GoblinElite_74: -5724498217674479407
+      GoblinElite_75: 1020317619632077063
+      GoblinElite_76: 239796034757735619
+      GoblinElite_77: -9081241966783845031
+      GoblinElite_78: 3165919236610465723
+      GoblinElite_79: 6610374907244127960
+      GoblinElite_8: -1468361146533931858
+      GoblinElite_80: 184466990885860274
+      GoblinElite_81: -6575761399222631021
+      GoblinElite_82: 2651981373330305909
+      GoblinElite_83: 2482253544359296583
+      GoblinElite_84: -2035855095388890700
+      GoblinElite_85: 1731091939973230686
+      GoblinElite_86: 5829788693394224279
+      GoblinElite_87: -7948390556098164935
+      GoblinElite_88: -1383460435437404464
+      GoblinElite_89: 7983571504623505681
+      GoblinElite_9: -667466136874628313
+      GoblinElite_90: 2038344381265844477
+      GoblinElite_91: -7948380986888081621
+      GoblinElite_92: 7941327571599000172
+      GoblinElite_93: -657123485992066517
+      GoblinElite_94: -4306605867635298120
+      GoblinElite_95: 3942312567719277756
+      GoblinElite_96: -5385877944122545234
+      GoblinElite_97: 7342050212920759285
+      GoblinElite_98: 411333390095520140
+      GoblinElite_99: 4600694251262670054
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

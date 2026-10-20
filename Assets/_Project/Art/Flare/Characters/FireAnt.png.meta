@@ -1,0 +1,3460 @@
+fileFormatVersion: 2
+guid: 270106bf921f8d942bd5fc0203103162
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 5145027805093512985
+    second: FireAnt_0
+  - first:
+      213: -2117629568447380735
+    second: FireAnt_1
+  - first:
+      213: -1860732958049464163
+    second: FireAnt_2
+  - first:
+      213: 1697577826445587433
+    second: FireAnt_3
+  - first:
+      213: -8402867944985051686
+    second: FireAnt_4
+  - first:
+      213: -5406058316358320911
+    second: FireAnt_5
+  - first:
+      213: -5669765835541020952
+    second: FireAnt_6
+  - first:
+      213: 8036433798558315790
+    second: FireAnt_7
+  - first:
+      213: 843290153374820296
+    second: FireAnt_8
+  - first:
+      213: -8035804477642314011
+    second: FireAnt_9
+  - first:
+      213: 419995115006307154
+    second: FireAnt_10
+  - first:
+      213: 1562124115379650739
+    second: FireAnt_11
+  - first:
+      213: 7858871944849650332
+    second: FireAnt_12
+  - first:
+      213: 6081023689552712939
+    second: FireAnt_13
+  - first:
+      213: 3260726367641571679
+    second: FireAnt_14
+  - first:
+      213: 1121108427156607681
+    second: FireAnt_15
+  - first:
+      213: -6917175875977765663
+    second: FireAnt_16
+  - first:
+      213: 6465011317179218787
+    second: FireAnt_17
+  - first:
+      213: 2840838715797344351
+    second: FireAnt_18
+  - first:
+      213: 1591600502028645724
+    second: FireAnt_19
+  - first:
+      213: -5632612580002551844
+    second: FireAnt_20
+  - first:
+      213: -5316117335521968150
+    second: FireAnt_21
+  - first:
+      213: 6043460838421147381
+    second: FireAnt_22
+  - first:
+      213: -1303854352848267988
+    second: FireAnt_23
+  - first:
+      213: -6857316389068800682
+    second: FireAnt_24
+  - first:
+      213: 8626494076586537503
+    second: FireAnt_25
+  - first:
+      213: -8464486251263361429
+    second: FireAnt_26
+  - first:
+      213: 2595443439983103105
+    second: FireAnt_27
+  - first:
+      213: 3956326160459990566
+    second: FireAnt_28
+  - first:
+      213: -5729416164946585914
+    second: FireAnt_29
+  - first:
+      213: -3396849407371181244
+    second: FireAnt_30
+  - first:
+      213: -4848844388875045643
+    second: FireAnt_31
+  - first:
+      213: 9128278107842630602
+    second: FireAnt_32
+  - first:
+      213: 2310517416490125519
+    second: FireAnt_33
+  - first:
+      213: -7280134285712705805
+    second: FireAnt_34
+  - first:
+      213: -7749938578589869313
+    second: FireAnt_35
+  - first:
+      213: -4142240131792874457
+    second: FireAnt_36
+  - first:
+      213: 2195640448346131325
+    second: FireAnt_37
+  - first:
+      213: 8336976262064508870
+    second: FireAnt_38
+  - first:
+      213: 8115537513489465895
+    second: FireAnt_39
+  - first:
+      213: 8876603372563378770
+    second: FireAnt_40
+  - first:
+      213: 1292932948552091462
+    second: FireAnt_41
+  - first:
+      213: 6006662566848811386
+    second: FireAnt_42
+  - first:
+      213: 3214390540964517902
+    second: FireAnt_43
+  - first:
+      213: 2529154359132035611
+    second: FireAnt_44
+  - first:
+      213: -1523676071038824721
+    second: FireAnt_45
+  - first:
+      213: 4134270944550132827
+    second: FireAnt_46
+  - first:
+      213: 1061378924147331770
+    second: FireAnt_47
+  - first:
+      213: -5758968378054092318
+    second: FireAnt_48
+  - first:
+      213: 7209008507326951574
+    second: FireAnt_49
+  - first:
+      213: -6623403838686519598
+    second: FireAnt_50
+  - first:
+      213: 4855532670781165490
+    second: FireAnt_51
+  - first:
+      213: 6380455615040610958
+    second: FireAnt_52
+  - first:
+      213: 6853027241740349398
+    second: FireAnt_53
+  - first:
+      213: 7085873031861527443
+    second: FireAnt_54
+  - first:
+      213: 2189545017808537490
+    second: FireAnt_55
+  - first:
+      213: -756516246606704754
+    second: FireAnt_56
+  - first:
+      213: -1731006599470781047
+    second: FireAnt_57
+  - first:
+      213: -5356129915679913187
+    second: FireAnt_58
+  - first:
+      213: 9026174400406327178
+    second: FireAnt_59
+  - first:
+      213: -6846028190161232143
+    second: FireAnt_60
+  - first:
+      213: 1613080905343488313
+    second: FireAnt_61
+  - first:
+      213: 7752703591087159558
+    second: FireAnt_62
+  - first:
+      213: -2309521695886884677
+    second: FireAnt_63
+  - first:
+      213: 1666697495864074920
+    second: FireAnt_64
+  - first:
+      213: -3282529278870327169
+    second: FireAnt_65
+  - first:
+      213: 5391260830653121022
+    second: FireAnt_66
+  - first:
+      213: 2978835632048175915
+    second: FireAnt_67
+  - first:
+      213: 112940215016671726
+    second: FireAnt_68
+  - first:
+      213: -465786422953691550
+    second: FireAnt_69
+  - first:
+      213: 4250781987587328376
+    second: FireAnt_70
+  - first:
+      213: 8813988424261260825
+    second: FireAnt_71
+  - first:
+      213: 5275419887389970486
+    second: FireAnt_72
+  - first:
+      213: -1081543891342423490
+    second: FireAnt_73
+  - first:
+      213: 7649997856435342510
+    second: FireAnt_74
+  - first:
+      213: -3923713075347750169
+    second: FireAnt_75
+  - first:
+      213: -6498181387958046248
+    second: FireAnt_76
+  - first:
+      213: 5677902533610629580
+    second: FireAnt_77
+  - first:
+      213: -2185338904602005059
+    second: FireAnt_78
+  - first:
+      213: -2601542133267687921
+    second: FireAnt_79
+  - first:
+      213: -6782143374891087900
+    second: FireAnt_80
+  - first:
+      213: 1852004742786627504
+    second: FireAnt_81
+  - first:
+      213: -4141165776417283781
+    second: FireAnt_82
+  - first:
+      213: 338994874239579674
+    second: FireAnt_83
+  - first:
+      213: -2249589023702802486
+    second: FireAnt_84
+  - first:
+      213: 8063454778084128229
+    second: FireAnt_85
+  - first:
+      213: 3529315128172170247
+    second: FireAnt_86
+  - first:
+      213: 6326308946530132721
+    second: FireAnt_87
+  - first:
+      213: 6334518485431514646
+    second: FireAnt_88
+  - first:
+      213: 5183633410477663914
+    second: FireAnt_89
+  - first:
+      213: -3263519038292976325
+    second: FireAnt_90
+  - first:
+      213: 7374021327352983783
+    second: FireAnt_91
+  - first:
+      213: 7589828184763754494
+    second: FireAnt_92
+  - first:
+      213: -7565322869354582165
+    second: FireAnt_93
+  - first:
+      213: -7313853645962012869
+    second: FireAnt_94
+  - first:
+      213: 513008379527836577
+    second: FireAnt_95
+  - first:
+      213: 3659024173579458280
+    second: FireAnt_96
+  - first:
+      213: -8013314096473936549
+    second: FireAnt_97
+  - first:
+      213: 3901619078910323593
+    second: FireAnt_98
+  - first:
+      213: -5145283252452089630
+    second: FireAnt_99
+  - first:
+      213: 2165136674257036556
+    second: FireAnt_100
+  - first:
+      213: -4828422538536729311
+    second: FireAnt_101
+  - first:
+      213: 7082997163569291414
+    second: FireAnt_102
+  - first:
+      213: -8049781222266538785
+    second: FireAnt_103
+  - first:
+      213: -2065560977529721063
+    second: FireAnt_104
+  - first:
+      213: -2102947142486988587
+    second: FireAnt_105
+  - first:
+      213: 2381651396541404535
+    second: FireAnt_106
+  - first:
+      213: -3309118141344116850
+    second: FireAnt_107
+  - first:
+      213: -678698330841134283
+    second: FireAnt_108
+  - first:
+      213: -4854444659586977198
+    second: FireAnt_109
+  - first:
+      213: 7470053068280503909
+    second: FireAnt_110
+  - first:
+      213: 4910055744570738347
+    second: FireAnt_111
+  - first:
+      213: 3102267300456541742
+    second: FireAnt_112
+  - first:
+      213: 1606078766789271048
+    second: FireAnt_113
+  - first:
+      213: -8569587770348913158
+    second: FireAnt_114
+  - first:
+      213: 2908386302353129694
+    second: FireAnt_115
+  - first:
+      213: 2131935336408500129
+    second: FireAnt_116
+  - first:
+      213: -7766742365147528245
+    second: FireAnt_117
+  - first:
+      213: -1396006321259724432
+    second: FireAnt_118
+  - first:
+      213: -2240861376530304646
+    second: FireAnt_119
+  - first:
+      213: 5122766036424742252
+    second: FireAnt_120
+  - first:
+      213: 3465531741824298622
+    second: FireAnt_121
+  - first:
+      213: -8157169804465483371
+    second: FireAnt_122
+  - first:
+      213: 9209918547605195893
+    second: FireAnt_123
+  - first:
+      213: 8636448530542527300
+    second: FireAnt_124
+  - first:
+      213: -6598822525165823767
+    second: FireAnt_125
+  - first:
+      213: -8133889467080257708
+    second: FireAnt_126
+  - first:
+      213: 1217857410447892995
+    second: FireAnt_127
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: FireAnt_0
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 871
+        width: 85
+        height: 152
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9174b1a778fc66740800000000000000
+      internalID: 5145027805093512985
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_1
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 872
+        width: 96
+        height: 151
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 10384de802bac92e0800000000000000
+      internalID: -2117629568447380735
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_2
+      rect:
+        serializedVersion: 2
+        x: 182
+        y: 874
+        width: 96
+        height: 149
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d909995bb395d26e0800000000000000
+      internalID: -1860732958049464163
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_3
+      rect:
+        serializedVersion: 2
+        x: 278
+        y: 880
+        width: 130
+        height: 143
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9e37edbf9020f8710800000000000000
+      internalID: 1697577826445587433
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_4
+      rect:
+        serializedVersion: 2
+        x: 408
+        y: 883
+        width: 130
+        height: 140
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: add36a4df14036b80800000000000000
+      internalID: -8402867944985051686
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_5
+      rect:
+        serializedVersion: 2
+        x: 539
+        y: 883
+        width: 125
+        height: 140
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1fc7a629a92d9f4b0800000000000000
+      internalID: -5406058316358320911
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_6
+      rect:
+        serializedVersion: 2
+        x: 664
+        y: 892
+        width: 93
+        height: 131
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8ee7ee42302f051b0800000000000000
+      internalID: -5669765835541020952
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_7
+      rect:
+        serializedVersion: 2
+        x: 757
+        y: 894
+        width: 108
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e05f20006f5278f60800000000000000
+      internalID: 8036433798558315790
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_8
+      rect:
+        serializedVersion: 2
+        x: 865
+        y: 900
+        width: 141
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8c7ad723de7f3bb00800000000000000
+      internalID: 843290153374820296
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_9
+      rect:
+        serializedVersion: 2
+        x: 1006
+        y: 900
+        width: 127
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5eee2a137661b7090800000000000000
+      internalID: -8035804477642314011
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_10
+      rect:
+        serializedVersion: 2
+        x: 1133
+        y: 901
+        width: 106
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 25ba955f45f14d500800000000000000
+      internalID: 419995115006307154
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_11
+      rect:
+        serializedVersion: 2
+        x: 1239
+        y: 904
+        width: 121
+        height: 119
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3b086404b97cda510800000000000000
+      internalID: 1562124115379650739
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_12
+      rect:
+        serializedVersion: 2
+        x: 1360
+        y: 906
+        width: 153
+        height: 117
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c92fb005562501d60800000000000000
+      internalID: 7858871944849650332
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_13
+      rect:
+        serializedVersion: 2
+        x: 1513
+        y: 906
+        width: 71
+        height: 117
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be45686b3d2246450800000000000000
+      internalID: 6081023689552712939
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_14
+      rect:
+        serializedVersion: 2
+        x: 1584
+        y: 912
+        width: 141
+        height: 111
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f519605fa5d604d20800000000000000
+      internalID: 3260726367641571679
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_15
+      rect:
+        serializedVersion: 2
+        x: 1725
+        y: 913
+        width: 150
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1c2dd53bc2afe8f00800000000000000
+      internalID: 1121108427156607681
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_16
+      rect:
+        serializedVersion: 2
+        x: 1875
+        y: 916
+        width: 117
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1ec917780314100a0800000000000000
+      internalID: -6917175875977765663
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_17
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 766
+        width: 139
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 36bf8553a8558b950800000000000000
+      internalID: 6465011317179218787
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_18
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 767
+        width: 117
+        height: 104
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f501747b2cfac6720800000000000000
+      internalID: 2840838715797344351
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_19
+      rect:
+        serializedVersion: 2
+        x: 257
+        y: 767
+        width: 150
+        height: 104
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c5530c35930861610800000000000000
+      internalID: 1591600502028645724
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_20
+      rect:
+        serializedVersion: 2
+        x: 407
+        y: 770
+        width: 132
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd72d8b83b0f4d1b0800000000000000
+      internalID: -5632612580002551844
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_21
+      rect:
+        serializedVersion: 2
+        x: 539
+        y: 770
+        width: 132
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aefbae7037b5936b0800000000000000
+      internalID: -5316117335521968150
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_22
+      rect:
+        serializedVersion: 2
+        x: 671
+        y: 770
+        width: 132
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5fea318ec9faed350800000000000000
+      internalID: 6043460838421147381
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_23
+      rect:
+        serializedVersion: 2
+        x: 803
+        y: 770
+        width: 132
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c25d1abcf57c7ede0800000000000000
+      internalID: -1303854352848267988
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_24
+      rect:
+        serializedVersion: 2
+        x: 935
+        y: 770
+        width: 151
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 65df615631be5d0a0800000000000000
+      internalID: -6857316389068800682
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_25
+      rect:
+        serializedVersion: 2
+        x: 1086
+        y: 771
+        width: 133
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f12b3f358a677b770800000000000000
+      internalID: 8626494076586537503
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_26
+      rect:
+        serializedVersion: 2
+        x: 1219
+        y: 771
+        width: 133
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b6ef44be99a188a80800000000000000
+      internalID: -8464486251263361429
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_27
+      rect:
+        serializedVersion: 2
+        x: 1352
+        y: 771
+        width: 133
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 18c8fc2be0ed40420800000000000000
+      internalID: 2595443439983103105
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_28
+      rect:
+        serializedVersion: 2
+        x: 1485
+        y: 772
+        width: 133
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6268dc17ea1b7e630800000000000000
+      internalID: 3956326160459990566
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_29
+      rect:
+        serializedVersion: 2
+        x: 1618
+        y: 773
+        width: 145
+        height: 98
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6c65afd8a560d70b0800000000000000
+      internalID: -5729416164946585914
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_30
+      rect:
+        serializedVersion: 2
+        x: 1763
+        y: 773
+        width: 135
+        height: 98
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 44305261677fbd0d0800000000000000
+      internalID: -3396849407371181244
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_31
+      rect:
+        serializedVersion: 2
+        x: 1898
+        y: 773
+        width: 135
+        height: 98
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5f4f4f5f7b175bcb0800000000000000
+      internalID: -4848844388875045643
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_32
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 668
+        width: 134
+        height: 98
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ac35fec43982eae70800000000000000
+      internalID: 9128278107842630602
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_33
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 669
+        width: 135
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fc84f31495b901020800000000000000
+      internalID: 2310517416490125519
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_34
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 669
+        width: 132
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3f6b3fe5074c7fa90800000000000000
+      internalID: -7280134285712705805
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_35
+      rect:
+        serializedVersion: 2
+        x: 402
+        y: 669
+        width: 133
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ffa1e087cefa27490800000000000000
+      internalID: -7749938578589869313
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_36
+      rect:
+        serializedVersion: 2
+        x: 535
+        y: 669
+        width: 132
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7245e12fb8ec386c0800000000000000
+      internalID: -4142240131792874457
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_37
+      rect:
+        serializedVersion: 2
+        x: 667
+        y: 669
+        width: 133
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d7b8622da5b787e10800000000000000
+      internalID: 2195640448346131325
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_38
+      rect:
+        serializedVersion: 2
+        x: 800
+        y: 669
+        width: 74
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6cf08393db3e2b370800000000000000
+      internalID: 8336976262064508870
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_39
+      rect:
+        serializedVersion: 2
+        x: 874
+        y: 670
+        width: 105
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 72285ecde5e20a070800000000000000
+      internalID: 8115537513489465895
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_40
+      rect:
+        serializedVersion: 2
+        x: 979
+        y: 673
+        width: 104
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 252bca1bcb7003b70800000000000000
+      internalID: 8876603372563378770
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_41
+      rect:
+        serializedVersion: 2
+        x: 1083
+        y: 673
+        width: 93
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 64788dc9aab61f110800000000000000
+      internalID: 1292932948552091462
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_42
+      rect:
+        serializedVersion: 2
+        x: 1176
+        y: 673
+        width: 117
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a71d8a6a7c3fb5350800000000000000
+      internalID: 6006662566848811386
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_43
+      rect:
+        serializedVersion: 2
+        x: 1293
+        y: 673
+        width: 115
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e08d09b9a2fcb9c20800000000000000
+      internalID: 3214390540964517902
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_44
+      rect:
+        serializedVersion: 2
+        x: 1408
+        y: 673
+        width: 132
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b1a12365d7c591320800000000000000
+      internalID: 2529154359132035611
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_45
+      rect:
+        serializedVersion: 2
+        x: 1540
+        y: 673
+        width: 115
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: feec7f8afa0dadae0800000000000000
+      internalID: -1523676071038824721
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_46
+      rect:
+        serializedVersion: 2
+        x: 1655
+        y: 673
+        width: 132
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b5c112f0581ef5930800000000000000
+      internalID: 4134270944550132827
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_47
+      rect:
+        serializedVersion: 2
+        x: 1788
+        y: 673
+        width: 117
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ab253e11286cabe00800000000000000
+      internalID: 1061378924147331770
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_48
+      rect:
+        serializedVersion: 2
+        x: 1905
+        y: 673
+        width: 133
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2e9d061c5c80410b0800000000000000
+      internalID: -5758968378054092318
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_49
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 575
+        width: 133
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 690fdfdda0b8b0460800000000000000
+      internalID: 7209008507326951574
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_50
+      rect:
+        serializedVersion: 2
+        x: 134
+        y: 576
+        width: 102
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2de912f0d41f414a0800000000000000
+      internalID: -6623403838686519598
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_51
+      rect:
+        serializedVersion: 2
+        x: 236
+        y: 576
+        width: 93
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2bf07350d31526340800000000000000
+      internalID: 4855532670781165490
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_52
+      rect:
+        serializedVersion: 2
+        x: 329
+        y: 576
+        width: 119
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e8264a7a39eeb8850800000000000000
+      internalID: 6380455615040610958
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_53
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 576
+        width: 115
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6df220ca7f7da1f50800000000000000
+      internalID: 6853027241740349398
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_54
+      rect:
+        serializedVersion: 2
+        x: 563
+        y: 576
+        width: 115
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 39360abdaf3165260800000000000000
+      internalID: 7085873031861527443
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_55
+      rect:
+        serializedVersion: 2
+        x: 678
+        y: 576
+        width: 127
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 297443ec793d26e10800000000000000
+      internalID: 2189545017808537490
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_56
+      rect:
+        serializedVersion: 2
+        x: 805
+        y: 577
+        width: 109
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e8f023e5b705085f0800000000000000
+      internalID: -756516246606704754
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_57
+      rect:
+        serializedVersion: 2
+        x: 914
+        y: 577
+        width: 101
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 98defa64baa3af7e0800000000000000
+      internalID: -1731006599470781047
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_58
+      rect:
+        serializedVersion: 2
+        x: 1015
+        y: 577
+        width: 92
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d1b4e0d38343ba5b0800000000000000
+      internalID: -5356129915679913187
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_59
+      rect:
+        serializedVersion: 2
+        x: 1107
+        y: 577
+        width: 107
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a8f81f06bc9634d70800000000000000
+      internalID: 9026174400406327178
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_60
+      rect:
+        serializedVersion: 2
+        x: 1214
+        y: 577
+        width: 109
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1fe112302a50ef0a0800000000000000
+      internalID: -6846028190161232143
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_61
+      rect:
+        serializedVersion: 2
+        x: 1323
+        y: 577
+        width: 101
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 931d6f47980d26610800000000000000
+      internalID: 1613080905343488313
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_62
+      rect:
+        serializedVersion: 2
+        x: 1424
+        y: 577
+        width: 92
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 60935ab27d2279b60800000000000000
+      internalID: 7752703591087159558
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_63
+      rect:
+        serializedVersion: 2
+        x: 1516
+        y: 577
+        width: 132
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bb0ca93014ee2ffd0800000000000000
+      internalID: -2309521695886884677
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_64
+      rect:
+        serializedVersion: 2
+        x: 1648
+        y: 578
+        width: 101
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8a2e20dba8c412710800000000000000
+      internalID: 1666697495864074920
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_65
+      rect:
+        serializedVersion: 2
+        x: 1749
+        y: 578
+        width: 91
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f707d10330d1272d0800000000000000
+      internalID: -3282529278870327169
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_66
+      rect:
+        serializedVersion: 2
+        x: 1840
+        y: 578
+        width: 94
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef18e8e492b91da40800000000000000
+      internalID: 5391260830653121022
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_67
+      rect:
+        serializedVersion: 2
+        x: 1934
+        y: 579
+        width: 100
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b2bf18c8933f65920800000000000000
+      internalID: 2978835632048175915
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_68
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 486
+        width: 89
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ee9cce4f68e319100800000000000000
+      internalID: 112940215016671726
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_69
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 486
+        width: 99
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 26635a657b13989f0800000000000000
+      internalID: -465786422953691550
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_70
+      rect:
+        serializedVersion: 2
+        x: 189
+        y: 486
+        width: 91
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 87985c332bfcdfa30800000000000000
+      internalID: 4250781987587328376
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_71
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 486
+        width: 101
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9165f7af5c3915a70800000000000000
+      internalID: 8813988424261260825
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_72
+      rect:
+        serializedVersion: 2
+        x: 381
+        y: 486
+        width: 99
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 63019ecef6e063940800000000000000
+      internalID: 5275419887389970486
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_73
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 486
+        width: 101
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e3a8a83af859df0f0800000000000000
+      internalID: -1081543891342423490
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_74
+      rect:
+        serializedVersion: 2
+        x: 581
+        y: 486
+        width: 109
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eac045dd4804a2a60800000000000000
+      internalID: 7649997856435342510
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_75
+      rect:
+        serializedVersion: 2
+        x: 690
+        y: 487
+        width: 103
+        height: 88
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7e287572fbb2c89c0800000000000000
+      internalID: -3923713075347750169
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_76
+      rect:
+        serializedVersion: 2
+        x: 793
+        y: 487
+        width: 103
+        height: 88
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d1b4bcd472d1d5a0800000000000000
+      internalID: -6498181387958046248
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_77
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 488
+        width: 117
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cc9e6218546fbce40800000000000000
+      internalID: 5677902533610629580
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_78
+      rect:
+        serializedVersion: 2
+        x: 1013
+        y: 488
+        width: 119
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: db13b5d38dd1ca1e0800000000000000
+      internalID: -2185338904602005059
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_79
+      rect:
+        serializedVersion: 2
+        x: 1132
+        y: 488
+        width: 115
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f061e5e963775ebd0800000000000000
+      internalID: -2601542133267687921
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_80
+      rect:
+        serializedVersion: 2
+        x: 1247
+        y: 488
+        width: 130
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4e709dba88cf0e1a0800000000000000
+      internalID: -6782143374891087900
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_81
+      rect:
+        serializedVersion: 2
+        x: 1377
+        y: 488
+        width: 129
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0b7b2205084a3b910800000000000000
+      internalID: 1852004742786627504
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_82
+      rect:
+        serializedVersion: 2
+        x: 1506
+        y: 489
+        width: 97
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b31a4accaaf9786c0800000000000000
+      internalID: -4141165776417283781
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_83
+      rect:
+        serializedVersion: 2
+        x: 1603
+        y: 489
+        width: 107
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a167ab3ca0a54b400800000000000000
+      internalID: 338994874239579674
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_84
+      rect:
+        serializedVersion: 2
+        x: 1710
+        y: 489
+        width: 103
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: acf9397a3bad7c0e0800000000000000
+      internalID: -2249589023702802486
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_85
+      rect:
+        serializedVersion: 2
+        x: 1813
+        y: 489
+        width: 140
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5e5712e066527ef60800000000000000
+      internalID: 8063454778084128229
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_86
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 401
+        width: 101
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 70c4d13f865aaf030800000000000000
+      internalID: 3529315128172170247
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_87
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 401
+        width: 109
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f2ed49f7709bc750800000000000000
+      internalID: 6326308946530132721
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_88
+      rect:
+        serializedVersion: 2
+        x: 211
+        y: 401
+        width: 91
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6167a43300bb8e750800000000000000
+      internalID: 6334518485431514646
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_89
+      rect:
+        serializedVersion: 2
+        x: 302
+        y: 401
+        width: 91
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa62e5d6f17ffe740800000000000000
+      internalID: 5183633410477663914
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_90
+      rect:
+        serializedVersion: 2
+        x: 393
+        y: 401
+        width: 109
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b3d92dcb9b6a5b2d0800000000000000
+      internalID: -3263519038292976325
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_91
+      rect:
+        serializedVersion: 2
+        x: 502
+        y: 401
+        width: 102
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7e07707f359c55660800000000000000
+      internalID: 7374021327352983783
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_92
+      rect:
+        serializedVersion: 2
+        x: 604
+        y: 401
+        width: 147
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef7671b758c745960800000000000000
+      internalID: 7589828184763754494
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_93
+      rect:
+        serializedVersion: 2
+        x: 751
+        y: 401
+        width: 97
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b6f2bf0eee2920790800000000000000
+      internalID: -7565322869354582165
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_94
+      rect:
+        serializedVersion: 2
+        x: 848
+        y: 402
+        width: 114
+        height: 84
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b371d350cd8ff7a90800000000000000
+      internalID: -7313853645962012869
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_95
+      rect:
+        serializedVersion: 2
+        x: 962
+        y: 403
+        width: 115
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a33e8437629e1700800000000000000
+      internalID: 513008379527836577
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_96
+      rect:
+        serializedVersion: 2
+        x: 1077
+        y: 403
+        width: 99
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8e655ca791777c230800000000000000
+      internalID: 3659024173579458280
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_97
+      rect:
+        serializedVersion: 2
+        x: 1176
+        y: 403
+        width: 99
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b5d6a0e194dfac090800000000000000
+      internalID: -8013314096473936549
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_98
+      rect:
+        serializedVersion: 2
+        x: 1275
+        y: 403
+        width: 109
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 98b265f61e5552630800000000000000
+      internalID: 3901619078910323593
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_99
+      rect:
+        serializedVersion: 2
+        x: 1384
+        y: 404
+        width: 95
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2e0a3dc84284898b0800000000000000
+      internalID: -5145283252452089630
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_100
+      rect:
+        serializedVersion: 2
+        x: 1479
+        y: 404
+        width: 117
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c05e247755c1c0e10800000000000000
+      internalID: 2165136674257036556
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_101
+      rect:
+        serializedVersion: 2
+        x: 1596
+        y: 404
+        width: 95
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1254705884ffdfcb0800000000000000
+      internalID: -4828422538536729311
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_102
+      rect:
+        serializedVersion: 2
+        x: 1691
+        y: 404
+        width: 94
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 690a5a7946cdb4260800000000000000
+      internalID: 7082997163569291414
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_103
+      rect:
+        serializedVersion: 2
+        x: 1785
+        y: 405
+        width: 117
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fd4713fb0ae694090800000000000000
+      internalID: -8049781222266538785
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_104
+      rect:
+        serializedVersion: 2
+        x: 1902
+        y: 405
+        width: 94
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 91fae681c37a553e0800000000000000
+      internalID: -2065560977529721063
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_105
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 320
+        width: 113
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5d8e3ae37b4d0d2e0800000000000000
+      internalID: -2102947142486988587
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_106
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 320
+        width: 134
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 775d9ad93535d0120800000000000000
+      internalID: 2381651396541404535
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_107
+      rect:
+        serializedVersion: 2
+        x: 248
+        y: 320
+        width: 103
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e8f02693596a312d0800000000000000
+      internalID: -3309118141344116850
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_108
+      rect:
+        serializedVersion: 2
+        x: 351
+        y: 320
+        width: 112
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 53b4098c677c496f0800000000000000
+      internalID: -678698330841134283
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_109
+      rect:
+        serializedVersion: 2
+        x: 463
+        y: 320
+        width: 134
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 252b6835d4c81acb0800000000000000
+      internalID: -4854444659586977198
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_110
+      rect:
+        serializedVersion: 2
+        x: 597
+        y: 321
+        width: 114
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 56e1d2400b5faa760800000000000000
+      internalID: 7470053068280503909
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_111
+      rect:
+        serializedVersion: 2
+        x: 711
+        y: 321
+        width: 103
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba641826fa5042440800000000000000
+      internalID: 4910055744570738347
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_112
+      rect:
+        serializedVersion: 2
+        x: 814
+        y: 321
+        width: 155
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e2ea50a5ca77d0b20800000000000000
+      internalID: 3102267300456541742
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_113
+      rect:
+        serializedVersion: 2
+        x: 969
+        y: 322
+        width: 115
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 80e95c70120f94610800000000000000
+      internalID: 1606078766789271048
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_114
+      rect:
+        serializedVersion: 2
+        x: 1084
+        y: 322
+        width: 117
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: afd32d49355b21980800000000000000
+      internalID: -8569587770348913158
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_115
+      rect:
+        serializedVersion: 2
+        x: 1201
+        y: 322
+        width: 114
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed0ce55cee9ac5820800000000000000
+      internalID: 2908386302353129694
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_116
+      rect:
+        serializedVersion: 2
+        x: 1315
+        y: 322
+        width: 102
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a74bba94e7269d10800000000000000
+      internalID: 2131935336408500129
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_117
+      rect:
+        serializedVersion: 2
+        x: 1417
+        y: 322
+        width: 113
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bc3876708fcf63490800000000000000
+      internalID: -7766742365147528245
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_118
+      rect:
+        serializedVersion: 2
+        x: 1530
+        y: 322
+        width: 115
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0714d1da5a360ace0800000000000000
+      internalID: -1396006321259724432
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_119
+      rect:
+        serializedVersion: 2
+        x: 1645
+        y: 322
+        width: 97
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a71b40d537cd6e0e0800000000000000
+      internalID: -2240861376530304646
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_120
+      rect:
+        serializedVersion: 2
+        x: 1742
+        y: 322
+        width: 111
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c65588c8198b71740800000000000000
+      internalID: 5122766036424742252
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_121
+      rect:
+        serializedVersion: 2
+        x: 1853
+        y: 322
+        width: 131
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e7e274d02ca081030800000000000000
+      internalID: 3465531741824298622
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_122
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 241
+        width: 131
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 591da480849ebce80800000000000000
+      internalID: -8157169804465483371
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_123
+      rect:
+        serializedVersion: 2
+        x: 132
+        y: 243
+        width: 114
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 57c0a407f1430df70800000000000000
+      internalID: 9209918547605195893
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_124
+      rect:
+        serializedVersion: 2
+        x: 246
+        y: 245
+        width: 135
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4438eef3e24dad770800000000000000
+      internalID: 8636448530542527300
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_125
+      rect:
+        serializedVersion: 2
+        x: 381
+        y: 245
+        width: 134
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9e815ab10e54c64a0800000000000000
+      internalID: -6598822525165823767
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_126
+      rect:
+        serializedVersion: 2
+        x: 515
+        y: 249
+        width: 166
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 45fc368ff9e9e1f80800000000000000
+      internalID: -8133889467080257708
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireAnt_127
+      rect:
+        serializedVersion: 2
+        x: 681
+        y: 252
+        width: 161
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 302e2d0ccd2b6e010800000000000000
+      internalID: 1217857410447892995
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      FireAnt_0: 5145027805093512985
+      FireAnt_1: -2117629568447380735
+      FireAnt_10: 419995115006307154
+      FireAnt_100: 2165136674257036556
+      FireAnt_101: -4828422538536729311
+      FireAnt_102: 7082997163569291414
+      FireAnt_103: -8049781222266538785
+      FireAnt_104: -2065560977529721063
+      FireAnt_105: -2102947142486988587
+      FireAnt_106: 2381651396541404535
+      FireAnt_107: -3309118141344116850
+      FireAnt_108: -678698330841134283
+      FireAnt_109: -4854444659586977198
+      FireAnt_11: 1562124115379650739
+      FireAnt_110: 7470053068280503909
+      FireAnt_111: 4910055744570738347
+      FireAnt_112: 3102267300456541742
+      FireAnt_113: 1606078766789271048
+      FireAnt_114: -8569587770348913158
+      FireAnt_115: 2908386302353129694
+      FireAnt_116: 2131935336408500129
+      FireAnt_117: -7766742365147528245
+      FireAnt_118: -1396006321259724432
+      FireAnt_119: -2240861376530304646
+      FireAnt_12: 7858871944849650332
+      FireAnt_120: 5122766036424742252
+      FireAnt_121: 3465531741824298622
+      FireAnt_122: -8157169804465483371
+      FireAnt_123: 9209918547605195893
+      FireAnt_124: 8636448530542527300
+      FireAnt_125: -6598822525165823767
+      FireAnt_126: -8133889467080257708
+      FireAnt_127: 1217857410447892995
+      FireAnt_13: 6081023689552712939
+      FireAnt_14: 3260726367641571679
+      FireAnt_15: 1121108427156607681
+      FireAnt_16: -6917175875977765663
+      FireAnt_17: 6465011317179218787
+      FireAnt_18: 2840838715797344351
+      FireAnt_19: 1591600502028645724
+      FireAnt_2: -1860732958049464163
+      FireAnt_20: -5632612580002551844
+      FireAnt_21: -5316117335521968150
+      FireAnt_22: 6043460838421147381
+      FireAnt_23: -1303854352848267988
+      FireAnt_24: -6857316389068800682
+      FireAnt_25: 8626494076586537503
+      FireAnt_26: -8464486251263361429
+      FireAnt_27: 2595443439983103105
+      FireAnt_28: 3956326160459990566
+      FireAnt_29: -5729416164946585914
+      FireAnt_3: 1697577826445587433
+      FireAnt_30: -3396849407371181244
+      FireAnt_31: -4848844388875045643
+      FireAnt_32: 9128278107842630602
+      FireAnt_33: 2310517416490125519
+      FireAnt_34: -7280134285712705805
+      FireAnt_35: -7749938578589869313
+      FireAnt_36: -4142240131792874457
+      FireAnt_37: 2195640448346131325
+      FireAnt_38: 8336976262064508870
+      FireAnt_39: 8115537513489465895
+      FireAnt_4: -8402867944985051686
+      FireAnt_40: 8876603372563378770
+      FireAnt_41: 1292932948552091462
+      FireAnt_42: 6006662566848811386
+      FireAnt_43: 3214390540964517902
+      FireAnt_44: 2529154359132035611
+      FireAnt_45: -1523676071038824721
+      FireAnt_46: 4134270944550132827
+      FireAnt_47: 1061378924147331770
+      FireAnt_48: -5758968378054092318
+      FireAnt_49: 7209008507326951574
+      FireAnt_5: -5406058316358320911
+      FireAnt_50: -6623403838686519598
+      FireAnt_51: 4855532670781165490
+      FireAnt_52: 6380455615040610958
+      FireAnt_53: 6853027241740349398
+      FireAnt_54: 7085873031861527443
+      FireAnt_55: 2189545017808537490
+      FireAnt_56: -756516246606704754
+      FireAnt_57: -1731006599470781047
+      FireAnt_58: -5356129915679913187
+      FireAnt_59: 9026174400406327178
+      FireAnt_6: -5669765835541020952
+      FireAnt_60: -6846028190161232143
+      FireAnt_61: 1613080905343488313
+      FireAnt_62: 7752703591087159558
+      FireAnt_63: -2309521695886884677
+      FireAnt_64: 1666697495864074920
+      FireAnt_65: -3282529278870327169
+      FireAnt_66: 5391260830653121022
+      FireAnt_67: 2978835632048175915
+      FireAnt_68: 112940215016671726
+      FireAnt_69: -465786422953691550
+      FireAnt_7: 8036433798558315790
+      FireAnt_70: 4250781987587328376
+      FireAnt_71: 8813988424261260825
+      FireAnt_72: 5275419887389970486
+      FireAnt_73: -1081543891342423490
+      FireAnt_74: 7649997856435342510
+      FireAnt_75: -3923713075347750169
+      FireAnt_76: -6498181387958046248
+      FireAnt_77: 5677902533610629580
+      FireAnt_78: -2185338904602005059
+      FireAnt_79: -2601542133267687921
+      FireAnt_8: 843290153374820296
+      FireAnt_80: -6782143374891087900
+      FireAnt_81: 1852004742786627504
+      FireAnt_82: -4141165776417283781
+      FireAnt_83: 338994874239579674
+      FireAnt_84: -2249589023702802486
+      FireAnt_85: 8063454778084128229
+      FireAnt_86: 3529315128172170247
+      FireAnt_87: 6326308946530132721
+      FireAnt_88: 6334518485431514646
+      FireAnt_89: 5183633410477663914
+      FireAnt_9: -8035804477642314011
+      FireAnt_90: -3263519038292976325
+      FireAnt_91: 7374021327352983783
+      FireAnt_92: 7589828184763754494
+      FireAnt_93: -7565322869354582165
+      FireAnt_94: -7313853645962012869
+      FireAnt_95: 513008379527836577
+      FireAnt_96: 3659024173579458280
+      FireAnt_97: -8013314096473936549
+      FireAnt_98: 3901619078910323593
+      FireAnt_99: -5145283252452089630
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

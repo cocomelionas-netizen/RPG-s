@@ -1,0 +1,3460 @@
+fileFormatVersion: 2
+guid: 5c971eda075583c498cefde2223460e1
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 4064937168185641364
+    second: SkeletonMage_0
+  - first:
+      213: 5086501998307776328
+    second: SkeletonMage_1
+  - first:
+      213: 3950644082927471128
+    second: SkeletonMage_2
+  - first:
+      213: 7014165723605356485
+    second: SkeletonMage_3
+  - first:
+      213: 8979249614630536709
+    second: SkeletonMage_4
+  - first:
+      213: 6600838706307713770
+    second: SkeletonMage_5
+  - first:
+      213: 5215966962294795996
+    second: SkeletonMage_6
+  - first:
+      213: -7182362696686139106
+    second: SkeletonMage_7
+  - first:
+      213: 1596526780115332361
+    second: SkeletonMage_8
+  - first:
+      213: -2079443174788355322
+    second: SkeletonMage_9
+  - first:
+      213: 8296641646875374322
+    second: SkeletonMage_10
+  - first:
+      213: 8334286440649135705
+    second: SkeletonMage_11
+  - first:
+      213: -2188811818898438581
+    second: SkeletonMage_12
+  - first:
+      213: 6169328140979281593
+    second: SkeletonMage_13
+  - first:
+      213: -7334833918535787745
+    second: SkeletonMage_14
+  - first:
+      213: -76887846825631472
+    second: SkeletonMage_15
+  - first:
+      213: 6981491402750960397
+    second: SkeletonMage_16
+  - first:
+      213: 5685174751641760541
+    second: SkeletonMage_17
+  - first:
+      213: 647449708250495751
+    second: SkeletonMage_18
+  - first:
+      213: 5175382342658537486
+    second: SkeletonMage_19
+  - first:
+      213: 8599947109017248056
+    second: SkeletonMage_20
+  - first:
+      213: 4629374114041575418
+    second: SkeletonMage_21
+  - first:
+      213: -5873084372673223844
+    second: SkeletonMage_22
+  - first:
+      213: 1569794052212222190
+    second: SkeletonMage_23
+  - first:
+      213: -5357996099008811826
+    second: SkeletonMage_24
+  - first:
+      213: 1225118869812059696
+    second: SkeletonMage_25
+  - first:
+      213: -5806359506632852913
+    second: SkeletonMage_26
+  - first:
+      213: -6105978916662114748
+    second: SkeletonMage_27
+  - first:
+      213: 1367290252567566794
+    second: SkeletonMage_28
+  - first:
+      213: -3868536843227339991
+    second: SkeletonMage_29
+  - first:
+      213: 4494512488664575502
+    second: SkeletonMage_30
+  - first:
+      213: -1517264022668829394
+    second: SkeletonMage_31
+  - first:
+      213: -6404417442984356130
+    second: SkeletonMage_32
+  - first:
+      213: -8645373642379942370
+    second: SkeletonMage_33
+  - first:
+      213: -1419643899676462669
+    second: SkeletonMage_34
+  - first:
+      213: -5212753368461132559
+    second: SkeletonMage_35
+  - first:
+      213: 8418318941208264816
+    second: SkeletonMage_36
+  - first:
+      213: -4891156608176382532
+    second: SkeletonMage_37
+  - first:
+      213: 9057162540806543415
+    second: SkeletonMage_38
+  - first:
+      213: 4857795363597982919
+    second: SkeletonMage_39
+  - first:
+      213: -92753674020261231
+    second: SkeletonMage_40
+  - first:
+      213: -4270118258969260411
+    second: SkeletonMage_41
+  - first:
+      213: 2282660731282023785
+    second: SkeletonMage_42
+  - first:
+      213: 8215485502285708717
+    second: SkeletonMage_43
+  - first:
+      213: -2484231883340656599
+    second: SkeletonMage_44
+  - first:
+      213: 7121022917724887073
+    second: SkeletonMage_45
+  - first:
+      213: 7175323612355723406
+    second: SkeletonMage_46
+  - first:
+      213: 1648483398028673149
+    second: SkeletonMage_47
+  - first:
+      213: 6542624947268349203
+    second: SkeletonMage_48
+  - first:
+      213: 3763786984884969638
+    second: SkeletonMage_49
+  - first:
+      213: 2968402355344479019
+    second: SkeletonMage_50
+  - first:
+      213: 1351826058032642872
+    second: SkeletonMage_51
+  - first:
+      213: 2655016942325655382
+    second: SkeletonMage_52
+  - first:
+      213: 8983716677092016186
+    second: SkeletonMage_53
+  - first:
+      213: -8279441850318989605
+    second: SkeletonMage_54
+  - first:
+      213: 521520302281163448
+    second: SkeletonMage_55
+  - first:
+      213: 2975867090909883381
+    second: SkeletonMage_56
+  - first:
+      213: -984904969986247253
+    second: SkeletonMage_57
+  - first:
+      213: 3908468075108113507
+    second: SkeletonMage_58
+  - first:
+      213: 4879741669622410085
+    second: SkeletonMage_59
+  - first:
+      213: -5199373427360593223
+    second: SkeletonMage_60
+  - first:
+      213: -4924616217697159370
+    second: SkeletonMage_61
+  - first:
+      213: 1464571710389698686
+    second: SkeletonMage_62
+  - first:
+      213: 7390540980176591225
+    second: SkeletonMage_63
+  - first:
+      213: -1291643833364713452
+    second: SkeletonMage_64
+  - first:
+      213: 1042249397281853419
+    second: SkeletonMage_65
+  - first:
+      213: 2016646016539374715
+    second: SkeletonMage_66
+  - first:
+      213: 8903262370151915711
+    second: SkeletonMage_67
+  - first:
+      213: -5874380976624404385
+    second: SkeletonMage_68
+  - first:
+      213: 2814881021676429064
+    second: SkeletonMage_69
+  - first:
+      213: -3072185000088197703
+    second: SkeletonMage_70
+  - first:
+      213: 7435541163620385227
+    second: SkeletonMage_71
+  - first:
+      213: 5389524913207769208
+    second: SkeletonMage_72
+  - first:
+      213: 8682609353680542376
+    second: SkeletonMage_73
+  - first:
+      213: 6183978092955295778
+    second: SkeletonMage_74
+  - first:
+      213: 4541170842706423963
+    second: SkeletonMage_75
+  - first:
+      213: -1592673752258589345
+    second: SkeletonMage_76
+  - first:
+      213: 3928174255887867609
+    second: SkeletonMage_77
+  - first:
+      213: 6749439169364183325
+    second: SkeletonMage_78
+  - first:
+      213: -710873428271619239
+    second: SkeletonMage_79
+  - first:
+      213: 7809684198355569617
+    second: SkeletonMage_80
+  - first:
+      213: -702097703926603306
+    second: SkeletonMage_81
+  - first:
+      213: -1613479742379645442
+    second: SkeletonMage_82
+  - first:
+      213: 7045995196942899554
+    second: SkeletonMage_83
+  - first:
+      213: 2157459988731308666
+    second: SkeletonMage_84
+  - first:
+      213: -7343030253078310861
+    second: SkeletonMage_85
+  - first:
+      213: -2488499763180435861
+    second: SkeletonMage_86
+  - first:
+      213: 7469752147240378049
+    second: SkeletonMage_87
+  - first:
+      213: -948645819672187325
+    second: SkeletonMage_88
+  - first:
+      213: 3008717712727959033
+    second: SkeletonMage_89
+  - first:
+      213: 2794253238876488458
+    second: SkeletonMage_90
+  - first:
+      213: 777762708505169969
+    second: SkeletonMage_91
+  - first:
+      213: 8427851447896756027
+    second: SkeletonMage_92
+  - first:
+      213: 2183204601726152798
+    second: SkeletonMage_93
+  - first:
+      213: -3976075845650032323
+    second: SkeletonMage_94
+  - first:
+      213: 7997809251000208599
+    second: SkeletonMage_95
+  - first:
+      213: 7050263054533528839
+    second: SkeletonMage_96
+  - first:
+      213: 5233121927381010390
+    second: SkeletonMage_97
+  - first:
+      213: 7956006574420689345
+    second: SkeletonMage_98
+  - first:
+      213: -1098615471553585068
+    second: SkeletonMage_99
+  - first:
+      213: 9184787476191172266
+    second: SkeletonMage_100
+  - first:
+      213: -513616801103077542
+    second: SkeletonMage_101
+  - first:
+      213: -5959684594388102936
+    second: SkeletonMage_102
+  - first:
+      213: -287070151867138604
+    second: SkeletonMage_103
+  - first:
+      213: 9073659920904983046
+    second: SkeletonMage_104
+  - first:
+      213: 1898306394640611082
+    second: SkeletonMage_105
+  - first:
+      213: -7811149537262131980
+    second: SkeletonMage_106
+  - first:
+      213: -3571713156585983198
+    second: SkeletonMage_107
+  - first:
+      213: 694333268030306634
+    second: SkeletonMage_108
+  - first:
+      213: -1583825760637181391
+    second: SkeletonMage_109
+  - first:
+      213: 6017250723271508649
+    second: SkeletonMage_110
+  - first:
+      213: -4132380033831610174
+    second: SkeletonMage_111
+  - first:
+      213: -4706780504050214930
+    second: SkeletonMage_112
+  - first:
+      213: -1886695594968480322
+    second: SkeletonMage_113
+  - first:
+      213: 7540566927085263781
+    second: SkeletonMage_114
+  - first:
+      213: 6685831428428625338
+    second: SkeletonMage_115
+  - first:
+      213: -2931172658359573992
+    second: SkeletonMage_116
+  - first:
+      213: 6753855083381279190
+    second: SkeletonMage_117
+  - first:
+      213: -6915253887463447071
+    second: SkeletonMage_118
+  - first:
+      213: -7975827642142409899
+    second: SkeletonMage_119
+  - first:
+      213: -2172586355313944821
+    second: SkeletonMage_120
+  - first:
+      213: 5575756547005705236
+    second: SkeletonMage_121
+  - first:
+      213: 7243511251214314763
+    second: SkeletonMage_122
+  - first:
+      213: 4218800776442980013
+    second: SkeletonMage_123
+  - first:
+      213: 2627691080110407365
+    second: SkeletonMage_124
+  - first:
+      213: 344593269513701144
+    second: SkeletonMage_125
+  - first:
+      213: 1519820780172609596
+    second: SkeletonMage_126
+  - first:
+      213: -813373189600575402
+    second: SkeletonMage_127
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: SkeletonMage_0
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 878
+        width: 81
+        height: 145
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 499ccf741de896830800000000000000
+      internalID: 4064937168185641364
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_1
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 882
+        width: 95
+        height: 141
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 84713763e92e69640800000000000000
+      internalID: 5086501998307776328
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_2
+      rect:
+        serializedVersion: 2
+        x: 177
+        y: 884
+        width: 77
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 81a04ecacd183d630800000000000000
+      internalID: 3950644082927471128
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_3
+      rect:
+        serializedVersion: 2
+        x: 254
+        y: 885
+        width: 89
+        height: 138
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5cfc73f1092575160800000000000000
+      internalID: 7014165723605356485
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_4
+      rect:
+        serializedVersion: 2
+        x: 343
+        y: 886
+        width: 71
+        height: 137
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 506cd9d43f3bc9c70800000000000000
+      internalID: 8979249614630536709
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_5
+      rect:
+        serializedVersion: 2
+        x: 414
+        y: 886
+        width: 89
+        height: 137
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aeace15a4d3ea9b50800000000000000
+      internalID: 6600838706307713770
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_6
+      rect:
+        serializedVersion: 2
+        x: 503
+        y: 886
+        width: 91
+        height: 137
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cde21cb1156d26840800000000000000
+      internalID: 5215966962294795996
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_7
+      rect:
+        serializedVersion: 2
+        x: 594
+        y: 888
+        width: 83
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e1981006e2f135c90800000000000000
+      internalID: -7182362696686139106
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_8
+      rect:
+        serializedVersion: 2
+        x: 677
+        y: 890
+        width: 78
+        height: 133
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 90d2c23d5a0082610800000000000000
+      internalID: 1596526780115332361
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_9
+      rect:
+        serializedVersion: 2
+        x: 755
+        y: 890
+        width: 75
+        height: 133
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 60b212c23755423e0800000000000000
+      internalID: -2079443174788355322
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_10
+      rect:
+        serializedVersion: 2
+        x: 830
+        y: 890
+        width: 79
+        height: 133
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f2f7bece97932370800000000000000
+      internalID: 8296641646875374322
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_11
+      rect:
+        serializedVersion: 2
+        x: 909
+        y: 890
+        width: 86
+        height: 133
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9561f3f5c5559a370800000000000000
+      internalID: 8334286440649135705
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_12
+      rect:
+        serializedVersion: 2
+        x: 995
+        y: 890
+        width: 73
+        height: 133
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b46c16e5f37cf91e0800000000000000
+      internalID: -2188811818898438581
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_13
+      rect:
+        serializedVersion: 2
+        x: 1068
+        y: 891
+        width: 93
+        height: 132
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9be14e9f14bdd9550800000000000000
+      internalID: 6169328140979281593
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_14
+      rect:
+        serializedVersion: 2
+        x: 1161
+        y: 891
+        width: 147
+        height: 132
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f1b1037a96f653a90800000000000000
+      internalID: -7334833918535787745
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_15
+      rect:
+        serializedVersion: 2
+        x: 1308
+        y: 892
+        width: 81
+        height: 131
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 011e96229e6deeef0800000000000000
+      internalID: -76887846825631472
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_16
+      rect:
+        serializedVersion: 2
+        x: 1389
+        y: 892
+        width: 91
+        height: 131
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d032a67f07d33e060800000000000000
+      internalID: 6981491402750960397
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_17
+      rect:
+        serializedVersion: 2
+        x: 1480
+        y: 892
+        width: 94
+        height: 131
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d1370a5b05cc5ee40800000000000000
+      internalID: 5685174751641760541
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_18
+      rect:
+        serializedVersion: 2
+        x: 1574
+        y: 892
+        width: 89
+        height: 131
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 70b733e44143cf800800000000000000
+      internalID: 647449708250495751
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_19
+      rect:
+        serializedVersion: 2
+        x: 1663
+        y: 892
+        width: 81
+        height: 131
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e08bdfef1d6a2d740800000000000000
+      internalID: 5175382342658537486
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_20
+      rect:
+        serializedVersion: 2
+        x: 1744
+        y: 892
+        width: 82
+        height: 131
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 831ee18c456295770800000000000000
+      internalID: 8599947109017248056
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_21
+      rect:
+        serializedVersion: 2
+        x: 1826
+        y: 892
+        width: 83
+        height: 131
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: af736dfaa37de3040800000000000000
+      internalID: 4629374114041575418
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_22
+      rect:
+        serializedVersion: 2
+        x: 1909
+        y: 892
+        width: 83
+        height: 131
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c532ae641ec9e7ea0800000000000000
+      internalID: -5873084372673223844
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_23
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 747
+        width: 135
+        height: 131
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ee861a49f5709c510800000000000000
+      internalID: 1569794052212222190
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_24
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 747
+        width: 93
+        height: 131
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ecca6a29fe294a5b0800000000000000
+      internalID: -5357996099008811826
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_25
+      rect:
+        serializedVersion: 2
+        x: 229
+        y: 747
+        width: 128
+        height: 131
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 03e96c20f1f700110800000000000000
+      internalID: 1225118869812059696
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_26
+      rect:
+        serializedVersion: 2
+        x: 359
+        y: 748
+        width: 101
+        height: 130
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f4abfe8cacaab6fa0800000000000000
+      internalID: -5806359506632852913
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_27
+      rect:
+        serializedVersion: 2
+        x: 460
+        y: 748
+        width: 76
+        height: 130
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4468452b684334ba0800000000000000
+      internalID: -6105978916662114748
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_28
+      rect:
+        serializedVersion: 2
+        x: 536
+        y: 748
+        width: 94
+        height: 130
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ac9d4219d3799f210800000000000000
+      internalID: 1367290252567566794
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_29
+      rect:
+        serializedVersion: 2
+        x: 630
+        y: 748
+        width: 83
+        height: 130
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9236ceacc32305ac0800000000000000
+      internalID: -3868536843227339991
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_30
+      rect:
+        serializedVersion: 2
+        x: 713
+        y: 748
+        width: 99
+        height: 130
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e0ea865ab47bf5e30800000000000000
+      internalID: 4494512488664575502
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_31
+      rect:
+        serializedVersion: 2
+        x: 812
+        y: 748
+        width: 95
+        height: 130
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e2d1852096891fae0800000000000000
+      internalID: -1517264022668829394
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_32
+      rect:
+        serializedVersion: 2
+        x: 907
+        y: 749
+        width: 115
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed61a958440fe17a0800000000000000
+      internalID: -6404417442984356130
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_33
+      rect:
+        serializedVersion: 2
+        x: 1022
+        y: 749
+        width: 97
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e162b673a76750880800000000000000
+      internalID: -8645373642379942370
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_34
+      rect:
+        serializedVersion: 2
+        x: 1119
+        y: 749
+        width: 89
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3b1fb3415696c4ce0800000000000000
+      internalID: -1419643899676462669
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_35
+      rect:
+        serializedVersion: 2
+        x: 1208
+        y: 749
+        width: 111
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1fc37230e6498a7b0800000000000000
+      internalID: -5212753368461132559
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_36
+      rect:
+        serializedVersion: 2
+        x: 1319
+        y: 749
+        width: 97
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 07049a09970e3d470800000000000000
+      internalID: 8418318941208264816
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_37
+      rect:
+        serializedVersion: 2
+        x: 1416
+        y: 749
+        width: 132
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cbd97d4bafe1f1cb0800000000000000
+      internalID: -4891156608176382532
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_38
+      rect:
+        serializedVersion: 2
+        x: 1548
+        y: 749
+        width: 138
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7389fbd085181bd70800000000000000
+      internalID: 9057162540806543415
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_39
+      rect:
+        serializedVersion: 2
+        x: 1686
+        y: 750
+        width: 98
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7cc1cce352b5a6340800000000000000
+      internalID: 4857795363597982919
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_40
+      rect:
+        serializedVersion: 2
+        x: 1784
+        y: 750
+        width: 97
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 192f860660976bef0800000000000000
+      internalID: -92753674020261231
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_41
+      rect:
+        serializedVersion: 2
+        x: 1881
+        y: 750
+        width: 81
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 58e4a39411e7db4c0800000000000000
+      internalID: -4270118258969260411
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_42
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 619
+        width: 109
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9656cce47d3adaf10800000000000000
+      internalID: 2282660731282023785
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_43
+      rect:
+        serializedVersion: 2
+        x: 110
+        y: 619
+        width: 94
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dad7c1d6984430270800000000000000
+      internalID: 8215485502285708717
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_44
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 619
+        width: 119
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 920d7cd934c368dd0800000000000000
+      internalID: -2484231883340656599
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_45
+      rect:
+        serializedVersion: 2
+        x: 323
+        y: 619
+        width: 129
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 12858686d94f2d260800000000000000
+      internalID: 7121022917724887073
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_46
+      rect:
+        serializedVersion: 2
+        x: 452
+        y: 619
+        width: 91
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e808fe61fced39360800000000000000
+      internalID: 7175323612355723406
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_47
+      rect:
+        serializedVersion: 2
+        x: 543
+        y: 620
+        width: 133
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d70c0ad9ae690e610800000000000000
+      internalID: 1648483398028673149
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_48
+      rect:
+        serializedVersion: 2
+        x: 676
+        y: 620
+        width: 111
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 31de988a9b21cca50800000000000000
+      internalID: 6542624947268349203
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_49
+      rect:
+        serializedVersion: 2
+        x: 787
+        y: 620
+        width: 96
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6a0ae444258ab3430800000000000000
+      internalID: 3763786984884969638
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_50
+      rect:
+        serializedVersion: 2
+        x: 883
+        y: 620
+        width: 90
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b239db40732e13920800000000000000
+      internalID: 2968402355344479019
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_51
+      rect:
+        serializedVersion: 2
+        x: 973
+        y: 620
+        width: 87
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 83bf62333a6a2c210800000000000000
+      internalID: 1351826058032642872
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_52
+      rect:
+        serializedVersion: 2
+        x: 1060
+        y: 620
+        width: 91
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 657e6f797d388d420800000000000000
+      internalID: 2655016942325655382
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_53
+      rect:
+        serializedVersion: 2
+        x: 1151
+        y: 620
+        width: 84
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a3082d458b29cac70800000000000000
+      internalID: 8983716677092016186
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_54
+      rect:
+        serializedVersion: 2
+        x: 1235
+        y: 620
+        width: 82
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bd6db35e083891d80800000000000000
+      internalID: -8279441850318989605
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_55
+      rect:
+        serializedVersion: 2
+        x: 1317
+        y: 620
+        width: 101
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8b28f98a3ffcc3700800000000000000
+      internalID: 521520302281163448
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_56
+      rect:
+        serializedVersion: 2
+        x: 1418
+        y: 620
+        width: 89
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5fb65743a576c4920800000000000000
+      internalID: 2975867090909883381
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_57
+      rect:
+        serializedVersion: 2
+        x: 1507
+        y: 621
+        width: 132
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba5f376e52ae452f0800000000000000
+      internalID: -984904969986247253
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_58
+      rect:
+        serializedVersion: 2
+        x: 1639
+        y: 621
+        width: 107
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 36c16c0a10bad3630800000000000000
+      internalID: 3908468075108113507
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_59
+      rect:
+        serializedVersion: 2
+        x: 1746
+        y: 621
+        width: 132
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 56be38dc13358b340800000000000000
+      internalID: 4879741669622410085
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_60
+      rect:
+        serializedVersion: 2
+        x: 1878
+        y: 621
+        width: 135
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9ba019f4a6d18d7b0800000000000000
+      internalID: -5199373427360593223
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_61
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 494
+        width: 135
+        height: 125
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 637780944af38abb0800000000000000
+      internalID: -4924616217697159370
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_62
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 494
+        width: 106
+        height: 125
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e704dd10634335410800000000000000
+      internalID: 1464571710389698686
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_63
+      rect:
+        serializedVersion: 2
+        x: 242
+        y: 494
+        width: 75
+        height: 125
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 979946d5dd9709660800000000000000
+      internalID: 7390540980176591225
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_64
+      rect:
+        serializedVersion: 2
+        x: 317
+        y: 494
+        width: 83
+        height: 125
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 410f8f7e6c8231ee0800000000000000
+      internalID: -1291643833364713452
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_65
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 494
+        width: 93
+        height: 125
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bef89540e40d67e00800000000000000
+      internalID: 1042249397281853419
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_66
+      rect:
+        serializedVersion: 2
+        x: 493
+        y: 494
+        width: 99
+        height: 125
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b74398d0ed09cfb10800000000000000
+      internalID: 2016646016539374715
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_67
+      rect:
+        serializedVersion: 2
+        x: 592
+        y: 494
+        width: 124
+        height: 125
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fb0e10344fdbe8b70800000000000000
+      internalID: 8903262370151915711
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_68
+      rect:
+        serializedVersion: 2
+        x: 716
+        y: 494
+        width: 143
+        height: 125
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f587df420a10a7ea0800000000000000
+      internalID: -5874380976624404385
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_69
+      rect:
+        serializedVersion: 2
+        x: 859
+        y: 494
+        width: 134
+        height: 125
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 80f13061067701720800000000000000
+      internalID: 2814881021676429064
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_70
+      rect:
+        serializedVersion: 2
+        x: 993
+        y: 494
+        width: 127
+        height: 125
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9b5a57105086d55d0800000000000000
+      internalID: -3072185000088197703
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_71
+      rect:
+        serializedVersion: 2
+        x: 1120
+        y: 495
+        width: 132
+        height: 124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bc1436a0b49503760800000000000000
+      internalID: 7435541163620385227
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_72
+      rect:
+        serializedVersion: 2
+        x: 1252
+        y: 495
+        width: 92
+        height: 124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 878fdd78a507bca40800000000000000
+      internalID: 5389524913207769208
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_73
+      rect:
+        serializedVersion: 2
+        x: 1344
+        y: 495
+        width: 91
+        height: 124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8aadc996433de7870800000000000000
+      internalID: 8682609353680542376
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_74
+      rect:
+        serializedVersion: 2
+        x: 1435
+        y: 495
+        width: 121
+        height: 124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 220e569bf47e1d550800000000000000
+      internalID: 6183978092955295778
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_75
+      rect:
+        serializedVersion: 2
+        x: 1556
+        y: 496
+        width: 99
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b90b0ef32da750f30800000000000000
+      internalID: 4541170842706423963
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_76
+      rect:
+        serializedVersion: 2
+        x: 1655
+        y: 496
+        width: 99
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f5dc98129afa5e9e0800000000000000
+      internalID: -1592673752258589345
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_77
+      rect:
+        serializedVersion: 2
+        x: 1754
+        y: 496
+        width: 89
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9ded7026cada38630800000000000000
+      internalID: 3928174255887867609
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_78
+      rect:
+        serializedVersion: 2
+        x: 1843
+        y: 496
+        width: 77
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d194f0b1a23daad50800000000000000
+      internalID: 6749439169364183325
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_79
+      rect:
+        serializedVersion: 2
+        x: 1920
+        y: 496
+        width: 97
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9532b9322687226f0800000000000000
+      internalID: -710873428271619239
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_80
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 371
+        width: 101
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1db07f2a662916c60800000000000000
+      internalID: 7809684198355569617
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_81
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 371
+        width: 93
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d166dfabd5a146f0800000000000000
+      internalID: -702097703926603306
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_82
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 371
+        width: 105
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef52c2f09b4cb99e0800000000000000
+      internalID: -1613479742379645442
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_83
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 371
+        width: 89
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 269d3e2ec4768c160800000000000000
+      internalID: 7045995196942899554
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_84
+      rect:
+        serializedVersion: 2
+        x: 389
+        y: 371
+        width: 71
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a7aa275dd66d0fd10800000000000000
+      internalID: 2157459988731308666
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_85
+      rect:
+        serializedVersion: 2
+        x: 460
+        y: 371
+        width: 107
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 330125ec3e0581a90800000000000000
+      internalID: -7343030253078310861
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_86
+      rect:
+        serializedVersion: 2
+        x: 567
+        y: 371
+        width: 128
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b668cf766a2177dd0800000000000000
+      internalID: -2488499763180435861
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_87
+      rect:
+        serializedVersion: 2
+        x: 695
+        y: 372
+        width: 137
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1ce59706004e9a760800000000000000
+      internalID: 7469752147240378049
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_88
+      rect:
+        serializedVersion: 2
+        x: 832
+        y: 372
+        width: 91
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 34ea7c437abb5d2f0800000000000000
+      internalID: -948645819672187325
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_89
+      rect:
+        serializedVersion: 2
+        x: 923
+        y: 372
+        width: 99
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9f56390a1dc11c920800000000000000
+      internalID: 3008717712727959033
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_90
+      rect:
+        serializedVersion: 2
+        x: 1022
+        y: 372
+        width: 88
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a03c7b3248e27c620800000000000000
+      internalID: 2794253238876488458
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_91
+      rect:
+        serializedVersion: 2
+        x: 1110
+        y: 372
+        width: 75
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1301ff7001b2bca00800000000000000
+      internalID: 777762708505169969
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_92
+      rect:
+        serializedVersion: 2
+        x: 1185
+        y: 372
+        width: 97
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b3fc5ab3d3eb5f470800000000000000
+      internalID: 8427851447896756027
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_93
+      rect:
+        serializedVersion: 2
+        x: 1282
+        y: 372
+        width: 77
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e50b2e5a40d4c4e10800000000000000
+      internalID: 2183204601726152798
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_94
+      rect:
+        serializedVersion: 2
+        x: 1359
+        y: 373
+        width: 100
+        height: 121
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d39d404a51422d8c0800000000000000
+      internalID: -3976075845650032323
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_95
+      rect:
+        serializedVersion: 2
+        x: 1459
+        y: 373
+        width: 135
+        height: 121
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7dc433bb32dedfe60800000000000000
+      internalID: 7997809251000208599
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_96
+      rect:
+        serializedVersion: 2
+        x: 1594
+        y: 373
+        width: 108
+        height: 121
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 70d088ae4e097d160800000000000000
+      internalID: 7050263054533528839
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_97
+      rect:
+        serializedVersion: 2
+        x: 1702
+        y: 373
+        width: 87
+        height: 121
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d74adbaaa8cf9840800000000000000
+      internalID: 5233121927381010390
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_98
+      rect:
+        serializedVersion: 2
+        x: 1789
+        y: 373
+        width: 101
+        height: 121
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1c18403a3d9696e60800000000000000
+      internalID: 7956006574420689345
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_99
+      rect:
+        serializedVersion: 2
+        x: 1890
+        y: 373
+        width: 105
+        height: 121
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 450ec41ac0fe0c0f0800000000000000
+      internalID: -1098615471553585068
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_100
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 250
+        width: 86
+        height: 121
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa6d4d7eb8be67f70800000000000000
+      internalID: 9184787476191172266
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_101
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 250
+        width: 99
+        height: 121
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a5f149b9d344fd8f0800000000000000
+      internalID: -513616801103077542
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_102
+      rect:
+        serializedVersion: 2
+        x: 186
+        y: 250
+        width: 75
+        height: 121
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8e0112aef62fa4da0800000000000000
+      internalID: -5959684594388102936
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_103
+      rect:
+        serializedVersion: 2
+        x: 261
+        y: 250
+        width: 103
+        height: 121
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4dd7754c73f140cf0800000000000000
+      internalID: -287070151867138604
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_104
+      rect:
+        serializedVersion: 2
+        x: 364
+        y: 250
+        width: 131
+        height: 121
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6029d3eaf9d1ced70800000000000000
+      internalID: 9073659920904983046
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_105
+      rect:
+        serializedVersion: 2
+        x: 495
+        y: 252
+        width: 105
+        height: 119
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a07f767bb93285a10800000000000000
+      internalID: 1898306394640611082
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_106
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 252
+        width: 135
+        height: 119
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4f4a80091e8399390800000000000000
+      internalID: -7811149537262131980
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_107
+      rect:
+        serializedVersion: 2
+        x: 735
+        y: 252
+        width: 81
+        height: 119
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2237a1ecec9be6ec0800000000000000
+      internalID: -3571713156585983198
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_108
+      rect:
+        serializedVersion: 2
+        x: 816
+        y: 252
+        width: 100
+        height: 119
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a49bea4bd64c2a900800000000000000
+      internalID: 694333268030306634
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_109
+      rect:
+        serializedVersion: 2
+        x: 916
+        y: 252
+        width: 115
+        height: 119
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 132ab17bcde150ae0800000000000000
+      internalID: -1583825760637181391
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_110
+      rect:
+        serializedVersion: 2
+        x: 1031
+        y: 252
+        width: 125
+        height: 119
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9a28f0de6a1918350800000000000000
+      internalID: 6017250723271508649
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_111
+      rect:
+        serializedVersion: 2
+        x: 1156
+        y: 253
+        width: 89
+        height: 118
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2c8dc86e046d6a6c0800000000000000
+      internalID: -4132380033831610174
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_112
+      rect:
+        serializedVersion: 2
+        x: 1245
+        y: 253
+        width: 133
+        height: 118
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ee75a54b1182eaeb0800000000000000
+      internalID: -4706780504050214930
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_113
+      rect:
+        serializedVersion: 2
+        x: 1378
+        y: 253
+        width: 92
+        height: 118
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eb50c9e3a5c11d5e0800000000000000
+      internalID: -1886695594968480322
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_114
+      rect:
+        serializedVersion: 2
+        x: 1470
+        y: 254
+        width: 116
+        height: 117
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5abd9f52ba975a860800000000000000
+      internalID: 7540566927085263781
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_115
+      rect:
+        serializedVersion: 2
+        x: 1586
+        y: 254
+        width: 92
+        height: 117
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ab571a7d248d8cc50800000000000000
+      internalID: 6685831428428625338
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_116
+      rect:
+        serializedVersion: 2
+        x: 1678
+        y: 254
+        width: 115
+        height: 117
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 812e32b4ff16257d0800000000000000
+      internalID: -2931172658359573992
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_117
+      rect:
+        serializedVersion: 2
+        x: 1793
+        y: 254
+        width: 105
+        height: 117
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d948653a638abd50800000000000000
+      internalID: 6753855083381279190
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_118
+      rect:
+        serializedVersion: 2
+        x: 1898
+        y: 254
+        width: 89
+        height: 117
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1e52a1a5a351800a0800000000000000
+      internalID: -6915253887463447071
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_119
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 134
+        width: 93
+        height: 116
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 55b3c58640b205190800000000000000
+      internalID: -7975827642142409899
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_120
+      rect:
+        serializedVersion: 2
+        x: 94
+        y: 135
+        width: 111
+        height: 115
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b07d6af783c69d1e0800000000000000
+      internalID: -2172586355313944821
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_121
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 135
+        width: 97
+        height: 115
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 41c6552b901116d40800000000000000
+      internalID: 5575756547005705236
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_122
+      rect:
+        serializedVersion: 2
+        x: 302
+        y: 135
+        width: 94
+        height: 115
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b0dac2fea1f168460800000000000000
+      internalID: 7243511251214314763
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_123
+      rect:
+        serializedVersion: 2
+        x: 396
+        y: 136
+        width: 109
+        height: 114
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: da6a60a34f03c8a30800000000000000
+      internalID: 4218800776442980013
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_124
+      rect:
+        serializedVersion: 2
+        x: 505
+        y: 139
+        width: 83
+        height: 111
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5ce71718d1f677420800000000000000
+      internalID: 2627691080110407365
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_125
+      rect:
+        serializedVersion: 2
+        x: 588
+        y: 141
+        width: 83
+        height: 109
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 817ca5db0cd38c400800000000000000
+      internalID: 344593269513701144
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_126
+      rect:
+        serializedVersion: 2
+        x: 671
+        y: 143
+        width: 84
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c38027c72fc771510800000000000000
+      internalID: 1519820780172609596
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SkeletonMage_127
+      rect:
+        serializedVersion: 2
+        x: 755
+        y: 143
+        width: 83
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 650080cb46156b4f0800000000000000
+      internalID: -813373189600575402
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      SkeletonMage_0: 4064937168185641364
+      SkeletonMage_1: 5086501998307776328
+      SkeletonMage_10: 8296641646875374322
+      SkeletonMage_100: 9184787476191172266
+      SkeletonMage_101: -513616801103077542
+      SkeletonMage_102: -5959684594388102936
+      SkeletonMage_103: -287070151867138604
+      SkeletonMage_104: 9073659920904983046
+      SkeletonMage_105: 1898306394640611082
+      SkeletonMage_106: -7811149537262131980
+      SkeletonMage_107: -3571713156585983198
+      SkeletonMage_108: 694333268030306634
+      SkeletonMage_109: -1583825760637181391
+      SkeletonMage_11: 8334286440649135705
+      SkeletonMage_110: 6017250723271508649
+      SkeletonMage_111: -4132380033831610174
+      SkeletonMage_112: -4706780504050214930
+      SkeletonMage_113: -1886695594968480322
+      SkeletonMage_114: 7540566927085263781
+      SkeletonMage_115: 6685831428428625338
+      SkeletonMage_116: -2931172658359573992
+      SkeletonMage_117: 6753855083381279190
+      SkeletonMage_118: -6915253887463447071
+      SkeletonMage_119: -7975827642142409899
+      SkeletonMage_12: -2188811818898438581
+      SkeletonMage_120: -2172586355313944821
+      SkeletonMage_121: 5575756547005705236
+      SkeletonMage_122: 7243511251214314763
+      SkeletonMage_123: 4218800776442980013
+      SkeletonMage_124: 2627691080110407365
+      SkeletonMage_125: 344593269513701144
+      SkeletonMage_126: 1519820780172609596
+      SkeletonMage_127: -813373189600575402
+      SkeletonMage_13: 6169328140979281593
+      SkeletonMage_14: -7334833918535787745
+      SkeletonMage_15: -76887846825631472
+      SkeletonMage_16: 6981491402750960397
+      SkeletonMage_17: 5685174751641760541
+      SkeletonMage_18: 647449708250495751
+      SkeletonMage_19: 5175382342658537486
+      SkeletonMage_2: 3950644082927471128
+      SkeletonMage_20: 8599947109017248056
+      SkeletonMage_21: 4629374114041575418
+      SkeletonMage_22: -5873084372673223844
+      SkeletonMage_23: 1569794052212222190
+      SkeletonMage_24: -5357996099008811826
+      SkeletonMage_25: 1225118869812059696
+      SkeletonMage_26: -5806359506632852913
+      SkeletonMage_27: -6105978916662114748
+      SkeletonMage_28: 1367290252567566794
+      SkeletonMage_29: -3868536843227339991
+      SkeletonMage_3: 7014165723605356485
+      SkeletonMage_30: 4494512488664575502
+      SkeletonMage_31: -1517264022668829394
+      SkeletonMage_32: -6404417442984356130
+      SkeletonMage_33: -8645373642379942370
+      SkeletonMage_34: -1419643899676462669
+      SkeletonMage_35: -5212753368461132559
+      SkeletonMage_36: 8418318941208264816
+      SkeletonMage_37: -4891156608176382532
+      SkeletonMage_38: 9057162540806543415
+      SkeletonMage_39: 4857795363597982919
+      SkeletonMage_4: 8979249614630536709
+      SkeletonMage_40: -92753674020261231
+      SkeletonMage_41: -4270118258969260411
+      SkeletonMage_42: 2282660731282023785
+      SkeletonMage_43: 8215485502285708717
+      SkeletonMage_44: -2484231883340656599
+      SkeletonMage_45: 7121022917724887073
+      SkeletonMage_46: 7175323612355723406
+      SkeletonMage_47: 1648483398028673149
+      SkeletonMage_48: 6542624947268349203
+      SkeletonMage_49: 3763786984884969638
+      SkeletonMage_5: 6600838706307713770
+      SkeletonMage_50: 2968402355344479019
+      SkeletonMage_51: 1351826058032642872
+      SkeletonMage_52: 2655016942325655382
+      SkeletonMage_53: 8983716677092016186
+      SkeletonMage_54: -8279441850318989605
+      SkeletonMage_55: 521520302281163448
+      SkeletonMage_56: 2975867090909883381
+      SkeletonMage_57: -984904969986247253
+      SkeletonMage_58: 3908468075108113507
+      SkeletonMage_59: 4879741669622410085
+      SkeletonMage_6: 5215966962294795996
+      SkeletonMage_60: -5199373427360593223
+      SkeletonMage_61: -4924616217697159370
+      SkeletonMage_62: 1464571710389698686
+      SkeletonMage_63: 7390540980176591225
+      SkeletonMage_64: -1291643833364713452
+      SkeletonMage_65: 1042249397281853419
+      SkeletonMage_66: 2016646016539374715
+      SkeletonMage_67: 8903262370151915711
+      SkeletonMage_68: -5874380976624404385
+      SkeletonMage_69: 2814881021676429064
+      SkeletonMage_7: -7182362696686139106
+      SkeletonMage_70: -3072185000088197703
+      SkeletonMage_71: 7435541163620385227
+      SkeletonMage_72: 5389524913207769208
+      SkeletonMage_73: 8682609353680542376
+      SkeletonMage_74: 6183978092955295778
+      SkeletonMage_75: 4541170842706423963
+      SkeletonMage_76: -1592673752258589345
+      SkeletonMage_77: 3928174255887867609
+      SkeletonMage_78: 6749439169364183325
+      SkeletonMage_79: -710873428271619239
+      SkeletonMage_8: 1596526780115332361
+      SkeletonMage_80: 7809684198355569617
+      SkeletonMage_81: -702097703926603306
+      SkeletonMage_82: -1613479742379645442
+      SkeletonMage_83: 7045995196942899554
+      SkeletonMage_84: 2157459988731308666
+      SkeletonMage_85: -7343030253078310861
+      SkeletonMage_86: -2488499763180435861
+      SkeletonMage_87: 7469752147240378049
+      SkeletonMage_88: -948645819672187325
+      SkeletonMage_89: 3008717712727959033
+      SkeletonMage_9: -2079443174788355322
+      SkeletonMage_90: 2794253238876488458
+      SkeletonMage_91: 777762708505169969
+      SkeletonMage_92: 8427851447896756027
+      SkeletonMage_93: 2183204601726152798
+      SkeletonMage_94: -3976075845650032323
+      SkeletonMage_95: 7997809251000208599
+      SkeletonMage_96: 7050263054533528839
+      SkeletonMage_97: 5233121927381010390
+      SkeletonMage_98: 7956006574420689345
+      SkeletonMage_99: -1098615471553585068
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

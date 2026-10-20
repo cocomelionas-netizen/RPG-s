@@ -1,0 +1,3460 @@
+fileFormatVersion: 2
+guid: bea8de9f6eae6a24b86120a9b8fccdaf
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 8293311012732993407
+    second: HeroRanger_0
+  - first:
+      213: -3896045949167163388
+    second: HeroRanger_1
+  - first:
+      213: 1188832901131959479
+    second: HeroRanger_2
+  - first:
+      213: -8301593006864527780
+    second: HeroRanger_3
+  - first:
+      213: -7505563450699866910
+    second: HeroRanger_4
+  - first:
+      213: -6485575691873321120
+    second: HeroRanger_5
+  - first:
+      213: -8505535224829710806
+    second: HeroRanger_6
+  - first:
+      213: -1027328220405745048
+    second: HeroRanger_7
+  - first:
+      213: 3387617269466223648
+    second: HeroRanger_8
+  - first:
+      213: -7554923525786940955
+    second: HeroRanger_9
+  - first:
+      213: 6530996621416796304
+    second: HeroRanger_10
+  - first:
+      213: -1986040720748072240
+    second: HeroRanger_11
+  - first:
+      213: 3587889411241302665
+    second: HeroRanger_12
+  - first:
+      213: 5993373372513722487
+    second: HeroRanger_13
+  - first:
+      213: -5012644174040054902
+    second: HeroRanger_14
+  - first:
+      213: 8290088719786937651
+    second: HeroRanger_15
+  - first:
+      213: -284801051858176251
+    second: HeroRanger_16
+  - first:
+      213: -8471251360993027413
+    second: HeroRanger_17
+  - first:
+      213: 2885711026526900397
+    second: HeroRanger_18
+  - first:
+      213: -266525935590300449
+    second: HeroRanger_19
+  - first:
+      213: -3412731548243696123
+    second: HeroRanger_20
+  - first:
+      213: 225881142046912811
+    second: HeroRanger_21
+  - first:
+      213: 6458527058916158570
+    second: HeroRanger_22
+  - first:
+      213: 7264346789698917828
+    second: HeroRanger_23
+  - first:
+      213: -5464558149539159543
+    second: HeroRanger_24
+  - first:
+      213: -5980797726538466678
+    second: HeroRanger_25
+  - first:
+      213: -8262799104091301370
+    second: HeroRanger_26
+  - first:
+      213: 2143216793239094537
+    second: HeroRanger_27
+  - first:
+      213: -8384622545821893893
+    second: HeroRanger_28
+  - first:
+      213: 3929449009420200461
+    second: HeroRanger_29
+  - first:
+      213: -7264160215197754224
+    second: HeroRanger_30
+  - first:
+      213: 4343977024580041211
+    second: HeroRanger_31
+  - first:
+      213: -9124421591780004777
+    second: HeroRanger_32
+  - first:
+      213: -870215672144645491
+    second: HeroRanger_33
+  - first:
+      213: -8264914760778177194
+    second: HeroRanger_34
+  - first:
+      213: 164769964945586813
+    second: HeroRanger_35
+  - first:
+      213: 8609900884819195812
+    second: HeroRanger_36
+  - first:
+      213: -64781866323187927
+    second: HeroRanger_37
+  - first:
+      213: -7382358621068006433
+    second: HeroRanger_38
+  - first:
+      213: 8681477542096847594
+    second: HeroRanger_39
+  - first:
+      213: -537144039965157116
+    second: HeroRanger_40
+  - first:
+      213: 6987158665725052641
+    second: HeroRanger_41
+  - first:
+      213: -7494275759661899541
+    second: HeroRanger_42
+  - first:
+      213: 3229088120567811797
+    second: HeroRanger_43
+  - first:
+      213: 8321783110255013585
+    second: HeroRanger_44
+  - first:
+      213: 2289688798930131158
+    second: HeroRanger_45
+  - first:
+      213: 6157867544481484160
+    second: HeroRanger_46
+  - first:
+      213: 1036521511301884036
+    second: HeroRanger_47
+  - first:
+      213: -7485519292194628652
+    second: HeroRanger_48
+  - first:
+      213: 2617637259422659169
+    second: HeroRanger_49
+  - first:
+      213: 5098315648536440566
+    second: HeroRanger_50
+  - first:
+      213: -3899570147878253188
+    second: HeroRanger_51
+  - first:
+      213: 6561782077700783250
+    second: HeroRanger_52
+  - first:
+      213: 389710462750707259
+    second: HeroRanger_53
+  - first:
+      213: 5397008095434805277
+    second: HeroRanger_54
+  - first:
+      213: -6978800785214212148
+    second: HeroRanger_55
+  - first:
+      213: 5262149182707673491
+    second: HeroRanger_56
+  - first:
+      213: -1306539519627528993
+    second: HeroRanger_57
+  - first:
+      213: 6668745346029990757
+    second: HeroRanger_58
+  - first:
+      213: -7202079473259163735
+    second: HeroRanger_59
+  - first:
+      213: -1280407198999086315
+    second: HeroRanger_60
+  - first:
+      213: -8104776382194106524
+    second: HeroRanger_61
+  - first:
+      213: 8655800809322635260
+    second: HeroRanger_62
+  - first:
+      213: -8381075418623563093
+    second: HeroRanger_63
+  - first:
+      213: 4692361083186477080
+    second: HeroRanger_64
+  - first:
+      213: 8932487708924930234
+    second: HeroRanger_65
+  - first:
+      213: -8244886201350486220
+    second: HeroRanger_66
+  - first:
+      213: -442874182513154870
+    second: HeroRanger_67
+  - first:
+      213: 1726313301274407981
+    second: HeroRanger_68
+  - first:
+      213: -7727875287081903071
+    second: HeroRanger_69
+  - first:
+      213: 8965577966958998394
+    second: HeroRanger_70
+  - first:
+      213: -1965721750606318515
+    second: HeroRanger_71
+  - first:
+      213: 2656348415718623097
+    second: HeroRanger_72
+  - first:
+      213: -3700179953401818921
+    second: HeroRanger_73
+  - first:
+      213: -5872431391910069575
+    second: HeroRanger_74
+  - first:
+      213: 6515171541203065845
+    second: HeroRanger_75
+  - first:
+      213: 7962437432637179760
+    second: HeroRanger_76
+  - first:
+      213: 1953547418280937411
+    second: HeroRanger_77
+  - first:
+      213: 771264736734598004
+    second: HeroRanger_78
+  - first:
+      213: -7985471734109091259
+    second: HeroRanger_79
+  - first:
+      213: 3890774084932039009
+    second: HeroRanger_80
+  - first:
+      213: -3086716477019411848
+    second: HeroRanger_81
+  - first:
+      213: -1799742045389514306
+    second: HeroRanger_82
+  - first:
+      213: -238043145725139390
+    second: HeroRanger_83
+  - first:
+      213: 7862548307816689315
+    second: HeroRanger_84
+  - first:
+      213: -5206249067086727956
+    second: HeroRanger_85
+  - first:
+      213: -1134323692982742181
+    second: HeroRanger_86
+  - first:
+      213: 8845288528282519476
+    second: HeroRanger_87
+  - first:
+      213: 6140906676264442498
+    second: HeroRanger_88
+  - first:
+      213: 6779936701401316884
+    second: HeroRanger_89
+  - first:
+      213: 6125515044214446789
+    second: HeroRanger_90
+  - first:
+      213: -1432247334376471153
+    second: HeroRanger_91
+  - first:
+      213: 8119159640442536251
+    second: HeroRanger_92
+  - first:
+      213: 8402616812865365989
+    second: HeroRanger_93
+  - first:
+      213: 7437973836406496047
+    second: HeroRanger_94
+  - first:
+      213: 6940460835555823855
+    second: HeroRanger_95
+  - first:
+      213: 7590410651257636482
+    second: HeroRanger_96
+  - first:
+      213: 7521170941016254726
+    second: HeroRanger_97
+  - first:
+      213: 5298334763226607946
+    second: HeroRanger_98
+  - first:
+      213: -8373645846287530873
+    second: HeroRanger_99
+  - first:
+      213: 7414874848407771352
+    second: HeroRanger_100
+  - first:
+      213: -7749252944776853680
+    second: HeroRanger_101
+  - first:
+      213: -4458675283603172386
+    second: HeroRanger_102
+  - first:
+      213: 1725697267116794264
+    second: HeroRanger_103
+  - first:
+      213: -4220929973307775952
+    second: HeroRanger_104
+  - first:
+      213: 7393052295696933094
+    second: HeroRanger_105
+  - first:
+      213: 7862047859644819301
+    second: HeroRanger_106
+  - first:
+      213: 7579553593956038063
+    second: HeroRanger_107
+  - first:
+      213: -8843900108335037192
+    second: HeroRanger_108
+  - first:
+      213: 8830969446290022122
+    second: HeroRanger_109
+  - first:
+      213: 8028321809376981954
+    second: HeroRanger_110
+  - first:
+      213: 7946282325124597985
+    second: HeroRanger_111
+  - first:
+      213: -2388082418871249889
+    second: HeroRanger_112
+  - first:
+      213: 7790426001774361827
+    second: HeroRanger_113
+  - first:
+      213: -1413145415047489717
+    second: HeroRanger_114
+  - first:
+      213: 4038119898090998225
+    second: HeroRanger_115
+  - first:
+      213: 4634343811296593385
+    second: HeroRanger_116
+  - first:
+      213: 6790728282569608190
+    second: HeroRanger_117
+  - first:
+      213: 6900536777923468737
+    second: HeroRanger_118
+  - first:
+      213: -3046560766845226515
+    second: HeroRanger_119
+  - first:
+      213: 8537278945015185583
+    second: HeroRanger_120
+  - first:
+      213: -562304812054952244
+    second: HeroRanger_121
+  - first:
+      213: 7632740768800337998
+    second: HeroRanger_122
+  - first:
+      213: -3708808396266138622
+    second: HeroRanger_123
+  - first:
+      213: -1399249930033285739
+    second: HeroRanger_124
+  - first:
+      213: 936068551472327280
+    second: HeroRanger_125
+  - first:
+      213: -7573172159513933898
+    second: HeroRanger_126
+  - first:
+      213: 2415314154763323025
+    second: HeroRanger_127
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: HeroRanger_0
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 876
+        width: 81
+        height: 147
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f7ff8cd1d62c71370800000000000000
+      internalID: 8293311012732993407
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_1
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 878
+        width: 69
+        height: 145
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 408aa43f9d67ee9c0800000000000000
+      internalID: -3896045949167163388
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_2
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 881
+        width: 73
+        height: 142
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7bc744199359f7010800000000000000
+      internalID: 1188832901131959479
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_3
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 882
+        width: 79
+        height: 141
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c5e09fbd421dacc80800000000000000
+      internalID: -8301593006864527780
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_4
+      rect:
+        serializedVersion: 2
+        x: 303
+        y: 888
+        width: 65
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2ec11e9cec1e6d790800000000000000
+      internalID: -7505563450699866910
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_5
+      rect:
+        serializedVersion: 2
+        x: 368
+        y: 888
+        width: 111
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 06f7bf1354b9ef5a0800000000000000
+      internalID: -6485575691873321120
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_6
+      rect:
+        serializedVersion: 2
+        x: 479
+        y: 893
+        width: 99
+        height: 130
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a2ee37bf6c446f980800000000000000
+      internalID: -8505535224829710806
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_7
+      rect:
+        serializedVersion: 2
+        x: 578
+        y: 895
+        width: 69
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 86a3bf23d623eb1f0800000000000000
+      internalID: -1027328220405745048
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_8
+      rect:
+        serializedVersion: 2
+        x: 647
+        y: 896
+        width: 105
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 024538d45fb330f20800000000000000
+      internalID: 3387617269466223648
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_9
+      rect:
+        serializedVersion: 2
+        x: 752
+        y: 897
+        width: 69
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5e94a3cb415872790800000000000000
+      internalID: -7554923525786940955
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_10
+      rect:
+        serializedVersion: 2
+        x: 821
+        y: 898
+        width: 68
+        height: 125
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 09013d013d2c2aa50800000000000000
+      internalID: 6530996621416796304
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_11
+      rect:
+        serializedVersion: 2
+        x: 889
+        y: 898
+        width: 68
+        height: 125
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0d2b95aac7a2074e0800000000000000
+      internalID: -1986040720748072240
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_12
+      rect:
+        serializedVersion: 2
+        x: 957
+        y: 898
+        width: 67
+        height: 125
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 98a5c6af86ebac130800000000000000
+      internalID: 3587889411241302665
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_13
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 898
+        width: 109
+        height: 125
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 77027faf35dbc2350800000000000000
+      internalID: 5993373372513722487
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_14
+      rect:
+        serializedVersion: 2
+        x: 1133
+        y: 899
+        width: 72
+        height: 124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a8349ec8ea28f6ab0800000000000000
+      internalID: -5012644174040054902
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_15
+      rect:
+        serializedVersion: 2
+        x: 1205
+        y: 900
+        width: 113
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 33d8f5394cf4c0370800000000000000
+      internalID: 8290088719786937651
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_16
+      rect:
+        serializedVersion: 2
+        x: 1318
+        y: 902
+        width: 85
+        height: 121
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 507f558c3fe2c0cf0800000000000000
+      internalID: -284801051858176251
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_17
+      rect:
+        serializedVersion: 2
+        x: 1403
+        y: 903
+        width: 96
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: baa57f015c1107a80800000000000000
+      internalID: -8471251360993027413
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_18
+      rect:
+        serializedVersion: 2
+        x: 1499
+        y: 903
+        width: 94
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: da05094b3ea1c0820800000000000000
+      internalID: 2885711026526900397
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_19
+      rect:
+        serializedVersion: 2
+        x: 1593
+        y: 903
+        width: 99
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fd426bdd21c1d4cf0800000000000000
+      internalID: -266525935590300449
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_20
+      rect:
+        serializedVersion: 2
+        x: 1692
+        y: 904
+        width: 70
+        height: 119
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5066a210dba83a0d0800000000000000
+      internalID: -3412731548243696123
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_21
+      rect:
+        serializedVersion: 2
+        x: 1762
+        y: 904
+        width: 87
+        height: 119
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b217a21b3bd722300800000000000000
+      internalID: 225881142046912811
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_22
+      rect:
+        serializedVersion: 2
+        x: 1849
+        y: 904
+        width: 67
+        height: 119
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a6c22fe242c41a950800000000000000
+      internalID: 6458527058916158570
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_23
+      rect:
+        serializedVersion: 2
+        x: 1916
+        y: 904
+        width: 82
+        height: 119
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4c5d045cae420d460800000000000000
+      internalID: 7264346789698917828
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_24
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 757
+        width: 69
+        height: 119
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 902a042c05df924b0800000000000000
+      internalID: -5464558149539159543
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_25
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 759
+        width: 76
+        height: 117
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a8af534c720fffca0800000000000000
+      internalID: -5980797726538466678
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_26
+      rect:
+        serializedVersion: 2
+        x: 146
+        y: 759
+        width: 76
+        height: 117
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 60ad8363ef3a45d80800000000000000
+      internalID: -8262799104091301370
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_27
+      rect:
+        serializedVersion: 2
+        x: 222
+        y: 759
+        width: 76
+        height: 117
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9050ba5715c3ebd10800000000000000
+      internalID: 2143216793239094537
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_28
+      rect:
+        serializedVersion: 2
+        x: 298
+        y: 759
+        width: 75
+        height: 117
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bfafd8cd736d3ab80800000000000000
+      internalID: -8384622545821893893
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_29
+      rect:
+        serializedVersion: 2
+        x: 373
+        y: 759
+        width: 106
+        height: 117
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d0a60811e05388630800000000000000
+      internalID: 3929449009420200461
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_30
+      rect:
+        serializedVersion: 2
+        x: 479
+        y: 759
+        width: 83
+        height: 117
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 09cdc9d75c4803b90800000000000000
+      internalID: -7264160215197754224
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_31
+      rect:
+        serializedVersion: 2
+        x: 562
+        y: 759
+        width: 65
+        height: 117
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bf93d86a618e84c30800000000000000
+      internalID: 4343977024580041211
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_32
+      rect:
+        serializedVersion: 2
+        x: 627
+        y: 759
+        width: 96
+        height: 117
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 75c6c01d7ea8f5180800000000000000
+      internalID: -9124421591780004777
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_33
+      rect:
+        serializedVersion: 2
+        x: 723
+        y: 759
+        width: 89
+        height: 117
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d8237dfe47f5ce3f0800000000000000
+      internalID: -870215672144645491
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_34
+      rect:
+        serializedVersion: 2
+        x: 812
+        y: 760
+        width: 88
+        height: 116
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6552fe080df1d4d80800000000000000
+      internalID: -8264914760778177194
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_35
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 760
+        width: 91
+        height: 116
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d7a3c3ef861694200800000000000000
+      internalID: 164769964945586813
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_36
+      rect:
+        serializedVersion: 2
+        x: 991
+        y: 761
+        width: 93
+        height: 115
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4a738fecc338c7770800000000000000
+      internalID: 8609900884819195812
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_37
+      rect:
+        serializedVersion: 2
+        x: 1084
+        y: 761
+        width: 78
+        height: 115
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9276bed5c39d91ff0800000000000000
+      internalID: -64781866323187927
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_38
+      rect:
+        serializedVersion: 2
+        x: 1162
+        y: 761
+        width: 89
+        height: 115
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fdbe2b292f79c8990800000000000000
+      internalID: -7382358621068006433
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_39
+      rect:
+        serializedVersion: 2
+        x: 1251
+        y: 761
+        width: 87
+        height: 115
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ae2c63ef3ddca7870800000000000000
+      internalID: 8681477542096847594
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_40
+      rect:
+        serializedVersion: 2
+        x: 1338
+        y: 761
+        width: 71
+        height: 115
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 40998a0775eab88f0800000000000000
+      internalID: -537144039965157116
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_41
+      rect:
+        serializedVersion: 2
+        x: 1409
+        y: 762
+        width: 95
+        height: 114
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1e685d379cf57f060800000000000000
+      internalID: 6987158665725052641
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_42
+      rect:
+        serializedVersion: 2
+        x: 1504
+        y: 763
+        width: 67
+        height: 113
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be0288827ebfef790800000000000000
+      internalID: -7494275759661899541
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_43
+      rect:
+        serializedVersion: 2
+        x: 1571
+        y: 764
+        width: 76
+        height: 112
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5dec0e6898600dc20800000000000000
+      internalID: 3229088120567811797
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_44
+      rect:
+        serializedVersion: 2
+        x: 1647
+        y: 765
+        width: 85
+        height: 111
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1de6898e5a9ec7370800000000000000
+      internalID: 8321783110255013585
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_45
+      rect:
+        serializedVersion: 2
+        x: 1732
+        y: 765
+        width: 76
+        height: 111
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d8db62d4db96cf10800000000000000
+      internalID: 2289688798930131158
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_46
+      rect:
+        serializedVersion: 2
+        x: 1808
+        y: 765
+        width: 75
+        height: 111
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 08dc9bae7e3257550800000000000000
+      internalID: 6157867544481484160
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_47
+      rect:
+        serializedVersion: 2
+        x: 1883
+        y: 765
+        width: 99
+        height: 111
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4882333a2d6726e00800000000000000
+      internalID: 1036521511301884036
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_48
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 646
+        width: 93
+        height: 111
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4dbd76d1dd71e1890800000000000000
+      internalID: -7485519292194628652
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_49
+      rect:
+        serializedVersion: 2
+        x: 94
+        y: 646
+        width: 79
+        height: 111
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 162f6b6f737b35420800000000000000
+      internalID: 2617637259422659169
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_50
+      rect:
+        serializedVersion: 2
+        x: 173
+        y: 646
+        width: 67
+        height: 111
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6fe64dff11bd0c640800000000000000
+      internalID: 5098315648536440566
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_51
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 647
+        width: 83
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c7dcffe7c91f1e9c0800000000000000
+      internalID: -3899570147878253188
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_52
+      rect:
+        serializedVersion: 2
+        x: 323
+        y: 647
+        width: 81
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 29c31eaa802201b50800000000000000
+      internalID: 6561782077700783250
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_53
+      rect:
+        serializedVersion: 2
+        x: 404
+        y: 647
+        width: 76
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b3e4281e997886500800000000000000
+      internalID: 389710462750707259
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_54
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 647
+        width: 65
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d109c4aa44606ea40800000000000000
+      internalID: 5397008095434805277
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_55
+      rect:
+        serializedVersion: 2
+        x: 545
+        y: 648
+        width: 67
+        height: 109
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cc7f61f39a1562f90800000000000000
+      internalID: -6978800785214212148
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_56
+      rect:
+        serializedVersion: 2
+        x: 612
+        y: 648
+        width: 67
+        height: 109
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 39927663dc8e60940800000000000000
+      internalID: 5262149182707673491
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_57
+      rect:
+        serializedVersion: 2
+        x: 679
+        y: 648
+        width: 84
+        height: 109
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fd4779faa3d3edde0800000000000000
+      internalID: -1306539519627528993
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_58
+      rect:
+        serializedVersion: 2
+        x: 763
+        y: 648
+        width: 61
+        height: 109
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 56338a74f842c8c50800000000000000
+      internalID: 6668745346029990757
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_59
+      rect:
+        serializedVersion: 2
+        x: 824
+        y: 648
+        width: 85
+        height: 109
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9af414890e21d0c90800000000000000
+      internalID: -7202079473259163735
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_60
+      rect:
+        serializedVersion: 2
+        x: 909
+        y: 648
+        width: 69
+        height: 109
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 51b7ec7bf641b3ee0800000000000000
+      internalID: -1280407198999086315
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_61
+      rect:
+        serializedVersion: 2
+        x: 978
+        y: 648
+        width: 84
+        height: 109
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 46f385342dc068f80800000000000000
+      internalID: -8104776382194106524
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_62
+      rect:
+        serializedVersion: 2
+        x: 1062
+        y: 649
+        width: 95
+        height: 108
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cffd636c9f49f1870800000000000000
+      internalID: 8655800809322635260
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_63
+      rect:
+        serializedVersion: 2
+        x: 1157
+        y: 650
+        width: 77
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: baa2f25cf4070bb80800000000000000
+      internalID: -8381075418623563093
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_64
+      rect:
+        serializedVersion: 2
+        x: 1234
+        y: 650
+        width: 75
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 81872314b8d9e1140800000000000000
+      internalID: 4692361083186477080
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_65
+      rect:
+        serializedVersion: 2
+        x: 1309
+        y: 650
+        width: 77
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ab86303be3296fb70800000000000000
+      internalID: 8932487708924930234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_66
+      rect:
+        serializedVersion: 2
+        x: 1386
+        y: 650
+        width: 76
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4370cf2eea7449d80800000000000000
+      internalID: -8244886201350486220
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_67
+      rect:
+        serializedVersion: 2
+        x: 1462
+        y: 650
+        width: 67
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ac4ac1707489ad9f0800000000000000
+      internalID: -442874182513154870
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_68
+      rect:
+        serializedVersion: 2
+        x: 1529
+        y: 650
+        width: 107
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d243e751dc815f710800000000000000
+      internalID: 1726313301274407981
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_69
+      rect:
+        serializedVersion: 2
+        x: 1636
+        y: 650
+        width: 97
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 12c96f4de5211c490800000000000000
+      internalID: -7727875287081903071
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_70
+      rect:
+        serializedVersion: 2
+        x: 1733
+        y: 650
+        width: 92
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a73f8a6c8a12c6c70800000000000000
+      internalID: 8965577966958998394
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_71
+      rect:
+        serializedVersion: 2
+        x: 1825
+        y: 650
+        width: 105
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d44f9df8b7a58b4e0800000000000000
+      internalID: -1965721750606318515
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_72
+      rect:
+        serializedVersion: 2
+        x: 1930
+        y: 650
+        width: 89
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 97784966fce3dd420800000000000000
+      internalID: 2656348415718623097
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_73
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 539
+        width: 62
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7d09670dfe156acc0800000000000000
+      internalID: -3700179953401818921
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_74
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 539
+        width: 99
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9baf85533cee08ea0800000000000000
+      internalID: -5872431391910069575
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_75
+      rect:
+        serializedVersion: 2
+        x: 162
+        y: 539
+        width: 105
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5fb94247ff98a6a50800000000000000
+      internalID: 6515171541203065845
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_76
+      rect:
+        serializedVersion: 2
+        x: 267
+        y: 539
+        width: 109
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 077cc9e78a2408e60800000000000000
+      internalID: 7962437432637179760
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_77
+      rect:
+        serializedVersion: 2
+        x: 376
+        y: 540
+        width: 83
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3c7448ec6056c1b10800000000000000
+      internalID: 1953547418280937411
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_78
+      rect:
+        serializedVersion: 2
+        x: 459
+        y: 540
+        width: 76
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 473d9d4113514ba00800000000000000
+      internalID: 771264736734598004
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_79
+      rect:
+        serializedVersion: 2
+        x: 535
+        y: 540
+        width: 67
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 54a418444c7ed2190800000000000000
+      internalID: -7985471734109091259
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_80
+      rect:
+        serializedVersion: 2
+        x: 602
+        y: 540
+        width: 113
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1617ba18a6ecef530800000000000000
+      internalID: 3890774084932039009
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_81
+      rect:
+        serializedVersion: 2
+        x: 715
+        y: 540
+        width: 107
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 87aa9e0e7b7c925d0800000000000000
+      internalID: -3086716477019411848
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_82
+      rect:
+        serializedVersion: 2
+        x: 822
+        y: 540
+        width: 113
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eb9193925280607e0800000000000000
+      internalID: -1799742045389514306
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_83
+      rect:
+        serializedVersion: 2
+        x: 935
+        y: 541
+        width: 77
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 24626d9250d42bcf0800000000000000
+      internalID: -238043145725139390
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_84
+      rect:
+        serializedVersion: 2
+        x: 1012
+        y: 541
+        width: 118
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3ae23c447026d1d60800000000000000
+      internalID: 7862548307816689315
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_85
+      rect:
+        serializedVersion: 2
+        x: 1131
+        y: 541
+        width: 128
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ce43610be00bfb7b0800000000000000
+      internalID: -5206249067086727956
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_86
+      rect:
+        serializedVersion: 2
+        x: 1259
+        y: 541
+        width: 65
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b5354737c921240f0800000000000000
+      internalID: -1134323692982742181
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_87
+      rect:
+        serializedVersion: 2
+        x: 1324
+        y: 541
+        width: 99
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b70e185d07c0ca70800000000000000
+      internalID: 8845288528282519476
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_88
+      rect:
+        serializedVersion: 2
+        x: 1423
+        y: 541
+        width: 107
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 28a119d0612e83550800000000000000
+      internalID: 6140906676264442498
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_89
+      rect:
+        serializedVersion: 2
+        x: 1530
+        y: 542
+        width: 75
+        height: 104
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 41eb8ae128c271e50800000000000000
+      internalID: 6779936701401316884
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_90
+      rect:
+        serializedVersion: 2
+        x: 1605
+        y: 542
+        width: 69
+        height: 104
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5ca96b47a73320550800000000000000
+      internalID: 6125515044214446789
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_91
+      rect:
+        serializedVersion: 2
+        x: 1674
+        y: 542
+        width: 88
+        height: 104
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f858df343a2af1ce0800000000000000
+      internalID: -1432247334376471153
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_92
+      rect:
+        serializedVersion: 2
+        x: 1762
+        y: 542
+        width: 109
+        height: 104
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b3104430dac0da070800000000000000
+      internalID: 8119159640442536251
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_93
+      rect:
+        serializedVersion: 2
+        x: 1871
+        y: 542
+        width: 93
+        height: 104
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5e7a09ae8771c9470800000000000000
+      internalID: 8402616812865365989
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_94
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 436
+        width: 84
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f2b98afcbcdf83760800000000000000
+      internalID: 7437973836406496047
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_95
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 436
+        width: 111
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fe0d0d89b58715060800000000000000
+      internalID: 6940460835555823855
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_96
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 436
+        width: 67
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2868d87854e865960800000000000000
+      internalID: 7590410651257636482
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_97
+      rect:
+        serializedVersion: 2
+        x: 263
+        y: 437
+        width: 90
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 609a34a3f11906860800000000000000
+      internalID: 7521170941016254726
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_98
+      rect:
+        serializedVersion: 2
+        x: 353
+        y: 437
+        width: 89
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a41b9373567778940800000000000000
+      internalID: 5298334763226607946
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_99
+      rect:
+        serializedVersion: 2
+        x: 442
+        y: 437
+        width: 107
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7844b11e775dacb80800000000000000
+      internalID: -8373645846287530873
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_100
+      rect:
+        serializedVersion: 2
+        x: 549
+        y: 437
+        width: 77
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d8d251936de6e660800000000000000
+      internalID: 7414874848407771352
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_101
+      rect:
+        serializedVersion: 2
+        x: 626
+        y: 437
+        width: 129
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0570de7018f157490800000000000000
+      internalID: -7749252944776853680
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_102
+      rect:
+        serializedVersion: 2
+        x: 755
+        y: 437
+        width: 111
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed3d400e37a9f12c0800000000000000
+      internalID: -4458675283603172386
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_103
+      rect:
+        serializedVersion: 2
+        x: 866
+        y: 437
+        width: 86
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 891eb547588e2f710800000000000000
+      internalID: 1725697267116794264
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_104
+      rect:
+        serializedVersion: 2
+        x: 952
+        y: 437
+        width: 110
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 034e03f7d8e3c65c0800000000000000
+      internalID: -4220929973307775952
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_105
+      rect:
+        serializedVersion: 2
+        x: 1062
+        y: 438
+        width: 90
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6e0e6e294e5699660800000000000000
+      internalID: 7393052295696933094
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_106
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 438
+        width: 92
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 567ef399fda9b1d60800000000000000
+      internalID: 7862047859644819301
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_107
+      rect:
+        serializedVersion: 2
+        x: 1244
+        y: 438
+        width: 107
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa5f8c3e5dbff2960800000000000000
+      internalID: 7579553593956038063
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_108
+      rect:
+        serializedVersion: 2
+        x: 1351
+        y: 438
+        width: 68
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8f4c6ad55b7244580800000000000000
+      internalID: -8843900108335037192
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_109
+      rect:
+        serializedVersion: 2
+        x: 1419
+        y: 438
+        width: 113
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aeed1744ce7ed8a70800000000000000
+      internalID: 8830969446290022122
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_110
+      rect:
+        serializedVersion: 2
+        x: 1532
+        y: 438
+        width: 97
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2c3bf6656245a6f60800000000000000
+      internalID: 8028321809376981954
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_111
+      rect:
+        serializedVersion: 2
+        x: 1629
+        y: 438
+        width: 115
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1e8440a6cadd64e60800000000000000
+      internalID: 7946282325124597985
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_112
+      rect:
+        serializedVersion: 2
+        x: 1744
+        y: 439
+        width: 65
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f14d2d051b3dbded0800000000000000
+      internalID: -2388082418871249889
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_113
+      rect:
+        serializedVersion: 2
+        x: 1809
+        y: 439
+        width: 95
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3ec3ab45c272d1c60800000000000000
+      internalID: 7790426001774361827
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_114
+      rect:
+        serializedVersion: 2
+        x: 1904
+        y: 440
+        width: 83
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b475f107bbf736ce0800000000000000
+      internalID: -1413145415047489717
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_115
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 337
+        width: 78
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1d9862607a84a0830800000000000000
+      internalID: 4038119898090998225
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_116
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 337
+        width: 109
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9e50d5f742f705040800000000000000
+      internalID: 4634343811296593385
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_117
+      rect:
+        serializedVersion: 2
+        x: 188
+        y: 337
+        width: 97
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: efb82c8e4638d3e50800000000000000
+      internalID: 6790728282569608190
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_118
+      rect:
+        serializedVersion: 2
+        x: 285
+        y: 338
+        width: 77
+        height: 98
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1cd95af83a1a3cf50800000000000000
+      internalID: 6900536777923468737
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_119
+      rect:
+        serializedVersion: 2
+        x: 362
+        y: 338
+        width: 90
+        height: 98
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: de17c89bf1178b5d0800000000000000
+      internalID: -3046560766845226515
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_120
+      rect:
+        serializedVersion: 2
+        x: 452
+        y: 338
+        width: 88
+        height: 98
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa04d02d7f18a7670800000000000000
+      internalID: 8537278945015185583
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_121
+      rect:
+        serializedVersion: 2
+        x: 540
+        y: 339
+        width: 77
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cc6c8fda0ca4238f0800000000000000
+      internalID: -562304812054952244
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_122
+      rect:
+        serializedVersion: 2
+        x: 617
+        y: 339
+        width: 77
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e407cfa0a41fce960800000000000000
+      internalID: 7632740768800337998
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_123
+      rect:
+        serializedVersion: 2
+        x: 694
+        y: 339
+        width: 93
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2041298e96aa78cc0800000000000000
+      internalID: -3708808396266138622
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_124
+      rect:
+        serializedVersion: 2
+        x: 787
+        y: 339
+        width: 66
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 59530682a9dd49ce0800000000000000
+      internalID: -1399249930033285739
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_125
+      rect:
+        serializedVersion: 2
+        x: 853
+        y: 339
+        width: 115
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 07a2ce753659dfc00800000000000000
+      internalID: 936068551472327280
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_126
+      rect:
+        serializedVersion: 2
+        x: 968
+        y: 341
+        width: 79
+        height: 95
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6b74b499b00b6e690800000000000000
+      internalID: -7573172159513933898
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroRanger_127
+      rect:
+        serializedVersion: 2
+        x: 1047
+        y: 341
+        width: 95
+        height: 95
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 19604a74d6be48120800000000000000
+      internalID: 2415314154763323025
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      HeroRanger_0: 8293311012732993407
+      HeroRanger_1: -3896045949167163388
+      HeroRanger_10: 6530996621416796304
+      HeroRanger_100: 7414874848407771352
+      HeroRanger_101: -7749252944776853680
+      HeroRanger_102: -4458675283603172386
+      HeroRanger_103: 1725697267116794264
+      HeroRanger_104: -4220929973307775952
+      HeroRanger_105: 7393052295696933094
+      HeroRanger_106: 7862047859644819301
+      HeroRanger_107: 7579553593956038063
+      HeroRanger_108: -8843900108335037192
+      HeroRanger_109: 8830969446290022122
+      HeroRanger_11: -1986040720748072240
+      HeroRanger_110: 8028321809376981954
+      HeroRanger_111: 7946282325124597985
+      HeroRanger_112: -2388082418871249889
+      HeroRanger_113: 7790426001774361827
+      HeroRanger_114: -1413145415047489717
+      HeroRanger_115: 4038119898090998225
+      HeroRanger_116: 4634343811296593385
+      HeroRanger_117: 6790728282569608190
+      HeroRanger_118: 6900536777923468737
+      HeroRanger_119: -3046560766845226515
+      HeroRanger_12: 3587889411241302665
+      HeroRanger_120: 8537278945015185583
+      HeroRanger_121: -562304812054952244
+      HeroRanger_122: 7632740768800337998
+      HeroRanger_123: -3708808396266138622
+      HeroRanger_124: -1399249930033285739
+      HeroRanger_125: 936068551472327280
+      HeroRanger_126: -7573172159513933898
+      HeroRanger_127: 2415314154763323025
+      HeroRanger_13: 5993373372513722487
+      HeroRanger_14: -5012644174040054902
+      HeroRanger_15: 8290088719786937651
+      HeroRanger_16: -284801051858176251
+      HeroRanger_17: -8471251360993027413
+      HeroRanger_18: 2885711026526900397
+      HeroRanger_19: -266525935590300449
+      HeroRanger_2: 1188832901131959479
+      HeroRanger_20: -3412731548243696123
+      HeroRanger_21: 225881142046912811
+      HeroRanger_22: 6458527058916158570
+      HeroRanger_23: 7264346789698917828
+      HeroRanger_24: -5464558149539159543
+      HeroRanger_25: -5980797726538466678
+      HeroRanger_26: -8262799104091301370
+      HeroRanger_27: 2143216793239094537
+      HeroRanger_28: -8384622545821893893
+      HeroRanger_29: 3929449009420200461
+      HeroRanger_3: -8301593006864527780
+      HeroRanger_30: -7264160215197754224
+      HeroRanger_31: 4343977024580041211
+      HeroRanger_32: -9124421591780004777
+      HeroRanger_33: -870215672144645491
+      HeroRanger_34: -8264914760778177194
+      HeroRanger_35: 164769964945586813
+      HeroRanger_36: 8609900884819195812
+      HeroRanger_37: -64781866323187927
+      HeroRanger_38: -7382358621068006433
+      HeroRanger_39: 8681477542096847594
+      HeroRanger_4: -7505563450699866910
+      HeroRanger_40: -537144039965157116
+      HeroRanger_41: 6987158665725052641
+      HeroRanger_42: -7494275759661899541
+      HeroRanger_43: 3229088120567811797
+      HeroRanger_44: 8321783110255013585
+      HeroRanger_45: 2289688798930131158
+      HeroRanger_46: 6157867544481484160
+      HeroRanger_47: 1036521511301884036
+      HeroRanger_48: -7485519292194628652
+      HeroRanger_49: 2617637259422659169
+      HeroRanger_5: -6485575691873321120
+      HeroRanger_50: 5098315648536440566
+      HeroRanger_51: -3899570147878253188
+      HeroRanger_52: 6561782077700783250
+      HeroRanger_53: 389710462750707259
+      HeroRanger_54: 5397008095434805277
+      HeroRanger_55: -6978800785214212148
+      HeroRanger_56: 5262149182707673491
+      HeroRanger_57: -1306539519627528993
+      HeroRanger_58: 6668745346029990757
+      HeroRanger_59: -7202079473259163735
+      HeroRanger_6: -8505535224829710806
+      HeroRanger_60: -1280407198999086315
+      HeroRanger_61: -8104776382194106524
+      HeroRanger_62: 8655800809322635260
+      HeroRanger_63: -8381075418623563093
+      HeroRanger_64: 4692361083186477080
+      HeroRanger_65: 8932487708924930234
+      HeroRanger_66: -8244886201350486220
+      HeroRanger_67: -442874182513154870
+      HeroRanger_68: 1726313301274407981
+      HeroRanger_69: -7727875287081903071
+      HeroRanger_7: -1027328220405745048
+      HeroRanger_70: 8965577966958998394
+      HeroRanger_71: -1965721750606318515
+      HeroRanger_72: 2656348415718623097
+      HeroRanger_73: -3700179953401818921
+      HeroRanger_74: -5872431391910069575
+      HeroRanger_75: 6515171541203065845
+      HeroRanger_76: 7962437432637179760
+      HeroRanger_77: 1953547418280937411
+      HeroRanger_78: 771264736734598004
+      HeroRanger_79: -7985471734109091259
+      HeroRanger_8: 3387617269466223648
+      HeroRanger_80: 3890774084932039009
+      HeroRanger_81: -3086716477019411848
+      HeroRanger_82: -1799742045389514306
+      HeroRanger_83: -238043145725139390
+      HeroRanger_84: 7862548307816689315
+      HeroRanger_85: -5206249067086727956
+      HeroRanger_86: -1134323692982742181
+      HeroRanger_87: 8845288528282519476
+      HeroRanger_88: 6140906676264442498
+      HeroRanger_89: 6779936701401316884
+      HeroRanger_9: -7554923525786940955
+      HeroRanger_90: 6125515044214446789
+      HeroRanger_91: -1432247334376471153
+      HeroRanger_92: 8119159640442536251
+      HeroRanger_93: 8402616812865365989
+      HeroRanger_94: 7437973836406496047
+      HeroRanger_95: 6940460835555823855
+      HeroRanger_96: 7590410651257636482
+      HeroRanger_97: 7521170941016254726
+      HeroRanger_98: 5298334763226607946
+      HeroRanger_99: -8373645846287530873
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,5176 @@
+fileFormatVersion: 2
+guid: 73396fa86f4222c4b9e5bb403bd29499
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 698536084151035223
+    second: WyvernFire_0
+  - first:
+      213: -5772724049784887515
+    second: WyvernFire_1
+  - first:
+      213: -99353977637508202
+    second: WyvernFire_2
+  - first:
+      213: 1855240517694302772
+    second: WyvernFire_3
+  - first:
+      213: -2307969788179601421
+    second: WyvernFire_4
+  - first:
+      213: 127665298185567522
+    second: WyvernFire_5
+  - first:
+      213: 5833991063315949211
+    second: WyvernFire_6
+  - first:
+      213: 1611459998856894623
+    second: WyvernFire_7
+  - first:
+      213: -6188375072258730181
+    second: WyvernFire_8
+  - first:
+      213: -7472906669469088963
+    second: WyvernFire_9
+  - first:
+      213: 3813210703456232713
+    second: WyvernFire_10
+  - first:
+      213: -7277098180032795229
+    second: WyvernFire_11
+  - first:
+      213: -1219844549812860504
+    second: WyvernFire_12
+  - first:
+      213: 3647057791190915539
+    second: WyvernFire_13
+  - first:
+      213: -1879440021901341782
+    second: WyvernFire_14
+  - first:
+      213: 4038652662954265784
+    second: WyvernFire_15
+  - first:
+      213: 4577075560552954273
+    second: WyvernFire_16
+  - first:
+      213: -1040699051922955068
+    second: WyvernFire_17
+  - first:
+      213: -7432298552246895266
+    second: WyvernFire_18
+  - first:
+      213: -1409694154942717509
+    second: WyvernFire_19
+  - first:
+      213: -4232578627346147646
+    second: WyvernFire_20
+  - first:
+      213: 8788111529846169003
+    second: WyvernFire_21
+  - first:
+      213: -8232233905614678384
+    second: WyvernFire_22
+  - first:
+      213: 696862176102329133
+    second: WyvernFire_23
+  - first:
+      213: 8357249305510602220
+    second: WyvernFire_24
+  - first:
+      213: 1124503705625422000
+    second: WyvernFire_25
+  - first:
+      213: 7307354626910721979
+    second: WyvernFire_26
+  - first:
+      213: -653295888460987949
+    second: WyvernFire_27
+  - first:
+      213: -5736697596829172539
+    second: WyvernFire_28
+  - first:
+      213: 2765492360907987837
+    second: WyvernFire_29
+  - first:
+      213: -5358086188582971128
+    second: WyvernFire_30
+  - first:
+      213: -3481274909947426174
+    second: WyvernFire_31
+  - first:
+      213: -8299117305882559190
+    second: WyvernFire_32
+  - first:
+      213: 5405126071266361168
+    second: WyvernFire_33
+  - first:
+      213: -3816477319066935847
+    second: WyvernFire_34
+  - first:
+      213: -428611074530562085
+    second: WyvernFire_35
+  - first:
+      213: -7637307237447478471
+    second: WyvernFire_36
+  - first:
+      213: -4062119695853011874
+    second: WyvernFire_37
+  - first:
+      213: -5365646732301805419
+    second: WyvernFire_38
+  - first:
+      213: 4048615160779208501
+    second: WyvernFire_39
+  - first:
+      213: -3954350955947042423
+    second: WyvernFire_40
+  - first:
+      213: -8672544674603131809
+    second: WyvernFire_41
+  - first:
+      213: 6150269676577758361
+    second: WyvernFire_42
+  - first:
+      213: -328941297802963799
+    second: WyvernFire_43
+  - first:
+      213: -3905374686846800320
+    second: WyvernFire_44
+  - first:
+      213: -5703694590627540526
+    second: WyvernFire_45
+  - first:
+      213: -272029534533040051
+    second: WyvernFire_46
+  - first:
+      213: -4852855467222532254
+    second: WyvernFire_47
+  - first:
+      213: -6069211635440893931
+    second: WyvernFire_48
+  - first:
+      213: -4568339668597176070
+    second: WyvernFire_49
+  - first:
+      213: 7656046693647112538
+    second: WyvernFire_50
+  - first:
+      213: 2323535158912396800
+    second: WyvernFire_51
+  - first:
+      213: 6286517986976290872
+    second: WyvernFire_52
+  - first:
+      213: -8988758872015199171
+    second: WyvernFire_53
+  - first:
+      213: 4350212919577535815
+    second: WyvernFire_54
+  - first:
+      213: -3675334819342963882
+    second: WyvernFire_55
+  - first:
+      213: 1587329627703184872
+    second: WyvernFire_56
+  - first:
+      213: -260264593963481680
+    second: WyvernFire_57
+  - first:
+      213: -165599093412950912
+    second: WyvernFire_58
+  - first:
+      213: -7629546392519976402
+    second: WyvernFire_59
+  - first:
+      213: 736753857211895218
+    second: WyvernFire_60
+  - first:
+      213: 857308636557452089
+    second: WyvernFire_61
+  - first:
+      213: 5839456645645675049
+    second: WyvernFire_62
+  - first:
+      213: -2837749211326913468
+    second: WyvernFire_63
+  - first:
+      213: -4359605999849222671
+    second: WyvernFire_64
+  - first:
+      213: -2374990846522855600
+    second: WyvernFire_65
+  - first:
+      213: 6931668276690810214
+    second: WyvernFire_66
+  - first:
+      213: 654345753293403265
+    second: WyvernFire_67
+  - first:
+      213: 5648452358936613823
+    second: WyvernFire_68
+  - first:
+      213: -7343850607461877151
+    second: WyvernFire_69
+  - first:
+      213: 768111977403203169
+    second: WyvernFire_70
+  - first:
+      213: 6676259625257736901
+    second: WyvernFire_71
+  - first:
+      213: 2471327271579834171
+    second: WyvernFire_72
+  - first:
+      213: 4988372439919539303
+    second: WyvernFire_73
+  - first:
+      213: 7287122592510012456
+    second: WyvernFire_74
+  - first:
+      213: 8687329872063630491
+    second: WyvernFire_75
+  - first:
+      213: -6128792357581194581
+    second: WyvernFire_76
+  - first:
+      213: -6093989968995381322
+    second: WyvernFire_77
+  - first:
+      213: -707197964872282386
+    second: WyvernFire_78
+  - first:
+      213: 8991775786972762839
+    second: WyvernFire_79
+  - first:
+      213: 8904588332766247138
+    second: WyvernFire_80
+  - first:
+      213: 6360151672773227523
+    second: WyvernFire_81
+  - first:
+      213: -1568871774057307522
+    second: WyvernFire_82
+  - first:
+      213: 6674600995124988786
+    second: WyvernFire_83
+  - first:
+      213: -95493682071264872
+    second: WyvernFire_84
+  - first:
+      213: -8291256604120955141
+    second: WyvernFire_85
+  - first:
+      213: -3357159470475459751
+    second: WyvernFire_86
+  - first:
+      213: 4559498075692866118
+    second: WyvernFire_87
+  - first:
+      213: 5454540909434481630
+    second: WyvernFire_88
+  - first:
+      213: -4151819266209422028
+    second: WyvernFire_89
+  - first:
+      213: 1726294999575748776
+    second: WyvernFire_90
+  - first:
+      213: 7022501152558998396
+    second: WyvernFire_91
+  - first:
+      213: 3660286840957247659
+    second: WyvernFire_92
+  - first:
+      213: -371198045867115042
+    second: WyvernFire_93
+  - first:
+      213: 7310419905126523734
+    second: WyvernFire_94
+  - first:
+      213: 5263854942484283105
+    second: WyvernFire_95
+  - first:
+      213: -6492400145532637353
+    second: WyvernFire_96
+  - first:
+      213: 979781610230215454
+    second: WyvernFire_97
+  - first:
+      213: -1512185515958808280
+    second: WyvernFire_98
+  - first:
+      213: -2124656537829737367
+    second: WyvernFire_99
+  - first:
+      213: -7282242519382767382
+    second: WyvernFire_100
+  - first:
+      213: -1259916733127743820
+    second: WyvernFire_101
+  - first:
+      213: -5633450527058328253
+    second: WyvernFire_102
+  - first:
+      213: -3177147099234174120
+    second: WyvernFire_103
+  - first:
+      213: -107437660559469322
+    second: WyvernFire_104
+  - first:
+      213: 1348745112103225388
+    second: WyvernFire_105
+  - first:
+      213: -8094527496914665047
+    second: WyvernFire_106
+  - first:
+      213: 7023485059799611751
+    second: WyvernFire_107
+  - first:
+      213: -4781706364346587468
+    second: WyvernFire_108
+  - first:
+      213: -5132660512125948235
+    second: WyvernFire_109
+  - first:
+      213: -1674762969063583035
+    second: WyvernFire_110
+  - first:
+      213: -1237580446297202185
+    second: WyvernFire_111
+  - first:
+      213: -7277757148320919871
+    second: WyvernFire_112
+  - first:
+      213: -980301414025675325
+    second: WyvernFire_113
+  - first:
+      213: 1971487391877525855
+    second: WyvernFire_114
+  - first:
+      213: 6903193106474655160
+    second: WyvernFire_115
+  - first:
+      213: -7407292867402066180
+    second: WyvernFire_116
+  - first:
+      213: -5599246855878881737
+    second: WyvernFire_117
+  - first:
+      213: 2444330375989556700
+    second: WyvernFire_118
+  - first:
+      213: -7147189707242376323
+    second: WyvernFire_119
+  - first:
+      213: 466284294430415027
+    second: WyvernFire_120
+  - first:
+      213: 6952041174373014873
+    second: WyvernFire_121
+  - first:
+      213: 1683752635704624392
+    second: WyvernFire_122
+  - first:
+      213: 5433774416178455461
+    second: WyvernFire_123
+  - first:
+      213: -5514396793308707189
+    second: WyvernFire_124
+  - first:
+      213: 5126378236481019514
+    second: WyvernFire_125
+  - first:
+      213: 8090206870681276518
+    second: WyvernFire_126
+  - first:
+      213: -1526715881406592696
+    second: WyvernFire_127
+  - first:
+      213: -7259245736166203555
+    second: WyvernFire_128
+  - first:
+      213: 5115204454632684888
+    second: WyvernFire_129
+  - first:
+      213: 7341015026910444522
+    second: WyvernFire_130
+  - first:
+      213: 1270045557687185369
+    second: WyvernFire_131
+  - first:
+      213: -9092496014203359043
+    second: WyvernFire_132
+  - first:
+      213: 5328228275111643150
+    second: WyvernFire_133
+  - first:
+      213: -4513031689479788325
+    second: WyvernFire_134
+  - first:
+      213: -1851226034424893817
+    second: WyvernFire_135
+  - first:
+      213: -8505070808386360566
+    second: WyvernFire_136
+  - first:
+      213: 8118075704217216400
+    second: WyvernFire_137
+  - first:
+      213: 3914837192476756777
+    second: WyvernFire_138
+  - first:
+      213: 6196940834241896918
+    second: WyvernFire_139
+  - first:
+      213: 2057479180812270362
+    second: WyvernFire_140
+  - first:
+      213: 6688296927032024344
+    second: WyvernFire_141
+  - first:
+      213: -5293155687303090780
+    second: WyvernFire_142
+  - first:
+      213: -8867604393161352576
+    second: WyvernFire_143
+  - first:
+      213: -6659995451924897953
+    second: WyvernFire_144
+  - first:
+      213: 5453554897837820598
+    second: WyvernFire_145
+  - first:
+      213: -2664631478516541958
+    second: WyvernFire_146
+  - first:
+      213: -3509645858916987495
+    second: WyvernFire_147
+  - first:
+      213: -2246338249242201245
+    second: WyvernFire_148
+  - first:
+      213: -1165601399678391374
+    second: WyvernFire_149
+  - first:
+      213: -1137145380938245027
+    second: WyvernFire_150
+  - first:
+      213: -6904271575899844080
+    second: WyvernFire_151
+  - first:
+      213: -8210933458060636212
+    second: WyvernFire_152
+  - first:
+      213: -9043885754004349273
+    second: WyvernFire_153
+  - first:
+      213: 6353609519532857651
+    second: WyvernFire_154
+  - first:
+      213: -3378672783450884501
+    second: WyvernFire_155
+  - first:
+      213: 7287139219110034487
+    second: WyvernFire_156
+  - first:
+      213: 6540990685628388311
+    second: WyvernFire_157
+  - first:
+      213: -1760452774904003071
+    second: WyvernFire_158
+  - first:
+      213: 2930667557761197735
+    second: WyvernFire_159
+  - first:
+      213: -739510479366332259
+    second: WyvernFire_160
+  - first:
+      213: -1718068878307101127
+    second: WyvernFire_161
+  - first:
+      213: -8088041469902352540
+    second: WyvernFire_162
+  - first:
+      213: 3682797160386959326
+    second: WyvernFire_163
+  - first:
+      213: 3997623226157186585
+    second: WyvernFire_164
+  - first:
+      213: 7301319487810039480
+    second: WyvernFire_165
+  - first:
+      213: -2628974277280758910
+    second: WyvernFire_166
+  - first:
+      213: -4334948799780104633
+    second: WyvernFire_167
+  - first:
+      213: 1709941750277456267
+    second: WyvernFire_168
+  - first:
+      213: -2161933651778916708
+    second: WyvernFire_169
+  - first:
+      213: 45714849763697027
+    second: WyvernFire_170
+  - first:
+      213: -44732783204235994
+    second: WyvernFire_171
+  - first:
+      213: 1048053915238672456
+    second: WyvernFire_172
+  - first:
+      213: -3731627747093460820
+    second: WyvernFire_173
+  - first:
+      213: -4632877259795964204
+    second: WyvernFire_174
+  - first:
+      213: -7858946938142189914
+    second: WyvernFire_175
+  - first:
+      213: 6217009896728651908
+    second: WyvernFire_176
+  - first:
+      213: -5100443827306630461
+    second: WyvernFire_177
+  - first:
+      213: 3577453630809888198
+    second: WyvernFire_178
+  - first:
+      213: -5389813170032891039
+    second: WyvernFire_179
+  - first:
+      213: 3652699957709066540
+    second: WyvernFire_180
+  - first:
+      213: -7130904271976972378
+    second: WyvernFire_181
+  - first:
+      213: 8921298029152117706
+    second: WyvernFire_182
+  - first:
+      213: -4895489477598063511
+    second: WyvernFire_183
+  - first:
+      213: -4334233258000570862
+    second: WyvernFire_184
+  - first:
+      213: 2806915291145643207
+    second: WyvernFire_185
+  - first:
+      213: 5800560233995441354
+    second: WyvernFire_186
+  - first:
+      213: -8296065069082263862
+    second: WyvernFire_187
+  - first:
+      213: -2247822786117443702
+    second: WyvernFire_188
+  - first:
+      213: 5082847002679300161
+    second: WyvernFire_189
+  - first:
+      213: -6629031950074922264
+    second: WyvernFire_190
+  - first:
+      213: -7456132417649406478
+    second: WyvernFire_191
+  - first:
+      213: -3571657683736407736
+    second: WyvernFire_192
+  - first:
+      213: 73588635290780318
+    second: WyvernFire_193
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: WyvernFire_0
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 1877
+        width: 99
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7556d961ed2b1b900800000000000000
+      internalID: 698536084151035223
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_1
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 1880
+        width: 87
+        height: 167
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 527a73adf0a23efa0800000000000000
+      internalID: -5772724049784887515
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_2
+      rect:
+        serializedVersion: 2
+        x: 187
+        y: 1886
+        width: 156
+        height: 161
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 69be4ef65160f9ef0800000000000000
+      internalID: -99353977637508202
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_3
+      rect:
+        serializedVersion: 2
+        x: 343
+        y: 1887
+        width: 147
+        height: 160
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 43aa41edb632fb910800000000000000
+      internalID: 1855240517694302772
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_4
+      rect:
+        serializedVersion: 2
+        x: 490
+        y: 1887
+        width: 171
+        height: 160
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3f7a83fa4b178ffd0800000000000000
+      internalID: -2307969788179601421
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_5
+      rect:
+        serializedVersion: 2
+        x: 661
+        y: 1888
+        width: 90
+        height: 159
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 22dbe7c89ee85c100800000000000000
+      internalID: 127665298185567522
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_6
+      rect:
+        serializedVersion: 2
+        x: 752
+        y: 1889
+        width: 174
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b9620c756ff76f050800000000000000
+      internalID: 5833991063315949211
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_7
+      rect:
+        serializedVersion: 2
+        x: 926
+        y: 1891
+        width: 108
+        height: 156
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f98dd91c45e0d5610800000000000000
+      internalID: 1611459998856894623
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_8
+      rect:
+        serializedVersion: 2
+        x: 1034
+        y: 1895
+        width: 120
+        height: 152
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b37d221c8a97e1aa0800000000000000
+      internalID: -6188375072258730181
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_9
+      rect:
+        serializedVersion: 2
+        x: 1154
+        y: 1897
+        width: 109
+        height: 150
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d33c5ae2af6ea4890800000000000000
+      internalID: -7472906669469088963
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_10
+      rect:
+        serializedVersion: 2
+        x: 1263
+        y: 1898
+        width: 125
+        height: 149
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 905e9397eee3be430800000000000000
+      internalID: 3813210703456232713
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_11
+      rect:
+        serializedVersion: 2
+        x: 1388
+        y: 1899
+        width: 161
+        height: 148
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3ade08fc2cd820b90800000000000000
+      internalID: -7277098180032795229
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_12
+      rect:
+        serializedVersion: 2
+        x: 1552
+        y: 1899
+        width: 140
+        height: 148
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8a9453f48dd321fe0800000000000000
+      internalID: -1219844549812860504
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_13
+      rect:
+        serializedVersion: 2
+        x: 1692
+        y: 1900
+        width: 146
+        height: 147
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3d95147fcb3fc9230800000000000000
+      internalID: 3647057791190915539
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_14
+      rect:
+        serializedVersion: 2
+        x: 1840
+        y: 1901
+        width: 153
+        height: 146
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aab0bedf143eae5e0800000000000000
+      internalID: -1879440021901341782
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_15
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 1733
+        width: 86
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8bc0392033d2c0830800000000000000
+      internalID: 4038652662954265784
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_16
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 1733
+        width: 92
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a971e0d8f9058f30800000000000000
+      internalID: 4577075560552954273
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_17
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 1733
+        width: 171
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4c4eb04e9b1be81f0800000000000000
+      internalID: -1040699051922955068
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_18
+      rect:
+        serializedVersion: 2
+        x: 351
+        y: 1734
+        width: 144
+        height: 143
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e5d7ca048db2bd890800000000000000
+      internalID: -7432298552246895266
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_19
+      rect:
+        serializedVersion: 2
+        x: 497
+        y: 1735
+        width: 174
+        height: 142
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bb1e1bc82a2cf6ce0800000000000000
+      internalID: -1409694154942717509
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_20
+      rect:
+        serializedVersion: 2
+        x: 671
+        y: 1737
+        width: 132
+        height: 140
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2c65f11e92cd245c0800000000000000
+      internalID: -4232578627346147646
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_21
+      rect:
+        serializedVersion: 2
+        x: 803
+        y: 1735
+        width: 132
+        height: 142
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: baddefeffd4a5f970800000000000000
+      internalID: 8788111529846169003
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_22
+      rect:
+        serializedVersion: 2
+        x: 935
+        y: 1735
+        width: 160
+        height: 142
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 09619eb01ea31cd80800000000000000
+      internalID: -8232233905614678384
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_23
+      rect:
+        serializedVersion: 2
+        x: 1095
+        y: 1736
+        width: 176
+        height: 141
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d2b2cfff470cba900800000000000000
+      internalID: 696862176102329133
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_24
+      rect:
+        serializedVersion: 2
+        x: 1272
+        y: 1737
+        width: 122
+        height: 140
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ce5e65af6f9eaf370800000000000000
+      internalID: 8357249305510602220
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_25
+      rect:
+        serializedVersion: 2
+        x: 1394
+        y: 1741
+        width: 167
+        height: 136
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0b8e962992a0b9f00800000000000000
+      internalID: 1124503705625422000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_26
+      rect:
+        serializedVersion: 2
+        x: 1561
+        y: 1741
+        width: 126
+        height: 136
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bb712d03150f86560800000000000000
+      internalID: 7307354626910721979
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_27
+      rect:
+        serializedVersion: 2
+        x: 1688
+        y: 1741
+        width: 151
+        height: 136
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3d14f0bc9d60fe6f0800000000000000
+      internalID: -653295888460987949
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_28
+      rect:
+        serializedVersion: 2
+        x: 1839
+        y: 1741
+        width: 172
+        height: 136
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5ccf8251ee72360b0800000000000000
+      internalID: -5736697596829172539
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_29
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 1597
+        width: 173
+        height: 136
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d7b1af866a0016620800000000000000
+      internalID: 2765492360907987837
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_30
+      rect:
+        serializedVersion: 2
+        x: 174
+        y: 1598
+        width: 110
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 809d595fff044a5b0800000000000000
+      internalID: -5358086188582971128
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_31
+      rect:
+        serializedVersion: 2
+        x: 284
+        y: 1599
+        width: 162
+        height: 134
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 28a8a1bf9e600bfc0800000000000000
+      internalID: -3481274909947426174
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_32
+      rect:
+        serializedVersion: 2
+        x: 446
+        y: 1599
+        width: 163
+        height: 134
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a2db299e7cc93dc80800000000000000
+      internalID: -8299117305882559190
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_33
+      rect:
+        serializedVersion: 2
+        x: 609
+        y: 1599
+        width: 161
+        height: 134
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 05fb804368dd20b40800000000000000
+      internalID: 5405126071266361168
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_34
+      rect:
+        serializedVersion: 2
+        x: 771
+        y: 1600
+        width: 160
+        height: 133
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9dd1eaf4916290bc0800000000000000
+      internalID: -3816477319066935847
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_35
+      rect:
+        serializedVersion: 2
+        x: 932
+        y: 1599
+        width: 166
+        height: 134
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bdfaec3af744d0af0800000000000000
+      internalID: -428611074530562085
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_36
+      rect:
+        serializedVersion: 2
+        x: 1098
+        y: 1599
+        width: 165
+        height: 134
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9335c6f1885d20690800000000000000
+      internalID: -7637307237447478471
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_37
+      rect:
+        serializedVersion: 2
+        x: 1263
+        y: 1599
+        width: 176
+        height: 134
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e5c309d98a370a7c0800000000000000
+      internalID: -4062119695853011874
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_38
+      rect:
+        serializedVersion: 2
+        x: 1440
+        y: 1600
+        width: 151
+        height: 133
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5985ae2b9b46985b0800000000000000
+      internalID: -5365646732301805419
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_39
+      rect:
+        serializedVersion: 2
+        x: 1591
+        y: 1601
+        width: 92
+        height: 132
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 537718ac9029f2830800000000000000
+      internalID: 4048615160779208501
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_40
+      rect:
+        serializedVersion: 2
+        x: 1683
+        y: 1601
+        width: 88
+        height: 132
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 989dc81b1c25f19c0800000000000000
+      internalID: -3954350955947042423
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_41
+      rect:
+        serializedVersion: 2
+        x: 1771
+        y: 1601
+        width: 193
+        height: 132
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f5c139b419ee4a780800000000000000
+      internalID: -8672544674603131809
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_42
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 1466
+        width: 148
+        height: 131
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 99c16417fa52a5550800000000000000
+      internalID: 6150269676577758361
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_43
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 1467
+        width: 156
+        height: 130
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9a49f78e1ad5f6bf0800000000000000
+      internalID: -328941297802963799
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_44
+      rect:
+        serializedVersion: 2
+        x: 305
+        y: 1468
+        width: 187
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 04ea1b3f9625dc9c0800000000000000
+      internalID: -3905374686846800320
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_45
+      rect:
+        serializedVersion: 2
+        x: 492
+        y: 1468
+        width: 159
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2d114524df768d0b0800000000000000
+      internalID: -5703694590627540526
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_46
+      rect:
+        serializedVersion: 2
+        x: 651
+        y: 1470
+        width: 157
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d484eb1649e893cf0800000000000000
+      internalID: -272029534533040051
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_47
+      rect:
+        serializedVersion: 2
+        x: 809
+        y: 1470
+        width: 163
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 26f73e10aa137acb0800000000000000
+      internalID: -4852855467222532254
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_48
+      rect:
+        serializedVersion: 2
+        x: 972
+        y: 1471
+        width: 125
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 510c0e27c24d5cba0800000000000000
+      internalID: -6069211635440893931
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_49
+      rect:
+        serializedVersion: 2
+        x: 1098
+        y: 1470
+        width: 128
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: af880f7864ff990c0800000000000000
+      internalID: -4568339668597176070
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_50
+      rect:
+        serializedVersion: 2
+        x: 1226
+        y: 1470
+        width: 158
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a59d3a687edbf3a60800000000000000
+      internalID: 7656046693647112538
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_51
+      rect:
+        serializedVersion: 2
+        x: 1384
+        y: 1470
+        width: 185
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 00eaa1a9aeade3020800000000000000
+      internalID: 2323535158912396800
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_52
+      rect:
+        serializedVersion: 2
+        x: 1569
+        y: 1471
+        width: 133
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 83853df3dc23e3750800000000000000
+      internalID: 6286517986976290872
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_53
+      rect:
+        serializedVersion: 2
+        x: 1702
+        y: 1471
+        width: 141
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d34a4ed2e63814380800000000000000
+      internalID: -8988758872015199171
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_54
+      rect:
+        serializedVersion: 2
+        x: 1843
+        y: 1471
+        width: 141
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 745ebb81a9f0f5c30800000000000000
+      internalID: 4350212919577535815
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_55
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 1340
+        width: 139
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 65b207e54769efcc0800000000000000
+      internalID: -3675334819342963882
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_56
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 1341
+        width: 174
+        height: 125
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8ed83b8e2e3570610800000000000000
+      internalID: 1587329627703184872
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_57
+      rect:
+        serializedVersion: 2
+        x: 314
+        y: 1341
+        width: 171
+        height: 125
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0b502311bba536cf0800000000000000
+      internalID: -260264593963481680
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_58
+      rect:
+        serializedVersion: 2
+        x: 486
+        y: 1342
+        width: 132
+        height: 124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 08c8efd708ca3bdf0800000000000000
+      internalID: -165599093412950912
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_59
+      rect:
+        serializedVersion: 2
+        x: 618
+        y: 1342
+        width: 145
+        height: 124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e2adb74aaf76e1690800000000000000
+      internalID: -7629546392519976402
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_60
+      rect:
+        serializedVersion: 2
+        x: 763
+        y: 1341
+        width: 150
+        height: 125
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2bd830acab9793a00800000000000000
+      internalID: 736753857211895218
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_61
+      rect:
+        serializedVersion: 2
+        x: 913
+        y: 1341
+        width: 155
+        height: 125
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 933a1e8a9a5c5eb00800000000000000
+      internalID: 857308636557452089
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_62
+      rect:
+        serializedVersion: 2
+        x: 1068
+        y: 1341
+        width: 68
+        height: 125
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 92a210561eae90150800000000000000
+      internalID: 5839456645645675049
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_63
+      rect:
+        serializedVersion: 2
+        x: 1136
+        y: 1341
+        width: 72
+        height: 125
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 444e639902a4e98d0800000000000000
+      internalID: -2837749211326913468
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_64
+      rect:
+        serializedVersion: 2
+        x: 1208
+        y: 1342
+        width: 160
+        height: 124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1fd435af0719f73c0800000000000000
+      internalID: -4359605999849222671
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_65
+      rect:
+        serializedVersion: 2
+        x: 1368
+        y: 1342
+        width: 156
+        height: 124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 05f633888665a0fd0800000000000000
+      internalID: -2374990846522855600
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_66
+      rect:
+        serializedVersion: 2
+        x: 1524
+        y: 1342
+        width: 127
+        height: 124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 665fff4729b323060800000000000000
+      internalID: 6931668276690810214
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_67
+      rect:
+        serializedVersion: 2
+        x: 1651
+        y: 1342
+        width: 112
+        height: 124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 184b659eef3b41900800000000000000
+      internalID: 654345753293403265
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_68
+      rect:
+        serializedVersion: 2
+        x: 1764
+        y: 1343
+        width: 122
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fb352216e75536e40800000000000000
+      internalID: 5648452358936613823
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_69
+      rect:
+        serializedVersion: 2
+        x: 1886
+        y: 1342
+        width: 104
+        height: 124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 16ab2ba28c6651a90800000000000000
+      internalID: -7343850607461877151
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_70
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 1217
+        width: 148
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 16e37d816c1e8aa00800000000000000
+      internalID: 768111977403203169
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_71
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 1217
+        width: 128
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5ca15cfb1c6d6ac50800000000000000
+      internalID: 6676259625257736901
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_72
+      rect:
+        serializedVersion: 2
+        x: 277
+        y: 1219
+        width: 105
+        height: 121
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b3750425f0beb4220800000000000000
+      internalID: 2471327271579834171
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_73
+      rect:
+        serializedVersion: 2
+        x: 382
+        y: 1218
+        width: 90
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 764b0c8fd424a3540800000000000000
+      internalID: 4988372439919539303
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_74
+      rect:
+        serializedVersion: 2
+        x: 472
+        y: 1218
+        width: 146
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 82c6849936f012560800000000000000
+      internalID: 7287122592510012456
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_75
+      rect:
+        serializedVersion: 2
+        x: 618
+        y: 1266
+        width: 125
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b9c0efebd789f8870800000000000000
+      internalID: 8687329872063630491
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_76
+      rect:
+        serializedVersion: 2
+        x: 621
+        y: 1218
+        width: 137
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: baa7e3092d722faa0800000000000000
+      internalID: -6128792357581194581
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_77
+      rect:
+        serializedVersion: 2
+        x: 758
+        y: 1218
+        width: 127
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6bf8c39196ccd6ba0800000000000000
+      internalID: -6093989968995381322
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_78
+      rect:
+        serializedVersion: 2
+        x: 885
+        y: 1218
+        width: 141
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eee88e5a2378f26f0800000000000000
+      internalID: -707197964872282386
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_79
+      rect:
+        serializedVersion: 2
+        x: 1026
+        y: 1220
+        width: 86
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7d25872107439cc70800000000000000
+      internalID: 8991775786972762839
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_80
+      rect:
+        serializedVersion: 2
+        x: 1112
+        y: 1219
+        width: 93
+        height: 121
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2e8be9df8e3739b70800000000000000
+      internalID: 8904588332766247138
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_81
+      rect:
+        serializedVersion: 2
+        x: 1205
+        y: 1219
+        width: 141
+        height: 121
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3043145bf3cc34850800000000000000
+      internalID: 6360151672773227523
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_82
+      rect:
+        serializedVersion: 2
+        x: 1346
+        y: 1219
+        width: 174
+        height: 121
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e726d290f6f3a3ae0800000000000000
+      internalID: -1568871774057307522
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_83
+      rect:
+        serializedVersion: 2
+        x: 1521
+        y: 1219
+        width: 130
+        height: 121
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 27bc4e3dd32f0ac50800000000000000
+      internalID: 6674600995124988786
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_84
+      rect:
+        serializedVersion: 2
+        x: 1652
+        y: 1219
+        width: 136
+        height: 121
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 89129d9800dbcaef0800000000000000
+      internalID: -95493682071264872
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_85
+      rect:
+        serializedVersion: 2
+        x: 1788
+        y: 1220
+        width: 80
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bf642c92c0a8fec80800000000000000
+      internalID: -8291256604120955141
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_86
+      rect:
+        serializedVersion: 2
+        x: 1869
+        y: 1220
+        width: 72
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 953c8f3af39f861d0800000000000000
+      internalID: -3357159470475459751
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_87
+      rect:
+        serializedVersion: 2
+        x: 1941
+        y: 1220
+        width: 84
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 64a10c3b757964f30800000000000000
+      internalID: 4559498075692866118
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_88
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 1097
+        width: 112
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: edbada7ce0c62bb40800000000000000
+      internalID: 5454540909434481630
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_89
+      rect:
+        serializedVersion: 2
+        x: 113
+        y: 1097
+        width: 133
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 435e6f9ef56c166c0800000000000000
+      internalID: -4151819266209422028
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_90
+      rect:
+        serializedVersion: 2
+        x: 246
+        y: 1097
+        width: 141
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8a0ee33e72805f710800000000000000
+      internalID: 1726294999575748776
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_91
+      rect:
+        serializedVersion: 2
+        x: 387
+        y: 1098
+        width: 156
+        height: 119
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c73ec09679fe47160800000000000000
+      internalID: 7022501152558998396
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_92
+      rect:
+        serializedVersion: 2
+        x: 543
+        y: 1098
+        width: 126
+        height: 119
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba02b432d73fbc230800000000000000
+      internalID: 3660286840957247659
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_93
+      rect:
+        serializedVersion: 2
+        x: 671
+        y: 1098
+        width: 136
+        height: 119
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: edd75ce085d39daf0800000000000000
+      internalID: -371198045867115042
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_94
+      rect:
+        serializedVersion: 2
+        x: 807
+        y: 1099
+        width: 104
+        height: 118
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 653e204eb24d37560800000000000000
+      internalID: 7310419905126523734
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_95
+      rect:
+        serializedVersion: 2
+        x: 911
+        y: 1099
+        width: 95
+        height: 118
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1eeb5fb5e28fc0940800000000000000
+      internalID: 5263854942484283105
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_96
+      rect:
+        serializedVersion: 2
+        x: 1006
+        y: 1099
+        width: 89
+        height: 118
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 75f25d1477c56e5a0800000000000000
+      internalID: -6492400145532637353
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_97
+      rect:
+        serializedVersion: 2
+        x: 1095
+        y: 1099
+        width: 159
+        height: 118
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e137b33fe22e89d00800000000000000
+      internalID: 979781610230215454
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_98
+      rect:
+        serializedVersion: 2
+        x: 1254
+        y: 1099
+        width: 127
+        height: 118
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 821d8cef843a30be0800000000000000
+      internalID: -1512185515958808280
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_99
+      rect:
+        serializedVersion: 2
+        x: 1381
+        y: 1100
+        width: 138
+        height: 117
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 96c72f0c224b382e0800000000000000
+      internalID: -2124656537829737367
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_100
+      rect:
+        serializedVersion: 2
+        x: 1519
+        y: 1099
+        width: 149
+        height: 118
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ae8c1f7f20740fa90800000000000000
+      internalID: -7282242519382767382
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_101
+      rect:
+        serializedVersion: 2
+        x: 1668
+        y: 1099
+        width: 142
+        height: 118
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b6a9531860e38ee0800000000000000
+      internalID: -1259916733127743820
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_102
+      rect:
+        serializedVersion: 2
+        x: 1810
+        y: 1099
+        width: 153
+        height: 118
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 34583fac796f1d1b0800000000000000
+      internalID: -5633450527058328253
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_103
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 979
+        width: 136
+        height: 118
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 85bfbf6eb8188e3d0800000000000000
+      internalID: -3177147099234174120
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_104
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 979
+        width: 134
+        height: 118
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6f49ad6540e428ef0800000000000000
+      internalID: -107437660559469322
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_105
+      rect:
+        serializedVersion: 2
+        x: 271
+        y: 979
+        width: 151
+        height: 118
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c2805739884b7b210800000000000000
+      internalID: 1348745112103225388
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_106
+      rect:
+        serializedVersion: 2
+        x: 422
+        y: 979
+        width: 137
+        height: 118
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9a105c1d0267aaf80800000000000000
+      internalID: -8094527496914665047
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_107
+      rect:
+        serializedVersion: 2
+        x: 559
+        y: 979
+        width: 132
+        height: 118
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7697e9a237e687160800000000000000
+      internalID: 7023485059799611751
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_108
+      rect:
+        serializedVersion: 2
+        x: 691
+        y: 980
+        width: 131
+        height: 117
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b6a5ec6567f3adb0800000000000000
+      internalID: -4781706364346587468
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_109
+      rect:
+        serializedVersion: 2
+        x: 822
+        y: 979
+        width: 134
+        height: 118
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5beee0e457025c8b0800000000000000
+      internalID: -5132660512125948235
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_110
+      rect:
+        serializedVersion: 2
+        x: 956
+        y: 980
+        width: 88
+        height: 117
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c29cf1f3fb02c8e0800000000000000
+      internalID: -1674762969063583035
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_111
+      rect:
+        serializedVersion: 2
+        x: 1044
+        y: 980
+        width: 132
+        height: 117
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7f16c7d142b33dee0800000000000000
+      internalID: -1237580446297202185
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_112
+      rect:
+        serializedVersion: 2
+        x: 1178
+        y: 980
+        width: 124
+        height: 117
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1ce85ccce66300b90800000000000000
+      internalID: -7277757148320919871
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_113
+      rect:
+        serializedVersion: 2
+        x: 1302
+        y: 981
+        width: 118
+        height: 116
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3cdbf2cce054562f0800000000000000
+      internalID: -980301414025675325
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_114
+      rect:
+        serializedVersion: 2
+        x: 1421
+        y: 981
+        width: 115
+        height: 116
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f51750866512c5b10800000000000000
+      internalID: 1971487391877525855
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_115
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 981
+        width: 106
+        height: 116
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8bdd85f3e811dcf50800000000000000
+      internalID: 6903193106474655160
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_116
+      rect:
+        serializedVersion: 2
+        x: 1642
+        y: 982
+        width: 89
+        height: 115
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cf61733f162043990800000000000000
+      internalID: -7407292867402066180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_117
+      rect:
+        serializedVersion: 2
+        x: 1731
+        y: 981
+        width: 119
+        height: 116
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 73ecd9196aa7b42b0800000000000000
+      internalID: -5599246855878881737
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_118
+      rect:
+        serializedVersion: 2
+        x: 1850
+        y: 981
+        width: 113
+        height: 116
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd5fd8eb6810ce120800000000000000
+      internalID: 2444330375989556700
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_119
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 863
+        width: 142
+        height: 116
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d737d7524d410dc90800000000000000
+      internalID: -7147189707242376323
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_120
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 863
+        width: 150
+        height: 116
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3b85ed56813987600800000000000000
+      internalID: 466284294430415027
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_121
+      rect:
+        serializedVersion: 2
+        x: 296
+        y: 863
+        width: 136
+        height: 116
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 95d94665d9c9a7060800000000000000
+      internalID: 6952041174373014873
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_122
+      rect:
+        serializedVersion: 2
+        x: 432
+        y: 863
+        width: 130
+        height: 116
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8054dcce914ed5710800000000000000
+      internalID: 1683752635704624392
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_123
+      rect:
+        serializedVersion: 2
+        x: 562
+        y: 863
+        width: 130
+        height: 116
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5a32ce9ca05a86b40800000000000000
+      internalID: 5433774416178455461
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_124
+      rect:
+        serializedVersion: 2
+        x: 692
+        y: 863
+        width: 126
+        height: 116
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b860840455de873b0800000000000000
+      internalID: -5514396793308707189
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_125
+      rect:
+        serializedVersion: 2
+        x: 818
+        y: 864
+        width: 72
+        height: 115
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a7e9eb968dd842740800000000000000
+      internalID: 5126378236481019514
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_126
+      rect:
+        serializedVersion: 2
+        x: 890
+        y: 864
+        width: 68
+        height: 115
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 660d16ef840364070800000000000000
+      internalID: 8090206870681276518
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_127
+      rect:
+        serializedVersion: 2
+        x: 958
+        y: 864
+        width: 70
+        height: 115
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 84900d7aef300dae0800000000000000
+      internalID: -1526715881406592696
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_128
+      rect:
+        serializedVersion: 2
+        x: 1028
+        y: 865
+        width: 84
+        height: 114
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d5f5b8ec67af14b90800000000000000
+      internalID: -7259245736166203555
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_129
+      rect:
+        serializedVersion: 2
+        x: 1112
+        y: 864
+        width: 122
+        height: 115
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 85d70e7995bdcf640800000000000000
+      internalID: 5115204454632684888
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_130
+      rect:
+        serializedVersion: 2
+        x: 1234
+        y: 864
+        width: 133
+        height: 115
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aeb3dc9c54680e560800000000000000
+      internalID: 7341015026910444522
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_131
+      rect:
+        serializedVersion: 2
+        x: 1367
+        y: 864
+        width: 161
+        height: 115
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9dfe18aa4bb10a110800000000000000
+      internalID: 1270045557687185369
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_132
+      rect:
+        serializedVersion: 2
+        x: 1528
+        y: 865
+        width: 82
+        height: 114
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: db0f0c79c07f0d180800000000000000
+      internalID: -9092496014203359043
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_133
+      rect:
+        serializedVersion: 2
+        x: 1610
+        y: 865
+        width: 86
+        height: 114
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e08c834d26ba1f940800000000000000
+      internalID: 5328228275111643150
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_134
+      rect:
+        serializedVersion: 2
+        x: 1696
+        y: 865
+        width: 85
+        height: 114
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bd8e978e69d7e51c0800000000000000
+      internalID: -4513031689479788325
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_135
+      rect:
+        serializedVersion: 2
+        x: 1781
+        y: 865
+        width: 82
+        height: 114
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 78e262bdabf1f46e0800000000000000
+      internalID: -1851226034424893817
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_136
+      rect:
+        serializedVersion: 2
+        x: 1863
+        y: 865
+        width: 87
+        height: 114
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a0b269c592be7f980800000000000000
+      internalID: -8505070808386360566
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_137
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 749
+        width: 114
+        height: 114
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 095a89177d239a070800000000000000
+      internalID: 8118075704217216400
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_138
+      rect:
+        serializedVersion: 2
+        x: 115
+        y: 749
+        width: 143
+        height: 114
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 92b80135fab445630800000000000000
+      internalID: 3914837192476756777
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_139
+      rect:
+        serializedVersion: 2
+        x: 258
+        y: 751
+        width: 88
+        height: 112
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d1e91f1bd4fff550800000000000000
+      internalID: 6196940834241896918
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_140
+      rect:
+        serializedVersion: 2
+        x: 346
+        y: 750
+        width: 118
+        height: 113
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a1bb319f962ad8c10800000000000000
+      internalID: 2057479180812270362
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_141
+      rect:
+        serializedVersion: 2
+        x: 465
+        y: 750
+        width: 142
+        height: 113
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 81d94187e9a91dc50800000000000000
+      internalID: 6688296927032024344
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_142
+      rect:
+        serializedVersion: 2
+        x: 607
+        y: 750
+        width: 161
+        height: 113
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4ade57d52feea86b0800000000000000
+      internalID: -5293155687303090780
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_143
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 750
+        width: 125
+        height: 113
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 08a9ce879c0ffe480800000000000000
+      internalID: -8867604393161352576
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_144
+      rect:
+        serializedVersion: 2
+        x: 893
+        y: 751
+        width: 112
+        height: 112
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f5f9c423c61f293a0800000000000000
+      internalID: -6659995451924897953
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_145
+      rect:
+        serializedVersion: 2
+        x: 1005
+        y: 751
+        width: 134
+        height: 112
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6ba07b0194beeab40800000000000000
+      internalID: 5453554897837820598
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_146
+      rect:
+        serializedVersion: 2
+        x: 1139
+        y: 751
+        width: 133
+        height: 112
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: af592b1c9c3550bd0800000000000000
+      internalID: -2664631478516541958
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_147
+      rect:
+        serializedVersion: 2
+        x: 1273
+        y: 751
+        width: 134
+        height: 112
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 99d05dbafab3b4fc0800000000000000
+      internalID: -3509645858916987495
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_148
+      rect:
+        serializedVersion: 2
+        x: 1407
+        y: 751
+        width: 150
+        height: 112
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 363bb80934763d0e0800000000000000
+      internalID: -2246338249242201245
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_149
+      rect:
+        serializedVersion: 2
+        x: 1557
+        y: 751
+        width: 141
+        height: 112
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2bba87ed3b3f2dfe0800000000000000
+      internalID: -1165601399678391374
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_150
+      rect:
+        serializedVersion: 2
+        x: 1698
+        y: 751
+        width: 161
+        height: 112
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d5c13370d4c0830f0800000000000000
+      internalID: -1137145380938245027
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_151
+      rect:
+        serializedVersion: 2
+        x: 1860
+        y: 752
+        width: 108
+        height: 111
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 012d9a505991f20a0800000000000000
+      internalID: -6904271575899844080
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_152
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 638
+        width: 108
+        height: 111
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ccf0de5f587ec0e80800000000000000
+      internalID: -8210933458060636212
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_153
+      rect:
+        serializedVersion: 2
+        x: 109
+        y: 638
+        width: 186
+        height: 111
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7aeda53c2d9ad7280800000000000000
+      internalID: -9043885754004349273
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_154
+      rect:
+        serializedVersion: 2
+        x: 295
+        y: 638
+        width: 134
+        height: 111
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 339db45f13e8c2850800000000000000
+      internalID: 6353609519532857651
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_155
+      rect:
+        serializedVersion: 2
+        x: 429
+        y: 639
+        width: 172
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b663122210b8c11d0800000000000000
+      internalID: -3378672783450884501
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_156
+      rect:
+        serializedVersion: 2
+        x: 601
+        y: 639
+        width: 194
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 73cfed7c28e112560800000000000000
+      internalID: 7287139219110034487
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_157
+      rect:
+        serializedVersion: 2
+        x: 795
+        y: 639
+        width: 150
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7d3d4087f5446ca50800000000000000
+      internalID: 6540990685628388311
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_158
+      rect:
+        serializedVersion: 2
+        x: 945
+        y: 639
+        width: 140
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1060ffb478d9197e0800000000000000
+      internalID: -1760452774904003071
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_159
+      rect:
+        serializedVersion: 2
+        x: 1085
+        y: 640
+        width: 175
+        height: 109
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7a62e1fcd92dba820800000000000000
+      internalID: 2930667557761197735
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_160
+      rect:
+        serializedVersion: 2
+        x: 1260
+        y: 640
+        width: 185
+        height: 109
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d90e0b9132bbcb5f0800000000000000
+      internalID: -739510479366332259
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_161
+      rect:
+        serializedVersion: 2
+        x: 1445
+        y: 640
+        width: 142
+        height: 109
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 936f9d835713828e0800000000000000
+      internalID: -1718068878307101127
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_162
+      rect:
+        serializedVersion: 2
+        x: 1588
+        y: 641
+        width: 142
+        height: 108
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 46f87d9a22181cf80800000000000000
+      internalID: -8088041469902352540
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_163
+      rect:
+        serializedVersion: 2
+        x: 1731
+        y: 641
+        width: 117
+        height: 108
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed79eac418ceb1330800000000000000
+      internalID: 3682797160386959326
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_164
+      rect:
+        serializedVersion: 2
+        x: 1848
+        y: 641
+        width: 132
+        height: 108
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 91e33f4d4296a7730800000000000000
+      internalID: 3997623226157186585
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_165
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 530
+        width: 139
+        height: 108
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8beed8ed36f735560800000000000000
+      internalID: 7301319487810039480
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_166
+      rect:
+        serializedVersion: 2
+        x: 141
+        y: 531
+        width: 108
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2838a0fd2d1048bd0800000000000000
+      internalID: -2628974277280758910
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_167
+      rect:
+        serializedVersion: 2
+        x: 249
+        y: 531
+        width: 132
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 746d99db80b27d3c0800000000000000
+      internalID: -4334948799780104633
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_168
+      rect:
+        serializedVersion: 2
+        x: 381
+        y: 532
+        width: 132
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b81c5e356feeab710800000000000000
+      internalID: 1709941750277456267
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_169
+      rect:
+        serializedVersion: 2
+        x: 513
+        y: 532
+        width: 127
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c9e21c15cc44ff1e0800000000000000
+      internalID: -2161933651778916708
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_170
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 533
+        width: 132
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3812025e96962a000800000000000000
+      internalID: 45714849763697027
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_171
+      rect:
+        serializedVersion: 2
+        x: 772
+        y: 533
+        width: 109
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6250c4b45c3116ff0800000000000000
+      internalID: -44732783204235994
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_172
+      rect:
+        serializedVersion: 2
+        x: 881
+        y: 533
+        width: 109
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 848224bab7f6b8e00800000000000000
+      internalID: 1048053915238672456
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_173
+      rect:
+        serializedVersion: 2
+        x: 990
+        y: 533
+        width: 187
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ca8c084c558963cc0800000000000000
+      internalID: -3731627747093460820
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_174
+      rect:
+        serializedVersion: 2
+        x: 1177
+        y: 533
+        width: 121
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4de50e1ada6b4bfb0800000000000000
+      internalID: -4632877259795964204
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_175
+      rect:
+        serializedVersion: 2
+        x: 1298
+        y: 533
+        width: 112
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6a61463f5696fe290800000000000000
+      internalID: -7858946938142189914
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_176
+      rect:
+        serializedVersion: 2
+        x: 1410
+        y: 577
+        width: 154
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 488699bdf81474650800000000000000
+      internalID: 6217009896728651908
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_177
+      rect:
+        serializedVersion: 2
+        x: 1416
+        y: 533
+        width: 167
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3c2fd84cc559739b0800000000000000
+      internalID: -5100443827306630461
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_178
+      rect:
+        serializedVersion: 2
+        x: 1584
+        y: 533
+        width: 162
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6c5dad08f1ba5a130800000000000000
+      internalID: 3577453630809888198
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_179
+      rect:
+        serializedVersion: 2
+        x: 1746
+        y: 534
+        width: 175
+        height: 104
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 16ba7727a798335b0800000000000000
+      internalID: -5389813170032891039
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_180
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 426
+        width: 171
+        height: 104
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c21555a324ff0b230800000000000000
+      internalID: 3652699957709066540
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_181
+      rect:
+        serializedVersion: 2
+        x: 173
+        y: 427
+        width: 179
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6af3f758850f90d90800000000000000
+      internalID: -7130904271976972378
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_182
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 427
+        width: 127
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ac3210b5a41decb70800000000000000
+      internalID: 8921298029152117706
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_183
+      rect:
+        serializedVersion: 2
+        x: 479
+        y: 428
+        width: 162
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 964da1ee14abf0cb0800000000000000
+      internalID: -4895489477598063511
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_184
+      rect:
+        serializedVersion: 2
+        x: 641
+        y: 428
+        width: 130
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 216213bc0d5b9d3c0800000000000000
+      internalID: -4334233258000570862
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_185
+      rect:
+        serializedVersion: 2
+        x: 772
+        y: 428
+        width: 128
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7c4295be59a24f620800000000000000
+      internalID: 2806915291145643207
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_186
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 428
+        width: 125
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ac41e85dccabf7050800000000000000
+      internalID: 5800560233995441354
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_187
+      rect:
+        serializedVersion: 2
+        x: 1025
+        y: 430
+        width: 161
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ace33db26c47edc80800000000000000
+      internalID: -8296065069082263862
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_188
+      rect:
+        serializedVersion: 2
+        x: 1186
+        y: 432
+        width: 132
+        height: 98
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a8fd073e5112ec0e0800000000000000
+      internalID: -2247822786117443702
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_189
+      rect:
+        serializedVersion: 2
+        x: 1318
+        y: 434
+        width: 185
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 140db5a3b66e98640800000000000000
+      internalID: 5082847002679300161
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_190
+      rect:
+        serializedVersion: 2
+        x: 1503
+        y: 435
+        width: 185
+        height: 95
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8eab1134092f004a0800000000000000
+      internalID: -6629031950074922264
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_191
+      rect:
+        serializedVersion: 2
+        x: 1689
+        y: 436
+        width: 132
+        height: 94
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2fd8bb7021f768890800000000000000
+      internalID: -7456132417649406478
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_192
+      rect:
+        serializedVersion: 2
+        x: 1821
+        y: 437
+        width: 194
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 841d895924cee6ec0800000000000000
+      internalID: -3571657683736407736
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WyvernFire_193
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 333
+        width: 194
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e9243025970750100800000000000000
+      internalID: 73588635290780318
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      WyvernFire_0: 698536084151035223
+      WyvernFire_1: -5772724049784887515
+      WyvernFire_10: 3813210703456232713
+      WyvernFire_100: -7282242519382767382
+      WyvernFire_101: -1259916733127743820
+      WyvernFire_102: -5633450527058328253
+      WyvernFire_103: -3177147099234174120
+      WyvernFire_104: -107437660559469322
+      WyvernFire_105: 1348745112103225388
+      WyvernFire_106: -8094527496914665047
+      WyvernFire_107: 7023485059799611751
+      WyvernFire_108: -4781706364346587468
+      WyvernFire_109: -5132660512125948235
+      WyvernFire_11: -7277098180032795229
+      WyvernFire_110: -1674762969063583035
+      WyvernFire_111: -1237580446297202185
+      WyvernFire_112: -7277757148320919871
+      WyvernFire_113: -980301414025675325
+      WyvernFire_114: 1971487391877525855
+      WyvernFire_115: 6903193106474655160
+      WyvernFire_116: -7407292867402066180
+      WyvernFire_117: -5599246855878881737
+      WyvernFire_118: 2444330375989556700
+      WyvernFire_119: -7147189707242376323
+      WyvernFire_12: -1219844549812860504
+      WyvernFire_120: 466284294430415027
+      WyvernFire_121: 6952041174373014873
+      WyvernFire_122: 1683752635704624392
+      WyvernFire_123: 5433774416178455461
+      WyvernFire_124: -5514396793308707189
+      WyvernFire_125: 5126378236481019514
+      WyvernFire_126: 8090206870681276518
+      WyvernFire_127: -1526715881406592696
+      WyvernFire_128: -7259245736166203555
+      WyvernFire_129: 5115204454632684888
+      WyvernFire_13: 3647057791190915539
+      WyvernFire_130: 7341015026910444522
+      WyvernFire_131: 1270045557687185369
+      WyvernFire_132: -9092496014203359043
+      WyvernFire_133: 5328228275111643150
+      WyvernFire_134: -4513031689479788325
+      WyvernFire_135: -1851226034424893817
+      WyvernFire_136: -8505070808386360566
+      WyvernFire_137: 8118075704217216400
+      WyvernFire_138: 3914837192476756777
+      WyvernFire_139: 6196940834241896918
+      WyvernFire_14: -1879440021901341782
+      WyvernFire_140: 2057479180812270362
+      WyvernFire_141: 6688296927032024344
+      WyvernFire_142: -5293155687303090780
+      WyvernFire_143: -8867604393161352576
+      WyvernFire_144: -6659995451924897953
+      WyvernFire_145: 5453554897837820598
+      WyvernFire_146: -2664631478516541958
+      WyvernFire_147: -3509645858916987495
+      WyvernFire_148: -2246338249242201245
+      WyvernFire_149: -1165601399678391374
+      WyvernFire_15: 4038652662954265784
+      WyvernFire_150: -1137145380938245027
+      WyvernFire_151: -6904271575899844080
+      WyvernFire_152: -8210933458060636212
+      WyvernFire_153: -9043885754004349273
+      WyvernFire_154: 6353609519532857651
+      WyvernFire_155: -3378672783450884501
+      WyvernFire_156: 7287139219110034487
+      WyvernFire_157: 6540990685628388311
+      WyvernFire_158: -1760452774904003071
+      WyvernFire_159: 2930667557761197735
+      WyvernFire_16: 4577075560552954273
+      WyvernFire_160: -739510479366332259
+      WyvernFire_161: -1718068878307101127
+      WyvernFire_162: -8088041469902352540
+      WyvernFire_163: 3682797160386959326
+      WyvernFire_164: 3997623226157186585
+      WyvernFire_165: 7301319487810039480
+      WyvernFire_166: -2628974277280758910
+      WyvernFire_167: -4334948799780104633
+      WyvernFire_168: 1709941750277456267
+      WyvernFire_169: -2161933651778916708
+      WyvernFire_17: -1040699051922955068
+      WyvernFire_170: 45714849763697027
+      WyvernFire_171: -44732783204235994
+      WyvernFire_172: 1048053915238672456
+      WyvernFire_173: -3731627747093460820
+      WyvernFire_174: -4632877259795964204
+      WyvernFire_175: -7858946938142189914
+      WyvernFire_176: 6217009896728651908
+      WyvernFire_177: -5100443827306630461
+      WyvernFire_178: 3577453630809888198
+      WyvernFire_179: -5389813170032891039
+      WyvernFire_18: -7432298552246895266
+      WyvernFire_180: 3652699957709066540
+      WyvernFire_181: -7130904271976972378
+      WyvernFire_182: 8921298029152117706
+      WyvernFire_183: -4895489477598063511
+      WyvernFire_184: -4334233258000570862
+      WyvernFire_185: 2806915291145643207
+      WyvernFire_186: 5800560233995441354
+      WyvernFire_187: -8296065069082263862
+      WyvernFire_188: -2247822786117443702
+      WyvernFire_189: 5082847002679300161
+      WyvernFire_19: -1409694154942717509
+      WyvernFire_190: -6629031950074922264
+      WyvernFire_191: -7456132417649406478
+      WyvernFire_192: -3571657683736407736
+      WyvernFire_193: 73588635290780318
+      WyvernFire_2: -99353977637508202
+      WyvernFire_20: -4232578627346147646
+      WyvernFire_21: 8788111529846169003
+      WyvernFire_22: -8232233905614678384
+      WyvernFire_23: 696862176102329133
+      WyvernFire_24: 8357249305510602220
+      WyvernFire_25: 1124503705625422000
+      WyvernFire_26: 7307354626910721979
+      WyvernFire_27: -653295888460987949
+      WyvernFire_28: -5736697596829172539
+      WyvernFire_29: 2765492360907987837
+      WyvernFire_3: 1855240517694302772
+      WyvernFire_30: -5358086188582971128
+      WyvernFire_31: -3481274909947426174
+      WyvernFire_32: -8299117305882559190
+      WyvernFire_33: 5405126071266361168
+      WyvernFire_34: -3816477319066935847
+      WyvernFire_35: -428611074530562085
+      WyvernFire_36: -7637307237447478471
+      WyvernFire_37: -4062119695853011874
+      WyvernFire_38: -5365646732301805419
+      WyvernFire_39: 4048615160779208501
+      WyvernFire_4: -2307969788179601421
+      WyvernFire_40: -3954350955947042423
+      WyvernFire_41: -8672544674603131809
+      WyvernFire_42: 6150269676577758361
+      WyvernFire_43: -328941297802963799
+      WyvernFire_44: -3905374686846800320
+      WyvernFire_45: -5703694590627540526
+      WyvernFire_46: -272029534533040051
+      WyvernFire_47: -4852855467222532254
+      WyvernFire_48: -6069211635440893931
+      WyvernFire_49: -4568339668597176070
+      WyvernFire_5: 127665298185567522
+      WyvernFire_50: 7656046693647112538
+      WyvernFire_51: 2323535158912396800
+      WyvernFire_52: 6286517986976290872
+      WyvernFire_53: -8988758872015199171
+      WyvernFire_54: 4350212919577535815
+      WyvernFire_55: -3675334819342963882
+      WyvernFire_56: 1587329627703184872
+      WyvernFire_57: -260264593963481680
+      WyvernFire_58: -165599093412950912
+      WyvernFire_59: -7629546392519976402
+      WyvernFire_6: 5833991063315949211
+      WyvernFire_60: 736753857211895218
+      WyvernFire_61: 857308636557452089
+      WyvernFire_62: 5839456645645675049
+      WyvernFire_63: -2837749211326913468
+      WyvernFire_64: -4359605999849222671
+      WyvernFire_65: -2374990846522855600
+      WyvernFire_66: 6931668276690810214
+      WyvernFire_67: 654345753293403265
+      WyvernFire_68: 5648452358936613823
+      WyvernFire_69: -7343850607461877151
+      WyvernFire_7: 1611459998856894623
+      WyvernFire_70: 768111977403203169
+      WyvernFire_71: 6676259625257736901
+      WyvernFire_72: 2471327271579834171
+      WyvernFire_73: 4988372439919539303
+      WyvernFire_74: 7287122592510012456
+      WyvernFire_75: 8687329872063630491
+      WyvernFire_76: -6128792357581194581
+      WyvernFire_77: -6093989968995381322
+      WyvernFire_78: -707197964872282386
+      WyvernFire_79: 8991775786972762839
+      WyvernFire_8: -6188375072258730181
+      WyvernFire_80: 8904588332766247138
+      WyvernFire_81: 6360151672773227523
+      WyvernFire_82: -1568871774057307522
+      WyvernFire_83: 6674600995124988786
+      WyvernFire_84: -95493682071264872
+      WyvernFire_85: -8291256604120955141
+      WyvernFire_86: -3357159470475459751
+      WyvernFire_87: 4559498075692866118
+      WyvernFire_88: 5454540909434481630
+      WyvernFire_89: -4151819266209422028
+      WyvernFire_9: -7472906669469088963
+      WyvernFire_90: 1726294999575748776
+      WyvernFire_91: 7022501152558998396
+      WyvernFire_92: 3660286840957247659
+      WyvernFire_93: -371198045867115042
+      WyvernFire_94: 7310419905126523734
+      WyvernFire_95: 5263854942484283105
+      WyvernFire_96: -6492400145532637353
+      WyvernFire_97: 979781610230215454
+      WyvernFire_98: -1512185515958808280
+      WyvernFire_99: -2124656537829737367
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,3460 @@
+fileFormatVersion: 2
+guid: f9ad7a7cedb646043afc9627e5afb3e8
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6660295851038989327
+    second: IceAnt_0
+  - first:
+      213: 5743655297229455615
+    second: IceAnt_1
+  - first:
+      213: -4071777782172677879
+    second: IceAnt_2
+  - first:
+      213: 5945404913560991312
+    second: IceAnt_3
+  - first:
+      213: -8552565775902787883
+    second: IceAnt_4
+  - first:
+      213: 3822145881936070982
+    second: IceAnt_5
+  - first:
+      213: 3056151610533172875
+    second: IceAnt_6
+  - first:
+      213: -7891835309098824592
+    second: IceAnt_7
+  - first:
+      213: 6821356465012614743
+    second: IceAnt_8
+  - first:
+      213: 4104852298786798096
+    second: IceAnt_9
+  - first:
+      213: 5574140251114436968
+    second: IceAnt_10
+  - first:
+      213: 2752352034116926064
+    second: IceAnt_11
+  - first:
+      213: 7392203112744534119
+    second: IceAnt_12
+  - first:
+      213: 5698924970057862304
+    second: IceAnt_13
+  - first:
+      213: -4130956167531113073
+    second: IceAnt_14
+  - first:
+      213: 4542970871697840303
+    second: IceAnt_15
+  - first:
+      213: 8567690262873255729
+    second: IceAnt_16
+  - first:
+      213: 3020094230856228311
+    second: IceAnt_17
+  - first:
+      213: -3421328454032803039
+    second: IceAnt_18
+  - first:
+      213: -8239651228746969785
+    second: IceAnt_19
+  - first:
+      213: 5420702033170811984
+    second: IceAnt_20
+  - first:
+      213: -8146268728017363904
+    second: IceAnt_21
+  - first:
+      213: 2296044213350584359
+    second: IceAnt_22
+  - first:
+      213: 6758942390518688344
+    second: IceAnt_23
+  - first:
+      213: 2283281683538493426
+    second: IceAnt_24
+  - first:
+      213: 1974440897201033237
+    second: IceAnt_25
+  - first:
+      213: -5934083340006336739
+    second: IceAnt_26
+  - first:
+      213: 4240206661215896837
+    second: IceAnt_27
+  - first:
+      213: 1067368138042665274
+    second: IceAnt_28
+  - first:
+      213: 4668846133107574222
+    second: IceAnt_29
+  - first:
+      213: -1663761483312825881
+    second: IceAnt_30
+  - first:
+      213: -1538718408528272580
+    second: IceAnt_31
+  - first:
+      213: 5114381983077615901
+    second: IceAnt_32
+  - first:
+      213: -7105772254155826743
+    second: IceAnt_33
+  - first:
+      213: -6706589276243834026
+    second: IceAnt_34
+  - first:
+      213: 2133384245895621208
+    second: IceAnt_35
+  - first:
+      213: 1412065123832856517
+    second: IceAnt_36
+  - first:
+      213: 9064972387267904707
+    second: IceAnt_37
+  - first:
+      213: 7216622071399421825
+    second: IceAnt_38
+  - first:
+      213: -974381566990595032
+    second: IceAnt_39
+  - first:
+      213: 4400943650176341783
+    second: IceAnt_40
+  - first:
+      213: 4730789972964923262
+    second: IceAnt_41
+  - first:
+      213: 7665559480193087045
+    second: IceAnt_42
+  - first:
+      213: -2494210846558904724
+    second: IceAnt_43
+  - first:
+      213: -2263096844605342360
+    second: IceAnt_44
+  - first:
+      213: 8939104230091135079
+    second: IceAnt_45
+  - first:
+      213: -288243895440695454
+    second: IceAnt_46
+  - first:
+      213: 7180567057582995772
+    second: IceAnt_47
+  - first:
+      213: -2366054376383330990
+    second: IceAnt_48
+  - first:
+      213: 9201721881159363336
+    second: IceAnt_49
+  - first:
+      213: -8016193509507676082
+    second: IceAnt_50
+  - first:
+      213: 5346960626274118657
+    second: IceAnt_51
+  - first:
+      213: -6037844277989961174
+    second: IceAnt_52
+  - first:
+      213: 8729574076684163875
+    second: IceAnt_53
+  - first:
+      213: -2295667223743642974
+    second: IceAnt_54
+  - first:
+      213: -878269841474213703
+    second: IceAnt_55
+  - first:
+      213: -5083850477635462094
+    second: IceAnt_56
+  - first:
+      213: -667848252137875525
+    second: IceAnt_57
+  - first:
+      213: 2593698312298719087
+    second: IceAnt_58
+  - first:
+      213: -2485133417045103234
+    second: IceAnt_59
+  - first:
+      213: -6244306446414556205
+    second: IceAnt_60
+  - first:
+      213: 2977810418564064272
+    second: IceAnt_61
+  - first:
+      213: 2069262235402955576
+    second: IceAnt_62
+  - first:
+      213: 912948298276391025
+    second: IceAnt_63
+  - first:
+      213: -8736825074772326516
+    second: IceAnt_64
+  - first:
+      213: 6479377934931201675
+    second: IceAnt_65
+  - first:
+      213: 7582140493020824805
+    second: IceAnt_66
+  - first:
+      213: 7336835093597600290
+    second: IceAnt_67
+  - first:
+      213: 5081319540292178377
+    second: IceAnt_68
+  - first:
+      213: 80564013056619716
+    second: IceAnt_69
+  - first:
+      213: -4733744266166475979
+    second: IceAnt_70
+  - first:
+      213: 4487544992469447056
+    second: IceAnt_71
+  - first:
+      213: -1432522272101292443
+    second: IceAnt_72
+  - first:
+      213: -8220248528135078481
+    second: IceAnt_73
+  - first:
+      213: -5737551815770495751
+    second: IceAnt_74
+  - first:
+      213: 7746955096640560940
+    second: IceAnt_75
+  - first:
+      213: -2654018661500886521
+    second: IceAnt_76
+  - first:
+      213: 1803892850473719576
+    second: IceAnt_77
+  - first:
+      213: -4245177608558837049
+    second: IceAnt_78
+  - first:
+      213: 6388282308077044960
+    second: IceAnt_79
+  - first:
+      213: -2908563622555959574
+    second: IceAnt_80
+  - first:
+      213: 8705707409284256141
+    second: IceAnt_81
+  - first:
+      213: -4860334462675811173
+    second: IceAnt_82
+  - first:
+      213: 9002126658750468135
+    second: IceAnt_83
+  - first:
+      213: -5741323744956142668
+    second: IceAnt_84
+  - first:
+      213: 144920068618540750
+    second: IceAnt_85
+  - first:
+      213: 4941449643435079758
+    second: IceAnt_86
+  - first:
+      213: -1505905915561173699
+    second: IceAnt_87
+  - first:
+      213: -3283557624449788842
+    second: IceAnt_88
+  - first:
+      213: -2497386033773531988
+    second: IceAnt_89
+  - first:
+      213: 2971130391807437593
+    second: IceAnt_90
+  - first:
+      213: 5427008907883660789
+    second: IceAnt_91
+  - first:
+      213: -2128952395135577051
+    second: IceAnt_92
+  - first:
+      213: 3167106828824310869
+    second: IceAnt_93
+  - first:
+      213: 6639743517924792964
+    second: IceAnt_94
+  - first:
+      213: 8775589944677253907
+    second: IceAnt_95
+  - first:
+      213: -1353013727941069658
+    second: IceAnt_96
+  - first:
+      213: -6814195819686858849
+    second: IceAnt_97
+  - first:
+      213: 6652932159232304738
+    second: IceAnt_98
+  - first:
+      213: 249562650480693940
+    second: IceAnt_99
+  - first:
+      213: 1927125232932525004
+    second: IceAnt_100
+  - first:
+      213: 5890907872147112583
+    second: IceAnt_101
+  - first:
+      213: 5879563485454026686
+    second: IceAnt_102
+  - first:
+      213: 3538210166427708130
+    second: IceAnt_103
+  - first:
+      213: -4697314556545017703
+    second: IceAnt_104
+  - first:
+      213: 4530341316332442296
+    second: IceAnt_105
+  - first:
+      213: -2460862194382955454
+    second: IceAnt_106
+  - first:
+      213: 4676675849511492040
+    second: IceAnt_107
+  - first:
+      213: 6652342564306040180
+    second: IceAnt_108
+  - first:
+      213: 2622803085565784113
+    second: IceAnt_109
+  - first:
+      213: 2123980869624431566
+    second: IceAnt_110
+  - first:
+      213: 4693163373900098638
+    second: IceAnt_111
+  - first:
+      213: 1001306474532807186
+    second: IceAnt_112
+  - first:
+      213: -1975237922271635149
+    second: IceAnt_113
+  - first:
+      213: 4620622864278369201
+    second: IceAnt_114
+  - first:
+      213: 206122648696233674
+    second: IceAnt_115
+  - first:
+      213: 6284637295995842895
+    second: IceAnt_116
+  - first:
+      213: -566666086757951463
+    second: IceAnt_117
+  - first:
+      213: -4257450759816151345
+    second: IceAnt_118
+  - first:
+      213: -6275303409343280738
+    second: IceAnt_119
+  - first:
+      213: 2552640389739909173
+    second: IceAnt_120
+  - first:
+      213: 7917904853346479987
+    second: IceAnt_121
+  - first:
+      213: 110576030442612935
+    second: IceAnt_122
+  - first:
+      213: 824874974399348478
+    second: IceAnt_123
+  - first:
+      213: 1851702549952864463
+    second: IceAnt_124
+  - first:
+      213: 215560969987530922
+    second: IceAnt_125
+  - first:
+      213: -5865115839661650378
+    second: IceAnt_126
+  - first:
+      213: -6418513669241187577
+    second: IceAnt_127
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: IceAnt_0
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 871
+        width: 85
+        height: 152
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f320d31630e193a0800000000000000
+      internalID: -6660295851038989327
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_1
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 872
+        width: 96
+        height: 151
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff007a7cf0095bf40800000000000000
+      internalID: 5743655297229455615
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_2
+      rect:
+        serializedVersion: 2
+        x: 182
+        y: 874
+        width: 96
+        height: 149
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 90905492ea32e77c0800000000000000
+      internalID: -4071777782172677879
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_3
+      rect:
+        serializedVersion: 2
+        x: 278
+        y: 880
+        width: 130
+        height: 143
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0563aaec442528250800000000000000
+      internalID: 5945404913560991312
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_4
+      rect:
+        serializedVersion: 2
+        x: 408
+        y: 883
+        width: 130
+        height: 140
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5d6b6218dbe2f4980800000000000000
+      internalID: -8552565775902787883
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_5
+      rect:
+        serializedVersion: 2
+        x: 539
+        y: 883
+        width: 125
+        height: 140
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6498584dd6dfa0530800000000000000
+      internalID: 3822145881936070982
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_6
+      rect:
+        serializedVersion: 2
+        x: 664
+        y: 892
+        width: 93
+        height: 131
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b86519592b1a96a20800000000000000
+      internalID: 3056151610533172875
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_7
+      rect:
+        serializedVersion: 2
+        x: 757
+        y: 894
+        width: 108
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 07c874f59919a7290800000000000000
+      internalID: -7891835309098824592
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_8
+      rect:
+        serializedVersion: 2
+        x: 865
+        y: 900
+        width: 141
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 756246750935aae50800000000000000
+      internalID: 6821356465012614743
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_9
+      rect:
+        serializedVersion: 2
+        x: 1006
+        y: 900
+        width: 127
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 01af1a4da6d57f830800000000000000
+      internalID: 4104852298786798096
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_10
+      rect:
+        serializedVersion: 2
+        x: 1133
+        y: 901
+        width: 106
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 869f1eb76035b5d40800000000000000
+      internalID: 5574140251114436968
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_11
+      rect:
+        serializedVersion: 2
+        x: 1239
+        y: 904
+        width: 121
+        height: 119
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 07afc5aa791523620800000000000000
+      internalID: 2752352034116926064
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_12
+      rect:
+        serializedVersion: 2
+        x: 1360
+        y: 906
+        width: 153
+        height: 117
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 760cca2c091669660800000000000000
+      internalID: 7392203112744534119
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_13
+      rect:
+        serializedVersion: 2
+        x: 1513
+        y: 906
+        width: 71
+        height: 117
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0ac07e9e016a61f40800000000000000
+      internalID: 5698924970057862304
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_14
+      rect:
+        serializedVersion: 2
+        x: 1584
+        y: 912
+        width: 141
+        height: 111
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f85599b9045eba6c0800000000000000
+      internalID: -4130956167531113073
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_15
+      rect:
+        serializedVersion: 2
+        x: 1725
+        y: 913
+        width: 150
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa81f7820ffdb0f30800000000000000
+      internalID: 4542970871697840303
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_16
+      rect:
+        serializedVersion: 2
+        x: 1875
+        y: 916
+        width: 117
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 13f222886ec86e670800000000000000
+      internalID: 8567690262873255729
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_17
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 766
+        width: 139
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7dd546aa3b789e920800000000000000
+      internalID: 3020094230856228311
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_18
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 767
+        width: 117
+        height: 104
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 12b3075e5eff480d0800000000000000
+      internalID: -3421328454032803039
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_19
+      rect:
+        serializedVersion: 2
+        x: 257
+        y: 767
+        width: 150
+        height: 104
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 74d0d6decd0e6ad80800000000000000
+      internalID: -8239651228746969785
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_20
+      rect:
+        serializedVersion: 2
+        x: 407
+        y: 770
+        width: 132
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 05c426077c33a3b40800000000000000
+      internalID: 5420702033170811984
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_21
+      rect:
+        serializedVersion: 2
+        x: 539
+        y: 770
+        width: 132
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 04cd6ada0c3a2fe80800000000000000
+      internalID: -8146268728017363904
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_22
+      rect:
+        serializedVersion: 2
+        x: 671
+        y: 770
+        width: 132
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7205a5d0c003ddf10800000000000000
+      internalID: 2296044213350584359
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_23
+      rect:
+        serializedVersion: 2
+        x: 803
+        y: 770
+        width: 132
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 85a22343b469ccd50800000000000000
+      internalID: 6758942390518688344
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_24
+      rect:
+        serializedVersion: 2
+        x: 935
+        y: 770
+        width: 151
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2ffb7750898dfaf10800000000000000
+      internalID: 2283281683538493426
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_25
+      rect:
+        serializedVersion: 2
+        x: 1086
+        y: 771
+        width: 133
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 510dba3f88f966b10800000000000000
+      internalID: 1974440897201033237
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_26
+      rect:
+        serializedVersion: 2
+        x: 1219
+        y: 771
+        width: 133
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d17db5374a6e5ada0800000000000000
+      internalID: -5934083340006336739
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_27
+      rect:
+        serializedVersion: 2
+        x: 1352
+        y: 771
+        width: 133
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 505c4082e7d38da30800000000000000
+      internalID: 4240206661215896837
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_28
+      rect:
+        serializedVersion: 2
+        x: 1485
+        y: 772
+        width: 133
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a396a989aad00de00800000000000000
+      internalID: 1067368138042665274
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_29
+      rect:
+        serializedVersion: 2
+        x: 1618
+        y: 773
+        width: 145
+        height: 98
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ec545da42d21bc040800000000000000
+      internalID: 4668846133107574222
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_30
+      rect:
+        serializedVersion: 2
+        x: 1763
+        y: 773
+        width: 135
+        height: 98
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7e97924feb129e8e0800000000000000
+      internalID: -1663761483312825881
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_31
+      rect:
+        serializedVersion: 2
+        x: 1898
+        y: 773
+        width: 135
+        height: 98
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c33615a82cf55aae0800000000000000
+      internalID: -1538718408528272580
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_32
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 668
+        width: 134
+        height: 98
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d19cff2015fe9f640800000000000000
+      internalID: 5114381983077615901
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_33
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 669
+        width: 134
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9c9173868c9336d90800000000000000
+      internalID: -7105772254155826743
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_34
+      rect:
+        serializedVersion: 2
+        x: 269
+        y: 669
+        width: 132
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 65bca0716986de2a0800000000000000
+      internalID: -6706589276243834026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_35
+      rect:
+        serializedVersion: 2
+        x: 401
+        y: 669
+        width: 133
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 85ae5022bad4b9d10800000000000000
+      internalID: 2133384245895621208
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_36
+      rect:
+        serializedVersion: 2
+        x: 534
+        y: 669
+        width: 132
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5cf76c9afb9a89310800000000000000
+      internalID: 1412065123832856517
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_37
+      rect:
+        serializedVersion: 2
+        x: 666
+        y: 669
+        width: 133
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3c404d1ab504dcd70800000000000000
+      internalID: 9064972387267904707
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_38
+      rect:
+        serializedVersion: 2
+        x: 799
+        y: 669
+        width: 74
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1879104e987962460800000000000000
+      internalID: 7216622071399421825
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_39
+      rect:
+        serializedVersion: 2
+        x: 873
+        y: 670
+        width: 105
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 82c46d7902d4a72f0800000000000000
+      internalID: -974381566990595032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_40
+      rect:
+        serializedVersion: 2
+        x: 978
+        y: 673
+        width: 104
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7179541ceea431d30800000000000000
+      internalID: 4400943650176341783
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_41
+      rect:
+        serializedVersion: 2
+        x: 1082
+        y: 673
+        width: 93
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e77dd856a6427a140800000000000000
+      internalID: 4730789972964923262
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_42
+      rect:
+        serializedVersion: 2
+        x: 1175
+        y: 673
+        width: 117
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 546798dbbb9816a60800000000000000
+      internalID: 7665559480193087045
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_43
+      rect:
+        serializedVersion: 2
+        x: 1292
+        y: 673
+        width: 115
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c6e1eef2378c26dd0800000000000000
+      internalID: -2494210846558904724
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_44
+      rect:
+        serializedVersion: 2
+        x: 1407
+        y: 673
+        width: 132
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 86dbdf4096dd790e0800000000000000
+      internalID: -2263096844605342360
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_45
+      rect:
+        serializedVersion: 2
+        x: 1539
+        y: 673
+        width: 115
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 76816c49fe31e0c70800000000000000
+      internalID: 8939104230091135079
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_46
+      rect:
+        serializedVersion: 2
+        x: 1654
+        y: 673
+        width: 132
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 26f159b44b3fffbf0800000000000000
+      internalID: -288243895440695454
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_47
+      rect:
+        serializedVersion: 2
+        x: 1787
+        y: 673
+        width: 117
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c393b11d1bf76a360800000000000000
+      internalID: 7180567057582995772
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_48
+      rect:
+        serializedVersion: 2
+        x: 1904
+        y: 673
+        width: 133
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 255c960a4161a2fd0800000000000000
+      internalID: -2366054376383330990
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_49
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 575
+        width: 133
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 80b61705c4513bf70800000000000000
+      internalID: 9201721881159363336
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_50
+      rect:
+        serializedVersion: 2
+        x: 134
+        y: 576
+        width: 102
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e48c0078972c0c090800000000000000
+      internalID: -8016193509507676082
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_51
+      rect:
+        serializedVersion: 2
+        x: 236
+        y: 576
+        width: 93
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 10ca1153c58343a40800000000000000
+      internalID: 5346960626274118657
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_52
+      rect:
+        serializedVersion: 2
+        x: 329
+        y: 576
+        width: 119
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a2298497e94453ca0800000000000000
+      internalID: -6037844277989961174
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_53
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 576
+        width: 115
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 32bd7391f5da52970800000000000000
+      internalID: 8729574076684163875
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_54
+      rect:
+        serializedVersion: 2
+        x: 563
+        y: 576
+        width: 115
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a2c04ea2d62420e0800000000000000
+      internalID: -2295667223743642974
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_55
+      rect:
+        serializedVersion: 2
+        x: 678
+        y: 576
+        width: 127
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9b8adf18b32cfc3f0800000000000000
+      internalID: -878269841474213703
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_56
+      rect:
+        serializedVersion: 2
+        x: 805
+        y: 577
+        width: 109
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 23c965d0de88279b0800000000000000
+      internalID: -5083850477635462094
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_57
+      rect:
+        serializedVersion: 2
+        x: 914
+        y: 577
+        width: 101
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bb7d4779d835bb6f0800000000000000
+      internalID: -667848252137875525
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_58
+      rect:
+        serializedVersion: 2
+        x: 1015
+        y: 577
+        width: 92
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f67681f7fdaaef320800000000000000
+      internalID: 2593698312298719087
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_59
+      rect:
+        serializedVersion: 2
+        x: 1107
+        y: 577
+        width: 107
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e7de291f258038dd0800000000000000
+      internalID: -2485133417045103234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_60
+      rect:
+        serializedVersion: 2
+        x: 1214
+        y: 577
+        width: 109
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3d357c8ee54c759a0800000000000000
+      internalID: -6244306446414556205
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_61
+      rect:
+        serializedVersion: 2
+        x: 1323
+        y: 577
+        width: 101
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 014e7fe6cce435920800000000000000
+      internalID: 2977810418564064272
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_62
+      rect:
+        serializedVersion: 2
+        x: 1424
+        y: 577
+        width: 92
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 83be2582a0f77bc10800000000000000
+      internalID: 2069262235402955576
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_63
+      rect:
+        serializedVersion: 2
+        x: 1516
+        y: 577
+        width: 132
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 178cf09e3a17bac00800000000000000
+      internalID: 912948298276391025
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_64
+      rect:
+        serializedVersion: 2
+        x: 1648
+        y: 578
+        width: 101
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c87487952ef80c680800000000000000
+      internalID: -8736825074772326516
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_65
+      rect:
+        serializedVersion: 2
+        x: 1749
+        y: 578
+        width: 91
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b8e041117ef5be950800000000000000
+      internalID: 6479377934931201675
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_66
+      rect:
+        serializedVersion: 2
+        x: 1840
+        y: 578
+        width: 94
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5e48c934b9c293960800000000000000
+      internalID: 7582140493020824805
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_67
+      rect:
+        serializedVersion: 2
+        x: 1934
+        y: 579
+        width: 100
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 22a318935aca1d560800000000000000
+      internalID: 7336835093597600290
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_68
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 486
+        width: 89
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9c1dd5d2339748640800000000000000
+      internalID: 5081319540292178377
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_69
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 486
+        width: 99
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4c47be30b883e1100800000000000000
+      internalID: 80564013056619716
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_70
+      rect:
+        serializedVersion: 2
+        x: 189
+        y: 486
+        width: 91
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 533ea9d9bac5e4eb0800000000000000
+      internalID: -4733744266166475979
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_71
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 486
+        width: 101
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 09179b50566f64e30800000000000000
+      internalID: 4487544992469447056
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_72
+      rect:
+        serializedVersion: 2
+        x: 381
+        y: 486
+        width: 99
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 56621965598ae1ce0800000000000000
+      internalID: -1432522272101292443
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_73
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 486
+        width: 101
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fadb413348fcbed80800000000000000
+      internalID: -8220248528135078481
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_74
+      rect:
+        serializedVersion: 2
+        x: 581
+        y: 486
+        width: 109
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9f42a9cb50f1060b0800000000000000
+      internalID: -5737551815770495751
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_75
+      rect:
+        serializedVersion: 2
+        x: 690
+        y: 487
+        width: 103
+        height: 88
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c2f99228d96b28b60800000000000000
+      internalID: 7746955096640560940
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_76
+      rect:
+        serializedVersion: 2
+        x: 793
+        y: 487
+        width: 103
+        height: 88
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7026bf5c6180b2bd0800000000000000
+      internalID: -2654018661500886521
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_77
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 488
+        width: 117
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8175a557df6b80910800000000000000
+      internalID: 1803892850473719576
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_78
+      rect:
+        serializedVersion: 2
+        x: 1013
+        y: 488
+        width: 119
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7c28869f4791615c0800000000000000
+      internalID: -4245177608558837049
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_79
+      rect:
+        serializedVersion: 2
+        x: 1132
+        y: 488
+        width: 115
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0e448d1a9ecb7a850800000000000000
+      internalID: 6388282308077044960
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_80
+      rect:
+        serializedVersion: 2
+        x: 1247
+        y: 488
+        width: 130
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aeebde6abc4b2a7d0800000000000000
+      internalID: -2908563622555959574
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_81
+      rect:
+        serializedVersion: 2
+        x: 1377
+        y: 488
+        width: 129
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d81dfd093c2e0d870800000000000000
+      internalID: 8705707409284256141
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_82
+      rect:
+        serializedVersion: 2
+        x: 1506
+        y: 489
+        width: 97
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b948e9eae8f9c8cb0800000000000000
+      internalID: -4860334462675811173
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_83
+      rect:
+        serializedVersion: 2
+        x: 1603
+        y: 489
+        width: 107
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 72055e5308afdec70800000000000000
+      internalID: 9002126658750468135
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_84
+      rect:
+        serializedVersion: 2
+        x: 1710
+        y: 489
+        width: 103
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4bbaf590978b250b0800000000000000
+      internalID: -5741323744956142668
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_85
+      rect:
+        serializedVersion: 2
+        x: 1813
+        y: 489
+        width: 140
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ec655dad80cd20200800000000000000
+      internalID: 144920068618540750
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_86
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 401
+        width: 101
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e48bd60154e839440800000000000000
+      internalID: 4941449643435079758
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_87
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 401
+        width: 109
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d3d11d56c82f91be0800000000000000
+      internalID: -1505905915561173699
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_88
+      rect:
+        serializedVersion: 2
+        x: 211
+        y: 401
+        width: 91
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6541523dcb57e62d0800000000000000
+      internalID: -3283557624449788842
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_89
+      rect:
+        serializedVersion: 2
+        x: 302
+        y: 401
+        width: 91
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cac28ed42a0875dd0800000000000000
+      internalID: -2497386033773531988
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_90
+      rect:
+        serializedVersion: 2
+        x: 393
+        y: 401
+        width: 109
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 91bac0189539b3920800000000000000
+      internalID: 2971130391807437593
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_91
+      rect:
+        serializedVersion: 2
+        x: 502
+        y: 401
+        width: 102
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5f5494329db905b40800000000000000
+      internalID: 5427008907883660789
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_92
+      rect:
+        serializedVersion: 2
+        x: 604
+        y: 401
+        width: 147
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5241a3883117472e0800000000000000
+      internalID: -2128952395135577051
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_93
+      rect:
+        serializedVersion: 2
+        x: 751
+        y: 401
+        width: 97
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 55479c971e2d3fb20800000000000000
+      internalID: 3167106828824310869
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_94
+      rect:
+        serializedVersion: 2
+        x: 848
+        y: 402
+        width: 114
+        height: 84
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 48a1c99fc8b152c50800000000000000
+      internalID: 6639743517924792964
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_95
+      rect:
+        serializedVersion: 2
+        x: 962
+        y: 403
+        width: 115
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3134af24f8829c970800000000000000
+      internalID: 8775589944677253907
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_96
+      rect:
+        serializedVersion: 2
+        x: 1077
+        y: 403
+        width: 99
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6a478d9de21293de0800000000000000
+      internalID: -1353013727941069658
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_97
+      rect:
+        serializedVersion: 2
+        x: 1176
+        y: 403
+        width: 99
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f9fec91510d1f61a0800000000000000
+      internalID: -6814195819686858849
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_98
+      rect:
+        serializedVersion: 2
+        x: 1275
+        y: 403
+        width: 109
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 26660d1dc86f35c50800000000000000
+      internalID: 6652932159232304738
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_99
+      rect:
+        serializedVersion: 2
+        x: 1384
+        y: 404
+        width: 95
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b25b1b88ef967300800000000000000
+      internalID: 249562650480693940
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_100
+      rect:
+        serializedVersion: 2
+        x: 1479
+        y: 404
+        width: 117
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cc392a260368eba10800000000000000
+      internalID: 1927125232932525004
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_101
+      rect:
+        serializedVersion: 2
+        x: 1596
+        y: 404
+        width: 95
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 78281e39f75b0c150800000000000000
+      internalID: 5890907872147112583
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_102
+      rect:
+        serializedVersion: 2
+        x: 1691
+        y: 404
+        width: 94
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eb748d8b6d7689150800000000000000
+      internalID: 5879563485454026686
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_103
+      rect:
+        serializedVersion: 2
+        x: 1785
+        y: 405
+        width: 117
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2ea699e666f3a1130800000000000000
+      internalID: 3538210166427708130
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_104
+      rect:
+        serializedVersion: 2
+        x: 1902
+        y: 405
+        width: 94
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 998dcda5c49cfceb0800000000000000
+      internalID: -4697314556545017703
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_105
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 320
+        width: 113
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8b25547ac610fde30800000000000000
+      internalID: 4530341316332442296
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_106
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 320
+        width: 134
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 24c9d965fd249ddd0800000000000000
+      internalID: -2460862194382955454
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_107
+      rect:
+        serializedVersion: 2
+        x: 248
+        y: 320
+        width: 103
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8c9d7c338e3e6e040800000000000000
+      internalID: 4676675849511492040
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_108
+      rect:
+        serializedVersion: 2
+        x: 351
+        y: 320
+        width: 112
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4753cad015ed15c50800000000000000
+      internalID: 6652342564306040180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_109
+      rect:
+        serializedVersion: 2
+        x: 463
+        y: 320
+        width: 134
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 13072f69281166420800000000000000
+      internalID: 2622803085565784113
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_110
+      rect:
+        serializedVersion: 2
+        x: 597
+        y: 321
+        width: 114
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ec380bbf855e97d10800000000000000
+      internalID: 2123980869624431566
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_111
+      rect:
+        serializedVersion: 2
+        x: 711
+        y: 321
+        width: 103
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e4c603e1937712140800000000000000
+      internalID: 4693163373900098638
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_112
+      rect:
+        serializedVersion: 2
+        x: 814
+        y: 321
+        width: 156
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 212a3d5feea55ed00800000000000000
+      internalID: 1001306474532807186
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_113
+      rect:
+        serializedVersion: 2
+        x: 970
+        y: 322
+        width: 115
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3395e10339b8694e0800000000000000
+      internalID: -1975237922271635149
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_114
+      rect:
+        serializedVersion: 2
+        x: 1085
+        y: 322
+        width: 117
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1b33c529300cf1040800000000000000
+      internalID: 4620622864278369201
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_115
+      rect:
+        serializedVersion: 2
+        x: 1202
+        y: 322
+        width: 114
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ace93b7f47b4cd200800000000000000
+      internalID: 206122648696233674
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_116
+      rect:
+        serializedVersion: 2
+        x: 1316
+        y: 322
+        width: 102
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f41f002c254873750800000000000000
+      internalID: 6284637295995842895
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_117
+      rect:
+        serializedVersion: 2
+        x: 1418
+        y: 322
+        width: 113
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9181888423cc228f0800000000000000
+      internalID: -566666086757951463
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_118
+      rect:
+        serializedVersion: 2
+        x: 1531
+        y: 322
+        width: 115
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fcef074471f7ae4c0800000000000000
+      internalID: -4257450759816151345
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_119
+      rect:
+        serializedVersion: 2
+        x: 1646
+        y: 322
+        width: 97
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e99cb441cc4a9e8a0800000000000000
+      internalID: -6275303409343280738
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_120
+      rect:
+        serializedVersion: 2
+        x: 1743
+        y: 322
+        width: 111
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 53013c5f8eccc6320800000000000000
+      internalID: 2552640389739909173
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_121
+      rect:
+        serializedVersion: 2
+        x: 1854
+        y: 322
+        width: 131
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 37fee05638c02ed60800000000000000
+      internalID: 7917904853346479987
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_122
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 241
+        width: 131
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7c864375058d88100800000000000000
+      internalID: 110576030442612935
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_123
+      rect:
+        serializedVersion: 2
+        x: 132
+        y: 243
+        width: 114
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: efebe293b6b827b00800000000000000
+      internalID: 824874974399348478
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_124
+      rect:
+        serializedVersion: 2
+        x: 246
+        y: 245
+        width: 135
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fc020af88a192b910800000000000000
+      internalID: 1851702549952864463
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_125
+      rect:
+        serializedVersion: 2
+        x: 381
+        y: 245
+        width: 134
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa0ab836f83ddf200800000000000000
+      internalID: 215560969987530922
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_126
+      rect:
+        serializedVersion: 2
+        x: 515
+        y: 249
+        width: 166
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 63e4372f73cea9ea0800000000000000
+      internalID: -5865115839661650378
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IceAnt_127
+      rect:
+        serializedVersion: 2
+        x: 681
+        y: 252
+        width: 161
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 703d3e613dbdce6a0800000000000000
+      internalID: -6418513669241187577
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      IceAnt_0: -6660295851038989327
+      IceAnt_1: 5743655297229455615
+      IceAnt_10: 5574140251114436968
+      IceAnt_100: 1927125232932525004
+      IceAnt_101: 5890907872147112583
+      IceAnt_102: 5879563485454026686
+      IceAnt_103: 3538210166427708130
+      IceAnt_104: -4697314556545017703
+      IceAnt_105: 4530341316332442296
+      IceAnt_106: -2460862194382955454
+      IceAnt_107: 4676675849511492040
+      IceAnt_108: 6652342564306040180
+      IceAnt_109: 2622803085565784113
+      IceAnt_11: 2752352034116926064
+      IceAnt_110: 2123980869624431566
+      IceAnt_111: 4693163373900098638
+      IceAnt_112: 1001306474532807186
+      IceAnt_113: -1975237922271635149
+      IceAnt_114: 4620622864278369201
+      IceAnt_115: 206122648696233674
+      IceAnt_116: 6284637295995842895
+      IceAnt_117: -566666086757951463
+      IceAnt_118: -4257450759816151345
+      IceAnt_119: -6275303409343280738
+      IceAnt_12: 7392203112744534119
+      IceAnt_120: 2552640389739909173
+      IceAnt_121: 7917904853346479987
+      IceAnt_122: 110576030442612935
+      IceAnt_123: 824874974399348478
+      IceAnt_124: 1851702549952864463
+      IceAnt_125: 215560969987530922
+      IceAnt_126: -5865115839661650378
+      IceAnt_127: -6418513669241187577
+      IceAnt_13: 5698924970057862304
+      IceAnt_14: -4130956167531113073
+      IceAnt_15: 4542970871697840303
+      IceAnt_16: 8567690262873255729
+      IceAnt_17: 3020094230856228311
+      IceAnt_18: -3421328454032803039
+      IceAnt_19: -8239651228746969785
+      IceAnt_2: -4071777782172677879
+      IceAnt_20: 5420702033170811984
+      IceAnt_21: -8146268728017363904
+      IceAnt_22: 2296044213350584359
+      IceAnt_23: 6758942390518688344
+      IceAnt_24: 2283281683538493426
+      IceAnt_25: 1974440897201033237
+      IceAnt_26: -5934083340006336739
+      IceAnt_27: 4240206661215896837
+      IceAnt_28: 1067368138042665274
+      IceAnt_29: 4668846133107574222
+      IceAnt_3: 5945404913560991312
+      IceAnt_30: -1663761483312825881
+      IceAnt_31: -1538718408528272580
+      IceAnt_32: 5114381983077615901
+      IceAnt_33: -7105772254155826743
+      IceAnt_34: -6706589276243834026
+      IceAnt_35: 2133384245895621208
+      IceAnt_36: 1412065123832856517
+      IceAnt_37: 9064972387267904707
+      IceAnt_38: 7216622071399421825
+      IceAnt_39: -974381566990595032
+      IceAnt_4: -8552565775902787883
+      IceAnt_40: 4400943650176341783
+      IceAnt_41: 4730789972964923262
+      IceAnt_42: 7665559480193087045
+      IceAnt_43: -2494210846558904724
+      IceAnt_44: -2263096844605342360
+      IceAnt_45: 8939104230091135079
+      IceAnt_46: -288243895440695454
+      IceAnt_47: 7180567057582995772
+      IceAnt_48: -2366054376383330990
+      IceAnt_49: 9201721881159363336
+      IceAnt_5: 3822145881936070982
+      IceAnt_50: -8016193509507676082
+      IceAnt_51: 5346960626274118657
+      IceAnt_52: -6037844277989961174
+      IceAnt_53: 8729574076684163875
+      IceAnt_54: -2295667223743642974
+      IceAnt_55: -878269841474213703
+      IceAnt_56: -5083850477635462094
+      IceAnt_57: -667848252137875525
+      IceAnt_58: 2593698312298719087
+      IceAnt_59: -2485133417045103234
+      IceAnt_6: 3056151610533172875
+      IceAnt_60: -6244306446414556205
+      IceAnt_61: 2977810418564064272
+      IceAnt_62: 2069262235402955576
+      IceAnt_63: 912948298276391025
+      IceAnt_64: -8736825074772326516
+      IceAnt_65: 6479377934931201675
+      IceAnt_66: 7582140493020824805
+      IceAnt_67: 7336835093597600290
+      IceAnt_68: 5081319540292178377
+      IceAnt_69: 80564013056619716
+      IceAnt_7: -7891835309098824592
+      IceAnt_70: -4733744266166475979
+      IceAnt_71: 4487544992469447056
+      IceAnt_72: -1432522272101292443
+      IceAnt_73: -8220248528135078481
+      IceAnt_74: -5737551815770495751
+      IceAnt_75: 7746955096640560940
+      IceAnt_76: -2654018661500886521
+      IceAnt_77: 1803892850473719576
+      IceAnt_78: -4245177608558837049
+      IceAnt_79: 6388282308077044960
+      IceAnt_8: 6821356465012614743
+      IceAnt_80: -2908563622555959574
+      IceAnt_81: 8705707409284256141
+      IceAnt_82: -4860334462675811173
+      IceAnt_83: 9002126658750468135
+      IceAnt_84: -5741323744956142668
+      IceAnt_85: 144920068618540750
+      IceAnt_86: 4941449643435079758
+      IceAnt_87: -1505905915561173699
+      IceAnt_88: -3283557624449788842
+      IceAnt_89: -2497386033773531988
+      IceAnt_9: 4104852298786798096
+      IceAnt_90: 2971130391807437593
+      IceAnt_91: 5427008907883660789
+      IceAnt_92: -2128952395135577051
+      IceAnt_93: 3167106828824310869
+      IceAnt_94: 6639743517924792964
+      IceAnt_95: 8775589944677253907
+      IceAnt_96: -1353013727941069658
+      IceAnt_97: -6814195819686858849
+      IceAnt_98: 6652932159232304738
+      IceAnt_99: 249562650480693940
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

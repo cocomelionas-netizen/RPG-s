@@ -1,0 +1,3512 @@
+fileFormatVersion: 2
+guid: a33e72d0065da0c448e13d6eb81c239a
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6932985576660069734
+    second: HeroMage_0
+  - first:
+      213: 2854775079445050354
+    second: HeroMage_1
+  - first:
+      213: 5273674210446239229
+    second: HeroMage_2
+  - first:
+      213: -696820199481083424
+    second: HeroMage_3
+  - first:
+      213: 7029880842974852908
+    second: HeroMage_4
+  - first:
+      213: 6618872915879869542
+    second: HeroMage_5
+  - first:
+      213: -7268516220860645681
+    second: HeroMage_6
+  - first:
+      213: 3481959665438938453
+    second: HeroMage_7
+  - first:
+      213: 3041273789567503953
+    second: HeroMage_8
+  - first:
+      213: 7507820716856285738
+    second: HeroMage_9
+  - first:
+      213: 4413233161194612905
+    second: HeroMage_10
+  - first:
+      213: -8039714733041778780
+    second: HeroMage_11
+  - first:
+      213: -7366683488540571566
+    second: HeroMage_12
+  - first:
+      213: 1445717900381216858
+    second: HeroMage_13
+  - first:
+      213: -7257486253607489213
+    second: HeroMage_14
+  - first:
+      213: -8969381836109591484
+    second: HeroMage_15
+  - first:
+      213: -7327595567866832284
+    second: HeroMage_16
+  - first:
+      213: -7446929712823013031
+    second: HeroMage_17
+  - first:
+      213: -3460474714749564233
+    second: HeroMage_18
+  - first:
+      213: -2098687517523736436
+    second: HeroMage_19
+  - first:
+      213: -3401098707892279162
+    second: HeroMage_20
+  - first:
+      213: 4902597260549371272
+    second: HeroMage_21
+  - first:
+      213: -2048711586535326584
+    second: HeroMage_22
+  - first:
+      213: -7302777888519622494
+    second: HeroMage_23
+  - first:
+      213: -4743809611407174749
+    second: HeroMage_24
+  - first:
+      213: 8944392940247968200
+    second: HeroMage_25
+  - first:
+      213: 9216389702779195800
+    second: HeroMage_26
+  - first:
+      213: -4244566641678925109
+    second: HeroMage_27
+  - first:
+      213: -6956081276556891427
+    second: HeroMage_28
+  - first:
+      213: 3982776426006599042
+    second: HeroMage_29
+  - first:
+      213: 2080777227893928210
+    second: HeroMage_30
+  - first:
+      213: -8527712739469790719
+    second: HeroMage_31
+  - first:
+      213: -3192823305723564707
+    second: HeroMage_32
+  - first:
+      213: 2790872495843412644
+    second: HeroMage_33
+  - first:
+      213: 6323161808476896670
+    second: HeroMage_34
+  - first:
+      213: -8376766334609578591
+    second: HeroMage_35
+  - first:
+      213: -1316374973766664375
+    second: HeroMage_36
+  - first:
+      213: -8886506597757418074
+    second: HeroMage_37
+  - first:
+      213: 3622484557735644406
+    second: HeroMage_38
+  - first:
+      213: 8388456427429266463
+    second: HeroMage_39
+  - first:
+      213: -513975839246755506
+    second: HeroMage_40
+  - first:
+      213: -1070663318368953283
+    second: HeroMage_41
+  - first:
+      213: 3630539179407026145
+    second: HeroMage_42
+  - first:
+      213: 9070246354874025108
+    second: HeroMage_43
+  - first:
+      213: -7973380746719957937
+    second: HeroMage_44
+  - first:
+      213: 2228974073480177383
+    second: HeroMage_45
+  - first:
+      213: 6795241189405150788
+    second: HeroMage_46
+  - first:
+      213: -6785418053700921391
+    second: HeroMage_47
+  - first:
+      213: -2893960849388325430
+    second: HeroMage_48
+  - first:
+      213: 3914355724018749678
+    second: HeroMage_49
+  - first:
+      213: -694950937223443972
+    second: HeroMage_50
+  - first:
+      213: -6708255242904015153
+    second: HeroMage_51
+  - first:
+      213: -8801869059808763070
+    second: HeroMage_52
+  - first:
+      213: -5146753949512624121
+    second: HeroMage_53
+  - first:
+      213: -7932127276406324242
+    second: HeroMage_54
+  - first:
+      213: -3873954984992600048
+    second: HeroMage_55
+  - first:
+      213: 2818495825770229040
+    second: HeroMage_56
+  - first:
+      213: -5913906649107937059
+    second: HeroMage_57
+  - first:
+      213: -7580762951280121500
+    second: HeroMage_58
+  - first:
+      213: -4965257663834224236
+    second: HeroMage_59
+  - first:
+      213: 7267307485290091657
+    second: HeroMage_60
+  - first:
+      213: 6502369681764253798
+    second: HeroMage_61
+  - first:
+      213: -7489215984511160277
+    second: HeroMage_62
+  - first:
+      213: -939252027290600821
+    second: HeroMage_63
+  - first:
+      213: -3480430126797865277
+    second: HeroMage_64
+  - first:
+      213: 5724543637366112132
+    second: HeroMage_65
+  - first:
+      213: 8469593998283515995
+    second: HeroMage_66
+  - first:
+      213: -5018962062402169455
+    second: HeroMage_67
+  - first:
+      213: -4067690470529035362
+    second: HeroMage_68
+  - first:
+      213: 2978583231736071500
+    second: HeroMage_69
+  - first:
+      213: -2231371349613030641
+    second: HeroMage_70
+  - first:
+      213: -405333703450805677
+    second: HeroMage_71
+  - first:
+      213: -1123598513155043113
+    second: HeroMage_72
+  - first:
+      213: 4292851059657098181
+    second: HeroMage_73
+  - first:
+      213: -1739014552554401221
+    second: HeroMage_74
+  - first:
+      213: 74469801875767431
+    second: HeroMage_75
+  - first:
+      213: -3916996874694253010
+    second: HeroMage_76
+  - first:
+      213: -6225214072094053587
+    second: HeroMage_77
+  - first:
+      213: 9219975079194360936
+    second: HeroMage_78
+  - first:
+      213: 2654103305745420791
+    second: HeroMage_79
+  - first:
+      213: -1350168879929705021
+    second: HeroMage_80
+  - first:
+      213: -8222355797111990246
+    second: HeroMage_81
+  - first:
+      213: 7290152554930571449
+    second: HeroMage_82
+  - first:
+      213: -6760818523282385891
+    second: HeroMage_83
+  - first:
+      213: 2151182351153201095
+    second: HeroMage_84
+  - first:
+      213: -7378233886232068645
+    second: HeroMage_85
+  - first:
+      213: -7997130156110795180
+    second: HeroMage_86
+  - first:
+      213: 4236008288586581445
+    second: HeroMage_87
+  - first:
+      213: -7069384992322767667
+    second: HeroMage_88
+  - first:
+      213: 215783801182848086
+    second: HeroMage_89
+  - first:
+      213: -6909726035002346297
+    second: HeroMage_90
+  - first:
+      213: 3416816147804644159
+    second: HeroMage_91
+  - first:
+      213: -6272508496176549391
+    second: HeroMage_92
+  - first:
+      213: -5576892788718086063
+    second: HeroMage_93
+  - first:
+      213: -9211527755540262446
+    second: HeroMage_94
+  - first:
+      213: 2648754731351637981
+    second: HeroMage_95
+  - first:
+      213: 4884709393013561279
+    second: HeroMage_96
+  - first:
+      213: 2591821779273930028
+    second: HeroMage_97
+  - first:
+      213: 998411713729849521
+    second: HeroMage_98
+  - first:
+      213: 8905213350870025441
+    second: HeroMage_99
+  - first:
+      213: -8738166754064395190
+    second: HeroMage_100
+  - first:
+      213: -5950536338858246402
+    second: HeroMage_101
+  - first:
+      213: 64679585793225209
+    second: HeroMage_102
+  - first:
+      213: -6546947492584895116
+    second: HeroMage_103
+  - first:
+      213: 5028259835713554034
+    second: HeroMage_104
+  - first:
+      213: 7091421557785209630
+    second: HeroMage_105
+  - first:
+      213: -4106231888564662610
+    second: HeroMage_106
+  - first:
+      213: 2090065756717177894
+    second: HeroMage_107
+  - first:
+      213: 1573822193308644863
+    second: HeroMage_108
+  - first:
+      213: 5027177283923900892
+    second: HeroMage_109
+  - first:
+      213: 9174254843547255587
+    second: HeroMage_110
+  - first:
+      213: -665310578413822732
+    second: HeroMage_111
+  - first:
+      213: -6291625025364697362
+    second: HeroMage_112
+  - first:
+      213: 7590151246762283597
+    second: HeroMage_113
+  - first:
+      213: -494157458843176129
+    second: HeroMage_114
+  - first:
+      213: -5039284580482836351
+    second: HeroMage_115
+  - first:
+      213: 9419947884422396
+    second: HeroMage_116
+  - first:
+      213: 7982176057545401963
+    second: HeroMage_117
+  - first:
+      213: 6468284955582019009
+    second: HeroMage_118
+  - first:
+      213: -8773639592640283618
+    second: HeroMage_119
+  - first:
+      213: 7356913432618310078
+    second: HeroMage_120
+  - first:
+      213: -632722923957621826
+    second: HeroMage_121
+  - first:
+      213: -1502109355289894438
+    second: HeroMage_122
+  - first:
+      213: 6936616696475282593
+    second: HeroMage_123
+  - first:
+      213: -3343619844162568185
+    second: HeroMage_124
+  - first:
+      213: 8284672211593640435
+    second: HeroMage_125
+  - first:
+      213: 7068840598001222108
+    second: HeroMage_126
+  - first:
+      213: -3553163089242418377
+    second: HeroMage_127
+  - first:
+      213: 1530913223369339379
+    second: HeroMage_128
+  - first:
+      213: 8888312457349491902
+    second: HeroMage_129
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: HeroMage_0
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 884
+        width: 97
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a92154eb95619cf90800000000000000
+      internalID: -6932985576660069734
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_1
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 885
+        width: 137
+        height: 138
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f3b5fb3fc23e9720800000000000000
+      internalID: 2854775079445050354
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_2
+      rect:
+        serializedVersion: 2
+        x: 235
+        y: 885
+        width: 136
+        height: 138
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: df569c6d0cadf2940800000000000000
+      internalID: 5273674210446239229
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_3
+      rect:
+        serializedVersion: 2
+        x: 371
+        y: 885
+        width: 76
+        height: 138
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0e9fc9178b56456f0800000000000000
+      internalID: -696820199481083424
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_4
+      rect:
+        serializedVersion: 2
+        x: 447
+        y: 886
+        width: 101
+        height: 137
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c27f6da71672f8160800000000000000
+      internalID: 7029880842974852908
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_5
+      rect:
+        serializedVersion: 2
+        x: 548
+        y: 890
+        width: 119
+        height: 133
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 66c397449d5fadb50800000000000000
+      internalID: 6618872915879869542
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_6
+      rect:
+        serializedVersion: 2
+        x: 667
+        y: 891
+        width: 81
+        height: 132
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fcebf63e10b012b90800000000000000
+      internalID: -7268516220860645681
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_7
+      rect:
+        serializedVersion: 2
+        x: 748
+        y: 891
+        width: 88
+        height: 132
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 555d9b41ed7625030800000000000000
+      internalID: 3481959665438938453
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_8
+      rect:
+        serializedVersion: 2
+        x: 836
+        y: 891
+        width: 90
+        height: 132
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 15e80e3f566c43a20800000000000000
+      internalID: 3041273789567503953
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_9
+      rect:
+        serializedVersion: 2
+        x: 926
+        y: 892
+        width: 64
+        height: 131
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a2a9981f923213860800000000000000
+      internalID: 7507820716856285738
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_10
+      rect:
+        serializedVersion: 2
+        x: 990
+        y: 892
+        width: 87
+        height: 131
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9a8aaf38d24fe3d30800000000000000
+      internalID: 4413233161194612905
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_11
+      rect:
+        serializedVersion: 2
+        x: 1077
+        y: 894
+        width: 65
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4aff199eb023d6090800000000000000
+      internalID: -8039714733041778780
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_12
+      rect:
+        serializedVersion: 2
+        x: 1142
+        y: 894
+        width: 66
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 258cdc4c56844c990800000000000000
+      internalID: -7366683488540571566
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_13
+      rect:
+        serializedVersion: 2
+        x: 1208
+        y: 894
+        width: 109
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a5065a945c8301410800000000000000
+      internalID: 1445717900381216858
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_14
+      rect:
+        serializedVersion: 2
+        x: 1313
+        y: 938
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 341f17344ba384b90800000000000000
+      internalID: -7257486253607489213
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_15
+      rect:
+        serializedVersion: 2
+        x: 1320
+        y: 894
+        width: 79
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 44cc8dbedba568380800000000000000
+      internalID: -8969381836109591484
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_16
+      rect:
+        serializedVersion: 2
+        x: 1399
+        y: 896
+        width: 71
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 46a129f77a62f4a90800000000000000
+      internalID: -7327595567866832284
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_17
+      rect:
+        serializedVersion: 2
+        x: 1470
+        y: 897
+        width: 99
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 951f1e7b1e037a890800000000000000
+      internalID: -7446929712823013031
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_18
+      rect:
+        serializedVersion: 2
+        x: 1569
+        y: 897
+        width: 99
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7ba8121d49ce9ffc0800000000000000
+      internalID: -3460474714749564233
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_19
+      rect:
+        serializedVersion: 2
+        x: 1668
+        y: 897
+        width: 105
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c88837772d6ffd2e0800000000000000
+      internalID: -2098687517523736436
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_20
+      rect:
+        serializedVersion: 2
+        x: 1773
+        y: 898
+        width: 68
+        height: 125
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6886a06bebedcc0d0800000000000000
+      internalID: -3401098707892279162
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_21
+      rect:
+        serializedVersion: 2
+        x: 1841
+        y: 898
+        width: 69
+        height: 125
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 88539dfbb36890440800000000000000
+      internalID: 4902597260549371272
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_22
+      rect:
+        serializedVersion: 2
+        x: 1910
+        y: 898
+        width: 71
+        height: 125
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 88cb555aaa38193e0800000000000000
+      internalID: -2048711586535326584
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_23
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 759
+        width: 85
+        height: 125
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a0f531c33257aa90800000000000000
+      internalID: -7302777888519622494
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_24
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 759
+        width: 137
+        height: 125
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3a3ddfdca4a9a2eb0800000000000000
+      internalID: -4743809611407174749
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_25
+      rect:
+        serializedVersion: 2
+        x: 223
+        y: 760
+        width: 82
+        height: 124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8c9edfe5dfdd02c70800000000000000
+      internalID: 8944392940247968200
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_26
+      rect:
+        serializedVersion: 2
+        x: 305
+        y: 760
+        width: 99
+        height: 124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 891d8b9aa9137ef70800000000000000
+      internalID: 9216389702779195800
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_27
+      rect:
+        serializedVersion: 2
+        x: 404
+        y: 760
+        width: 122
+        height: 124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bc24149c0254815c0800000000000000
+      internalID: -4244566641678925109
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_28
+      rect:
+        serializedVersion: 2
+        x: 526
+        y: 761
+        width: 89
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ddaa4121fe8077f90800000000000000
+      internalID: -6956081276556891427
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_29
+      rect:
+        serializedVersion: 2
+        x: 615
+        y: 761
+        width: 126
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2855cebce0aa54730800000000000000
+      internalID: 3982776426006599042
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_30
+      rect:
+        serializedVersion: 2
+        x: 741
+        y: 762
+        width: 101
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 211f6554dd760ec10800000000000000
+      internalID: 2080777227893928210
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_31
+      rect:
+        serializedVersion: 2
+        x: 842
+        y: 762
+        width: 97
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1027459f17a77a980800000000000000
+      internalID: -8527712739469790719
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_32
+      rect:
+        serializedVersion: 2
+        x: 939
+        y: 763
+        width: 89
+        height: 121
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d5d22c7ae10d0b3d0800000000000000
+      internalID: -3192823305723564707
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_33
+      rect:
+        serializedVersion: 2
+        x: 1028
+        y: 763
+        width: 93
+        height: 121
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4aa87209fbb2bb620800000000000000
+      internalID: 2790872495843412644
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_34
+      rect:
+        serializedVersion: 2
+        x: 1121
+        y: 763
+        width: 91
+        height: 121
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e9df49bc92260c750800000000000000
+      internalID: 6323161808476896670
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_35
+      rect:
+        serializedVersion: 2
+        x: 1212
+        y: 764
+        width: 70
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a52523966fbfbb80800000000000000
+      internalID: -8376766334609578591
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_36
+      rect:
+        serializedVersion: 2
+        x: 1282
+        y: 764
+        width: 97
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 94f7c619feb4bbde0800000000000000
+      internalID: -1316374973766664375
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_37
+      rect:
+        serializedVersion: 2
+        x: 1379
+        y: 764
+        width: 97
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6a501820559cca480800000000000000
+      internalID: -8886506597757418074
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_38
+      rect:
+        serializedVersion: 2
+        x: 1476
+        y: 764
+        width: 75
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6fccb243386a54230800000000000000
+      internalID: 3622484557735644406
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_39
+      rect:
+        serializedVersion: 2
+        x: 1551
+        y: 764
+        width: 123
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f1483c24da8c96470800000000000000
+      internalID: 8388456427429266463
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_40
+      rect:
+        serializedVersion: 2
+        x: 1674
+        y: 765
+        width: 69
+        height: 119
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e49509682bdfdd8f0800000000000000
+      internalID: -513975839246755506
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_41
+      rect:
+        serializedVersion: 2
+        x: 1743
+        y: 765
+        width: 96
+        height: 119
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d3cd392726d3421f0800000000000000
+      internalID: -1070663318368953283
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_42
+      rect:
+        serializedVersion: 2
+        x: 1839
+        y: 766
+        width: 67
+        height: 118
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1e7a1b3f524426230800000000000000
+      internalID: 3630539179407026145
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_43
+      rect:
+        serializedVersion: 2
+        x: 1906
+        y: 766
+        width: 87
+        height: 118
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4944c87e00dffdd70800000000000000
+      internalID: 9070246354874025108
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_44
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 641
+        width: 93
+        height: 118
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f4c61d4a47cd85190800000000000000
+      internalID: -7973380746719957937
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_45
+      rect:
+        serializedVersion: 2
+        x: 94
+        y: 641
+        width: 85
+        height: 118
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7e667573c18eeee10800000000000000
+      internalID: 2228974073480177383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_46
+      rect:
+        serializedVersion: 2
+        x: 179
+        y: 641
+        width: 86
+        height: 118
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 44ec899ebdb8d4e50800000000000000
+      internalID: 6795241189405150788
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_47
+      rect:
+        serializedVersion: 2
+        x: 265
+        y: 641
+        width: 115
+        height: 118
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1d752a81b3a55d1a0800000000000000
+      internalID: -6785418053700921391
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_48
+      rect:
+        serializedVersion: 2
+        x: 380
+        y: 642
+        width: 76
+        height: 117
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ac5325ab0f596d7d0800000000000000
+      internalID: -2893960849388325430
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_49
+      rect:
+        serializedVersion: 2
+        x: 456
+        y: 643
+        width: 91
+        height: 116
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ee097a6bac5925630800000000000000
+      internalID: 3914355724018749678
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_50
+      rect:
+        serializedVersion: 2
+        x: 547
+        y: 643
+        width: 95
+        height: 116
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cf9c87afdc90b56f0800000000000000
+      internalID: -694950937223443972
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_51
+      rect:
+        serializedVersion: 2
+        x: 642
+        y: 644
+        width: 99
+        height: 115
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fceed00066d77e2a0800000000000000
+      internalID: -6708255242904015153
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_52
+      rect:
+        serializedVersion: 2
+        x: 741
+        y: 644
+        width: 69
+        height: 115
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 243e89279ba79d580800000000000000
+      internalID: -8801869059808763070
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_53
+      rect:
+        serializedVersion: 2
+        x: 810
+        y: 644
+        width: 68
+        height: 115
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 70816f43d8e0398b0800000000000000
+      internalID: -5146753949512624121
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_54
+      rect:
+        serializedVersion: 2
+        x: 878
+        y: 644
+        width: 77
+        height: 115
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ee34d90b44c6be190800000000000000
+      internalID: -7932127276406324242
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_55
+      rect:
+        serializedVersion: 2
+        x: 955
+        y: 645
+        width: 76
+        height: 114
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 01099ab5772fc3ac0800000000000000
+      internalID: -3873954984992600048
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_56
+      rect:
+        serializedVersion: 2
+        x: 1031
+        y: 645
+        width: 81
+        height: 114
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 03da4ff350f4d1720800000000000000
+      internalID: 2818495825770229040
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_57
+      rect:
+        serializedVersion: 2
+        x: 1112
+        y: 645
+        width: 81
+        height: 114
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dd8c9116c359deda0800000000000000
+      internalID: -5913906649107937059
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_58
+      rect:
+        serializedVersion: 2
+        x: 1193
+        y: 645
+        width: 91
+        height: 114
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 469a18aa248bbc690800000000000000
+      internalID: -7580762951280121500
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_59
+      rect:
+        serializedVersion: 2
+        x: 1284
+        y: 645
+        width: 80
+        height: 114
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 49900e8367cd71bb0800000000000000
+      internalID: -4965257663834224236
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_60
+      rect:
+        serializedVersion: 2
+        x: 1364
+        y: 646
+        width: 85
+        height: 113
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 984d04e67a9aad460800000000000000
+      internalID: 7267307485290091657
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_61
+      rect:
+        serializedVersion: 2
+        x: 1449
+        y: 646
+        width: 81
+        height: 113
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 66004d746ce0d3a50800000000000000
+      internalID: 6502369681764253798
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_62
+      rect:
+        serializedVersion: 2
+        x: 1530
+        y: 646
+        width: 77
+        height: 113
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b20f80dddb5f01890800000000000000
+      internalID: -7489215984511160277
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_63
+      rect:
+        serializedVersion: 2
+        x: 1607
+        y: 646
+        width: 83
+        height: 113
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b8a37cee14b17f2f0800000000000000
+      internalID: -939252027290600821
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_64
+      rect:
+        serializedVersion: 2
+        x: 1690
+        y: 646
+        width: 80
+        height: 113
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3ce35a26d3703bfc0800000000000000
+      internalID: -3480430126797865277
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_65
+      rect:
+        serializedVersion: 2
+        x: 1770
+        y: 646
+        width: 76
+        height: 113
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 48ffd66bb1aa17f40800000000000000
+      internalID: 5724543637366112132
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_66
+      rect:
+        serializedVersion: 2
+        x: 1846
+        y: 646
+        width: 83
+        height: 113
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b58287b1eda0a8570800000000000000
+      internalID: 8469593998283515995
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_67
+      rect:
+        serializedVersion: 2
+        x: 1929
+        y: 646
+        width: 81
+        height: 113
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1955b598890195ab0800000000000000
+      internalID: -5018962062402169455
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_68
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 528
+        width: 77
+        height: 113
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e9310ef8119ac87c0800000000000000
+      internalID: -4067690470529035362
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_69
+      rect:
+        serializedVersion: 2
+        x: 78
+        y: 528
+        width: 98
+        height: 113
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c4540950bad065920800000000000000
+      internalID: 2978583231736071500
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_70
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 528
+        width: 95
+        height: 113
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f03d45074939801e0800000000000000
+      internalID: -2231371349613030641
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_71
+      rect:
+        serializedVersion: 2
+        x: 271
+        y: 528
+        width: 129
+        height: 113
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 35a325ee427ff5af0800000000000000
+      internalID: -405333703450805677
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_72
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 529
+        width: 80
+        height: 112
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7d09c39fa1d2860f0800000000000000
+      internalID: -1123598513155043113
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_73
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 529
+        width: 87
+        height: 112
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c345845b45439b30800000000000000
+      internalID: 4292851059657098181
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_74
+      rect:
+        serializedVersion: 2
+        x: 567
+        y: 529
+        width: 99
+        height: 112
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b3292c76a77cdd7e0800000000000000
+      internalID: -1739014552554401221
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_75
+      rect:
+        serializedVersion: 2
+        x: 666
+        y: 529
+        width: 67
+        height: 112
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7808c47e3e1980100800000000000000
+      internalID: 74469801875767431
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_76
+      rect:
+        serializedVersion: 2
+        x: 733
+        y: 530
+        width: 79
+        height: 111
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e26a889781804a9c0800000000000000
+      internalID: -3916996874694253010
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_77
+      rect:
+        serializedVersion: 2
+        x: 812
+        y: 530
+        width: 81
+        height: 111
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d2b2216b8c89b99a0800000000000000
+      internalID: -6225214072094053587
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_78
+      rect:
+        serializedVersion: 2
+        x: 893
+        y: 530
+        width: 95
+        height: 111
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 86c75592c7ee3ff70800000000000000
+      internalID: 9219975079194360936
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_79
+      rect:
+        serializedVersion: 2
+        x: 988
+        y: 530
+        width: 104
+        height: 111
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7f1552005e445d420800000000000000
+      internalID: 2654103305745420791
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_80
+      rect:
+        serializedVersion: 2
+        x: 1092
+        y: 530
+        width: 101
+        height: 111
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3cdb005ae8c334de0800000000000000
+      internalID: -1350168879929705021
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_81
+      rect:
+        serializedVersion: 2
+        x: 1193
+        y: 531
+        width: 90
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a18144867f254ed80800000000000000
+      internalID: -8222355797111990246
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_82
+      rect:
+        serializedVersion: 2
+        x: 1283
+        y: 531
+        width: 70
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9b80b03bf13db2560800000000000000
+      internalID: 7290152554930571449
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_83
+      rect:
+        serializedVersion: 2
+        x: 1353
+        y: 531
+        width: 92
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d145fd89f5fbc22a0800000000000000
+      internalID: -6760818523282385891
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_84
+      rect:
+        serializedVersion: 2
+        x: 1445
+        y: 532
+        width: 108
+        height: 109
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7cf739f63f88add10800000000000000
+      internalID: 2151182351153201095
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_85
+      rect:
+        serializedVersion: 2
+        x: 1553
+        y: 532
+        width: 115
+        height: 109
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bdd336d3f5f3b9990800000000000000
+      internalID: -7378233886232068645
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_86
+      rect:
+        serializedVersion: 2
+        x: 1668
+        y: 532
+        width: 97
+        height: 109
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 45ea37e5e7c740190800000000000000
+      internalID: -7997130156110795180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_87
+      rect:
+        serializedVersion: 2
+        x: 1765
+        y: 532
+        width: 69
+        height: 109
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c540da581359ca30800000000000000
+      internalID: 4236008288586581445
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_88
+      rect:
+        serializedVersion: 2
+        x: 1834
+        y: 532
+        width: 105
+        height: 109
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dc4bf100ecf74ed90800000000000000
+      internalID: -7069384992322767667
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_89
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 419
+        width: 111
+        height: 109
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 65489c1593e9ef200800000000000000
+      internalID: 215783801182848086
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_90
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 419
+        width: 117
+        height: 109
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7c4ba6cc7c8bb10a0800000000000000
+      internalID: -6909726035002346297
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_91
+      rect:
+        serializedVersion: 2
+        x: 229
+        y: 419
+        width: 70
+        height: 109
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f33e6b0fe28fa6f20800000000000000
+      internalID: 3416816147804644159
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_92
+      rect:
+        serializedVersion: 2
+        x: 299
+        y: 420
+        width: 86
+        height: 108
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f1f6c281c293f8a0800000000000000
+      internalID: -6272508496176549391
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_93
+      rect:
+        serializedVersion: 2
+        x: 385
+        y: 420
+        width: 117
+        height: 108
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 158550a6e85ea92b0800000000000000
+      internalID: -5576892788718086063
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_94
+      rect:
+        serializedVersion: 2
+        x: 502
+        y: 420
+        width: 131
+        height: 108
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2d11f54af441a2080800000000000000
+      internalID: -9211527755540262446
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_95
+      rect:
+        serializedVersion: 2
+        x: 633
+        y: 421
+        width: 97
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ddf795bf46442c420800000000000000
+      internalID: 2648754731351637981
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_96
+      rect:
+        serializedVersion: 2
+        x: 730
+        y: 421
+        width: 95
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fb756990059f9c340800000000000000
+      internalID: 4884709393013561279
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_97
+      rect:
+        serializedVersion: 2
+        x: 825
+        y: 421
+        width: 89
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c255eba1d2008f320800000000000000
+      internalID: 2591821779273930028
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_98
+      rect:
+        serializedVersion: 2
+        x: 914
+        y: 421
+        width: 71
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1b8e470f9221bdd00800000000000000
+      internalID: 998411713729849521
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_99
+      rect:
+        serializedVersion: 2
+        x: 985
+        y: 421
+        width: 104
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1e48cab5c5ca59b70800000000000000
+      internalID: 8905213350870025441
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_100
+      rect:
+        serializedVersion: 2
+        x: 1089
+        y: 422
+        width: 101
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a441ddb42abcbb680800000000000000
+      internalID: -8738166754064395190
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_101
+      rect:
+        serializedVersion: 2
+        x: 1190
+        y: 422
+        width: 93
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: efefc432ab27b6da0800000000000000
+      internalID: -5950536338858246402
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_102
+      rect:
+        serializedVersion: 2
+        x: 1283
+        y: 422
+        width: 89
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9f1bc679db9c5e000800000000000000
+      internalID: 64679585793225209
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_103
+      rect:
+        serializedVersion: 2
+        x: 1372
+        y: 422
+        width: 103
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 47dc75551f19425a0800000000000000
+      internalID: -6546947492584895116
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_104
+      rect:
+        serializedVersion: 2
+        x: 1475
+        y: 422
+        width: 97
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 27602120ea7f7c540800000000000000
+      internalID: 5028259835713554034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_105
+      rect:
+        serializedVersion: 2
+        x: 1572
+        y: 422
+        width: 119
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e1ba558b55ac96260800000000000000
+      internalID: 7091421557785209630
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_106
+      rect:
+        serializedVersion: 2
+        x: 1691
+        y: 422
+        width: 117
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eaec8b46adbb307c0800000000000000
+      internalID: -4106231888564662610
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_107
+      rect:
+        serializedVersion: 2
+        x: 1808
+        y: 422
+        width: 92
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 62cd55a6bb7610d10800000000000000
+      internalID: 2090065756717177894
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_108
+      rect:
+        serializedVersion: 2
+        x: 1900
+        y: 423
+        width: 101
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff5b9c342f657d510800000000000000
+      internalID: 1573822193308644863
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_109
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 314
+        width: 99
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd97237ca1f14c540800000000000000
+      internalID: 5027177283923900892
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_110
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 314
+        width: 97
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3238a844c20815f70800000000000000
+      internalID: 9174254843547255587
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_111
+      rect:
+        serializedVersion: 2
+        x: 197
+        y: 314
+        width: 87
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4fc955ccd8754c6f0800000000000000
+      internalID: -665310578413822732
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_112
+      rect:
+        serializedVersion: 2
+        x: 284
+        y: 314
+        width: 102
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eeedd27bf58afa8a0800000000000000
+      internalID: -6291625025364697362
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_113
+      rect:
+        serializedVersion: 2
+        x: 386
+        y: 314
+        width: 102
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d4211c63852a55960800000000000000
+      internalID: 7590151246762283597
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_114
+      rect:
+        serializedVersion: 2
+        x: 488
+        y: 314
+        width: 91
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f33fa8ac8666429f0800000000000000
+      internalID: -494157458843176129
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_115
+      rect:
+        serializedVersion: 2
+        x: 579
+        y: 315
+        width: 98
+        height: 104
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 18897329f5dd01ab0800000000000000
+      internalID: -5039284580482836351
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_116
+      rect:
+        serializedVersion: 2
+        x: 677
+        y: 315
+        width: 90
+        height: 104
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cf424778467712000800000000000000
+      internalID: 9419947884422396
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_117
+      rect:
+        serializedVersion: 2
+        x: 767
+        y: 315
+        width: 84
+        height: 104
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b662f9c35d266ce60800000000000000
+      internalID: 7982176057545401963
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_118
+      rect:
+        serializedVersion: 2
+        x: 851
+        y: 315
+        width: 104
+        height: 104
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1c5387b85e6f3c950800000000000000
+      internalID: 6468284955582019009
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_119
+      rect:
+        serializedVersion: 2
+        x: 956
+        y: 316
+        width: 101
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e1c7f557645cd3680800000000000000
+      internalID: -8773639592640283618
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_120
+      rect:
+        serializedVersion: 2
+        x: 1057
+        y: 316
+        width: 97
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eb99382d9c1091660800000000000000
+      internalID: 7356913432618310078
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_121
+      rect:
+        serializedVersion: 2
+        x: 1154
+        y: 316
+        width: 98
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ebb624c5add1837f0800000000000000
+      internalID: -632722923957621826
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_122
+      rect:
+        serializedVersion: 2
+        x: 1252
+        y: 316
+        width: 95
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad1a728ff7f672be0800000000000000
+      internalID: -1502109355289894438
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_123
+      rect:
+        serializedVersion: 2
+        x: 1347
+        y: 316
+        width: 69
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1ace3783220d34060800000000000000
+      internalID: 6936616696475282593
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_124
+      rect:
+        serializedVersion: 2
+        x: 1416
+        y: 316
+        width: 110
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7004ebc87731991d0800000000000000
+      internalID: -3343619844162568185
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_125
+      rect:
+        serializedVersion: 2
+        x: 1525
+        y: 338
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3f9b69c7b7119f270800000000000000
+      internalID: 8284672211593640435
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_126
+      rect:
+        serializedVersion: 2
+        x: 1533
+        y: 316
+        width: 82
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd109b15211991260800000000000000
+      internalID: 7068840598001222108
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_127
+      rect:
+        serializedVersion: 2
+        x: 1615
+        y: 317
+        width: 97
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7331daceef0a0bec0800000000000000
+      internalID: -3553163089242418377
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_128
+      rect:
+        serializedVersion: 2
+        x: 1712
+        y: 317
+        width: 88
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3f1b0ec2775ee3510800000000000000
+      internalID: 1530913223369339379
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroMage_129
+      rect:
+        serializedVersion: 2
+        x: 1800
+        y: 318
+        width: 92
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ebceef07611a95b70800000000000000
+      internalID: 8888312457349491902
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      HeroMage_0: -6932985576660069734
+      HeroMage_1: 2854775079445050354
+      HeroMage_10: 4413233161194612905
+      HeroMage_100: -8738166754064395190
+      HeroMage_101: -5950536338858246402
+      HeroMage_102: 64679585793225209
+      HeroMage_103: -6546947492584895116
+      HeroMage_104: 5028259835713554034
+      HeroMage_105: 7091421557785209630
+      HeroMage_106: -4106231888564662610
+      HeroMage_107: 2090065756717177894
+      HeroMage_108: 1573822193308644863
+      HeroMage_109: 5027177283923900892
+      HeroMage_11: -8039714733041778780
+      HeroMage_110: 9174254843547255587
+      HeroMage_111: -665310578413822732
+      HeroMage_112: -6291625025364697362
+      HeroMage_113: 7590151246762283597
+      HeroMage_114: -494157458843176129
+      HeroMage_115: -5039284580482836351
+      HeroMage_116: 9419947884422396
+      HeroMage_117: 7982176057545401963
+      HeroMage_118: 6468284955582019009
+      HeroMage_119: -8773639592640283618
+      HeroMage_12: -7366683488540571566
+      HeroMage_120: 7356913432618310078
+      HeroMage_121: -632722923957621826
+      HeroMage_122: -1502109355289894438
+      HeroMage_123: 6936616696475282593
+      HeroMage_124: -3343619844162568185
+      HeroMage_125: 8284672211593640435
+      HeroMage_126: 7068840598001222108
+      HeroMage_127: -3553163089242418377
+      HeroMage_128: 1530913223369339379
+      HeroMage_129: 8888312457349491902
+      HeroMage_13: 1445717900381216858
+      HeroMage_14: -7257486253607489213
+      HeroMage_15: -8969381836109591484
+      HeroMage_16: -7327595567866832284
+      HeroMage_17: -7446929712823013031
+      HeroMage_18: -3460474714749564233
+      HeroMage_19: -2098687517523736436
+      HeroMage_2: 5273674210446239229
+      HeroMage_20: -3401098707892279162
+      HeroMage_21: 4902597260549371272
+      HeroMage_22: -2048711586535326584
+      HeroMage_23: -7302777888519622494
+      HeroMage_24: -4743809611407174749
+      HeroMage_25: 8944392940247968200
+      HeroMage_26: 9216389702779195800
+      HeroMage_27: -4244566641678925109
+      HeroMage_28: -6956081276556891427
+      HeroMage_29: 3982776426006599042
+      HeroMage_3: -696820199481083424
+      HeroMage_30: 2080777227893928210
+      HeroMage_31: -8527712739469790719
+      HeroMage_32: -3192823305723564707
+      HeroMage_33: 2790872495843412644
+      HeroMage_34: 6323161808476896670
+      HeroMage_35: -8376766334609578591
+      HeroMage_36: -1316374973766664375
+      HeroMage_37: -8886506597757418074
+      HeroMage_38: 3622484557735644406
+      HeroMage_39: 8388456427429266463
+      HeroMage_4: 7029880842974852908
+      HeroMage_40: -513975839246755506
+      HeroMage_41: -1070663318368953283
+      HeroMage_42: 3630539179407026145
+      HeroMage_43: 9070246354874025108
+      HeroMage_44: -7973380746719957937
+      HeroMage_45: 2228974073480177383
+      HeroMage_46: 6795241189405150788
+      HeroMage_47: -6785418053700921391
+      HeroMage_48: -2893960849388325430
+      HeroMage_49: 3914355724018749678
+      HeroMage_5: 6618872915879869542
+      HeroMage_50: -694950937223443972
+      HeroMage_51: -6708255242904015153
+      HeroMage_52: -8801869059808763070
+      HeroMage_53: -5146753949512624121
+      HeroMage_54: -7932127276406324242
+      HeroMage_55: -3873954984992600048
+      HeroMage_56: 2818495825770229040
+      HeroMage_57: -5913906649107937059
+      HeroMage_58: -7580762951280121500
+      HeroMage_59: -4965257663834224236
+      HeroMage_6: -7268516220860645681
+      HeroMage_60: 7267307485290091657
+      HeroMage_61: 6502369681764253798
+      HeroMage_62: -7489215984511160277
+      HeroMage_63: -939252027290600821
+      HeroMage_64: -3480430126797865277
+      HeroMage_65: 5724543637366112132
+      HeroMage_66: 8469593998283515995
+      HeroMage_67: -5018962062402169455
+      HeroMage_68: -4067690470529035362
+      HeroMage_69: 2978583231736071500
+      HeroMage_7: 3481959665438938453
+      HeroMage_70: -2231371349613030641
+      HeroMage_71: -405333703450805677
+      HeroMage_72: -1123598513155043113
+      HeroMage_73: 4292851059657098181
+      HeroMage_74: -1739014552554401221
+      HeroMage_75: 74469801875767431
+      HeroMage_76: -3916996874694253010
+      HeroMage_77: -6225214072094053587
+      HeroMage_78: 9219975079194360936
+      HeroMage_79: 2654103305745420791
+      HeroMage_8: 3041273789567503953
+      HeroMage_80: -1350168879929705021
+      HeroMage_81: -8222355797111990246
+      HeroMage_82: 7290152554930571449
+      HeroMage_83: -6760818523282385891
+      HeroMage_84: 2151182351153201095
+      HeroMage_85: -7378233886232068645
+      HeroMage_86: -7997130156110795180
+      HeroMage_87: 4236008288586581445
+      HeroMage_88: -7069384992322767667
+      HeroMage_89: 215783801182848086
+      HeroMage_9: 7507820716856285738
+      HeroMage_90: -6909726035002346297
+      HeroMage_91: 3416816147804644159
+      HeroMage_92: -6272508496176549391
+      HeroMage_93: -5576892788718086063
+      HeroMage_94: -9211527755540262446
+      HeroMage_95: 2648754731351637981
+      HeroMage_96: 4884709393013561279
+      HeroMage_97: 2591821779273930028
+      HeroMage_98: 998411713729849521
+      HeroMage_99: 8905213350870025441
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

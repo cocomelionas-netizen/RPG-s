@@ -1,0 +1,3512 @@
+fileFormatVersion: 2
+guid: 6944ebbe8d09f76499413126cf3abbbd
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 7080578821650540076
+    second: HeroWarrior_0
+  - first:
+      213: -8505206667122014426
+    second: HeroWarrior_1
+  - first:
+      213: 4762908020070400700
+    second: HeroWarrior_2
+  - first:
+      213: -8127329530483101736
+    second: HeroWarrior_3
+  - first:
+      213: -2966511516980216993
+    second: HeroWarrior_4
+  - first:
+      213: 3282953783924393824
+    second: HeroWarrior_5
+  - first:
+      213: -7070606672124328911
+    second: HeroWarrior_6
+  - first:
+      213: -6611752380266620308
+    second: HeroWarrior_7
+  - first:
+      213: -3343323091309108737
+    second: HeroWarrior_8
+  - first:
+      213: -442933560531500983
+    second: HeroWarrior_9
+  - first:
+      213: 8690214879452103498
+    second: HeroWarrior_10
+  - first:
+      213: -4060129694857897278
+    second: HeroWarrior_11
+  - first:
+      213: 5070949921411638482
+    second: HeroWarrior_12
+  - first:
+      213: 1029058608687057294
+    second: HeroWarrior_13
+  - first:
+      213: 2433229566347978820
+    second: HeroWarrior_14
+  - first:
+      213: 3159477470004335465
+    second: HeroWarrior_15
+  - first:
+      213: 612856773963875785
+    second: HeroWarrior_16
+  - first:
+      213: 1490364917671846906
+    second: HeroWarrior_17
+  - first:
+      213: -3521318738248447806
+    second: HeroWarrior_18
+  - first:
+      213: -5759272361331298049
+    second: HeroWarrior_19
+  - first:
+      213: 4929236773626794832
+    second: HeroWarrior_20
+  - first:
+      213: -6900250183280669269
+    second: HeroWarrior_21
+  - first:
+      213: -3148595656704354282
+    second: HeroWarrior_22
+  - first:
+      213: -3758509376416306840
+    second: HeroWarrior_23
+  - first:
+      213: -8545816083991299508
+    second: HeroWarrior_24
+  - first:
+      213: -4403007254593565084
+    second: HeroWarrior_25
+  - first:
+      213: -6537323581919192474
+    second: HeroWarrior_26
+  - first:
+      213: 7541399212007518543
+    second: HeroWarrior_27
+  - first:
+      213: -8425840243931148203
+    second: HeroWarrior_28
+  - first:
+      213: 2295915247882292074
+    second: HeroWarrior_29
+  - first:
+      213: 4555154542130836713
+    second: HeroWarrior_30
+  - first:
+      213: 2451335170786448716
+    second: HeroWarrior_31
+  - first:
+      213: -7705613927942006978
+    second: HeroWarrior_32
+  - first:
+      213: 2982279349483140613
+    second: HeroWarrior_33
+  - first:
+      213: 5156454696008901702
+    second: HeroWarrior_34
+  - first:
+      213: 4168985088679606410
+    second: HeroWarrior_35
+  - first:
+      213: -1415202851166812155
+    second: HeroWarrior_36
+  - first:
+      213: 5542058431281464236
+    second: HeroWarrior_37
+  - first:
+      213: -5530515342722151700
+    second: HeroWarrior_38
+  - first:
+      213: -3989990103077713225
+    second: HeroWarrior_39
+  - first:
+      213: 892677335242272234
+    second: HeroWarrior_40
+  - first:
+      213: 7272976190960442435
+    second: HeroWarrior_41
+  - first:
+      213: 6055850603737986036
+    second: HeroWarrior_42
+  - first:
+      213: -5167261141230449272
+    second: HeroWarrior_43
+  - first:
+      213: -3982502928148065299
+    second: HeroWarrior_44
+  - first:
+      213: -3470695694987570420
+    second: HeroWarrior_45
+  - first:
+      213: -6746891273845992389
+    second: HeroWarrior_46
+  - first:
+      213: -8508702498339712480
+    second: HeroWarrior_47
+  - first:
+      213: -1876855885426719372
+    second: HeroWarrior_48
+  - first:
+      213: 4685896325305116833
+    second: HeroWarrior_49
+  - first:
+      213: 1169789368200403981
+    second: HeroWarrior_50
+  - first:
+      213: 8698958752004200845
+    second: HeroWarrior_51
+  - first:
+      213: -766760235503758404
+    second: HeroWarrior_52
+  - first:
+      213: -5033343626970917386
+    second: HeroWarrior_53
+  - first:
+      213: 2930246370821262350
+    second: HeroWarrior_54
+  - first:
+      213: 533274775945410570
+    second: HeroWarrior_55
+  - first:
+      213: -1710078260499203022
+    second: HeroWarrior_56
+  - first:
+      213: -3287849229406899960
+    second: HeroWarrior_57
+  - first:
+      213: -2897675821093938481
+    second: HeroWarrior_58
+  - first:
+      213: -629031451712246339
+    second: HeroWarrior_59
+  - first:
+      213: 7585107106091197343
+    second: HeroWarrior_60
+  - first:
+      213: -7377106074548621623
+    second: HeroWarrior_61
+  - first:
+      213: 6122161962500197028
+    second: HeroWarrior_62
+  - first:
+      213: -4712540594745622242
+    second: HeroWarrior_63
+  - first:
+      213: 4180326871187508943
+    second: HeroWarrior_64
+  - first:
+      213: -7851674406835641761
+    second: HeroWarrior_65
+  - first:
+      213: -4164446018295493688
+    second: HeroWarrior_66
+  - first:
+      213: 6232953401798688702
+    second: HeroWarrior_67
+  - first:
+      213: -3889967799358836286
+    second: HeroWarrior_68
+  - first:
+      213: 1214229819215438144
+    second: HeroWarrior_69
+  - first:
+      213: 9001510534522664518
+    second: HeroWarrior_70
+  - first:
+      213: 1504127430899604142
+    second: HeroWarrior_71
+  - first:
+      213: -4968923891232028535
+    second: HeroWarrior_72
+  - first:
+      213: -7554987212622767687
+    second: HeroWarrior_73
+  - first:
+      213: 8297394449053672171
+    second: HeroWarrior_74
+  - first:
+      213: -4188708988418612301
+    second: HeroWarrior_75
+  - first:
+      213: 4010088970499067903
+    second: HeroWarrior_76
+  - first:
+      213: -1159831391743749972
+    second: HeroWarrior_77
+  - first:
+      213: -7260516609620537284
+    second: HeroWarrior_78
+  - first:
+      213: -4711096263516547028
+    second: HeroWarrior_79
+  - first:
+      213: 5869684135522751090
+    second: HeroWarrior_80
+  - first:
+      213: 8936278551830557249
+    second: HeroWarrior_81
+  - first:
+      213: 2105953809453074734
+    second: HeroWarrior_82
+  - first:
+      213: -2110914121735007504
+    second: HeroWarrior_83
+  - first:
+      213: -5447180038732228262
+    second: HeroWarrior_84
+  - first:
+      213: 1876222515443162255
+    second: HeroWarrior_85
+  - first:
+      213: 5926484690670984365
+    second: HeroWarrior_86
+  - first:
+      213: 3795393538925841982
+    second: HeroWarrior_87
+  - first:
+      213: 4240206507172768258
+    second: HeroWarrior_88
+  - first:
+      213: 2579270345917849351
+    second: HeroWarrior_89
+  - first:
+      213: 4391827945849770240
+    second: HeroWarrior_90
+  - first:
+      213: 8972211616373885641
+    second: HeroWarrior_91
+  - first:
+      213: 1823176325141031811
+    second: HeroWarrior_92
+  - first:
+      213: 2373314771477667970
+    second: HeroWarrior_93
+  - first:
+      213: -7104590005788004154
+    second: HeroWarrior_94
+  - first:
+      213: 8352633174954405096
+    second: HeroWarrior_95
+  - first:
+      213: -1067245875949590172
+    second: HeroWarrior_96
+  - first:
+      213: -5355925573366475781
+    second: HeroWarrior_97
+  - first:
+      213: 8580815573981668659
+    second: HeroWarrior_98
+  - first:
+      213: -2738228535965238425
+    second: HeroWarrior_99
+  - first:
+      213: -7118409760303570968
+    second: HeroWarrior_100
+  - first:
+      213: 898282269153646711
+    second: HeroWarrior_101
+  - first:
+      213: -300223219848774916
+    second: HeroWarrior_102
+  - first:
+      213: 8644919225008884516
+    second: HeroWarrior_103
+  - first:
+      213: 7558211584695501110
+    second: HeroWarrior_104
+  - first:
+      213: 2329729594553137838
+    second: HeroWarrior_105
+  - first:
+      213: 525616373096112399
+    second: HeroWarrior_106
+  - first:
+      213: -1440402927238992854
+    second: HeroWarrior_107
+  - first:
+      213: -3149473014577705961
+    second: HeroWarrior_108
+  - first:
+      213: -1800887462144092495
+    second: HeroWarrior_109
+  - first:
+      213: 453705573789717877
+    second: HeroWarrior_110
+  - first:
+      213: 4331828902547225169
+    second: HeroWarrior_111
+  - first:
+      213: -3465737842260001359
+    second: HeroWarrior_112
+  - first:
+      213: -8498852086353670889
+    second: HeroWarrior_113
+  - first:
+      213: 5342247357266022397
+    second: HeroWarrior_114
+  - first:
+      213: -3860954421867897947
+    second: HeroWarrior_115
+  - first:
+      213: -7780082364003825006
+    second: HeroWarrior_116
+  - first:
+      213: 7047002652063359978
+    second: HeroWarrior_117
+  - first:
+      213: -2037210850464741949
+    second: HeroWarrior_118
+  - first:
+      213: 3911052789948790439
+    second: HeroWarrior_119
+  - first:
+      213: 7735295938024312347
+    second: HeroWarrior_120
+  - first:
+      213: -449644309079132016
+    second: HeroWarrior_121
+  - first:
+      213: 3319238205884035450
+    second: HeroWarrior_122
+  - first:
+      213: 1208638419572156886
+    second: HeroWarrior_123
+  - first:
+      213: -5293464411042602368
+    second: HeroWarrior_124
+  - first:
+      213: 2729246940159801940
+    second: HeroWarrior_125
+  - first:
+      213: 1462078416206299411
+    second: HeroWarrior_126
+  - first:
+      213: -1657534791125872275
+    second: HeroWarrior_127
+  - first:
+      213: -1270669107827436661
+    second: HeroWarrior_128
+  - first:
+      213: 721132713373134164
+    second: HeroWarrior_129
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: HeroWarrior_0
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 869
+        width: 82
+        height: 154
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c2662ac7ce4434260800000000000000
+      internalID: 7080578821650540076
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_1
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 876
+        width: 73
+        height: 147
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 62788e8499f67f980800000000000000
+      internalID: -8505206667122014426
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_2
+      rect:
+        serializedVersion: 2
+        x: 156
+        y: 880
+        width: 95
+        height: 143
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cb2c72afb9f391240800000000000000
+      internalID: 4762908020070400700
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_3
+      rect:
+        serializedVersion: 2
+        x: 251
+        y: 885
+        width: 91
+        height: 138
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8df230b3adce53f80800000000000000
+      internalID: -8127329530483101736
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_4
+      rect:
+        serializedVersion: 2
+        x: 342
+        y: 886
+        width: 88
+        height: 137
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f5bf9481e75d4d6d0800000000000000
+      internalID: -2966511516980216993
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_5
+      rect:
+        serializedVersion: 2
+        x: 430
+        y: 888
+        width: 124
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 06786d892156f8d20800000000000000
+      internalID: 3282953783924393824
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_6
+      rect:
+        serializedVersion: 2
+        x: 555
+        y: 955
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 134c58181b820ed90800000000000000
+      internalID: -7070606672124328911
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_7
+      rect:
+        serializedVersion: 2
+        x: 564
+        y: 889
+        width: 95
+        height: 134
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c6a5d5f9d365e34a0800000000000000
+      internalID: -6611752380266620308
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_8
+      rect:
+        serializedVersion: 2
+        x: 659
+        y: 890
+        width: 75
+        height: 133
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff1e825bc512a91d0800000000000000
+      internalID: -3343323091309108737
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_9
+      rect:
+        serializedVersion: 2
+        x: 734
+        y: 891
+        width: 109
+        height: 132
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 940cb6106426ad9f0800000000000000
+      internalID: -442933560531500983
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_10
+      rect:
+        serializedVersion: 2
+        x: 843
+        y: 893
+        width: 70
+        height: 130
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a438e8fd368d99870800000000000000
+      internalID: 8690214879452103498
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_11
+      rect:
+        serializedVersion: 2
+        x: 913
+        y: 894
+        width: 101
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2cadaf3dd8587a7c0800000000000000
+      internalID: -4060129694857897278
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_12
+      rect:
+        serializedVersion: 2
+        x: 1014
+        y: 894
+        width: 75
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2d429832612af5640800000000000000
+      internalID: 5070949921411638482
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_13
+      rect:
+        serializedVersion: 2
+        x: 1089
+        y: 894
+        width: 87
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e8989d73a53f74e00800000000000000
+      internalID: 1029058608687057294
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_14
+      rect:
+        serializedVersion: 2
+        x: 1176
+        y: 896
+        width: 76
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4482627166194c120800000000000000
+      internalID: 2433229566347978820
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_15
+      rect:
+        serializedVersion: 2
+        x: 1252
+        y: 896
+        width: 73
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9635573f408b8db20800000000000000
+      internalID: 3159477470004335465
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_16
+      rect:
+        serializedVersion: 2
+        x: 1325
+        y: 897
+        width: 73
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9c50f462dfd418800800000000000000
+      internalID: 612856773963875785
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_17
+      rect:
+        serializedVersion: 2
+        x: 1398
+        y: 898
+        width: 97
+        height: 125
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: af3e88f0ff6dea410800000000000000
+      internalID: 1490364917671846906
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_18
+      rect:
+        serializedVersion: 2
+        x: 1495
+        y: 900
+        width: 99
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2c846c9a343c12fc0800000000000000
+      internalID: -3521318738248447806
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_19
+      rect:
+        serializedVersion: 2
+        x: 1594
+        y: 901
+        width: 76
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff07f122d44f210b0800000000000000
+      internalID: -5759272361331298049
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_20
+      rect:
+        serializedVersion: 2
+        x: 1670
+        y: 902
+        width: 89
+        height: 121
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 05351d9baba286440800000000000000
+      internalID: 4929236773626794832
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_21
+      rect:
+        serializedVersion: 2
+        x: 1759
+        y: 902
+        width: 73
+        height: 121
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bad4b3474036d30a0800000000000000
+      internalID: -6900250183280669269
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_22
+      rect:
+        serializedVersion: 2
+        x: 1832
+        y: 902
+        width: 105
+        height: 121
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6189cc4aee0fd44d0800000000000000
+      internalID: -3148595656704354282
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_23
+      rect:
+        serializedVersion: 2
+        x: 1937
+        y: 903
+        width: 83
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8692bb5b2a717dbc0800000000000000
+      internalID: -3758509376416306840
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_24
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 749
+        width: 90
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c4af0ed9c89276980800000000000000
+      internalID: -8545816083991299508
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_25
+      rect:
+        serializedVersion: 2
+        x: 91
+        y: 750
+        width: 84
+        height: 119
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 46e8b76ea3065e2c0800000000000000
+      internalID: -4403007254593565084
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_26
+      rect:
+        serializedVersion: 2
+        x: 175
+        y: 750
+        width: 105
+        height: 119
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 66a1ce5a6d2c645a0800000000000000
+      internalID: -6537323581919192474
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_27
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 751
+        width: 92
+        height: 118
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f417e1590ae68a860800000000000000
+      internalID: 7541399212007518543
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_28
+      rect:
+        serializedVersion: 2
+        x: 372
+        y: 751
+        width: 115
+        height: 118
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5501b4ea0f6611b80800000000000000
+      internalID: -8425840243931148203
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_29
+      rect:
+        serializedVersion: 2
+        x: 487
+        y: 751
+        width: 117
+        height: 118
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a6b4d60f0cabcdf10800000000000000
+      internalID: 2295915247882292074
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_30
+      rect:
+        serializedVersion: 2
+        x: 604
+        y: 751
+        width: 82
+        height: 118
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9e437bcfbe8273f30800000000000000
+      internalID: 4555154542130836713
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_31
+      rect:
+        serializedVersion: 2
+        x: 689
+        y: 752
+        width: 113
+        height: 117
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c45d520a954e40220800000000000000
+      internalID: 2451335170786448716
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_32
+      rect:
+        serializedVersion: 2
+        x: 802
+        y: 752
+        width: 91
+        height: 117
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e37d6b865f8201590800000000000000
+      internalID: -7705613927942006978
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_33
+      rect:
+        serializedVersion: 2
+        x: 893
+        y: 752
+        width: 69
+        height: 117
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 506fcee744f236920800000000000000
+      internalID: 2982279349483140613
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_34
+      rect:
+        serializedVersion: 2
+        x: 962
+        y: 753
+        width: 79
+        height: 116
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6446108d9386f8740800000000000000
+      internalID: 5156454696008901702
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_35
+      rect:
+        serializedVersion: 2
+        x: 1041
+        y: 753
+        width: 106
+        height: 116
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a88f5a499d53bd930800000000000000
+      internalID: 4168985088679606410
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_36
+      rect:
+        serializedVersion: 2
+        x: 1147
+        y: 753
+        width: 74
+        height: 116
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 508051341803c5ce0800000000000000
+      internalID: -1415202851166812155
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_37
+      rect:
+        serializedVersion: 2
+        x: 1221
+        y: 753
+        width: 97
+        height: 116
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ca38df8b7c859ec40800000000000000
+      internalID: 5542058431281464236
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_38
+      rect:
+        serializedVersion: 2
+        x: 1318
+        y: 753
+        width: 91
+        height: 116
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ceac2340999af33b0800000000000000
+      internalID: -5530515342722151700
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_39
+      rect:
+        serializedVersion: 2
+        x: 1409
+        y: 754
+        width: 109
+        height: 115
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7ba8ab02425b0a8c0800000000000000
+      internalID: -3989990103077713225
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_40
+      rect:
+        serializedVersion: 2
+        x: 1518
+        y: 754
+        width: 115
+        height: 115
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aed682a8e4d636c00800000000000000
+      internalID: 892677335242272234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_41
+      rect:
+        serializedVersion: 2
+        x: 1633
+        y: 754
+        width: 112
+        height: 115
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 34c1212df4dcee460800000000000000
+      internalID: 7272976190960442435
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_42
+      rect:
+        serializedVersion: 2
+        x: 1745
+        y: 756
+        width: 77
+        height: 113
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4f333a0f904ba0450800000000000000
+      internalID: 6055850603737986036
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_43
+      rect:
+        serializedVersion: 2
+        x: 1822
+        y: 756
+        width: 98
+        height: 113
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 88d874f8e533a48b0800000000000000
+      internalID: -5167261141230449272
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_44
+      rect:
+        serializedVersion: 2
+        x: 1920
+        y: 756
+        width: 79
+        height: 113
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: de318c2efae4bb8c0800000000000000
+      internalID: -3982502928148065299
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_45
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 636
+        width: 100
+        height: 113
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c03d9c867ac95dfc0800000000000000
+      internalID: -3470695694987570420
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_46
+      rect:
+        serializedVersion: 2
+        x: 101
+        y: 636
+        width: 133
+        height: 113
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b341a3c022a3e52a0800000000000000
+      internalID: -6746891273845992389
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_47
+      rect:
+        serializedVersion: 2
+        x: 234
+        y: 637
+        width: 100
+        height: 112
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0229bf6a8240be980800000000000000
+      internalID: -8508702498339712480
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_48
+      rect:
+        serializedVersion: 2
+        x: 334
+        y: 637
+        width: 80
+        height: 112
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4750a86248114f5e0800000000000000
+      internalID: -1876855885426719372
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_49
+      rect:
+        serializedVersion: 2
+        x: 414
+        y: 637
+        width: 73
+        height: 112
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a8ae1481e5a70140800000000000000
+      internalID: 4685896325305116833
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_50
+      rect:
+        serializedVersion: 2
+        x: 487
+        y: 638
+        width: 80
+        height: 111
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d0c1d998b3deb3010800000000000000
+      internalID: 1169789368200403981
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_51
+      rect:
+        serializedVersion: 2
+        x: 567
+        y: 638
+        width: 101
+        height: 111
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d895cf855e8e8b870800000000000000
+      internalID: 8698958752004200845
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_52
+      rect:
+        serializedVersion: 2
+        x: 668
+        y: 638
+        width: 101
+        height: 111
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cb357e6d0abeb55f0800000000000000
+      internalID: -766760235503758404
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_53
+      rect:
+        serializedVersion: 2
+        x: 769
+        y: 638
+        width: 70
+        height: 111
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6f51ce993a8f52ab0800000000000000
+      internalID: -5033343626970917386
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_54
+      rect:
+        serializedVersion: 2
+        x: 839
+        y: 638
+        width: 101
+        height: 111
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e0ccd259c835aa820800000000000000
+      internalID: 2930246370821262350
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_55
+      rect:
+        serializedVersion: 2
+        x: 940
+        y: 639
+        width: 77
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a08f6e35592966700800000000000000
+      internalID: 533274775945410570
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_56
+      rect:
+        serializedVersion: 2
+        x: 1017
+        y: 639
+        width: 107
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 23cb3d8e1e49448e0800000000000000
+      internalID: -1710078260499203022
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_57
+      rect:
+        serializedVersion: 2
+        x: 1124
+        y: 640
+        width: 95
+        height: 109
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 801f82eab863f52d0800000000000000
+      internalID: -3287849229406899960
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_58
+      rect:
+        serializedVersion: 2
+        x: 1219
+        y: 640
+        width: 95
+        height: 109
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fca1579713369c7d0800000000000000
+      internalID: -2897675821093938481
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_59
+      rect:
+        serializedVersion: 2
+        x: 1314
+        y: 640
+        width: 95
+        height: 109
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dbda4283a3b3547f0800000000000000
+      internalID: -629031451712246339
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_60
+      rect:
+        serializedVersion: 2
+        x: 1409
+        y: 640
+        width: 113
+        height: 109
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f936bd1b9b6b34960800000000000000
+      internalID: 7585107106091197343
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_61
+      rect:
+        serializedVersion: 2
+        x: 1522
+        y: 640
+        width: 89
+        height: 109
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9ce272c5c114f9990800000000000000
+      internalID: -7377106074548621623
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_62
+      rect:
+        serializedVersion: 2
+        x: 1611
+        y: 640
+        width: 97
+        height: 109
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4aa8b384ed946f450800000000000000
+      internalID: 6122161962500197028
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_63
+      rect:
+        serializedVersion: 2
+        x: 1708
+        y: 640
+        width: 73
+        height: 109
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e1144941c41b99eb0800000000000000
+      internalID: -4712540594745622242
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_64
+      rect:
+        serializedVersion: 2
+        x: 1781
+        y: 640
+        width: 91
+        height: 109
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fcec62a1421830a30800000000000000
+      internalID: 4180326871187508943
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_65
+      rect:
+        serializedVersion: 2
+        x: 1872
+        y: 640
+        width: 108
+        height: 109
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f5229881abf390390800000000000000
+      internalID: -7851674406835641761
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_66
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 527
+        width: 68
+        height: 109
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8cb0539196ae436c0800000000000000
+      internalID: -4164446018295493688
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_67
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 527
+        width: 67
+        height: 109
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ebff5c76816ef7650800000000000000
+      internalID: 6232953401798688702
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_68
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 527
+        width: 103
+        height: 109
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2c1328b75ee040ac0800000000000000
+      internalID: -3889967799358836286
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_69
+      rect:
+        serializedVersion: 2
+        x: 239
+        y: 527
+        width: 109
+        height: 109
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 041e50a569fc9d010800000000000000
+      internalID: 1214229819215438144
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_70
+      rect:
+        serializedVersion: 2
+        x: 348
+        y: 529
+        width: 83
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 646f82c932acbec70800000000000000
+      internalID: 9001510534522664518
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_71
+      rect:
+        serializedVersion: 2
+        x: 431
+        y: 529
+        width: 83
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eaa11bfddebbfd410800000000000000
+      internalID: 1504127430899604142
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_72
+      rect:
+        serializedVersion: 2
+        x: 514
+        y: 529
+        width: 86
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 988c9232c06da0bb0800000000000000
+      internalID: -4968923891232028535
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_73
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 529
+        width: 82
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9b9500d782b472790800000000000000
+      internalID: -7554987212622767687
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_74
+      rect:
+        serializedVersion: 2
+        x: 682
+        y: 529
+        width: 96
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be264293a44462370800000000000000
+      internalID: 8297394449053672171
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_75
+      rect:
+        serializedVersion: 2
+        x: 778
+        y: 529
+        width: 86
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3b3a2d52e57bed5c0800000000000000
+      internalID: -4188708988418612301
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_76
+      rect:
+        serializedVersion: 2
+        x: 864
+        y: 529
+        width: 73
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fff0f4c1ca2b6a730800000000000000
+      internalID: 4010088970499067903
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_77
+      rect:
+        serializedVersion: 2
+        x: 937
+        y: 529
+        width: 126
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ca054c78e7377efe0800000000000000
+      internalID: -1159831391743749972
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_78
+      rect:
+        serializedVersion: 2
+        x: 1063
+        y: 530
+        width: 84
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c309eb58c967d3b90800000000000000
+      internalID: -7260516609620537284
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_79
+      rect:
+        serializedVersion: 2
+        x: 1147
+        y: 530
+        width: 115
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c281d66a8e2de9eb0800000000000000
+      internalID: -4711096263516547028
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_80
+      rect:
+        serializedVersion: 2
+        x: 1262
+        y: 530
+        width: 72
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 27254915f9e457150800000000000000
+      internalID: 5869684135522751090
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_81
+      rect:
+        serializedVersion: 2
+        x: 1334
+        y: 530
+        width: 104
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1427dc71ff9040c70800000000000000
+      internalID: 8936278551830557249
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_82
+      rect:
+        serializedVersion: 2
+        x: 1438
+        y: 530
+        width: 111
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e29c4d5f4d9d93d10800000000000000
+      internalID: 2105953809453074734
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_83
+      rect:
+        serializedVersion: 2
+        x: 1549
+        y: 530
+        width: 69
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0f211a65ac684b2e0800000000000000
+      internalID: -2110914121735007504
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_84
+      rect:
+        serializedVersion: 2
+        x: 1618
+        y: 530
+        width: 122
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a5954cb7d9ab764b0800000000000000
+      internalID: -5447180038732228262
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_85
+      rect:
+        serializedVersion: 2
+        x: 1740
+        y: 530
+        width: 117
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f8c5498ef6ea90a10800000000000000
+      internalID: 1876222515443162255
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_86
+      rect:
+        serializedVersion: 2
+        x: 1857
+        y: 531
+        width: 89
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dac1c322d6a1f3250800000000000000
+      internalID: 5926484690670984365
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_87
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 422
+        width: 133
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e3ecc769052fba430800000000000000
+      internalID: 3795393538925841982
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_88
+      rect:
+        serializedVersion: 2
+        x: 134
+        y: 422
+        width: 110
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 20a255a4a5d38da30800000000000000
+      internalID: 4240206507172768258
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_89
+      rect:
+        serializedVersion: 2
+        x: 244
+        y: 423
+        width: 85
+        height: 104
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 70fd12cc6b86bc320800000000000000
+      internalID: 2579270345917849351
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_90
+      rect:
+        serializedVersion: 2
+        x: 329
+        y: 423
+        width: 85
+        height: 104
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 00152037f38e2fc30800000000000000
+      internalID: 4391827945849770240
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_91
+      rect:
+        serializedVersion: 2
+        x: 414
+        y: 423
+        width: 109
+        height: 104
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9ca4993ade2b38c70800000000000000
+      internalID: 8972211616373885641
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_92
+      rect:
+        serializedVersion: 2
+        x: 523
+        y: 423
+        width: 101
+        height: 104
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 38beee645393d4910800000000000000
+      internalID: 1823176325141031811
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_93
+      rect:
+        serializedVersion: 2
+        x: 624
+        y: 423
+        width: 102
+        height: 104
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2802d16d535bfe020800000000000000
+      internalID: 2373314771477667970
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_94
+      rect:
+        serializedVersion: 2
+        x: 726
+        y: 423
+        width: 108
+        height: 104
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6c0373e080d676d90800000000000000
+      internalID: -7104590005788004154
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_95
+      rect:
+        serializedVersion: 2
+        x: 834
+        y: 424
+        width: 86
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8ecec445e938ae370800000000000000
+      internalID: 8352633174954405096
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_96
+      rect:
+        serializedVersion: 2
+        x: 920
+        y: 424
+        width: 103
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4692604c7816031f0800000000000000
+      internalID: -1067245875949590172
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_97
+      rect:
+        serializedVersion: 2
+        x: 1023
+        y: 424
+        width: 81
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bf39f04611eeba5b0800000000000000
+      internalID: -5355925573366475781
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_98
+      rect:
+        serializedVersion: 2
+        x: 1104
+        y: 424
+        width: 85
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 335215a2d4e251770800000000000000
+      internalID: 8580815573981668659
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_99
+      rect:
+        serializedVersion: 2
+        x: 1189
+        y: 424
+        width: 103
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 76b34ff77abdff9d0800000000000000
+      internalID: -2738228535965238425
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_100
+      rect:
+        serializedVersion: 2
+        x: 1292
+        y: 424
+        width: 82
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8ef9e67b904563d90800000000000000
+      internalID: -7118409760303570968
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_101
+      rect:
+        serializedVersion: 2
+        x: 1374
+        y: 424
+        width: 103
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7785fe8e6f6577c00800000000000000
+      internalID: 898282269153646711
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_102
+      rect:
+        serializedVersion: 2
+        x: 1477
+        y: 424
+        width: 121
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cfaf69b729465dbf0800000000000000
+      internalID: -300223219848774916
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_103
+      rect:
+        serializedVersion: 2
+        x: 1598
+        y: 424
+        width: 120
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 42b899e7b3ce8f770800000000000000
+      internalID: 8644919225008884516
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_104
+      rect:
+        serializedVersion: 2
+        x: 1718
+        y: 424
+        width: 107
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6318403246924e860800000000000000
+      internalID: 7558211584695501110
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_105
+      rect:
+        serializedVersion: 2
+        x: 1825
+        y: 424
+        width: 109
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eaafd0a09bcd45020800000000000000
+      internalID: 2329729594553137838
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_106
+      rect:
+        serializedVersion: 2
+        x: 1934
+        y: 424
+        width: 97
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f01e5867e4d5b4700800000000000000
+      internalID: 525616373096112399
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_107
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 319
+        width: 104
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a2cac745b29a20ce0800000000000000
+      internalID: -1440402927238992854
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_108
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 319
+        width: 129
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 71cca68daf2da44d0800000000000000
+      internalID: -3149473014577705961
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_109
+      rect:
+        serializedVersion: 2
+        x: 234
+        y: 319
+        width: 70
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1b6527a0566f107e0800000000000000
+      internalID: -1800887462144092495
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_110
+      rect:
+        serializedVersion: 2
+        x: 304
+        y: 320
+        width: 84
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 575d956c0d2eb4600800000000000000
+      internalID: 453705573789717877
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_111
+      rect:
+        serializedVersion: 2
+        x: 388
+        y: 320
+        width: 86
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 15af8149f6fbd1c30800000000000000
+      internalID: 4331828902547225169
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_112
+      rect:
+        serializedVersion: 2
+        x: 474
+        y: 320
+        width: 104
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1bdb6737bc937efc0800000000000000
+      internalID: -3465737842260001359
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_113
+      rect:
+        serializedVersion: 2
+        x: 578
+        y: 320
+        width: 108
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 71d4d4a6e030e0a80800000000000000
+      internalID: -8498852086353670889
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_114
+      rect:
+        serializedVersion: 2
+        x: 686
+        y: 321
+        width: 81
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dff4c10caa9732a40800000000000000
+      internalID: 5342247357266022397
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_115
+      rect:
+        serializedVersion: 2
+        x: 767
+        y: 321
+        width: 83
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5ab1796d8622b6ac0800000000000000
+      internalID: -3860954421867897947
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_116
+      rect:
+        serializedVersion: 2
+        x: 850
+        y: 321
+        width: 110
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 29a45428f48970490800000000000000
+      internalID: -7780082364003825006
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_117
+      rect:
+        serializedVersion: 2
+        x: 960
+        y: 321
+        width: 140
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ae3e87f439bfbc160800000000000000
+      internalID: 7047002652063359978
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_118
+      rect:
+        serializedVersion: 2
+        x: 1100
+        y: 321
+        width: 107
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3c54a7d668f5ab3e0800000000000000
+      internalID: -2037210850464741949
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_119
+      rect:
+        serializedVersion: 2
+        x: 1207
+        y: 323
+        width: 146
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7a6b2b27ac9d64630800000000000000
+      internalID: 3911052789948790439
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_120
+      rect:
+        serializedVersion: 2
+        x: 1353
+        y: 323
+        width: 105
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b1e067a1caa495b60800000000000000
+      internalID: 7735295938024312347
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_121
+      rect:
+        serializedVersion: 2
+        x: 1458
+        y: 325
+        width: 108
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 098ff0a12ea82c9f0800000000000000
+      internalID: -449644309079132016
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_122
+      rect:
+        serializedVersion: 2
+        x: 1566
+        y: 329
+        width: 129
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a717f9aef8d401e20800000000000000
+      internalID: 3319238205884035450
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_123
+      rect:
+        serializedVersion: 2
+        x: 1572
+        y: 326
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d9ec7c2d32f5c010800000000000000
+      internalID: 1208638419572156886
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_124
+      rect:
+        serializedVersion: 2
+        x: 1695
+        y: 327
+        width: 154
+        height: 95
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 08222a40a26d986b0800000000000000
+      internalID: -5293464411042602368
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_125
+      rect:
+        serializedVersion: 2
+        x: 1849
+        y: 329
+        width: 143
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 45afb84c1ab30e520800000000000000
+      internalID: 2729246940159801940
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_126
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 230
+        width: 113
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3110eb7b2985a4410800000000000000
+      internalID: 1462078416206299411
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_127
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 230
+        width: 133
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d615714b3e04ff8e0800000000000000
+      internalID: -1657534791125872275
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_128
+      rect:
+        serializedVersion: 2
+        x: 247
+        y: 230
+        width: 144
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b8312e0cd2dad5ee0800000000000000
+      internalID: -1270669107827436661
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HeroWarrior_129
+      rect:
+        serializedVersion: 2
+        x: 391
+        y: 232
+        width: 77
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 45de480d16af10a00800000000000000
+      internalID: 721132713373134164
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      HeroWarrior_0: 7080578821650540076
+      HeroWarrior_1: -8505206667122014426
+      HeroWarrior_10: 8690214879452103498
+      HeroWarrior_100: -7118409760303570968
+      HeroWarrior_101: 898282269153646711
+      HeroWarrior_102: -300223219848774916
+      HeroWarrior_103: 8644919225008884516
+      HeroWarrior_104: 7558211584695501110
+      HeroWarrior_105: 2329729594553137838
+      HeroWarrior_106: 525616373096112399
+      HeroWarrior_107: -1440402927238992854
+      HeroWarrior_108: -3149473014577705961
+      HeroWarrior_109: -1800887462144092495
+      HeroWarrior_11: -4060129694857897278
+      HeroWarrior_110: 453705573789717877
+      HeroWarrior_111: 4331828902547225169
+      HeroWarrior_112: -3465737842260001359
+      HeroWarrior_113: -8498852086353670889
+      HeroWarrior_114: 5342247357266022397
+      HeroWarrior_115: -3860954421867897947
+      HeroWarrior_116: -7780082364003825006
+      HeroWarrior_117: 7047002652063359978
+      HeroWarrior_118: -2037210850464741949
+      HeroWarrior_119: 3911052789948790439
+      HeroWarrior_12: 5070949921411638482
+      HeroWarrior_120: 7735295938024312347
+      HeroWarrior_121: -449644309079132016
+      HeroWarrior_122: 3319238205884035450
+      HeroWarrior_123: 1208638419572156886
+      HeroWarrior_124: -5293464411042602368
+      HeroWarrior_125: 2729246940159801940
+      HeroWarrior_126: 1462078416206299411
+      HeroWarrior_127: -1657534791125872275
+      HeroWarrior_128: -1270669107827436661
+      HeroWarrior_129: 721132713373134164
+      HeroWarrior_13: 1029058608687057294
+      HeroWarrior_14: 2433229566347978820
+      HeroWarrior_15: 3159477470004335465
+      HeroWarrior_16: 612856773963875785
+      HeroWarrior_17: 1490364917671846906
+      HeroWarrior_18: -3521318738248447806
+      HeroWarrior_19: -5759272361331298049
+      HeroWarrior_2: 4762908020070400700
+      HeroWarrior_20: 4929236773626794832
+      HeroWarrior_21: -6900250183280669269
+      HeroWarrior_22: -3148595656704354282
+      HeroWarrior_23: -3758509376416306840
+      HeroWarrior_24: -8545816083991299508
+      HeroWarrior_25: -4403007254593565084
+      HeroWarrior_26: -6537323581919192474
+      HeroWarrior_27: 7541399212007518543
+      HeroWarrior_28: -8425840243931148203
+      HeroWarrior_29: 2295915247882292074
+      HeroWarrior_3: -8127329530483101736
+      HeroWarrior_30: 4555154542130836713
+      HeroWarrior_31: 2451335170786448716
+      HeroWarrior_32: -7705613927942006978
+      HeroWarrior_33: 2982279349483140613
+      HeroWarrior_34: 5156454696008901702
+      HeroWarrior_35: 4168985088679606410
+      HeroWarrior_36: -1415202851166812155
+      HeroWarrior_37: 5542058431281464236
+      HeroWarrior_38: -5530515342722151700
+      HeroWarrior_39: -3989990103077713225
+      HeroWarrior_4: -2966511516980216993
+      HeroWarrior_40: 892677335242272234
+      HeroWarrior_41: 7272976190960442435
+      HeroWarrior_42: 6055850603737986036
+      HeroWarrior_43: -5167261141230449272
+      HeroWarrior_44: -3982502928148065299
+      HeroWarrior_45: -3470695694987570420
+      HeroWarrior_46: -6746891273845992389
+      HeroWarrior_47: -8508702498339712480
+      HeroWarrior_48: -1876855885426719372
+      HeroWarrior_49: 4685896325305116833
+      HeroWarrior_5: 3282953783924393824
+      HeroWarrior_50: 1169789368200403981
+      HeroWarrior_51: 8698958752004200845
+      HeroWarrior_52: -766760235503758404
+      HeroWarrior_53: -5033343626970917386
+      HeroWarrior_54: 2930246370821262350
+      HeroWarrior_55: 533274775945410570
+      HeroWarrior_56: -1710078260499203022
+      HeroWarrior_57: -3287849229406899960
+      HeroWarrior_58: -2897675821093938481
+      HeroWarrior_59: -629031451712246339
+      HeroWarrior_6: -7070606672124328911
+      HeroWarrior_60: 7585107106091197343
+      HeroWarrior_61: -7377106074548621623
+      HeroWarrior_62: 6122161962500197028
+      HeroWarrior_63: -4712540594745622242
+      HeroWarrior_64: 4180326871187508943
+      HeroWarrior_65: -7851674406835641761
+      HeroWarrior_66: -4164446018295493688
+      HeroWarrior_67: 6232953401798688702
+      HeroWarrior_68: -3889967799358836286
+      HeroWarrior_69: 1214229819215438144
+      HeroWarrior_7: -6611752380266620308
+      HeroWarrior_70: 9001510534522664518
+      HeroWarrior_71: 1504127430899604142
+      HeroWarrior_72: -4968923891232028535
+      HeroWarrior_73: -7554987212622767687
+      HeroWarrior_74: 8297394449053672171
+      HeroWarrior_75: -4188708988418612301
+      HeroWarrior_76: 4010088970499067903
+      HeroWarrior_77: -1159831391743749972
+      HeroWarrior_78: -7260516609620537284
+      HeroWarrior_79: -4711096263516547028
+      HeroWarrior_8: -3343323091309108737
+      HeroWarrior_80: 5869684135522751090
+      HeroWarrior_81: 8936278551830557249
+      HeroWarrior_82: 2105953809453074734
+      HeroWarrior_83: -2110914121735007504
+      HeroWarrior_84: -5447180038732228262
+      HeroWarrior_85: 1876222515443162255
+      HeroWarrior_86: 5926484690670984365
+      HeroWarrior_87: 3795393538925841982
+      HeroWarrior_88: 4240206507172768258
+      HeroWarrior_89: 2579270345917849351
+      HeroWarrior_9: -442933560531500983
+      HeroWarrior_90: 4391827945849770240
+      HeroWarrior_91: 8972211616373885641
+      HeroWarrior_92: 1823176325141031811
+      HeroWarrior_93: 2373314771477667970
+      HeroWarrior_94: -7104590005788004154
+      HeroWarrior_95: 8352633174954405096
+      HeroWarrior_96: -1067245875949590172
+      HeroWarrior_97: -5355925573366475781
+      HeroWarrior_98: 8580815573981668659
+      HeroWarrior_99: -2738228535965238425
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
