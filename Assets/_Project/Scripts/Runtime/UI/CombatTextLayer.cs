@@ -114,7 +114,7 @@ namespace RPG.UI
             if (cam == null) return;
 
             float t = entry.Age / lifetime;
-            float scale = canvas != null ? canvas.scaleFactor : 1f;
+            float scale = canvas != null ? canvas.rootCanvas.scaleFactor : 1f;
             Vector3 screen = cam.WorldToScreenPoint(entry.WorldPosition);
             entry.Text.rectTransform.position = screen + Vector3.up * (rise * scale * t);
 

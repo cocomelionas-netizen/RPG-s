@@ -1686,12 +1686,16 @@ namespace RPG.EditorTools
             combatText.transform.SetParent(canvasObject.transform, false);
             Stretch((RectTransform)combatText.transform);
             combatText.AddComponent<CombatTextLayer>();
+            // The layers that move every frame get canvases of their own, so they do not rebuild the rest of the HUD.
+            // Nothing in them is clicked (no raycaster).
+            combatText.AddComponent<Canvas>();
 
             // Names over units first, so frames and windows are drawn over them.
             var unitNameplates = new GameObject("Unit Nameplates", typeof(RectTransform));
             unitNameplates.transform.SetParent(canvasObject.transform, false);
             Stretch((RectTransform)unitNameplates.transform);
             unitNameplates.AddComponent<UnitNameplates>();
+            unitNameplates.AddComponent<Canvas>();
 
             // These build their own contents at runtime. Layout: player top left, target top middle,
             // minimap top right, messages bottom left, action bar and experience bottom middle.
@@ -1705,6 +1709,7 @@ namespace RPG.EditorTools
             nameplates.transform.SetParent(canvasObject.transform, false);
             Stretch((RectTransform)nameplates.transform);
             nameplates.AddComponent<NpcNameplates>();
+            nameplates.AddComponent<Canvas>();
 
             var vendorWindow = new GameObject("Vendor Window", typeof(RectTransform));
             vendorWindow.transform.SetParent(canvasObject.transform, false);

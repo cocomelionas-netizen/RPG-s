@@ -55,6 +55,8 @@ namespace RPG.UI
             background.raycastTarget = false;
             UIFactory.Place(background.rectTransform, new Vector2(0.5f, 0.5f), Vector2.zero, Vector2.one * mapSize);
             background.gameObject.AddComponent<RectMask2D>();
+            // The map and its dots move every frame: a canvas of their own keeps that from rebuilding the whole HUD.
+            background.gameObject.AddComponent<Canvas>();
             view = background.rectTransform;
 
             picture = new GameObject("Map", typeof(RectTransform)).AddComponent<RawImage>();
