@@ -320,7 +320,8 @@ namespace RPG.Progression
             if (SlotOf(spell) >= 0) return;
             for (int i = 0; i < bar.Count; i++)
             {
-                if (bar[i] >= 0) continue;
+                // Only empty slots (-1): Attack (-2) and items are kept.
+                if (bar[i] != -1) continue;
                 bar[i] = spell;
                 return;
             }

@@ -168,7 +168,7 @@ namespace RPG.Progression
             spentPoints.OnValueChanged += OnPointsChanged;
             experienceToSpend.OnValueChanged += OnExperienceToSpendChanged;
             if (inventory != null) inventory.Changed += OnEquipmentChanged;
-            if (effects != null) effects.Changed += OnEquipmentChanged;
+            if (effects != null) effects.Changed += OnEffectsChanged;
 
             if (IsServer)
             {
@@ -193,12 +193,25 @@ namespace RPG.Progression
             spentPoints.OnValueChanged -= OnPointsChanged;
             experienceToSpend.OnValueChanged -= OnExperienceToSpendChanged;
             if (inventory != null) inventory.Changed -= OnEquipmentChanged;
-            if (effects != null) effects.Changed -= OnEquipmentChanged;
+            if (effects != null) effects.Changed -= OnEffectsChanged;
         }
 
         private void OnEquipmentChanged()
         {
             ApplyClassAndLevel(false);
+        }
+
+        // Effects change often in combat (one change can arrive as several list events): the stats are recounted once,
+        // at the end of the frame, and that alone does not count as a change worth saving the character for.
+        private bool effectsChanged;
+
+        private void OnEffectsChanged() => effectsChanged = true;
+
+        private void LateUpdate()
+        {
+            if (!effectsChanged) return;
+            effectsChanged = false;
+            ApplyClassAndLevel(false, notify: false);
         }
 
         private void OnPointsChanged(AttributeSet previous, AttributeSet current)
@@ -335,7 +348,7 @@ namespace RPG.Progression
         }
 
         /// <summary>Applies the stats and look of the current class at the current level.</summary>
-        private void ApplyClassAndLevel(bool healFully)
+        private void ApplyClassAndLevel(bool healFully, bool notify = true)
         {
             CharacterClassDefinition definition = Class;
             if (definition == null) return;
@@ -370,7 +383,7 @@ namespace RPG.Progression
                 if (mana != null) mana.ServerSetMax(definition.MaxManaAt(currentLevel) + manaBonus, healFully);
             }
 
-            Changed?.Invoke();
+            if (notify) Changed?.Invoke();
         }
     }
 }

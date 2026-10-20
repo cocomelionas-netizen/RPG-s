@@ -300,21 +300,50 @@ namespace RPG.Dungeons
             DungeonInstance instance = InstanceAt(position);
             if (instance == null) return false;
             Portal entrance = WorldEntranceOf(instance.Definition);
-            destination = entrance != null ? (Vector2)entrance.transform.position + new Vector2(0f, -0.8f) : Vector2.zero;
+            if (entrance == null) return false;
+            destination = (Vector2)entrance.transform.position + new Vector2(0f, -0.8f);
             return true;
         }
 
-        /// <summary>The entrance in the world that opens <paramref name="dungeon"/> (or any world entrance when there is none).</summary>
+        /// <summary>
+        /// The entrance in the world that opens <paramref name="dungeon"/>; for a dungeon entered through a door inside
+        /// another (Salmaster's Descent, Telamont's Sanctuary) the outer dungeon's entrance; any world entrance only when
+        /// there is none at all.
+        /// </summary>
         private Portal WorldEntranceOf(DungeonDefinition dungeon)
         {
-            Portal any = null;
+            for (int depth = 0; dungeon != null && depth < 8; depth++)
+            {
+                Portal own = DirectWorldEntrance(dungeon);
+                if (own != null) return own;
+                dungeon = OuterDungeonOf(dungeon);
+            }
+            foreach (Portal portal in Portal.Portals)
+                if (portal.Kind == PortalKind.DungeonEntrance && portal.Instance == null && InstanceAt(portal.transform.position) == null)
+                    return portal;
+            return null;
+        }
+
+        private Portal DirectWorldEntrance(DungeonDefinition dungeon)
+        {
             foreach (Portal portal in Portal.Portals)
             {
                 if (portal.Kind != PortalKind.DungeonEntrance || portal.Instance != null || InstanceAt(portal.transform.position) != null) continue;
                 if (portal.Dungeon == dungeon) return portal;
-                if (any == null || portal.Dungeon == null) any = portal;
             }
-            return any;
+            return null;
+        }
+
+        /// <summary>The dungeon with a door into <paramref name="dungeon"/>, or null.</summary>
+        private DungeonDefinition OuterDungeonOf(DungeonDefinition dungeon)
+        {
+            foreach (DungeonDefinition outer in dungeons)
+            {
+                if (outer == null || outer.doors == null) continue;
+                foreach (DungeonDoor door in outer.doors)
+                    if (door.target == dungeon) return outer;
+            }
+            return null;
         }
 
         /// <summary>The instance whose area contains a position (null in the world).</summary>

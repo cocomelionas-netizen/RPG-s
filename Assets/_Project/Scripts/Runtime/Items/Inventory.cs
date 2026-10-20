@@ -456,9 +456,10 @@ namespace RPG.Items
             else if (item.use != ItemUse.None) RequestUse(bagIndex);
         }
 
-        public void RequestBuy(Vendor vendor, int stockIndex)
+        /// <param name="expectedAffix">The quality the player saw (the vendor's known affix id); -1 buys whatever is there.</param>
+        public void RequestBuy(Vendor vendor, int stockIndex, int expectedAffix = -1)
         {
-            if (IsOwner && vendor != null) BuyRpc(vendor.Index, stockIndex);
+            if (IsOwner && vendor != null) BuyRpc(vendor.Index, stockIndex, expectedAffix);
         }
 
         /// <summary>Owner: opens a chest the player stands next to.</summary>
@@ -526,9 +527,9 @@ namespace RPG.Items
         }
 
         [Rpc(SendTo.Server)]
-        private void BuyRpc(int vendorIndex, int stockIndex, RpcParams rpcParams = default)
+        private void BuyRpc(int vendorIndex, int stockIndex, int expectedAffix, RpcParams rpcParams = default)
         {
-            if (rpcParams.Receive.SenderClientId == OwnerClientId) ServerBuy(Vendor.Get(vendorIndex), stockIndex);
+            if (rpcParams.Receive.SenderClientId == OwnerClientId) ServerBuy(Vendor.Get(vendorIndex), stockIndex, expectedAffix);
         }
 
         [Rpc(SendTo.Server)]
@@ -1062,7 +1063,9 @@ namespace RPG.Items
         }
 
         /// <summary>Server: buys one item from a vendor the player stands next to.</summary>
-        public bool ServerBuy(Vendor vendor, int stockIndex)
+        /// <param name="expectedAffix">The quality the buyer saw; when the vendor restocked since (another quality now), the
+        /// sale is refused and the buyer gets the new stock. -1: any.</param>
+        public bool ServerBuy(Vendor vendor, int stockIndex, int expectedAffix = -1)
         {
             if (!IsServer || health.IsDead || !IsNear(vendor)) return false;
             ItemDefinition[] stock = vendor.Definition.stock;
@@ -1076,6 +1079,11 @@ namespace RPG.Items
                 return false;
             }
             int affixId = vendor.ServerAffix(stockIndex);
+            if (expectedAffix >= 0 && expectedAffix != affixId)
+            {
+                VendorStockRpc(vendor.Index, vendor.ServerStockSnapshot(), vendor.ServerAffixSnapshot());
+                return false;
+            }
             AffixDefinition affix = affixes != null ? affixes.Get(affixId) : null;
             int price = BuyPrice(item, affix);
             if (gold.Value < price)

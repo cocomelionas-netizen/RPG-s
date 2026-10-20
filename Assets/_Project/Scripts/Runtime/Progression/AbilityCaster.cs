@@ -504,9 +504,19 @@ namespace RPG.Progression
                 case AbilityKind.Charge:
                     if (TryGetComponent(out PlayerNetworkMovement network))
                     {
-                        // Rush to the target, stopping just short of it.
+                        // Rush to the target, stopping just short of it on walkable ground (never inside a wall): from the
+                        // target back towards the caster until a spot is free.
                         Vector2 away = self - effectTarget;
-                        network.ServerTeleport(effectTarget + (away.sqrMagnitude > 0.0001f ? away.normalized : Vector2.down) * 0.6f);
+                        Vector2 back = away.sqrMagnitude > 0.0001f ? away.normalized : Vector2.down;
+                        WorldNavigation chargeMap = WorldNavigation.At(effectTarget);
+                        float reach = Mathf.Max(0.6f, away.magnitude);
+                        for (float step = 0.6f; step <= reach; step += 0.3f)
+                        {
+                            Vector2 spot = effectTarget + back * step;
+                            if (chargeMap != null && !chargeMap.IsWalkable(spot)) continue;
+                            network.ServerTeleport(spot);
+                            break;
+                        }
                     }
                     Strike(ability, rank, attributes, target);
                     break;

@@ -121,7 +121,11 @@ namespace RPG.Monsters
             WorldNavigation navigation = WorldNavigation.At(next);
             if (navigation != null && !navigation.IsWalkable(next)) return;
             SetPosition(next);
+            // Clients see the step too (sent at most at the send rate).
+            nudged = true;
         }
+
+        private bool nudged;
 
         /// <summary>Server only: instantly places the monster somewhere (for example back home when it is stuck).</summary>
         public void ServerTeleport(Vector2 position)
@@ -201,8 +205,11 @@ namespace RPG.Monsters
 
             sendTimer += Time.deltaTime;
             bool stoppedOrStarted = moving != sentMoving;
-            if (stoppedOrStarted || (moving && sendTimer >= 1f / sendRate) || Vector2.Dot(facing, state.Value.Facing) < 0.999f)
+            if (stoppedOrStarted || ((moving || nudged) && sendTimer >= 1f / sendRate) || Vector2.Dot(facing, state.Value.Facing) < 0.999f)
+            {
+                nudged = false;
                 WriteState();
+            }
         }
 
         private void SetPosition(Vector2 position)

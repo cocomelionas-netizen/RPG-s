@@ -239,7 +239,7 @@ namespace RPG.UI
         private void Buy(int index)
         {
             Inventory inventory = UIFactory.LocalPlayer<Inventory>();
-            if (inventory != null && shown != null) inventory.RequestBuy(shown, index);
+            if (inventory != null && shown != null) inventory.RequestBuy(shown, index, shown.KnownAffix(index));
         }
 
         private void Update()
