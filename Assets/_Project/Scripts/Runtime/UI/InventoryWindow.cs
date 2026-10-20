@@ -15,6 +15,7 @@ namespace RPG.UI
     /// Builds its own UI; place it on a RectTransform that fills the HUD canvas.
     /// </summary>
     [RequireComponent(typeof(RectTransform))]
+    [DefaultExecutionOrder(-20)]
     public class InventoryWindow : MonoBehaviour
     {
         [SerializeField, Min(20f)] private float slotSize = 62f;
@@ -249,6 +250,8 @@ namespace RPG.UI
 
         private Inventory watched;
         private bool dirty = true;
+        // The slot the tooltip text was built for (rebuilt when the hovered slot changes or the window redraws).
+        private ItemSlotView tooltipFor;
         private int shownGem = int.MinValue;
         private int shownGold = -1;
         private float nextRefresh;
@@ -268,19 +271,24 @@ namespace RPG.UI
             }
 
             PlayerInputReader input = inventory.GetComponent<PlayerInputReader>();
-            // Esc closes the bag, unless it is only cancelling a gem being set.
-            if (input != null && input.enabled && (input.InventoryPressed || input.CancelPressed && window.activeSelf && pendingGem < 0)) Toggle();
+            // Esc closes the bag, unless it is only cancelling a gem being set (then no other window closes on it either).
+            if (pendingGem >= 0 && input != null && input.enabled && input.CancelPressed)
+            {
+                pendingGem = -1;
+                OpenWindow.HandleEscape();
+            }
+            else if (input != null && input.enabled && (input.InventoryPressed || OpenWindow.EscapeCloses(input) && window.activeSelf)) Toggle();
             if (!window.activeSelf)
             {
                 tooltip.gameObject.SetActive(false);
                 return;
             }
 
-            // The chosen gem moved or was used up, or Esc: stop waiting for a target.
+            // The chosen gem moved or was used up: stop waiting for a target.
             if (pendingGem >= 0)
             {
                 ItemDefinition gem = inventory.Definition(inventory.GetBagSlot(pendingGem));
-                if (gem == null || !gem.isGem || (input != null && input.CancelPressed)) pendingGem = -1;
+                if (gem == null || !gem.isGem) pendingGem = -1;
             }
 
             // The slots and stats are redrawn when the bag changed (or the gem being set, or gold), and now and then
@@ -305,6 +313,7 @@ namespace RPG.UI
                     if (i == pendingGem) bagSlots[i].Border.effectColor = PendingGemBorder;
                 }
                 ShowStats();
+                tooltipFor = null;
             }
             ShowTooltip();
         }
@@ -346,43 +355,50 @@ namespace RPG.UI
 
         private void ShowTooltip()
         {
-            ItemDefinition item = null;
-            ItemStack hoveredStack = ItemStack.Empty;
-            if (hovered != null)
+            if (hovered == null)
             {
-                int bagIndex = bagSlots.IndexOf(hovered);
-                int equipIndex = equipmentSlots.IndexOf(hovered);
-                ItemStack stack = bagIndex >= 0 ? inventory.GetBagSlot(bagIndex)
-                    : equipIndex >= 0 ? inventory.GetEquippedAt(equipIndex) : ItemStack.Empty;
-                item = inventory.Definition(stack);
-                hoveredStack = stack;
-                string className = VendorWindow.ClassName(item, inventory.GetComponent<CharacterProgress>());
-                string description = inventory.Describe(stack, className);
-                if (item != null && equipIndex >= 0)
-                    tooltipText.text = description.Replace("Click to equip", "Click to take off");
-                else if (item != null && TransmuteWindow.IsOpen)
-                    tooltipText.text = description.Replace("Click to equip", "").Replace("Click to use", "").Replace("Click, then click the item to set it into", "").TrimEnd()
-                                       + "\nClick to put into the transmuter";
-                else if (item != null && VendorWindow.CurrentVendor != null)
-                    tooltipText.text = description.Replace("Click to equip", "").Replace("Click to use", "").Replace("Click, then click the item to set it into", "").TrimEnd()
-                                       + $"\nClick to sell for {inventory.SellPrice(stack)} gold";
-                else if (item != null)
-                    tooltipText.text = description;
+                tooltipFor = null;
+                if (tooltip.gameObject.activeSelf) tooltip.gameObject.SetActive(false);
+                return;
             }
+            if (hovered != tooltipFor) DrawTooltip();
+            if (!tooltip.gameObject.activeSelf) return;
 
-            tooltip.gameObject.SetActive(item != null);
-            if (item == null) return;
-
-            tooltipText.color = ItemDefinition.RarityColor(inventory.Quality(hoveredStack));
-            // The source game's affixes can add many stats: the tooltip grows with its text.
-            tooltip.sizeDelta = new Vector2(250f, Mathf.Max(60f, tooltipText.preferredHeight + 14f));
             var canvas = GetComponentInParent<Canvas>();
             float scale = canvas != null ? canvas.scaleFactor : 1f;
             Vector2 pointer = UnityEngine.InputSystem.Mouse.current != null
                 ? UnityEngine.InputSystem.Mouse.current.position.ReadValue()
                 : (Vector2)hovered.transform.position;
             tooltip.anchoredPosition = UIFactory.KeepOnScreen(tooltip, pointer / scale + new Vector2(-12f, 12f), scale);
-            tooltip.SetAsLastSibling();
+        }
+
+        private void DrawTooltip()
+        {
+            tooltipFor = hovered;
+            int bagIndex = bagSlots.IndexOf(hovered);
+            int equipIndex = equipmentSlots.IndexOf(hovered);
+            ItemStack stack = bagIndex >= 0 ? inventory.GetBagSlot(bagIndex)
+                : equipIndex >= 0 ? inventory.GetEquippedAt(equipIndex) : ItemStack.Empty;
+            ItemDefinition item = inventory.Definition(stack);
+            string className = VendorWindow.ClassName(item, inventory.GetComponent<CharacterProgress>());
+            string description = inventory.Describe(stack, className);
+            if (item != null && equipIndex >= 0)
+                tooltipText.text = description.Replace("Click to equip", "Click to take off");
+            else if (item != null && TransmuteWindow.IsOpen)
+                tooltipText.text = description.Replace("Click to equip", "").Replace("Click to use", "").Replace("Click, then click the item to set it into", "").TrimEnd()
+                                   + "\nClick to put into the transmuter";
+            else if (item != null && VendorWindow.CurrentVendor != null)
+                tooltipText.text = description.Replace("Click to equip", "").Replace("Click to use", "").Replace("Click, then click the item to set it into", "").TrimEnd()
+                                   + $"\nClick to sell for {inventory.SellPrice(stack)} gold";
+            else if (item != null)
+                tooltipText.text = description;
+
+            tooltip.gameObject.SetActive(item != null);
+            if (item == null) return;
+
+            tooltipText.color = ItemDefinition.RarityColor(inventory.Quality(stack));
+            // The source game's affixes can add many stats: the tooltip grows with its text.
+            tooltip.sizeDelta = new Vector2(250f, Mathf.Max(60f, tooltipText.preferredHeight + 14f));
         }
     }
 }

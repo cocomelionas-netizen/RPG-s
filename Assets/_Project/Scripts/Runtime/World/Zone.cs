@@ -17,7 +17,7 @@ namespace RPG.World
         private static readonly List<Zone> Zones = new List<Zone>();
 
         /// <summary>Every named area in the scene.</summary>
-        public static IReadOnlyList<Zone> All => Zones;
+        public static ListView<Zone> All => new ListView<Zone>(Zones);
 
         public string DisplayName => displayName;
         public float Radius => radius;

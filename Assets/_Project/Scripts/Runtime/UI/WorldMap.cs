@@ -90,7 +90,7 @@ namespace RPG.UI
             if (input != null && input.enabled)
             {
                 if (input.MapPressed) window.SetActive(!window.activeSelf);
-                else if (input.CancelPressed && window.activeSelf) window.SetActive(false);
+                else if (OpenWindow.EscapeCloses(input) && window.activeSelf) window.SetActive(false);
             }
             if (window.activeSelf) Draw(self);
         }
@@ -203,7 +203,7 @@ namespace RPG.UI
                 created.horizontalOverflow = HorizontalWrapMode.Overflow;
                 created.verticalOverflow = VerticalWrapMode.Overflow;
                 created.fontStyle = FontStyle.Bold;
-                created.gameObject.AddComponent<Outline>().effectColor = new Color(0f, 0f, 0f, 0.9f);
+                created.GetComponent<Outline>().effectColor = new Color(0f, 0f, 0f, 0.9f);
                 labels.Add(created);
             }
             Text label = labels[usedLabels++];

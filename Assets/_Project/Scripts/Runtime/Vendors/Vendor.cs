@@ -37,7 +37,7 @@ namespace RPG.Vendors
         public string DisplayName => definition != null ? definition.displayName : name;
 
         /// <summary>Every vendor in the scene, sorted by name.</summary>
-        public static IReadOnlyList<Vendor> All => Vendors;
+        public static ListView<Vendor> All => new ListView<Vendor>(Vendors);
 
         public int Index => Vendors.IndexOf(this);
 

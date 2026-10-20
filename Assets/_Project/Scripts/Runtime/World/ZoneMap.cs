@@ -30,8 +30,9 @@ namespace RPG.World
 
         private static readonly List<ZoneMap> Maps = new List<ZoneMap>();
 
-        public static IReadOnlyList<ZoneMap> All => Maps;
-        public IReadOnlyList<Label> Labels => labels;
+        public static ListView<ZoneMap> All => new ListView<ZoneMap>(Maps);
+        /// <summary>The labels (the array itself, so walking it allocates nothing).</summary>
+        public Label[] Labels => labels;
 
         public void Configure(Grid cells, int size, string[] names, string[] blockRows, Label[] mapLabels)
         {

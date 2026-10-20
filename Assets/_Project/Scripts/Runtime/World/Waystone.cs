@@ -24,7 +24,7 @@ namespace RPG.World
         public float UseRange => useRange;
 
         /// <summary>Every waystone in the scene, by id.</summary>
-        public static IReadOnlyList<Waystone> All => Stones;
+        public static ListView<Waystone> All => new ListView<Waystone>(Stones);
 
         public static Waystone Get(int stoneId)
         {

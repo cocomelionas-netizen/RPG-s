@@ -255,7 +255,7 @@ namespace RPG.UI
             PlayerInputReader input = inventory != null ? inventory.GetComponent<PlayerInputReader>() : null;
             bool walkedAway = inventory == null || shown == null
                               || Vector2.Distance(inventory.transform.position, shown.transform.position) > shown.TradeRange + WalkAwayDistance;
-            if (walkedAway || (input != null && input.CancelPressed))
+            if (walkedAway || OpenWindow.EscapeCloses(input))
             {
                 Hide();
                 return;

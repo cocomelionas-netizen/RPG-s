@@ -57,7 +57,7 @@ namespace RPG.World
         private Health picker;
 
         /// <summary>Every spawned chest (on every peer).</summary>
-        public static IReadOnlyList<LootChest> All => Chests;
+        public static ListView<LootChest> All => new ListView<LootChest>(Chests);
 
         public string DisplayName => displayName;
         public int Level => IsSpawned && networkLevel.Value > 0 ? networkLevel.Value : level;

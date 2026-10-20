@@ -15,6 +15,7 @@ namespace RPG.UI
     /// Tome. ACTIONS holds Attack. Builds its own UI; place it on a RectTransform that fills the HUD canvas.
     /// </summary>
     [RequireComponent(typeof(RectTransform))]
+    [DefaultExecutionOrder(-20)]
     public class SpellbookWindow : MonoBehaviour
     {
         private const float Width = 474f;
@@ -78,6 +79,7 @@ namespace RPG.UI
         private RectTransform tooltip;
         private Text tooltipText;
         private System.Func<string> tooltipContent;
+        private System.Func<string> shownTooltip;
 
         private class Row
         {
@@ -153,12 +155,22 @@ namespace RPG.UI
 
             BuildTooltip();
             window.SetActive(false);
+            VendorWindow.Opened += CloseForTrade;
+            TransmuteWindow.Opened += CloseForTrade;
         }
 
         private void OnDestroy()
         {
             if (instance == this) instance = null;
             PendingSpell = -1;
+            VendorWindow.Opened -= CloseForTrade;
+            TransmuteWindow.Opened -= CloseForTrade;
+        }
+
+        /// <summary>A vendor's or the transmuter's window opens where this one stands: it closes.</summary>
+        private void CloseForTrade()
+        {
+            if (window.activeSelf) Toggle();
         }
 
         private static Text AddText(RectTransform parent, string content, int size, TextAnchor alignment, Vector2 topLeft, Vector2 boxSize)
@@ -340,8 +352,12 @@ namespace RPG.UI
             if (input != null && input.enabled)
             {
                 if (input.SpellbookPressed) Toggle();
-                else if (input.CancelPressed && PendingSpell != -1) PendingSpell = -1;
-                else if (input.CancelPressed && window.activeSelf) Toggle();
+                else if (input.CancelPressed && PendingSpell != -1)
+                {
+                    PendingSpell = -1;
+                    OpenWindow.HandleEscape();
+                }
+                else if (OpenWindow.EscapeCloses(input) && window.activeSelf) Toggle();
             }
             if (!window.activeSelf)
             {
@@ -356,7 +372,7 @@ namespace RPG.UI
             int state = StateOf(spellbook, progress);
             if (!rebuilt && state == shownState && Time.unscaledTime < nextRefresh)
             {
-                UpdateTooltip();
+                UpdateTooltip(false);
                 return;
             }
             shownState = state;
@@ -398,17 +414,28 @@ namespace RPG.UI
                 row.Plus.SetActive(known && spellbook.NextRankCost(row.Spell) > 0);
             }
             footer.text = $"Experience to spend: <color=#{CostHex}>{progress.ExperienceToSpend}xp</color>";
-            UpdateTooltip();
+            UpdateTooltip(true);
         }
 
-        private void UpdateTooltip()
+        /// <summary>
+        /// Shows the hovered element's tooltip. Its text is built when the hovered element changes or the window redraws
+        /// (<paramref name="refresh"/>), not every frame; only its position follows the pointer.
+        /// </summary>
+        private void UpdateTooltip(bool refresh)
         {
             bool show = tooltipContent != null;
             if (tooltip.gameObject.activeSelf != show) tooltip.gameObject.SetActive(show);
-            if (!show) return;
-            tooltipText.text = tooltipContent();
-            tooltip.sizeDelta = new Vector2(260f, tooltipText.preferredHeight + 14f);
-            tooltip.SetAsLastSibling();
+            if (!show)
+            {
+                shownTooltip = null;
+                return;
+            }
+            if (refresh || tooltipContent != shownTooltip)
+            {
+                shownTooltip = tooltipContent;
+                tooltipText.text = tooltipContent();
+                tooltip.sizeDelta = new Vector2(260f, tooltipText.preferredHeight + 14f);
+            }
             var canvas = GetComponentInParent<Canvas>();
             float scale = canvas != null ? canvas.scaleFactor : 1f;
             Vector2 pointer = UnityEngine.InputSystem.Mouse.current != null ? UnityEngine.InputSystem.Mouse.current.position.ReadValue() : Vector2.zero;

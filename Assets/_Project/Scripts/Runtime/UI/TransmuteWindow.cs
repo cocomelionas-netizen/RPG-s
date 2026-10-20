@@ -50,6 +50,10 @@ namespace RPG.UI
         private Text recipeText;
         private Text recipePageText;
         private int recipePage;
+        // The grid and the recipe list are redrawn when the bag or the grid changed (or the page), not every frame.
+        private bool dirty;
+        private Inventory watched;
+        private readonly List<int> placedSlots = new List<int>();
 
         /// <summary>Whether the transmute window is open (clicking bag items then puts them in).</summary>
         public static bool IsOpen => instance != null && instance.window.activeSelf;
@@ -110,21 +114,21 @@ namespace RPG.UI
             confirmButton.onClick.AddListener(Confirm);
             Button recipes = UIFactory.CreateButton("Recipes", rect, SlotColor, "Recipes", 15);
             UIFactory.Place((RectTransform)recipes.transform, new Vector2(1f, 1f), new Vector2(-14f, below - 48f), new Vector2(110f, 42f));
-            recipes.onClick.AddListener(() => recipePanel.SetActive(!recipePanel.activeSelf));
+            recipes.onClick.AddListener(() => { recipePanel.SetActive(!recipePanel.activeSelf); dirty = true; });
 
             // The recipe list, beside the grid.
             Image list = UIFactory.CreateImage("Recipe List", rect, PanelColor);
             recipePanel = list.gameObject;
-            UIFactory.Place(list.rectTransform, new Vector2(1f, 1f), new Vector2(Width + 360f + 8f, 0f), new Vector2(360f, height));
+            UIFactory.Place(list.rectTransform, new Vector2(1f, 1f), new Vector2(360f + 8f, 0f), new Vector2(360f, height));
             list.rectTransform.pivot = new Vector2(1f, 1f);
             list.gameObject.AddComponent<Outline>().effectColor = new Color(0.45f, 0.36f, 0.6f, 0.9f);
             recipeText = Label(list.rectTransform, 13, TextAnchor.UpperLeft, new Vector2(12f, -12f), new Vector2(336f, height - 70f));
             Button previous = UIFactory.CreateButton("Previous", list.rectTransform, SlotColor, "<", 18);
             UIFactory.Place((RectTransform)previous.transform, new Vector2(0f, 0f), new Vector2(12f, 12f), new Vector2(60f, 34f));
-            previous.onClick.AddListener(() => recipePage = Mathf.Max(0, recipePage - 1));
+            previous.onClick.AddListener(() => { recipePage = Mathf.Max(0, recipePage - 1); dirty = true; });
             Button next = UIFactory.CreateButton("Next", list.rectTransform, SlotColor, ">", 18);
             UIFactory.Place((RectTransform)next.transform, new Vector2(1f, 0f), new Vector2(-12f, 12f), new Vector2(60f, 34f));
-            next.onClick.AddListener(() => recipePage++);
+            next.onClick.AddListener(() => { recipePage++; dirty = true; });
             recipePageText = Label(list.rectTransform, 14, TextAnchor.MiddleCenter, new Vector2(80f, -height + 46f), new Vector2(200f, 34f));
             recipePanel.SetActive(false);
 
@@ -134,7 +138,10 @@ namespace RPG.UI
         private void OnDestroy()
         {
             if (instance == this) instance = null;
+            if (watched != null) watched.Changed -= MarkDirty;
         }
+
+        private void MarkDirty() => dirty = true;
 
         private static Text Label(RectTransform parent, int size, TextAnchor alignment, Vector2 topLeft, Vector2 boxSize)
         {
@@ -150,6 +157,7 @@ namespace RPG.UI
             title.text = $"TRANSMUTE\n<size=14>{vendor.DisplayName}, {subtitle}: put items in, then Confirm.</size>";
             for (int i = 0; i < bagSlots.Length; i++) bagSlots[i] = -1;
             recipePage = 0;
+            dirty = true;
             window.SetActive(true);
             Opened?.Invoke();
         }
@@ -172,19 +180,21 @@ namespace RPG.UI
             if (gridIndex < 0) return;
             bagSlots[gridIndex] = bagIndex;
             itemIds[gridIndex] = stack.ItemId;
+            dirty = true;
         }
 
         private void Clear(int gridIndex)
         {
             bagSlots[gridIndex] = -1;
+            dirty = true;
         }
 
         private List<int> PlacedSlots()
         {
-            var placed = new List<int>();
+            placedSlots.Clear();
             foreach (int slot in bagSlots)
-                if (slot >= 0) placed.Add(slot);
-            return placed;
+                if (slot >= 0) placedSlots.Add(slot);
+            return placedSlots;
         }
 
         private void Confirm()
@@ -207,11 +217,21 @@ namespace RPG.UI
             PlayerInputReader input = inventory != null ? inventory.GetComponent<PlayerInputReader>() : null;
             bool walkedAway = inventory == null || shown == null
                               || Vector2.Distance(inventory.transform.position, shown.transform.position) > shown.TradeRange + WalkAwayDistance;
-            if (walkedAway || (input != null && input.CancelPressed))
+            if (walkedAway || OpenWindow.EscapeCloses(input))
             {
                 Hide();
                 return;
             }
+
+            if (inventory != watched)
+            {
+                if (watched != null) watched.Changed -= MarkDirty;
+                watched = inventory;
+                watched.Changed += MarkDirty;
+                dirty = true;
+            }
+            if (!dirty) return;
+            dirty = false;
 
             for (int i = 0; i < bagSlots.Length; i++)
             {

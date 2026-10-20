@@ -37,6 +37,9 @@ namespace RPG.UI
 
         private ulong lootId;
         private ItemStack[] contents = new ItemStack[0];
+        // The slots are drawn when the contents arrive, the tooltip text when the hovered slot changes (not every frame).
+        private bool dirty;
+        private int tooltipIndex = -1;
 
         private void Awake()
         {
@@ -102,6 +105,8 @@ namespace RPG.UI
             }
             lootId = id;
             contents = stacks;
+            dirty = true;
+            tooltipIndex = -1;
             Layout();
             window.SetActive(true);
         }
@@ -158,6 +163,7 @@ namespace RPG.UI
             window.SetActive(false);
             tooltip.gameObject.SetActive(false);
             hovered = null;
+            tooltipIndex = -1;
             lootId = 0;
         }
 
@@ -169,12 +175,19 @@ namespace RPG.UI
             PlayerInputReader input = inventory != null ? inventory.GetComponent<PlayerInputReader>() : null;
             bool gone = inventory == null || bag == null
                         || Vector2.Distance(inventory.transform.position, bag.transform.position) > inventory.PickupRange + WalkAwayDistance;
-            if (gone || (input != null && input.CancelPressed))
+            if (gone || OpenWindow.EscapeCloses(input))
             {
                 Hide();
                 return;
             }
 
+            if (dirty) DrawSlots(inventory);
+            UpdateTooltip(inventory);
+        }
+
+        private void DrawSlots(Inventory inventory)
+        {
+            dirty = false;
             for (int i = 0; i < contents.Length; i++)
             {
                 ItemSlotView view = slots[i];
@@ -193,7 +206,6 @@ namespace RPG.UI
                 view.Label.text = contents[i].Count > 1 ? $"{inventory.DisplayName(contents[i])} x{contents[i].Count}" : inventory.DisplayName(contents[i]);
                 view.Label.color = rarity;
             }
-            UpdateTooltip(inventory);
         }
 
         private void UpdateTooltip(Inventory inventory)
@@ -201,21 +213,30 @@ namespace RPG.UI
             int index = hovered != null ? slots.IndexOf(hovered) : -1;
             ItemDefinition item = index >= 0 && index < contents.Length ? inventory.Definition(contents[index]) : null;
             tooltip.gameObject.SetActive(item != null);
-            if (item == null) return;
+            if (item == null)
+            {
+                tooltipIndex = -1;
+                return;
+            }
 
-            string className = VendorWindow.ClassName(item, inventory.GetComponent<CharacterProgress>());
-            tooltipText.text = inventory.Describe(contents[index], className)
-                .Replace("Click to equip", "").Replace("Click to use", "").Replace("Click, then click the item to set it into", "").TrimEnd()
-                + "\nClick to take";
-            tooltipText.color = ItemDefinition.RarityColor(inventory.Quality(contents[index]));
-            tooltip.sizeDelta = new Vector2(260f, tooltipText.preferredHeight + 14f);
+            if (index != tooltipIndex) DrawTooltip(inventory, index, item);
             var canvas = GetComponentInParent<Canvas>();
             float scale = canvas != null ? canvas.scaleFactor : 1f;
             Vector2 pointer = UnityEngine.InputSystem.Mouse.current != null
                 ? UnityEngine.InputSystem.Mouse.current.position.ReadValue()
                 : (Vector2)hovered.transform.position;
             tooltip.anchoredPosition = UIFactory.KeepOnScreen(tooltip, pointer / scale + new Vector2(14f, 10f), scale);
-            tooltip.SetAsLastSibling();
+        }
+
+        private void DrawTooltip(Inventory inventory, int index, ItemDefinition item)
+        {
+            tooltipIndex = index;
+            string className = VendorWindow.ClassName(item, inventory.GetComponent<CharacterProgress>());
+            tooltipText.text = inventory.Describe(contents[index], className)
+                .Replace("Click to equip", "").Replace("Click to use", "").Replace("Click, then click the item to set it into", "").TrimEnd()
+                + "\nClick to take";
+            tooltipText.color = ItemDefinition.RarityColor(inventory.Quality(contents[index]));
+            tooltip.sizeDelta = new Vector2(260f, tooltipText.preferredHeight + 14f);
         }
     }
 }

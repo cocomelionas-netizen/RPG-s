@@ -53,7 +53,23 @@ namespace RPG.Combat
         public int BaseMax => maxHealth;
         public float Fraction => max.Value > 0 ? (float)current.Value / max.Value : 0f;
         public bool IsDead => IsSpawned && current.Value <= 0;
-        public string DisplayName => displayName.Value.ToString();
+        /// <summary>The unit's name; the string is made again only when the networked name changes (read every frame by the HUD).</summary>
+        public string DisplayName
+        {
+            get
+            {
+                FixedString32Bytes value = displayName.Value;
+                if (cachedName == null || !value.Equals(cachedNameSource))
+                {
+                    cachedNameSource = value;
+                    cachedName = value.ToString();
+                }
+                return cachedName;
+            }
+        }
+
+        private string cachedName;
+        private FixedString32Bytes cachedNameSource;
         public Faction Faction => faction;
 
         /// <summary>Server only: <see cref="Time.time"/> of the last damage taken.</summary>
@@ -89,7 +105,7 @@ namespace RPG.Combat
         }
 
         /// <summary>Every spawned unit on this peer (for area effects and target searches).</summary>
-        public static IReadOnlyList<Health> Spawned => SpawnedUnits;
+        public static ListView<Health> Spawned => new ListView<Health>(SpawnedUnits);
 
         private StatusEffects effects;
 

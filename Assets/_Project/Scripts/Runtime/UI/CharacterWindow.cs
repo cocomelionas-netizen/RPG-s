@@ -66,6 +66,7 @@ namespace RPG.UI
         private RectTransform tooltip;
         private Text tooltipText;
         private System.Func<string> tooltipContent;
+        private System.Func<string> shownTooltip;
         private CharacterProgress progress;
         private Health health;
         private Mana mana;
@@ -269,6 +270,20 @@ namespace RPG.UI
             ShowPage(0);
             SetSpending(false);
             window.SetActive(false);
+            VendorWindow.Opened += CloseForTrade;
+            TransmuteWindow.Opened += CloseForTrade;
+        }
+
+        private void OnDestroy()
+        {
+            VendorWindow.Opened -= CloseForTrade;
+            TransmuteWindow.Opened -= CloseForTrade;
+        }
+
+        /// <summary>A vendor's or the transmuter's window opens where the sheet stands: the sheet closes.</summary>
+        private void CloseForTrade()
+        {
+            if (window.activeSelf) Toggle();
         }
 
         /// <summary>The worn gear down both sides, and between them the name, level and experience, like the source game's.</summary>
@@ -597,7 +612,7 @@ namespace RPG.UI
             }
 
             var input = progress.GetComponent<PlayerInputReader>();
-            if (input != null && input.enabled && (input.CharacterPressed || input.CancelPressed && window.activeSelf)) Toggle();
+            if (input != null && input.enabled && (input.CharacterPressed || OpenWindow.EscapeCloses(input) && window.activeSelf)) Toggle();
             if (!window.activeSelf)
             {
                 tooltip.gameObject.SetActive(false);
@@ -611,7 +626,7 @@ namespace RPG.UI
             int state = StateOf();
             if (state == shownState && Time.unscaledTime < nextRefresh)
             {
-                UpdateTooltip();
+                UpdateTooltip(false);
                 return;
             }
             shownState = state;
@@ -630,18 +645,28 @@ namespace RPG.UI
             points.text = "";
             if (spending) RefreshEditing();
 
-            UpdateTooltip();
+            UpdateTooltip(true);
         }
 
-        private void UpdateTooltip()
+        /// <summary>
+        /// Shows the hovered element's tooltip. Its text is built when the hovered element changes or the window redraws
+        /// (<paramref name="refresh"/>), not every frame; only its position follows the pointer.
+        /// </summary>
+        private void UpdateTooltip(bool refresh)
         {
             bool show = tooltipContent != null;
             if (tooltip.gameObject.activeSelf != show) tooltip.gameObject.SetActive(show);
-            if (!show) return;
-
-            tooltipText.text = tooltipContent();
-            tooltip.sizeDelta = new Vector2(280f, tooltipText.preferredHeight + 18f);
-            tooltip.SetAsLastSibling();
+            if (!show)
+            {
+                shownTooltip = null;
+                return;
+            }
+            if (refresh || tooltipContent != shownTooltip)
+            {
+                shownTooltip = tooltipContent;
+                tooltipText.text = tooltipContent();
+                tooltip.sizeDelta = new Vector2(280f, tooltipText.preferredHeight + 18f);
+            }
             var canvas = GetComponentInParent<Canvas>();
             float scale = canvas != null ? canvas.scaleFactor : 1f;
             Vector2 pointer = UnityEngine.InputSystem.Mouse.current != null

@@ -45,7 +45,7 @@ namespace RPG.Dungeons
         /// <summary>What it is called on hover and in messages: the dungeon it opens, or where an exit leads.</summary>
         public string Label { get; private set; }
 
-        public static IReadOnlyList<Portal> Portals => All;
+        public static ListView<Portal> Portals => new ListView<Portal>(All);
 
         /// <summary>Sets up a portal created at runtime (dungeon exits) or by the scene builder.</summary>
         public void Configure(PortalKind portalKind, SpriteRenderer visual, DungeonInstance owner, bool needsBossDefeated)

@@ -33,6 +33,9 @@ namespace RPG.UI
         private RectTransform list;
         private readonly List<(Button button, Text name, Text info, Waystone stone)> rows = new List<(Button, Text, Text, Waystone)>();
         private Waystone shown;
+        // What the rows were last drawn for (discovered stones, whether the gold covers a trip): redrawn only on change.
+        private int shownMask = -1;
+        private bool shownCanPay;
 
         public static void Open(Waystone stone)
         {
@@ -82,6 +85,7 @@ namespace RPG.UI
 
             float height = 70f + rows.Count * (rowHeight + 4f) + 14f;
             ((RectTransform)window.transform).sizeDelta = new Vector2(width, height);
+            shownMask = -1;
             window.SetActive(true);
         }
 
@@ -125,7 +129,7 @@ namespace RPG.UI
             PlayerInputReader input = traveller != null ? traveller.GetComponent<PlayerInputReader>() : null;
             bool walkedAway = traveller == null || shown == null
                               || Vector2.Distance(traveller.transform.position, shown.transform.position) > shown.UseRange + WalkAwayDistance;
-            if (walkedAway || (input != null && input.CancelPressed))
+            if (walkedAway || OpenWindow.EscapeCloses(input))
             {
                 Hide();
                 return;
@@ -133,16 +137,25 @@ namespace RPG.UI
 
             var inventory = traveller.GetComponent<Inventory>();
             bool canPay = traveller.TravelCost <= 0 || inventory == null || inventory.Gold >= traveller.TravelCost;
-            foreach (var (button, name, info, stone) in rows)
+            if (traveller.DiscoveredMask == shownMask && canPay == shownCanPay) return;
+            shownMask = traveller.DiscoveredMask;
+            shownCanPay = canPay;
+            for (int i = 0; i < rows.Count; i++)
             {
-                bool here = stone == shown;
-                bool known = traveller.IsDiscovered(stone.Id);
-                name.text = known || here ? stone.DisplayName : "Undiscovered";
-                name.color = here ? HereColor : known ? Color.white : LockedColor;
-                info.text = here ? "You are here" : !known ? "" : traveller.TravelCost > 0 ? $"Travel  {traveller.TravelCost} g" : "Teleport";
-                info.color = here ? HereColor : canPay ? GoldColor : new Color(1f, 0.4f, 0.3f);
-                button.interactable = known && !here;
+                var (button, name, info, stone) = rows[i];
+                DrawRow(traveller, canPay, button, name, info, stone);
             }
+        }
+
+        private void DrawRow(WaystoneTraveller traveller, bool canPay, Button button, Text name, Text info, Waystone stone)
+        {
+            bool here = stone == shown;
+            bool known = traveller.IsDiscovered(stone.Id);
+            name.text = known || here ? stone.DisplayName : "Undiscovered";
+            name.color = here ? HereColor : known ? Color.white : LockedColor;
+            info.text = here ? "You are here" : !known ? "" : traveller.TravelCost > 0 ? $"Travel  {traveller.TravelCost} g" : "Teleport";
+            info.color = here ? HereColor : canPay ? GoldColor : new Color(1f, 0.4f, 0.3f);
+            button.interactable = known && !here;
         }
     }
 }
