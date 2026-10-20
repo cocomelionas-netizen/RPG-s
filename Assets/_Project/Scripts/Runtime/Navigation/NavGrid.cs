@@ -18,6 +18,7 @@ namespace RPG.Navigation
         private readonly int width;
         private readonly int height;
         private readonly bool[] walkable;
+        private readonly bool[] sightBlocked;
         private readonly Vector2[] centers;
 
         // A* buffers, reused between searches. A stamp marks which entries belong to the current search.
@@ -31,7 +32,9 @@ namespace RPG.Navigation
         /// <param name="bounds">Cells covered by the grid (z is ignored).</param>
         /// <param name="isWalkable">Whether a cell can be walked on.</param>
         /// <param name="cellCenter">World position of a cell's center.</param>
-        public NavGrid(BoundsInt bounds, Func<Vector3Int, bool> isWalkable, Func<Vector3Int, Vector2> cellCenter)
+        /// <param name="blocksSight">Whether a cell blocks sight (a wall); null: nothing does.</param>
+        public NavGrid(BoundsInt bounds, Func<Vector3Int, bool> isWalkable, Func<Vector3Int, Vector2> cellCenter,
+            Func<Vector3Int, bool> blocksSight = null)
         {
             this.bounds = bounds;
             width = Mathf.Max(0, bounds.size.x);
@@ -39,6 +42,7 @@ namespace RPG.Navigation
 
             int count = width * height;
             walkable = new bool[count];
+            sightBlocked = new bool[count];
             centers = new Vector2[count];
             costFromStart = new float[count];
             parent = new int[count];
@@ -51,6 +55,7 @@ namespace RPG.Navigation
                 var cell = new Vector3Int(bounds.xMin + x, bounds.yMin + y, 0);
                 int index = y * width + x;
                 walkable[index] = isWalkable(cell);
+                sightBlocked[index] = blocksSight != null && blocksSight(cell);
                 centers[index] = cellCenter(cell);
             }
         }
@@ -67,6 +72,12 @@ namespace RPG.Navigation
         public bool IsWalkable(Vector3Int cell)
         {
             return Contains(cell) && walkable[IndexOf(cell)];
+        }
+
+        /// <summary>True for a wall cell (nothing can be seen, shot or cast through it). False outside the grid.</summary>
+        public bool BlocksSight(Vector3Int cell)
+        {
+            return Contains(cell) && sightBlocked[IndexOf(cell)];
         }
 
         public void SetWalkable(Vector3Int cell, bool value)

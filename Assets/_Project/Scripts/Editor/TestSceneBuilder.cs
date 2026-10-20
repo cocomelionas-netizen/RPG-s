@@ -193,7 +193,8 @@ namespace RPG.EditorTools
             colliderObject.ApplyModifiedPropertiesWithoutUndo();
             obstacles.gameObject.AddComponent<CompositeCollider2D>().geometryType = CompositeCollider2D.GeometryType.Polygons;
             var navigation = grid.gameObject.AddComponent<WorldNavigation>();
-            navigation.Configure(grid, ground, obstacles);
+            // Only the walls (rock) block sight; water, woods and bushes do not.
+            navigation.Configure(grid, ground, obstacles, worldTiles.Walls);
             navigation.ZoneName = "Fanadin";
 
             CreateGlobalLight();

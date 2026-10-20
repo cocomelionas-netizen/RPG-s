@@ -116,6 +116,29 @@ namespace RPG.Tests
             Assert.Less(Vector2.Distance(end, grid.GetCellCenterWorld(rock)), 1f);
         }
 
+        [Test]
+        public void LineOfSight_IsBlockedByWallsOnly()
+        {
+            WorldNavigation navigation = CreateMap(out Grid grid, out Tilemap obstacles);
+            Tile wall = ScriptableObject.CreateInstance<Tile>();
+            Tile water = ScriptableObject.CreateInstance<Tile>();
+            for (int y = 0; y < 12; y++) obstacles.SetTile(new Vector3Int(6, y, 0), wall);
+            obstacles.SetTile(new Vector3Int(3, 8, 0), water);
+            navigation.Configure(grid, navigation.GetComponentInChildren<Tilemap>(), obstacles, new TileBase[] { wall });
+
+            Vector2 left = grid.GetCellCenterWorld(new Vector3Int(3, 5, 0));
+            Vector2 right = grid.GetCellCenterWorld(new Vector3Int(9, 5, 0));
+            Assert.IsFalse(navigation.HasLineOfSight(left, right), "A wall is in between.");
+            Assert.IsFalse(navigation.HasLineOfSight(right, left));
+
+            Vector2 acrossWater = grid.GetCellCenterWorld(new Vector3Int(3, 10, 0));
+            Assert.IsTrue(navigation.HasLineOfSight(left, acrossWater), "Water does not block sight.");
+
+            // Standing right at the wall still sees the next cell along it.
+            Vector2 atWall = grid.GetCellCenterWorld(new Vector3Int(5, 5, 0));
+            Assert.IsTrue(navigation.HasLineOfSight(left, atWall));
+        }
+
         private WorldNavigation CreateMap(out Grid grid, out Tilemap obstacles)
         {
             grid = new GameObject("Test Grid").AddComponent<Grid>();

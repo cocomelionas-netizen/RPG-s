@@ -32,6 +32,8 @@ namespace RPG.Progression
         Interrupted,
         /// <summary>Teleport: nowhere to stand there.</summary>
         BadPlace,
+        /// <summary>A wall stands between the caster and the target.</summary>
+        NotInSight,
     }
 
     /// <summary>
@@ -149,7 +151,8 @@ namespace RPG.Progression
             }
 
             Vector2 target = pendingTarget.transform.position;
-            if (Vector2.Distance(transform.position, target) > ability.range * ApproachRangeFactor)
+            if (Vector2.Distance(transform.position, target) > ability.range * ApproachRangeFactor
+                || !WorldNavigation.LineOfSight(transform.position, target))
             {
                 if (movement != null) movement.SetDestination(target);
                 return;
@@ -273,14 +276,15 @@ namespace RPG.Progression
                 CastFailed?.Invoke(slot, CastFailure.NoTarget);
                 return;
             }
-            if (Vector2.Distance(transform.position, target.transform.position) > ability.range)
+            bool tooFar = Vector2.Distance(transform.position, target.transform.position) > ability.range;
+            if (tooFar || !WorldNavigation.LineOfSight(transform.position, target.transform.position))
             {
                 if (movement == null)
                 {
-                    CastFailed?.Invoke(slot, CastFailure.OutOfRange);
+                    CastFailed?.Invoke(slot, tooFar ? CastFailure.OutOfRange : CastFailure.NotInSight);
                     return;
                 }
-                // Walk into range first; UpdateApproach uses the spell on arrival.
+                // Walk into range (and around walls) first; UpdateApproach uses the spell on arrival.
                 pendingSlot = slot;
                 pendingTarget = target;
                 movement.SetDestination(target.transform.position);
@@ -340,6 +344,7 @@ namespace RPG.Progression
                 case CastFailure.Casting: return "You are already casting";
                 case CastFailure.Interrupted: return "Interrupted";
                 case CastFailure.BadPlace: return "You can't teleport there";
+                case CastFailure.NotInSight: return "Target not in line of sight";
                 default: return "";
             }
         }
@@ -419,6 +424,11 @@ namespace RPG.Progression
                     failure = CastFailure.OutOfRange;
                     return false;
                 }
+                if (!WorldNavigation.LineOfSight(self, AutoAttack.ServerPosition(target)))
+                {
+                    failure = CastFailure.NotInSight;
+                    return false;
+                }
                 bool missingEffect = ability.requiresTargetEffect && (target.Effects == null
                     || (string.IsNullOrEmpty(ability.requiredEffectName)
                         ? !target.Effects.Has(ability.requiredEffect)
@@ -435,7 +445,8 @@ namespace RPG.Progression
             if (ability.kind == AbilityKind.FriendlyTarget)
             {
                 bool usable = target != null && target.IsSpawned && !target.IsDead && !health.IsHostileTo(target)
-                              && Vector2.Distance(self, AutoAttack.ServerPosition(target)) <= ability.range + autoAttack.RangeTolerance;
+                              && Vector2.Distance(self, AutoAttack.ServerPosition(target)) <= ability.range + autoAttack.RangeTolerance
+                              && WorldNavigation.LineOfSight(self, AutoAttack.ServerPosition(target));
                 if (!usable) target = health;
                 return true;
             }
@@ -445,7 +456,8 @@ namespace RPG.Progression
                 Vector2 to = self + Vector2.ClampMagnitude(point - self, ability.range);
                 // Only onto walkable ground of a map: never past a dungeon's or the world's edge.
                 WorldNavigation map = WorldNavigation.At(to);
-                if (map == null || !map.IsWalkable(to))
+                // ... and not through a wall into the next room.
+                if (map == null || !map.IsWalkable(to) || !map.HasLineOfSight(self, to))
                 {
                     failure = CastFailure.BadPlace;
                     return false;
@@ -679,7 +691,9 @@ namespace RPG.Progression
             foreach (Health unit in Health.Spawned)
             {
                 if (unit == null || !unit.IsSpawned || unit.IsDead || !health.IsHostileTo(unit)) continue;
-                if (Vector2.Distance(center, AutoAttack.ServerPosition(unit)) <= ability.radius)
+                // Not behind a wall from the blast.
+                Vector2 at = AutoAttack.ServerPosition(unit);
+                if (Vector2.Distance(center, at) <= ability.radius && WorldNavigation.LineOfSight(center, at))
                     areaTargets.Add(unit);
             }
             if (ability.maxTargets > 0 && areaTargets.Count > ability.maxTargets)

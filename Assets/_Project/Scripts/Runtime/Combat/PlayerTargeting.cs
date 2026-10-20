@@ -164,7 +164,8 @@ namespace RPG.Combat
 
             Vector2 self = transform.position;
             Vector2 target = LocalTarget.transform.position;
-            if (Vector2.Distance(self, target) > autoAttack.Range * 0.9f)
+            // Too far, or a wall in between: walk (around the wall) until the target is in reach and in sight.
+            if (Vector2.Distance(self, target) > autoAttack.Range * 0.9f || !RPG.Navigation.WorldNavigation.LineOfSight(self, target))
             {
                 movement.SetDestination(target);
             }

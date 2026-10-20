@@ -187,6 +187,8 @@ namespace RPG.Combat
             Vector2 from = ServerPosition(this);
             Vector2 to = ServerPosition(serverTarget);
             if (Vector2.Distance(from, to) > range + rangeTolerance) return;
+            // No hits through walls: the attacker walks around first (monsters chase, players approach).
+            if (!RPG.Navigation.WorldNavigation.LineOfSight(from, to)) return;
 
             int damage = RollDamage(1f, out bool critical);
             nextAttackTime = now + attackInterval * (health.Effects != null ? health.Effects.AttackIntervalMultiplier : 1f);

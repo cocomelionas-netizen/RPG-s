@@ -374,7 +374,9 @@ namespace RPG.Monsters
                 // Stealthed (Vanish) players are not noticed.
                 if (playerHealth.Effects != null && playerHealth.Effects.IsStealthed) continue;
 
-                if (Vector2.Distance(Position, AutoAttack.ServerPosition(playerHealth)) <= aggroRadius)
+                // Only players it can see: not through walls.
+                Vector2 seen = AutoAttack.ServerPosition(playerHealth);
+                if (Vector2.Distance(Position, seen) <= aggroRadius && WorldNavigation.LineOfSight(Position, seen))
                     AddThreat(playerHealth, SightThreat * ScanInterval, true);
             }
         }
@@ -527,7 +529,8 @@ namespace RPG.Monsters
 
             Vector2 self = Position;
             Vector2 target = AutoAttack.ServerPosition(CurrentTarget);
-            if (Vector2.Distance(self, target) > autoAttack.Range * 0.85f)
+            // Out of reach, or a wall in between: go around it.
+            if (Vector2.Distance(self, target) > autoAttack.Range * 0.85f || !WorldNavigation.LineOfSight(self, target))
             {
                 motion.ServerMoveTo(target);
                 if (motion.PathFailed)

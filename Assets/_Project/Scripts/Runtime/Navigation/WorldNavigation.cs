@@ -17,6 +17,8 @@ namespace RPG.Navigation
         [SerializeField] private Grid grid;
         [SerializeField] private Tilemap ground;
         [SerializeField] private Tilemap obstacles;
+        [Tooltip("Obstacle tiles that block sight (walls): attacks and spells cannot pass them. Empty: every obstacle tile does.")]
+        [SerializeField] private TileBase[] sightBlockingTiles = System.Array.Empty<TileBase>();
         [Tooltip("Shown above the minimap.")]
         [SerializeField] private string zoneName = "Wilderness";
         [Tooltip("A cell is blocked when a solid collider without a rigidbody (tree trunk, post) overlaps this radius around its center.")]
@@ -25,6 +27,7 @@ namespace RPG.Navigation
         [SerializeField, Min(0f)] private float clearance = 0.1f;
 
         private const float LineSampleStep = 0.08f;
+        private const float SightSampleStep = 0.1f;
         private const int NearestWalkableSearchRadius = 3;
 
         private NavGrid navGrid;
@@ -84,12 +87,16 @@ namespace RPG.Navigation
             return Map.Contains(ToCell(worldPosition));
         }
 
-        /// <summary>Sets the map to navigate (used by the scene builder and tests). Rebuilds on next use.</summary>
-        public void Configure(Grid worldGrid, Tilemap groundTilemap, Tilemap obstacleTilemap)
+        /// <summary>
+        /// Sets the map to navigate (used by the scene builder and tests). Rebuilds on next use.
+        /// <paramref name="wallTiles"/>: the obstacle tiles that block sight (null or empty: every obstacle tile).
+        /// </summary>
+        public void Configure(Grid worldGrid, Tilemap groundTilemap, Tilemap obstacleTilemap, TileBase[] wallTiles = null)
         {
             grid = worldGrid;
             ground = groundTilemap;
             obstacles = obstacleTilemap;
+            sightBlockingTiles = wallTiles ?? System.Array.Empty<TileBase>();
             navGrid = null;
         }
 
@@ -106,7 +113,10 @@ namespace RPG.Navigation
 
             Physics2D.SyncTransforms();
             ground.CompressBounds();
-            navGrid = new NavGrid(ground.cellBounds, IsCellWalkable, cell => grid.GetCellCenterWorld(cell));
+            var walls = new HashSet<TileBase>(sightBlockingTiles ?? System.Array.Empty<TileBase>());
+            walls.Remove(null);
+            navGrid = new NavGrid(ground.cellBounds, IsCellWalkable, cell => grid.GetCellCenterWorld(cell),
+                cell => BlocksSight(cell, walls));
             worldBounds = CellsToWorld(ground.cellBounds);
         }
 
@@ -115,6 +125,13 @@ namespace RPG.Navigation
             if (!ground.HasTile(cell)) return false;
             if (obstacles != null && obstacles.HasTile(cell)) return false;
             return !HasStaticProp(grid.GetCellCenterWorld(cell));
+        }
+
+        private bool BlocksSight(Vector3Int cell, HashSet<TileBase> walls)
+        {
+            if (obstacles == null) return false;
+            TileBase tile = obstacles.GetTile(cell);
+            return tile != null && (walls.Count == 0 || walls.Contains(tile));
         }
 
         private bool HasStaticProp(Vector2 point)
@@ -170,6 +187,36 @@ namespace RPG.Navigation
                     return false;
             }
             return true;
+        }
+
+        /// <summary>
+        /// True when no wall stands between two points (the cells the two stand in do not count, so a unit next to a
+        /// wall can still be hit). Water, trees and props do not block sight.
+        /// </summary>
+        public bool HasLineOfSight(Vector2 from, Vector2 to)
+        {
+            NavGrid map = Map;
+            Vector3Int fromCell = ToCell(from);
+            Vector3Int toCell = ToCell(to);
+            if (fromCell == toCell) return true;
+            Vector2 delta = to - from;
+            int steps = Mathf.Max(1, Mathf.CeilToInt(delta.magnitude / SightSampleStep));
+            for (int i = 1; i < steps; i++)
+            {
+                Vector3Int cell = ToCell(from + delta * ((float)i / steps));
+                if (cell != fromCell && cell != toCell && map.BlocksSight(cell)) return false;
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// True when nothing on the map under <paramref name="from"/> blocks sight to <paramref name="to"/> (true off
+        /// every map, as in tests). Attacks and spells need it; monsters notice only players they can see.
+        /// </summary>
+        public static bool LineOfSight(Vector2 from, Vector2 to)
+        {
+            WorldNavigation map = At(from);
+            return map == null || map.HasLineOfSight(from, to);
         }
 
         /// <summary>
