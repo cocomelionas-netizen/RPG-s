@@ -104,66 +104,66 @@ namespace RPG.EditorTools
 
             Setup2DRendering();
 
-            Tile[] grassTiles =
-            {
-                CreateTile("Grass_A", PlaceholderArtGenerator.GroundTile("Grass_A", new Color(0.27f, 0.42f, 0.2f), new Color(0.42f, 0.55f, 0.26f), 1)),
-                CreateTile("Grass_B", PlaceholderArtGenerator.GroundTile("Grass_B", new Color(0.25f, 0.4f, 0.19f), new Color(0.38f, 0.5f, 0.22f), 2)),
-                CreateTile("Grass_C", PlaceholderArtGenerator.GroundTile("Grass_C", new Color(0.3f, 0.44f, 0.21f), new Color(0.47f, 0.56f, 0.3f), 3)),
-            };
-            Tile pathTile = CreateTile("Path", PlaceholderArtGenerator.GroundTile("Path", new Color(0.5f, 0.41f, 0.29f), new Color(0.64f, 0.55f, 0.4f), 4));
-            Tile rockTile = CreateTile("Rock", PlaceholderArtGenerator.Rock("Rock", 5), Tile.ColliderType.Grid);
             Tile blockedTile = CreateTile("Blocked", null, Tile.ColliderType.Grid);
             Sprite treeSprite = PlaceholderArtGenerator.Tree("Tree", 6);
-            Tile treeTile = CreateTile("Tree", treeSprite, Tile.ColliderType.Grid);
             Sprite markerSprite = PlaceholderArtGenerator.GroundRing("ClickMarker", new Color(1f, 0.85f, 0.4f, 0.9f));
-            CharacterAnimationSet playerAnimations = CreateCharacterAnimationSet("Player", PlayerArtFolder, PlayerAnimationSetPath, new Color(0.2f, 0.32f, 0.62f), null);
-            CharacterAnimationSet goblinAnimations = CreateCharacterAnimationSet("Goblin", GoblinArtFolder, GoblinAnimationSetPath,
-                new Color(0.42f, 0.27f, 0.16f), new Color(0.45f, 0.62f, 0.27f));
+            // Flare's heroes and monsters (TestSceneBuilder.Art.cs).
+            WorldTiles worldTiles = CreateWorldTiles();
+            CharacterAnimationSet playerAnimations = FlareAnimationSet("HeroWarrior");
+            CharacterAnimationSet goblinAnimations = FlareAnimationSet("Goblin");
             // The tree prefab is kept for hand-made scenes; the world draws its trees as tiles (PlaceTrees).
             CreateTreePrefab(treeSprite);
             Sprite barSprite = PlaceholderArtGenerator.BarPixel("BarPixel");
             Sprite targetRingSprite = PlaceholderArtGenerator.GroundRing("TargetRing", new Color(0.95f, 0.2f, 0.15f, 0.9f));
             GameObject dummyPrefab = CreateDummyPrefab(PlaceholderArtGenerator.TrainingDummy("TrainingDummy"), barSprite);
-            CharacterAnimationSet bruteAnimations = CreateCharacterAnimationSet("GoblinBrute", BruteArtFolder, BruteAnimationSetPath,
-                new Color(0.33f, 0.31f, 0.29f), new Color(0.3f, 0.45f, 0.2f));
-            CharacterAnimationSet orcAnimations = CreateCharacterAnimationSet("Orc", OrcArtFolder, OrcAnimationSetPath,
-                new Color(0.45f, 0.12f, 0.1f), new Color(0.42f, 0.52f, 0.36f));
+            CharacterAnimationSet bruteAnimations = FlareAnimationSet("GoblinElite");
+            CharacterAnimationSet orcAnimations = FlareAnimationSet("Minotaur");
             ItemCatalog items = CreateItems(out ItemDefinition potion, out ItemDefinition manaPotion);
             AffixCatalog affixes = CreateAffixes();
             GameObject lootBagPrefab = CreateLootBagPrefab(PlaceholderArtGenerator.LootSack("LootSack"));
-            GameObject goblinPrefab = CreateMonsterPrefab(new MonsterSpec
+            MonsterSpec goblinSpec = new MonsterSpec
             {
-                Name = "Goblin", Animations = goblinAnimations, Scale = 0.85f, Health = SourceHealth(2), MinDamage = 6, MaxDamage = 10,
+                Name = "Goblin", Animations = goblinAnimations, Scale = 1f, Health = SourceHealth(2), MinDamage = 6, MaxDamage = 10,
                 AttackInterval = 2f, Level = 2, Experience = LevelCurve.KillExperienceFor(2), MoveSpeed = 1.8f, Gold = new Vector2Int(3, 6),
                 Loot = Loot(items, ("ChippedRuby", 0.02f), ("ChippedTopaz", 0.02f), ("ChippedSapphire", 0.02f), ("ChippedEmerald", 0.02f), ("RoughAmethyst", 0.02f), ("HealingPotion", 0.3f), ("ManaPotion", 0.15f)),
-            }, barSprite, lootBagPrefab, affixes);
-            GameObject brutePrefab = CreateMonsterPrefab(new MonsterSpec
+            };
+            GameObject goblinPrefab = CreateMonsterPrefab(goblinSpec, barSprite, lootBagPrefab, affixes);
+            MonsterSpec bruteSpec = new MonsterSpec
             {
-                Name = "Goblin Brute", Animations = bruteAnimations, Scale = 1.05f, Health = SourceHealth(4), MinDamage = 12, MaxDamage = 20,
+                Name = "Goblin Brute", Animations = bruteAnimations, Scale = 1f, Health = SourceHealth(4), MinDamage = 12, MaxDamage = 20,
                 AttackInterval = 2.2f, Level = 4, Experience = LevelCurve.KillExperienceFor(4), MoveSpeed = 1.6f, Gold = new Vector2Int(10, 16),
                 Loot = Loot(items, ("ChippedRuby", 0.04f), ("ChippedTopaz", 0.04f), ("ChippedSapphire", 0.04f), ("ChippedEmerald", 0.04f), ("RoughAmethyst", 0.04f), ("HealingPotion", 0.5f), ("ManaPotion", 0.25f)),
-            }, barSprite, lootBagPrefab, affixes);
-            GameObject orcPrefab = CreateMonsterPrefab(new MonsterSpec
+            };
+            GameObject brutePrefab = CreateMonsterPrefab(bruteSpec, barSprite, lootBagPrefab, affixes);
+            MonsterSpec orcSpec = new MonsterSpec
             {
-                Name = "Orc", Animations = orcAnimations, Scale = 1.15f, Health = SourceHealth(6), MinDamage = 20, MaxDamage = 30,
+                Name = "Orc", Animations = orcAnimations, Scale = 1f, Health = SourceHealth(6), MinDamage = 20, MaxDamage = 30,
                 AttackInterval = 2f, Level = 6, Experience = LevelCurve.KillExperienceFor(6), MoveSpeed = 1.7f, Gold = new Vector2Int(20, 30),
                 Loot = Loot(items, ("ChippedRuby", 0.05f), ("ChippedTopaz", 0.05f), ("ChippedSapphire", 0.05f), ("ChippedEmerald", 0.05f), ("RoughAmethyst", 0.05f), ("Ruby", 0.01f), ("Sapphire", 0.01f), ("HealingPotion", 0.6f), ("ManaPotion", 0.3f)),
-            }, barSprite, lootBagPrefab, affixes);
-            CharacterAnimationSet kingAnimations = CreateCharacterAnimationSet("GoblinKing", KingArtFolder, KingAnimationSetPath,
-                new Color(0.75f, 0.58f, 0.15f), new Color(0.4f, 0.58f, 0.25f));
+            };
+            GameObject orcPrefab = CreateMonsterPrefab(orcSpec, barSprite, lootBagPrefab, affixes);
+            CharacterAnimationSet kingAnimations = FlareAnimationSet("Minotaur");
             // The source game's dungeon bosses: an orc's numbers (each boss's own health, damage, level and loot are set per
             // dungeon spot, measured against a normal monster), drawn bigger, with the ground slam.
-            GameObject bossPrefab = CreateMonsterPrefab(new MonsterSpec
+            MonsterSpec dungeonBossSpec = new MonsterSpec
             {
-                Name = "Dungeon Boss", Animations = kingAnimations, Scale = 1.5f, Health = SourceHealth(6), MinDamage = 20, MaxDamage = 30,
+                Name = "Dungeon Boss", Animations = kingAnimations, Scale = 1.3f, Health = SourceHealth(6), MinDamage = 20, MaxDamage = 30,
                 AttackInterval = 2f, Level = 6, Experience = LevelCurve.KillExperienceFor(6), MoveSpeed = 1.7f, Gold = new Vector2Int(20, 30),
                 Loot = Loot(items, ("ChippedRuby", 0.05f), ("ChippedTopaz", 0.05f), ("ChippedSapphire", 0.05f), ("ChippedEmerald", 0.05f), ("RoughAmethyst", 0.05f), ("Ruby", 0.01f), ("Sapphire", 0.01f), ("HealingPotion", 0.6f), ("ManaPotion", 0.3f)),
-            }, barSprite, lootBagPrefab, affixes, boss => boss.AddComponent<BossMechanics>());
+            };
+            GameObject bossPrefab = CreateMonsterPrefab(dungeonBossSpec, barSprite, lootBagPrefab, affixes, boss => boss.AddComponent<BossMechanics>());
+            // Every source-game monster gets its own Flare look over its tier's numbers (MonsterPrefabFor).
+            tierSpecs = new[] { goblinSpec, bruteSpec, orcSpec };
+            bossSpec = dungeonBossSpec;
+            monsterBarSprite = barSprite;
+            monsterLootBag = lootBagPrefab;
+            monsterAffixes = affixes;
+            LookPrefabs.Clear();
             ChestPrefabs chests = CreateChestPrefabs(items, affixes, lootBagPrefab);
-            DungeonDefinition[] dungeons = CreateDungeons(goblinPrefab, brutePrefab, orcPrefab, bossPrefab,
+            DungeonDefinition[] dungeons = CreateDungeons(orcPrefab, worldTiles,
                 CreateDungeonContainers(chests, items, affixes, lootBagPrefab));
-            CharacterAnimationSet rangerAnimations = CreateCharacterAnimationSet("Ranger", RangerArtFolder, RangerAnimationSetPath, new Color(0.2f, 0.45f, 0.22f), null);
-            CharacterAnimationSet mageAnimations = CreateCharacterAnimationSet("Mage", MageArtFolder, MageAnimationSetPath, new Color(0.45f, 0.22f, 0.62f), null);
+            CharacterAnimationSet rangerAnimations = FlareAnimationSet("HeroRanger");
+            CharacterAnimationSet mageAnimations = FlareAnimationSet("HeroMage");
             ClassCatalog classes = CreateClasses(playerAnimations, rangerAnimations, mageAnimations, items);
             Sprite projectileSprite = PlaceholderArtGenerator.Orb("Projectile");
             Sprite effectRingSprite = PlaceholderArtGenerator.GroundRing("EffectRing", Color.white);
@@ -173,8 +173,9 @@ namespace RPG.EditorTools
             Grid grid = CreateGrid();
             Tilemap ground = CreateTilemap(grid, "Ground", -100, TilemapRenderer.Mode.Chunk);
             Tilemap obstacles = CreateTilemap(grid, "Obstacles", 0, TilemapRenderer.Mode.Individual);
-            PaintTestMap(ground, obstacles, grassTiles, pathTile, rockTile, blockedTile);
-            PlaceTrees(obstacles, treeTile);
+            Tilemap decor = CreateTilemap(grid, "Decor", 0, TilemapRenderer.Mode.Individual);
+            PaintTestMap(ground, obstacles, decor, worldTiles, blockedTile);
+            PlaceTrees(obstacles, worldTiles);
             // The rocks and trees block as one merged static shape rather than tens of thousands of tile boxes.
             var obstacleBody = obstacles.gameObject.AddComponent<Rigidbody2D>();
             obstacleBody.bodyType = RigidbodyType2D.Static;
@@ -206,9 +207,9 @@ namespace RPG.EditorTools
             CreateTargetIndicator(targetRingSprite);
             new GameObject("Combat Effects").AddComponent<CombatEffects>().Configure(projectileSprite, effectRingSprite, GroundRingRadius);
             PlaceDummies(grid, dummyPrefab);
-            PlaceMonsters(grid, obstacles, goblinPrefab, brutePrefab, orcPrefab);
+            PlaceMonsters(grid, obstacles);
             PlaceChests(grid, obstacles, chests);
-            PlaceEdgeMonsters(grid, obstacles, orcPrefab);
+            PlaceEdgeMonsters(grid, obstacles);
             PlaceDungeons(grid, obstacles, dungeons);
             VendorDefinition[] vendors = CreateVendors(items, out Vector3Int[] vendorCells);
             PlaceVendors(grid, vendors, vendorCells, affixes);
@@ -303,13 +304,15 @@ namespace RPG.EditorTools
         }
 
         /// <summary>
-        /// The source game's ground (<see cref="WorldMapData"/>, from its fanadin.map): its walls, fences and rocks as rock
-        /// tiles, its trees and other blocked objects as tree cells (drawn by <see cref="PlaceTrees"/>), everything else
-        /// grass, with a paved square in the middle of St. Revere and at the start.
+        /// The source game's ground (<see cref="WorldMapData"/>, from its fanadin.map) in Flare's art: grass everywhere, its
+        /// walls, fences and rocks as rock pillars, its lakes as water (blocked by an invisible tile), its trees and other
+        /// blocked objects as tree cells (drawn by <see cref="PlaceTrees"/>), a paved square in the middle of St. Revere and
+        /// at the start, and here and there tall grass and reeds on open ground.
         /// </summary>
-        private static void PaintTestMap(Tilemap ground, Tilemap obstacles, Tile[] grassTiles, Tile pathTile, Tile rockTile, Tile blockedTile)
+        private static void PaintTestMap(Tilemap ground, Tilemap obstacles, Tilemap decor, WorldTiles tiles, Tile blockedTile)
         {
             var random = new System.Random(Seed);
+            T Any<T>(T[] options) => options[random.Next(options.Length)];
             TreeCells.Clear();
             for (int y = 0; y < MapHeight; y++)
             {
@@ -319,14 +322,21 @@ namespace RPG.EditorTools
                     var cell = new Vector3Int(x, y, 0);
                     char kind = x < row.Length ? row[x] : WorldMapData.Wall;
                     bool square = Within(cell, TownCell, TownSquareRadius) || Within(cell, StartCell, StartSquareRadius);
-                    ground.SetTile(cell, square && kind == WorldMapData.Walkable ? pathTile : grassTiles[random.Next(grassTiles.Length)]);
-                    if (kind == WorldMapData.Wall) obstacles.SetTile(cell, rockTile);
+                    if (kind == WorldMapData.Water)
+                    {
+                        ground.SetTile(cell, Any(tiles.Water));
+                        obstacles.SetTile(cell, blockedTile);
+                        continue;
+                    }
+                    ground.SetTile(cell, square && kind == WorldMapData.Walkable ? Any(tiles.Path) : Any(tiles.Grass));
+                    if (kind == WorldMapData.Wall) obstacles.SetTile(cell, Any(tiles.Walls));
                     else if (kind == WorldMapData.Tree)
                     {
-                        // Blocked by an invisible tile; the tree itself is a prop on some of these cells.
+                        // Blocked by an invisible tile; trees and bushes are drawn on some of these cells.
                         obstacles.SetTile(cell, blockedTile);
                         TreeCells.Add(cell);
                     }
+                    else if (!square && random.NextDouble() < 0.025) decor.SetTile(cell, Any(tiles.Decor));
                 }
             }
         }
@@ -403,8 +413,9 @@ namespace RPG.EditorTools
             player.AddComponent<CharacterPersistence>();
             player.AddComponent<DungeonTraveller>();
             player.AddComponent<WaystoneTraveller>();
-            AddHealthPresenter(player, barSprite, 0.85f);
-            AddHitbox(player, new Vector2(0.36f, 0.62f), new Vector2(0f, 0.34f));
+            float height = BodyHeight(animations);
+            AddHealthPresenter(player, barSprite, height + 0.08f);
+            AddHitbox(player, new Vector2(0.36f, height * 0.85f), new Vector2(0f, height * 0.45f));
 
             Directory.CreateDirectory(Path.GetDirectoryName(PlayerPrefabPath));
             GameObject prefab = PrefabUtility.SaveAsPrefabAsset(player, PlayerPrefabPath);
@@ -517,12 +528,14 @@ namespace RPG.EditorTools
 
         /// <summary>
         /// A tree on the source game's tree cells: one per clump (no two closer than three cells), so a wood looks like a
-        /// wood and not a wall of trunks. Trees are tiles of the obstacle tilemap (drawn and sorted one by one with the
-        /// characters), not objects of their own: the island has tens of thousands of tree cells. Every tree cell blocks.
+        /// wood and not a wall of trunks, and bushes and ferns on a third of the cells between them. They are tiles of the
+        /// obstacle tilemap (drawn and sorted one by one with the characters), not objects of their own: the island has tens
+        /// of thousands of tree cells. Every tree cell blocks.
         /// </summary>
-        private static void PlaceTrees(Tilemap obstacles, Tile treeTile)
+        private static void PlaceTrees(Tilemap obstacles, WorldTiles tiles)
         {
             const int spacing = 2;
+            var random = new System.Random(Seed + 1);
             var drawn = new HashSet<Vector3Int>();
             foreach (Vector3Int cell in TreeCells.OrderBy(c => c.y).ThenBy(c => c.x))
             {
@@ -530,9 +543,13 @@ namespace RPG.EditorTools
                 for (int dx = -spacing; dx <= spacing && !crowded; dx++)
                 for (int dy = -spacing; dy <= spacing && !crowded; dy++)
                     crowded = (dx != 0 || dy != 0) && drawn.Contains(new Vector3Int(cell.x + dx, cell.y + dy, 0));
-                if (crowded) continue;
+                if (crowded)
+                {
+                    if (random.NextDouble() < 0.33) obstacles.SetTile(cell, tiles.Plants[random.Next(tiles.Plants.Length)]);
+                    continue;
+                }
                 drawn.Add(cell);
-                obstacles.SetTile(cell, treeTile);
+                obstacles.SetTile(cell, tiles.Trees[random.Next(tiles.Trees.Length)]);
             }
         }
 
@@ -589,6 +606,13 @@ namespace RPG.EditorTools
             healthObject.FindProperty("maxHealth").intValue = maxHealth;
             healthObject.ApplyModifiedPropertiesWithoutUndo();
             return health;
+        }
+
+        /// <summary>How tall a character is drawn above its feet: the top of its first idle frame facing the camera.</summary>
+        private static float BodyHeight(CharacterAnimationSet animations)
+        {
+            Sprite[] frames = animations.FindClip(CharacterAnimationSet.IdleClip)?.south;
+            return frames != null && frames.Length > 0 && frames[0] != null ? Mathf.Clamp(frames[0].bounds.max.y, 0.4f, 2.5f) : 0.75f;
         }
 
         private static void AddHealthPresenter(GameObject go, Sprite barSprite, float barHeight)
@@ -797,9 +821,10 @@ namespace RPG.EditorTools
             ai.ConfigureLoot(lootBagPrefab, spec.Loot, affixes, AssetDatabase.LoadAssetAtPath<ItemCatalog>($"{ItemsFolder}/ItemCatalog.asset"));
             ai.GoldReward = spec.Gold;
 
-            // The bar and hitbox are children, so they scale with the monster.
-            AddHealthPresenter(monster, barSprite, 0.85f);
-            AddHitbox(monster, new Vector2(0.4f, 0.65f), new Vector2(0f, 0.34f));
+            // The bar and hitbox are children, so they scale with the monster; the bar sits over the head of its art.
+            float height = BodyHeight(spec.Animations);
+            AddHealthPresenter(monster, barSprite, height + 0.08f);
+            AddHitbox(monster, new Vector2(0.45f, height * 0.85f), new Vector2(0f, height * 0.45f));
             addExtras?.Invoke(monster);
 
             string path = $"{MonstersFolder}/{spec.Name.Replace(" ", "")}.prefab";
@@ -1537,7 +1562,7 @@ namespace RPG.EditorTools
         /// The source game's levels 1-2 look like goblins, 3-5 brutes, higher orcs, and keep the source-game level (health, damage,
         /// experience and gear drops follow it); its elites and bosses are elites here. None inside the towns.
         /// </summary>
-        private static void PlaceMonsters(Grid grid, Tilemap obstacles, GameObject goblin, GameObject brute, GameObject orc)
+        private static void PlaceMonsters(Grid grid, Tilemap obstacles)
         {
             var parent = new GameObject("Monster Spots").transform;
             var monsters = StartAreaData.Monsters;
@@ -1545,7 +1570,8 @@ namespace RPG.EditorTools
             {
                 (Vector3Int cell, int level, bool elite, float respawn) = monsters[i];
                 if (IsCleared(cell, 0)) continue;
-                GameObject prefab = level <= 2 ? goblin : level <= 5 ? brute : orc;
+                string sourceName = i < MonsterData.SpotNames.Length ? MonsterData.SpotNames[i] : null;
+                GameObject prefab = MonsterPrefabFor(sourceName, level, false);
                 var spot = new GameObject($"Monster Spot {i + 1} {prefab.name}{(elite ? " (elite)" : "")}");
                 spot.transform.SetParent(parent, false);
                 spot.transform.position = grid.GetCellCenterWorld(OpenCellNear(obstacles, cell));
@@ -1555,7 +1581,6 @@ namespace RPG.EditorTools
                 spawner.EliteChance = elite ? 1f : 0f;
                 spawner.Level = level;
                 // The source game's name, and its junk; horned beasts and Lesser Wyrms sometimes drop Keys to the Barracks.
-                string sourceName = i < MonsterData.SpotNames.Length ? MonsterData.SpotNames[i] : null;
                 if (!string.IsNullOrEmpty(sourceName)) spawner.DisplayName = sourceName;
                 int keyLoot = KeyDropperLoot(cell);
                 spawner.BonusLoot = JunkLoot(sourceName, level).Concat(keyLoot > 0 ? DungeonLoot(keyLoot) : Array.Empty<LootEntry>()).ToArray();

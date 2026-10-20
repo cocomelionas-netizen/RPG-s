@@ -118,11 +118,10 @@ namespace RPG.EditorTools
 
         /// <summary>
         /// One asset per source-game dungeon: its plan, arrival, exits (destinations are set when the world is placed),
-        /// monsters (goblins, brutes or orcs by level like outdoors; bosses look like the boss), containers and entry
+        /// monsters (each with its Flare look over its level tier's numbers, like outdoors), containers and entry
         /// rules, and doors into the dungeons entered from inside it. In DungeonData' order.
         /// </summary>
-        private static DungeonDefinition[] CreateDungeons(GameObject goblin, GameObject brute, GameObject orc, GameObject boss,
-            Dictionary<string, GameObject> containers)
+        private static DungeonDefinition[] CreateDungeons(GameObject orc, WorldTiles tiles, Dictionary<string, GameObject> containers)
         {
             var instance = new GameObject("Dungeon Instance");
             instance.AddComponent<NetworkObject>();
@@ -132,9 +131,9 @@ namespace RPG.EditorTools
             UnityEngine.Object.DestroyImmediate(instance);
             RegisterNetworkPrefab(instancePrefab);
 
-            Tile floorTile = CreateTile("DungeonFloor",
-                PlaceholderArtGenerator.GroundTile("DungeonFloor", new Color(0.24f, 0.22f, 0.21f), new Color(0.36f, 0.33f, 0.3f), 7));
-            Tile wallTile = CreateTile("DungeonWall", PlaceholderArtGenerator.Rock("DungeonWall", 9), Tile.ColliderType.Grid);
+            // Flare's paving and rock pillars.
+            Tile floorTile = tiles.Path[0];
+            Tile wallTile = tiles.Walls[0];
             Sprite portalSprite = PlaceholderArtGenerator.Portal("Portal");
 
             var byId = new Dictionary<string, DungeonDefinition>();
@@ -154,7 +153,7 @@ namespace RPG.EditorTools
                 dungeon.referenceMonster = orc;
                 dungeon.monsters = data.Monsters.Select(m => new DungeonMonsterSpot
                 {
-                    prefab = m.boss ? boss : m.level <= 2 ? goblin : m.level <= 5 ? brute : orc,
+                    prefab = MonsterPrefabFor(m.name.Trim(), m.level, m.boss),
                     cell = m.cell,
                     displayName = m.name,
                     level = m.level,
@@ -237,7 +236,7 @@ namespace RPG.EditorTools
         /// The source game's outdoor key droppers that it has further south than this world reaches stand at its south edge:
         /// the Zhendale camp (Dale Gems) and the roaming bosses Tantorus and Fasthorn (Inactive Demiplane Keys).
         /// </summary>
-        private static void PlaceEdgeMonsters(Grid grid, Tilemap obstacles, GameObject orc)
+        private static void PlaceEdgeMonsters(Grid grid, Tilemap obstacles)
         {
             var parent = new GameObject("Edge Monster Spots").transform;
             foreach (var edge in DungeonData.EdgeMonsters)
@@ -247,7 +246,7 @@ namespace RPG.EditorTools
                 spot.transform.position = grid.GetCellCenterWorld(OpenCellNear(obstacles, edge.cell));
                 var spawner = spot.AddComponent<MonsterSpawner>();
                 spawner.ActivationRange = MonsterActivationRange;
-                spawner.Configure(orc, 1, 0.6f, edge.respawn);
+                spawner.Configure(MonsterPrefabFor(edge.name, edge.level, false), 1, 0.6f, edge.respawn);
                 spawner.EliteChance = edge.elite ? 1f : 0f;
                 spawner.Level = edge.level;
                 spawner.DisplayName = edge.name;

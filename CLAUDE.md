@@ -39,6 +39,8 @@ generators are in `Tools/GameData/` (`island.py` → `StartAreaData` (whole isla
 World: the source game's whole island, north up like its map (`island.py`: source (x, y) → cell (597 − y, 688 − x)): its
 ground from `fanadin.map` (walls, woods), its zones (13 × 13 blocks, `ZoneMap`), its monsters (source names, junk loot by model)/chests, free waypoints, all its vendors at their spots with their stock (random-quality gear merchants),
 Scroll of Returning (back to St. Revere), food, M world map with the source map's labels and level ranges.
+Art: Flare's (CC-BY-SA 3.0, `Assets/_Project/Art/Flare/CREDITS.md`): grassland tiles, lakes, trees, heroes and
+monsters in 8 directions, packed by `Tools/Art/flare.py` (`Docs/Art.md`); UI still placeholder.
 Stats: all source stats bought with experience (C: GENERAL / COMBAT / SKILLS tabs with the worn gear on both sides; SPEND EXP → CONFIRM/CANCEL; class-only weapon skills). Equipment: the source's 11 slots (weapon, helm, chest,
 feet, necklace, belt, legs, hands, two rings, shield), up to 4 sockets by quality, class gear (bows ranger, staves mage,
 plate warrior, robes mage). Items: source gear by level and material, dropped
