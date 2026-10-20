@@ -33,6 +33,6 @@ The world, heroes and monsters are drawn with art from the open game **Flare** (
 
 ## UI frames
 
-Windows get an ornate gold frame and coloured buttons a cut-corner shape from Kenney's **Fantasy UI Borders** (CC0,
+Windows get an ornate gold frame (border only) and coloured labelled buttons a cut-corner shape (slots and list rows stay square) from Kenney's **Fantasy UI Borders** (CC0,
 `Assets/_Project/Resources/UI`, credits there), tinted in code (`UIFactory.AddFrame`, `UIFactory.CreateButton`); the
 builder sets their nine-slice borders (`ImportUiFrames`).

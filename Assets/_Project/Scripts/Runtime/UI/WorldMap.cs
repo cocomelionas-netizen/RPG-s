@@ -39,11 +39,16 @@ namespace RPG.UI
         private readonly List<Text> labels = new List<Text>();
         private int usedDots;
         private int usedLabels;
+        private int drawOrder;
+        private string lastTitleZone;
+        private string lastTitleMap;
+        private readonly Dictionary<string, string> labelTexts = new Dictionary<string, string>();
 
         private void Awake()
         {
             Image panel = UIFactory.CreateImage("World Map", transform, PanelColor);
             window = panel.gameObject;
+            window.AddComponent<OpenWindow>();
             UIFactory.AddFrame(panel);
             UIFactory.Place(panel.rectTransform, new Vector2(0.5f, 0.5f), Vector2.zero, size);
 
@@ -60,6 +65,8 @@ namespace RPG.UI
             background.raycastTarget = false;
             UIFactory.Place(background.rectTransform, new Vector2(0.5f, 0f), new Vector2(0f, 16f), new Vector2(size.x - 32f, size.y - 64f));
             background.gameObject.AddComponent<RectMask2D>();
+            // The dots move every frame while the map is open: a canvas of their own keeps the rest of the HUD as it is.
+            background.gameObject.AddComponent<Canvas>();
             view = background.rectTransform;
 
             picture = new GameObject("Map", typeof(RectTransform)).AddComponent<RawImage>();
@@ -94,7 +101,15 @@ namespace RPG.UI
             WorldNavigation map = WorldNavigation.At(position);
             usedDots = 0;
             usedLabels = 0;
-            title.text = map != null ? $"{map.ZoneName}  -  {Zone.NameAt(position)}" : Zone.NameAt(position);
+            drawOrder = 0;
+            string zone = Zone.NameAt(position);
+            string mapName = map != null ? map.ZoneName : null;
+            if (zone != lastTitleZone || mapName != lastTitleMap)
+            {
+                lastTitleZone = zone;
+                lastTitleMap = mapName;
+                title.text = map != null ? $"{map.ZoneName}  -  {zone}" : zone;
+            }
             picture.enabled = map != null;
 
             if (map != null)
@@ -123,7 +138,8 @@ namespace RPG.UI
                         }
                         Dot(at, PlaceRingColor, 18f);
                         Dot(at, PlaceColor, 12f);
-                        string text = string.IsNullOrEmpty(label.detail) ? label.name : $"{label.name}\n{label.detail}";
+                        if (!labelTexts.TryGetValue(label.name, out string text))
+                            labelTexts[label.name] = text = string.IsNullOrEmpty(label.detail) ? label.name : $"{label.name}\n{label.detail}";
                         Label(at + new Vector2(0f, 26f), text, ZoneColor, 13);
                     }
                 }
@@ -164,10 +180,17 @@ namespace RPG.UI
             }
             Image dot = dots[usedDots++];
             if (!dot.gameObject.activeSelf) dot.gameObject.SetActive(true);
-            dot.transform.SetAsLastSibling();
+            KeepOrder(dot.transform);
             dot.color = color;
             dot.rectTransform.sizeDelta = new Vector2(diameter, diameter);
             dot.rectTransform.anchoredPosition = at;
+        }
+
+        /// <summary>Draws the elements in the order they are used (after the map picture), moving one only when it is out of place.</summary>
+        private void KeepOrder(Transform element)
+        {
+            int wanted = Mathf.Min(picture.transform.GetSiblingIndex() + 1 + drawOrder++, view.childCount - 1);
+            if (element.GetSiblingIndex() != wanted) element.SetSiblingIndex(wanted);
         }
 
         private void Label(Vector2 at, string text, Color color, int fontSize)
@@ -185,7 +208,7 @@ namespace RPG.UI
             }
             Text label = labels[usedLabels++];
             if (!label.gameObject.activeSelf) label.gameObject.SetActive(true);
-            label.transform.SetAsLastSibling();
+            KeepOrder(label.transform);
             label.text = text;
             label.color = color;
             label.fontSize = fontSize;

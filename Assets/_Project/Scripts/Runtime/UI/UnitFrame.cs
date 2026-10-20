@@ -145,26 +145,64 @@ namespace RPG.UI
             if (panel.activeSelf != show) panel.SetActive(show);
             if (!show) return;
 
-            nameText.text = bound.DisplayName + Subtitle(bound);
-            nameText.color = bound.Faction == Faction.Player ? FriendlyName : HostileName;
-            int level = LevelOf(bound);
-            levelText.text = level > 0 ? level.ToString() : "";
-            levelText.transform.parent.gameObject.SetActive(level > 0);
+            // Texts are rewritten only when what they show changed (a new unit, its health or mana), the name and the
+            // effect timers a few times a second.
+            bool newUnit = bound != shownUnit;
+            if (newUnit)
+            {
+                shownUnit = bound;
+                shownMana = bound.GetComponent<Mana>();
+                shownHealth = shownMaxHealth = shownManaValue = shownManaMax = int.MinValue;
+            }
+            if (newUnit || Time.unscaledTime >= nextNameRefresh)
+            {
+                nextNameRefresh = Time.unscaledTime + 0.5f;
+                nameText.text = bound.DisplayName + Subtitle(bound);
+                nameText.color = bound.Faction == Faction.Player ? FriendlyName : HostileName;
+                int level = LevelOf(bound);
+                levelText.text = level > 0 ? level.ToString() : "";
+                levelText.transform.parent.gameObject.SetActive(level > 0);
+            }
 
             healthFill.anchorMax = new Vector2(bound.Fraction, 1f);
-            healthLabel.text = bound.IsDead ? "Dead" : $"{bound.Current} / {bound.Max}   ({Mathf.RoundToInt(bound.Fraction * 100f)}%)";
+            int current = bound.IsDead ? -1 : bound.Current;
+            if (current != shownHealth || bound.Max != shownMaxHealth)
+            {
+                shownHealth = current;
+                shownMaxHealth = bound.Max;
+                healthLabel.text = bound.IsDead ? "Dead" : $"{bound.Current} / {bound.Max}   ({Mathf.RoundToInt(bound.Fraction * 100f)}%)";
+            }
 
-            bool hasMana = bound.TryGetComponent(out Mana mana) && mana.IsSpawned && mana.Max > 0;
+            Mana mana = shownMana;
+            bool hasMana = mana != null && mana.IsSpawned && mana.Max > 0;
             if (manaBar.activeSelf != hasMana) manaBar.SetActive(hasMana);
             if (hasMana)
             {
                 manaFill.anchorMax = new Vector2(mana.Fraction, 1f);
-                manaLabel.text = $"{mana.Current} / {mana.Max}";
+                if (mana.Current != shownManaValue || mana.Max != shownManaMax)
+                {
+                    shownManaValue = mana.Current;
+                    shownManaMax = mana.Max;
+                    manaLabel.text = $"{mana.Current} / {mana.Max}";
+                }
             }
 
             UpdateFace();
-            UpdateEffects();
+            if (newUnit || Time.unscaledTime >= nextEffectsRefresh)
+            {
+                nextEffectsRefresh = Time.unscaledTime + 0.25f;
+                UpdateEffects();
+            }
         }
+
+        private Health shownUnit;
+        private Mana shownMana;
+        private int shownHealth;
+        private int shownMaxHealth;
+        private int shownManaValue;
+        private int shownManaMax;
+        private float nextNameRefresh;
+        private float nextEffectsRefresh;
 
         private const float EffectIconSize = 26f;
         private const int MaxEffectIcons = 10;

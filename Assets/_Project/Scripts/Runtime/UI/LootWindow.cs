@@ -42,6 +42,7 @@ namespace RPG.UI
         {
             Image panel = UIFactory.CreateImage("Loot", transform, PanelColor);
             window = panel.gameObject;
+            window.AddComponent<OpenWindow>();
             UIFactory.AddFrame(panel);
             windowRect = panel.rectTransform;
             windowRect.anchorMin = windowRect.anchorMax = new Vector2(0.5f, 0.5f);
@@ -71,6 +72,7 @@ namespace RPG.UI
             windowRect.sizeDelta = new Vector2(width, 120f);
 
             Image background = UIFactory.CreateImage("Tooltip", transform, new Color(0f, 0f, 0f, 0.92f));
+            UIFactory.MakeTopmost(background.gameObject);
             background.raycastTarget = false;
             tooltip = background.rectTransform;
             tooltip.anchorMin = tooltip.anchorMax = Vector2.zero;
@@ -212,7 +214,7 @@ namespace RPG.UI
             Vector2 pointer = UnityEngine.InputSystem.Mouse.current != null
                 ? UnityEngine.InputSystem.Mouse.current.position.ReadValue()
                 : (Vector2)hovered.transform.position;
-            tooltip.anchoredPosition = pointer / scale + new Vector2(14f, 10f);
+            tooltip.anchoredPosition = UIFactory.KeepOnScreen(tooltip, pointer / scale + new Vector2(14f, 10f), scale);
             tooltip.SetAsLastSibling();
         }
     }

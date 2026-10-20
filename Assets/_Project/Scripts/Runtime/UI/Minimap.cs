@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using RPG.Combat;
 using RPG.Dungeons;
-using RPG.Monsters;
 using RPG.Navigation;
 using RPG.Vendors;
 using RPG.World;
@@ -99,7 +98,7 @@ namespace RPG.UI
             {
                 if (unit == null || unit == self || unit.IsDead) continue;
                 if (unit.Faction == Faction.Player) Dot(unit.transform.position, center, scale, PlayerColor, 8f);
-                else if (unit.GetComponent<MonsterAI>() != null) Dot(unit.transform.position, center, scale, MonsterColor, 6f);
+                else if (unit.Faction == Faction.Monster) Dot(unit.transform.position, center, scale, MonsterColor, 6f);
             }
             Dot(center, center, scale, SelfColor, 10f);
 
@@ -124,8 +123,8 @@ namespace RPG.UI
             }
 
             Image dot = dots[usedDots++];
+            // Dots are used in creation order after the map picture, so the last one drawn (you) is on top without reordering.
             if (!dot.gameObject.activeSelf) dot.gameObject.SetActive(true);
-            dot.transform.SetAsLastSibling();
             dot.color = color;
             dot.rectTransform.sizeDelta = new Vector2(size, size);
             dot.rectTransform.anchoredPosition = offset;

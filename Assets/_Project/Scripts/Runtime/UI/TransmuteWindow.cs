@@ -75,6 +75,7 @@ namespace RPG.UI
 
             Image panel = UIFactory.CreateImage("Transmute", transform, PanelColor);
             window = panel.gameObject;
+            window.AddComponent<OpenWindow>();
             RectTransform rect = panel.rectTransform;
             float height = 96f + Rows * (SlotSize + Spacing) + 104f;
             UIFactory.Place(rect, new Vector2(0.5f, 0.5f), new Vector2(-220f, 30f), new Vector2(Width, height));

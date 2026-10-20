@@ -140,7 +140,7 @@ namespace RPG.Progression
             bool cancelled = ability == null || health.IsDead
                              || pendingTarget == null || !pendingTarget.IsSpawned || pendingTarget.IsDead
                              || PlayerTargeting.LocalTarget != pendingTarget
-                             || input.MoveInput.sqrMagnitude > 0.01f || input.CancelPressed
+                             || input.MoveInput.sqrMagnitude > 0.01f || (input.CancelPressed && !RPG.UI.OpenWindow.EscapeUsedByWindow)
                              || (input.MoveClickPressed && !input.IsPointerOverUI);
             if (cancelled)
             {

@@ -55,7 +55,7 @@ namespace RPG.UI
                 }
 
                 bool show = cam != null && Vector2.Distance(cam.transform.position, vendor.transform.position) <= visibleDistance;
-                plate.gameObject.SetActive(show);
+                if (plate.gameObject.activeSelf != show) plate.gameObject.SetActive(show);
                 if (show)
                     plate.rectTransform.position = cam.WorldToScreenPoint(vendor.transform.position + Vector3.up * heightAboveFeet);
             }

@@ -118,7 +118,8 @@ namespace RPG.Combat
             if (LocalTarget != null && !LocalTarget.IsSpawned)
                 SetTarget(null);
 
-            if (input.CancelPressed)
+            // Esc closes an open window first; only then does it drop the target.
+            if (input.CancelPressed && !RPG.UI.OpenWindow.EscapeUsedByWindow)
             {
                 StopAttack();
                 SetTarget(null);

@@ -116,8 +116,8 @@ namespace RPG.UI
         public static Button CreateButton(string name, Transform parent, Color color, string label, int fontSize)
         {
             Image background = CreateImage(name, parent, color);
-            // Coloured buttons get the cut-corner shape; clear ones (tabs, slots) stay as they are.
-            if (color.a > 0.01f && ButtonSprite != null)
+            // Coloured buttons with a label get the cut-corner shape; slots and list rows (no label) and clear tabs stay square.
+            if (color.a > 0.01f && !string.IsNullOrEmpty(label) && ButtonSprite != null)
             {
                 background.sprite = ButtonSprite;
                 background.type = Image.Type.Sliced;
@@ -147,6 +147,8 @@ namespace RPG.UI
             Image frame = CreateImage("Frame", panel.transform, color ?? FrameColor);
             frame.sprite = WindowFrameSprite;
             frame.type = Image.Type.Sliced;
+            // Only the border is drawn, not a transparent quad over the whole window.
+            frame.fillCenter = false;
             frame.raycastTarget = false;
             Stretch(frame.rectTransform);
             frame.rectTransform.offsetMin = new Vector2(-outset, -outset);
@@ -163,6 +165,33 @@ namespace RPG.UI
             if (DividerSprite != null) line.sprite = DividerSprite;
             Place(line.rectTransform, new Vector2(0.5f, 1f), new Vector2(0f, y), new Vector2(width, DividerSprite != null ? 22f : 2f));
             return line;
+        }
+
+        /// <summary>
+        /// Draws a popup (a tooltip) over every window, whatever window it belongs to: a canvas of its own sorted on top.
+        /// </summary>
+        public static void MakeTopmost(GameObject popup)
+        {
+            Canvas canvas = popup.AddComponent<Canvas>();
+            canvas.overrideSorting = true;
+            canvas.sortingOrder = 500;
+        }
+
+        /// <summary>
+        /// <paramref name="position"/> (canvas units, from the bottom left of the screen) moved just enough that a popup of
+        /// its size and pivot stays on the screen.
+        /// </summary>
+        public static Vector2 KeepOnScreen(RectTransform popup, Vector2 position, float scale)
+        {
+            Vector2 screen = new Vector2(Screen.width, Screen.height) / Mathf.Max(0.0001f, scale);
+            Vector2 size = popup.sizeDelta;
+            Vector2 min = position - Vector2.Scale(popup.pivot, size);
+            Vector2 max = min + size;
+            if (max.x > screen.x) position.x -= max.x - screen.x;
+            if (min.x < 0f) position.x -= min.x;
+            if (max.y > screen.y) position.y -= max.y - screen.y;
+            if (min.y < 0f) position.y -= min.y;
+            return position;
         }
 
         public static void Stretch(RectTransform rect)

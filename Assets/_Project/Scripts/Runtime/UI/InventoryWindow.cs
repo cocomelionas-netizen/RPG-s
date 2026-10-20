@@ -68,6 +68,7 @@ namespace RPG.UI
         {
             VendorWindow.Opened -= OnVendorOpened;
             TransmuteWindow.Opened -= OnVendorOpened;
+            if (watched != null) watched.Changed -= MarkDirty;
         }
 
         private void OnVendorOpened()
@@ -81,6 +82,7 @@ namespace RPG.UI
             float gridWidth = columns * slotSize + (columns - 1) * spacing;
             Image panel = UIFactory.CreateImage("Inventory", transform, PanelColor);
             window = panel.gameObject;
+            window.AddComponent<OpenWindow>();
             UIFactory.AddFrame(panel);
             RectTransform rect = panel.rectTransform;
             rect.anchorMin = rect.anchorMax = rect.pivot = new Vector2(1f, 0.5f);
@@ -188,6 +190,7 @@ namespace RPG.UI
         private void BuildTooltip()
         {
             Image background = UIFactory.CreateImage("Tooltip", transform, new Color(0f, 0f, 0f, 0.9f));
+            UIFactory.MakeTopmost(background.gameObject);
             background.raycastTarget = false;
             tooltip = background.rectTransform;
             tooltip.anchorMin = tooltip.anchorMax = new Vector2(0f, 0f);
@@ -244,6 +247,14 @@ namespace RPG.UI
             inventory.RequestActivate(index);
         }
 
+        private Inventory watched;
+        private bool dirty = true;
+        private int shownGem = int.MinValue;
+        private int shownGold = -1;
+        private float nextRefresh;
+
+        private void MarkDirty() => dirty = true;
+
         private void Update()
         {
             inventory = UIFactory.LocalPlayer<Inventory>();
@@ -257,7 +268,8 @@ namespace RPG.UI
             }
 
             PlayerInputReader input = inventory.GetComponent<PlayerInputReader>();
-            if (input != null && input.enabled && input.InventoryPressed) Toggle();
+            // Esc closes the bag, unless it is only cancelling a gem being set.
+            if (input != null && input.enabled && (input.InventoryPressed || input.CancelPressed && window.activeSelf && pendingGem < 0)) Toggle();
             if (!window.activeSelf)
             {
                 tooltip.gameObject.SetActive(false);
@@ -271,14 +283,29 @@ namespace RPG.UI
                 if (gem == null || !gem.isGem || (input != null && input.CancelPressed)) pendingGem = -1;
             }
 
-            EnsureBagSlots(inventory.BagSize);
-            for (int i = 0; i < bagSlots.Count; i++)
+            // The slots and stats are redrawn when the bag changed (or the gem being set, or gold), and now and then
+            // for buffs, not every frame.
+            if (inventory != watched)
             {
-                Show(bagSlots[i], inventory.GetBagSlot(i));
-                if (i == pendingGem) bagSlots[i].Border.effectColor = PendingGemBorder;
+                if (watched != null) watched.Changed -= MarkDirty;
+                watched = inventory;
+                watched.Changed += MarkDirty;
+                dirty = true;
             }
-
-            ShowStats();
+            if (dirty || pendingGem != shownGem || inventory.Gold != shownGold || Time.unscaledTime >= nextRefresh)
+            {
+                dirty = false;
+                shownGem = pendingGem;
+                shownGold = inventory.Gold;
+                nextRefresh = Time.unscaledTime + 0.5f;
+                EnsureBagSlots(inventory.BagSize);
+                for (int i = 0; i < bagSlots.Count; i++)
+                {
+                    Show(bagSlots[i], inventory.GetBagSlot(i));
+                    if (i == pendingGem) bagSlots[i].Border.effectColor = PendingGemBorder;
+                }
+                ShowStats();
+            }
             ShowTooltip();
         }
 
@@ -354,7 +381,7 @@ namespace RPG.UI
             Vector2 pointer = UnityEngine.InputSystem.Mouse.current != null
                 ? UnityEngine.InputSystem.Mouse.current.position.ReadValue()
                 : (Vector2)hovered.transform.position;
-            tooltip.anchoredPosition = pointer / scale + new Vector2(-12f, 12f);
+            tooltip.anchoredPosition = UIFactory.KeepOnScreen(tooltip, pointer / scale + new Vector2(-12f, 12f), scale);
             tooltip.SetAsLastSibling();
         }
     }

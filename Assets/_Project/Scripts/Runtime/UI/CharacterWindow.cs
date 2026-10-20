@@ -205,6 +205,7 @@ namespace RPG.UI
 
             Image panel = UIFactory.CreateImage("Character", transform, PanelColor);
             window = panel.gameObject;
+            window.AddComponent<OpenWindow>();
             UIFactory.AddFrame(panel);
             RectTransform rect = panel.rectTransform;
             rect.anchorMin = rect.anchorMax = rect.pivot = new Vector2(0f, 0.5f);
@@ -507,6 +508,7 @@ namespace RPG.UI
         private void BuildTooltip()
         {
             Image background = UIFactory.CreateImage("Stat Tooltip", transform, TooltipColor);
+            UIFactory.MakeTopmost(background.gameObject);
             background.raycastTarget = false;
             background.gameObject.AddComponent<Outline>().effectColor = TooltipBorder;
             tooltip = background.rectTransform;
@@ -537,7 +539,31 @@ namespace RPG.UI
         private void Toggle()
         {
             window.SetActive(!window.activeSelf);
-            if (!window.activeSelf) HideTooltip();
+            nextRefresh = 0f;
+            if (window.activeSelf) return;
+            HideTooltip();
+            // Closing drops the points picked but not confirmed.
+            if (spending) SetSpending(false);
+        }
+
+        // The texts are rewritten when what they show changed, or a few times a second (buffs), not every frame.
+        private float nextRefresh;
+        private int shownState;
+        private const float RefreshSeconds = 0.25f;
+
+        private int StateOf()
+        {
+            unchecked
+            {
+                int state = progress.Level;
+                state = state * 31 + progress.Experience;
+                state = state * 31 + progress.ExperienceToSpend;
+                state = state * 31 + PendingCost();
+                state = state * 31 + page;
+                state = state * 31 + (spending ? 1 : 0);
+                state = state * 31 + (inventory != null ? inventory.Gold : 0);
+                return state;
+            }
         }
 
         /// <summary>Picks one more point (bought on CONFIRM), when the experience covers everything picked.</summary>
@@ -571,7 +597,7 @@ namespace RPG.UI
             }
 
             var input = progress.GetComponent<PlayerInputReader>();
-            if (input != null && input.enabled && input.CharacterPressed) Toggle();
+            if (input != null && input.enabled && (input.CharacterPressed || input.CancelPressed && window.activeSelf)) Toggle();
             if (!window.activeSelf)
             {
                 tooltip.gameObject.SetActive(false);
@@ -582,6 +608,14 @@ namespace RPG.UI
             mana = progress.GetComponent<Mana>();
             attack = progress.GetComponent<AutoAttack>();
             inventory = progress.GetComponent<Inventory>();
+            int state = StateOf();
+            if (state == shownState && Time.unscaledTime < nextRefresh)
+            {
+                UpdateTooltip();
+                return;
+            }
+            shownState = state;
+            nextRefresh = Time.unscaledTime + RefreshSeconds;
             nameText.text = health.DisplayName.ToUpperInvariant();
             levelText.text = $"Level {progress.Level} {progress.ClassName} ({LevelCurve.RankName(progress.Level)})";
             progressionText.text = progress.ExperienceToNext > 0 ? $"{progress.Experience} / {progress.ExperienceToNext}" : "Max level";
@@ -613,7 +647,7 @@ namespace RPG.UI
             Vector2 pointer = UnityEngine.InputSystem.Mouse.current != null
                 ? UnityEngine.InputSystem.Mouse.current.position.ReadValue()
                 : Vector2.zero;
-            tooltip.anchoredPosition = pointer / scale + new Vector2(16f, -12f);
+            tooltip.anchoredPosition = UIFactory.KeepOnScreen(tooltip, pointer / scale + new Vector2(16f, -12f), scale);
         }
     }
 }

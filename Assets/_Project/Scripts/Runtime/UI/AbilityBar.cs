@@ -30,6 +30,32 @@ namespace RPG.UI
             public Text Key;
             public Text Name;
             public Text Countdown;
+            public Outline Border;
+            // What the texts show now, so they are rewritten only when it changes (the bar is always on screen).
+            public int ShownKind = -1;
+            public int ShownId;
+            public int ShownNumber;
+            public bool ShownFlag;
+            public int ShownCountdown;
+        }
+
+        /// <summary>True (and remembers it) when the slot's name text must be rewritten for this content.</summary>
+        private static bool NameChanged(Slot slot, int kind, int id, int number, bool flag)
+        {
+            if (slot.ShownKind == kind && slot.ShownId == id && slot.ShownNumber == number && slot.ShownFlag == flag) return false;
+            slot.ShownKind = kind;
+            slot.ShownId = id;
+            slot.ShownNumber = number;
+            slot.ShownFlag = flag;
+            return true;
+        }
+
+        /// <summary>Shows whole seconds (positive) or minutes (negative, "5m"); 0 shows nothing.</summary>
+        private static void SetCountdown(Slot slot, int value)
+        {
+            if (slot.ShownCountdown == value) return;
+            slot.ShownCountdown = value;
+            slot.Countdown.text = value > 0 ? value.ToString() : value < 0 ? $"{-value}m" : "";
         }
 
         private Slot[] slots;
@@ -132,7 +158,8 @@ namespace RPG.UI
             slot.Key.rectTransform.offsetMin = new Vector2(5f, 0f);
             slot.Key.rectTransform.offsetMax = new Vector2(0f, -3f);
             slot.Key.text = key;
-            button.gameObject.AddComponent<Outline>().effectDistance = new Vector2(3f, -3f);
+            slot.Border = button.gameObject.AddComponent<Outline>();
+            slot.Border.effectDistance = new Vector2(3f, -3f);
 
             slot.Name = UIFactory.CreateText("Name", rect, 11, TextAnchor.LowerCenter);
             UIFactory.Stretch(slot.Name.rectTransform);
@@ -254,9 +281,9 @@ namespace RPG.UI
         private void ShowAttack(Slot slot)
         {
             slot.Background.color = AttackColor;
-            slot.Name.text = "Attack";
+            if (NameChanged(slot, 0, 0, 0, false)) slot.Name.text = "Attack";
             slot.Cooldown.anchorMax = new Vector2(1f, 0f);
-            slot.Countdown.text = "";
+            SetCountdown(slot, 0);
             SetHighlighted(slot, targeting != null && targeting.IsAttacking);
         }
 
@@ -267,14 +294,15 @@ namespace RPG.UI
             slot.Background.color = tint;
             bool enoughMana = caster.HasManaFor(ability);
             int cost = caster.ManaCost(ability);
-            slot.Name.text = cost > 0
-                ? $"{ability.displayName}\n<color={(enoughMana ? "#8fb3ff" : "#ff6655")}>{cost} mana</color>"
-                : ability.displayName;
+            if (NameChanged(slot, 1, ability.GetInstanceID(), cost, enoughMana))
+                slot.Name.text = cost > 0
+                    ? $"{ability.displayName}\n<color={(enoughMana ? "#8fb3ff" : "#ff6655")}>{cost} mana</color>"
+                    : ability.displayName;
             SetHighlighted(slot, caster.PendingSlot == index);
 
             float remaining = caster.CooldownRemaining(index);
             slot.Cooldown.anchorMax = new Vector2(1f, caster.CooldownFraction(index));
-            slot.Countdown.text = remaining >= 1f ? Mathf.CeilToInt(remaining).ToString() : "";
+            SetCountdown(slot, remaining >= 1f ? Mathf.CeilToInt(remaining) : 0);
         }
 
         private void ShowItem(Slot slot, int itemId)
@@ -289,7 +317,7 @@ namespace RPG.UI
             Color tint = count > 0 ? item.iconColor * 0.7f : item.iconColor * 0.3f;
             tint.a = 0.92f;
             slot.Background.color = tint;
-            slot.Name.text = $"{item.displayName}\nx{count}";
+            if (NameChanged(slot, 2, itemId, count, false)) slot.Name.text = $"{item.displayName}\nx{count}";
             bool potion = item.use == ItemUse.Heal || item.use == ItemUse.RestoreMana;
             bool scroll = item.use == ItemUse.Return;
             bool food = item.use == ItemUse.Food;
@@ -299,28 +327,28 @@ namespace RPG.UI
             float fraction = potion ? inventory.PotionCooldownFraction : scroll ? inventory.ReturnCooldownFraction(item.useCooldown)
                 : food && item.useCooldown > 0f ? Mathf.Clamp01(remaining / item.useCooldown) : 0f;
             slot.Cooldown.anchorMax = new Vector2(1f, count > 0 ? fraction : 0f);
-            slot.Countdown.text = count > 0 && remaining >= 0.05f ? CountdownText(remaining) : "";
+            SetCountdown(slot, count > 0 && remaining >= 0.05f ? CountdownValue(remaining) : 0);
             SetHighlighted(slot, false);
         }
 
-        /// <summary>"45" seconds, or "5m" for long cooldowns.</summary>
-        private static string CountdownText(float seconds) =>
-            seconds >= 60f ? $"{Mathf.CeilToInt(seconds / 60f)}m" : Mathf.CeilToInt(seconds).ToString();
+        /// <summary>45 seconds, or -5 for "5m" on long cooldowns (see <see cref="SetCountdown"/>).</summary>
+        private static int CountdownValue(float seconds) =>
+            seconds >= 60f ? -Mathf.CeilToInt(seconds / 60f) : Mathf.CeilToInt(seconds);
 
         private void ShowEmpty(Slot slot, bool dropping)
         {
             // Empty slots stay visible (dim) so things can be put there.
             slot.Background.color = dropping ? DropColor : EmptyColor;
-            slot.Name.text = "";
-            slot.Countdown.text = "";
+            if (NameChanged(slot, 3, 0, 0, false)) slot.Name.text = "";
+            SetCountdown(slot, 0);
             slot.Cooldown.anchorMax = new Vector2(1f, 0f);
             SetHighlighted(slot, false);
         }
 
         private static void SetHighlighted(Slot slot, bool highlighted)
         {
-            var outline = slot.Root.GetComponent<Outline>();
-            outline.effectColor = highlighted ? ActiveOutline : IdleOutline;
+            Color wanted = highlighted ? ActiveOutline : IdleOutline;
+            if (slot.Border != null && slot.Border.effectColor != wanted) slot.Border.effectColor = wanted;
         }
 
         private void OnDestroy()

@@ -13,3 +13,12 @@ The layout follows a screenshot of the source game, but all the art is generated
 
 The minimap picture is drawn once per map from `WorldNavigation` (walkable / blocked),
 the zone name comes from `WorldNavigation.ZoneName`.
+
+## Esc and popups
+
+- Esc closes the open windows first (character C, bag I, abilities P, vendor, loot, transmute, waystones, map); only
+  when no window is open (or closing) does it drop the target and cancel a cast (`UI/OpenWindow.cs`). With a gem being
+  set into an item, Esc cancels that and keeps the bag open.
+- Tooltips are drawn over every window (a canvas of their own sorted on top) and kept on the screen.
+- The HUD texts are rewritten only when what they show changes (the action bar, nameplates, frames, the bag, the
+  character sheet, the vendor list a few times a second), to keep WebGL frames smooth.

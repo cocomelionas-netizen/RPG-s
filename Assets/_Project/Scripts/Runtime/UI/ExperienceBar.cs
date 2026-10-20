@@ -31,6 +31,8 @@ namespace RPG.UI
             label.horizontalOverflow = HorizontalWrapMode.Overflow;
         }
 
+        private int shownState = int.MinValue;
+
         private void LateUpdate()
         {
             CharacterProgress progress = UIFactory.LocalPlayer<CharacterProgress>();
@@ -41,6 +43,10 @@ namespace RPG.UI
             int needed = progress.ExperienceToNext;
             float fraction = needed > 0 ? Mathf.Clamp01((float)progress.Experience / needed) : 1f;
             fill.anchorMax = new Vector2(fraction, 1f);
+            // The text only changes with the experience, level or class.
+            int state = unchecked((progress.Level * 31 + progress.Experience) * 31 + progress.ClassIndex);
+            if (state == shownState) return;
+            shownState = state;
             label.text = needed > 0
                 ? $"Level {progress.Level} {progress.ClassName}  -  {progress.Experience} / {needed} XP"
                 : $"Level {progress.Level} {progress.ClassName}  -  max level";

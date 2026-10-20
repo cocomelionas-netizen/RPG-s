@@ -43,6 +43,12 @@ namespace RPG.UI
         private const int RowsPerColumn = 10;
         private const int PageSize = RowsPerColumn * 2;
         private int page;
+        // The rows are rewritten only when something they show may have changed (gold, level, page) or a few times a
+        // second (stock left, restocks), not every frame.
+        private float nextRefresh;
+        private int lastGold = -1;
+        private int lastLevel = -1;
+        private const float RefreshSeconds = 0.25f;
         private int pageCount = 1;
         private RectTransform pager;
         private Text pageText;
@@ -85,6 +91,7 @@ namespace RPG.UI
             instance = this;
             Image panel = UIFactory.CreateImage("Vendor", transform, PanelColor);
             window = panel.gameObject;
+            window.AddComponent<OpenWindow>();
             UIFactory.AddFrame(panel);
             RectTransform rect = panel.rectTransform;
             rect.anchorMin = rect.anchorMax = rect.pivot = new Vector2(0f, 0.5f);
@@ -209,6 +216,7 @@ namespace RPG.UI
             // Long stock lists (a trainer's Tomes) in two columns.
             Row row = CreateRowAt(-(position % stockPerColumn) * (rowHeight + 4f), RowColor, out Button button, position / stockPerColumn * width);
             row.StockIndex = stockIndex;
+            nextRefresh = 0f;
             button.onClick.AddListener(() => Buy(stockIndex));
             return row;
         }
@@ -253,8 +261,14 @@ namespace RPG.UI
                 return;
             }
 
-            goldText.text = $"Your gold: {inventory.Gold}      Click an item to buy. While this is open, click items in your bag to sell them.";
             var progress = inventory.GetComponent<CharacterProgress>();
+            int level = progress != null ? progress.Level : 0;
+            if (inventory.Gold == lastGold && level == lastLevel && Time.unscaledTime < nextRefresh) return;
+            lastGold = inventory.Gold;
+            lastLevel = level;
+            nextRefresh = Time.unscaledTime + RefreshSeconds;
+
+            goldText.text = $"Your gold: {inventory.Gold}      Click an item to buy. While this is open, click items in your bag to sell them.";
             ItemDefinition[] stock = shown.Definition.stock;
             AffixCatalog affixCatalog = inventory.Affixes;
             foreach (Row row in rows)

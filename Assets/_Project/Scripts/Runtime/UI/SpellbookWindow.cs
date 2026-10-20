@@ -66,6 +66,10 @@ namespace RPG.UI
         private ScrollRect scroll;
         private Text footer;
         private readonly List<Button> tabs = new List<Button>();
+        private readonly List<Text> tabTexts = new List<Text>();
+        // The rows are rewritten only when what they show changed (ranks, level, experience, the picked spell), or now and then.
+        private int shownState;
+        private float nextRefresh;
         private readonly List<Row> rows = new List<Row>();
         private int tab;
         private Spellbook shownFor;
@@ -98,6 +102,7 @@ namespace RPG.UI
 
             Image panel = UIFactory.CreateImage("Abilities", transform, PanelColor);
             window = panel.gameObject;
+            window.AddComponent<OpenWindow>();
             UIFactory.AddFrame(panel);
             windowRect = panel.rectTransform;
             windowRect.anchorMin = windowRect.anchorMax = new Vector2(0f, 0.5f);
@@ -121,6 +126,7 @@ namespace RPG.UI
                 UIFactory.Place((RectTransform)button.transform, new Vector2(0f, 1f), new Vector2(centers[i] - 50f, -74f), new Vector2(100f, 26f));
                 button.onClick.AddListener(() => tab = index);
                 tabs.Add(button);
+                tabTexts.Add(button.GetComponentInChildren<Text>());
             }
             Button close = UIFactory.CreateButton("Close", windowRect, new Color(0.35f, 0.12f, 0.1f, 0.95f), "X", 15);
             UIFactory.Place((RectTransform)close.transform, new Vector2(1f, 1f), new Vector2(-14f, -26f), new Vector2(26f, 26f));
@@ -270,21 +276,42 @@ namespace RPG.UI
         public static string Roman(int rank)
         {
             if (rank <= 1) return "";
-            string[] numerals = { "M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I" };
-            int[] values = { 1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1 };
+            if (rank < RomanCache.Length) return RomanCache[rank] ??= ToRoman(rank);
+            return ToRoman(rank);
+        }
+
+        private static readonly string[] RomanCache = new string[32];
+        private static readonly string[] Numerals = { "M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I" };
+        private static readonly int[] NumeralValues = { 1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1 };
+
+        private static string ToRoman(int rank)
+        {
             var text = new System.Text.StringBuilder();
-            for (int i = 0; i < values.Length; i++)
-                while (rank >= values[i])
+            for (int i = 0; i < NumeralValues.Length; i++)
+                while (rank >= NumeralValues[i])
                 {
-                    text.Append(numerals[i]);
-                    rank -= values[i];
+                    text.Append(Numerals[i]);
+                    rank -= NumeralValues[i];
                 }
             return text.ToString();
+        }
+
+        /// <summary>A number that changes when anything the rows show changes.</summary>
+        private int StateOf(Spellbook spellbook, CharacterProgress progress)
+        {
+            unchecked
+            {
+                int state = PendingSpell * 31 + tab;
+                state = state * 31 + (progress != null ? progress.Level * 100003 + progress.ExperienceToSpend : 0);
+                for (int i = 0; i < spellbook.Spells.Count; i++) state = state * 31 + spellbook.RankOf(i);
+                return state;
+            }
         }
 
         private void BuildTooltip()
         {
             Image background = UIFactory.CreateImage("Rank Tooltip", transform, TooltipColor);
+            UIFactory.MakeTopmost(background.gameObject);
             background.raycastTarget = false;
             tooltip = background.rectTransform;
             tooltip.anchorMin = tooltip.anchorMax = Vector2.zero;
@@ -314,17 +341,27 @@ namespace RPG.UI
             {
                 if (input.SpellbookPressed) Toggle();
                 else if (input.CancelPressed && PendingSpell != -1) PendingSpell = -1;
+                else if (input.CancelPressed && window.activeSelf) Toggle();
             }
             if (!window.activeSelf)
             {
                 tooltip.gameObject.SetActive(false);
                 return;
             }
-            if (spellbook != shownFor || spellbook.Spells.Count != shownCount || tab != shownTab) Build(spellbook);
-            for (int i = 0; i < tabs.Count; i++) tabs[i].GetComponentInChildren<Text>().color = i == tab ? ActiveTabColor : TabColor;
+            bool rebuilt = spellbook != shownFor || spellbook.Spells.Count != shownCount || tab != shownTab;
+            if (rebuilt) Build(spellbook);
 
             var progress = spellbook.GetComponent<CharacterProgress>();
             var caster = spellbook.GetComponent<AbilityCaster>();
+            int state = StateOf(spellbook, progress);
+            if (!rebuilt && state == shownState && Time.unscaledTime < nextRefresh)
+            {
+                UpdateTooltip();
+                return;
+            }
+            shownState = state;
+            nextRefresh = Time.unscaledTime + 1f;
+            for (int i = 0; i < tabTexts.Count; i++) tabTexts[i].color = i == tab ? ActiveTabColor : TabColor;
             foreach (Row row in rows)
             {
                 if (row.Spell == Spellbook.AttackEntry)
@@ -375,7 +412,7 @@ namespace RPG.UI
             var canvas = GetComponentInParent<Canvas>();
             float scale = canvas != null ? canvas.scaleFactor : 1f;
             Vector2 pointer = UnityEngine.InputSystem.Mouse.current != null ? UnityEngine.InputSystem.Mouse.current.position.ReadValue() : Vector2.zero;
-            tooltip.anchoredPosition = pointer / scale + new Vector2(16f, -12f);
+            tooltip.anchoredPosition = UIFactory.KeepOnScreen(tooltip, pointer / scale + new Vector2(16f, -12f), scale);
         }
     }
 }
