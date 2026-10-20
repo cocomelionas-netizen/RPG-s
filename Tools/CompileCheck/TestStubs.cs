@@ -18,7 +18,7 @@ namespace Unity.Netcode {
   public class NetworkList<T> where T : unmanaged, System.IEquatable<T> {
     public NetworkList(System.Collections.Generic.IEnumerable<T> values = default, NetworkVariableReadPermission r = default, NetworkVariableWritePermission w = default) {}
     public delegate void OnListChangedDelegate(NetworkListEvent<T> e); public event OnListChangedDelegate OnListChanged;
-    public void Add(T v){} public void Clear(){} public int Count => 0; public T this[int i] { get => default; set {} }
+    public void Add(T v){} public void Clear(){} public void RemoveAt(int i){} public int Count => 0; public T this[int i] { get => default; set {} }
   }
 }
 namespace UnityEngine.InputSystem { public class Mouse { public static Mouse current; public PosCtl position; } public class PosCtl { public Vector2 ReadValue()=>default; } }

@@ -162,10 +162,30 @@ namespace RPG.Combat
             }
         }
 
+        // The checks below run every frame for every unit: plain loops over the list, no iterator allocations.
+
         public bool Has(StatusKind kind)
         {
-            foreach (StatusView view in Views)
-                if (view.Kind == kind) return true;
+            if (views == null) return false;
+            double now = Now;
+            for (int i = 0; i < views.Count; i++)
+            {
+                StatusView view = views[i];
+                if (view.Kind == kind && view.EndsAt > now) return true;
+            }
+            return false;
+        }
+
+        /// <summary>Has an effect of either kind (one pass).</summary>
+        private bool HasAny(StatusKind first, StatusKind second, StatusKind third)
+        {
+            if (views == null) return false;
+            double now = Now;
+            for (int i = 0; i < views.Count; i++)
+            {
+                StatusView view = views[i];
+                if (view.EndsAt > now && (view.Kind == first || view.Kind == second || view.Kind == third)) return true;
+            }
             return false;
         }
 
@@ -178,18 +198,18 @@ namespace RPG.Combat
         }
 
         /// <summary>Stunned or incapacitated: cannot move, attack or cast.</summary>
-        public bool IsDisabled => Has(StatusKind.Stun) || Has(StatusKind.Incapacitate);
+        public bool IsDisabled => HasAny(StatusKind.Stun, StatusKind.Incapacitate, StatusKind.Incapacitate);
 
         /// <summary>Cannot move (also while disabled).</summary>
-        public bool IsRooted => IsDisabled || Has(StatusKind.Root);
+        public bool IsRooted => HasAny(StatusKind.Stun, StatusKind.Incapacitate, StatusKind.Root);
 
         public bool IsStealthed => Has(StatusKind.Stealth);
 
         /// <summary>Cannot cast spells (silenced, or stunned).</summary>
-        public bool IsSilenced => IsDisabled || Has(StatusKind.Silence);
+        public bool IsSilenced => HasAny(StatusKind.Stun, StatusKind.Incapacitate, StatusKind.Silence);
 
         /// <summary>Cannot swing its weapon (pacified, or stunned).</summary>
-        public bool IsPacified => IsDisabled || Has(StatusKind.Pacify);
+        public bool IsPacified => HasAny(StatusKind.Stun, StatusKind.Incapacitate, StatusKind.Pacify);
 
         public bool IsImmune => Has(StatusKind.Immune);
 
@@ -204,11 +224,19 @@ namespace RPG.Combat
         {
             get
             {
+                if (views == null || views.Count == 0) return 1f;
                 if (IsRooted) return 0f;
                 float slow = 0f;
-                foreach (StatusView view in Views)
+                float haste = 0f;
+                double now = Now;
+                for (int i = 0; i < views.Count; i++)
+                {
+                    StatusView view = views[i];
+                    if (view.EndsAt <= now) continue;
                     if (view.Kind == StatusKind.Slow) slow = Mathf.Max(slow, view.Total);
-                return Mathf.Clamp01(1f - slow / 100f) * (1f + Mathf.Max(0f, Total(StatusKind.Haste)) / 100f);
+                    else if (view.Kind == StatusKind.Haste) haste += view.Total;
+                }
+                return Mathf.Clamp01(1f - slow / 100f) * (1f + Mathf.Max(0f, haste) / 100f);
             }
         }
 
@@ -216,8 +244,13 @@ namespace RPG.Combat
         public float Total(StatusKind kind, DamageSchool? school = null)
         {
             float total = 0f;
-            foreach (StatusView view in Views)
-                if (view.Kind == kind && (!school.HasValue || view.Matches(school.Value))) total += view.Total;
+            if (views == null) return total;
+            double now = Now;
+            for (int i = 0; i < views.Count; i++)
+            {
+                StatusView view = views[i];
+                if (view.Kind == kind && view.EndsAt > now && (!school.HasValue || view.Matches(school.Value))) total += view.Total;
+            }
             return total;
         }
 
@@ -410,10 +443,18 @@ namespace RPG.Combat
             if (changed) Publish();
         }
 
+        /// <summary>Sends the effects: only the entries that changed, were added or ended (not the whole list again).</summary>
         private void Publish()
         {
-            views.Clear();
-            foreach (Active effect in active) views.Add(effect.View);
+            for (int i = 0; i < active.Count; i++)
+            {
+                if (i < views.Count)
+                {
+                    if (!views[i].Equals(active[i].View)) views[i] = active[i].View;
+                }
+                else views.Add(active[i].View);
+            }
+            while (views.Count > active.Count) views.RemoveAt(views.Count - 1);
         }
     }
 }

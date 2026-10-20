@@ -96,9 +96,10 @@ namespace RPG.Accounts
             inventory.ServerSetGold(saved.gold);
             if (waystones != null) waystones.ServerLoad(saved.waystones);
             var position = new Vector2(saved.x, saved.y);
-            // A spot on no map (for example inside a dungeon that has closed since) keeps the spawn point.
+            // A spot on no map, or inside a dungeon (its slot may belong to another group by now), keeps the spawn point.
             WorldNavigation navigation = WorldNavigation.At(position);
-            bool safe = navigation != null && navigation.IsWalkable(position);
+            bool inDungeon = RPG.Dungeons.DungeonManager.Instance != null && RPG.Dungeons.DungeonManager.Instance.InstanceAt(position) != null;
+            bool safe = navigation != null && navigation.IsWalkable(position) && !inDungeon;
             if (safe && networkMovement != null) networkMovement.ServerTeleport(position);
             Debug.Log($"[Accounts] Loaded {account.username}: level {saved.level} {progress.ClassName}.");
         }
@@ -124,6 +125,9 @@ namespace RPG.Accounts
                 record.spellBar = spellbook.BarSnapshot();
             }
             Vector2 position = AutoAttack.ServerPosition(this);
+            // Inside a dungeon the character is saved at its entrance in the world.
+            if (RPG.Dungeons.DungeonManager.Instance != null && RPG.Dungeons.DungeonManager.Instance.TryGetWorldReturn(position, out Vector2 outside))
+                position = outside;
             record.x = position.x;
             record.y = position.y;
             record.hasBeenSaved = true;

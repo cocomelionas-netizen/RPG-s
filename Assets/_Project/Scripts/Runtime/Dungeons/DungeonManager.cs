@@ -290,6 +290,20 @@ namespace RPG.Dungeons
             return true;
         }
 
+        /// <summary>
+        /// Where a player inside a dungeon at <paramref name="position"/> would come back to in the world (its entrance);
+        /// false when the position is in no dungeon. Saved characters use it, so nobody logs back into another group's run.
+        /// </summary>
+        public bool TryGetWorldReturn(Vector2 position, out Vector2 destination)
+        {
+            destination = position;
+            DungeonInstance instance = InstanceAt(position);
+            if (instance == null) return false;
+            Portal entrance = WorldEntranceOf(instance.Definition);
+            destination = entrance != null ? (Vector2)entrance.transform.position + new Vector2(0f, -0.8f) : Vector2.zero;
+            return true;
+        }
+
         /// <summary>The entrance in the world that opens <paramref name="dungeon"/> (or any world entrance when there is none).</summary>
         private Portal WorldEntranceOf(DungeonDefinition dungeon)
         {

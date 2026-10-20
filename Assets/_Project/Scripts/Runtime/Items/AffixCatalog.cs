@@ -21,7 +21,20 @@ namespace RPG.Items
 
         public AffixDefinition Get(int id) => id >= 1 && id <= affixes.Length ? affixes[id - 1] : null;
 
-        public int IdOf(AffixDefinition affix) => affix != null ? Array.IndexOf(affixes, affix) + 1 : 0;
+        private Dictionary<AffixDefinition, int> ids;
+
+        /// <summary>The id of an affix (its place in the list, from 1), looked up in a table rather than searched.</summary>
+        public int IdOf(AffixDefinition affix)
+        {
+            if (affix == null) return 0;
+            if (ids == null || ids.Count == 0 && affixes.Length > 0)
+            {
+                ids = new Dictionary<AffixDefinition, int>(affixes.Length);
+                for (int i = 0; i < affixes.Length; i++)
+                    if (affixes[i] != null && !ids.ContainsKey(affixes[i])) ids[affixes[i]] = i + 1;
+            }
+            return ids.TryGetValue(affix, out int id) ? id : Array.IndexOf(affixes, affix) + 1;
+        }
 
         /// <summary>How often a quality is picked among the possible affixes: rarer qualities much less often.</summary>
         public static float Weight(ItemRarity quality)

@@ -32,11 +32,13 @@ namespace RPG.Networking
         /// Returns true and spends budget when moving <paramref name="distance"/> at <paramref name="time"/> is allowed.
         /// A rejected move spends nothing, so the player can continue from the last accepted position.
         /// </summary>
-        public bool TryMove(float distance, double time)
+        /// <param name="speedScale">How much faster than normal the character may move now (haste: above 1).</param>
+        public bool TryMove(float distance, double time, float speedScale = 1f)
         {
+            speedScale = Mathf.Max(1f, speedScale);
             float elapsed = Mathf.Max(0f, (float)(time - lastTime));
             lastTime = time;
-            budget = Mathf.Min(maxBudget, budget + elapsed * maxSpeed);
+            budget = Mathf.Min(maxBudget * speedScale, budget + elapsed * maxSpeed * speedScale);
 
             if (distance > budget)
                 return false;

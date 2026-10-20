@@ -117,6 +117,8 @@ namespace RPG.Vendors
             remaining = new int[count];
             affixIds = new int[count];
             Restock();
+            // The vendors do not all restock in the same frame: the first restock comes after a random part of the time.
+            nextRestock = Time.time + UnityEngine.Random.Range(0.3f, 1f) * (definition != null ? definition.restockSeconds : 300f);
         }
 
         private void Restock()

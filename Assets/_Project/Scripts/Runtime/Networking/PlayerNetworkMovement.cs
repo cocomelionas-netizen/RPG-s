@@ -204,7 +204,15 @@ namespace RPG.Networking
             }
 
             float distance = Vector2.Distance(serverPosition, position);
-            if (!validator.TryMove(distance, Now))
+            // Stunned or rooted players do not move; hasted ones may move as much faster as their haste allows.
+            var effects = health != null ? health.Effects : null;
+            if (effects != null && effects.IsRooted && distance > 0.05f)
+            {
+                Correct("rooted");
+                return;
+            }
+            float speedScale = effects != null ? effects.SpeedMultiplier : 1f;
+            if (!validator.TryMove(distance, Now, speedScale))
             {
                 Correct($"too fast ({distance:0.00} units)");
                 return;

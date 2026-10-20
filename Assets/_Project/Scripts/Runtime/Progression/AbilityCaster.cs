@@ -443,8 +443,9 @@ namespace RPG.Progression
             if (ability.kind == AbilityKind.Teleport)
             {
                 Vector2 to = self + Vector2.ClampMagnitude(point - self, ability.range);
+                // Only onto walkable ground of a map: never past a dungeon's or the world's edge.
                 WorldNavigation map = WorldNavigation.At(to);
-                if (map != null && !map.IsWalkable(to))
+                if (map == null || !map.IsWalkable(to))
                 {
                     failure = CastFailure.BadPlace;
                     return false;
