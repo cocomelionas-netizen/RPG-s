@@ -44,7 +44,7 @@ namespace RPG.UI
             instance = this;
             Image panel = UIFactory.CreateImage("Waystones", transform, PanelColor);
             window = panel.gameObject;
-            panel.gameObject.AddComponent<Outline>().effectColor = new Color(0.3f, 0.6f, 0.65f, 0.9f);
+            UIFactory.AddFrame(panel);
             UIFactory.Place(panel.rectTransform, new Vector2(0.5f, 0.5f), new Vector2(0f, 40f), new Vector2(width, 200f));
 
             title = UIFactory.CreateText("Title", panel.transform, 22, TextAnchor.UpperLeft);

@@ -9,6 +9,21 @@ namespace RPG.UI
     {
         private static Font font;
         private static Sprite circle;
+        private static Sprite windowFrame;
+        private static Sprite buttonShape;
+        private static Sprite divider;
+
+        /// <summary>The gold of the window frames (Kenney's Fantasy UI Borders, CC0, tinted).</summary>
+        public static readonly Color FrameColor = new Color32(0xC8, 0xA2, 0x62, 0xFF);
+
+        /// <summary>A window's ornate border (nine-sliced; Resources/UI/WindowFrame.png).</summary>
+        public static Sprite WindowFrameSprite => windowFrame != null ? windowFrame : windowFrame = Resources.Load<Sprite>("UI/WindowFrame");
+
+        /// <summary>A button's shape with cut corners (nine-sliced; Resources/UI/Button.png), tinted with the button's colour.</summary>
+        public static Sprite ButtonSprite => buttonShape != null ? buttonShape : buttonShape = Resources.Load<Sprite>("UI/Button");
+
+        /// <summary>A fading divider line (Resources/UI/Divider.png).</summary>
+        public static Sprite DividerSprite => divider != null ? divider : divider = Resources.Load<Sprite>("UI/Divider");
 
         public static Font DefaultFont => font != null ? font : font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
 
@@ -101,6 +116,12 @@ namespace RPG.UI
         public static Button CreateButton(string name, Transform parent, Color color, string label, int fontSize)
         {
             Image background = CreateImage(name, parent, color);
+            // Coloured buttons get the cut-corner shape; clear ones (tabs, slots) stay as they are.
+            if (color.a > 0.01f && ButtonSprite != null)
+            {
+                background.sprite = ButtonSprite;
+                background.type = Image.Type.Sliced;
+            }
             Button button = background.gameObject.AddComponent<Button>();
             button.targetGraphic = background;
             if (!string.IsNullOrEmpty(label))
@@ -112,12 +133,50 @@ namespace RPG.UI
             return button;
         }
 
+        /// <summary>
+        /// Draws the ornate gold frame around a window or panel, a little outside its edge and over its contents
+        /// (it moves to the top when the window first shows). Without the frame sprite the panel keeps an outline.
+        /// </summary>
+        public static Image AddFrame(Image panel, float outset = 6f, Color? color = null)
+        {
+            if (WindowFrameSprite == null)
+            {
+                panel.gameObject.AddComponent<Outline>().effectColor = color ?? FrameColor;
+                return null;
+            }
+            Image frame = CreateImage("Frame", panel.transform, color ?? FrameColor);
+            frame.sprite = WindowFrameSprite;
+            frame.type = Image.Type.Sliced;
+            frame.raycastTarget = false;
+            Stretch(frame.rectTransform);
+            frame.rectTransform.offsetMin = new Vector2(-outset, -outset);
+            frame.rectTransform.offsetMax = new Vector2(outset, outset);
+            frame.gameObject.AddComponent<DrawnLast>();
+            return frame;
+        }
+
+        /// <summary>A fading gold divider line across a panel, centred at <paramref name="y"/> from its top.</summary>
+        public static Image AddDivider(RectTransform parent, float y, float width)
+        {
+            Image line = CreateImage("Divider", parent, FrameColor);
+            line.raycastTarget = false;
+            if (DividerSprite != null) line.sprite = DividerSprite;
+            Place(line.rectTransform, new Vector2(0.5f, 1f), new Vector2(0f, y), new Vector2(width, DividerSprite != null ? 22f : 2f));
+            return line;
+        }
+
         public static void Stretch(RectTransform rect)
         {
             rect.anchorMin = Vector2.zero;
             rect.anchorMax = Vector2.one;
             rect.offsetMin = Vector2.zero;
             rect.offsetMax = Vector2.zero;
+        }
+
+        /// <summary>Moves its object to the end of its parent's children when it first shows, so it is drawn over them.</summary>
+        private sealed class DrawnLast : MonoBehaviour
+        {
+            private void Start() => transform.SetAsLastSibling();
         }
 
         /// <summary>A component on the local player's character, or null before it has spawned.</summary>

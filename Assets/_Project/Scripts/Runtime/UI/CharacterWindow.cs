@@ -205,7 +205,7 @@ namespace RPG.UI
 
             Image panel = UIFactory.CreateImage("Character", transform, PanelColor);
             window = panel.gameObject;
-            panel.gameObject.AddComponent<Outline>().effectColor = BorderColor;
+            UIFactory.AddFrame(panel);
             RectTransform rect = panel.rectTransform;
             rect.anchorMin = rect.anchorMax = rect.pivot = new Vector2(0f, 0.5f);
             rect.anchoredPosition = new Vector2(20f, 40f);

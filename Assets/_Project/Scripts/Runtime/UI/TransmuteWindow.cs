@@ -78,7 +78,7 @@ namespace RPG.UI
             RectTransform rect = panel.rectTransform;
             float height = 96f + Rows * (SlotSize + Spacing) + 104f;
             UIFactory.Place(rect, new Vector2(0.5f, 0.5f), new Vector2(-220f, 30f), new Vector2(Width, height));
-            panel.gameObject.AddComponent<Outline>().effectColor = new Color(0.45f, 0.36f, 0.6f, 0.9f);
+            UIFactory.AddFrame(panel);
 
             title = Label(rect, 24, TextAnchor.UpperLeft, new Vector2(14f, -10f), new Vector2(Width - 60f, 60f));
             title.fontStyle = FontStyle.Bold;

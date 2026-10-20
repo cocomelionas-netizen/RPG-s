@@ -42,7 +42,7 @@ namespace RPG.UI
         {
             Image panel = UIFactory.CreateImage("Loot", transform, PanelColor);
             window = panel.gameObject;
-            panel.gameObject.AddComponent<Outline>().effectColor = BorderColor;
+            UIFactory.AddFrame(panel);
             windowRect = panel.rectTransform;
             windowRect.anchorMin = windowRect.anchorMax = new Vector2(0.5f, 0.5f);
             windowRect.pivot = new Vector2(0f, 0.5f);

@@ -81,6 +81,7 @@ namespace RPG.UI
             float gridWidth = columns * slotSize + (columns - 1) * spacing;
             Image panel = UIFactory.CreateImage("Inventory", transform, PanelColor);
             window = panel.gameObject;
+            UIFactory.AddFrame(panel);
             RectTransform rect = panel.rectTransform;
             rect.anchorMin = rect.anchorMax = rect.pivot = new Vector2(1f, 0.5f);
             rect.anchoredPosition = new Vector2(-20f, 30f);

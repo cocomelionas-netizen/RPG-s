@@ -85,6 +85,7 @@ namespace RPG.UI
             instance = this;
             Image panel = UIFactory.CreateImage("Vendor", transform, PanelColor);
             window = panel.gameObject;
+            UIFactory.AddFrame(panel);
             RectTransform rect = panel.rectTransform;
             rect.anchorMin = rect.anchorMax = rect.pivot = new Vector2(0f, 0.5f);
             rect.anchoredPosition = new Vector2(20f, 30f);

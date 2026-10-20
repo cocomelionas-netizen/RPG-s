@@ -109,6 +109,7 @@ namespace RPG.EditorTools
             Sprite markerSprite = PlaceholderArtGenerator.GroundRing("ClickMarker", new Color(1f, 0.85f, 0.4f, 0.9f));
             // Flare's heroes and monsters (TestSceneBuilder.Art.cs).
             WorldTiles worldTiles = CreateWorldTiles();
+            ImportUiFrames();
             CharacterAnimationSet playerAnimations = FlareAnimationSet("HeroWarrior");
             CharacterAnimationSet goblinAnimations = FlareAnimationSet("Goblin");
             // The tree prefab is kept for hand-made scenes; the world draws its trees as tiles (PlaceTrees).

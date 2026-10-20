@@ -44,7 +44,7 @@ namespace RPG.UI
         {
             Image panel = UIFactory.CreateImage("World Map", transform, PanelColor);
             window = panel.gameObject;
-            panel.gameObject.AddComponent<Outline>().effectColor = BorderColor;
+            UIFactory.AddFrame(panel);
             UIFactory.Place(panel.rectTransform, new Vector2(0.5f, 0.5f), Vector2.zero, size);
 
             title = UIFactory.CreateText("Title", panel.transform, 24, TextAnchor.UpperCenter);

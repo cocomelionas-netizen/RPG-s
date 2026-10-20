@@ -40,7 +40,7 @@ namespace RPG.UI
             Image panel = UIFactory.CreateImage("Panel", transform, new Color(0.04f, 0.03f, 0.03f, 0.6f));
             panel.raycastTarget = false;
             UIFactory.Stretch(panel.rectTransform);
-            panel.gameObject.AddComponent<Outline>().effectColor = new Color(0.35f, 0.27f, 0.16f, 0.8f);
+            UIFactory.AddFrame(panel);
 
             text = UIFactory.CreateText("Lines", panel.transform, 15, TextAnchor.LowerLeft);
             UIFactory.Stretch(text.rectTransform);

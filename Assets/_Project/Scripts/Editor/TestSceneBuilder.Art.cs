@@ -38,6 +38,38 @@ namespace RPG.EditorTools
             public Tile[] Decor;
         }
 
+        /// <summary>
+        /// The UI frames (Kenney's Fantasy UI Borders, CC0, in Resources/UI): sprites with nine-slice borders, loaded by
+        /// UIFactory at runtime. The window frame keeps 16 pixel corners, the button shape 8.
+        /// </summary>
+        private static void ImportUiFrames()
+        {
+            foreach ((string file, float pixelsPerUnit, int border) in new[] { ("WindowFrame", 100f, 16), ("Button", 200f, 16), ("Divider", 100f, 0) })
+            {
+                string path = $"Assets/_Project/Resources/UI/{file}.png";
+                AssetDatabase.ImportAsset(path, ImportAssetOptions.ForceSynchronousImport);
+                var importer = (TextureImporter)AssetImporter.GetAtPath(path);
+                if (importer == null)
+                {
+                    Debug.LogWarning($"[TestScene] Missing UI frame {path}.");
+                    continue;
+                }
+                importer.textureType = TextureImporterType.Sprite;
+                importer.spriteImportMode = SpriteImportMode.Single;
+                importer.spritePixelsPerUnit = pixelsPerUnit;
+                importer.spriteBorder = new Vector4(border, border, border, border);
+                importer.mipmapEnabled = false;
+                importer.alphaIsTransparency = true;
+                importer.filterMode = FilterMode.Bilinear;
+                importer.textureCompression = TextureImporterCompression.Uncompressed;
+                var settings = new TextureImporterSettings();
+                importer.ReadTextureSettings(settings);
+                settings.spriteMeshType = SpriteMeshType.FullRect;
+                importer.SetTextureSettings(settings);
+                importer.SaveAndReimport();
+            }
+        }
+
         private static Texture2D FlareAtlas(string path)
         {
             AssetDatabase.ImportAsset(path, ImportAssetOptions.ForceSynchronousImport);

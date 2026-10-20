@@ -30,3 +30,9 @@ The world, heroes and monsters are drawn with art from the open game **Flare** (
   by its name (`TestSceneBuilder.MonsterLook`: ants and bugs, wyrms and drakes, the undead, zombies and lost souls,
   horned beasts and brutes, goblin folk; anything else by level) over its level tier's numbers; health bars and hitboxes
   follow the art's height.
+
+## UI frames
+
+Windows get an ornate gold frame and coloured buttons a cut-corner shape from Kenney's **Fantasy UI Borders** (CC0,
+`Assets/_Project/Resources/UI`, credits there), tinted in code (`UIFactory.AddFrame`, `UIFactory.CreateButton`); the
+builder sets their nine-slice borders (`ImportUiFrames`).
