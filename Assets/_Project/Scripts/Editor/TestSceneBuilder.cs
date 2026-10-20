@@ -144,7 +144,8 @@ namespace RPG.EditorTools
                 AttackInterval = 2f, Level = 6, Experience = LevelCurve.KillExperienceFor(6), MoveSpeed = 1.7f, Gold = new Vector2Int(20, 30),
                 Loot = Loot(items, ("ChippedRuby", 0.05f), ("ChippedTopaz", 0.05f), ("ChippedSapphire", 0.05f), ("ChippedEmerald", 0.05f), ("RoughAmethyst", 0.05f), ("Ruby", 0.01f), ("Sapphire", 0.01f), ("HealingPotion", 0.6f), ("ManaPotion", 0.3f)),
             };
-            GameObject orcPrefab = CreateMonsterPrefab(orcSpec, barSprite, lootBagPrefab, affixes);
+            // Only a reference for the dungeons' numbers (never spawned), so not a network prefab.
+            GameObject orcPrefab = CreateMonsterPrefab(orcSpec, barSprite, lootBagPrefab, affixes, register: false);
             CharacterAnimationSet kingAnimations = FlareAnimationSet("Minotaur");
             // The source game's dungeon bosses: an orc's numbers (each boss's own health, damage, level and loot are set per
             // dungeon spot, measured against a normal monster), drawn bigger, with the ground slam.
@@ -221,6 +222,7 @@ namespace RPG.EditorTools
             EditorSceneManager.SaveScene(EditorSceneManager.GetActiveScene(), ScenePath);
             AddSceneToBuildSettings();
             EditorSettings.defaultBehaviorMode = EditorBehaviorMode.Mode2D;
+            KeepOnlyUsedMonsterPrefabs();
             AssetDatabase.SaveAssets();
 
             Debug.Log($"[TestScene] Test scene built: {ScenePath}");
@@ -1543,7 +1545,6 @@ namespace RPG.EditorTools
             return catalog;
         }
 
-        /// <summary>Prefabs spawned at runtime must be in the network prefab list on server and clients.</summary>
         /// <summary>
         /// Drops the monster prefabs (and missing ones) from the network prefab list before they are made again, so looks
         /// a build no longer uses do not stay registered and shipped.
@@ -1559,6 +1560,37 @@ namespace RPG.EditorTools
             if (stale.Count > 0) EditorUtility.SetDirty(prefabsList);
         }
 
+        /// <summary>
+        /// At the end of a build: only the monster prefabs this build uses stay in the network prefab list (Netcode's own
+        /// importer may have added others, for example ones a previous build left on disk), and leftover monster prefab
+        /// files go away (they are generated, never committed). The plain goblin (tests) and the orc (dungeon reference) stay.
+        /// </summary>
+        private static void KeepOnlyUsedMonsterPrefabs()
+        {
+            var used = new HashSet<string>(LookPrefabs.Values.Where(prefab => prefab != null).Select(AssetDatabase.GetAssetPath))
+            {
+                $"{MonstersFolder}/Goblin.prefab",
+                $"{MonstersFolder}/Orc.prefab",
+            };
+            var prefabsList = AssetDatabase.LoadAssetAtPath<NetworkPrefabsList>(NetworkPrefabsListPath);
+            if (prefabsList != null)
+            {
+                var unused = prefabsList.PrefabList
+                    .Where(entry => entry.Prefab == null || AssetDatabase.GetAssetPath(entry.Prefab).StartsWith(MonstersFolder + "/")
+                                    && !LookPrefabs.ContainsValue(entry.Prefab))
+                    .ToList();
+                foreach (NetworkPrefab entry in unused) prefabsList.Remove(entry);
+                if (unused.Count > 0) EditorUtility.SetDirty(prefabsList);
+            }
+            if (!AssetDatabase.IsValidFolder(MonstersFolder)) return;
+            foreach (string guid in AssetDatabase.FindAssets("t:Prefab", new[] { MonstersFolder }))
+            {
+                string path = AssetDatabase.GUIDToAssetPath(guid);
+                if (!used.Contains(path)) AssetDatabase.DeleteAsset(path);
+            }
+        }
+
+        /// <summary>Prefabs spawned at runtime must be in the network prefab list on server and clients.</summary>
         private static void RegisterNetworkPrefab(GameObject prefab)
         {
             var prefabsList = AssetDatabase.LoadAssetAtPath<NetworkPrefabsList>(NetworkPrefabsListPath);

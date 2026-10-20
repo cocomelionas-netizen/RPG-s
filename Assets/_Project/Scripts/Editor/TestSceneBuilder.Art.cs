@@ -76,8 +76,7 @@ namespace RPG.EditorTools
             var importer = (TextureImporter)AssetImporter.GetAtPath(path);
             if (importer == null)
             {
-                Debug.LogError($"[TestScene] Missing art {path} (run Tools/Art/flare.py).");
-                return null;
+                throw new InvalidOperationException($"[TestScene] Missing art {path} (run Tools/Art/flare.py).");
             }
             importer.textureType = TextureImporterType.Default;
             importer.alphaIsTransparency = true;

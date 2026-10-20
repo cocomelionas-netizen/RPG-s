@@ -14,4 +14,9 @@ find ../../Assets/_Project/Scripts/Editor -name "*.cs" ! -name BuildMenu.cs -exe
 grep -v "public static class AssetDatabase" TestStubs.cs \
   | sed 's/public class NetworkPrefabs {/public class NetworkPrefabs { public System.Collections.Generic.List<NetworkPrefabsList> NetworkPrefabsLists = new System.Collections.Generic.List<NetworkPrefabsList>();/' \
   > Editor/src/TestStubsForEditor.cs
-(cd Editor && "$DOTNET" build -nologo 2>&1 | grep -E " error |Error\(s\)" | sort -u)
+# Prints the errors (and the "N Error(s)" line); exits 1 when the build failed or any error was printed.
+output=$(cd Editor && "$DOTNET" build -nologo 2>&1)
+build=$?
+echo "$output" | grep -E " error |Error\(s\)" | sort -u
+[ $build -eq 0 ] && [ "$(echo "$output" | grep -cE " error ")" -eq 0 ] || exit 1
+exit 0

@@ -5,8 +5,9 @@
 For every cell of WorldMapData the source position is found (island.source_of) and the source world map picture
 (content/interface.zip, mapquester_map.png, pixel = (614 + 0.855 (x - y), 16 + 0.4275 (x + y))) is sampled there:
 blue is water. Each zone gets a water agreement score (cells where both say water or both say land). The map labels
-(StartAreaData.MapLabels) are checked to stand in the zone they name, and the waypoints on walkable ground. Optionally
-writes a side-by-side picture: the source map and ours drawn the same way. Exits 1 when a zone is under 95 %.
+(StartAreaData.MapLabels) are checked to stand in the zone they name (or the zone listed in LABEL_ZONES), and the
+waypoints on walkable ground. Optionally writes a side-by-side picture: the source map and ours drawn the same way.
+Exits 1 when a zone is under 95 %, a label is in the wrong zone or a waypoint is on a blocked cell. Needs Pillow.
 """
 import io
 import os
@@ -14,13 +15,26 @@ import re
 import sys
 import zipfile
 
-from PIL import Image, ImageDraw
-
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import island  # noqa: E402
 
 EDITOR = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'Assets', '_Project', 'Scripts', 'Editor')
 THRESHOLD = 95.0
+
+# Map labels that are not zones of their own: the zone each one stands in (a dungeon entrance, a camp, a small area).
+LABEL_ZONES = {
+    'Trog Cave': 'Fields of Dreams',
+    "Atmar's Fall": None,
+    "Morgall's Camp": 'Kandorys Castle',
+    'Deserters': 'Kandorys Beach',
+    'Wyrm Thicket': 'Thicket of Wyrms',
+    'Hollow Fields': 'The Hollow Fields',
+}
+
+
+def to_pixel(x, y):
+    """A source position on the source world map picture (mapquester_map.png)."""
+    return int(round(614 + 0.855 * (x - y))), int(round(16 + 0.4275 * (x + y)))
 
 
 def load_rows():
@@ -39,6 +53,7 @@ def load_area():
 
 
 def picture(root):
+    from PIL import Image  # Pillow, only needed here
     with zipfile.ZipFile(os.path.join(root, 'content', 'interface.zip')) as archive:
         name = next(n for n in archive.namelist() if n.endswith('mapquester_map.png'))
         return Image.open(io.BytesIO(archive.read(name))).convert('RGBA')
@@ -57,7 +72,7 @@ def main(root, out=None):
         return names[ord(blocks[row][column]) - ord('A')]
 
     def blue(x, y):
-        sx, sy = int(round(614 + 0.855 * (x - y))), int(round(16 + 0.4275 * (x + y)))
+        sx, sy = to_pixel(x, y)
         if not (0 <= sx < pic.width and 0 <= sy < pic.height):
             return None
         r, g, b, a = px[sx, sy]
@@ -80,18 +95,23 @@ def main(root, out=None):
     print(f'{"zone":28s} {"cells":>7s} {"water agrees":>13s}')
     for zone, (same, total) in sorted(stats.items(), key=lambda item: item[1][0] / max(1, item[1][1])):
         score = 100.0 * same / max(1, total)
-        mark = '' if score >= THRESHOLD else '   <-- check'
-        failed |= score < THRESHOLD and zone != '(no zone)'
+        # Cells outside every zone (the coast, the island's edge) are shown but do not fail the check.
+        counted = zone != '(no zone)'
+        mark = '' if score >= THRESHOLD else ('   <-- check' if counted else '   (outside the zones, not counted)')
+        failed |= score < THRESHOLD and counted
         print(f'{zone:28s} {total:7d} {score:12.1f}%{mark}')
 
     print()
     for title, _detail, cx, cy, _town in labels:
         zone = zone_of(int(cx), int(cy))
-        ok = zone is not None and (zone.lower().startswith(title.lower()[:6]) or title.lower()[:6] in zone.lower())
-        print(f'label {title:22s} in zone {zone or "-":26s} {"ok" if ok else "(different name: check by eye)"}')
+        expected = LABEL_ZONES[title] if title in LABEL_ZONES else title
+        ok = zone == expected
+        failed |= not ok
+        print(f'label {title:22s} in zone {zone or "-":26s} {"ok" if ok else "WRONG ZONE (expected " + str(expected) + ")"}')
     for name, cx, cy in places:
         kind = rows[int(cy)][int(cx)]
-        print(f'waypoint {name:24s} on {"walkable ground" if kind == "." else "blocked cell " + kind}')
+        failed |= kind != '.'
+        print(f'waypoint {name:24s} on {"walkable ground" if kind == "." else "BLOCKED cell " + kind}')
 
     if out:
         draw_side_by_side(pic, rows, out)
@@ -100,14 +120,15 @@ def main(root, out=None):
 
 
 def draw_side_by_side(pic, rows, out):
-    """The source map next to ours, drawn with the same isometric projection."""
+    """The source map next to ours, drawn with the same isometric projection (cell centres, like the score)."""
+    from PIL import Image, ImageDraw
     ours = Image.new('RGBA', pic.size, (0, 0, 0, 0))
     o = ours.load()
     colors = {'.': (104, 128, 64, 255), '#': (96, 84, 70, 255), 'T': (40, 70, 34, 255), 'W': (50, 80, 140, 255)}
     for cy, row in enumerate(rows):
         for cx, kind in enumerate(row):
             x, y = island.source_of(cx, cy)
-            sx, sy = int(614 + 0.855 * (x - y)), int(16 + 0.4275 * (x + y))
+            sx, sy = to_pixel(x + 0.5, y + 0.5)
             if 0 <= sx < ours.width and 0 <= sy < ours.height:
                 o[sx, sy] = colors[kind]
     side = Image.new('RGBA', (pic.width * 2, pic.height), (16, 16, 16, 255))

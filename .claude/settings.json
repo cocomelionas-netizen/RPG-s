@@ -6,7 +6,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash \"$CLAUDE_PROJECT_DIR/Tools/CompileCheck/deprecations.sh\" >&2 || exit 2"
+            "command": "bash \"$CLAUDE_PROJECT_DIR/Tools/CompileCheck/stop-hook.sh\""
           }
         ]
       }
