@@ -233,8 +233,8 @@ namespace RPG.EditorTools
         }
 
         /// <summary>
-        /// The source game's outdoor key droppers that it has further south than this world reaches stand at its south edge:
-        /// the Zhendale camp (Dale Gems) and the roaming bosses Tantorus and Fasthorn (Inactive Demiplane Keys).
+        /// Outdoor key droppers the source game has beyond this world's edge (DungeonData.EdgeMonsters). The world is the whole
+        /// island now, so there are none: the Zhendale camp, Tantorus and Fasthorn are ordinary spots (KeyDroppers).
         /// </summary>
         private static void PlaceEdgeMonsters(Grid grid, Tilemap obstacles)
         {

@@ -108,6 +108,8 @@ namespace RPG.EditorTools
             Sprite treeSprite = PlaceholderArtGenerator.Tree("Tree", 6);
             Sprite markerSprite = PlaceholderArtGenerator.GroundRing("ClickMarker", new Color(1f, 0.85f, 0.4f, 0.9f));
             // Flare's heroes and monsters (TestSceneBuilder.Art.cs).
+            FlareSets.Clear();
+            PruneMonsterPrefabs();
             WorldTiles worldTiles = CreateWorldTiles();
             ImportUiFrames();
             CharacterAnimationSet playerAnimations = FlareAnimationSet("HeroWarrior");
@@ -128,14 +130,14 @@ namespace RPG.EditorTools
                 AttackInterval = 2f, Level = 2, Experience = LevelCurve.KillExperienceFor(2), MoveSpeed = 1.8f, Gold = new Vector2Int(3, 6),
                 Loot = Loot(items, ("ChippedRuby", 0.02f), ("ChippedTopaz", 0.02f), ("ChippedSapphire", 0.02f), ("ChippedEmerald", 0.02f), ("RoughAmethyst", 0.02f), ("HealingPotion", 0.3f), ("ManaPotion", 0.15f)),
             };
-            GameObject goblinPrefab = CreateMonsterPrefab(goblinSpec, barSprite, lootBagPrefab, affixes);
+            // The plain goblin is kept for the tests (they register it themselves); the world uses MonsterPrefabFor.
+            CreateMonsterPrefab(goblinSpec, barSprite, lootBagPrefab, affixes, register: false);
             MonsterSpec bruteSpec = new MonsterSpec
             {
                 Name = "Goblin Brute", Animations = bruteAnimations, Scale = 1f, Health = SourceHealth(4), MinDamage = 12, MaxDamage = 20,
                 AttackInterval = 2.2f, Level = 4, Experience = LevelCurve.KillExperienceFor(4), MoveSpeed = 1.6f, Gold = new Vector2Int(10, 16),
                 Loot = Loot(items, ("ChippedRuby", 0.04f), ("ChippedTopaz", 0.04f), ("ChippedSapphire", 0.04f), ("ChippedEmerald", 0.04f), ("RoughAmethyst", 0.04f), ("HealingPotion", 0.5f), ("ManaPotion", 0.25f)),
             };
-            GameObject brutePrefab = CreateMonsterPrefab(bruteSpec, barSprite, lootBagPrefab, affixes);
             MonsterSpec orcSpec = new MonsterSpec
             {
                 Name = "Orc", Animations = orcAnimations, Scale = 1f, Health = SourceHealth(6), MinDamage = 20, MaxDamage = 30,
@@ -152,7 +154,6 @@ namespace RPG.EditorTools
                 AttackInterval = 2f, Level = 6, Experience = LevelCurve.KillExperienceFor(6), MoveSpeed = 1.7f, Gold = new Vector2Int(20, 30),
                 Loot = Loot(items, ("ChippedRuby", 0.05f), ("ChippedTopaz", 0.05f), ("ChippedSapphire", 0.05f), ("ChippedEmerald", 0.05f), ("RoughAmethyst", 0.05f), ("Ruby", 0.01f), ("Sapphire", 0.01f), ("HealingPotion", 0.6f), ("ManaPotion", 0.3f)),
             };
-            GameObject bossPrefab = CreateMonsterPrefab(dungeonBossSpec, barSprite, lootBagPrefab, affixes, boss => boss.AddComponent<BossMechanics>());
             // Every source-game monster gets its own Flare look over its tier's numbers (MonsterPrefabFor).
             tierSpecs = new[] { goblinSpec, bruteSpec, orcSpec };
             bossSpec = dungeonBossSpec;
@@ -345,7 +346,7 @@ namespace RPG.EditorTools
         private static bool Within(Vector3Int cell, Vector3Int center, int radius) =>
             Mathf.Abs(cell.x - center.x) <= radius && Mathf.Abs(cell.y - center.y) <= radius;
 
-        /// <summary>Inside the cleared town or start area (no rocks, trees, or monsters' spots), shrunk by <paramref name="shrink"/>.</summary>
+        /// <summary>Inside the town or start area (no monsters' spots there), shrunk by <paramref name="shrink"/>.</summary>
         private static bool IsCleared(Vector3Int cell, int shrink) =>
             Within(cell, TownCell, TownClearRadius - shrink) || Within(cell, StartCell, StartClearRadius - shrink);
 
@@ -781,7 +782,7 @@ namespace RPG.EditorTools
         }
 
         private static GameObject CreateMonsterPrefab(MonsterSpec spec, Sprite barSprite, GameObject lootBagPrefab,
-            AffixCatalog affixes, Action<GameObject> addExtras = null)
+            AffixCatalog affixes, Action<GameObject> addExtras = null, bool register = true)
         {
             var monster = new GameObject(spec.Name);
             monster.transform.localScale = new Vector3(spec.Scale, spec.Scale, 1f);
@@ -832,7 +833,7 @@ namespace RPG.EditorTools
             Directory.CreateDirectory(MonstersFolder);
             GameObject prefab = PrefabUtility.SaveAsPrefabAsset(monster, path);
             UnityEngine.Object.DestroyImmediate(monster);
-            RegisterNetworkPrefab(prefab);
+            if (register) RegisterNetworkPrefab(prefab);
             return prefab;
         }
 
@@ -856,8 +857,7 @@ namespace RPG.EditorTools
             var stones = new GameObject("Waystones").transform;
             for (int i = 0; i < places.Length; i++)
             {
-                // At the start the stone stands at the corner of the square, not in the middle of it.
-                Vector3Int stoneCell = OpenCellNear(obstacles, places[i].cell == StartCell ? StartCell + new Vector3Int(-3, 3, 0) : places[i].cell);
+                Vector3Int stoneCell = OpenCellNear(obstacles, places[i].cell);
                 var stone = new GameObject($"Waystone {i} {places[i].name}");
                 stone.transform.SetParent(stones, false);
                 stone.transform.position = grid.GetCellCenterWorld(stoneCell);
@@ -1544,6 +1544,21 @@ namespace RPG.EditorTools
         }
 
         /// <summary>Prefabs spawned at runtime must be in the network prefab list on server and clients.</summary>
+        /// <summary>
+        /// Drops the monster prefabs (and missing ones) from the network prefab list before they are made again, so looks
+        /// a build no longer uses do not stay registered and shipped.
+        /// </summary>
+        private static void PruneMonsterPrefabs()
+        {
+            var prefabsList = AssetDatabase.LoadAssetAtPath<NetworkPrefabsList>(NetworkPrefabsListPath);
+            if (prefabsList == null) return;
+            var stale = prefabsList.PrefabList
+                .Where(entry => entry.Prefab == null || AssetDatabase.GetAssetPath(entry.Prefab).StartsWith(MonstersFolder + "/"))
+                .ToList();
+            foreach (NetworkPrefab entry in stale) prefabsList.Remove(entry);
+            if (stale.Count > 0) EditorUtility.SetDirty(prefabsList);
+        }
+
         private static void RegisterNetworkPrefab(GameObject prefab)
         {
             var prefabsList = AssetDatabase.LoadAssetAtPath<NetworkPrefabsList>(NetworkPrefabsListPath);
@@ -1559,9 +1574,9 @@ namespace RPG.EditorTools
         }
 
         /// <summary>
-        /// One monster on every spot the source game has one between the start and St. Revere, coming back as fast as there.
-        /// The source game's levels 1-2 look like goblins, 3-5 brutes, higher orcs, and keep the source-game level (health, damage,
-        /// experience and gear drops follow it); its elites and bosses are elites here. None inside the towns.
+        /// One monster on every spot the source game has one on the island, coming back as fast as there, with the Flare look
+        /// of its name (<see cref="MonsterPrefabFor"/>) and the source-game level (health, damage, experience and gear drops
+        /// follow it); its elites and bosses are elites here. None inside the towns. A spot only runs near players.
         /// </summary>
         private static void PlaceMonsters(Grid grid, Tilemap obstacles)
         {

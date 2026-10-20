@@ -21,5 +21,7 @@ namespace Unity.Netcode
     {
         public bool Contains(UnityEngine.GameObject prefab) => false;
         public void Add(NetworkPrefab prefab) {}
+        public void Remove(NetworkPrefab prefab) {}
+        public System.Collections.Generic.IReadOnlyList<NetworkPrefab> PrefabList => new System.Collections.Generic.List<NetworkPrefab>();
     }
 }

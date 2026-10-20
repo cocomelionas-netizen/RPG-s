@@ -156,6 +156,8 @@ namespace RPG.EditorTools
         /// <summary>An animation set from a Flare look (<see cref="FlareArtData.Looks"/>): Idle, Walk and Attack in eight directions.</summary>
         private static CharacterAnimationSet FlareAnimationSet(string lookName)
         {
+            // Made once per build: making it again would delete the sprites prefabs made earlier already point at.
+            if (FlareSets.TryGetValue(lookName, out CharacterAnimationSet made) && made != null) return made;
             FlareArtData.Look look = FlareArtData.Looks.FirstOrDefault(l => l.Name == lookName);
             if (look == null) throw new ArgumentException($"No Flare look {lookName}.");
             Texture2D atlas = FlareAtlas($"{FlareCharactersFolder}/{lookName}.png");
@@ -200,8 +202,12 @@ namespace RPG.EditorTools
                 };
             }).ToArray();
             EditorUtility.SetDirty(set);
+            FlareSets[lookName] = set;
             return set;
         }
+
+        /// <summary>The animation sets made in this build, by look (cleared when a build starts).</summary>
+        private static readonly Dictionary<string, CharacterAnimationSet> FlareSets = new Dictionary<string, CharacterAnimationSet>();
 
         /// <summary>
         /// The Flare look of a source-game monster, by its name: ants and bugs, wyrms and drakes, the undead (warriors,
@@ -211,18 +217,22 @@ namespace RPG.EditorTools
         {
             string n = (name ?? "").ToLowerInvariant();
             bool Has(params string[] words) => words.Any(w => n.Contains(w));
+            // Whole camps look alike: the source game's Blightchosen cultists and the Zhendale raiders.
+            if (Has("blightchosen")) return Has("acolyte") ? "SkeletonMage" : "GoblinElite";
+            if (Has("zhendale")) return Has("archer") ? "SkeletonArcher" : "Minotaur";
             if (Has("fire antwig", "firemite")) return "FireAnt";
             if (Has("ice antwig", "frostmite")) return "IceAnt";
+            if (Has("broodmother")) return "Antlion";
             if (Has("antling", "antwig")) return "AntlionSmall";
             if (Has("antipede", "pincer", "spider", "arachnid", "broodmother", "howler", "shadowclaw")) return "Antlion";
             if (Has("flame", "fire cokatrice", "fire quazit", "balagos", "tchazzar", "klauth")) return "WyvernFire";
             if (Has("wyrm", "hydra", "roc", "cokatrice", "serpent")) return "Wyvern";
             if (Has("archer")) return "SkeletonArcher";
-            if (Has("mage", "sorcerer", "seer", "watcher", "cleric", "shaman", "acolyte", "quazit")) return "SkeletonMage";
+            if (Has("mage", "sorcerer", "seer of", "watcher", "cleric", "shaman", "quazit")) return "SkeletonMage";
             if (Has("skelet", "guard", "loyalist", "knight", "centurion", "tomb", "uninterred", "maximus")) return "Skeleton";
             if (Has("damned", "lost soul", "horror", "risen", "servant", "drauglyen", "defiler")) return "Zombie";
             if (Has("horned", "charger", "beast", "brute", "yargol", "fasthorn", "tantorus", "elite", "morgall")) return "Minotaur";
-            if (Has("trog", "tasloi", "bandit", "blightchosen", "terror clan", "goblin")) return level >= 6 ? "GoblinElite" : "Goblin";
+            if (Has("trog", "tasloi", "bandit", "terror clan", "goblin", "overseer", "bushwhacker", "plunderer")) return level >= 6 ? "GoblinElite" : "Goblin";
             return level <= 5 ? "Goblin" : level <= 12 ? "GoblinElite" : "Minotaur";
         }
 

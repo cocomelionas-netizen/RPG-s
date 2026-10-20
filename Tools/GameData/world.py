@@ -158,8 +158,9 @@ def carve_fords(rows, spots, open_ground):
     .map file left as open ground, never its walls or blocked cells).
     """
     carved = 0
+    # The walk from the start is redone only after a ford opened something.
+    seen = reached(rows)
     for name, cell in spots:
-        seen = reached(rows)
         cx, cy = cell
         if near(seen, cell) or not (0 <= cx < WIDTH and 0 <= cy < HEIGHT) or rows[cy][cx] == 'W':
             continue
@@ -187,6 +188,7 @@ def carve_fords(rows, spots, open_ground):
                     (queue.append if step else queue.appendleft)(nxt)
         if goal is None:
             continue
+        before = carved
         while goal in parent:
             x, y = goal
             for dx in (-1, 0, 1):
@@ -195,6 +197,8 @@ def carve_fords(rows, spots, open_ground):
                         rows[y + dy][x + dx] = '.'
                         carved += 1
             goal = parent[goal]
+        if carved != before:
+            seen = reached(rows)
     print(f'fords: {carved} water cells made walkable')
 
 

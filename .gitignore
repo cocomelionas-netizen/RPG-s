@@ -115,3 +115,6 @@ InitTestScene*.unity*
 
 # Burst intermediate output from WebGL builds
 /Data/
+
+# Python
+__pycache__/
