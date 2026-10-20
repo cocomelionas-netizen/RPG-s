@@ -294,7 +294,7 @@ namespace RPG.UI
             slot.Background.color = tint;
             bool enoughMana = caster.HasManaFor(ability);
             int cost = caster.ManaCost(ability);
-            if (NameChanged(slot, 1, ability.GetInstanceID(), cost, enoughMana))
+            if (NameChanged(slot, 1, ability.GetHashCode(), cost, enoughMana))
                 slot.Name.text = cost > 0
                     ? $"{ability.displayName}\n<color={(enoughMana ? "#8fb3ff" : "#ff6655")}>{cost} mana</color>"
                     : ability.displayName;
