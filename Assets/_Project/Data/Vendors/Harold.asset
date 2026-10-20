@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40ae07ff7f63b4b46a9a172d057258f2, type: 3}
+  m_Name: Harold
+  m_EditorClassIdentifier: RPG.Runtime::RPG.Vendors.VendorDefinition
+  displayName: Harold
+  title: Banker
+  stock:
+  - {fileID: 11400000, guid: 51fcae70015816c44b7bf5628f02db6a, type: 2}
+  - {fileID: 11400000, guid: 0d9b4bb0850c33449a1607fb7bc5bd1b, type: 2}
+  - {fileID: 11400000, guid: 6cdb50c40109e184cbfd3f6b979197d8, type: 2}
+  stockLimits: 000000000000000000000000i
+  restockSeconds: 60
+  recipes: []
+  randomQuality: 0
+  greenChance: 100
+  blueChance: 50
+  goldChance: 5
+  purpleChance: 1

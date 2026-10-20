@@ -1,0 +1,839 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e19652b0b5dc8644987563b65cb5de0, type: 3}
+  m_Name: WolfsDen
+  m_EditorClassIdentifier: RPG.Runtime::RPG.Dungeons.DungeonDefinition
+  displayName: Wolf's Den
+  instancePrefab: {fileID: 8556319660589481182, guid: 98036ae6eda62224e974cbc5868435b1, type: 3}
+  floorTile: {fileID: 11400000, guid: 28e286d1acd4a834ebb38e0ffae8808c, type: 2}
+  wallTile: {fileID: 11400000, guid: 279826b5bb279214b967497435bf558f, type: 2}
+  portalSprite: {fileID: 21300000, guid: 5c9c4cb5599cb95459addd4fda70a5b6, type: 3}
+  rows:
+  - '################################################################################'
+  - '################################################################################'
+  - '################################################################################'
+  - '################################################################################'
+  - '################################################################################'
+  - '################################################################################'
+  - '################################################################################'
+  - '################################################################################'
+  - '################################################################################'
+  - '################################################################################'
+  - '################################################################################'
+  - '################################################################################'
+  - '################################################################################'
+  - '################################################################################'
+  - '################################################################################'
+  - '################################################################################'
+  - '################################################################################'
+  - '################################################################################'
+  - '################################################################################'
+  - '################################################################################'
+  - '############....################################################################'
+  - '############....################################################################'
+  - '###########.....#####################################################.....######'
+  - '###########.....####################################################.......#####'
+  - '###########.....########################################.......####.........####'
+  - '###########.....##########.......######################......................###'
+  - '###########.....#########..........###########......###.......................##'
+  - '#############....####...............######................................#....#'
+  - '##############........................###.................###..................#'
+  - '##############...........................................########..............#'
+  - '#############..............#####................####...##########............###'
+  - '###########..........###########............######################.............#'
+  - '###########.......#.#############........##########################.......#...##'
+  - '###########..........############.....#######################...###...........##'
+  - '############........##############....##########....###..........###...###....##'
+  - '############...#.##...############....#########.##.............#.###...###...###'
+  - '#############.......#.#############......#########........##....####...###...###'
+  - '###################..##############........#####..........##....#####........###'
+  - '####################################........######.......##....#######.......###'
+  - '######################################......#######......##############.......##'
+  - '#######################################........######...###############.......##'
+  - '#########################################.......#####...##############........##'
+  - '###########################################........##....##############.......##'
+  - '############################################..............#############......###'
+  - '##############################################.....##.....############......####'
+  - '##############################################...........##############.....####'
+  - '#################################################.......###############.....####'
+  - '######################################################################......####'
+  - '################################################################..##.......#####'
+  - '###############################################################............#####'
+  - '###############################################################........#...#####'
+  - '###############################################################............#####'
+  - '###############################################.############...............#####'
+  - '###############################################..########..........###.....#####'
+  - '################################################....######........#####....#####'
+  - '################################################.....#####.......######....#####'
+  - '###.############################################......#####..###########...#####'
+  - '###.############################################.......################....#####'
+  - '###....#####################################..........################.....#####'
+  - '######.####################################.........##..############.......#####'
+  - '######.##################################.....##...###.############.......######'
+  - '######..##############################.............###.############......#######'
+  - '#####......##..####################....................############......#######'
+  - '#####........#..###################.....................############.....#######'
+  - '######..........#.##################....................############......######'
+  - '#######..........####################..#.#.#...#....#...#############......#####'
+  - '#######............####################.......##.......###############......####'
+  - '#######............####################.....#####.......##############.......###'
+  - '######..............#############################.......#..##########........###'
+  - '#########.........###############################...........########......#.####'
+  - '######..##.#..#.#################################..............##............###'
+  - '######.#####...#######################################............#.....#...####'
+  - '##############.##################################..###.................#########'
+  - '##################################################........#...........##########'
+  - '####################################################......#........#############'
+  - '######################################################...##...#..###############'
+  - '###########################################################.####################'
+  - '################################################################################'
+  - '################################################################################'
+  - '################################################################################'
+  arrival: {x: 14, y: 23, z: 0}
+  exits:
+  - cell: {x: 12, y: 20, z: 0}
+    destination: {x: -90.5, y: 260}
+    label: Wolf's Den
+  doors: []
+  monsters:
+  - prefab: {fileID: 733914044435342080, guid: fff773502d166324fac6b41a5a06c65e, type: 3}
+    cell: {x: 15, y: 34, z: 0}
+    displayName: Cave Howler
+    level: 5
+    elite: 1
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: 172c5501665e38d40b8463391de7d701, type: 2}
+      chance: 0.075
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: b1232945a4174f14896ac7084c27e21c, type: 2}
+      chance: 0.075
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: ca55647569cb31048a28b0b2968799d8, type: 2}
+      chance: 0.075
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: b5101c447a3b8f245ac31cf6873a7957, type: 2}
+      chance: 0.075
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: fd5855714ac01be499949636313e2c1c, type: 2}
+      chance: 0.075
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 9d53ec4a368964640854a3c9c347da7d, type: 2}
+      chance: 0.075
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 83ba3f47845ffbf4ea5fe368e6f544dd, type: 2}
+      chance: 0.075
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: d9c3586fc314b92408295a354ea92d8d, type: 2}
+      chance: 0.075
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Howl of Terror
+      kind: 1
+      school: 3
+      castSeconds: 1.5
+      range: 0
+      radius: 2.5
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 30
+      primary: 0
+      color: {r: 0.65, g: 0.35, b: 0.95, a: 1}
+      effects:
+      - kind: 13
+        value: 0
+        scaled: 0
+        seconds: 4
+        tick: 0
+        stacks: 1
+        onCaster: 0
+      - kind: 2
+        value: 30
+        scaled: 0
+        seconds: 4
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Mind Blast
+      kind: 0
+      school: 3
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 20
+      interval: 1.3
+      cooldown: 12
+      primary: 0
+      color: {r: 0.65, g: 0.35, b: 0.95, a: 1}
+      effects:
+      - kind: 7
+        value: -5
+        scaled: 0
+        seconds: 10
+        tick: 0
+        stacks: 1
+        onCaster: 0
+  - prefab: {fileID: 733914044435342080, guid: fff773502d166324fac6b41a5a06c65e, type: 3}
+    cell: {x: 59, y: 55, z: 0}
+    displayName: Cave Howler
+    level: 5
+    elite: 1
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: 172c5501665e38d40b8463391de7d701, type: 2}
+      chance: 0.075
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: b1232945a4174f14896ac7084c27e21c, type: 2}
+      chance: 0.075
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: ca55647569cb31048a28b0b2968799d8, type: 2}
+      chance: 0.075
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: b5101c447a3b8f245ac31cf6873a7957, type: 2}
+      chance: 0.075
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: fd5855714ac01be499949636313e2c1c, type: 2}
+      chance: 0.075
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 9d53ec4a368964640854a3c9c347da7d, type: 2}
+      chance: 0.075
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 83ba3f47845ffbf4ea5fe368e6f544dd, type: 2}
+      chance: 0.075
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: d9c3586fc314b92408295a354ea92d8d, type: 2}
+      chance: 0.075
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Howl of Terror
+      kind: 1
+      school: 3
+      castSeconds: 1.5
+      range: 0
+      radius: 2.5
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 30
+      primary: 0
+      color: {r: 0.65, g: 0.35, b: 0.95, a: 1}
+      effects:
+      - kind: 13
+        value: 0
+        scaled: 0
+        seconds: 4
+        tick: 0
+        stacks: 1
+        onCaster: 0
+      - kind: 2
+        value: 30
+        scaled: 0
+        seconds: 4
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Mind Blast
+      kind: 0
+      school: 3
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 20
+      interval: 1.3
+      cooldown: 12
+      primary: 0
+      color: {r: 0.65, g: 0.35, b: 0.95, a: 1}
+      effects:
+      - kind: 7
+        value: -5
+        scaled: 0
+        seconds: 10
+        tick: 0
+        stacks: 1
+        onCaster: 0
+  - prefab: {fileID: 733914044435342080, guid: fff773502d166324fac6b41a5a06c65e, type: 3}
+    cell: {x: 55, y: 38, z: 0}
+    displayName: Cave Howler
+    level: 5
+    elite: 1
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: 172c5501665e38d40b8463391de7d701, type: 2}
+      chance: 0.075
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: b1232945a4174f14896ac7084c27e21c, type: 2}
+      chance: 0.075
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: ca55647569cb31048a28b0b2968799d8, type: 2}
+      chance: 0.075
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: b5101c447a3b8f245ac31cf6873a7957, type: 2}
+      chance: 0.075
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: fd5855714ac01be499949636313e2c1c, type: 2}
+      chance: 0.075
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 9d53ec4a368964640854a3c9c347da7d, type: 2}
+      chance: 0.075
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 83ba3f47845ffbf4ea5fe368e6f544dd, type: 2}
+      chance: 0.075
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: d9c3586fc314b92408295a354ea92d8d, type: 2}
+      chance: 0.075
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Howl of Terror
+      kind: 1
+      school: 3
+      castSeconds: 1.5
+      range: 0
+      radius: 2.5
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 30
+      primary: 0
+      color: {r: 0.65, g: 0.35, b: 0.95, a: 1}
+      effects:
+      - kind: 13
+        value: 0
+        scaled: 0
+        seconds: 4
+        tick: 0
+        stacks: 1
+        onCaster: 0
+      - kind: 2
+        value: 30
+        scaled: 0
+        seconds: 4
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Mind Blast
+      kind: 0
+      school: 3
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 20
+      interval: 1.3
+      cooldown: 12
+      primary: 0
+      color: {r: 0.65, g: 0.35, b: 0.95, a: 1}
+      effects:
+      - kind: 7
+        value: -5
+        scaled: 0
+        seconds: 10
+        tick: 0
+        stacks: 1
+        onCaster: 0
+  - prefab: {fileID: 349712258043630230, guid: 5fd7ef06dd1a73149be42343cc8aad04, type: 3}
+    cell: {x: 68, y: 29, z: 0}
+    displayName: Risen Miner
+    level: 5
+    elite: 1
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: 65a9e9aaeeb5d664283ba90383372f42, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 6ac414ef8dd03d24bbc9cb0acc67695d, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 49c88481b0259b24ea75dffc90cb7fa5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: c85ce5a11bc647440924ceb2269d9d76, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2cc9f86ef49a01f40896aab5e18c991f, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: d1c49b6586e93fc46ae5dcccc24b5741, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 55100b0055ab40e4486a1e518305ddab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Infected Wound
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.5
+      cooldown: 30
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 7
+        value: -2
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Frost Bolt
+      kind: 0
+      school: 1
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 10
+      interval: 0.3
+      cooldown: 12
+      primary: 0
+      color: {r: 0.5, g: 0.8, b: 1, a: 1}
+      effects:
+      - kind: 2
+        value: 30
+        scaled: 0
+        seconds: 6
+        tick: 0
+        stacks: 1
+        onCaster: 0
+  - prefab: {fileID: 349712258043630230, guid: 5fd7ef06dd1a73149be42343cc8aad04, type: 3}
+    cell: {x: 75, y: 30, z: 0}
+    displayName: Risen Miner
+    level: 5
+    elite: 1
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: 65a9e9aaeeb5d664283ba90383372f42, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 6ac414ef8dd03d24bbc9cb0acc67695d, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 49c88481b0259b24ea75dffc90cb7fa5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: c85ce5a11bc647440924ceb2269d9d76, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2cc9f86ef49a01f40896aab5e18c991f, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: d1c49b6586e93fc46ae5dcccc24b5741, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 55100b0055ab40e4486a1e518305ddab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Infected Wound
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.5
+      cooldown: 30
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 7
+        value: -2
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Frost Bolt
+      kind: 0
+      school: 1
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 10
+      interval: 0.3
+      cooldown: 12
+      primary: 0
+      color: {r: 0.5, g: 0.8, b: 1, a: 1}
+      effects:
+      - kind: 2
+        value: 30
+        scaled: 0
+        seconds: 6
+        tick: 0
+        stacks: 1
+        onCaster: 0
+  - prefab: {fileID: 733914044435342080, guid: fff773502d166324fac6b41a5a06c65e, type: 3}
+    cell: {x: 55, y: 70, z: 0}
+    displayName: Cave Howler
+    level: 5
+    elite: 1
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: 172c5501665e38d40b8463391de7d701, type: 2}
+      chance: 0.075
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: b1232945a4174f14896ac7084c27e21c, type: 2}
+      chance: 0.075
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: ca55647569cb31048a28b0b2968799d8, type: 2}
+      chance: 0.075
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: b5101c447a3b8f245ac31cf6873a7957, type: 2}
+      chance: 0.075
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: fd5855714ac01be499949636313e2c1c, type: 2}
+      chance: 0.075
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 9d53ec4a368964640854a3c9c347da7d, type: 2}
+      chance: 0.075
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 83ba3f47845ffbf4ea5fe368e6f544dd, type: 2}
+      chance: 0.075
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: d9c3586fc314b92408295a354ea92d8d, type: 2}
+      chance: 0.075
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Howl of Terror
+      kind: 1
+      school: 3
+      castSeconds: 1.5
+      range: 0
+      radius: 2.5
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 30
+      primary: 0
+      color: {r: 0.65, g: 0.35, b: 0.95, a: 1}
+      effects:
+      - kind: 13
+        value: 0
+        scaled: 0
+        seconds: 4
+        tick: 0
+        stacks: 1
+        onCaster: 0
+      - kind: 2
+        value: 30
+        scaled: 0
+        seconds: 4
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Mind Blast
+      kind: 0
+      school: 3
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 20
+      interval: 1.3
+      cooldown: 12
+      primary: 0
+      color: {r: 0.65, g: 0.35, b: 0.95, a: 1}
+      effects:
+      - kind: 7
+        value: -5
+        scaled: 0
+        seconds: 10
+        tick: 0
+        stacks: 1
+        onCaster: 0
+  - prefab: {fileID: 349712258043630230, guid: 5fd7ef06dd1a73149be42343cc8aad04, type: 3}
+    cell: {x: 40, y: 64, z: 0}
+    displayName: Risen Miner
+    level: 5
+    elite: 1
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: 65a9e9aaeeb5d664283ba90383372f42, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 6ac414ef8dd03d24bbc9cb0acc67695d, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 49c88481b0259b24ea75dffc90cb7fa5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: c85ce5a11bc647440924ceb2269d9d76, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2cc9f86ef49a01f40896aab5e18c991f, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: d1c49b6586e93fc46ae5dcccc24b5741, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 55100b0055ab40e4486a1e518305ddab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Infected Wound
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.5
+      cooldown: 30
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 7
+        value: -2
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Frost Bolt
+      kind: 0
+      school: 1
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 10
+      interval: 0.3
+      cooldown: 12
+      primary: 0
+      color: {r: 0.5, g: 0.8, b: 1, a: 1}
+      effects:
+      - kind: 2
+        value: 30
+        scaled: 0
+        seconds: 6
+        tick: 0
+        stacks: 1
+        onCaster: 0
+  - prefab: {fileID: 349712258043630230, guid: 5fd7ef06dd1a73149be42343cc8aad04, type: 3}
+    cell: {x: 34, y: 29, z: 0}
+    displayName: Risen Miner
+    level: 5
+    elite: 1
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: 65a9e9aaeeb5d664283ba90383372f42, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 6ac414ef8dd03d24bbc9cb0acc67695d, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 49c88481b0259b24ea75dffc90cb7fa5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: c85ce5a11bc647440924ceb2269d9d76, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2cc9f86ef49a01f40896aab5e18c991f, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: d1c49b6586e93fc46ae5dcccc24b5741, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 55100b0055ab40e4486a1e518305ddab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Infected Wound
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.5
+      cooldown: 30
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 7
+        value: -2
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Frost Bolt
+      kind: 0
+      school: 1
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 10
+      interval: 0.3
+      cooldown: 12
+      primary: 0
+      color: {r: 0.5, g: 0.8, b: 1, a: 1}
+      effects:
+      - kind: 2
+        value: 30
+        scaled: 0
+        seconds: 6
+        tick: 0
+        stacks: 1
+        onCaster: 0
+  chests:
+  - prefab: {fileID: 2125152371908520561, guid: 0d97a23b68174fc49a712c127ccc092c, type: 3}
+    cell: {x: 16, y: 33, z: 0}
+    level: 6
+  - prefab: {fileID: 2825187003681677602, guid: b902d6c8104604f4daf2364d909936b9, type: 3}
+    cell: {x: 42, y: 65, z: 0}
+    level: 7
+  - prefab: {fileID: 2048598119119357318, guid: 6f3f90b67c5cb694abeeddc891b66075, type: 3}
+    cell: {x: 40, y: 65, z: 0}
+    level: 7
+  - prefab: {fileID: 2151841680169209794, guid: 4193e686f9c8ee245bca0d83783ddaea, type: 3}
+    cell: {x: 39, y: 67, z: 0}
+    level: 5
+  - prefab: {fileID: 2825187003681677602, guid: b902d6c8104604f4daf2364d909936b9, type: 3}
+    cell: {x: 74, y: 68, z: 0}
+    level: 6
+  - prefab: {fileID: 2048598119119357318, guid: 6f3f90b67c5cb694abeeddc891b66075, type: 3}
+    cell: {x: 50, y: 35, z: 0}
+    level: 6
+  referenceMonster: {fileID: 8861474206017915938, guid: e24c55e4fc7ce0046994a5fd34c16036, type: 3}
+  minLevel: 1
+  key: {fileID: 0}
+  maxPlayers: 4
+  monsterAggroRadius: 3.5

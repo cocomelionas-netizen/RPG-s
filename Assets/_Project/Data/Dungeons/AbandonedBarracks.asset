@@ -1,0 +1,2823 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e19652b0b5dc8644987563b65cb5de0, type: 3}
+  m_Name: AbandonedBarracks
+  m_EditorClassIdentifier: RPG.Runtime::RPG.Dungeons.DungeonDefinition
+  displayName: Abandoned Barracks
+  instancePrefab: {fileID: 8556319660589481182, guid: 98036ae6eda62224e974cbc5868435b1, type: 3}
+  floorTile: {fileID: 11400000, guid: 28e286d1acd4a834ebb38e0ffae8808c, type: 2}
+  wallTile: {fileID: 11400000, guid: 279826b5bb279214b967497435bf558f, type: 2}
+  portalSprite: {fileID: 21300000, guid: 5c9c4cb5599cb95459addd4fda70a5b6, type: 3}
+  rows:
+  - '####################################################################################################'
+  - '################################....################################################################'
+  - '################################....################################################################'
+  - '################################....################################################################'
+  - '################################....################################################################'
+  - '################################....################################################################'
+  - '################################....################################################################'
+  - '################################....##############........................................##########'
+  - '################################....##############........................................##########'
+  - '################################....##############........................................##########'
+  - '################################....##############........................................##########'
+  - '################################....####################....#####..........#####....################'
+  - '################################....####################....####################....################'
+  - '##########################................##############.....##################.....################'
+  - '##########################................##############.....##################.....################'
+  - '##########################.....#....#.....##############.....##################.....################'
+  - '##########################.....#....#.....##############.....##################.....################'
+  - '##########################.....#....#.....##############....####################....################'
+  - '##########################.....#....#.....##############....#####..........#####....################'
+  - '##########################.....#....#.....########........................................##########'
+  - '##########################................########........................................##########'
+  - '##########################................########........................................##########'
+  - '##########################.....##..##.....########........................................##########'
+  - '#################################..#####################....####################....################'
+  - '#################################..######################..######################..#################'
+  - '#################################..######################..######################..#################'
+  - '#################################..######################..######################..#################'
+  - '################################....#####################..######################..#################'
+  - '################################....####################....####################....################'
+  - '################################....####################....####################....################'
+  - '################################....####################....####################....################'
+  - '################################....####################....##############.....##.........##########'
+  - '################################....####################....##############......#.......############'
+  - '################################....####################....##############......##.......###########'
+  - '################################....####################....##############......##........##########'
+  - '################################....####################....##############......##.......###########'
+  - '################################....####################...###############......##.......###########'
+  - '################################....#####################..###############......##.......###########'
+  - '################################....#####################..###############......##........##########'
+  - '################################....#####################..###############...............###########'
+  - '################################....#####################..###############..............############'
+  - '################################....####################....##############................##########'
+  - '################################....####################....##############.....#####################'
+  - '################################...............................................#####################'
+  - '################################...............................................#####################'
+  - '################################...............................................#####################'
+  - '################################...............................................#####################'
+  - '########################################################....##############.....#####################'
+  - '########################################################....##############................##########'
+  - '#########################################################..###############............##############'
+  - '#########################################################..###############............#..###########'
+  - '#########################################################..###############.....#..#...#...##########'
+  - '#########################################################..###############............#..###########'
+  - '########################################################....##############...#######..#..###########'
+  - '########################################################....##############....######..#..###########'
+  - '########################################################....##############............#...##########'
+  - '########################################################....##############............#..###########'
+  - '########################################################....##############............##############'
+  - '########################################################....##############................##########'
+  - '########################################################....########################################'
+  - '########################################################....########################################'
+  - '##############.....######...................................########################################'
+  - '##############.....######...................................########################################'
+  - '##############.....######...................................########################################'
+  - '##############.....######...................................########################################'
+  - '##############.....######.................##############....########################################'
+  - '##############.........#.......#########################....########################################'
+  - '##############......####.......#########################.................######.....################'
+  - '##############......####.......#########################.................######.....################'
+  - '##############......####.......#########################.................######.....################'
+  - '##############......####.......#########################.................######.....################'
+  - '##############.................#########################.................######.....################'
+  - '##############...........#....#......########################................#......################'
+  - '##############.......................#############################........####......########....####'
+  - '##############.......................########################.####........####......########....####'
+  - '##############.......................########################.####........####......########....####'
+  - '##############.......................########################.####........####......########....####'
+  - '##############...........#....#......########################.......................########....####'
+  - '##############.....######......##############################...........#......#....########....####'
+  - '##############.....######......##############################........................####.......####'
+  - '##############.....######......##############################...............................#..#####'
+  - '##############.....######......##############################...............................#...####'
+  - '##############.....######......##############################........................####.......####'
+  - '##############.....######......##############################...........#......#....########....####'
+  - '##############.....######.................###################............######.....########....####'
+  - '##############.....######.................###################.####.......######.....########....####'
+  - '##############.....######.................###################.####.......######.....########....####'
+  - '##############.....######.................###################.####.......######.....########....####'
+  - '##############.....######.................########################.......######.....########...#####'
+  - '#############################################################............######.....################'
+  - '########################################################.................######.....################'
+  - '########################################################.................######.....################'
+  - '########################################################.................######.....################'
+  - '########################################################.................######.....################'
+  - '########################################################.................######.....################'
+  - '####################################################################################################'
+  - '####################################################################################################'
+  - '####################################################################################################'
+  - '####################################################################################################'
+  - '####################################################################################################'
+  arrival: {x: 34, y: 4, z: 0}
+  exits:
+  - cell: {x: 33, y: 2, z: 0}
+    destination: {x: -22.5, y: 199.5}
+    label: Abandoned Barracks
+  doors: []
+  monsters:
+  - prefab: {fileID: 232793115955633434, guid: 80175b2a0a5c81a4f8e31ef7ef5ab08d, type: 3}
+    cell: {x: 39, y: 18, z: 0}
+    displayName: Skeletal Warrior
+    level: 25
+    elite: 0
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Sprint
+      kind: 5
+      school: 0
+      castSeconds: 0.3
+      range: 4.166667
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.5
+      cooldown: 30
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects: []
+    - name: Hamstring
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.9
+      chance: 30
+      interval: 1.5
+      cooldown: 15
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 2
+        value: 29
+        scaled: 0
+        seconds: 5
+        tick: 0
+        stacks: 1
+        onCaster: 0
+  - prefab: {fileID: 789256670840241608, guid: 44e6efefd140fee4294871a6836da1aa, type: 3}
+    cell: {x: 29, y: 17, z: 0}
+    displayName: Skeletal Mage
+    level: 25
+    elite: 0
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Shadow Bolt
+      kind: 0
+      school: 3
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 100
+      interval: 0
+      cooldown: 0
+      primary: 1
+      color: {r: 0.65, g: 0.35, b: 0.95, a: 1}
+      effects:
+      - kind: 5
+        value: 5
+        scaled: 0
+        seconds: 10
+        tick: 0
+        stacks: 25
+        onCaster: 0
+    - name: Frost Bolt
+      kind: 0
+      school: 1
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 30
+      interval: 1.5
+      cooldown: 3
+      primary: 0
+      color: {r: 0.5, g: 0.8, b: 1, a: 1}
+      effects:
+      - kind: 2
+        value: 30
+        scaled: 0
+        seconds: 6
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Determination
+      kind: 6
+      school: 4
+      castSeconds: 0
+      range: 0
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.5
+      cooldown: 30
+      primary: 0
+      color: {r: 1, g: 0.92, b: 0.5, a: 1}
+      effects:
+      - kind: 6
+        value: 5
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 1
+      - kind: 5
+        value: -5
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 1
+  - prefab: {fileID: 789256670840241608, guid: 44e6efefd140fee4294871a6836da1aa, type: 3}
+    cell: {x: 34, y: 31, z: 0}
+    displayName: Skeletal Mage
+    level: 25
+    elite: 0
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Shadow Bolt
+      kind: 0
+      school: 3
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 100
+      interval: 0
+      cooldown: 0
+      primary: 1
+      color: {r: 0.65, g: 0.35, b: 0.95, a: 1}
+      effects:
+      - kind: 5
+        value: 5
+        scaled: 0
+        seconds: 10
+        tick: 0
+        stacks: 25
+        onCaster: 0
+    - name: Frost Bolt
+      kind: 0
+      school: 1
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 30
+      interval: 1.5
+      cooldown: 3
+      primary: 0
+      color: {r: 0.5, g: 0.8, b: 1, a: 1}
+      effects:
+      - kind: 2
+        value: 30
+        scaled: 0
+        seconds: 6
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Determination
+      kind: 6
+      school: 4
+      castSeconds: 0
+      range: 0
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.5
+      cooldown: 30
+      primary: 0
+      color: {r: 1, g: 0.92, b: 0.5, a: 1}
+      effects:
+      - kind: 6
+        value: 5
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 1
+      - kind: 5
+        value: -5
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 1
+  - prefab: {fileID: 789256670840241608, guid: 44e6efefd140fee4294871a6836da1aa, type: 3}
+    cell: {x: 48, y: 45, z: 0}
+    displayName: Skeletal Mage
+    level: 25
+    elite: 0
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Shadow Bolt
+      kind: 0
+      school: 3
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 100
+      interval: 0
+      cooldown: 0
+      primary: 1
+      color: {r: 0.65, g: 0.35, b: 0.95, a: 1}
+      effects:
+      - kind: 5
+        value: 5
+        scaled: 0
+        seconds: 10
+        tick: 0
+        stacks: 25
+        onCaster: 0
+    - name: Frost Bolt
+      kind: 0
+      school: 1
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 30
+      interval: 1.5
+      cooldown: 3
+      primary: 0
+      color: {r: 0.5, g: 0.8, b: 1, a: 1}
+      effects:
+      - kind: 2
+        value: 30
+        scaled: 0
+        seconds: 6
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Determination
+      kind: 6
+      school: 4
+      castSeconds: 0
+      range: 0
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.5
+      cooldown: 30
+      primary: 0
+      color: {r: 1, g: 0.92, b: 0.5, a: 1}
+      effects:
+      - kind: 6
+        value: 5
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 1
+      - kind: 5
+        value: -5
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 1
+  - prefab: {fileID: 789256670840241608, guid: 44e6efefd140fee4294871a6836da1aa, type: 3}
+    cell: {x: 48, y: 62, z: 0}
+    displayName: Skeletal Mage
+    level: 25
+    elite: 0
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Shadow Bolt
+      kind: 0
+      school: 3
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 100
+      interval: 0
+      cooldown: 0
+      primary: 1
+      color: {r: 0.65, g: 0.35, b: 0.95, a: 1}
+      effects:
+      - kind: 5
+        value: 5
+        scaled: 0
+        seconds: 10
+        tick: 0
+        stacks: 25
+        onCaster: 0
+    - name: Frost Bolt
+      kind: 0
+      school: 1
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 30
+      interval: 1.5
+      cooldown: 3
+      primary: 0
+      color: {r: 0.5, g: 0.8, b: 1, a: 1}
+      effects:
+      - kind: 2
+        value: 30
+        scaled: 0
+        seconds: 6
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Determination
+      kind: 6
+      school: 4
+      castSeconds: 0
+      range: 0
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.5
+      cooldown: 30
+      primary: 0
+      color: {r: 1, g: 0.92, b: 0.5, a: 1}
+      effects:
+      - kind: 6
+        value: 5
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 1
+      - kind: 5
+        value: -5
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 1
+  - prefab: {fileID: 789256670840241608, guid: 44e6efefd140fee4294871a6836da1aa, type: 3}
+    cell: {x: 29, y: 63, z: 0}
+    displayName: Skeletal Mage
+    level: 25
+    elite: 0
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Shadow Bolt
+      kind: 0
+      school: 3
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 100
+      interval: 0
+      cooldown: 0
+      primary: 1
+      color: {r: 0.65, g: 0.35, b: 0.95, a: 1}
+      effects:
+      - kind: 5
+        value: 5
+        scaled: 0
+        seconds: 10
+        tick: 0
+        stacks: 25
+        onCaster: 0
+    - name: Frost Bolt
+      kind: 0
+      school: 1
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 30
+      interval: 1.5
+      cooldown: 3
+      primary: 0
+      color: {r: 0.5, g: 0.8, b: 1, a: 1}
+      effects:
+      - kind: 2
+        value: 30
+        scaled: 0
+        seconds: 6
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Determination
+      kind: 6
+      school: 4
+      castSeconds: 0
+      range: 0
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.5
+      cooldown: 30
+      primary: 0
+      color: {r: 1, g: 0.92, b: 0.5, a: 1}
+      effects:
+      - kind: 6
+        value: 5
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 1
+      - kind: 5
+        value: -5
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 1
+  - prefab: {fileID: 789256670840241608, guid: 44e6efefd140fee4294871a6836da1aa, type: 3}
+    cell: {x: 27, y: 74, z: 0}
+    displayName: Skeletal Mage
+    level: 25
+    elite: 0
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Shadow Bolt
+      kind: 0
+      school: 3
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 100
+      interval: 0
+      cooldown: 0
+      primary: 1
+      color: {r: 0.65, g: 0.35, b: 0.95, a: 1}
+      effects:
+      - kind: 5
+        value: 5
+        scaled: 0
+        seconds: 10
+        tick: 0
+        stacks: 25
+        onCaster: 0
+    - name: Frost Bolt
+      kind: 0
+      school: 1
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 30
+      interval: 1.5
+      cooldown: 3
+      primary: 0
+      color: {r: 0.5, g: 0.8, b: 1, a: 1}
+      effects:
+      - kind: 2
+        value: 30
+        scaled: 0
+        seconds: 6
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Determination
+      kind: 6
+      school: 4
+      castSeconds: 0
+      range: 0
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.5
+      cooldown: 30
+      primary: 0
+      color: {r: 1, g: 0.92, b: 0.5, a: 1}
+      effects:
+      - kind: 6
+        value: 5
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 1
+      - kind: 5
+        value: -5
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 1
+  - prefab: {fileID: 789256670840241608, guid: 44e6efefd140fee4294871a6836da1aa, type: 3}
+    cell: {x: 16, y: 68, z: 0}
+    displayName: Skeletal Mage
+    level: 25
+    elite: 0
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Shadow Bolt
+      kind: 0
+      school: 3
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 100
+      interval: 0
+      cooldown: 0
+      primary: 1
+      color: {r: 0.65, g: 0.35, b: 0.95, a: 1}
+      effects:
+      - kind: 5
+        value: 5
+        scaled: 0
+        seconds: 10
+        tick: 0
+        stacks: 25
+        onCaster: 0
+    - name: Frost Bolt
+      kind: 0
+      school: 1
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 30
+      interval: 1.5
+      cooldown: 3
+      primary: 0
+      color: {r: 0.5, g: 0.8, b: 1, a: 1}
+      effects:
+      - kind: 2
+        value: 30
+        scaled: 0
+        seconds: 6
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Determination
+      kind: 6
+      school: 4
+      castSeconds: 0
+      range: 0
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.5
+      cooldown: 30
+      primary: 0
+      color: {r: 1, g: 0.92, b: 0.5, a: 1}
+      effects:
+      - kind: 6
+        value: 5
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 1
+      - kind: 5
+        value: -5
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 1
+  - prefab: {fileID: 789256670840241608, guid: 44e6efefd140fee4294871a6836da1aa, type: 3}
+    cell: {x: 28, y: 86, z: 0}
+    displayName: Skeletal Mage
+    level: 25
+    elite: 0
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Shadow Bolt
+      kind: 0
+      school: 3
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 100
+      interval: 0
+      cooldown: 0
+      primary: 1
+      color: {r: 0.65, g: 0.35, b: 0.95, a: 1}
+      effects:
+      - kind: 5
+        value: 5
+        scaled: 0
+        seconds: 10
+        tick: 0
+        stacks: 25
+        onCaster: 0
+    - name: Frost Bolt
+      kind: 0
+      school: 1
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 30
+      interval: 1.5
+      cooldown: 3
+      primary: 0
+      color: {r: 0.5, g: 0.8, b: 1, a: 1}
+      effects:
+      - kind: 2
+        value: 30
+        scaled: 0
+        seconds: 6
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Determination
+      kind: 6
+      school: 4
+      castSeconds: 0
+      range: 0
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.5
+      cooldown: 30
+      primary: 0
+      color: {r: 1, g: 0.92, b: 0.5, a: 1}
+      effects:
+      - kind: 6
+        value: 5
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 1
+      - kind: 5
+        value: -5
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 1
+  - prefab: {fileID: 789256670840241608, guid: 44e6efefd140fee4294871a6836da1aa, type: 3}
+    cell: {x: 61, y: 92, z: 0}
+    displayName: Skeletal Mage
+    level: 25
+    elite: 0
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Shadow Bolt
+      kind: 0
+      school: 3
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 100
+      interval: 0
+      cooldown: 0
+      primary: 1
+      color: {r: 0.65, g: 0.35, b: 0.95, a: 1}
+      effects:
+      - kind: 5
+        value: 5
+        scaled: 0
+        seconds: 10
+        tick: 0
+        stacks: 25
+        onCaster: 0
+    - name: Frost Bolt
+      kind: 0
+      school: 1
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 30
+      interval: 1.5
+      cooldown: 3
+      primary: 0
+      color: {r: 0.5, g: 0.8, b: 1, a: 1}
+      effects:
+      - kind: 2
+        value: 30
+        scaled: 0
+        seconds: 6
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Determination
+      kind: 6
+      school: 4
+      castSeconds: 0
+      range: 0
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.5
+      cooldown: 30
+      primary: 0
+      color: {r: 1, g: 0.92, b: 0.5, a: 1}
+      effects:
+      - kind: 6
+        value: 5
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 1
+      - kind: 5
+        value: -5
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 1
+  - prefab: {fileID: 789256670840241608, guid: 44e6efefd140fee4294871a6836da1aa, type: 3}
+    cell: {x: 69, y: 80, z: 0}
+    displayName: Skeletal Mage
+    level: 25
+    elite: 0
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Shadow Bolt
+      kind: 0
+      school: 3
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 100
+      interval: 0
+      cooldown: 0
+      primary: 1
+      color: {r: 0.65, g: 0.35, b: 0.95, a: 1}
+      effects:
+      - kind: 5
+        value: 5
+        scaled: 0
+        seconds: 10
+        tick: 0
+        stacks: 25
+        onCaster: 0
+    - name: Frost Bolt
+      kind: 0
+      school: 1
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 30
+      interval: 1.5
+      cooldown: 3
+      primary: 0
+      color: {r: 0.5, g: 0.8, b: 1, a: 1}
+      effects:
+      - kind: 2
+        value: 30
+        scaled: 0
+        seconds: 6
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Determination
+      kind: 6
+      school: 4
+      castSeconds: 0
+      range: 0
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.5
+      cooldown: 30
+      primary: 0
+      color: {r: 1, g: 0.92, b: 0.5, a: 1}
+      effects:
+      - kind: 6
+        value: 5
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 1
+      - kind: 5
+        value: -5
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 1
+  - prefab: {fileID: 789256670840241608, guid: 44e6efefd140fee4294871a6836da1aa, type: 3}
+    cell: {x: 63, y: 68, z: 0}
+    displayName: Skeletal Mage
+    level: 25
+    elite: 0
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Shadow Bolt
+      kind: 0
+      school: 3
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 100
+      interval: 0
+      cooldown: 0
+      primary: 1
+      color: {r: 0.65, g: 0.35, b: 0.95, a: 1}
+      effects:
+      - kind: 5
+        value: 5
+        scaled: 0
+        seconds: 10
+        tick: 0
+        stacks: 25
+        onCaster: 0
+    - name: Frost Bolt
+      kind: 0
+      school: 1
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 30
+      interval: 1.5
+      cooldown: 3
+      primary: 0
+      color: {r: 0.5, g: 0.8, b: 1, a: 1}
+      effects:
+      - kind: 2
+        value: 30
+        scaled: 0
+        seconds: 6
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Determination
+      kind: 6
+      school: 4
+      castSeconds: 0
+      range: 0
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.5
+      cooldown: 30
+      primary: 0
+      color: {r: 1, g: 0.92, b: 0.5, a: 1}
+      effects:
+      - kind: 6
+        value: 5
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 1
+      - kind: 5
+        value: -5
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 1
+  - prefab: {fileID: 789256670840241608, guid: 44e6efefd140fee4294871a6836da1aa, type: 3}
+    cell: {x: 76, y: 45, z: 0}
+    displayName: Skeletal Mage
+    level: 25
+    elite: 0
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Shadow Bolt
+      kind: 0
+      school: 3
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 100
+      interval: 0
+      cooldown: 0
+      primary: 1
+      color: {r: 0.65, g: 0.35, b: 0.95, a: 1}
+      effects:
+      - kind: 5
+        value: 5
+        scaled: 0
+        seconds: 10
+        tick: 0
+        stacks: 25
+        onCaster: 0
+    - name: Frost Bolt
+      kind: 0
+      school: 1
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 30
+      interval: 1.5
+      cooldown: 3
+      primary: 0
+      color: {r: 0.5, g: 0.8, b: 1, a: 1}
+      effects:
+      - kind: 2
+        value: 30
+        scaled: 0
+        seconds: 6
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Determination
+      kind: 6
+      school: 4
+      castSeconds: 0
+      range: 0
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.5
+      cooldown: 30
+      primary: 0
+      color: {r: 1, g: 0.92, b: 0.5, a: 1}
+      effects:
+      - kind: 6
+        value: 5
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 1
+      - kind: 5
+        value: -5
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 1
+  - prefab: {fileID: 789256670840241608, guid: 44e6efefd140fee4294871a6836da1aa, type: 3}
+    cell: {x: 57, y: 20, z: 0}
+    displayName: Skeletal Mage
+    level: 25
+    elite: 0
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Shadow Bolt
+      kind: 0
+      school: 3
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 100
+      interval: 0
+      cooldown: 0
+      primary: 1
+      color: {r: 0.65, g: 0.35, b: 0.95, a: 1}
+      effects:
+      - kind: 5
+        value: 5
+        scaled: 0
+        seconds: 10
+        tick: 0
+        stacks: 25
+        onCaster: 0
+    - name: Frost Bolt
+      kind: 0
+      school: 1
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 30
+      interval: 1.5
+      cooldown: 3
+      primary: 0
+      color: {r: 0.5, g: 0.8, b: 1, a: 1}
+      effects:
+      - kind: 2
+        value: 30
+        scaled: 0
+        seconds: 6
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Determination
+      kind: 6
+      school: 4
+      castSeconds: 0
+      range: 0
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.5
+      cooldown: 30
+      primary: 0
+      color: {r: 1, g: 0.92, b: 0.5, a: 1}
+      effects:
+      - kind: 6
+        value: 5
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 1
+      - kind: 5
+        value: -5
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 1
+  - prefab: {fileID: 789256670840241608, guid: 44e6efefd140fee4294871a6836da1aa, type: 3}
+    cell: {x: 82, y: 20, z: 0}
+    displayName: Skeletal Mage
+    level: 25
+    elite: 0
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Shadow Bolt
+      kind: 0
+      school: 3
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 100
+      interval: 0
+      cooldown: 0
+      primary: 1
+      color: {r: 0.65, g: 0.35, b: 0.95, a: 1}
+      effects:
+      - kind: 5
+        value: 5
+        scaled: 0
+        seconds: 10
+        tick: 0
+        stacks: 25
+        onCaster: 0
+    - name: Frost Bolt
+      kind: 0
+      school: 1
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 30
+      interval: 1.5
+      cooldown: 3
+      primary: 0
+      color: {r: 0.5, g: 0.8, b: 1, a: 1}
+      effects:
+      - kind: 2
+        value: 30
+        scaled: 0
+        seconds: 6
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Determination
+      kind: 6
+      school: 4
+      castSeconds: 0
+      range: 0
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.5
+      cooldown: 30
+      primary: 0
+      color: {r: 1, g: 0.92, b: 0.5, a: 1}
+      effects:
+      - kind: 6
+        value: 5
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 1
+      - kind: 5
+        value: -5
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 1
+  - prefab: {fileID: 789256670840241608, guid: 44e6efefd140fee4294871a6836da1aa, type: 3}
+    cell: {x: 85, y: 9, z: 0}
+    displayName: Skeletal Mage
+    level: 25
+    elite: 0
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Shadow Bolt
+      kind: 0
+      school: 3
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 100
+      interval: 0
+      cooldown: 0
+      primary: 1
+      color: {r: 0.65, g: 0.35, b: 0.95, a: 1}
+      effects:
+      - kind: 5
+        value: 5
+        scaled: 0
+        seconds: 10
+        tick: 0
+        stacks: 25
+        onCaster: 0
+    - name: Frost Bolt
+      kind: 0
+      school: 1
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 30
+      interval: 1.5
+      cooldown: 3
+      primary: 0
+      color: {r: 0.5, g: 0.8, b: 1, a: 1}
+      effects:
+      - kind: 2
+        value: 30
+        scaled: 0
+        seconds: 6
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Determination
+      kind: 6
+      school: 4
+      castSeconds: 0
+      range: 0
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.5
+      cooldown: 30
+      primary: 0
+      color: {r: 1, g: 0.92, b: 0.5, a: 1}
+      effects:
+      - kind: 6
+        value: 5
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 1
+      - kind: 5
+        value: -5
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 1
+  - prefab: {fileID: 232793115955633434, guid: 80175b2a0a5c81a4f8e31ef7ef5ab08d, type: 3}
+    cell: {x: 16, y: 85, z: 0}
+    displayName: Skeletal Warrior
+    level: 25
+    elite: 0
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Sprint
+      kind: 5
+      school: 0
+      castSeconds: 0.3
+      range: 4.166667
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.5
+      cooldown: 30
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects: []
+    - name: Hamstring
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.9
+      chance: 30
+      interval: 1.5
+      cooldown: 15
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 2
+        value: 29
+        scaled: 0
+        seconds: 5
+        tick: 0
+        stacks: 1
+        onCaster: 0
+  - prefab: {fileID: 232793115955633434, guid: 80175b2a0a5c81a4f8e31ef7ef5ab08d, type: 3}
+    cell: {x: 38, y: 86, z: 0}
+    displayName: Skeletal Warrior
+    level: 25
+    elite: 0
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Sprint
+      kind: 5
+      school: 0
+      castSeconds: 0.3
+      range: 4.166667
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.5
+      cooldown: 30
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects: []
+    - name: Hamstring
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.9
+      chance: 30
+      interval: 1.5
+      cooldown: 15
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 2
+        value: 29
+        scaled: 0
+        seconds: 5
+        tick: 0
+        stacks: 1
+        onCaster: 0
+  - prefab: {fileID: 232793115955633434, guid: 80175b2a0a5c81a4f8e31ef7ef5ab08d, type: 3}
+    cell: {x: 38, y: 63, z: 0}
+    displayName: Skeletal Warrior
+    level: 25
+    elite: 0
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Sprint
+      kind: 5
+      school: 0
+      castSeconds: 0.3
+      range: 4.166667
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.5
+      cooldown: 30
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects: []
+    - name: Hamstring
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.9
+      chance: 30
+      interval: 1.5
+      cooldown: 15
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 2
+        value: 29
+        scaled: 0
+        seconds: 5
+        tick: 0
+        stacks: 1
+        onCaster: 0
+  - prefab: {fileID: 232793115955633434, guid: 80175b2a0a5c81a4f8e31ef7ef5ab08d, type: 3}
+    cell: {x: 34, y: 74, z: 0}
+    displayName: Skeletal Warrior
+    level: 25
+    elite: 0
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Sprint
+      kind: 5
+      school: 0
+      castSeconds: 0.3
+      range: 4.166667
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.5
+      cooldown: 30
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects: []
+    - name: Hamstring
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.9
+      chance: 30
+      interval: 1.5
+      cooldown: 15
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 2
+        value: 29
+        scaled: 0
+        seconds: 5
+        tick: 0
+        stacks: 1
+        onCaster: 0
+  - prefab: {fileID: 232793115955633434, guid: 80175b2a0a5c81a4f8e31ef7ef5ab08d, type: 3}
+    cell: {x: 35, y: 44, z: 0}
+    displayName: Skeletal Warrior
+    level: 25
+    elite: 0
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Sprint
+      kind: 5
+      school: 0
+      castSeconds: 0.3
+      range: 4.166667
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.5
+      cooldown: 30
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects: []
+    - name: Hamstring
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.9
+      chance: 30
+      interval: 1.5
+      cooldown: 15
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 2
+        value: 29
+        scaled: 0
+        seconds: 5
+        tick: 0
+        stacks: 1
+        onCaster: 0
+  - prefab: {fileID: 232793115955633434, guid: 80175b2a0a5c81a4f8e31ef7ef5ab08d, type: 3}
+    cell: {x: 67, y: 9, z: 0}
+    displayName: Skeletal Warrior
+    level: 25
+    elite: 0
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Sprint
+      kind: 5
+      school: 0
+      castSeconds: 0.3
+      range: 4.166667
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.5
+      cooldown: 30
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects: []
+    - name: Hamstring
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.9
+      chance: 30
+      interval: 1.5
+      cooldown: 15
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 2
+        value: 29
+        scaled: 0
+        seconds: 5
+        tick: 0
+        stacks: 1
+        onCaster: 0
+  - prefab: {fileID: 232793115955633434, guid: 80175b2a0a5c81a4f8e31ef7ef5ab08d, type: 3}
+    cell: {x: 85, y: 36, z: 0}
+    displayName: Skeletal Warrior
+    level: 25
+    elite: 0
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Sprint
+      kind: 5
+      school: 0
+      castSeconds: 0.3
+      range: 4.166667
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.5
+      cooldown: 30
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects: []
+    - name: Hamstring
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.9
+      chance: 30
+      interval: 1.5
+      cooldown: 15
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 2
+        value: 29
+        scaled: 0
+        seconds: 5
+        tick: 0
+        stacks: 1
+        onCaster: 0
+  - prefab: {fileID: 232793115955633434, guid: 80175b2a0a5c81a4f8e31ef7ef5ab08d, type: 3}
+    cell: {x: 77, y: 36, z: 0}
+    displayName: Skeletal Warrior
+    level: 25
+    elite: 0
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Sprint
+      kind: 5
+      school: 0
+      castSeconds: 0.3
+      range: 4.166667
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.5
+      cooldown: 30
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects: []
+    - name: Hamstring
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.9
+      chance: 30
+      interval: 1.5
+      cooldown: 15
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 2
+        value: 29
+        scaled: 0
+        seconds: 5
+        tick: 0
+        stacks: 1
+        onCaster: 0
+  - prefab: {fileID: 232793115955633434, guid: 80175b2a0a5c81a4f8e31ef7ef5ab08d, type: 3}
+    cell: {x: 61, y: 44, z: 0}
+    displayName: Skeletal Warrior
+    level: 25
+    elite: 0
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Sprint
+      kind: 5
+      school: 0
+      castSeconds: 0.3
+      range: 4.166667
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.5
+      cooldown: 30
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects: []
+    - name: Hamstring
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.9
+      chance: 30
+      interval: 1.5
+      cooldown: 15
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 2
+        value: 29
+        scaled: 0
+        seconds: 5
+        tick: 0
+        stacks: 1
+        onCaster: 0
+  - prefab: {fileID: 232793115955633434, guid: 80175b2a0a5c81a4f8e31ef7ef5ab08d, type: 3}
+    cell: {x: 76, y: 56, z: 0}
+    displayName: Skeletal Warrior
+    level: 25
+    elite: 0
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Sprint
+      kind: 5
+      school: 0
+      castSeconds: 0.3
+      range: 4.166667
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.5
+      cooldown: 30
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects: []
+    - name: Hamstring
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.9
+      chance: 30
+      interval: 1.5
+      cooldown: 15
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 2
+        value: 29
+        scaled: 0
+        seconds: 5
+        tick: 0
+        stacks: 1
+        onCaster: 0
+  - prefab: {fileID: 232793115955633434, guid: 80175b2a0a5c81a4f8e31ef7ef5ab08d, type: 3}
+    cell: {x: 81, y: 76, z: 0}
+    displayName: Skeletal Warrior
+    level: 25
+    elite: 0
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Sprint
+      kind: 5
+      school: 0
+      castSeconds: 0.3
+      range: 4.166667
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.5
+      cooldown: 30
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects: []
+    - name: Hamstring
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.9
+      chance: 30
+      interval: 1.5
+      cooldown: 15
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 2
+        value: 29
+        scaled: 0
+        seconds: 5
+        tick: 0
+        stacks: 1
+        onCaster: 0
+  - prefab: {fileID: 7709745790407067756, guid: 2fb8b23367469d44f86b637439c7206d, type: 3}
+    cell: {x: 94, y: 80, z: 0}
+    displayName: Sarloch the Betrayer
+    level: 25
+    elite: 1
+    boss: 1
+    healthScale: 2.522
+    damageScale: 1.5
+    goldScale: 3
+    loot:
+    - item: {fileID: 11400000, guid: cbeabef2358c8c445ac355199904aa1b, type: 2}
+      chance: 1
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 1
+    goldChance: 0.25
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Lesser Heal
+      kind: 4
+      school: 4
+      castSeconds: 1.5
+      range: 4.166667
+      radius: 0
+      damageMultiplier: 0.15
+      chance: 100
+      interval: 10
+      cooldown: 20
+      primary: 0
+      color: {r: 1, g: 0.92, b: 0.5, a: 1}
+      effects: []
+    - name: Greater Flame
+      kind: 0
+      school: 2
+      castSeconds: 2.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 100
+      interval: 15
+      cooldown: 30
+      primary: 0
+      color: {r: 1, g: 0.5, b: 0.15, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 3
+        tick: 1
+        stacks: 1
+        onCaster: 0
+  chests:
+  - prefab: {fileID: 9132592564667760077, guid: d4516aea8c155a54caf376718c740729, type: 3}
+    cell: {x: 61, y: 87, z: 0}
+    level: 25
+  - prefab: {fileID: 9132592564667760077, guid: d4516aea8c155a54caf376718c740729, type: 3}
+    cell: {x: 89, y: 34, z: 0}
+    level: 25
+  - prefab: {fileID: 9132592564667760077, guid: d4516aea8c155a54caf376718c740729, type: 3}
+    cell: {x: 89, y: 8, z: 0}
+    level: 25
+  - prefab: {fileID: 9132592564667760077, guid: d4516aea8c155a54caf376718c740729, type: 3}
+    cell: {x: 41, y: 88, z: 0}
+    level: 25
+  - prefab: {fileID: 9009517225111955400, guid: 8be907da07a726c42958bb6ed4ba6349, type: 3}
+    cell: {x: 14, y: 88, z: 0}
+    level: 25
+  - prefab: {fileID: 9009517225111955400, guid: 8be907da07a726c42958bb6ed4ba6349, type: 3}
+    cell: {x: 18, y: 62, z: 0}
+    level: 25
+  - prefab: {fileID: 9009517225111955400, guid: 8be907da07a726c42958bb6ed4ba6349, type: 3}
+    cell: {x: 41, y: 22, z: 0}
+    level: 25
+  - prefab: {fileID: 9009517225111955400, guid: 8be907da07a726c42958bb6ed4ba6349, type: 3}
+    cell: {x: 51, y: 10, z: 0}
+    level: 25
+  - prefab: {fileID: 9009517225111955400, guid: 8be907da07a726c42958bb6ed4ba6349, type: 3}
+    cell: {x: 89, y: 22, z: 0}
+    level: 25
+  - prefab: {fileID: 9009517225111955400, guid: 8be907da07a726c42958bb6ed4ba6349, type: 3}
+    cell: {x: 89, y: 41, z: 0}
+    level: 25
+  - prefab: {fileID: 9009517225111955400, guid: 8be907da07a726c42958bb6ed4ba6349, type: 3}
+    cell: {x: 89, y: 58, z: 0}
+    level: 25
+  - prefab: {fileID: 9009517225111955400, guid: 8be907da07a726c42958bb6ed4ba6349, type: 3}
+    cell: {x: 59, y: 53, z: 0}
+    level: 25
+  - prefab: {fileID: 9009517225111955400, guid: 8be907da07a726c42958bb6ed4ba6349, type: 3}
+    cell: {x: 79, y: 94, z: 0}
+    level: 25
+  - prefab: {fileID: 9009517225111955400, guid: 8be907da07a726c42958bb6ed4ba6349, type: 3}
+    cell: {x: 72, y: 94, z: 0}
+    level: 25
+  - prefab: {fileID: 9009517225111955400, guid: 8be907da07a726c42958bb6ed4ba6349, type: 3}
+    cell: {x: 33, y: 88, z: 0}
+    level: 25
+  - prefab: {fileID: 8151336511189478221, guid: e5910700f5a0f0f48a327151127096f3, type: 3}
+    cell: {x: 93, y: 88, z: 0}
+    level: 25
+  referenceMonster: {fileID: 8861474206017915938, guid: e24c55e4fc7ce0046994a5fd34c16036, type: 3}
+  minLevel: 25
+  key: {fileID: 11400000, guid: 6514d0770d0c7a54fbae4b936286d556, type: 2}
+  maxPlayers: 1
+  monsterAggroRadius: 3.5

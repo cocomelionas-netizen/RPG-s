@@ -1,0 +1,3669 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e19652b0b5dc8644987563b65cb5de0, type: 3}
+  m_Name: TelamontsDemiplane
+  m_EditorClassIdentifier: RPG.Runtime::RPG.Dungeons.DungeonDefinition
+  displayName: Telamont's Demiplane
+  instancePrefab: {fileID: 8556319660589481182, guid: 98036ae6eda62224e974cbc5868435b1, type: 3}
+  floorTile: {fileID: 11400000, guid: 28e286d1acd4a834ebb38e0ffae8808c, type: 2}
+  wallTile: {fileID: 11400000, guid: 279826b5bb279214b967497435bf558f, type: 2}
+  portalSprite: {fileID: 21300000, guid: 5c9c4cb5599cb95459addd4fda70a5b6, type: 3}
+  rows:
+  - '############################################################################################################'
+  - '############################################################################################################'
+  - '############################################################################################################'
+  - '############################################################################################################'
+  - '############################################################################################################'
+  - '############################################################################################################'
+  - '############################################################################################################'
+  - '############################################################################################################'
+  - '############################################################################################################'
+  - '############################################################################################################'
+  - '############################################################################################################'
+  - '############################################################################################################'
+  - '############################################################################################################'
+  - '############################################################################################################'
+  - '##........................########################################################........................##'
+  - '##.......................#########################################################........................##'
+  - '##.......................#########################################################........................##'
+  - '##........................########################################################........................##'
+  - '##....########....####...#########################################################....####....########....##'
+  - '##....########.......#....########################################################....#.......########....##'
+  - '##...................#....########################################################....#...................##'
+  - '##...................#....########################################################....#...................##'
+  - '##........................########################################################.......................###'
+  - '##........................########################################################........................##'
+  - '##........................########################################################........................##'
+  - '##........................########################################################........................##'
+  - '##........############....#############......##################......#############....############........##'
+  - '##........############....############........################........############....############........##'
+  - '##........############....############........################........############....############.......###'
+  - '##........############....############........################........############....############.......###'
+  - '##....################....############...##...################...##...############....################....##'
+  - '##....################....############...##...################...##...############....################....##'
+  - '##....################....############...##...################...##...############....################....##'
+  - '##....################....############...##...################...##...############....################....##'
+  - '##....################...................##.......########.......##...................################....##'
+  - '##....################...................##.......########.......##...................################....##'
+  - '##....################...................##.......########.......##...................################....##'
+  - '##....################...................##.......########.......##...................################....##'
+  - '##....############........................................................................############....##'
+  - '##....############........................................................................############....##'
+  - '##....############........................................................................############....##'
+  - '##....############........................................................................############....##'
+  - '##........................########################........########################........................##'
+  - '##........................########################........########################........................##'
+  - '##........................########################........########################........................##'
+  - '##..##...#................########################........########################.................#...#..##'
+  - '##############........############################........############################........##############'
+  - '##############........############################........############################........##############'
+  - '##############........############################........############################...##...##############'
+  - '##############........############################........############################...##...##############'
+  - '##############........####################........................####################...##...##############'
+  - '##############........####################........................####################...##...##############'
+  - '##############........####################........................####################...##...##############'
+  - '##############........####################........................####################...##...##############'
+  - '##############........####################........................####################...##...##############'
+  - '##############........####################........................####################...##...##############'
+  - '##############........####################........................####################........##############'
+  - '##############........####################........................####################........##############'
+  - '##############........####........########........................########....................##############'
+  - '##############....................########........................########....................##############'
+  - '##############....................########........................########....................##############'
+  - '##############........####........########........................########....................##############'
+  - '##########################...##...########........................########...##...##########################'
+  - '##########################...##...########........................########...##...##########################'
+  - '##########################...##...########........................########...##...##########################'
+  - '##########################...##...########........................########...##...##########################'
+  - '##########################...##...########........................########...##...##########################'
+  - '##########################...##...########........................########...##...##########################'
+  - '##########################...##...########........................########...##...##########################'
+  - '##########################...##...########........................########...##...##########################'
+  - '##############....................########........................########........####........##############'
+  - '##############....................########........................########....................##############'
+  - '##############....................########........................########....................##############'
+  - '##############....................########........................########........####........##############'
+  - '##############........#############################......#############################........##############'
+  - '##############........#############################......#############################........##############'
+  - '##############........############################........############################........##############'
+  - '##############........############################.#....#.############################........##############'
+  - '##############........############################........############################........##############'
+  - '##############........############################...##...############################........##############'
+  - '##############........############################....#...############################........##############'
+  - '##############........############################.#....#.############################........##############'
+  - '##############........################################################################........##############'
+  - '##############........################################################################........##############'
+  - '##############........################################################################........##############'
+  - '##############........################################################################........##############'
+  - '##############............########################################################.##.........##############'
+  - '##############............########################################################............##############'
+  - '##############...........#########################################################.........##.##############'
+  - '##############............########################################################............##############'
+  - '##################............................################............................##################'
+  - '##################............................################............................##################'
+  - '##################............................################..##...##...................##################'
+  - '##################..#.........................################..##...##................##.##################'
+  - '######################........................################........................######################'
+  - '######################........................################......................#.######################'
+  - '######################........................################......................#.######################'
+  - '######################........................################........................######################'
+  - '##################################............################..#.........##################################'
+  - '##################################....#..#....################..######....##################################'
+  - '##################################....####....################..######....##################################'
+  - '##################################....####....################..######....##################################'
+  - '##################################.....###....################..##.###....##################################'
+  - '##################################............################..#.####....##################################'
+  - '##################################............################............##################################'
+  - '##################################............################............##################################'
+  - '############################################################################################################'
+  - '############################################################################################################'
+  arrival: {x: 39, y: 97, z: 0}
+  exits:
+  - cell: {x: 38, y: 102, z: 0}
+    destination: {x: -136, y: 149.75}
+    label: Leave
+  doors:
+  - cell: {x: 66, y: 102, z: 0}
+    target: {fileID: 11400000, guid: f33663823395fcb43b271eecdfe53c6f, type: 2}
+  monsters:
+  - prefab: {fileID: 232793115955633434, guid: 80175b2a0a5c81a4f8e31ef7ef5ab08d, type: 3}
+    cell: {x: 23, y: 41, z: 0}
+    displayName: Kandoryrs Knight
+    level: 30
+    elite: 1
+    boss: 0
+    healthScale: 9.288
+    damageScale: 7.5
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: 45d7664951ee80249b4e9bba9c687ff3, type: 2}
+      chance: 0.15
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.15
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.15
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.15
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 1
+    spells:
+    - name: Howl of Terror
+      kind: 1
+      school: 3
+      castSeconds: 1.5
+      range: 0
+      radius: 2.5
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 15
+      primary: 0
+      color: {r: 0.65, g: 0.35, b: 0.95, a: 1}
+      effects:
+      - kind: 13
+        value: 0
+        scaled: 0
+        seconds: 4
+        tick: 0
+        stacks: 1
+        onCaster: 0
+      - kind: 2
+        value: 30
+        scaled: 0
+        seconds: 4
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Hamstring
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.9
+      chance: 30
+      interval: 0.3
+      cooldown: 4
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 2
+        value: 29
+        scaled: 0
+        seconds: 5
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Sprint
+      kind: 5
+      school: 0
+      castSeconds: 0.3
+      range: 4.166667
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 0.3
+      cooldown: 10
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects: []
+    - name: Enrage
+      kind: 6
+      school: 0
+      castSeconds: 0
+      range: 0
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 0.3
+      cooldown: 15
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 6
+        value: 30
+        scaled: 0
+        seconds: 8
+        tick: 0
+        stacks: 1
+        onCaster: 1
+  - prefab: {fileID: 576195659918313895, guid: 4a3ddbe5c1c1e4546a728d8216582258, type: 3}
+    cell: {x: 22, y: 37, z: 0}
+    displayName: Conjured Frostmite
+    level: 30
+    elite: 1
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: 723d3ce8b36662448a6609f3a3ec0dc1, type: 2}
+      chance: 0.1
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: e6bc4577b44c84e478171981be6f3cf9, type: 2}
+      chance: 0.1
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: ca16d7108e09ee44c9ac67175c124733, type: 2}
+      chance: 0.1
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 663e73b86778d7547a14cf0b64b1dbde, type: 2}
+      chance: 0.1
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 0ec0b8bfe513db54ca43b239ff92d991, type: 2}
+      chance: 0.1
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 1dcc25e1ab62bd84cbc027e3b6e8b0ec, type: 2}
+      chance: 0.1
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Insect Bite
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.75
+      chance: 30
+      interval: 1.3
+      cooldown: 6
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 8
+        tick: 2
+        stacks: 1
+        onCaster: 0
+    - name: Frostbolt Volley
+      kind: 1
+      school: 1
+      castSeconds: 2
+      range: 0
+      radius: 6
+      damageMultiplier: 1.2
+      chance: 30
+      interval: 1.3
+      cooldown: 3
+      primary: 0
+      color: {r: 0.5, g: 0.8, b: 1, a: 1}
+      effects:
+      - kind: 2
+        value: 50
+        scaled: 0
+        seconds: 12
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Rend
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 10
+      interval: 0.03
+      cooldown: 6
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 8
+        tick: 2
+        stacks: 1
+        onCaster: 0
+    - name: Venomous Bite
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.85
+      chance: 30
+      interval: 1.3
+      cooldown: 6
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 12
+        tick: 2
+        stacks: 5
+        onCaster: 0
+  - prefab: {fileID: 3269593560576086043, guid: 219106cdf9498d944a920242dfd4df5b, type: 3}
+    cell: {x: 28, y: 40, z: 0}
+    displayName: Conjured Firemite
+    level: 30
+    elite: 1
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 0.75
+    loot:
+    - item: {fileID: 11400000, guid: 723d3ce8b36662448a6609f3a3ec0dc1, type: 2}
+      chance: 0.1
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: e6bc4577b44c84e478171981be6f3cf9, type: 2}
+      chance: 0.1
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: ca16d7108e09ee44c9ac67175c124733, type: 2}
+      chance: 0.1
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 663e73b86778d7547a14cf0b64b1dbde, type: 2}
+      chance: 0.1
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 0ec0b8bfe513db54ca43b239ff92d991, type: 2}
+      chance: 0.1
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 1dcc25e1ab62bd84cbc027e3b6e8b0ec, type: 2}
+      chance: 0.1
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Insect Bite
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.75
+      chance: 30
+      interval: 1.3
+      cooldown: 6
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 8
+        tick: 2
+        stacks: 1
+        onCaster: 0
+    - name: Firebolt Volley
+      kind: 1
+      school: 2
+      castSeconds: 2
+      range: 0
+      radius: 6
+      damageMultiplier: 1.2
+      chance: 30
+      interval: 1.3
+      cooldown: 3
+      primary: 0
+      color: {r: 1, g: 0.5, b: 0.15, a: 1}
+      effects:
+      - kind: 3
+        value: 0.075
+        scaled: 1
+        seconds: 12
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Rend
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 10
+      interval: 0.03
+      cooldown: 6
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 8
+        tick: 2
+        stacks: 1
+        onCaster: 0
+    - name: Venomous Bite
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.85
+      chance: 30
+      interval: 1.3
+      cooldown: 6
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 12
+        tick: 2
+        stacks: 5
+        onCaster: 0
+  - prefab: {fileID: 232793115955633434, guid: 80175b2a0a5c81a4f8e31ef7ef5ab08d, type: 3}
+    cell: {x: 24, y: 73, z: 0}
+    displayName: Kandoryrs Knight
+    level: 30
+    elite: 1
+    boss: 0
+    healthScale: 9.288
+    damageScale: 7.5
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: 45d7664951ee80249b4e9bba9c687ff3, type: 2}
+      chance: 0.15
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.15
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.15
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.15
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 1
+    spells:
+    - name: Howl of Terror
+      kind: 1
+      school: 3
+      castSeconds: 1.5
+      range: 0
+      radius: 2.5
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 15
+      primary: 0
+      color: {r: 0.65, g: 0.35, b: 0.95, a: 1}
+      effects:
+      - kind: 13
+        value: 0
+        scaled: 0
+        seconds: 4
+        tick: 0
+        stacks: 1
+        onCaster: 0
+      - kind: 2
+        value: 30
+        scaled: 0
+        seconds: 4
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Hamstring
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.9
+      chance: 30
+      interval: 0.3
+      cooldown: 4
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 2
+        value: 29
+        scaled: 0
+        seconds: 5
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Sprint
+      kind: 5
+      school: 0
+      castSeconds: 0.3
+      range: 4.166667
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 0.3
+      cooldown: 10
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects: []
+    - name: Enrage
+      kind: 6
+      school: 0
+      castSeconds: 0
+      range: 0
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 0.3
+      cooldown: 15
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 6
+        value: 30
+        scaled: 0
+        seconds: 8
+        tick: 0
+        stacks: 1
+        onCaster: 1
+  - prefab: {fileID: 232793115955633434, guid: 80175b2a0a5c81a4f8e31ef7ef5ab08d, type: 3}
+    cell: {x: 28, y: 73, z: 0}
+    displayName: Kandoryrs Knight
+    level: 30
+    elite: 1
+    boss: 0
+    healthScale: 9.288
+    damageScale: 7.5
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: 45d7664951ee80249b4e9bba9c687ff3, type: 2}
+      chance: 0.15
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.15
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.15
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.15
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 1
+    spells:
+    - name: Howl of Terror
+      kind: 1
+      school: 3
+      castSeconds: 1.5
+      range: 0
+      radius: 2.5
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 15
+      primary: 0
+      color: {r: 0.65, g: 0.35, b: 0.95, a: 1}
+      effects:
+      - kind: 13
+        value: 0
+        scaled: 0
+        seconds: 4
+        tick: 0
+        stacks: 1
+        onCaster: 0
+      - kind: 2
+        value: 30
+        scaled: 0
+        seconds: 4
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Hamstring
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.9
+      chance: 30
+      interval: 0.3
+      cooldown: 4
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 2
+        value: 29
+        scaled: 0
+        seconds: 5
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Sprint
+      kind: 5
+      school: 0
+      castSeconds: 0.3
+      range: 4.166667
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 0.3
+      cooldown: 10
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects: []
+    - name: Enrage
+      kind: 6
+      school: 0
+      castSeconds: 0
+      range: 0
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 0.3
+      cooldown: 15
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 6
+        value: 30
+        scaled: 0
+        seconds: 8
+        tick: 0
+        stacks: 1
+        onCaster: 1
+  - prefab: {fileID: 232793115955633434, guid: 80175b2a0a5c81a4f8e31ef7ef5ab08d, type: 3}
+    cell: {x: 33, y: 59, z: 0}
+    displayName: Kandoryrs Knight
+    level: 30
+    elite: 1
+    boss: 0
+    healthScale: 9.288
+    damageScale: 7.5
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: 45d7664951ee80249b4e9bba9c687ff3, type: 2}
+      chance: 0.15
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.15
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.15
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.15
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 1
+    spells:
+    - name: Howl of Terror
+      kind: 1
+      school: 3
+      castSeconds: 1.5
+      range: 0
+      radius: 2.5
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 15
+      primary: 0
+      color: {r: 0.65, g: 0.35, b: 0.95, a: 1}
+      effects:
+      - kind: 13
+        value: 0
+        scaled: 0
+        seconds: 4
+        tick: 0
+        stacks: 1
+        onCaster: 0
+      - kind: 2
+        value: 30
+        scaled: 0
+        seconds: 4
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Hamstring
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.9
+      chance: 30
+      interval: 0.3
+      cooldown: 4
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 2
+        value: 29
+        scaled: 0
+        seconds: 5
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Sprint
+      kind: 5
+      school: 0
+      castSeconds: 0.3
+      range: 4.166667
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 0.3
+      cooldown: 10
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects: []
+    - name: Enrage
+      kind: 6
+      school: 0
+      castSeconds: 0
+      range: 0
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 0.3
+      cooldown: 15
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 6
+        value: 30
+        scaled: 0
+        seconds: 8
+        tick: 0
+        stacks: 1
+        onCaster: 1
+  - prefab: {fileID: 576195659918313895, guid: 4a3ddbe5c1c1e4546a728d8216582258, type: 3}
+    cell: {x: 32, y: 63, z: 0}
+    displayName: Conjured Frostmite
+    level: 30
+    elite: 1
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: 723d3ce8b36662448a6609f3a3ec0dc1, type: 2}
+      chance: 0.1
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: e6bc4577b44c84e478171981be6f3cf9, type: 2}
+      chance: 0.1
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: ca16d7108e09ee44c9ac67175c124733, type: 2}
+      chance: 0.1
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 663e73b86778d7547a14cf0b64b1dbde, type: 2}
+      chance: 0.1
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 0ec0b8bfe513db54ca43b239ff92d991, type: 2}
+      chance: 0.1
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 1dcc25e1ab62bd84cbc027e3b6e8b0ec, type: 2}
+      chance: 0.1
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Insect Bite
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.75
+      chance: 30
+      interval: 1.3
+      cooldown: 6
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 8
+        tick: 2
+        stacks: 1
+        onCaster: 0
+    - name: Frostbolt Volley
+      kind: 1
+      school: 1
+      castSeconds: 2
+      range: 0
+      radius: 6
+      damageMultiplier: 1.2
+      chance: 30
+      interval: 1.3
+      cooldown: 3
+      primary: 0
+      color: {r: 0.5, g: 0.8, b: 1, a: 1}
+      effects:
+      - kind: 2
+        value: 50
+        scaled: 0
+        seconds: 12
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Rend
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 10
+      interval: 0.03
+      cooldown: 6
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 8
+        tick: 2
+        stacks: 1
+        onCaster: 0
+    - name: Venomous Bite
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.85
+      chance: 30
+      interval: 1.3
+      cooldown: 6
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 12
+        tick: 2
+        stacks: 5
+        onCaster: 0
+  - prefab: {fileID: 3269593560576086043, guid: 219106cdf9498d944a920242dfd4df5b, type: 3}
+    cell: {x: 28, y: 59, z: 0}
+    displayName: Conjured Firemite
+    level: 30
+    elite: 1
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 0.75
+    loot:
+    - item: {fileID: 11400000, guid: 723d3ce8b36662448a6609f3a3ec0dc1, type: 2}
+      chance: 0.1
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: e6bc4577b44c84e478171981be6f3cf9, type: 2}
+      chance: 0.1
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: ca16d7108e09ee44c9ac67175c124733, type: 2}
+      chance: 0.1
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 663e73b86778d7547a14cf0b64b1dbde, type: 2}
+      chance: 0.1
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 0ec0b8bfe513db54ca43b239ff92d991, type: 2}
+      chance: 0.1
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 1dcc25e1ab62bd84cbc027e3b6e8b0ec, type: 2}
+      chance: 0.1
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Insect Bite
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.75
+      chance: 30
+      interval: 1.3
+      cooldown: 6
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 8
+        tick: 2
+        stacks: 1
+        onCaster: 0
+    - name: Firebolt Volley
+      kind: 1
+      school: 2
+      castSeconds: 2
+      range: 0
+      radius: 6
+      damageMultiplier: 1.2
+      chance: 30
+      interval: 1.3
+      cooldown: 3
+      primary: 0
+      color: {r: 1, g: 0.5, b: 0.15, a: 1}
+      effects:
+      - kind: 3
+        value: 0.075
+        scaled: 1
+        seconds: 12
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Rend
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 10
+      interval: 0.03
+      cooldown: 6
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 8
+        tick: 2
+        stacks: 1
+        onCaster: 0
+    - name: Venomous Bite
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.85
+      chance: 30
+      interval: 1.3
+      cooldown: 6
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 12
+        tick: 2
+        stacks: 5
+        onCaster: 0
+  - prefab: {fileID: 232793115955633434, guid: 80175b2a0a5c81a4f8e31ef7ef5ab08d, type: 3}
+    cell: {x: 75, y: 97, z: 0}
+    displayName: Kandoryrs Knight
+    level: 30
+    elite: 1
+    boss: 0
+    healthScale: 9.288
+    damageScale: 7.5
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: 45d7664951ee80249b4e9bba9c687ff3, type: 2}
+      chance: 0.15
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.15
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.15
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.15
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 1
+    spells:
+    - name: Howl of Terror
+      kind: 1
+      school: 3
+      castSeconds: 1.5
+      range: 0
+      radius: 2.5
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 15
+      primary: 0
+      color: {r: 0.65, g: 0.35, b: 0.95, a: 1}
+      effects:
+      - kind: 13
+        value: 0
+        scaled: 0
+        seconds: 4
+        tick: 0
+        stacks: 1
+        onCaster: 0
+      - kind: 2
+        value: 30
+        scaled: 0
+        seconds: 4
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Hamstring
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.9
+      chance: 30
+      interval: 0.3
+      cooldown: 4
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 2
+        value: 29
+        scaled: 0
+        seconds: 5
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Sprint
+      kind: 5
+      school: 0
+      castSeconds: 0.3
+      range: 4.166667
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 0.3
+      cooldown: 10
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects: []
+    - name: Enrage
+      kind: 6
+      school: 0
+      castSeconds: 0
+      range: 0
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 0.3
+      cooldown: 15
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 6
+        value: 30
+        scaled: 0
+        seconds: 8
+        tick: 0
+        stacks: 1
+        onCaster: 1
+  - prefab: {fileID: 232793115955633434, guid: 80175b2a0a5c81a4f8e31ef7ef5ab08d, type: 3}
+    cell: {x: 75, y: 90, z: 0}
+    displayName: Kandoryrs Knight
+    level: 30
+    elite: 1
+    boss: 0
+    healthScale: 9.288
+    damageScale: 7.5
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: 45d7664951ee80249b4e9bba9c687ff3, type: 2}
+      chance: 0.15
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.15
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.15
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.15
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 1
+    spells:
+    - name: Howl of Terror
+      kind: 1
+      school: 3
+      castSeconds: 1.5
+      range: 0
+      radius: 2.5
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 15
+      primary: 0
+      color: {r: 0.65, g: 0.35, b: 0.95, a: 1}
+      effects:
+      - kind: 13
+        value: 0
+        scaled: 0
+        seconds: 4
+        tick: 0
+        stacks: 1
+        onCaster: 0
+      - kind: 2
+        value: 30
+        scaled: 0
+        seconds: 4
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Hamstring
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.9
+      chance: 30
+      interval: 0.3
+      cooldown: 4
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 2
+        value: 29
+        scaled: 0
+        seconds: 5
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Sprint
+      kind: 5
+      school: 0
+      castSeconds: 0.3
+      range: 4.166667
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 0.3
+      cooldown: 10
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects: []
+    - name: Enrage
+      kind: 6
+      school: 0
+      castSeconds: 0
+      range: 0
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 0.3
+      cooldown: 15
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 6
+        value: 30
+        scaled: 0
+        seconds: 8
+        tick: 0
+        stacks: 1
+        onCaster: 1
+  - prefab: {fileID: 3269593560576086043, guid: 219106cdf9498d944a920242dfd4df5b, type: 3}
+    cell: {x: 79, y: 94, z: 0}
+    displayName: Conjured Firemite
+    level: 30
+    elite: 1
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 0.75
+    loot:
+    - item: {fileID: 11400000, guid: 723d3ce8b36662448a6609f3a3ec0dc1, type: 2}
+      chance: 0.1
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: e6bc4577b44c84e478171981be6f3cf9, type: 2}
+      chance: 0.1
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: ca16d7108e09ee44c9ac67175c124733, type: 2}
+      chance: 0.1
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 663e73b86778d7547a14cf0b64b1dbde, type: 2}
+      chance: 0.1
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 0ec0b8bfe513db54ca43b239ff92d991, type: 2}
+      chance: 0.1
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 1dcc25e1ab62bd84cbc027e3b6e8b0ec, type: 2}
+      chance: 0.1
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Insect Bite
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.75
+      chance: 30
+      interval: 1.3
+      cooldown: 6
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 8
+        tick: 2
+        stacks: 1
+        onCaster: 0
+    - name: Firebolt Volley
+      kind: 1
+      school: 2
+      castSeconds: 2
+      range: 0
+      radius: 6
+      damageMultiplier: 1.2
+      chance: 30
+      interval: 1.3
+      cooldown: 3
+      primary: 0
+      color: {r: 1, g: 0.5, b: 0.15, a: 1}
+      effects:
+      - kind: 3
+        value: 0.075
+        scaled: 1
+        seconds: 12
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Rend
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 10
+      interval: 0.03
+      cooldown: 6
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 8
+        tick: 2
+        stacks: 1
+        onCaster: 0
+    - name: Venomous Bite
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.85
+      chance: 30
+      interval: 1.3
+      cooldown: 6
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 12
+        tick: 2
+        stacks: 5
+        onCaster: 0
+  - prefab: {fileID: 576195659918313895, guid: 4a3ddbe5c1c1e4546a728d8216582258, type: 3}
+    cell: {x: 44, y: 40, z: 0}
+    displayName: Conjured Frostmite
+    level: 30
+    elite: 1
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: 723d3ce8b36662448a6609f3a3ec0dc1, type: 2}
+      chance: 0.1
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: e6bc4577b44c84e478171981be6f3cf9, type: 2}
+      chance: 0.1
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: ca16d7108e09ee44c9ac67175c124733, type: 2}
+      chance: 0.1
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 663e73b86778d7547a14cf0b64b1dbde, type: 2}
+      chance: 0.1
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 0ec0b8bfe513db54ca43b239ff92d991, type: 2}
+      chance: 0.1
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 1dcc25e1ab62bd84cbc027e3b6e8b0ec, type: 2}
+      chance: 0.1
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Insect Bite
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.75
+      chance: 30
+      interval: 1.3
+      cooldown: 6
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 8
+        tick: 2
+        stacks: 1
+        onCaster: 0
+    - name: Frostbolt Volley
+      kind: 1
+      school: 1
+      castSeconds: 2
+      range: 0
+      radius: 6
+      damageMultiplier: 1.2
+      chance: 30
+      interval: 1.3
+      cooldown: 3
+      primary: 0
+      color: {r: 0.5, g: 0.8, b: 1, a: 1}
+      effects:
+      - kind: 2
+        value: 50
+        scaled: 0
+        seconds: 12
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Rend
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 10
+      interval: 0.03
+      cooldown: 6
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 8
+        tick: 2
+        stacks: 1
+        onCaster: 0
+    - name: Venomous Bite
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.85
+      chance: 30
+      interval: 1.3
+      cooldown: 6
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 12
+        tick: 2
+        stacks: 5
+        onCaster: 0
+  - prefab: {fileID: 576195659918313895, guid: 4a3ddbe5c1c1e4546a728d8216582258, type: 3}
+    cell: {x: 40, y: 30, z: 0}
+    displayName: Conjured Frostmite
+    level: 30
+    elite: 1
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: 723d3ce8b36662448a6609f3a3ec0dc1, type: 2}
+      chance: 0.1
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: e6bc4577b44c84e478171981be6f3cf9, type: 2}
+      chance: 0.1
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: ca16d7108e09ee44c9ac67175c124733, type: 2}
+      chance: 0.1
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 663e73b86778d7547a14cf0b64b1dbde, type: 2}
+      chance: 0.1
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 0ec0b8bfe513db54ca43b239ff92d991, type: 2}
+      chance: 0.1
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 1dcc25e1ab62bd84cbc027e3b6e8b0ec, type: 2}
+      chance: 0.1
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Insect Bite
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.75
+      chance: 30
+      interval: 1.3
+      cooldown: 6
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 8
+        tick: 2
+        stacks: 1
+        onCaster: 0
+    - name: Frostbolt Volley
+      kind: 1
+      school: 1
+      castSeconds: 2
+      range: 0
+      radius: 6
+      damageMultiplier: 1.2
+      chance: 30
+      interval: 1.3
+      cooldown: 3
+      primary: 0
+      color: {r: 0.5, g: 0.8, b: 1, a: 1}
+      effects:
+      - kind: 2
+        value: 50
+        scaled: 0
+        seconds: 12
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Rend
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 10
+      interval: 0.03
+      cooldown: 6
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 8
+        tick: 2
+        stacks: 1
+        onCaster: 0
+    - name: Venomous Bite
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.85
+      chance: 30
+      interval: 1.3
+      cooldown: 6
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 12
+        tick: 2
+        stacks: 5
+        onCaster: 0
+  - prefab: {fileID: 576195659918313895, guid: 4a3ddbe5c1c1e4546a728d8216582258, type: 3}
+    cell: {x: 47, y: 38, z: 0}
+    displayName: Conjured Frostmite
+    level: 30
+    elite: 1
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: 723d3ce8b36662448a6609f3a3ec0dc1, type: 2}
+      chance: 0.1
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: e6bc4577b44c84e478171981be6f3cf9, type: 2}
+      chance: 0.1
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: ca16d7108e09ee44c9ac67175c124733, type: 2}
+      chance: 0.1
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 663e73b86778d7547a14cf0b64b1dbde, type: 2}
+      chance: 0.1
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 0ec0b8bfe513db54ca43b239ff92d991, type: 2}
+      chance: 0.1
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 1dcc25e1ab62bd84cbc027e3b6e8b0ec, type: 2}
+      chance: 0.1
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Insect Bite
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.75
+      chance: 30
+      interval: 1.3
+      cooldown: 6
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 8
+        tick: 2
+        stacks: 1
+        onCaster: 0
+    - name: Frostbolt Volley
+      kind: 1
+      school: 1
+      castSeconds: 2
+      range: 0
+      radius: 6
+      damageMultiplier: 1.2
+      chance: 30
+      interval: 1.3
+      cooldown: 3
+      primary: 0
+      color: {r: 0.5, g: 0.8, b: 1, a: 1}
+      effects:
+      - kind: 2
+        value: 50
+        scaled: 0
+        seconds: 12
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Rend
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 10
+      interval: 0.03
+      cooldown: 6
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 8
+        tick: 2
+        stacks: 1
+        onCaster: 0
+    - name: Venomous Bite
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.85
+      chance: 30
+      interval: 1.3
+      cooldown: 6
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 12
+        tick: 2
+        stacks: 5
+        onCaster: 0
+  - prefab: {fileID: 3269593560576086043, guid: 219106cdf9498d944a920242dfd4df5b, type: 3}
+    cell: {x: 89, y: 44, z: 0}
+    displayName: Conjured Firemite
+    level: 30
+    elite: 1
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 0.75
+    loot:
+    - item: {fileID: 11400000, guid: 723d3ce8b36662448a6609f3a3ec0dc1, type: 2}
+      chance: 0.1
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: e6bc4577b44c84e478171981be6f3cf9, type: 2}
+      chance: 0.1
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: ca16d7108e09ee44c9ac67175c124733, type: 2}
+      chance: 0.1
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 663e73b86778d7547a14cf0b64b1dbde, type: 2}
+      chance: 0.1
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 0ec0b8bfe513db54ca43b239ff92d991, type: 2}
+      chance: 0.1
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 1dcc25e1ab62bd84cbc027e3b6e8b0ec, type: 2}
+      chance: 0.1
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Insect Bite
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.75
+      chance: 30
+      interval: 1.3
+      cooldown: 6
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 8
+        tick: 2
+        stacks: 1
+        onCaster: 0
+    - name: Firebolt Volley
+      kind: 1
+      school: 2
+      castSeconds: 2
+      range: 0
+      radius: 6
+      damageMultiplier: 1.2
+      chance: 30
+      interval: 1.3
+      cooldown: 3
+      primary: 0
+      color: {r: 1, g: 0.5, b: 0.15, a: 1}
+      effects:
+      - kind: 3
+        value: 0.075
+        scaled: 1
+        seconds: 12
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Rend
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 10
+      interval: 0.03
+      cooldown: 6
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 8
+        tick: 2
+        stacks: 1
+        onCaster: 0
+    - name: Venomous Bite
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.85
+      chance: 30
+      interval: 1.3
+      cooldown: 6
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 12
+        tick: 2
+        stacks: 5
+        onCaster: 0
+  - prefab: {fileID: 3269593560576086043, guid: 219106cdf9498d944a920242dfd4df5b, type: 3}
+    cell: {x: 85, y: 43, z: 0}
+    displayName: Conjured Firemite
+    level: 30
+    elite: 1
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 0.75
+    loot:
+    - item: {fileID: 11400000, guid: 723d3ce8b36662448a6609f3a3ec0dc1, type: 2}
+      chance: 0.1
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: e6bc4577b44c84e478171981be6f3cf9, type: 2}
+      chance: 0.1
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: ca16d7108e09ee44c9ac67175c124733, type: 2}
+      chance: 0.1
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 663e73b86778d7547a14cf0b64b1dbde, type: 2}
+      chance: 0.1
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 0ec0b8bfe513db54ca43b239ff92d991, type: 2}
+      chance: 0.1
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 1dcc25e1ab62bd84cbc027e3b6e8b0ec, type: 2}
+      chance: 0.1
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Insect Bite
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.75
+      chance: 30
+      interval: 1.3
+      cooldown: 6
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 8
+        tick: 2
+        stacks: 1
+        onCaster: 0
+    - name: Firebolt Volley
+      kind: 1
+      school: 2
+      castSeconds: 2
+      range: 0
+      radius: 6
+      damageMultiplier: 1.2
+      chance: 30
+      interval: 1.3
+      cooldown: 3
+      primary: 0
+      color: {r: 1, g: 0.5, b: 0.15, a: 1}
+      effects:
+      - kind: 3
+        value: 0.075
+        scaled: 1
+        seconds: 12
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Rend
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 10
+      interval: 0.03
+      cooldown: 6
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 8
+        tick: 2
+        stacks: 1
+        onCaster: 0
+    - name: Venomous Bite
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.85
+      chance: 30
+      interval: 1.3
+      cooldown: 6
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 12
+        tick: 2
+        stacks: 5
+        onCaster: 0
+  - prefab: {fileID: 3269593560576086043, guid: 219106cdf9498d944a920242dfd4df5b, type: 3}
+    cell: {x: 87, y: 39, z: 0}
+    displayName: Conjured Firemite
+    level: 30
+    elite: 1
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 0.75
+    loot:
+    - item: {fileID: 11400000, guid: 723d3ce8b36662448a6609f3a3ec0dc1, type: 2}
+      chance: 0.1
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: e6bc4577b44c84e478171981be6f3cf9, type: 2}
+      chance: 0.1
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: ca16d7108e09ee44c9ac67175c124733, type: 2}
+      chance: 0.1
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 663e73b86778d7547a14cf0b64b1dbde, type: 2}
+      chance: 0.1
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 0ec0b8bfe513db54ca43b239ff92d991, type: 2}
+      chance: 0.1
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 1dcc25e1ab62bd84cbc027e3b6e8b0ec, type: 2}
+      chance: 0.1
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Insect Bite
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.75
+      chance: 30
+      interval: 1.3
+      cooldown: 6
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 8
+        tick: 2
+        stacks: 1
+        onCaster: 0
+    - name: Firebolt Volley
+      kind: 1
+      school: 2
+      castSeconds: 2
+      range: 0
+      radius: 6
+      damageMultiplier: 1.2
+      chance: 30
+      interval: 1.3
+      cooldown: 3
+      primary: 0
+      color: {r: 1, g: 0.5, b: 0.15, a: 1}
+      effects:
+      - kind: 3
+        value: 0.075
+        scaled: 1
+        seconds: 12
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Rend
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 10
+      interval: 0.03
+      cooldown: 6
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 8
+        tick: 2
+        stacks: 1
+        onCaster: 0
+    - name: Venomous Bite
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.85
+      chance: 30
+      interval: 1.3
+      cooldown: 6
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 12
+        tick: 2
+        stacks: 5
+        onCaster: 0
+  - prefab: {fileID: 789256670840241608, guid: 44e6efefd140fee4294871a6836da1aa, type: 3}
+    cell: {x: 25, y: 86, z: 0}
+    displayName: Telamont's Watcher
+    level: 30
+    elite: 1
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 1
+    spells:
+    - name: Inevitable Shard
+      kind: 3
+      school: 0
+      castSeconds: 0.5
+      range: 25.000002
+      radius: 0
+      damageMultiplier: 1
+      chance: 100
+      interval: 0
+      cooldown: 0
+      primary: 1
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects: []
+    - name: Mind Blast
+      kind: 0
+      school: 3
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 30
+      interval: 1.3
+      cooldown: 6
+      primary: 0
+      color: {r: 0.65, g: 0.35, b: 0.95, a: 1}
+      effects:
+      - kind: 7
+        value: -5
+        scaled: 0
+        seconds: 10
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Shadow Bolt
+      kind: 0
+      school: 3
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 30
+      interval: 1.3
+      cooldown: 6
+      primary: 0
+      color: {r: 0.65, g: 0.35, b: 0.95, a: 1}
+      effects:
+      - kind: 5
+        value: 25
+        scaled: 0
+        seconds: 10
+        tick: 0
+        stacks: 25
+        onCaster: 0
+  - prefab: {fileID: 789256670840241608, guid: 44e6efefd140fee4294871a6836da1aa, type: 3}
+    cell: {x: 19, y: 20, z: 0}
+    displayName: Telamont's Watcher
+    level: 30
+    elite: 1
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 1
+    spells:
+    - name: Inevitable Shard
+      kind: 3
+      school: 0
+      castSeconds: 0.5
+      range: 25.000002
+      radius: 0
+      damageMultiplier: 1
+      chance: 100
+      interval: 0
+      cooldown: 0
+      primary: 1
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects: []
+    - name: Mind Blast
+      kind: 0
+      school: 3
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 30
+      interval: 1.3
+      cooldown: 6
+      primary: 0
+      color: {r: 0.65, g: 0.35, b: 0.95, a: 1}
+      effects:
+      - kind: 7
+        value: -5
+        scaled: 0
+        seconds: 10
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Shadow Bolt
+      kind: 0
+      school: 3
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 30
+      interval: 1.3
+      cooldown: 6
+      primary: 0
+      color: {r: 0.65, g: 0.35, b: 0.95, a: 1}
+      effects:
+      - kind: 5
+        value: 25
+        scaled: 0
+        seconds: 10
+        tick: 0
+        stacks: 25
+        onCaster: 0
+  - prefab: {fileID: 789256670840241608, guid: 44e6efefd140fee4294871a6836da1aa, type: 3}
+    cell: {x: 18, y: 93, z: 0}
+    displayName: Telamont's Watcher
+    level: 30
+    elite: 1
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 1
+    spells:
+    - name: Inevitable Shard
+      kind: 3
+      school: 0
+      castSeconds: 0.5
+      range: 25.000002
+      radius: 0
+      damageMultiplier: 1
+      chance: 100
+      interval: 0
+      cooldown: 0
+      primary: 1
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects: []
+    - name: Mind Blast
+      kind: 0
+      school: 3
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 30
+      interval: 1.3
+      cooldown: 6
+      primary: 0
+      color: {r: 0.65, g: 0.35, b: 0.95, a: 1}
+      effects:
+      - kind: 7
+        value: -5
+        scaled: 0
+        seconds: 10
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Shadow Bolt
+      kind: 0
+      school: 3
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 30
+      interval: 1.3
+      cooldown: 6
+      primary: 0
+      color: {r: 0.65, g: 0.35, b: 0.95, a: 1}
+      effects:
+      - kind: 5
+        value: 25
+        scaled: 0
+        seconds: 10
+        tick: 0
+        stacks: 25
+        onCaster: 0
+  - prefab: {fileID: 789256670840241608, guid: 44e6efefd140fee4294871a6836da1aa, type: 3}
+    cell: {x: 2, y: 45, z: 0}
+    displayName: Telamont's Watcher
+    level: 30
+    elite: 1
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 1
+    spells:
+    - name: Inevitable Shard
+      kind: 3
+      school: 0
+      castSeconds: 0.5
+      range: 25.000002
+      radius: 0
+      damageMultiplier: 1
+      chance: 100
+      interval: 0
+      cooldown: 0
+      primary: 1
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects: []
+    - name: Mind Blast
+      kind: 0
+      school: 3
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 30
+      interval: 1.3
+      cooldown: 6
+      primary: 0
+      color: {r: 0.65, g: 0.35, b: 0.95, a: 1}
+      effects:
+      - kind: 7
+        value: -5
+        scaled: 0
+        seconds: 10
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Shadow Bolt
+      kind: 0
+      school: 3
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 30
+      interval: 1.3
+      cooldown: 6
+      primary: 0
+      color: {r: 0.65, g: 0.35, b: 0.95, a: 1}
+      effects:
+      - kind: 5
+        value: 25
+        scaled: 0
+        seconds: 10
+        tick: 0
+        stacks: 25
+        onCaster: 0
+  - prefab: {fileID: 789256670840241608, guid: 44e6efefd140fee4294871a6836da1aa, type: 3}
+    cell: {x: 73, y: 36, z: 0}
+    displayName: Telamont's Watcher
+    level: 30
+    elite: 1
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 1
+    spells:
+    - name: Inevitable Shard
+      kind: 3
+      school: 0
+      castSeconds: 0.5
+      range: 25.000002
+      radius: 0
+      damageMultiplier: 1
+      chance: 100
+      interval: 0
+      cooldown: 0
+      primary: 1
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects: []
+    - name: Mind Blast
+      kind: 0
+      school: 3
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 30
+      interval: 1.3
+      cooldown: 6
+      primary: 0
+      color: {r: 0.65, g: 0.35, b: 0.95, a: 1}
+      effects:
+      - kind: 7
+        value: -5
+        scaled: 0
+        seconds: 10
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Shadow Bolt
+      kind: 0
+      school: 3
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 30
+      interval: 1.3
+      cooldown: 6
+      primary: 0
+      color: {r: 0.65, g: 0.35, b: 0.95, a: 1}
+      effects:
+      - kind: 5
+        value: 25
+        scaled: 0
+        seconds: 10
+        tick: 0
+        stacks: 25
+        onCaster: 0
+  - prefab: {fileID: 789256670840241608, guid: 44e6efefd140fee4294871a6836da1aa, type: 3}
+    cell: {x: 73, y: 39, z: 0}
+    displayName: Telamont's Watcher
+    level: 30
+    elite: 1
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 1
+    spells:
+    - name: Inevitable Shard
+      kind: 3
+      school: 0
+      castSeconds: 0.5
+      range: 25.000002
+      radius: 0
+      damageMultiplier: 1
+      chance: 100
+      interval: 0
+      cooldown: 0
+      primary: 1
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects: []
+    - name: Mind Blast
+      kind: 0
+      school: 3
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 30
+      interval: 1.3
+      cooldown: 6
+      primary: 0
+      color: {r: 0.65, g: 0.35, b: 0.95, a: 1}
+      effects:
+      - kind: 7
+        value: -5
+        scaled: 0
+        seconds: 10
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Shadow Bolt
+      kind: 0
+      school: 3
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 30
+      interval: 1.3
+      cooldown: 6
+      primary: 0
+      color: {r: 0.65, g: 0.35, b: 0.95, a: 1}
+      effects:
+      - kind: 5
+        value: 25
+        scaled: 0
+        seconds: 10
+        tick: 0
+        stacks: 25
+        onCaster: 0
+  - prefab: {fileID: 789256670840241608, guid: 44e6efefd140fee4294871a6836da1aa, type: 3}
+    cell: {x: 91, y: 85, z: 0}
+    displayName: Telamont's Watcher
+    level: 30
+    elite: 1
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 1
+    spells:
+    - name: Inevitable Shard
+      kind: 3
+      school: 0
+      castSeconds: 0.5
+      range: 25.000002
+      radius: 0
+      damageMultiplier: 1
+      chance: 100
+      interval: 0
+      cooldown: 0
+      primary: 1
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects: []
+    - name: Mind Blast
+      kind: 0
+      school: 3
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 30
+      interval: 1.3
+      cooldown: 6
+      primary: 0
+      color: {r: 0.65, g: 0.35, b: 0.95, a: 1}
+      effects:
+      - kind: 7
+        value: -5
+        scaled: 0
+        seconds: 10
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Shadow Bolt
+      kind: 0
+      school: 3
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 30
+      interval: 1.3
+      cooldown: 6
+      primary: 0
+      color: {r: 0.65, g: 0.35, b: 0.95, a: 1}
+      effects:
+      - kind: 5
+        value: 25
+        scaled: 0
+        seconds: 10
+        tick: 0
+        stacks: 25
+        onCaster: 0
+  - prefab: {fileID: 789256670840241608, guid: 44e6efefd140fee4294871a6836da1aa, type: 3}
+    cell: {x: 88, y: 85, z: 0}
+    displayName: Telamont's Watcher
+    level: 30
+    elite: 1
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 1
+    spells:
+    - name: Inevitable Shard
+      kind: 3
+      school: 0
+      castSeconds: 0.5
+      range: 25.000002
+      radius: 0
+      damageMultiplier: 1
+      chance: 100
+      interval: 0
+      cooldown: 0
+      primary: 1
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects: []
+    - name: Mind Blast
+      kind: 0
+      school: 3
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 30
+      interval: 1.3
+      cooldown: 6
+      primary: 0
+      color: {r: 0.65, g: 0.35, b: 0.95, a: 1}
+      effects:
+      - kind: 7
+        value: -5
+        scaled: 0
+        seconds: 10
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Shadow Bolt
+      kind: 0
+      school: 3
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 30
+      interval: 1.3
+      cooldown: 6
+      primary: 0
+      color: {r: 0.65, g: 0.35, b: 0.95, a: 1}
+      effects:
+      - kind: 5
+        value: 25
+        scaled: 0
+        seconds: 10
+        tick: 0
+        stacks: 25
+        onCaster: 0
+  - prefab: {fileID: 789256670840241608, guid: 44e6efefd140fee4294871a6836da1aa, type: 3}
+    cell: {x: 16, y: 51, z: 0}
+    displayName: Telamont's Watcher
+    level: 30
+    elite: 1
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 1
+    spells:
+    - name: Inevitable Shard
+      kind: 3
+      school: 0
+      castSeconds: 0.5
+      range: 25.000002
+      radius: 0
+      damageMultiplier: 1
+      chance: 100
+      interval: 0
+      cooldown: 0
+      primary: 1
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects: []
+    - name: Mind Blast
+      kind: 0
+      school: 3
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 30
+      interval: 1.3
+      cooldown: 6
+      primary: 0
+      color: {r: 0.65, g: 0.35, b: 0.95, a: 1}
+      effects:
+      - kind: 7
+        value: -5
+        scaled: 0
+        seconds: 10
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Shadow Bolt
+      kind: 0
+      school: 3
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 30
+      interval: 1.3
+      cooldown: 6
+      primary: 0
+      color: {r: 0.65, g: 0.35, b: 0.95, a: 1}
+      effects:
+      - kind: 5
+        value: 25
+        scaled: 0
+        seconds: 10
+        tick: 0
+        stacks: 25
+        onCaster: 0
+  - prefab: {fileID: 789256670840241608, guid: 44e6efefd140fee4294871a6836da1aa, type: 3}
+    cell: {x: 18, y: 51, z: 0}
+    displayName: Telamont's Watcher
+    level: 30
+    elite: 1
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 1
+    spells:
+    - name: Inevitable Shard
+      kind: 3
+      school: 0
+      castSeconds: 0.5
+      range: 25.000002
+      radius: 0
+      damageMultiplier: 1
+      chance: 100
+      interval: 0
+      cooldown: 0
+      primary: 1
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects: []
+    - name: Mind Blast
+      kind: 0
+      school: 3
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 30
+      interval: 1.3
+      cooldown: 6
+      primary: 0
+      color: {r: 0.65, g: 0.35, b: 0.95, a: 1}
+      effects:
+      - kind: 7
+        value: -5
+        scaled: 0
+        seconds: 10
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Shadow Bolt
+      kind: 0
+      school: 3
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 30
+      interval: 1.3
+      cooldown: 6
+      primary: 0
+      color: {r: 0.65, g: 0.35, b: 0.95, a: 1}
+      effects:
+      - kind: 5
+        value: 25
+        scaled: 0
+        seconds: 10
+        tick: 0
+        stacks: 25
+        onCaster: 0
+  - prefab: {fileID: 6111973421948054406, guid: 78d76adf7f5952b4a9595bdecddbd76c, type: 3}
+    cell: {x: 53, y: 69, z: 0}
+    displayName: Demiplanar Guardian
+    level: 30
+    elite: 1
+    boss: 1
+    healthScale: 72.155
+    damageScale: 11.25
+    goldScale: 50
+    loot:
+    - item: {fileID: 11400000, guid: f5cc88a8412781246a80dfaaa8f6d1fc, type: 2}
+      chance: 1
+      minCount: 20
+      maxCount: 20
+    - item: {fileID: 11400000, guid: 06a7fc628ec755b418e31d35a5a2e8ae, type: 2}
+      chance: 0.5
+      minCount: 1
+      maxCount: 3
+    - item: {fileID: 11400000, guid: 2280bd80fb862514aa7c9cb3bb5567e1, type: 2}
+      chance: 0.5
+      minCount: 1
+      maxCount: 3
+    - item: {fileID: 11400000, guid: ca52e8e39e0eca94dbcc81f3e8f72285, type: 2}
+      chance: 0.5
+      minCount: 1
+      maxCount: 3
+    - item: {fileID: 11400000, guid: 010d72dce8b98c745b83fda7f8052a31, type: 2}
+      chance: 0.5
+      minCount: 1
+      maxCount: 3
+    - item: {fileID: 11400000, guid: 6ce26ebdecb63624892a3c399f308346, type: 2}
+      chance: 0.5
+      minCount: 1
+      maxCount: 3
+    - item: {fileID: 11400000, guid: aac85d089f625484a91147b2c53b718f, type: 2}
+      chance: 1
+      minCount: 1
+      maxCount: 5
+    - item: {fileID: 11400000, guid: 8c0b38c40ea94b346a285cedc37c9c3e, type: 2}
+      chance: 1
+      minCount: 1
+      maxCount: 5
+    - item: {fileID: 11400000, guid: 87cb68c933878f14e900602d489cf190, type: 2}
+      chance: 1
+      minCount: 1
+      maxCount: 5
+    - item: {fileID: 11400000, guid: 43442a2ae7883e740bdc9379b6af2c45, type: 2}
+      chance: 1
+      minCount: 1
+      maxCount: 5
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 1
+    controlImmune: 1
+    spells:
+    - name: Greater Heal
+      kind: 4
+      school: 4
+      castSeconds: 2.5
+      range: 4.166667
+      radius: 0
+      damageMultiplier: 500
+      chance: 30
+      interval: 1.3
+      cooldown: 24
+      primary: 0
+      color: {r: 1, g: 0.92, b: 0.5, a: 1}
+      effects: []
+    - name: Greater Sprint
+      kind: 5
+      school: 0
+      castSeconds: 0.3
+      range: 8.333334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.5
+      cooldown: 6
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects: []
+    - name: Inevitable Shard
+      kind: 3
+      school: 0
+      castSeconds: 0.5
+      range: 25.000002
+      radius: 0
+      damageMultiplier: 1
+      chance: 30
+      interval: 1.5
+      cooldown: 6
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects: []
+    - name: Thunder Clap
+      kind: 1
+      school: 0
+      castSeconds: 0
+      range: 0
+      radius: 2.5
+      damageMultiplier: 3.75
+      chance: 30
+      interval: 1.5
+      cooldown: 12
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 0
+        value: 0
+        scaled: 0
+        seconds: 3
+        tick: 0
+        stacks: 1
+        onCaster: 0
+  - prefab: {fileID: 789256670840241608, guid: 44e6efefd140fee4294871a6836da1aa, type: 3}
+    cell: {x: 45, y: 32, z: 0}
+    displayName: Telamont's Watcher
+    level: 30
+    elite: 1
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 1
+    spells:
+    - name: Inevitable Shard
+      kind: 3
+      school: 0
+      castSeconds: 0.5
+      range: 25.000002
+      radius: 0
+      damageMultiplier: 1
+      chance: 100
+      interval: 0
+      cooldown: 0
+      primary: 1
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects: []
+    - name: Mind Blast
+      kind: 0
+      school: 3
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 30
+      interval: 1.3
+      cooldown: 6
+      primary: 0
+      color: {r: 0.65, g: 0.35, b: 0.95, a: 1}
+      effects:
+      - kind: 7
+        value: -5
+        scaled: 0
+        seconds: 10
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Shadow Bolt
+      kind: 0
+      school: 3
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 30
+      interval: 1.3
+      cooldown: 6
+      primary: 0
+      color: {r: 0.65, g: 0.35, b: 0.95, a: 1}
+      effects:
+      - kind: 5
+        value: 25
+        scaled: 0
+        seconds: 10
+        tick: 0
+        stacks: 25
+        onCaster: 0
+  - prefab: {fileID: 789256670840241608, guid: 44e6efefd140fee4294871a6836da1aa, type: 3}
+    cell: {x: 89, y: 38, z: 0}
+    displayName: Telamont's Watcher
+    level: 30
+    elite: 1
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 1
+    spells:
+    - name: Inevitable Shard
+      kind: 3
+      school: 0
+      castSeconds: 0.5
+      range: 25.000002
+      radius: 0
+      damageMultiplier: 1
+      chance: 100
+      interval: 0
+      cooldown: 0
+      primary: 1
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects: []
+    - name: Mind Blast
+      kind: 0
+      school: 3
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 30
+      interval: 1.3
+      cooldown: 6
+      primary: 0
+      color: {r: 0.65, g: 0.35, b: 0.95, a: 1}
+      effects:
+      - kind: 7
+        value: -5
+        scaled: 0
+        seconds: 10
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Shadow Bolt
+      kind: 0
+      school: 3
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 30
+      interval: 1.3
+      cooldown: 6
+      primary: 0
+      color: {r: 0.65, g: 0.35, b: 0.95, a: 1}
+      effects:
+      - kind: 5
+        value: 25
+        scaled: 0
+        seconds: 10
+        tick: 0
+        stacks: 25
+        onCaster: 0
+  - prefab: {fileID: 789256670840241608, guid: 44e6efefd140fee4294871a6836da1aa, type: 3}
+    cell: {x: 87, y: 19, z: 0}
+    displayName: Telamont's Watcher
+    level: 30
+    elite: 1
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 1
+    spells:
+    - name: Inevitable Shard
+      kind: 3
+      school: 0
+      castSeconds: 0.5
+      range: 25.000002
+      radius: 0
+      damageMultiplier: 1
+      chance: 100
+      interval: 0
+      cooldown: 0
+      primary: 1
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects: []
+    - name: Mind Blast
+      kind: 0
+      school: 3
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 30
+      interval: 1.3
+      cooldown: 6
+      primary: 0
+      color: {r: 0.65, g: 0.35, b: 0.95, a: 1}
+      effects:
+      - kind: 7
+        value: -5
+        scaled: 0
+        seconds: 10
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Shadow Bolt
+      kind: 0
+      school: 3
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 30
+      interval: 1.3
+      cooldown: 6
+      primary: 0
+      color: {r: 0.65, g: 0.35, b: 0.95, a: 1}
+      effects:
+      - kind: 5
+        value: 25
+        scaled: 0
+        seconds: 10
+        tick: 0
+        stacks: 25
+        onCaster: 0
+  - prefab: {fileID: 3269593560576086043, guid: 219106cdf9498d944a920242dfd4df5b, type: 3}
+    cell: {x: 21, y: 89, z: 0}
+    displayName: Conjured Firemite
+    level: 30
+    elite: 1
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 0.75
+    loot:
+    - item: {fileID: 11400000, guid: 723d3ce8b36662448a6609f3a3ec0dc1, type: 2}
+      chance: 0.1
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: e6bc4577b44c84e478171981be6f3cf9, type: 2}
+      chance: 0.1
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: ca16d7108e09ee44c9ac67175c124733, type: 2}
+      chance: 0.1
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 663e73b86778d7547a14cf0b64b1dbde, type: 2}
+      chance: 0.1
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 0ec0b8bfe513db54ca43b239ff92d991, type: 2}
+      chance: 0.1
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 1dcc25e1ab62bd84cbc027e3b6e8b0ec, type: 2}
+      chance: 0.1
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Insect Bite
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.75
+      chance: 30
+      interval: 1.3
+      cooldown: 6
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 8
+        tick: 2
+        stacks: 1
+        onCaster: 0
+    - name: Firebolt Volley
+      kind: 1
+      school: 2
+      castSeconds: 2
+      range: 0
+      radius: 6
+      damageMultiplier: 1.2
+      chance: 30
+      interval: 1.3
+      cooldown: 3
+      primary: 0
+      color: {r: 1, g: 0.5, b: 0.15, a: 1}
+      effects:
+      - kind: 3
+        value: 0.075
+        scaled: 1
+        seconds: 12
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Rend
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 10
+      interval: 0.03
+      cooldown: 6
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 8
+        tick: 2
+        stacks: 1
+        onCaster: 0
+    - name: Venomous Bite
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.85
+      chance: 30
+      interval: 1.3
+      cooldown: 6
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 12
+        tick: 2
+        stacks: 5
+        onCaster: 0
+  chests:
+  - prefab: {fileID: 8151336511189478221, guid: e5910700f5a0f0f48a327151127096f3, type: 3}
+    cell: {x: 99, y: 17, z: 0}
+    level: 25
+  - prefab: {fileID: 8151336511189478221, guid: e5910700f5a0f0f48a327151127096f3, type: 3}
+    cell: {x: 15, y: 61, z: 0}
+    level: 25
+  - prefab: {fileID: 9009517225111955400, guid: 8be907da07a726c42958bb6ed4ba6349, type: 3}
+    cell: {x: 19, y: 61, z: 0}
+    level: 25
+  - prefab: {fileID: 9009517225111955400, guid: 8be907da07a726c42958bb6ed4ba6349, type: 3}
+    cell: {x: 17, y: 61, z: 0}
+    level: 25
+  - prefab: {fileID: 9009517225111955400, guid: 8be907da07a726c42958bb6ed4ba6349, type: 3}
+    cell: {x: 25, y: 45, z: 0}
+    level: 25
+  - prefab: {fileID: 8151336511189478221, guid: e5910700f5a0f0f48a327151127096f3, type: 3}
+    cell: {x: 11, y: 17, z: 0}
+    level: 25
+  - prefab: {fileID: 9009517225111955400, guid: 8be907da07a726c42958bb6ed4ba6349, type: 3}
+    cell: {x: 41, y: 26, z: 0}
+    level: 25
+  - prefab: {fileID: 9009517225111955400, guid: 8be907da07a726c42958bb6ed4ba6349, type: 3}
+    cell: {x: 65, y: 26, z: 0}
+    level: 25
+  - prefab: {fileID: 9009517225111955400, guid: 8be907da07a726c42958bb6ed4ba6349, type: 3}
+    cell: {x: 75, y: 73, z: 0}
+    level: 25
+  - prefab: {fileID: 9009517225111955400, guid: 8be907da07a726c42958bb6ed4ba6349, type: 3}
+    cell: {x: 93, y: 61, z: 0}
+    level: 25
+  - prefab: {fileID: 9009517225111955400, guid: 8be907da07a726c42958bb6ed4ba6349, type: 3}
+    cell: {x: 105, y: 45, z: 0}
+    level: 25
+  - prefab: {fileID: 9009517225111955400, guid: 8be907da07a726c42958bb6ed4ba6349, type: 3}
+    cell: {x: 96, y: 17, z: 0}
+    level: 25
+  - prefab: {fileID: 8151336511189478221, guid: e5910700f5a0f0f48a327151127096f3, type: 3}
+    cell: {x: 52, y: 81, z: 0}
+    level: 25
+  - prefab: {fileID: 8151336511189478221, guid: e5910700f5a0f0f48a327151127096f3, type: 3}
+    cell: {x: 55, y: 81, z: 0}
+    level: 25
+  referenceMonster: {fileID: 8861474206017915938, guid: e24c55e4fc7ce0046994a5fd34c16036, type: 3}
+  minLevel: 25
+  key: {fileID: 11400000, guid: 3c2382f3192e5d540917d5f0d19256f0, type: 2}
+  maxPlayers: 4
+  monsterAggroRadius: 3.5

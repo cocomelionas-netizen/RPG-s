@@ -1,0 +1,78 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdd5151e861198848a8cbc562cdb5a94, type: 3}
+  m_Name: Mage
+  m_EditorClassIdentifier: RPG.Runtime::RPG.Progression.CharacterClassDefinition
+  displayName: Mage
+  animations: {fileID: 11400000, guid: 77aeb812f9e302f4bba09d03c52335f9, type: 2}
+  baseAttributes:
+    strength: 5
+    agility: 5
+    intelligence: 20
+    vitality: 10
+    health: 0
+    mana: 0
+    willpower: 0
+    regeneration: 0
+    meditate: 0
+    meleeCritical: 0
+    rangedCritical: 0
+    spellCritical: 0
+    dodge: 0
+    block: 0
+    resistFrost: 0
+    resistFire: 0
+    resistShadow: 0
+    resistHoly: 0
+    bartering: 0
+    lockpicking: 0
+    staves: 0
+    maces: 0
+    axes: 0
+    swords: 0
+    ranged: 0
+    daggers: 0
+    wands: 0
+    shields: 0
+  primaryAttribute: 2
+  weaponSkills: 140000001a000000i
+  baseHealth: 40
+  baseMana: 70
+  minDamage: 0
+  maxDamage: 3
+  damagePerLevel: 0.8
+  attackInterval: 1.8
+  attackRange: 4.5
+  critChance: 0.08
+  projectileColor: {r: 0.7, g: 0.5, b: 1, a: 1}
+  abilities:
+  - {fileID: 11400000, guid: 2275228dac30fcc43ae2e96ce4070ef0, type: 2}
+  - {fileID: 11400000, guid: 0abc8898acac6884383477cc19ccf49e, type: 2}
+  - {fileID: 11400000, guid: acacceac4cd56174482a199953788168, type: 2}
+  - {fileID: 11400000, guid: 16eefad8d0a24114fb8da001af0a22f4, type: 2}
+  - {fileID: 11400000, guid: a24a94444d14c1d4191293011c349440, type: 2}
+  - {fileID: 11400000, guid: 7104d2f03e0fe95449a455c70213cfa9, type: 2}
+  - {fileID: 11400000, guid: 9120cc4b32428804b817ade5d62e518e, type: 2}
+  - {fileID: 11400000, guid: 58f3679d5c55ad840a9719dcd971cda3, type: 2}
+  - {fileID: 11400000, guid: 28c72290210b1ca47b8b293c18c282d8, type: 2}
+  - {fileID: 11400000, guid: 2062265d04738454fad8ff0372de6e68, type: 2}
+  - {fileID: 11400000, guid: 1ed3ebc63e3f8ac49963453a5ea54442, type: 2}
+  - {fileID: 11400000, guid: a8a21e68f373daf45b447dce6e6f1930, type: 2}
+  - {fileID: 11400000, guid: f845afd9d5d96844ca12658b58a21bef, type: 2}
+  - {fileID: 11400000, guid: ccdb58fd18f162a499da105da1c5d42a, type: 2}
+  - {fileID: 11400000, guid: 615c7fbf6c7308a4c9f3344621360e13, type: 2}
+  - {fileID: 11400000, guid: 2cedc1be94e17fb4cbb8a81f70bd4943, type: 2}
+  - {fileID: 11400000, guid: 2f122f5e2018a4547a2d550f40f260a1, type: 2}
+  - {fileID: 11400000, guid: fddb96d67d1c3b64bbeeaf54474c5689, type: 2}
+  - {fileID: 11400000, guid: df97d62077dc84943bdbfd9528c9cc17, type: 2}
+  - {fileID: 11400000, guid: 6e84c96726f2f49448a980cf7240957f, type: 2}
+  - {fileID: 11400000, guid: 026fe55e3b6c8b24a82319d53e0fa5e9, type: 2}

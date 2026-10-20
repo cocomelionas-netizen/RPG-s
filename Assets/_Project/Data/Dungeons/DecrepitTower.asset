@@ -1,0 +1,4428 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e19652b0b5dc8644987563b65cb5de0, type: 3}
+  m_Name: DecrepitTower
+  m_EditorClassIdentifier: RPG.Runtime::RPG.Dungeons.DungeonDefinition
+  displayName: Decrepit Tower
+  instancePrefab: {fileID: 8556319660589481182, guid: 98036ae6eda62224e974cbc5868435b1, type: 3}
+  floorTile: {fileID: 11400000, guid: 28e286d1acd4a834ebb38e0ffae8808c, type: 2}
+  wallTile: {fileID: 11400000, guid: 279826b5bb279214b967497435bf558f, type: 2}
+  portalSprite: {fileID: 21300000, guid: 5c9c4cb5599cb95459addd4fda70a5b6, type: 3}
+  rows:
+  - '################################################################################'
+  - '################################################################################'
+  - '####....................#####################################...............####'
+  - '####....................#####################################.............#.####'
+  - '####....................#####################################...............####'
+  - '####....................#####################################...............####'
+  - '####....#########.......########................#############.............######'
+  - '####....#########.......########................#############..............#####'
+  - '####...........##.......########................#############...............####'
+  - '####...........##.......########...##########...#############..#....#.......####'
+  - '####...........##..................##########...........#####.............######'
+  - '####.........#.##..................##########...............................####'
+  - '####......#..#.##..................##########...............................####'
+  - '####...........##..................##########...........#####...............####'
+  - '####....########################...##########...#############..#....#.....######'
+  - '####....########################................#############...............####'
+  - '####....................########................#############...............####'
+  - '####....................########................#################...........####'
+  - '####....................#########################################..##.....######'
+  - '####....................#########################################..##.......####'
+  - '####...................##########################################..##..#..#.####'
+  - '####...................##########################################..##..#....####'
+  - '############....################################################....############'
+  - '############....################################################....############'
+  - '############....################################################....############'
+  - '############....################################################....############'
+  - '############....################################################....############'
+  - '############....################################################....############'
+  - '############....################################################....############'
+  - '############....################################################....############'
+  - '########....................####################################....############'
+  - '########....................####################################....############'
+  - '########....................####################################....############'
+  - '########....................####################################....############'
+  - '########....................########............################....############'
+  - '########....................########............################....############'
+  - '########....................########......######################....############'
+  - '########....................########............################....############'
+  - '########....................###########.............................############'
+  - '########....................########................................############'
+  - '########....................########................................############'
+  - '########....................###########.............................############'
+  - '########....................########............################....############'
+  - '########....................########......######################....############'
+  - '########....................########.......#####################....############'
+  - '########....................########.......#####################....############'
+  - '########....................############....####################....############'
+  - '########....................############....####################....############'
+  - '########....................############....####################....############'
+  - '########....................############....####################....############'
+  - '########################################....####################....############'
+  - '########################################....####################....############'
+  - '########################################....####################....############'
+  - '########################################....####################....############'
+  - '########################################....####################....############'
+  - '########################################....####################....############'
+  - '############....########################....####################....############'
+  - '############....########################....####################....############'
+  - '########........................................########....................####'
+  - '########........................................########....................####'
+  - '########........................................########....................####'
+  - '########........................................########...#................####'
+  - '########......####........####........####......########................#...####'
+  - '########......####........####........####......########..#.................####'
+  - '########......####..#..#..####..#..#..####......########.................#..####'
+  - '########......####........####........####......########..#.................####'
+  - '#...............................................########.................#..####'
+  - '#...............................................########....................####'
+  - '#...............................................########....................####'
+  - '#...............................................########....................####'
+  - '########......####........####........####......########..#..............#..####'
+  - '########......####..#..#..####..#..#..####......########.....#........#.....####'
+  - '########......####........####........####......########..#..............#..####'
+  - '########......####........####........####......########....................####'
+  - '########........................................########...#............#...####'
+  - '########........................................########....................####'
+  - '########........................................########....................####'
+  - '########........................................########....................####'
+  - '################################################################################'
+  - '################################################################################'
+  arrival: {x: 3, y: 68, z: 0}
+  exits:
+  - cell: {x: 2, y: 69, z: 0}
+    destination: {x: -234.5, y: 189.5}
+    label: Decrepit Tower
+  doors: []
+  monsters:
+  - prefab: {fileID: 7056072118663412086, guid: 52e18f8b4fa2fd34ca99caf7d2f16a0a, type: 3}
+    cell: {x: 36, y: 76, z: 0}
+    displayName: Undead Horror
+    level: 25
+    elite: 1
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Hamstring
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.9
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 2
+        value: 29
+        scaled: 0
+        seconds: 5
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Rend
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 8
+        tick: 2
+        stacks: 1
+        onCaster: 0
+    - name: Infected Wound
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 7
+        value: -2
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 0
+  - prefab: {fileID: 7056072118663412086, guid: 52e18f8b4fa2fd34ca99caf7d2f16a0a, type: 3}
+    cell: {x: 20, y: 72, z: 0}
+    displayName: Undead Horror
+    level: 25
+    elite: 1
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Hamstring
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.9
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 2
+        value: 29
+        scaled: 0
+        seconds: 5
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Rend
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 8
+        tick: 2
+        stacks: 1
+        onCaster: 0
+    - name: Infected Wound
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 7
+        value: -2
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 0
+  - prefab: {fileID: 7056072118663412086, guid: 52e18f8b4fa2fd34ca99caf7d2f16a0a, type: 3}
+    cell: {x: 22, y: 70, z: 0}
+    displayName: Undead Horror
+    level: 25
+    elite: 1
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Hamstring
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.9
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 2
+        value: 29
+        scaled: 0
+        seconds: 5
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Rend
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 8
+        tick: 2
+        stacks: 1
+        onCaster: 0
+    - name: Infected Wound
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 7
+        value: -2
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 0
+  - prefab: {fileID: 7056072118663412086, guid: 52e18f8b4fa2fd34ca99caf7d2f16a0a, type: 3}
+    cell: {x: 23, y: 65, z: 0}
+    displayName: Undead Horror
+    level: 25
+    elite: 1
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Hamstring
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.9
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 2
+        value: 29
+        scaled: 0
+        seconds: 5
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Rend
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 8
+        tick: 2
+        stacks: 1
+        onCaster: 0
+    - name: Infected Wound
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 7
+        value: -2
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 0
+  - prefab: {fileID: 7056072118663412086, guid: 52e18f8b4fa2fd34ca99caf7d2f16a0a, type: 3}
+    cell: {x: 32, y: 77, z: 0}
+    displayName: Undead Horror
+    level: 25
+    elite: 1
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Hamstring
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.9
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 2
+        value: 29
+        scaled: 0
+        seconds: 5
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Rend
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 8
+        tick: 2
+        stacks: 1
+        onCaster: 0
+    - name: Infected Wound
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 7
+        value: -2
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 0
+  - prefab: {fileID: 7056072118663412086, guid: 52e18f8b4fa2fd34ca99caf7d2f16a0a, type: 3}
+    cell: {x: 34, y: 75, z: 0}
+    displayName: Undead Horror
+    level: 25
+    elite: 1
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Hamstring
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.9
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 2
+        value: 29
+        scaled: 0
+        seconds: 5
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Rend
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 8
+        tick: 2
+        stacks: 1
+        onCaster: 0
+    - name: Infected Wound
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 7
+        value: -2
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 0
+  - prefab: {fileID: 7056072118663412086, guid: 52e18f8b4fa2fd34ca99caf7d2f16a0a, type: 3}
+    cell: {x: 37, y: 60, z: 0}
+    displayName: Undead Horror
+    level: 25
+    elite: 1
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Hamstring
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.9
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 2
+        value: 29
+        scaled: 0
+        seconds: 5
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Rend
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 8
+        tick: 2
+        stacks: 1
+        onCaster: 0
+    - name: Infected Wound
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 7
+        value: -2
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 0
+  - prefab: {fileID: 7056072118663412086, guid: 52e18f8b4fa2fd34ca99caf7d2f16a0a, type: 3}
+    cell: {x: 34, y: 60, z: 0}
+    displayName: Undead Horror
+    level: 25
+    elite: 1
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Hamstring
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.9
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 2
+        value: 29
+        scaled: 0
+        seconds: 5
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Rend
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 8
+        tick: 2
+        stacks: 1
+        onCaster: 0
+    - name: Infected Wound
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 7
+        value: -2
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 0
+  - prefab: {fileID: 7056072118663412086, guid: 52e18f8b4fa2fd34ca99caf7d2f16a0a, type: 3}
+    cell: {x: 36, y: 62, z: 0}
+    displayName: Undead Horror
+    level: 25
+    elite: 1
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Hamstring
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.9
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 2
+        value: 29
+        scaled: 0
+        seconds: 5
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Rend
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 8
+        tick: 2
+        stacks: 1
+        onCaster: 0
+    - name: Infected Wound
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 7
+        value: -2
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 0
+  - prefab: {fileID: 7056072118663412086, guid: 52e18f8b4fa2fd34ca99caf7d2f16a0a, type: 3}
+    cell: {x: 35, y: 59, z: 0}
+    displayName: Undead Horror
+    level: 25
+    elite: 1
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Hamstring
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.9
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 2
+        value: 29
+        scaled: 0
+        seconds: 5
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Rend
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 8
+        tick: 2
+        stacks: 1
+        onCaster: 0
+    - name: Infected Wound
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 7
+        value: -2
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 0
+  - prefab: {fileID: 7056072118663412086, guid: 52e18f8b4fa2fd34ca99caf7d2f16a0a, type: 3}
+    cell: {x: 47, y: 71, z: 0}
+    displayName: Undead Horror
+    level: 25
+    elite: 1
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Hamstring
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.9
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 2
+        value: 29
+        scaled: 0
+        seconds: 5
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Rend
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 8
+        tick: 2
+        stacks: 1
+        onCaster: 0
+    - name: Infected Wound
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 7
+        value: -2
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 0
+  - prefab: {fileID: 7056072118663412086, guid: 52e18f8b4fa2fd34ca99caf7d2f16a0a, type: 3}
+    cell: {x: 46, y: 65, z: 0}
+    displayName: Undead Horror
+    level: 25
+    elite: 1
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Hamstring
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.9
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 2
+        value: 29
+        scaled: 0
+        seconds: 5
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Rend
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 8
+        tick: 2
+        stacks: 1
+        onCaster: 0
+    - name: Infected Wound
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 7
+        value: -2
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 0
+  - prefab: {fileID: 7056072118663412086, guid: 52e18f8b4fa2fd34ca99caf7d2f16a0a, type: 3}
+    cell: {x: 47, y: 62, z: 0}
+    displayName: Undead Horror
+    level: 25
+    elite: 1
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Hamstring
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.9
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 2
+        value: 29
+        scaled: 0
+        seconds: 5
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Rend
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 8
+        tick: 2
+        stacks: 1
+        onCaster: 0
+    - name: Infected Wound
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 7
+        value: -2
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 0
+  - prefab: {fileID: 7056072118663412086, guid: 52e18f8b4fa2fd34ca99caf7d2f16a0a, type: 3}
+    cell: {x: 46, y: 74, z: 0}
+    displayName: Undead Horror
+    level: 25
+    elite: 1
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Hamstring
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.9
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 2
+        value: 29
+        scaled: 0
+        seconds: 5
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Rend
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 8
+        tick: 2
+        stacks: 1
+        onCaster: 0
+    - name: Infected Wound
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 7
+        value: -2
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 0
+  - prefab: {fileID: 789256670840241608, guid: 44e6efefd140fee4294871a6836da1aa, type: 3}
+    cell: {x: 34, y: 64, z: 0}
+    displayName: Sorcerer
+    level: 25
+    elite: 1
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 0.75
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 1
+    spells:
+    - name: Shadow Bolt
+      kind: 0
+      school: 3
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 100
+      interval: 0
+      cooldown: 0
+      primary: 1
+      color: {r: 0.65, g: 0.35, b: 0.95, a: 1}
+      effects:
+      - kind: 5
+        value: 25
+        scaled: 0
+        seconds: 10
+        tick: 0
+        stacks: 25
+        onCaster: 0
+    - name: Determination
+      kind: 6
+      school: 4
+      castSeconds: 0
+      range: 0
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.5
+      cooldown: 30
+      primary: 0
+      color: {r: 1, g: 0.92, b: 0.5, a: 1}
+      effects:
+      - kind: 6
+        value: 5
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 1
+      - kind: 5
+        value: -5
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 1
+  - prefab: {fileID: 789256670840241608, guid: 44e6efefd140fee4294871a6836da1aa, type: 3}
+    cell: {x: 47, y: 68, z: 0}
+    displayName: Sorcerer
+    level: 25
+    elite: 1
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 0.75
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 1
+    spells:
+    - name: Shadow Bolt
+      kind: 0
+      school: 3
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 100
+      interval: 0
+      cooldown: 0
+      primary: 1
+      color: {r: 0.65, g: 0.35, b: 0.95, a: 1}
+      effects:
+      - kind: 5
+        value: 25
+        scaled: 0
+        seconds: 10
+        tick: 0
+        stacks: 25
+        onCaster: 0
+    - name: Determination
+      kind: 6
+      school: 4
+      castSeconds: 0
+      range: 0
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.5
+      cooldown: 30
+      primary: 0
+      color: {r: 1, g: 0.92, b: 0.5, a: 1}
+      effects:
+      - kind: 6
+        value: 5
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 1
+      - kind: 5
+        value: -5
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 1
+  - prefab: {fileID: 789256670840241608, guid: 44e6efefd140fee4294871a6836da1aa, type: 3}
+    cell: {x: 20, y: 67, z: 0}
+    displayName: Sorcerer
+    level: 25
+    elite: 1
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 0.75
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 1
+    spells:
+    - name: Shadow Bolt
+      kind: 0
+      school: 3
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 100
+      interval: 0
+      cooldown: 0
+      primary: 1
+      color: {r: 0.65, g: 0.35, b: 0.95, a: 1}
+      effects:
+      - kind: 5
+        value: 25
+        scaled: 0
+        seconds: 10
+        tick: 0
+        stacks: 25
+        onCaster: 0
+    - name: Determination
+      kind: 6
+      school: 4
+      castSeconds: 0
+      range: 0
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.5
+      cooldown: 30
+      primary: 0
+      color: {r: 1, g: 0.92, b: 0.5, a: 1}
+      effects:
+      - kind: 6
+        value: 5
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 1
+      - kind: 5
+        value: -5
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 1
+  - prefab: {fileID: 7056072118663412086, guid: 52e18f8b4fa2fd34ca99caf7d2f16a0a, type: 3}
+    cell: {x: 19, y: 62, z: 0}
+    displayName: Undead Horror
+    level: 25
+    elite: 1
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Hamstring
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.9
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 2
+        value: 29
+        scaled: 0
+        seconds: 5
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Rend
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 8
+        tick: 2
+        stacks: 1
+        onCaster: 0
+    - name: Infected Wound
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 7
+        value: -2
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 0
+  - prefab: {fileID: 7709745790407067756, guid: 2fb8b23367469d44f86b637439c7206d, type: 3}
+    cell: {x: 24, y: 40, z: 0}
+    displayName: Lord Zargan
+    level: 30
+    elite: 1
+    boss: 1
+    healthScale: 25.501
+    damageScale: 4.688
+    goldScale: 20
+    loot:
+    - item: {fileID: 11400000, guid: 85010dd01a2715d4fb872800a491b28c, type: 2}
+      chance: 1
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 67dda4013e97aa94c86beb56f65c1b2d, type: 2}
+      chance: 1
+      minCount: 1
+      maxCount: 2
+    - item: {fileID: 11400000, guid: 0c9a51209740ec14c9003e15bf6b9118, type: 2}
+      chance: 1
+      minCount: 2
+      maxCount: 2
+    - item: {fileID: 11400000, guid: deed00709c95ecd478538d7dd2a7f445, type: 2}
+      chance: 1
+      minCount: 4
+      maxCount: 4
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 1d201dbd0a4946d49bfd8d9611b43ca3, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2287c83ffcfaa8845b7625b0a0674954, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 29ed519d21dc5f24f8ff1a4efa85dcf3, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 6bedb63391656bf48a1c524e3b2427aa, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4a3b181697dd32342ac8f55b0d0a7ddf, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 1
+    controlImmune: 1
+    spells:
+    - name: Mortal Wound
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 1.05
+      chance: 30
+      interval: 1.3
+      cooldown: 20
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 21
+        value: -50
+        scaled: 0
+        seconds: 6
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Sprint
+      kind: 5
+      school: 0
+      castSeconds: 0.3
+      range: 4.166667
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 12
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects: []
+    - name: Vortex
+      kind: 1
+      school: 3
+      castSeconds: 0
+      range: 5.0833335
+      radius: 6
+      damageMultiplier: 0
+      chance: 100
+      interval: 15
+      cooldown: 30
+      primary: 0
+      color: {r: 0.65, g: 0.35, b: 0.95, a: 1}
+      effects:
+      - kind: 0
+        value: 0
+        scaled: 0
+        seconds: 2
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Duke's Mind Blast
+      kind: 1
+      school: 3
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 6
+      damageMultiplier: 0.75
+      chance: 100
+      interval: 10
+      cooldown: 10
+      primary: 0
+      color: {r: 0.65, g: 0.35, b: 0.95, a: 1}
+      effects:
+      - kind: 3
+        value: 0.25
+        scaled: 1
+        seconds: 10
+        tick: 2
+        stacks: 1
+        onCaster: 0
+  - prefab: {fileID: 9200693212058218490, guid: 5268dd155af30cc489443bdee849c8e6, type: 3}
+    cell: {x: 65, y: 72, z: 0}
+    displayName: Tchazzar
+    level: 30
+    elite: 1
+    boss: 1
+    healthScale: 14.631
+    damageScale: 0
+    goldScale: 17.5
+    loot:
+    - item: {fileID: 11400000, guid: 85010dd01a2715d4fb872800a491b28c, type: 2}
+      chance: 1
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 67dda4013e97aa94c86beb56f65c1b2d, type: 2}
+      chance: 0.01
+      minCount: 2
+      maxCount: 2
+    - item: {fileID: 11400000, guid: 0c9a51209740ec14c9003e15bf6b9118, type: 2}
+      chance: 1
+      minCount: 2
+      maxCount: 2
+    - item: {fileID: 11400000, guid: ef660ae576ce5594b944027b9ededd5b, type: 2}
+      chance: 0.075
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: fd4e53aea5a943841b33dd9de1d80ff7, type: 2}
+      chance: 0.075
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 602991b9ce14911458094ab8751d0d28, type: 2}
+      chance: 0.075
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 02776bb9a714e5542ae32baecb36e943, type: 2}
+      chance: 0.075
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ce63ed811d52dc46a8cc4306082c34c, type: 2}
+      chance: 0.075
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 0ec0b8bfe513db54ca43b239ff92d991, type: 2}
+      chance: 0.075
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 27fbc6c2c5a430a43ada03603a37b159, type: 2}
+      chance: 0.075
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.075
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 1
+    purpleChance: 0.25
+    controlImmune: 1
+    spells:
+    - name: Greater Fireball Volley
+      kind: 1
+      school: 2
+      castSeconds: 2
+      range: 0
+      radius: 6
+      damageMultiplier: 1.2
+      chance: 100
+      interval: 15
+      cooldown: 15
+      primary: 0
+      color: {r: 1, g: 0.5, b: 0.15, a: 1}
+      effects: []
+    - name: Bellowing Roar
+      kind: 1
+      school: 3
+      castSeconds: 2
+      range: 0
+      radius: 6
+      damageMultiplier: 0
+      chance: 100
+      interval: 20
+      cooldown: 20
+      primary: 0
+      color: {r: 0.65, g: 0.35, b: 0.95, a: 1}
+      effects:
+      - kind: 13
+        value: 0
+        scaled: 0
+        seconds: 4
+        tick: 0
+        stacks: 1
+        onCaster: 0
+      - kind: 2
+        value: 30
+        scaled: 0
+        seconds: 4
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Divine Storm Bolt
+      kind: 1
+      school: 4
+      castSeconds: 2
+      range: 5.0833335
+      radius: 6
+      damageMultiplier: 2.5
+      chance: 100
+      interval: 3
+      cooldown: 15
+      primary: 0
+      color: {r: 1, g: 0.92, b: 0.5, a: 1}
+      effects:
+      - kind: 0
+        value: 0
+        scaled: 0
+        seconds: 2
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Greater Flame
+      kind: 0
+      school: 2
+      castSeconds: 2.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 30
+      interval: 1.5
+      cooldown: 9
+      primary: 0
+      color: {r: 1, g: 0.5, b: 0.15, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 3
+        tick: 1
+        stacks: 1
+        onCaster: 0
+  - prefab: {fileID: 232793115955633434, guid: 80175b2a0a5c81a4f8e31ef7ef5ab08d, type: 3}
+    cell: {x: 46, y: 35, z: 0}
+    displayName: Forgotten Loyalist
+    level: 25
+    elite: 1
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 0.5
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Lesser Heal
+      kind: 4
+      school: 4
+      castSeconds: 1.5
+      range: 4.166667
+      radius: 0
+      damageMultiplier: 0.15
+      chance: 30
+      interval: 1.5
+      cooldown: 3
+      primary: 0
+      color: {r: 1, g: 0.92, b: 0.5, a: 1}
+      effects: []
+    - name: Greater Flame
+      kind: 0
+      school: 2
+      castSeconds: 2.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 30
+      interval: 1.5
+      cooldown: 9
+      primary: 0
+      color: {r: 1, g: 0.5, b: 0.15, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 3
+        tick: 1
+        stacks: 1
+        onCaster: 0
+    - name: Storm Bolt
+      kind: 0
+      school: 4
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 30
+      interval: 1.5
+      cooldown: 9
+      primary: 0
+      color: {r: 1, g: 0.92, b: 0.5, a: 1}
+      effects:
+      - kind: 0
+        value: 0
+        scaled: 0
+        seconds: 2
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Mind Blast
+      kind: 0
+      school: 3
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 30
+      interval: 1.5
+      cooldown: 9
+      primary: 0
+      color: {r: 0.65, g: 0.35, b: 0.95, a: 1}
+      effects:
+      - kind: 7
+        value: -5
+        scaled: 0
+        seconds: 10
+        tick: 0
+        stacks: 1
+        onCaster: 0
+  - prefab: {fileID: 232793115955633434, guid: 80175b2a0a5c81a4f8e31ef7ef5ab08d, type: 3}
+    cell: {x: 44, y: 35, z: 0}
+    displayName: Forgotten Loyalist
+    level: 25
+    elite: 1
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 0.5
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Lesser Heal
+      kind: 4
+      school: 4
+      castSeconds: 1.5
+      range: 4.166667
+      radius: 0
+      damageMultiplier: 0.15
+      chance: 30
+      interval: 1.5
+      cooldown: 3
+      primary: 0
+      color: {r: 1, g: 0.92, b: 0.5, a: 1}
+      effects: []
+    - name: Greater Flame
+      kind: 0
+      school: 2
+      castSeconds: 2.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 30
+      interval: 1.5
+      cooldown: 9
+      primary: 0
+      color: {r: 1, g: 0.5, b: 0.15, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 3
+        tick: 1
+        stacks: 1
+        onCaster: 0
+    - name: Storm Bolt
+      kind: 0
+      school: 4
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 30
+      interval: 1.5
+      cooldown: 9
+      primary: 0
+      color: {r: 1, g: 0.92, b: 0.5, a: 1}
+      effects:
+      - kind: 0
+        value: 0
+        scaled: 0
+        seconds: 2
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Mind Blast
+      kind: 0
+      school: 3
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 30
+      interval: 1.5
+      cooldown: 9
+      primary: 0
+      color: {r: 0.65, g: 0.35, b: 0.95, a: 1}
+      effects:
+      - kind: 7
+        value: -5
+        scaled: 0
+        seconds: 10
+        tick: 0
+        stacks: 1
+        onCaster: 0
+  - prefab: {fileID: 232793115955633434, guid: 80175b2a0a5c81a4f8e31ef7ef5ab08d, type: 3}
+    cell: {x: 45, y: 39, z: 0}
+    displayName: Forgotten Guard
+    level: 25
+    elite: 1
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 0.5
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Sprint
+      kind: 5
+      school: 0
+      castSeconds: 0.3
+      range: 4.166667
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.5
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects: []
+    - name: Hamstring
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.9
+      chance: 30
+      interval: 1.5
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 2
+        value: 29
+        scaled: 0
+        seconds: 5
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Rend
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.5
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 8
+        tick: 2
+        stacks: 1
+        onCaster: 0
+    - name: Enrage
+      kind: 6
+      school: 0
+      castSeconds: 0
+      range: 0
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.5
+      cooldown: 20
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 6
+        value: 30
+        scaled: 0
+        seconds: 8
+        tick: 0
+        stacks: 1
+        onCaster: 1
+  - prefab: {fileID: 7056072118663412086, guid: 52e18f8b4fa2fd34ca99caf7d2f16a0a, type: 3}
+    cell: {x: 72, y: 14, z: 0}
+    displayName: Gargantuan Defiler
+    level: 26
+    elite: 1
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: 45d7664951ee80249b4e9bba9c687ff3, type: 2}
+      chance: 0.15
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.15
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.15
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.15
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 1
+    spells:
+    - name: Sprint
+      kind: 5
+      school: 0
+      castSeconds: 0.3
+      range: 4.166667
+      radius: 0
+      damageMultiplier: 0
+      chance: 25
+      interval: 0.2
+      cooldown: 15
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects: []
+    - name: Rend
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 13
+      cooldown: 0
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 8
+        tick: 2
+        stacks: 1
+        onCaster: 0
+    - name: Mortal Wound
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 1.05
+      chance: 30
+      interval: 1.5
+      cooldown: 6
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 21
+        value: -50
+        scaled: 0
+        seconds: 6
+        tick: 0
+        stacks: 1
+        onCaster: 0
+  - prefab: {fileID: 7056072118663412086, guid: 52e18f8b4fa2fd34ca99caf7d2f16a0a, type: 3}
+    cell: {x: 72, y: 11, z: 0}
+    displayName: Gargantuan Defiler
+    level: 26
+    elite: 1
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: 45d7664951ee80249b4e9bba9c687ff3, type: 2}
+      chance: 0.15
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.15
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.15
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.15
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 1
+    spells:
+    - name: Sprint
+      kind: 5
+      school: 0
+      castSeconds: 0.3
+      range: 4.166667
+      radius: 0
+      damageMultiplier: 0
+      chance: 25
+      interval: 0.2
+      cooldown: 15
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects: []
+    - name: Rend
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 13
+      cooldown: 0
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 8
+        tick: 2
+        stacks: 1
+        onCaster: 0
+    - name: Mortal Wound
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 1.05
+      chance: 30
+      interval: 1.5
+      cooldown: 6
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 21
+        value: -50
+        scaled: 0
+        seconds: 6
+        tick: 0
+        stacks: 1
+        onCaster: 0
+  - prefab: {fileID: 7056072118663412086, guid: 52e18f8b4fa2fd34ca99caf7d2f16a0a, type: 3}
+    cell: {x: 6, y: 10, z: 0}
+    displayName: Undead Horror
+    level: 25
+    elite: 1
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Hamstring
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.9
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 2
+        value: 29
+        scaled: 0
+        seconds: 5
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Rend
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 8
+        tick: 2
+        stacks: 1
+        onCaster: 0
+    - name: Infected Wound
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 7
+        value: -2
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 0
+  - prefab: {fileID: 7056072118663412086, guid: 52e18f8b4fa2fd34ca99caf7d2f16a0a, type: 3}
+    cell: {x: 5, y: 15, z: 0}
+    displayName: Undead Horror
+    level: 25
+    elite: 1
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Hamstring
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.9
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 2
+        value: 29
+        scaled: 0
+        seconds: 5
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Rend
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 8
+        tick: 2
+        stacks: 1
+        onCaster: 0
+    - name: Infected Wound
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 7
+        value: -2
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 0
+  - prefab: {fileID: 7056072118663412086, guid: 52e18f8b4fa2fd34ca99caf7d2f16a0a, type: 3}
+    cell: {x: 11, y: 19, z: 0}
+    displayName: Undead Horror
+    level: 25
+    elite: 1
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Hamstring
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.9
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 2
+        value: 29
+        scaled: 0
+        seconds: 5
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Rend
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 8
+        tick: 2
+        stacks: 1
+        onCaster: 0
+    - name: Infected Wound
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 7
+        value: -2
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 0
+  - prefab: {fileID: 7056072118663412086, guid: 52e18f8b4fa2fd34ca99caf7d2f16a0a, type: 3}
+    cell: {x: 17, y: 19, z: 0}
+    displayName: Undead Horror
+    level: 25
+    elite: 1
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Hamstring
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.9
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 2
+        value: 29
+        scaled: 0
+        seconds: 5
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Rend
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 8
+        tick: 2
+        stacks: 1
+        onCaster: 0
+    - name: Infected Wound
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 7
+        value: -2
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 0
+  - prefab: {fileID: 7056072118663412086, guid: 52e18f8b4fa2fd34ca99caf7d2f16a0a, type: 3}
+    cell: {x: 8, y: 3, z: 0}
+    displayName: Undead Horror
+    level: 25
+    elite: 1
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Hamstring
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.9
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 2
+        value: 29
+        scaled: 0
+        seconds: 5
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Rend
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 8
+        tick: 2
+        stacks: 1
+        onCaster: 0
+    - name: Infected Wound
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 7
+        value: -2
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 0
+  - prefab: {fileID: 789256670840241608, guid: 44e6efefd140fee4294871a6836da1aa, type: 3}
+    cell: {x: 10, y: 10, z: 0}
+    displayName: Sorcerer
+    level: 25
+    elite: 1
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 0.75
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 1
+    spells:
+    - name: Shadow Bolt
+      kind: 0
+      school: 3
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 100
+      interval: 0
+      cooldown: 0
+      primary: 1
+      color: {r: 0.65, g: 0.35, b: 0.95, a: 1}
+      effects:
+      - kind: 5
+        value: 25
+        scaled: 0
+        seconds: 10
+        tick: 0
+        stacks: 25
+        onCaster: 0
+    - name: Determination
+      kind: 6
+      school: 4
+      castSeconds: 0
+      range: 0
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.5
+      cooldown: 30
+      primary: 0
+      color: {r: 1, g: 0.92, b: 0.5, a: 1}
+      effects:
+      - kind: 6
+        value: 5
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 1
+      - kind: 5
+        value: -5
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 1
+  - prefab: {fileID: 7056072118663412086, guid: 52e18f8b4fa2fd34ca99caf7d2f16a0a, type: 3}
+    cell: {x: 46, y: 12, z: 0}
+    displayName: Undead Horror
+    level: 25
+    elite: 1
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Hamstring
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.9
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 2
+        value: 29
+        scaled: 0
+        seconds: 5
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Rend
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 8
+        tick: 2
+        stacks: 1
+        onCaster: 0
+    - name: Infected Wound
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 7
+        value: -2
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 0
+  - prefab: {fileID: 7056072118663412086, guid: 52e18f8b4fa2fd34ca99caf7d2f16a0a, type: 3}
+    cell: {x: 44, y: 16, z: 0}
+    displayName: Undead Horror
+    level: 25
+    elite: 1
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Hamstring
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.9
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 2
+        value: 29
+        scaled: 0
+        seconds: 5
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Rend
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 8
+        tick: 2
+        stacks: 1
+        onCaster: 0
+    - name: Infected Wound
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 7
+        value: -2
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 0
+  - prefab: {fileID: 7056072118663412086, guid: 52e18f8b4fa2fd34ca99caf7d2f16a0a, type: 3}
+    cell: {x: 44, y: 7, z: 0}
+    displayName: Undead Horror
+    level: 25
+    elite: 1
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Hamstring
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.9
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 2
+        value: 29
+        scaled: 0
+        seconds: 5
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Rend
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 8
+        tick: 2
+        stacks: 1
+        onCaster: 0
+    - name: Infected Wound
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 7
+        value: -2
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 0
+  - prefab: {fileID: 7056072118663412086, guid: 52e18f8b4fa2fd34ca99caf7d2f16a0a, type: 3}
+    cell: {x: 39, y: 7, z: 0}
+    displayName: Undead Horror
+    level: 25
+    elite: 1
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Hamstring
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.9
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 2
+        value: 29
+        scaled: 0
+        seconds: 5
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Rend
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 8
+        tick: 2
+        stacks: 1
+        onCaster: 0
+    - name: Infected Wound
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 7
+        value: -2
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 0
+  - prefab: {fileID: 7056072118663412086, guid: 52e18f8b4fa2fd34ca99caf7d2f16a0a, type: 3}
+    cell: {x: 38, y: 16, z: 0}
+    displayName: Undead Horror
+    level: 25
+    elite: 1
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Hamstring
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.9
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 2
+        value: 29
+        scaled: 0
+        seconds: 5
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Rend
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 8
+        tick: 2
+        stacks: 1
+        onCaster: 0
+    - name: Infected Wound
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 7
+        value: -2
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 0
+  - prefab: {fileID: 7056072118663412086, guid: 52e18f8b4fa2fd34ca99caf7d2f16a0a, type: 3}
+    cell: {x: 33, y: 15, z: 0}
+    displayName: Undead Horror
+    level: 25
+    elite: 1
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Hamstring
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.9
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 2
+        value: 29
+        scaled: 0
+        seconds: 5
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Rend
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 8
+        tick: 2
+        stacks: 1
+        onCaster: 0
+    - name: Infected Wound
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 7
+        value: -2
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 0
+  - prefab: {fileID: 7056072118663412086, guid: 52e18f8b4fa2fd34ca99caf7d2f16a0a, type: 3}
+    cell: {x: 33, y: 10, z: 0}
+    displayName: Undead Horror
+    level: 25
+    elite: 1
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Hamstring
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.9
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 2
+        value: 29
+        scaled: 0
+        seconds: 5
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Rend
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 8
+        tick: 2
+        stacks: 1
+        onCaster: 0
+    - name: Infected Wound
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 7
+        value: -2
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 0
+  - prefab: {fileID: 7056072118663412086, guid: 52e18f8b4fa2fd34ca99caf7d2f16a0a, type: 3}
+    cell: {x: 34, y: 6, z: 0}
+    displayName: Undead Horror
+    level: 25
+    elite: 1
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Hamstring
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.9
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 2
+        value: 29
+        scaled: 0
+        seconds: 5
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Rend
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 8
+        tick: 2
+        stacks: 1
+        onCaster: 0
+    - name: Infected Wound
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 7
+        value: -2
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 0
+  - prefab: {fileID: 7056072118663412086, guid: 52e18f8b4fa2fd34ca99caf7d2f16a0a, type: 3}
+    cell: {x: 65, y: 39, z: 0}
+    displayName: Undead Horror
+    level: 25
+    elite: 1
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Hamstring
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.9
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 2
+        value: 29
+        scaled: 0
+        seconds: 5
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Rend
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 8
+        tick: 2
+        stacks: 1
+        onCaster: 0
+    - name: Infected Wound
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 7
+        value: -2
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 0
+  - prefab: {fileID: 7056072118663412086, guid: 52e18f8b4fa2fd34ca99caf7d2f16a0a, type: 3}
+    cell: {x: 40, y: 41, z: 0}
+    displayName: Undead Horror
+    level: 25
+    elite: 1
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Hamstring
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.9
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 2
+        value: 29
+        scaled: 0
+        seconds: 5
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Rend
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 8
+        tick: 2
+        stacks: 1
+        onCaster: 0
+    - name: Infected Wound
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 7
+        value: -2
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 0
+  chests:
+  - prefab: {fileID: 9132592564667760077, guid: d4516aea8c155a54caf376718c740729, type: 3}
+    cell: {x: 47, y: 77, z: 0}
+    level: 25
+  - prefab: {fileID: 9009517225111955400, guid: 8be907da07a726c42958bb6ed4ba6349, type: 3}
+    cell: {x: 47, y: 76, z: 0}
+    level: 25
+  - prefab: {fileID: 9009517225111955400, guid: 8be907da07a726c42958bb6ed4ba6349, type: 3}
+    cell: {x: 34, y: 77, z: 0}
+    level: 25
+  - prefab: {fileID: 9009517225111955400, guid: 8be907da07a726c42958bb6ed4ba6349, type: 3}
+    cell: {x: 35, y: 77, z: 0}
+    level: 25
+  - prefab: {fileID: 9132592564667760077, guid: d4516aea8c155a54caf376718c740729, type: 3}
+    cell: {x: 34, y: 76, z: 0}
+    level: 25
+  - prefab: {fileID: 9009517225111955400, guid: 8be907da07a726c42958bb6ed4ba6349, type: 3}
+    cell: {x: 8, y: 77, z: 0}
+    level: 25
+  - prefab: {fileID: 9132592564667760077, guid: d4516aea8c155a54caf376718c740729, type: 3}
+    cell: {x: 75, y: 12, z: 0}
+    level: 25
+  - prefab: {fileID: 9132592564667760077, guid: d4516aea8c155a54caf376718c740729, type: 3}
+    cell: {x: 75, y: 16, z: 0}
+    level: 25
+  - prefab: {fileID: 9132592564667760077, guid: d4516aea8c155a54caf376718c740729, type: 3}
+    cell: {x: 75, y: 5, z: 0}
+    level: 25
+  - prefab: {fileID: 9009517225111955400, guid: 8be907da07a726c42958bb6ed4ba6349, type: 3}
+    cell: {x: 72, y: 21, z: 0}
+    level: 25
+  - prefab: {fileID: 9009517225111955400, guid: 8be907da07a726c42958bb6ed4ba6349, type: 3}
+    cell: {x: 75, y: 17, z: 0}
+    level: 25
+  - prefab: {fileID: 9132592564667760077, guid: d4516aea8c155a54caf376718c740729, type: 3}
+    cell: {x: 36, y: 39, z: 0}
+    level: 25
+  - prefab: {fileID: 9009517225111955400, guid: 8be907da07a726c42958bb6ed4ba6349, type: 3}
+    cell: {x: 36, y: 40, z: 0}
+    level: 25
+  - prefab: {fileID: 9009517225111955400, guid: 8be907da07a726c42958bb6ed4ba6349, type: 3}
+    cell: {x: 23, y: 19, z: 0}
+    level: 25
+  - prefab: {fileID: 9132592564667760077, guid: d4516aea8c155a54caf376718c740729, type: 3}
+    cell: {x: 23, y: 18, z: 0}
+    level: 25
+  - prefab: {fileID: 8151336511189478221, guid: e5910700f5a0f0f48a327151127096f3, type: 3}
+    cell: {x: 66, y: 77, z: 0}
+    level: 25
+  - prefab: {fileID: 5850711047563545806, guid: 6183334596f05c643a14970c87de31ad, type: 3}
+    cell: {x: 67, y: 35, z: 0}
+    level: 24
+  - prefab: {fileID: 5850711047563545806, guid: 6183334596f05c643a14970c87de31ad, type: 3}
+    cell: {x: 64, y: 47, z: 0}
+    level: 24
+  - prefab: {fileID: 5850711047563545806, guid: 6183334596f05c643a14970c87de31ad, type: 3}
+    cell: {x: 43, y: 48, z: 0}
+    level: 24
+  - prefab: {fileID: 5850711047563545806, guid: 6183334596f05c643a14970c87de31ad, type: 3}
+    cell: {x: 40, y: 55, z: 0}
+    level: 24
+  - prefab: {fileID: 5850711047563545806, guid: 6183334596f05c643a14970c87de31ad, type: 3}
+    cell: {x: 4, y: 21, z: 0}
+    level: 24
+  - prefab: {fileID: 5850711047563545806, guid: 6183334596f05c643a14970c87de31ad, type: 3}
+    cell: {x: 14, y: 13, z: 0}
+    level: 24
+  - prefab: {fileID: 5850711047563545806, guid: 6183334596f05c643a14970c87de31ad, type: 3}
+    cell: {x: 33, y: 17, z: 0}
+    level: 24
+  - prefab: {fileID: 5850711047563545806, guid: 6183334596f05c643a14970c87de31ad, type: 3}
+    cell: {x: 47, y: 6, z: 0}
+    level: 24
+  - prefab: {fileID: 5850711047563545806, guid: 6183334596f05c643a14970c87de31ad, type: 3}
+    cell: {x: 65, y: 2, z: 0}
+    level: 24
+  - prefab: {fileID: 5850711047563545806, guid: 6183334596f05c643a14970c87de31ad, type: 3}
+    cell: {x: 64, y: 2, z: 0}
+    level: 24
+  referenceMonster: {fileID: 8861474206017915938, guid: e24c55e4fc7ce0046994a5fd34c16036, type: 3}
+  minLevel: 25
+  key: {fileID: 11400000, guid: 5b06254e33327094e987a24ff639abdd, type: 2}
+  maxPlayers: 4
+  monsterAggroRadius: 3.5

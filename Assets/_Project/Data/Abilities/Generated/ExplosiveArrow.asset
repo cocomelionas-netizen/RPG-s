@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85946f6b89aab484586cee3631b8ff29, type: 3}
+  m_Name: ExplosiveArrow
+  m_EditorClassIdentifier: RPG.Runtime::RPG.Progression.AbilityDefinition
+  displayName: Explosive Arrow
+  description: 97% ranged damage as Fire that cannot be dodged or blocked. Needs Flame Arrow on the target.
+  kind: 0
+  learnLevel: 18
+  maxRank: 10
+  school: 2
+  cooldown: 3
+  manaCost: 2
+  manaPerLevel: 2
+  castTime: 0.3
+  range: 5.0833335
+  radius: 1
+  maxTargets: 0
+  damageMultiplier: 0
+  weaponPercent: 97
+  weaponPercentPerRank: 3
+  hits: 1
+  ignoreDefenses: 1
+  isHeal: 0
+  spellAmount: 0
+  spellSpread: 0
+  spellCoefficient: 0
+  spellStat: 2
+  spellStat2: 3
+  spellStat2Factor: 1
+  rankDivisor: 5
+  healFraction: 0
+  effects: []
+  removesHarmful: 0
+  breaksControl: 0
+  requiresTargetEffect: 1
+  requiredEffect: 5
+  requiredEffectName: Flame Arrow
+  requiresTargetOutOfCombat: 0
+  requiresCasterOutOfCombat: 0
+  restoreManaPercent: 0
+  restoreManaPerRank: 0
+  leapDistance: 2.5
+  reviveHealth: 0.4
+  reviveMana: 0.2
+  effectColor: {r: 1, g: 0.5, b: 0.15, a: 1}
+  icon: {fileID: -4947634933414333666, guid: 8862461b43fa31f419efec2601e9a897, type: 2}

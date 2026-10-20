@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40ae07ff7f63b4b46a9a172d057258f2, type: 3}
+  m_Name: Dragos
+  m_EditorClassIdentifier: RPG.Runtime::RPG.Vendors.VendorDefinition
+  displayName: Dragos
+  title: Staves and Wands Merchant
+  stock:
+  - {fileID: 11400000, guid: ca21393aef616524299deb5b963f265e, type: 2}
+  - {fileID: 11400000, guid: 26aeca797202f3c4697e9ef14f60cfd3, type: 2}
+  - {fileID: 11400000, guid: 81eebb5892e60d7448064b65d248296d, type: 2}
+  - {fileID: 11400000, guid: 0f82007b6f4bf2549ba0c7b4e7494b32, type: 2}
+  - {fileID: 11400000, guid: ce48ef4da204cb84f97bad96d7bceebc, type: 2}
+  - {fileID: 11400000, guid: a9dd9f1af654c554fb9110a62350b996, type: 2}
+  - {fileID: 11400000, guid: 56accaa5514d111498b10bb279bb96e3, type: 2}
+  - {fileID: 11400000, guid: f4c4f59d127c7c045aa144d35ddeda88, type: 2}
+  - {fileID: 11400000, guid: 62d003f7861f8c84a9676da8320f1d22, type: 2}
+  - {fileID: 11400000, guid: 60f7344fb4fd54b42955ed13cbee6f88, type: 2}
+  - {fileID: 11400000, guid: 9e876dca72b18264890661ff3d0502e8, type: 2}
+  - {fileID: 11400000, guid: d2452f121f98ff045937ab9c6edea718, type: 2}
+  - {fileID: 11400000, guid: 52282daa16a800646a048ca884d1dcc2, type: 2}
+  stockLimits: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000i
+  restockSeconds: 300
+  recipes: []
+  randomQuality: 1
+  greenChance: 100
+  blueChance: 50
+  goldChance: 5
+  purpleChance: 1

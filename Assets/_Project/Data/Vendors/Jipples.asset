@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40ae07ff7f63b4b46a9a172d057258f2, type: 3}
+  m_Name: Jipples
+  m_EditorClassIdentifier: RPG.Runtime::RPG.Vendors.VendorDefinition
+  displayName: Jipples
+  title: Traveling Merchant
+  stock:
+  - {fileID: 11400000, guid: 38e2c09ca33f9ba4db6d4a3be2b8bc1b, type: 2}
+  - {fileID: 11400000, guid: b0a7256c0ff63944fb36620aca1431ff, type: 2}
+  - {fileID: 11400000, guid: e08f3df1a5c7f494b8e0b1a6fb71ee1c, type: 2}
+  - {fileID: 11400000, guid: f74eb403abdceb149b3702763790b8f0, type: 2}
+  stockLimits: 01000000010000000100000001000000i
+  restockSeconds: 300
+  recipes: []
+  randomQuality: 0
+  greenChance: 100
+  blueChance: 50
+  goldChance: 5
+  purpleChance: 1

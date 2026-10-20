@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85946f6b89aab484586cee3631b8ff29, type: 3}
+  m_Name: TacticalRetreat
+  m_EditorClassIdentifier: RPG.Runtime::RPG.Progression.AbilityDefinition
+  displayName: Tactical Retreat
+  description: Leap away from the enemy, free of stuns and slows, 34% faster for 5 sec.
+  kind: 9
+  learnLevel: 14
+  maxRank: 10
+  school: 0
+  cooldown: 45
+  manaCost: 2
+  manaPerLevel: 3
+  castTime: 0
+  range: 1.0833334
+  radius: 1
+  maxTargets: 0
+  damageMultiplier: 0
+  weaponPercent: 0
+  weaponPercentPerRank: 0
+  hits: 1
+  ignoreDefenses: 0
+  isHeal: 0
+  spellAmount: 0
+  spellSpread: 0
+  spellCoefficient: 0
+  spellStat: 2
+  spellStat2: 3
+  spellStat2Factor: 1
+  rankDivisor: 5
+  healFraction: 0
+  effects:
+  - kind: 18
+    value: 34
+    valuePerRank: 1
+    scalesWithStat: 0
+    stat: 0
+    statFactor: 0
+    duration: 5
+    interval: 0
+    maxStacks: 1
+    school: 0
+    anySchool: 1
+    onCaster: 0
+    magicOnly: 0
+  removesHarmful: 0
+  breaksControl: 1
+  requiresTargetEffect: 0
+  requiredEffect: 0
+  requiredEffectName: 
+  requiresTargetOutOfCombat: 0
+  requiresCasterOutOfCombat: 0
+  restoreManaPercent: 0
+  restoreManaPerRank: 0
+  leapDistance: 2.5
+  reviveHealth: 0.4
+  reviveMana: 0.2
+  effectColor: {r: 0.45, g: 0.95, b: 0.4, a: 1}
+  icon: {fileID: 2199469873638165507, guid: 8862461b43fa31f419efec2601e9a897, type: 2}

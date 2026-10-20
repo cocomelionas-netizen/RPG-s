@@ -1,0 +1,265 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2a533dae08a7d140a75da84b47ec381, type: 3}
+  m_Name: AvatarCatalog
+  m_EditorClassIdentifier: RPG.Runtime::RPG.Characters.AvatarCatalog
+  maleParts:
+  - slot: 0
+    name: hair
+    animations: {fileID: 11400000, guid: 6970cda1e30b97b469e6a901b23b980b, type: 2}
+  - slot: 0
+    name: leather_hood
+    animations: {fileID: 11400000, guid: 4292d89145b34e649b765d7edf394d4a, type: 2}
+  - slot: 0
+    name: chain_coif
+    animations: {fileID: 11400000, guid: 5ca27b2509e7a4848a26fb63a72de304, type: 2}
+  - slot: 0
+    name: plate_helm
+    animations: {fileID: 11400000, guid: f1656fd2170a7284fadba5698067806d, type: 2}
+  - slot: 0
+    name: mage_hood
+    animations: {fileID: 11400000, guid: f6f81b0cbf62b1048816e8246dd65fdb, type: 2}
+  - slot: 1
+    name: default_chest
+    animations: {fileID: 11400000, guid: 7e08ab4b745d7c043a191245c7037940, type: 2}
+  - slot: 1
+    name: cloth_shirt
+    animations: {fileID: 11400000, guid: ae0b01218a7de0042ad72ae1ba2bf272, type: 2}
+  - slot: 1
+    name: leather_chest
+    animations: {fileID: 11400000, guid: 5efaca545b9a8354798d80b7356d18e3, type: 2}
+  - slot: 1
+    name: chain_cuirass
+    animations: {fileID: 11400000, guid: a3eef317f06e22542b9eb5d4c5b3ab57, type: 2}
+  - slot: 1
+    name: plate_cuirass
+    animations: {fileID: 11400000, guid: da57f74868588044684ca32bff720684, type: 2}
+  - slot: 1
+    name: mage_vest
+    animations: {fileID: 11400000, guid: de45d1104c4b02b4ab4259a7c0fad28b, type: 2}
+  - slot: 2
+    name: default_legs
+    animations: {fileID: 11400000, guid: 4588d5f846a736f4cb27e44954be1880, type: 2}
+  - slot: 2
+    name: cloth_pants
+    animations: {fileID: 11400000, guid: dac8db55af669774a9a0bfb84d5d4120, type: 2}
+  - slot: 2
+    name: leather_pants
+    animations: {fileID: 11400000, guid: b15a8994b340b73479066d3089d0f042, type: 2}
+  - slot: 2
+    name: chain_greaves
+    animations: {fileID: 11400000, guid: c7c2a1e6323bcbc40a6790ad8f3e2816, type: 2}
+  - slot: 2
+    name: plate_greaves
+    animations: {fileID: 11400000, guid: 0dbd92d1640f82a48ba20911c116d1b2, type: 2}
+  - slot: 2
+    name: mage_skirt
+    animations: {fileID: 11400000, guid: f2a239b5babaae549afd072a2885f3ce, type: 2}
+  - slot: 3
+    name: default_feet
+    animations: {fileID: 11400000, guid: d695ad5e8f24e4748a8cba9f8967dccb, type: 2}
+  - slot: 3
+    name: cloth_sandals
+    animations: {fileID: 11400000, guid: a7411a5fa2d75c64da8eda9b254404a4, type: 2}
+  - slot: 3
+    name: leather_boots
+    animations: {fileID: 11400000, guid: 9d08995d65854d04eb0921bf0747f3e6, type: 2}
+  - slot: 3
+    name: chain_boots
+    animations: {fileID: 11400000, guid: 8d0a473ec7367ee4281de71a5d5768ed, type: 2}
+  - slot: 3
+    name: plate_boots
+    animations: {fileID: 11400000, guid: 0dab7041f9f1000438890dd2f9f6ff9b, type: 2}
+  - slot: 3
+    name: mage_boots
+    animations: {fileID: 11400000, guid: bcde3ec569ae6f940a264cde2f5e2196, type: 2}
+  - slot: 4
+    name: default_hands
+    animations: {fileID: 11400000, guid: 2783e7e2a727d834ab2d184838cdf30d, type: 2}
+  - slot: 4
+    name: cloth_gloves
+    animations: {fileID: 11400000, guid: c616e61f55b270c4989151037d26dae8, type: 2}
+  - slot: 4
+    name: leather_gloves
+    animations: {fileID: 11400000, guid: 7e6ad2f798efc0f44aaaa2bde43315ec, type: 2}
+  - slot: 4
+    name: chain_gloves
+    animations: {fileID: 11400000, guid: 0e486dac3f847e540aecb281826d284f, type: 2}
+  - slot: 4
+    name: plate_gauntlets
+    animations: {fileID: 11400000, guid: e770f0dea0e7850498d7277c3a260698, type: 2}
+  - slot: 4
+    name: mage_sleeves
+    animations: {fileID: 11400000, guid: 26da65d9a9831fc45a4b466fb127f839, type: 2}
+  - slot: 5
+    name: dagger
+    animations: {fileID: 11400000, guid: 6e3978b7e98936e408bf27a41ee8926e, type: 2}
+  - slot: 5
+    name: shortsword
+    animations: {fileID: 11400000, guid: 0807513bc9eb13242bf1fae3186d731a, type: 2}
+  - slot: 5
+    name: longsword
+    animations: {fileID: 11400000, guid: 4ad06e406dda7df4e8ca0f9aaef4dc58, type: 2}
+  - slot: 5
+    name: battle_axe
+    animations: {fileID: 11400000, guid: 1869e93cc3db919448a7168cf046bed0, type: 2}
+  - slot: 5
+    name: mace
+    animations: {fileID: 11400000, guid: 0055a0dc453c116438293f72e4b1d609, type: 2}
+  - slot: 5
+    name: shortbow
+    animations: {fileID: 11400000, guid: 7564bdbf9314e4f409b64312cc77bf27, type: 2}
+  - slot: 5
+    name: longbow
+    animations: {fileID: 11400000, guid: 26df7c3913d229245aee4090438aec72, type: 2}
+  - slot: 5
+    name: wand
+    animations: {fileID: 11400000, guid: 276411b7512ad424081da71b16b50e3e, type: 2}
+  - slot: 5
+    name: staff
+    animations: {fileID: 11400000, guid: 9527192e565170a4f849db6be2ace506, type: 2}
+  - slot: 6
+    name: buckler
+    animations: {fileID: 11400000, guid: fa3dfcd9f568dd8499001e9d20d88778, type: 2}
+  - slot: 6
+    name: kite_shield
+    animations: {fileID: 11400000, guid: 427084d342faa7a45b30fcb77110b360, type: 2}
+  femaleParts:
+  - slot: 0
+    name: hair
+    animations: {fileID: 11400000, guid: 4fc62d629e577914385011e7875de8f2, type: 2}
+  - slot: 0
+    name: leather_hood
+    animations: {fileID: 11400000, guid: 136a8ff590605454ab9546a7a2bafd71, type: 2}
+  - slot: 0
+    name: chain_coif
+    animations: {fileID: 11400000, guid: a42c3d2edea8894439ce0f525c30ed08, type: 2}
+  - slot: 0
+    name: plate_helm
+    animations: {fileID: 11400000, guid: da4236d557fd7a2439dee2c4df78b7da, type: 2}
+  - slot: 0
+    name: mage_hood
+    animations: {fileID: 11400000, guid: c27da5d8ad1c49842b6f749dcfe9aa30, type: 2}
+  - slot: 1
+    name: default_chest
+    animations: {fileID: 11400000, guid: 965b15f2aa3fe8344838cadf815de638, type: 2}
+  - slot: 1
+    name: cloth_shirt
+    animations: {fileID: 11400000, guid: 70169f48b856b98479c1e13ac430824f, type: 2}
+  - slot: 1
+    name: leather_chest
+    animations: {fileID: 11400000, guid: fca25370ac26ae64ebc36e0611c1a582, type: 2}
+  - slot: 1
+    name: chain_cuirass
+    animations: {fileID: 11400000, guid: f52fefdd000ce1f46a8bb3e1bcb36d33, type: 2}
+  - slot: 1
+    name: plate_cuirass
+    animations: {fileID: 11400000, guid: 0139f18fa6d9ebf478cd50e34283a86e, type: 2}
+  - slot: 1
+    name: mage_vest
+    animations: {fileID: 11400000, guid: edc54598e286a8246ac914f98b10ce7b, type: 2}
+  - slot: 2
+    name: default_legs
+    animations: {fileID: 11400000, guid: 2ef556d640c1636459d9b7d73eac9cc2, type: 2}
+  - slot: 2
+    name: cloth_pants
+    animations: {fileID: 11400000, guid: 9d750052c48e25843a83b9cf59b61bbd, type: 2}
+  - slot: 2
+    name: leather_pants
+    animations: {fileID: 11400000, guid: 2ecfd4296fd67494f9fdf895a61c42e0, type: 2}
+  - slot: 2
+    name: chain_greaves
+    animations: {fileID: 11400000, guid: f3db37e9c2911bb4191df3a10d4ac6d2, type: 2}
+  - slot: 2
+    name: plate_greaves
+    animations: {fileID: 11400000, guid: 4362c8ded32d82143a28daefec04b2de, type: 2}
+  - slot: 2
+    name: mage_skirt
+    animations: {fileID: 11400000, guid: d7a2f015900d2854e9bfb56de772c4f2, type: 2}
+  - slot: 3
+    name: default_feet
+    animations: {fileID: 11400000, guid: bb028395f8770604e950812d97e11f14, type: 2}
+  - slot: 3
+    name: cloth_sandals
+    animations: {fileID: 11400000, guid: c0278c90b84febf4f9a12eec9ba0c175, type: 2}
+  - slot: 3
+    name: leather_boots
+    animations: {fileID: 11400000, guid: c5b224d1a5d131f43a4a9f9ac7174e42, type: 2}
+  - slot: 3
+    name: chain_boots
+    animations: {fileID: 11400000, guid: 016f34ffc52612b478912289c98f87a0, type: 2}
+  - slot: 3
+    name: plate_boots
+    animations: {fileID: 11400000, guid: d97bcd9be610e734e84d31dd2c8261de, type: 2}
+  - slot: 3
+    name: mage_boots
+    animations: {fileID: 11400000, guid: e6d584acbb4c05242a816a3f27486273, type: 2}
+  - slot: 4
+    name: default_hands
+    animations: {fileID: 11400000, guid: 5aba1e0ccc95e664697f313b79859109, type: 2}
+  - slot: 4
+    name: cloth_gloves
+    animations: {fileID: 11400000, guid: 49954c4e74a761448bb12f8a76835612, type: 2}
+  - slot: 4
+    name: leather_gloves
+    animations: {fileID: 11400000, guid: 6c79054d14e3081469a89380d7676f7d, type: 2}
+  - slot: 4
+    name: chain_gloves
+    animations: {fileID: 11400000, guid: 21997219e5dfe3440a356e1aa01e3141, type: 2}
+  - slot: 4
+    name: plate_gauntlets
+    animations: {fileID: 11400000, guid: 75154dfe05986164f95efb77fce20c8e, type: 2}
+  - slot: 4
+    name: mage_sleeves
+    animations: {fileID: 11400000, guid: 7021ad5f40cbead4b9324dc04b309a07, type: 2}
+  - slot: 5
+    name: dagger
+    animations: {fileID: 11400000, guid: bbf95235c1ad57b4fa5e3b41cd497570, type: 2}
+  - slot: 5
+    name: shortsword
+    animations: {fileID: 11400000, guid: 12543590de868e04a97d61f997566a35, type: 2}
+  - slot: 5
+    name: longsword
+    animations: {fileID: 11400000, guid: 2f1a3dc8d5dc5574cb689b69cbffc4b6, type: 2}
+  - slot: 5
+    name: battle_axe
+    animations: {fileID: 11400000, guid: dccc99bd494700546a52e67dd7d6ecba, type: 2}
+  - slot: 5
+    name: mace
+    animations: {fileID: 11400000, guid: 12528a1acc5701e40a4c1febfa46031b, type: 2}
+  - slot: 5
+    name: shortbow
+    animations: {fileID: 11400000, guid: d376aad1a390d314e9a212dec0d4a35b, type: 2}
+  - slot: 5
+    name: longbow
+    animations: {fileID: 11400000, guid: b569ad1328725a84c940379160553780, type: 2}
+  - slot: 5
+    name: wand
+    animations: {fileID: 11400000, guid: ed706ee071b5a534991d3f7201a951e4, type: 2}
+  - slot: 5
+    name: staff
+    animations: {fileID: 11400000, guid: 9f5dd8486dfee89418a40c94ba459ddd, type: 2}
+  - slot: 6
+    name: buckler
+    animations: {fileID: 11400000, guid: 3b9c6504d4f387748815b9d2adcb7dcd, type: 2}
+  - slot: 6
+    name: kite_shield
+    animations: {fileID: 11400000, guid: 2e2cc5e701de1a142b9b0d19acde2d0c, type: 2}
+  layerOrder:
+  - slots: 03000000020000000400000001000000060000000000000005000000i
+  - slots: 03000000020000000400000001000000060000000000000005000000i
+  - slots: 03000000020000000400000001000000060000000000000005000000i
+  - slots: 05000000030000000200000004000000010000000600000000000000i
+  - slots: 05000000030000000200000004000000010000000600000000000000i
+  - slots: 05000000030000000200000004000000010000000600000000000000i
+  - slots: 05000000030000000200000004000000010000000000000006000000i
+  - slots: 03000000020000000400000005000000010000000000000006000000i

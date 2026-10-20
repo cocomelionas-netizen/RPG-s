@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85946f6b89aab484586cee3631b8ff29, type: 3}
+  m_Name: FortificationAura
+  m_EditorClassIdentifier: RPG.Runtime::RPG.Progression.AbilityDefinition
+  displayName: Fortification Aura
+  description: Friends near you take 18% (+2% a rank) less physical damage for 15 sec.
+  kind: 6
+  learnLevel: 14
+  maxRank: 10
+  school: 4
+  cooldown: 60
+  manaCost: 2
+  manaPerLevel: 1.5
+  castTime: 0
+  range: 0
+  radius: 4
+  maxTargets: 0
+  damageMultiplier: 0
+  weaponPercent: 0
+  weaponPercentPerRank: 0
+  hits: 1
+  ignoreDefenses: 0
+  isHeal: 0
+  spellAmount: 0
+  spellSpread: 0
+  spellCoefficient: 0
+  spellStat: 2
+  spellStat2: 3
+  spellStat2Factor: 1
+  rankDivisor: 5
+  healFraction: 0
+  effects:
+  - kind: 5
+    value: -18
+    valuePerRank: -2
+    scalesWithStat: 0
+    stat: 0
+    statFactor: 0
+    duration: 15
+    interval: 0
+    maxStacks: 1
+    school: 0
+    anySchool: 0
+    onCaster: 0
+    magicOnly: 0
+  removesHarmful: 0
+  breaksControl: 0
+  requiresTargetEffect: 0
+  requiredEffect: 0
+  requiredEffectName: 
+  requiresTargetOutOfCombat: 0
+  requiresCasterOutOfCombat: 0
+  restoreManaPercent: 0
+  restoreManaPerRank: 0
+  leapDistance: 2.5
+  reviveHealth: 0.4
+  reviveMana: 0.2
+  effectColor: {r: 0.85, g: 0.85, b: 0.95, a: 1}
+  icon: {fileID: -3653103417344636185, guid: 8862461b43fa31f419efec2601e9a897, type: 2}

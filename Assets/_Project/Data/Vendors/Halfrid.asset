@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40ae07ff7f63b4b46a9a172d057258f2, type: 3}
+  m_Name: Halfrid
+  m_EditorClassIdentifier: RPG.Runtime::RPG.Vendors.VendorDefinition
+  displayName: Halfrid
+  title: Paladin
+  stock:
+  - {fileID: 11400000, guid: a4148a0eff68cff4581f64c1d2aa2fce, type: 2}
+  - {fileID: 11400000, guid: 55bf304da8b555f48bd7ddc2c6eda4d3, type: 2}
+  - {fileID: 11400000, guid: ec66a5e074ea9924991dc9b8f03c1cb9, type: 2}
+  - {fileID: 11400000, guid: 86d83f7b7b24f224485d70f5be4ffac2, type: 2}
+  - {fileID: 11400000, guid: 33430547ca970d246879652fa99a3d29, type: 2}
+  - {fileID: 11400000, guid: 59ebc5c445f005e4b8819794f45631af, type: 2}
+  - {fileID: 11400000, guid: 1de04cd2a9e1bfe4d952d076bffd2f14, type: 2}
+  - {fileID: 11400000, guid: c4eae6e301111e948ac34e7a3babd0f4, type: 2}
+  - {fileID: 11400000, guid: 9ee4b3a4b6b30954882a8d2ffd7db863, type: 2}
+  - {fileID: 11400000, guid: b70c82a643d5d014ba1db41965d6eee2, type: 2}
+  - {fileID: 11400000, guid: c9354f28d5d20524f8e306fce65fcdc5, type: 2}
+  - {fileID: 11400000, guid: 65f41c98aa3c62047806c50d71331c52, type: 2}
+  - {fileID: 11400000, guid: 7aa67c66d73c23a47a2e31174d847e15, type: 2}
+  - {fileID: 11400000, guid: a2ed5f246096cdd42b674c20e1729b4b, type: 2}
+  - {fileID: 11400000, guid: 9d06745c97d2e77478a8fd631cc7aeae, type: 2}
+  - {fileID: 11400000, guid: 31a05814f4c9468459862c0318f8c139, type: 2}
+  - {fileID: 11400000, guid: 557e244acdb3d8245b9263b5940f3db3, type: 2}
+  - {fileID: 11400000, guid: 706536e14087762498f2acc3ad44884d, type: 2}
+  - {fileID: 11400000, guid: a2036987a7fc9074b9db4926df5e78dc, type: 2}
+  - {fileID: 11400000, guid: 3c0437a588f1afd4baaa1952afc4b884, type: 2}
+  stockLimits: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000i
+  restockSeconds: 60
+  recipes: []
+  randomQuality: 0
+  greenChance: 100
+  blueChance: 50
+  goldChance: 5
+  purpleChance: 1

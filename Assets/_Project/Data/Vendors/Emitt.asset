@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40ae07ff7f63b4b46a9a172d057258f2, type: 3}
+  m_Name: Emitt
+  m_EditorClassIdentifier: RPG.Runtime::RPG.Vendors.VendorDefinition
+  displayName: Emitt
+  title: Paymaster
+  stock:
+  - {fileID: 11400000, guid: 33430547ca970d246879652fa99a3d29, type: 2}
+  - {fileID: 11400000, guid: 10568445ae210724e87e6c66309cc050, type: 2}
+  - {fileID: 11400000, guid: 6c91b5f8eb4b3f94983c5cef9e499e6e, type: 2}
+  - {fileID: 11400000, guid: efadc6768eaa7204f9073d7853b3e557, type: 2}
+  - {fileID: 11400000, guid: a2036987a7fc9074b9db4926df5e78dc, type: 2}
+  - {fileID: 11400000, guid: 70a5067bd4ebb494bbe2ef51b39ed7a1, type: 2}
+  - {fileID: 11400000, guid: d9014c30964904a49910ca1d1a596ac1, type: 2}
+  - {fileID: 11400000, guid: 864f8e3d9b44cbc48aea9e8c1f9feae5, type: 2}
+  - {fileID: 11400000, guid: 0228a326b0d87f4478caba83cd50ac69, type: 2}
+  - {fileID: 11400000, guid: 2a9a2d2bbf80ece4aa093b264e67ba09, type: 2}
+  - {fileID: 11400000, guid: 80043a84846cabe44be4823a39a02be7, type: 2}
+  - {fileID: 11400000, guid: c375cf416158b2642baeafae81a2f243, type: 2}
+  - {fileID: 11400000, guid: 1de04cd2a9e1bfe4d952d076bffd2f14, type: 2}
+  - {fileID: 11400000, guid: c4eae6e301111e948ac34e7a3babd0f4, type: 2}
+  - {fileID: 11400000, guid: 17443d00b2f35da4387067e635643030, type: 2}
+  - {fileID: 11400000, guid: 14919ad15b7f8fc4089b68ff6c3e4c7e, type: 2}
+  - {fileID: 11400000, guid: 679243c5a770a50408a77930cde70409, type: 2}
+  - {fileID: 11400000, guid: 103b5e66f66aae143809c0fb3d3da81d, type: 2}
+  - {fileID: 11400000, guid: 14dff952b0b337343b8628bd82c4e863, type: 2}
+  - {fileID: 11400000, guid: eafc549cf6c65f347b39c26e0c16b51d, type: 2}
+  - {fileID: 11400000, guid: 5831afd08686ed64397797eca467420f, type: 2}
+  - {fileID: 11400000, guid: 3beaf6e1ddaaab74fb43d5b352b6793c, type: 2}
+  - {fileID: 11400000, guid: e7e7350d06fb7d647a78ab9023cff665, type: 2}
+  - {fileID: 11400000, guid: 26aeca797202f3c4697e9ef14f60cfd3, type: 2}
+  - {fileID: 11400000, guid: 73efd8813a9273a48be0b6fc2fdaf889, type: 2}
+  - {fileID: 11400000, guid: d13f3ec2701e19c40b86a1a9b3a33e06, type: 2}
+  - {fileID: 11400000, guid: c7266979232de04448e2653a3ff8d7d6, type: 2}
+  - {fileID: 11400000, guid: 04752eb4e0a5f2a44943159d1d470cda, type: 2}
+  - {fileID: 11400000, guid: dfdd45a70bf0bd346946ad2cb4345c1f, type: 2}
+  - {fileID: 11400000, guid: ea6a35da9a767c34e96adf330d5976ac, type: 2}
+  - {fileID: 11400000, guid: 9e5f35703656ed747a804c89933e6035, type: 2}
+  - {fileID: 11400000, guid: 32f954193c16bb844af31a4a82e65b65, type: 2}
+  - {fileID: 11400000, guid: e095e666f47d12b4fb45b766e3185846, type: 2}
+  - {fileID: 11400000, guid: a823a32ecda4d174a8c3f69251806627, type: 2}
+  stockLimits: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000i
+  restockSeconds: 300
+  recipes: []
+  randomQuality: 1
+  greenChance: 100
+  blueChance: 0
+  goldChance: 0
+  purpleChance: 0

@@ -66,7 +66,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0.34}
+  m_Offset: {x: 0, y: 0.31303117}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -76,7 +76,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.36, y: 0.62}
+  m_Size: {x: 0.36, y: 0.5912811}
   m_EdgeRadius: 0
 --- !u!1 &4455562802883493941
 GameObject:
@@ -94,11 +94,23 @@ GameObject:
   - component: {fileID: 5937208823369157367}
   - component: {fileID: 3262352295627561672}
   - component: {fileID: 8555798132690638902}
+  - component: {fileID: 5622500675715243314}
   - component: {fileID: 4041374300206589006}
   - component: {fileID: 379844217195263069}
+  - component: {fileID: 6427385469685496130}
+  - component: {fileID: 3495355475519909113}
+  - component: {fileID: 7395546303137898962}
   - component: {fileID: 2162212954763707132}
   - component: {fileID: 6325825251776631861}
   - component: {fileID: 1192377579958495832}
+  - component: {fileID: 5888510268031642953}
+  - component: {fileID: 3027456365178693989}
+  - component: {fileID: 3735659755294091159}
+  - component: {fileID: 8885054570785125251}
+  - component: {fileID: 1410773765663843577}
+  - component: {fileID: 7196815510806694343}
+  - component: {fileID: 1196436858367366333}
+  - component: {fileID: 3595354552755494304}
   - component: {fileID: 8215790676358303326}
   m_Layer: 0
   m_Name: Player
@@ -172,12 +184,12 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: 37a574620a896dd479d376f67ea1fca2, type: 3}
+  m_Sprite: {fileID: -6799923178063462225, guid: 6724da390d703af459508474f7d19cf3, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.5, y: 0.75}
+  m_Size: {x: 0.6328125, y: 0.8203125}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -275,6 +287,7 @@ MonoBehaviour:
   moveSpeed: 3
   stopDistance: 0.05
   blockedTimeout: 0.25
+  repathInterval: 0.15
 --- !u!114 &3262352295627561672
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -287,7 +300,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c69ec4f0299fb1f42bfdfa245612a97c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: RPG.Runtime::RPG.Characters.CharacterAnimator
-  animationSet: {fileID: 11400000, guid: f8d5cfc9155092946b898d8c44a5fe2f, type: 2}
+  animationSet: {fileID: 11400000, guid: 6724da390d703af459508474f7d19cf3, type: 2}
   idleClip: Idle
   walkClip: Walk
 --- !u!114 &8555798132690638902
@@ -317,6 +330,20 @@ MonoBehaviour:
   AutoObjectParentSync: 1
   SyncOwnerTransformWhenParented: 1
   AllowOwnerToParent: 0
+--- !u!114 &5622500675715243314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4455562802883493941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c49120ed1c6723a479873c052991bb37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: RPG.Runtime::RPG.Characters.HeroAppearance
+  ShowTopMostFoldoutHeaderGroup: 1
+  catalog: {fileID: 11400000, guid: a3d1b7d3eaacd5f4e81a24415e872e0e, type: 2}
 --- !u!114 &4041374300206589006
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -351,6 +378,47 @@ MonoBehaviour:
   appendOwnerId: 1
   faction: 0
   maxHealth: 100
+--- !u!114 &6427385469685496130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4455562802883493941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b293063d90c8b284091e0f0f0930053d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: RPG.Runtime::RPG.Combat.StatusEffects
+  ShowTopMostFoldoutHeaderGroup: 1
+--- !u!114 &3495355475519909113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4455562802883493941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db8c001620c2ba549a6a6444fa40b496, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: RPG.Runtime::RPG.Combat.HealthRegeneration
+  delayAfterDamage: 5
+  fractionPerSecond: 0.05
+--- !u!114 &7395546303137898962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4455562802883493941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef250e95ac7fda74db20a3b1f2749e67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: RPG.Runtime::RPG.Combat.Mana
+  ShowTopMostFoldoutHeaderGroup: 1
+  regenFractionPerSecond: 0.03
 --- !u!114 &2162212954763707132
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -369,7 +437,9 @@ MonoBehaviour:
   attackInterval: 1.5
   range: 0.9
   critChance: 0.1
+  damageSchool: 0
   rangeTolerance: 0.35
+  projectileColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &6325825251776631861
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -398,6 +468,129 @@ MonoBehaviour:
   m_EditorClassIdentifier: RPG.Runtime::RPG.Combat.PlayerRespawn
   ShowTopMostFoldoutHeaderGroup: 1
   respawnDelay: 5
+  waitForChoice: 1
+--- !u!114 &5888510268031642953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4455562802883493941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 803ac8c76cd58594789862c17a9c3e5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: RPG.Runtime::RPG.Progression.CharacterProgress
+  ShowTopMostFoldoutHeaderGroup: 1
+  catalog: {fileID: 11400000, guid: 48c3df9d1ddd76a4c9a346ea602251e9, type: 2}
+  defaultClass: 0
+--- !u!114 &3027456365178693989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4455562802883493941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bab6f9cfa63a3f429d7f4542b6d2986, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: RPG.Runtime::RPG.Progression.Spellbook
+  ShowTopMostFoldoutHeaderGroup: 1
+--- !u!114 &3735659755294091159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4455562802883493941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9243d58286b05ac48af70b0e5f80287f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: RPG.Runtime::RPG.Progression.AbilityCaster
+  ShowTopMostFoldoutHeaderGroup: 1
+--- !u!114 &8885054570785125251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4455562802883493941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad86424567f48494ab1d85da4df87bda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: RPG.Runtime::RPG.Items.Inventory
+  ShowTopMostFoldoutHeaderGroup: 1
+  catalog: {fileID: 11400000, guid: a6c71b9285cb65846b3e3baab8221c67, type: 2}
+  affixes: {fileID: 11400000, guid: 40b2f4053f9a61c478854fbd268f30e3, type: 2}
+  bagSize: 20
+  startingItems:
+  - {fileID: 11400000, guid: 2a9a2d2bbf80ece4aa093b264e67ba09, type: 2}
+  - {fileID: 11400000, guid: 2a9a2d2bbf80ece4aa093b264e67ba09, type: 2}
+  - {fileID: 11400000, guid: 2a9a2d2bbf80ece4aa093b264e67ba09, type: 2}
+  - {fileID: 11400000, guid: 80043a84846cabe44be4823a39a02be7, type: 2}
+  - {fileID: 11400000, guid: 80043a84846cabe44be4823a39a02be7, type: 2}
+  potionCooldown: 60
+  pickupRange: 1.2
+  startingGold: 20
+--- !u!114 &1410773765663843577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4455562802883493941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a4d27d46ede7bb4ba3c641ce5a21545, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: RPG.Runtime::RPG.Items.LootPicker
+  ShowTopMostFoldoutHeaderGroup: 1
+--- !u!114 &7196815510806694343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4455562802883493941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f12042136c182647a036943014f18ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: RPG.Runtime::RPG.Accounts.CharacterPersistence
+  ShowTopMostFoldoutHeaderGroup: 1
+  autosaveSeconds: 15
+  changeSaveDelay: 2
+--- !u!114 &1196436858367366333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4455562802883493941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 973c68d2367d0cf4a913e16479e44089, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: RPG.Runtime::RPG.Dungeons.DungeonTraveller
+  ShowTopMostFoldoutHeaderGroup: 1
+--- !u!114 &3595354552755494304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4455562802883493941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54ea6d38a8f8041468b00ac747adb5aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: RPG.Runtime::RPG.World.WaystoneTraveller
+  ShowTopMostFoldoutHeaderGroup: 1
+  discoverRadius: 3
+  travelCost: 0
 --- !u!114 &8215790676358303326
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -412,6 +605,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: RPG.Runtime::RPG.Combat.HealthPresenter
   body: {fileID: 6127499580983485403}
   barSprite: {fileID: 21300000, guid: 693c320e785fb2b4d87a53fd760699fc, type: 3}
-  barHeightAboveFeet: 0.85
+  barHeightAboveFeet: 0.7756248
   barSize: {x: 0.5, y: 0.06}
-  damageNumberHeight: 0.90000004
+  damageNumberHeight: 0.8256248

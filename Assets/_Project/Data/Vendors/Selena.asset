@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40ae07ff7f63b4b46a9a172d057258f2, type: 3}
+  m_Name: Selena
+  m_EditorClassIdentifier: RPG.Runtime::RPG.Vendors.VendorDefinition
+  displayName: Selena
+  title: Ranged & Shield Merchant
+  stock:
+  - {fileID: 11400000, guid: e6e59eb0b8c992f49b65864dc15ed44b, type: 2}
+  - {fileID: 11400000, guid: 005cbf61efb3cef44ae780e73f5b11ba, type: 2}
+  - {fileID: 11400000, guid: 106633ee08153764da7150b2c35175fb, type: 2}
+  - {fileID: 11400000, guid: 2fe3d91f6c28b994e999936bf41e317e, type: 2}
+  - {fileID: 11400000, guid: 7fa4b20ab8bd5b94c96a886c62dab85a, type: 2}
+  - {fileID: 11400000, guid: 664d2b0cebd565b428afc11a10860c4f, type: 2}
+  - {fileID: 11400000, guid: 41103e44a31f7ab4793b4d419a246d15, type: 2}
+  - {fileID: 11400000, guid: d370d1aa5aaa8994f9709319e1551ae5, type: 2}
+  - {fileID: 11400000, guid: 4fe5575900a2ac44f98d0e3df6b6658e, type: 2}
+  - {fileID: 11400000, guid: 2cf99ffeb846d5245ae81e7ecb850963, type: 2}
+  - {fileID: 11400000, guid: b99a14aabb1814b429794e07859c6b41, type: 2}
+  - {fileID: 11400000, guid: 965097f74f5a8fe4894b579afd363c3d, type: 2}
+  - {fileID: 11400000, guid: 30da3b666c11a974c88083a9be4f01e5, type: 2}
+  - {fileID: 11400000, guid: 66dc5b83dad4aa049a31e0be39b8dd7a, type: 2}
+  - {fileID: 11400000, guid: f655f1d36f293b04888ea4dad3807267, type: 2}
+  - {fileID: 11400000, guid: aa47f91cba4e7494eb4bb5d536b41ef5, type: 2}
+  - {fileID: 11400000, guid: 36dc06d416ffabd428c3129cecb57e6f, type: 2}
+  - {fileID: 11400000, guid: 8b9af42727f53c14a9cd4fa13ba9b7bf, type: 2}
+  - {fileID: 11400000, guid: ae77b013eba3b2645b5e23efe9f0aca9, type: 2}
+  - {fileID: 11400000, guid: 44a50df738db04c4ab5c07bd752f5ece, type: 2}
+  - {fileID: 11400000, guid: 51953a386ef332548aceff9da59eaf96, type: 2}
+  - {fileID: 11400000, guid: 18be2dcc5b5dd1e40bf9c2cb73a475c3, type: 2}
+  - {fileID: 11400000, guid: 06e5b358e0629ac46ac94648122ea2fb, type: 2}
+  - {fileID: 11400000, guid: 9811d20fa55889a459efeca18195d6fe, type: 2}
+  - {fileID: 11400000, guid: 7999bc90c9d23014f8d7ca65b59543dd, type: 2}
+  - {fileID: 11400000, guid: 861927fc3cb59cc4e912caed4f3e9955, type: 2}
+  stockLimits: 0100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000i
+  restockSeconds: 300
+  recipes: []
+  randomQuality: 1
+  greenChance: 100
+  blueChance: 50
+  goldChance: 5
+  purpleChance: 1

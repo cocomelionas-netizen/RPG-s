@@ -1,0 +1,429 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e19652b0b5dc8644987563b65cb5de0, type: 3}
+  m_Name: TrogCave
+  m_EditorClassIdentifier: RPG.Runtime::RPG.Dungeons.DungeonDefinition
+  displayName: Trog Cave
+  instancePrefab: {fileID: 8556319660589481182, guid: 98036ae6eda62224e974cbc5868435b1, type: 3}
+  floorTile: {fileID: 11400000, guid: 28e286d1acd4a834ebb38e0ffae8808c, type: 2}
+  wallTile: {fileID: 11400000, guid: 279826b5bb279214b967497435bf558f, type: 2}
+  portalSprite: {fileID: 21300000, guid: 5c9c4cb5599cb95459addd4fda70a5b6, type: 3}
+  rows:
+  - '################################################'
+  - '################################################'
+  - '################################################'
+  - '################################################'
+  - '##############################.....#############'
+  - '#######...##...#########...###.......###########'
+  - '####..................................##########'
+  - '###...................................##########'
+  - '##............#.............#....####...########'
+  - '##....####.......#####..........#####...########'
+  - '##...######......#########.......#####...#######'
+  - '##...#######.....#############...######...######'
+  - '##...########.....############...#######...#####'
+  - '##...#########..#..###########...######....#####'
+  - '##...#############..##########....#####....#####'
+  - '##....##########....###########...#####....#####'
+  - '##....##########.....##########............#####'
+  - '##....###########.....#########.........#..#####'
+  - '###....###########.....########....#........####'
+  - '####....##########.....#######....#####.....####'
+  - '#####....##########.....######....#####..#..####'
+  - '#####....##########.....######....#####....#####'
+  - '#######...#########.....######....#####.....####'
+  - '########.....######....######.....#####....#####'
+  - '#########.....#####....######.#...#####....#####'
+  - '###########..######.....######....#####....#####'
+  - '############..#####.....######....#####....#####'
+  - '#....#######...####.....######....####.....#####'
+  - '#.....######...####.....######.....####....#####'
+  - '#......#####...#####......####.....#####...#####'
+  - '#......#####...#####........##....######....####'
+  - '####...#####...#####...............###......####'
+  - '####...#####...######...###........###.....#####'
+  - '####....####...######...#####......#####...#####'
+  - '####....#####..######...######.....#####....####'
+  - '####....######..#####...#######....#####....####'
+  - '####....######...####...#######.....####...#####'
+  - '####....######...####....######...######...#####'
+  - '#####...######...####....######...######....####'
+  - '######...#####...####......###....#####......###'
+  - '######...........####.......#................###'
+  - '#######..........#####........................##'
+  - '#########......#########.#....................##'
+  - '###########.#############......#...........##.##'
+  - '######################################........##'
+  - '######################################......####'
+  - '########################################..######'
+  - '################################################'
+  arrival: {x: 3, y: 29, z: 0}
+  exits:
+  - cell: {x: 0, y: 27, z: 0}
+    destination: {x: 47, y: 247.75}
+    label: Trog Cave
+  doors: []
+  monsters:
+  - prefab: {fileID: 2867120308592815707, guid: c35a209b302ae254bb617623d5db5d01, type: 3}
+    cell: {x: 9, y: 42, z: 0}
+    displayName: Cave Trog
+    level: 3
+    elite: 0
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: 0d9040799c1cd8540ae5650283358148, type: 2}
+      chance: 0.120000005
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: bb60ac79b25a70b418256a782dfab665, type: 2}
+      chance: 0.120000005
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: eddd580e72466e848a4870db01445299, type: 2}
+      chance: 0.120000005
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: dc87456c4e1e7f144add4bc6a40bb3b4, type: 2}
+      chance: 0.120000005
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: b20d18fb93d9dc2449cf76ffa4691338, type: 2}
+      chance: 0.120000005
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Throw Weapon
+      kind: 3
+      school: 0
+      castSeconds: 0.3
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1
+      chance: 50
+      interval: 0.3
+      cooldown: 20
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects: []
+  - prefab: {fileID: 2867120308592815707, guid: c35a209b302ae254bb617623d5db5d01, type: 3}
+    cell: {x: 14, y: 27, z: 0}
+    displayName: Cave Trog
+    level: 3
+    elite: 0
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: 0d9040799c1cd8540ae5650283358148, type: 2}
+      chance: 0.120000005
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: bb60ac79b25a70b418256a782dfab665, type: 2}
+      chance: 0.120000005
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: eddd580e72466e848a4870db01445299, type: 2}
+      chance: 0.120000005
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: dc87456c4e1e7f144add4bc6a40bb3b4, type: 2}
+      chance: 0.120000005
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: b20d18fb93d9dc2449cf76ffa4691338, type: 2}
+      chance: 0.120000005
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Throw Weapon
+      kind: 3
+      school: 0
+      castSeconds: 0.3
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1
+      chance: 50
+      interval: 0.3
+      cooldown: 20
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects: []
+  - prefab: {fileID: 2867120308592815707, guid: c35a209b302ae254bb617623d5db5d01, type: 3}
+    cell: {x: 20, y: 19, z: 0}
+    displayName: Cave Trog
+    level: 3
+    elite: 0
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: 0d9040799c1cd8540ae5650283358148, type: 2}
+      chance: 0.120000005
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: bb60ac79b25a70b418256a782dfab665, type: 2}
+      chance: 0.120000005
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: eddd580e72466e848a4870db01445299, type: 2}
+      chance: 0.120000005
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: dc87456c4e1e7f144add4bc6a40bb3b4, type: 2}
+      chance: 0.120000005
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: b20d18fb93d9dc2449cf76ffa4691338, type: 2}
+      chance: 0.120000005
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Throw Weapon
+      kind: 3
+      school: 0
+      castSeconds: 0.3
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1
+      chance: 50
+      interval: 0.3
+      cooldown: 20
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects: []
+  - prefab: {fileID: 2867120308592815707, guid: c35a209b302ae254bb617623d5db5d01, type: 3}
+    cell: {x: 24, y: 40, z: 0}
+    displayName: Cave Trog
+    level: 3
+    elite: 0
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: 0d9040799c1cd8540ae5650283358148, type: 2}
+      chance: 0.120000005
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: bb60ac79b25a70b418256a782dfab665, type: 2}
+      chance: 0.120000005
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: eddd580e72466e848a4870db01445299, type: 2}
+      chance: 0.120000005
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: dc87456c4e1e7f144add4bc6a40bb3b4, type: 2}
+      chance: 0.120000005
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: b20d18fb93d9dc2449cf76ffa4691338, type: 2}
+      chance: 0.120000005
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Throw Weapon
+      kind: 3
+      school: 0
+      castSeconds: 0.3
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1
+      chance: 50
+      interval: 0.3
+      cooldown: 20
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects: []
+  - prefab: {fileID: 2867120308592815707, guid: c35a209b302ae254bb617623d5db5d01, type: 3}
+    cell: {x: 31, y: 34, z: 0}
+    displayName: Cave Trog
+    level: 3
+    elite: 0
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: 0d9040799c1cd8540ae5650283358148, type: 2}
+      chance: 0.120000005
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: bb60ac79b25a70b418256a782dfab665, type: 2}
+      chance: 0.120000005
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: eddd580e72466e848a4870db01445299, type: 2}
+      chance: 0.120000005
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: dc87456c4e1e7f144add4bc6a40bb3b4, type: 2}
+      chance: 0.120000005
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: b20d18fb93d9dc2449cf76ffa4691338, type: 2}
+      chance: 0.120000005
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Throw Weapon
+      kind: 3
+      school: 0
+      castSeconds: 0.3
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1
+      chance: 50
+      interval: 0.3
+      cooldown: 20
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects: []
+  - prefab: {fileID: 2867120308592815707, guid: c35a209b302ae254bb617623d5db5d01, type: 3}
+    cell: {x: 41, y: 45, z: 0}
+    displayName: Cave Trog
+    level: 3
+    elite: 0
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: 0d9040799c1cd8540ae5650283358148, type: 2}
+      chance: 0.120000005
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: bb60ac79b25a70b418256a782dfab665, type: 2}
+      chance: 0.120000005
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: eddd580e72466e848a4870db01445299, type: 2}
+      chance: 0.120000005
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: dc87456c4e1e7f144add4bc6a40bb3b4, type: 2}
+      chance: 0.120000005
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: b20d18fb93d9dc2449cf76ffa4691338, type: 2}
+      chance: 0.120000005
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Throw Weapon
+      kind: 3
+      school: 0
+      castSeconds: 0.3
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1
+      chance: 50
+      interval: 0.3
+      cooldown: 20
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects: []
+  - prefab: {fileID: 2867120308592815707, guid: c35a209b302ae254bb617623d5db5d01, type: 3}
+    cell: {x: 40, y: 15, z: 0}
+    displayName: Cave Trog
+    level: 3
+    elite: 0
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: 0d9040799c1cd8540ae5650283358148, type: 2}
+      chance: 0.120000005
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: bb60ac79b25a70b418256a782dfab665, type: 2}
+      chance: 0.120000005
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: eddd580e72466e848a4870db01445299, type: 2}
+      chance: 0.120000005
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: dc87456c4e1e7f144add4bc6a40bb3b4, type: 2}
+      chance: 0.120000005
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: b20d18fb93d9dc2449cf76ffa4691338, type: 2}
+      chance: 0.120000005
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Throw Weapon
+      kind: 3
+      school: 0
+      castSeconds: 0.3
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1
+      chance: 50
+      interval: 0.3
+      cooldown: 20
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects: []
+  chests:
+  - prefab: {fileID: 425571720690101849, guid: 37f8032e8ae108e46b8523567f636cee, type: 3}
+    cell: {x: 42, y: 44, z: 0}
+    level: 4
+  - prefab: {fileID: 4900333078274702116, guid: 270b119432d5f524794a21bc732d07f9, type: 3}
+    cell: {x: 35, y: 36, z: 0}
+    level: 3
+  - prefab: {fileID: 6016153308299510809, guid: bac96af61c6768a43a9263b86b52bb44, type: 3}
+    cell: {x: 13, y: 12, z: 0}
+    level: 3
+  - prefab: {fileID: 6016153308299510809, guid: bac96af61c6768a43a9263b86b52bb44, type: 3}
+    cell: {x: 43, y: 18, z: 0}
+    level: 3
+  referenceMonster: {fileID: 8861474206017915938, guid: e24c55e4fc7ce0046994a5fd34c16036, type: 3}
+  minLevel: 1
+  key: {fileID: 0}
+  maxPlayers: 4
+  monsterAggroRadius: 3.5

@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21423e1a2d1344b459752bd4a0f137ae, type: 3}
+  m_Name: ClassCatalog
+  m_EditorClassIdentifier: RPG.Runtime::RPG.Progression.ClassCatalog
+  classes:
+  - {fileID: 11400000, guid: 72cfffc9960ed2f4194e05b56da56a48, type: 2}
+  - {fileID: 11400000, guid: 769ee4e8d27c01a4494edb82b1808408, type: 2}
+  - {fileID: 11400000, guid: 6293ad26c6f7ddf449ee89b52b481614, type: 2}

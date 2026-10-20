@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40ae07ff7f63b4b46a9a172d057258f2, type: 3}
+  m_Name: Hezakoth
+  m_EditorClassIdentifier: RPG.Runtime::RPG.Vendors.VendorDefinition
+  displayName: Hezakoth
+  title: Blades Merchant
+  stock:
+  - {fileID: 11400000, guid: b4b212024b6ba8545b9abee36025c1c2, type: 2}
+  - {fileID: 11400000, guid: 514a4f9a7ade8194aa9b3e24828fc8b9, type: 2}
+  - {fileID: 11400000, guid: 03461473feb9e55428da30424dc866c8, type: 2}
+  - {fileID: 11400000, guid: 4f678af8d135e664fb68bd021bb46765, type: 2}
+  - {fileID: 11400000, guid: 258712c68e3050746b8e5534883a8fca, type: 2}
+  - {fileID: 11400000, guid: 3e4706c618cc38d48829165fdae0c879, type: 2}
+  - {fileID: 11400000, guid: a947446fb6db37945ad84ed384a4cb93, type: 2}
+  - {fileID: 11400000, guid: 1e4ce7f3bf3106c468ae4e28dea8583f, type: 2}
+  - {fileID: 11400000, guid: 0185769f3e12b4a4d98900f42e17fc81, type: 2}
+  - {fileID: 11400000, guid: 9c82567730c80404baa30fe99aa80412, type: 2}
+  - {fileID: 11400000, guid: f7ed32254fdd25343b079652d17fdc41, type: 2}
+  - {fileID: 11400000, guid: a97b1917781f2bb4aafa325c1830c9c0, type: 2}
+  - {fileID: 11400000, guid: 398e4bf7120563d4f9f2f44a9ae8dbe4, type: 2}
+  stockLimits: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000i
+  restockSeconds: 300
+  recipes: []
+  randomQuality: 1
+  greenChance: 100
+  blueChance: 50
+  goldChance: 5
+  purpleChance: 1

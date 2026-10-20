@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40ae07ff7f63b4b46a9a172d057258f2, type: 3}
+  m_Name: Stefan
+  m_EditorClassIdentifier: RPG.Runtime::RPG.Vendors.VendorDefinition
+  displayName: Stefan
+  title: Explorer
+  stock:
+  - {fileID: 11400000, guid: 10568445ae210724e87e6c66309cc050, type: 2}
+  - {fileID: 11400000, guid: 33430547ca970d246879652fa99a3d29, type: 2}
+  - {fileID: 11400000, guid: c375cf416158b2642baeafae81a2f243, type: 2}
+  - {fileID: 11400000, guid: 19662f43d8f14d04fbec300c796dbdee, type: 2}
+  stockLimits: 00000000000000000000000001000000i
+  restockSeconds: 300
+  recipes: []
+  randomQuality: 1
+  greenChance: 100
+  blueChance: 100
+  goldChance: 0
+  purpleChance: 0

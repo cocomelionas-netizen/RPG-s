@@ -1,0 +1,84 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71b1f7bf907779a4798bae1bf2559627, type: 3}
+  m_Name: UnusualInsectLeg
+  m_EditorClassIdentifier: RPG.Runtime::RPG.Items.ItemDefinition
+  displayName: Unusual Insect Leg
+  description: 
+  slot: 0
+  rarity: 0
+  weaponType: 0
+  appearance: 
+  damageBonus: 0
+  healthBonus: 0
+  armor: 0
+  manaBonus: 0
+  attributes:
+    strength: 0
+    agility: 0
+    intelligence: 0
+    vitality: 0
+    health: 0
+    mana: 0
+    willpower: 0
+    regeneration: 0
+    meditate: 0
+    meleeCritical: 0
+    rangedCritical: 0
+    spellCritical: 0
+    dodge: 0
+    block: 0
+    resistFrost: 0
+    resistFire: 0
+    resistShadow: 0
+    resistHoly: 0
+    bartering: 0
+    lockpicking: 0
+    staves: 0
+    maces: 0
+    axes: 0
+    swords: 0
+    ranged: 0
+    daggers: 0
+    wands: 0
+    shields: 0
+  canHaveAffix: 0
+  alwaysAffix: 0
+  price: 68
+  sellValue: 17
+  requiredClass: -1
+  classMask: 0
+  itemLevel: 8
+  dropWeight: 1
+  use: 0
+  healFraction: 0.35
+  restoreAmount: 0
+  restoreSeconds: 0
+  maxStack: 5
+  strongerVariant: {fileID: 0}
+  buffAttribute: 0
+  buffAmount: 0
+  buffSeconds: 300
+  empowerTarget: 0
+  empowerPower: 0
+  empowerBeyond: 0
+  castSeconds: 0
+  useCooldown: 0
+  teachesSpell: {fileID: 0}
+  combineWith: []
+  combineResult: {fileID: 0}
+  isGem: 0
+  combinesInto: {fileID: 0}
+  combineCount: 3
+  iconColor: {r: 0.6, g: 0.55, b: 0.45, a: 1}
+  icon: {fileID: -6506000220795070857, guid: 8862461b43fa31f419efec2601e9a897, type: 2}
+  iconTint: {r: 1, g: 1, b: 1, a: 1}

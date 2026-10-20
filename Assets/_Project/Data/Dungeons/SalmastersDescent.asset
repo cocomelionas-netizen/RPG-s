@@ -1,0 +1,2552 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e19652b0b5dc8644987563b65cb5de0, type: 3}
+  m_Name: SalmastersDescent
+  m_EditorClassIdentifier: RPG.Runtime::RPG.Dungeons.DungeonDefinition
+  displayName: Salmaster's Descent
+  instancePrefab: {fileID: 8556319660589481182, guid: 98036ae6eda62224e974cbc5868435b1, type: 3}
+  floorTile: {fileID: 11400000, guid: 28e286d1acd4a834ebb38e0ffae8808c, type: 2}
+  wallTile: {fileID: 11400000, guid: 279826b5bb279214b967497435bf558f, type: 2}
+  portalSprite: {fileID: 21300000, guid: 5c9c4cb5599cb95459addd4fda70a5b6, type: 3}
+  rows:
+  - '################################################################################'
+  - '############################################....################################'
+  - '############################################....################################'
+  - '############################################....################################'
+  - '####.......#.....#######....################....################################'
+  - '####.....#.#......######....################....################################'
+  - '####.....#.#.......#####....################....################################'
+  - '#####.....###.....######....################....################################'
+  - '####........................################....################################'
+  - '####........................################....################################'
+  - '####........................################....###################.........####'
+  - '####........................#################..#####################......#.####'
+  - '#####.....###.....######....#################..####################.........####'
+  - '####.......#.....#######....#################..####################.........####'
+  - '####....####.....#######....#################..#################......#.#...####'
+  - '#####.....###...########....###########..####..####..###########......####..####'
+  - '########################....###########..####..####..###########......####..####'
+  - '########################....#################..#################.........#..####'
+  - '########################...........##########..##########.............#.##..####'
+  - '########################...........##########..##########.............####..####'
+  - '########################...........##########..##########.............####..####'
+  - '########################...........##########..##########.............#.....####'
+  - '########################....#################..#################............####'
+  - '########################....###########..............###############........####'
+  - '####................####....###########..............###############........####'
+  - '####................####....#################..######################.......####'
+  - '####...##......##...####....#################..#########################....####'
+  - '####...##......##...####....#################..#########################....####'
+  - '####..###.....###...........################....########################....####'
+  - '####...##......##...........################....########################....####'
+  - '####...##......##...........################....########################....####'
+  - '####..###.....###...........################....########################....####'
+  - '####...##......##...####....################....########################....####'
+  - '####...##......##...####....################....########################....####'
+  - '####................####....################....########################....####'
+  - '####................####....################....########################....####'
+  - '########################..............####..................................####'
+  - '########################....................................................####'
+  - '########################....................................................####'
+  - '########################..............####..................................####'
+  - '################################....############################....############'
+  - '################################....############################....############'
+  - '################################....############################....############'
+  - '################################....############################....############'
+  - '################################....############################....############'
+  - '################################....############################....############'
+  - '################################....############################....############'
+  - '################################....############################....############'
+  - '################################....#############################..#############'
+  - '################################....#############################..#############'
+  - '################################....#############################..#############'
+  - '################################....#############################..#############'
+  - '################################....############################....############'
+  - '################################....############################....############'
+  - '################################....############################....############'
+  - '################################....############################....############'
+  - '####################................................############....############'
+  - '####################................................############....############'
+  - '####################...#...#...#.......#..........#.############....############'
+  - '####################...#...#...#....................############....############'
+  - '####################.......................#####....########...#....#...########'
+  - '####################.......................#####....########............########'
+  - '####################..###...............#..#####....########............########'
+  - '####################...#................#...........########............########'
+  - '####################...#................#...........########............########'
+  - '####################..###...............#..#####....########............########'
+  - '####################.......................#####..#.########............########'
+  - '####################.......................#####....########............########'
+  - '####################...#...#...#...#................########............########'
+  - '####################...#...#...#...#...#..........#.########............########'
+  - '####################................................########.#........#.########'
+  - '####################................................########.#........#.########'
+  - '################################################################################'
+  - '################################################################################'
+  - '################################################################################'
+  - '################################################################################'
+  - '################################################################################'
+  - '################################################################################'
+  - '################################################################################'
+  - '################################################################################'
+  arrival: {x: 45, y: 2, z: 0}
+  exits:
+  - cell: {x: 47, y: 1, z: 0}
+    destination: {x: 116.5, y: 143.5}
+    label: St. Revere
+  doors: []
+  monsters:
+  - prefab: {fileID: 9200693212058218490, guid: 5268dd155af30cc489443bdee849c8e6, type: 3}
+    cell: {x: 65, y: 66, z: 0}
+    displayName: Balagos
+    level: 30
+    elite: 1
+    boss: 1
+    healthScale: 5.344
+    damageScale: 1.875
+    goldScale: 8.5
+    loot:
+    - item: {fileID: 11400000, guid: 395e30af2497a2f419eba5f92fe3a54d, type: 2}
+      chance: 0.5
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 61344f1320d8e5c4b8e65849a59a7ffd, type: 2}
+      chance: 0.5
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 3971e9c4cf4aaff42b13064e17a83e47, type: 2}
+      chance: 0.5
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 5174545be213d1144b230a1c759e263a, type: 2}
+      chance: 0.5
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: bc7bab9a3c3aef842bf85d91bf2e3466, type: 2}
+      chance: 0.5
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: e2defe3dd15c54f49baa588952cd907b, type: 2}
+      chance: 0.5
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: aac85d089f625484a91147b2c53b718f, type: 2}
+      chance: 0.5
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 8c0b38c40ea94b346a285cedc37c9c3e, type: 2}
+      chance: 0.5
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 87cb68c933878f14e900602d489cf190, type: 2}
+      chance: 0.5
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 43442a2ae7883e740bdc9379b6af2c45, type: 2}
+      chance: 0.5
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: ef660ae576ce5594b944027b9ededd5b, type: 2}
+      chance: 0.075
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: fd4e53aea5a943841b33dd9de1d80ff7, type: 2}
+      chance: 0.075
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 602991b9ce14911458094ab8751d0d28, type: 2}
+      chance: 0.075
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 02776bb9a714e5542ae32baecb36e943, type: 2}
+      chance: 0.075
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ce63ed811d52dc46a8cc4306082c34c, type: 2}
+      chance: 0.075
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 0ec0b8bfe513db54ca43b239ff92d991, type: 2}
+      chance: 0.075
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 27fbc6c2c5a430a43ada03603a37b159, type: 2}
+      chance: 0.075
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.075
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 1
+    purpleChance: 0.75
+    controlImmune: 0
+    spells:
+    - name: Greater Fireball Volley
+      kind: 1
+      school: 2
+      castSeconds: 2
+      range: 0
+      radius: 6
+      damageMultiplier: 1.2
+      chance: 15
+      interval: 1.5
+      cooldown: 15
+      primary: 0
+      color: {r: 1, g: 0.5, b: 0.15, a: 1}
+      effects: []
+    - name: Bellowing Roar
+      kind: 1
+      school: 3
+      castSeconds: 2
+      range: 0
+      radius: 6
+      damageMultiplier: 0
+      chance: 15
+      interval: 1.5
+      cooldown: 30
+      primary: 0
+      color: {r: 0.65, g: 0.35, b: 0.95, a: 1}
+      effects:
+      - kind: 13
+        value: 0
+        scaled: 0
+        seconds: 4
+        tick: 0
+        stacks: 1
+        onCaster: 0
+      - kind: 2
+        value: 30
+        scaled: 0
+        seconds: 4
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Hamstring
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.9
+      chance: 30
+      interval: 1.3
+      cooldown: 10
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 2
+        value: 29
+        scaled: 0
+        seconds: 5
+        tick: 0
+        stacks: 1
+        onCaster: 0
+  - prefab: {fileID: 789256670840241608, guid: 44e6efefd140fee4294871a6836da1aa, type: 3}
+    cell: {x: 11, y: 30, z: 0}
+    displayName: Corrupt Cleric
+    level: 25
+    elite: 1
+    boss: 0
+    healthScale: 2.663
+    damageScale: 0.75
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Lesser Heal
+      kind: 4
+      school: 4
+      castSeconds: 1.5
+      range: 4.166667
+      radius: 0
+      damageMultiplier: 0.15
+      chance: 30
+      interval: 1.5
+      cooldown: 7
+      primary: 0
+      color: {r: 1, g: 0.92, b: 0.5, a: 1}
+      effects: []
+    - name: Hamstring
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.9
+      chance: 1300
+      interval: 0.03
+      cooldown: 3
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 2
+        value: 29
+        scaled: 0
+        seconds: 5
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Storm Bolt
+      kind: 0
+      school: 4
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 30
+      interval: 1.5
+      cooldown: 9
+      primary: 0
+      color: {r: 1, g: 0.92, b: 0.5, a: 1}
+      effects:
+      - kind: 0
+        value: 0
+        scaled: 0
+        seconds: 2
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Mind Blast
+      kind: 0
+      school: 3
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 30
+      interval: 1.5
+      cooldown: 9
+      primary: 0
+      color: {r: 0.65, g: 0.35, b: 0.95, a: 1}
+      effects:
+      - kind: 7
+        value: -5
+        scaled: 0
+        seconds: 10
+        tick: 0
+        stacks: 1
+        onCaster: 0
+  - prefab: {fileID: 789256670840241608, guid: 44e6efefd140fee4294871a6836da1aa, type: 3}
+    cell: {x: 13, y: 31, z: 0}
+    displayName: Skeletal Mage
+    level: 25
+    elite: 0
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Shadow Bolt
+      kind: 0
+      school: 3
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 100
+      interval: 0
+      cooldown: 0
+      primary: 1
+      color: {r: 0.65, g: 0.35, b: 0.95, a: 1}
+      effects:
+      - kind: 5
+        value: 5
+        scaled: 0
+        seconds: 10
+        tick: 0
+        stacks: 25
+        onCaster: 0
+    - name: Frost Bolt
+      kind: 0
+      school: 1
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 30
+      interval: 1.5
+      cooldown: 3
+      primary: 0
+      color: {r: 0.5, g: 0.8, b: 1, a: 1}
+      effects:
+      - kind: 2
+        value: 30
+        scaled: 0
+        seconds: 6
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Determination
+      kind: 6
+      school: 4
+      castSeconds: 0
+      range: 0
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.5
+      cooldown: 30
+      primary: 0
+      color: {r: 1, g: 0.92, b: 0.5, a: 1}
+      effects:
+      - kind: 6
+        value: 5
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 1
+      - kind: 5
+        value: -5
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 1
+  - prefab: {fileID: 789256670840241608, guid: 44e6efefd140fee4294871a6836da1aa, type: 3}
+    cell: {x: 13, y: 28, z: 0}
+    displayName: Skeletal Mage
+    level: 25
+    elite: 0
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Shadow Bolt
+      kind: 0
+      school: 3
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 100
+      interval: 0
+      cooldown: 0
+      primary: 1
+      color: {r: 0.65, g: 0.35, b: 0.95, a: 1}
+      effects:
+      - kind: 5
+        value: 5
+        scaled: 0
+        seconds: 10
+        tick: 0
+        stacks: 25
+        onCaster: 0
+    - name: Frost Bolt
+      kind: 0
+      school: 1
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 30
+      interval: 1.5
+      cooldown: 3
+      primary: 0
+      color: {r: 0.5, g: 0.8, b: 1, a: 1}
+      effects:
+      - kind: 2
+        value: 30
+        scaled: 0
+        seconds: 6
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Determination
+      kind: 6
+      school: 4
+      castSeconds: 0
+      range: 0
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.5
+      cooldown: 30
+      primary: 0
+      color: {r: 1, g: 0.92, b: 0.5, a: 1}
+      effects:
+      - kind: 6
+        value: 5
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 1
+      - kind: 5
+        value: -5
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 1
+  - prefab: {fileID: 789256670840241608, guid: 44e6efefd140fee4294871a6836da1aa, type: 3}
+    cell: {x: 5, y: 31, z: 0}
+    displayName: Skeletal Mage
+    level: 25
+    elite: 0
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Shadow Bolt
+      kind: 0
+      school: 3
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 100
+      interval: 0
+      cooldown: 0
+      primary: 1
+      color: {r: 0.65, g: 0.35, b: 0.95, a: 1}
+      effects:
+      - kind: 5
+        value: 5
+        scaled: 0
+        seconds: 10
+        tick: 0
+        stacks: 25
+        onCaster: 0
+    - name: Frost Bolt
+      kind: 0
+      school: 1
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 30
+      interval: 1.5
+      cooldown: 3
+      primary: 0
+      color: {r: 0.5, g: 0.8, b: 1, a: 1}
+      effects:
+      - kind: 2
+        value: 30
+        scaled: 0
+        seconds: 6
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Determination
+      kind: 6
+      school: 4
+      castSeconds: 0
+      range: 0
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.5
+      cooldown: 30
+      primary: 0
+      color: {r: 1, g: 0.92, b: 0.5, a: 1}
+      effects:
+      - kind: 6
+        value: 5
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 1
+      - kind: 5
+        value: -5
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 1
+  - prefab: {fileID: 789256670840241608, guid: 44e6efefd140fee4294871a6836da1aa, type: 3}
+    cell: {x: 5, y: 28, z: 0}
+    displayName: Skeletal Mage
+    level: 25
+    elite: 0
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Shadow Bolt
+      kind: 0
+      school: 3
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 100
+      interval: 0
+      cooldown: 0
+      primary: 1
+      color: {r: 0.65, g: 0.35, b: 0.95, a: 1}
+      effects:
+      - kind: 5
+        value: 5
+        scaled: 0
+        seconds: 10
+        tick: 0
+        stacks: 25
+        onCaster: 0
+    - name: Frost Bolt
+      kind: 0
+      school: 1
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 30
+      interval: 1.5
+      cooldown: 3
+      primary: 0
+      color: {r: 0.5, g: 0.8, b: 1, a: 1}
+      effects:
+      - kind: 2
+        value: 30
+        scaled: 0
+        seconds: 6
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Determination
+      kind: 6
+      school: 4
+      castSeconds: 0
+      range: 0
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.5
+      cooldown: 30
+      primary: 0
+      color: {r: 1, g: 0.92, b: 0.5, a: 1}
+      effects:
+      - kind: 6
+        value: 5
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 1
+      - kind: 5
+        value: -5
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 1
+  - prefab: {fileID: 232793115955633434, guid: 80175b2a0a5c81a4f8e31ef7ef5ab08d, type: 3}
+    cell: {x: 14, y: 15, z: 0}
+    displayName: Fallen Guard
+    level: 25
+    elite: 1
+    boss: 0
+    healthScale: 2.663
+    damageScale: 1.5
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Sprint
+      kind: 5
+      school: 0
+      castSeconds: 0.3
+      range: 4.166667
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.5
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects: []
+    - name: Hamstring
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.9
+      chance: 30
+      interval: 1.5
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 2
+        value: 29
+        scaled: 0
+        seconds: 5
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Rend
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.5
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 8
+        tick: 2
+        stacks: 1
+        onCaster: 0
+    - name: Enrage
+      kind: 6
+      school: 0
+      castSeconds: 0
+      range: 0
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.5
+      cooldown: 20
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 6
+        value: 30
+        scaled: 0
+        seconds: 8
+        tick: 0
+        stacks: 1
+        onCaster: 1
+  - prefab: {fileID: 7056072118663412086, guid: 52e18f8b4fa2fd34ca99caf7d2f16a0a, type: 3}
+    cell: {x: 15, y: 10, z: 0}
+    displayName: Undead Horror
+    level: 25
+    elite: 1
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Hamstring
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.9
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 2
+        value: 29
+        scaled: 0
+        seconds: 5
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Rend
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 8
+        tick: 2
+        stacks: 1
+        onCaster: 0
+    - name: Infected Wound
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 7
+        value: -2
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 0
+  - prefab: {fileID: 7056072118663412086, guid: 52e18f8b4fa2fd34ca99caf7d2f16a0a, type: 3}
+    cell: {x: 9, y: 10, z: 0}
+    displayName: Undead Horror
+    level: 25
+    elite: 1
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Hamstring
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.9
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 2
+        value: 29
+        scaled: 0
+        seconds: 5
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Rend
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 8
+        tick: 2
+        stacks: 1
+        onCaster: 0
+    - name: Infected Wound
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 7
+        value: -2
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 0
+  - prefab: {fileID: 7056072118663412086, guid: 52e18f8b4fa2fd34ca99caf7d2f16a0a, type: 3}
+    cell: {x: 26, y: 9, z: 0}
+    displayName: Undead Horror
+    level: 25
+    elite: 1
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Hamstring
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.9
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 2
+        value: 29
+        scaled: 0
+        seconds: 5
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Rend
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 8
+        tick: 2
+        stacks: 1
+        onCaster: 0
+    - name: Infected Wound
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 7
+        value: -2
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 0
+  - prefab: {fileID: 7056072118663412086, guid: 52e18f8b4fa2fd34ca99caf7d2f16a0a, type: 3}
+    cell: {x: 26, y: 36, z: 0}
+    displayName: Undead Horror
+    level: 25
+    elite: 1
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Hamstring
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.9
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 2
+        value: 29
+        scaled: 0
+        seconds: 5
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Rend
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 8
+        tick: 2
+        stacks: 1
+        onCaster: 0
+    - name: Infected Wound
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 7
+        value: -2
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 0
+  - prefab: {fileID: 7709745790407067756, guid: 2fb8b23367469d44f86b637439c7206d, type: 3}
+    cell: {x: 50, y: 64, z: 0}
+    displayName: Salmaster
+    level: 30
+    elite: 1
+    boss: 1
+    healthScale: 5.492
+    damageScale: 1.125
+    goldScale: 9.5
+    loot:
+    - item: {fileID: 11400000, guid: 29fe9f11e4255db48b0c8e3771644655, type: 2}
+      chance: 1
+      minCount: 5
+      maxCount: 5
+    - item: {fileID: 11400000, guid: 7ba0c6b307a521242be9048089d1c8db, type: 2}
+      chance: 1
+      minCount: 5
+      maxCount: 5
+    - item: {fileID: 11400000, guid: 85010dd01a2715d4fb872800a491b28c, type: 2}
+      chance: 1
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: deed00709c95ecd478538d7dd2a7f445, type: 2}
+      chance: 1
+      minCount: 2
+      maxCount: 2
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 1d201dbd0a4946d49bfd8d9611b43ca3, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2287c83ffcfaa8845b7625b0a0674954, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 29ed519d21dc5f24f8ff1a4efa85dcf3, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 6bedb63391656bf48a1c524e3b2427aa, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4a3b181697dd32342ac8f55b0d0a7ddf, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 1
+    controlImmune: 0
+    spells:
+    - name: Shadow Bolt
+      kind: 0
+      school: 3
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 100
+      interval: 0
+      cooldown: 0
+      primary: 1
+      color: {r: 0.65, g: 0.35, b: 0.95, a: 1}
+      effects:
+      - kind: 5
+        value: 5
+        scaled: 0
+        seconds: 10
+        tick: 0
+        stacks: 25
+        onCaster: 0
+    - name: Vortex
+      kind: 1
+      school: 3
+      castSeconds: 0
+      range: 5.0833335
+      radius: 6
+      damageMultiplier: 0
+      chance: 100
+      interval: 5
+      cooldown: 15
+      primary: 0
+      color: {r: 0.65, g: 0.35, b: 0.95, a: 1}
+      effects:
+      - kind: 0
+        value: 0
+        scaled: 0
+        seconds: 2
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Greater Flame
+      kind: 0
+      school: 2
+      castSeconds: 2.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 100
+      interval: 10
+      cooldown: 15
+      primary: 0
+      color: {r: 1, g: 0.5, b: 0.15, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 3
+        tick: 1
+        stacks: 1
+        onCaster: 0
+  - prefab: {fileID: 789256670840241608, guid: 44e6efefd140fee4294871a6836da1aa, type: 3}
+    cell: {x: 20, y: 56, z: 0}
+    displayName: Salmaster's Watcher
+    level: 30
+    elite: 1
+    boss: 0
+    healthScale: 1.614
+    damageScale: 1.125
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Inevitable Shard
+      kind: 3
+      school: 0
+      castSeconds: 0.5
+      range: 25.000002
+      radius: 0
+      damageMultiplier: 1
+      chance: 100
+      interval: 0
+      cooldown: 0
+      primary: 1
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects: []
+    - name: Mind Blast
+      kind: 0
+      school: 3
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.65, g: 0.35, b: 0.95, a: 1}
+      effects:
+      - kind: 7
+        value: -5
+        scaled: 0
+        seconds: 10
+        tick: 0
+        stacks: 1
+        onCaster: 0
+  - prefab: {fileID: 789256670840241608, guid: 44e6efefd140fee4294871a6836da1aa, type: 3}
+    cell: {x: 20, y: 71, z: 0}
+    displayName: Salmaster's Watcher
+    level: 30
+    elite: 1
+    boss: 0
+    healthScale: 1.614
+    damageScale: 1.125
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Inevitable Shard
+      kind: 3
+      school: 0
+      castSeconds: 0.5
+      range: 25.000002
+      radius: 0
+      damageMultiplier: 1
+      chance: 100
+      interval: 0
+      cooldown: 0
+      primary: 1
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects: []
+    - name: Mind Blast
+      kind: 0
+      school: 3
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.65, g: 0.35, b: 0.95, a: 1}
+      effects:
+      - kind: 7
+        value: -5
+        scaled: 0
+        seconds: 10
+        tick: 0
+        stacks: 1
+        onCaster: 0
+  - prefab: {fileID: 7056072118663412086, guid: 52e18f8b4fa2fd34ca99caf7d2f16a0a, type: 3}
+    cell: {x: 34, y: 64, z: 0}
+    displayName: Undead Horror
+    level: 25
+    elite: 1
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Hamstring
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.9
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 2
+        value: 29
+        scaled: 0
+        seconds: 5
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Rend
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 8
+        tick: 2
+        stacks: 1
+        onCaster: 0
+    - name: Infected Wound
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 7
+        value: -2
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 0
+  - prefab: {fileID: 789256670840241608, guid: 44e6efefd140fee4294871a6836da1aa, type: 3}
+    cell: {x: 51, y: 23, z: 0}
+    displayName: Salmaster's Watcher
+    level: 30
+    elite: 1
+    boss: 0
+    healthScale: 1.614
+    damageScale: 1.125
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Inevitable Shard
+      kind: 3
+      school: 0
+      castSeconds: 0.5
+      range: 25.000002
+      radius: 0
+      damageMultiplier: 1
+      chance: 100
+      interval: 0
+      cooldown: 0
+      primary: 1
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects: []
+    - name: Mind Blast
+      kind: 0
+      school: 3
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.65, g: 0.35, b: 0.95, a: 1}
+      effects:
+      - kind: 7
+        value: -5
+        scaled: 0
+        seconds: 10
+        tick: 0
+        stacks: 1
+        onCaster: 0
+  - prefab: {fileID: 789256670840241608, guid: 44e6efefd140fee4294871a6836da1aa, type: 3}
+    cell: {x: 39, y: 23, z: 0}
+    displayName: Salmaster's Watcher
+    level: 30
+    elite: 1
+    boss: 0
+    healthScale: 1.614
+    damageScale: 1.125
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Inevitable Shard
+      kind: 3
+      school: 0
+      castSeconds: 0.5
+      range: 25.000002
+      radius: 0
+      damageMultiplier: 1
+      chance: 100
+      interval: 0
+      cooldown: 0
+      primary: 1
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects: []
+    - name: Mind Blast
+      kind: 0
+      school: 3
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.65, g: 0.35, b: 0.95, a: 1}
+      effects:
+      - kind: 7
+        value: -5
+        scaled: 0
+        seconds: 10
+        tick: 0
+        stacks: 1
+        onCaster: 0
+  - prefab: {fileID: 6576556491672996916, guid: d34b5e12a0562ba48a21c68feb392e63, type: 3}
+    cell: {x: 67, y: 14, z: 0}
+    displayName: Lesser Wyrm
+    level: 25
+    elite: 1
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: 6514d0770d0c7a54fbae4b936286d556, type: 2}
+      chance: 0.05
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: ef660ae576ce5594b944027b9ededd5b, type: 2}
+      chance: 0.075
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: fd4e53aea5a943841b33dd9de1d80ff7, type: 2}
+      chance: 0.075
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 602991b9ce14911458094ab8751d0d28, type: 2}
+      chance: 0.075
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 02776bb9a714e5542ae32baecb36e943, type: 2}
+      chance: 0.075
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ce63ed811d52dc46a8cc4306082c34c, type: 2}
+      chance: 0.075
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 0ec0b8bfe513db54ca43b239ff92d991, type: 2}
+      chance: 0.075
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 27fbc6c2c5a430a43ada03603a37b159, type: 2}
+      chance: 0.075
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.075
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Venomous Bite
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.85
+      chance: 30
+      interval: 1.5
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 12
+        tick: 2
+        stacks: 5
+        onCaster: 0
+    - name: Lesser Flame
+      kind: 0
+      school: 2
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 30
+      interval: 1.5
+      cooldown: 9
+      primary: 0
+      color: {r: 1, g: 0.5, b: 0.15, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 3
+        tick: 1
+        stacks: 1
+        onCaster: 0
+    - name: Greater Flame
+      kind: 0
+      school: 2
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 30
+      interval: 1.5
+      cooldown: 9
+      primary: 0
+      color: {r: 1, g: 0.5, b: 0.15, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 3
+        tick: 1
+        stacks: 1
+        onCaster: 0
+  - prefab: {fileID: 232793115955633434, guid: 80175b2a0a5c81a4f8e31ef7ef5ab08d, type: 3}
+    cell: {x: 35, y: 49, z: 0}
+    displayName: Fallen Guard
+    level: 25
+    elite: 1
+    boss: 0
+    healthScale: 2.663
+    damageScale: 1.5
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Sprint
+      kind: 5
+      school: 0
+      castSeconds: 0.3
+      range: 4.166667
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.5
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects: []
+    - name: Hamstring
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.9
+      chance: 30
+      interval: 1.5
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 2
+        value: 29
+        scaled: 0
+        seconds: 5
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Rend
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.5
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 8
+        tick: 2
+        stacks: 1
+        onCaster: 0
+    - name: Enrage
+      kind: 6
+      school: 0
+      castSeconds: 0
+      range: 0
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.5
+      cooldown: 20
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 6
+        value: 30
+        scaled: 0
+        seconds: 8
+        tick: 0
+        stacks: 1
+        onCaster: 1
+  - prefab: {fileID: 232793115955633434, guid: 80175b2a0a5c81a4f8e31ef7ef5ab08d, type: 3}
+    cell: {x: 67, y: 47, z: 0}
+    displayName: Fallen Guard
+    level: 25
+    elite: 1
+    boss: 0
+    healthScale: 2.663
+    damageScale: 1.5
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Sprint
+      kind: 5
+      school: 0
+      castSeconds: 0.3
+      range: 4.166667
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.5
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects: []
+    - name: Hamstring
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.9
+      chance: 30
+      interval: 1.5
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 2
+        value: 29
+        scaled: 0
+        seconds: 5
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Rend
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.5
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 8
+        tick: 2
+        stacks: 1
+        onCaster: 0
+    - name: Enrage
+      kind: 6
+      school: 0
+      castSeconds: 0
+      range: 0
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.5
+      cooldown: 20
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 6
+        value: 30
+        scaled: 0
+        seconds: 8
+        tick: 0
+        stacks: 1
+        onCaster: 1
+  - prefab: {fileID: 232793115955633434, guid: 80175b2a0a5c81a4f8e31ef7ef5ab08d, type: 3}
+    cell: {x: 75, y: 39, z: 0}
+    displayName: Fallen Guard
+    level: 25
+    elite: 1
+    boss: 0
+    healthScale: 2.663
+    damageScale: 1.5
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Sprint
+      kind: 5
+      school: 0
+      castSeconds: 0.3
+      range: 4.166667
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.5
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects: []
+    - name: Hamstring
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.9
+      chance: 30
+      interval: 1.5
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 2
+        value: 29
+        scaled: 0
+        seconds: 5
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Rend
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.5
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 8
+        tick: 2
+        stacks: 1
+        onCaster: 0
+    - name: Enrage
+      kind: 6
+      school: 0
+      castSeconds: 0
+      range: 0
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.5
+      cooldown: 20
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 6
+        value: 30
+        scaled: 0
+        seconds: 8
+        tick: 0
+        stacks: 1
+        onCaster: 1
+  - prefab: {fileID: 6576556491672996916, guid: d34b5e12a0562ba48a21c68feb392e63, type: 3}
+    cell: {x: 66, y: 20, z: 0}
+    displayName: Lesser Wyrm
+    level: 25
+    elite: 1
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: 6514d0770d0c7a54fbae4b936286d556, type: 2}
+      chance: 0.05
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: ef660ae576ce5594b944027b9ededd5b, type: 2}
+      chance: 0.075
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: fd4e53aea5a943841b33dd9de1d80ff7, type: 2}
+      chance: 0.075
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 602991b9ce14911458094ab8751d0d28, type: 2}
+      chance: 0.075
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 02776bb9a714e5542ae32baecb36e943, type: 2}
+      chance: 0.075
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ce63ed811d52dc46a8cc4306082c34c, type: 2}
+      chance: 0.075
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 0ec0b8bfe513db54ca43b239ff92d991, type: 2}
+      chance: 0.075
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 27fbc6c2c5a430a43ada03603a37b159, type: 2}
+      chance: 0.075
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.075
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Venomous Bite
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.85
+      chance: 30
+      interval: 1.5
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 12
+        tick: 2
+        stacks: 5
+        onCaster: 0
+    - name: Lesser Flame
+      kind: 0
+      school: 2
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 30
+      interval: 1.5
+      cooldown: 9
+      primary: 0
+      color: {r: 1, g: 0.5, b: 0.15, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 3
+        tick: 1
+        stacks: 1
+        onCaster: 0
+    - name: Greater Flame
+      kind: 0
+      school: 2
+      castSeconds: 1.5
+      range: 5.0833335
+      radius: 0
+      damageMultiplier: 1.2
+      chance: 30
+      interval: 1.5
+      cooldown: 9
+      primary: 0
+      color: {r: 1, g: 0.5, b: 0.15, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 3
+        tick: 1
+        stacks: 1
+        onCaster: 0
+  - prefab: {fileID: 7056072118663412086, guid: 52e18f8b4fa2fd34ca99caf7d2f16a0a, type: 3}
+    cell: {x: 56, y: 38, z: 0}
+    displayName: Undead Horror
+    level: 25
+    elite: 1
+    boss: 0
+    healthScale: 0
+    damageScale: 0
+    goldScale: 1
+    loot:
+    - item: {fileID: 11400000, guid: cbe27ab52df8e0949b9e33e3114da4ab, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: a4168a6ab8bbd524aa40442cafa6a8b7, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: f20e9761003cac540ab451cb00473d70, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 2ca77fbfd90476749b4948ab817335a5, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 47a12538e77627f48952e139350254cb, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 50a87836ed43b6a4dba85ea2903329b9, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    - item: {fileID: 11400000, guid: 4ffa883922d225647b36a33f88d91a81, type: 2}
+      chance: 0.08571429
+      minCount: 1
+      maxCount: 1
+    blueChance: 0
+    goldChance: 0
+    purpleChance: 0
+    controlImmune: 0
+    spells:
+    - name: Hamstring
+      kind: 2
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0.9
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 2
+        value: 29
+        scaled: 0
+        seconds: 5
+        tick: 0
+        stacks: 1
+        onCaster: 0
+    - name: Rend
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 3
+        value: 1
+        scaled: 1
+        seconds: 8
+        tick: 2
+        stacks: 1
+        onCaster: 0
+    - name: Infected Wound
+      kind: 7
+      school: 0
+      castSeconds: 0.3
+      range: 1.0833334
+      radius: 0
+      damageMultiplier: 0
+      chance: 30
+      interval: 1.3
+      cooldown: 9
+      primary: 0
+      color: {r: 0.9, g: 0.85, b: 0.75, a: 1}
+      effects:
+      - kind: 7
+        value: -2
+        scaled: 0
+        seconds: 30
+        tick: 0
+        stacks: 1
+        onCaster: 0
+  chests:
+  - prefab: {fileID: 8151336511189478221, guid: e5910700f5a0f0f48a327151127096f3, type: 3}
+    cell: {x: 63, y: 71, z: 0}
+    level: 25
+  - prefab: {fileID: 8151336511189478221, guid: e5910700f5a0f0f48a327151127096f3, type: 3}
+    cell: {x: 68, y: 71, z: 0}
+    level: 25
+  - prefab: {fileID: 8151336511189478221, guid: e5910700f5a0f0f48a327151127096f3, type: 3}
+    cell: {x: 71, y: 17, z: 0}
+    level: 25
+  referenceMonster: {fileID: 8861474206017915938, guid: e24c55e4fc7ce0046994a5fd34c16036, type: 3}
+  minLevel: 25
+  key: {fileID: 11400000, guid: a8e7a8e3cf1f4fc4cbdbe56b38e94096, type: 2}
+  maxPlayers: 1
+  monsterAggroRadius: 3.5

@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40ae07ff7f63b4b46a9a172d057258f2, type: 3}
+  m_Name: Kelda
+  m_EditorClassIdentifier: RPG.Runtime::RPG.Vendors.VendorDefinition
+  displayName: Kelda
+  title: Ranger
+  stock:
+  - {fileID: 11400000, guid: 5bc217144b59cba4c97fc4aaf21a134e, type: 2}
+  - {fileID: 11400000, guid: 9307fb4087954924cb4a7ffbb0597bf8, type: 2}
+  - {fileID: 11400000, guid: 2578b82510568314392f34cb96366839, type: 2}
+  - {fileID: 11400000, guid: 701d6cdeec45b34409fe95bb10278d25, type: 2}
+  - {fileID: 11400000, guid: 8fb7bbd97af4c2d4bb42be6c1a961247, type: 2}
+  - {fileID: 11400000, guid: 70a5067bd4ebb494bbe2ef51b39ed7a1, type: 2}
+  - {fileID: 11400000, guid: f6127d2d6b141fe44aa209cdb4fdc726, type: 2}
+  - {fileID: 11400000, guid: 2fc7810b24fa4f445bee23d171e52be2, type: 2}
+  - {fileID: 11400000, guid: 649e19abcbb1499498477759c9546ceb, type: 2}
+  - {fileID: 11400000, guid: 9fc7163c8e482724f8043d8ee8894cf1, type: 2}
+  - {fileID: 11400000, guid: 7760ca1767f380642a669468f1c88cf8, type: 2}
+  - {fileID: 11400000, guid: 864f8e3d9b44cbc48aea9e8c1f9feae5, type: 2}
+  - {fileID: 11400000, guid: 7a8b997fb0d1bc84387f76e2c4090b6b, type: 2}
+  - {fileID: 11400000, guid: 225d81349f8b5cf48a85c4f5dbc90b5f, type: 2}
+  - {fileID: 11400000, guid: 41a9a919a4e3e3e49ae626e0e80858a4, type: 2}
+  - {fileID: 11400000, guid: f3c7a71b1543ce2478a8e8a4f93d4833, type: 2}
+  - {fileID: 11400000, guid: 2c974bec7849daf468316d26902cdf1f, type: 2}
+  - {fileID: 11400000, guid: 10568445ae210724e87e6c66309cc050, type: 2}
+  - {fileID: 11400000, guid: 566e22ae99cb901439d34f33c5a7558f, type: 2}
+  - {fileID: 11400000, guid: efadc6768eaa7204f9073d7853b3e557, type: 2}
+  stockLimits: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000i
+  restockSeconds: 60
+  recipes: []
+  randomQuality: 0
+  greenChance: 100
+  blueChance: 50
+  goldChance: 5
+  purpleChance: 1

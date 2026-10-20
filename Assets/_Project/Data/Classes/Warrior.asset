@@ -1,0 +1,78 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdd5151e861198848a8cbc562cdb5a94, type: 3}
+  m_Name: Warrior
+  m_EditorClassIdentifier: RPG.Runtime::RPG.Progression.CharacterClassDefinition
+  displayName: Warrior
+  animations: {fileID: 11400000, guid: 6724da390d703af459508474f7d19cf3, type: 2}
+  baseAttributes:
+    strength: 15
+    agility: 10
+    intelligence: 5
+    vitality: 15
+    health: 0
+    mana: 0
+    willpower: 0
+    regeneration: 0
+    meditate: 0
+    meleeCritical: 0
+    rangedCritical: 0
+    spellCritical: 0
+    dodge: 0
+    block: 0
+    resistFrost: 0
+    resistFire: 0
+    resistShadow: 0
+    resistHoly: 0
+    bartering: 0
+    lockpicking: 0
+    staves: 0
+    maces: 0
+    axes: 0
+    swords: 0
+    ranged: 0
+    daggers: 0
+    wands: 0
+    shields: 0
+  primaryAttribute: 0
+  weaponSkills: 1500000016000000170000001b000000i
+  baseHealth: 75
+  baseMana: 30
+  minDamage: 5
+  maxDamage: 9
+  damagePerLevel: 1
+  attackInterval: 1.5
+  attackRange: 0.9
+  critChance: 0.06
+  projectileColor: {r: 0, g: 0, b: 0, a: 0}
+  abilities:
+  - {fileID: 11400000, guid: 1bfe43abd14d35f459377b7074691267, type: 2}
+  - {fileID: 11400000, guid: 2ece6543acbeb6c4d8c8616883d5082f, type: 2}
+  - {fileID: 11400000, guid: c42616fc303421d4684239da55de0e75, type: 2}
+  - {fileID: 11400000, guid: f667e079da872454da99c36b39741399, type: 2}
+  - {fileID: 11400000, guid: 7b61a21d39efd224c94af6327f83412d, type: 2}
+  - {fileID: 11400000, guid: a7550b6318c5bd54099a632030a7fa52, type: 2}
+  - {fileID: 11400000, guid: 7a650dc72f4fd4c48b4f41225fd70d83, type: 2}
+  - {fileID: 11400000, guid: e0a5bc2a5ac0b1f4b903e3c03f4bf1a6, type: 2}
+  - {fileID: 11400000, guid: 0e290b72d0b601348890e79f54d182ef, type: 2}
+  - {fileID: 11400000, guid: d59f3e76dc5da964ead20d7284af5db8, type: 2}
+  - {fileID: 11400000, guid: e6d9a5de10cbee54c937e5bec2c9892b, type: 2}
+  - {fileID: 11400000, guid: 551deae993ce9104faeb322a1d5b9f7c, type: 2}
+  - {fileID: 11400000, guid: fe02b69528543534caa079eb03662741, type: 2}
+  - {fileID: 11400000, guid: 0036c927a9a69b24d9276eb9c87435b5, type: 2}
+  - {fileID: 11400000, guid: 1881b345779b3754ba2236fb9b3f31f2, type: 2}
+  - {fileID: 11400000, guid: 1ed51bae0bb9e9d488f09847a35fca4b, type: 2}
+  - {fileID: 11400000, guid: 5ed3f8ae9074277459af920f49f522a2, type: 2}
+  - {fileID: 11400000, guid: f0e8f0ac1e989d14e95bd6e725fa7a63, type: 2}
+  - {fileID: 11400000, guid: 93b8d0d417155674e8bd3750a289bfee, type: 2}
+  - {fileID: 11400000, guid: 26d1e19c739f1214e81e0f199a8a4ffc, type: 2}
+  - {fileID: 11400000, guid: 026fe55e3b6c8b24a82319d53e0fa5e9, type: 2}

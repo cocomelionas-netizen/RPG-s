@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40ae07ff7f63b4b46a9a172d057258f2, type: 3}
+  m_Name: Vikram
+  m_EditorClassIdentifier: RPG.Runtime::RPG.Vendors.VendorDefinition
+  displayName: Vikram
+  title: Jeweler
+  stock:
+  - {fileID: 11400000, guid: 19662f43d8f14d04fbec300c796dbdee, type: 2}
+  - {fileID: 11400000, guid: 154c2c6382bb8c941ac3ebd6936827f7, type: 2}
+  - {fileID: 11400000, guid: a23edfba79b830d4fb647aa7ef1d16be, type: 2}
+  - {fileID: 11400000, guid: 9e5f35703656ed747a804c89933e6035, type: 2}
+  - {fileID: 11400000, guid: 2c87e6e3067f59a479e32cf9b8f3f9db, type: 2}
+  - {fileID: 11400000, guid: a823a32ecda4d174a8c3f69251806627, type: 2}
+  - {fileID: 11400000, guid: 0291e94bbfd5d3f48bdbfe63de428547, type: 2}
+  - {fileID: 11400000, guid: 288301a5c4111814e94a2bf6f8be82c4, type: 2}
+  - {fileID: 11400000, guid: 884130604c23abc4495f0e7411319f89, type: 2}
+  - {fileID: 11400000, guid: ef447e3bcc600b54fb8e37ccdc020ccd, type: 2}
+  - {fileID: 11400000, guid: 7c44c6ea711d13948af5c0c5b8340085, type: 2}
+  - {fileID: 11400000, guid: 9b6bc18937e52c645b5088349b7e6cd7, type: 2}
+  - {fileID: 11400000, guid: 52851bd45b505844993872028b4781bd, type: 2}
+  - {fileID: 11400000, guid: ff9fa533110ef7840b2d10684d583294, type: 2}
+  - {fileID: 11400000, guid: 529986ddbf0abbb479e3183b3960d70a, type: 2}
+  - {fileID: 11400000, guid: 109a75b256b0e954cabd2f73ab2cf6c6, type: 2}
+  - {fileID: 11400000, guid: eece02251550a274783e62214a8f6e62, type: 2}
+  - {fileID: 11400000, guid: 081fd4cdcf709554fb1312f8c7da4be4, type: 2}
+  - {fileID: 11400000, guid: 0ff2d8f7de22b6644a0b19bfba348a5f, type: 2}
+  - {fileID: 11400000, guid: b294deb2f07fc5b49b675b81927f4dd0, type: 2}
+  - {fileID: 11400000, guid: b84388889e6a60f4c9df4a4ea2d1d892, type: 2}
+  - {fileID: 11400000, guid: 1095d934f8e19764f8fccefa6c6fb6fc, type: 2}
+  - {fileID: 11400000, guid: 21a36445cf8895c489bc7e2476477fce, type: 2}
+  - {fileID: 11400000, guid: 4dcd55a7b7200584ababbe9c2fb8de07, type: 2}
+  - {fileID: 11400000, guid: 3db16bc71f6eed6488b528a5ef54bc70, type: 2}
+  - {fileID: 11400000, guid: 029f3f1c65e2dd442b8e9886d66f1ec8, type: 2}
+  stockLimits: 0100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000i
+  restockSeconds: 300
+  recipes: []
+  randomQuality: 1
+  greenChance: 100
+  blueChance: 50
+  goldChance: 5
+  purpleChance: 1

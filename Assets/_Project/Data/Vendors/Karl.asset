@@ -1,0 +1,90 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40ae07ff7f63b4b46a9a172d057258f2, type: 3}
+  m_Name: Karl
+  m_EditorClassIdentifier: RPG.Runtime::RPG.Vendors.VendorDefinition
+  displayName: Karl
+  title: Heavy Armor Merchant
+  stock:
+  - {fileID: 11400000, guid: 0698249fd169b3241b4b2b7cc8e66c6f, type: 2}
+  - {fileID: 11400000, guid: dd280c188cd36ac45bf9ebf19fcf89c7, type: 2}
+  - {fileID: 11400000, guid: 8194b2288e778894a9bc48772518570f, type: 2}
+  - {fileID: 11400000, guid: 5f6aa5d659a3fe3489834858214c0cf1, type: 2}
+  - {fileID: 11400000, guid: 28edaa88af2e43740af824ee7dbc35c5, type: 2}
+  - {fileID: 11400000, guid: 11145580a1c83a24593fbf86c6e6975e, type: 2}
+  - {fileID: 11400000, guid: 45c3e2e989ed62d42bc15242dfa09200, type: 2}
+  - {fileID: 11400000, guid: 93bab94826928454281144ea5fb18464, type: 2}
+  - {fileID: 11400000, guid: c7266979232de04448e2653a3ff8d7d6, type: 2}
+  - {fileID: 11400000, guid: ea6a35da9a767c34e96adf330d5976ac, type: 2}
+  - {fileID: 11400000, guid: 780c6821ef8506940a1c63e225c13fe7, type: 2}
+  - {fileID: 11400000, guid: dbbd24748177f1e4b9adee18f9df6688, type: 2}
+  - {fileID: 11400000, guid: eefeb51190bb499429022cf4febad2fe, type: 2}
+  - {fileID: 11400000, guid: ddfe4dff7b8e8ea418ac8e29e06755dd, type: 2}
+  - {fileID: 11400000, guid: 336e420420adc6d43b9be77fee7f84f9, type: 2}
+  - {fileID: 11400000, guid: 2b844edfe27192f468a4817a9510bf5b, type: 2}
+  - {fileID: 11400000, guid: e3fcbf5eafc439947b8060452a29f0b9, type: 2}
+  - {fileID: 11400000, guid: 405c63794bb11914aad30552ff9df68a, type: 2}
+  - {fileID: 11400000, guid: a0da391d4832ea148848a2b6ea435e64, type: 2}
+  - {fileID: 11400000, guid: ecd7392a4b3ff8f428295ceaa3761cb9, type: 2}
+  - {fileID: 11400000, guid: f7479f4592f7a574b84b261f52c8856d, type: 2}
+  - {fileID: 11400000, guid: bf5591574d5761840ae6ca1e739f3eb0, type: 2}
+  - {fileID: 11400000, guid: 6a68baff982f26641b80463834eb8f35, type: 2}
+  - {fileID: 11400000, guid: 15194cb936919f74398306963a8884de, type: 2}
+  - {fileID: 11400000, guid: ed7c8a9f1f9a22542b11a479c35fbdf0, type: 2}
+  - {fileID: 11400000, guid: 42808df8d1eccaf42b90443724605dd7, type: 2}
+  - {fileID: 11400000, guid: 4deb29a088cf0b54fadee6605928642a, type: 2}
+  - {fileID: 11400000, guid: cbc381b678785b543ab1bdb1a8ec62ee, type: 2}
+  - {fileID: 11400000, guid: ba0c8aad21276e242b67eae0789ad83b, type: 2}
+  - {fileID: 11400000, guid: 34ddf18d7d29b294d96ca7d9b96201c0, type: 2}
+  - {fileID: 11400000, guid: 45124eb0e066dd14d89881acd0cdcdec, type: 2}
+  - {fileID: 11400000, guid: a08d31eaba36c194e9865833e4c6abaa, type: 2}
+  - {fileID: 11400000, guid: 06bdcdf8ba5d28b4cb50d6daa14e4cd9, type: 2}
+  - {fileID: 11400000, guid: a182480917d9378458c9812889015b56, type: 2}
+  - {fileID: 11400000, guid: 4e3eac92cdcce234085dc31fcb244a91, type: 2}
+  - {fileID: 11400000, guid: b157ab6055b39ec4192424d7f12eef03, type: 2}
+  - {fileID: 11400000, guid: 29514071871d4824f90d462b6ef0a2a5, type: 2}
+  - {fileID: 11400000, guid: ba68e3a1d64fc0245aca17bce0445ce6, type: 2}
+  - {fileID: 11400000, guid: fd418fa8b586227439b32e8ba3d33dd3, type: 2}
+  - {fileID: 11400000, guid: ae202d566983903459a074231205626f, type: 2}
+  - {fileID: 11400000, guid: f07a1596bee61044dbd6f970062fb065, type: 2}
+  - {fileID: 11400000, guid: 9dccfa78c48fda245a6fb49ee3c430e3, type: 2}
+  - {fileID: 11400000, guid: 4fd08257579b33742847b0528a2577cc, type: 2}
+  - {fileID: 11400000, guid: e0b7fb1b209c5ad40a4c23b8204469a6, type: 2}
+  - {fileID: 11400000, guid: 5f86be35916baa84cbaf580a25f38bf0, type: 2}
+  - {fileID: 11400000, guid: 4b78c269ba7920040afcdde1384c48e2, type: 2}
+  - {fileID: 11400000, guid: e2fd6dd1420f0fe478eeb6782823210f, type: 2}
+  - {fileID: 11400000, guid: afd74e0da20ada04097cd9991878ea20, type: 2}
+  - {fileID: 11400000, guid: 4980ffa85237c47439c5b58ff9857560, type: 2}
+  - {fileID: 11400000, guid: e7eb925b665df0746b419a8f7fb576e7, type: 2}
+  - {fileID: 11400000, guid: d8565a5799d57e748b1e8d604622387d, type: 2}
+  - {fileID: 11400000, guid: ae85e5884d166fd478386ef2b000580d, type: 2}
+  - {fileID: 11400000, guid: 778c9f3b5b9c0d24988d1da5ba03c336, type: 2}
+  - {fileID: 11400000, guid: a23fed96edfb99b4bb028e999e0ab41d, type: 2}
+  - {fileID: 11400000, guid: 8b6216788ce93ff42af7c961cca01590, type: 2}
+  - {fileID: 11400000, guid: d1e756f1ca4978944acbe3b1ad993ae8, type: 2}
+  - {fileID: 11400000, guid: 4d4abed0d72163e4b99cc28fe65f59e6, type: 2}
+  - {fileID: 11400000, guid: 4061d58b5504c99469609734507b7253, type: 2}
+  - {fileID: 11400000, guid: a229a02747537ab4aa45d2e0d9a732b4, type: 2}
+  - {fileID: 11400000, guid: e32bc9437d04c5f4d85de2b3cb9cf999, type: 2}
+  - {fileID: 11400000, guid: 7da6d73b088650d418243eb76f19238d, type: 2}
+  - {fileID: 11400000, guid: b06c0698d6790b440a59aa98783ff6f5, type: 2}
+  - {fileID: 11400000, guid: 77d6b94eb06a5f448884c81962bf127c, type: 2}
+  - {fileID: 11400000, guid: d4fe254f8c0ae9a4d98fc0925feba81a, type: 2}
+  - {fileID: 11400000, guid: e714d0ca7ce513849b726eada5adbe44, type: 2}
+  stockLimits: 0100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000i
+  restockSeconds: 300
+  recipes: []
+  randomQuality: 1
+  greenChance: 100
+  blueChance: 50
+  goldChance: 5
+  purpleChance: 1

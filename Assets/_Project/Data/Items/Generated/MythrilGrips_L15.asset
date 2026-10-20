@@ -17,6 +17,7 @@ MonoBehaviour:
   slot: 8
   rarity: 1
   weaponType: 0
+  appearance: chain_gloves
   damageBonus: 0
   healthBonus: 0
   armor: 9
@@ -79,5 +80,5 @@ MonoBehaviour:
   combinesInto: {fileID: 0}
   combineCount: 3
   iconColor: {r: 0.55, g: 0.75, b: 0.9, a: 1}
-  icon: {fileID: -1467774976137560719, guid: 8862461b43fa31f419efec2601e9a897, type: 2}
+  icon: {fileID: -6189544536423819191, guid: 8862461b43fa31f419efec2601e9a897, type: 2}
   iconTint: {r: 1, g: 1, b: 1, a: 1}
