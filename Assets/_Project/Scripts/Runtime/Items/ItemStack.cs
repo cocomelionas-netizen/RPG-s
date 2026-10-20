@@ -24,6 +24,8 @@ namespace RPG.Items
         public int Socket2;
         public int Socket3;
         public int Socket4;
+        /// <summary>Orb empowerment: steps gained (low byte) and empowerment points used (next byte).</summary>
+        public int Empower;
 
         public static readonly ItemStack Empty = default;
 
@@ -36,6 +38,7 @@ namespace RPG.Items
             Socket2 = socket2;
             Socket3 = socket3;
             Socket4 = socket4;
+            Empower = 0;
         }
 
         /// <summary>One item with <paramref name="sockets"/> empty sockets.</summary>
@@ -47,7 +50,25 @@ namespace RPG.Items
         }
 
         /// <summary>The same stack with another count.</summary>
-        public ItemStack WithCount(int count) => new ItemStack(ItemId, count, AffixId, Socket, Socket2, Socket3, Socket4);
+        public ItemStack WithCount(int count)
+        {
+            ItemStack copy = this;
+            copy.Count = count;
+            return copy;
+        }
+
+        /// <summary>How many times an orb empowered the item (each: +1 item level and more damage, armor or attributes).</summary>
+        public int EmpowerSteps => Empower & 0xFF;
+
+        /// <summary>Empowerment points used up (successes and failures alike).</summary>
+        public int EmpowerSpent => (Empower >> 8) & 0xFF;
+
+        public ItemStack WithEmpower(int steps, int spent)
+        {
+            ItemStack copy = this;
+            copy.Empower = Math.Min(255, Math.Max(0, steps)) | (Math.Min(255, Math.Max(0, spent)) << 8);
+            return copy;
+        }
 
         /// <summary>The same stack with another first socket content.</summary>
         public ItemStack WithSocket(int socket) => WithSocketAt(0, socket);
@@ -106,7 +127,8 @@ namespace RPG.Items
         public bool HasGem => Socket > 0 || Socket2 > 0 || Socket3 > 0 || Socket4 > 0;
 
         public bool SameKind(ItemStack other) => ItemId == other.ItemId && AffixId == other.AffixId && Socket == other.Socket
-                                                 && Socket2 == other.Socket2 && Socket3 == other.Socket3 && Socket4 == other.Socket4;
+                                                 && Socket2 == other.Socket2 && Socket3 == other.Socket3 && Socket4 == other.Socket4
+                                                 && Empower == other.Empower;
 
         public bool IsEmpty => ItemId == 0 || Count <= 0;
 
@@ -114,6 +136,6 @@ namespace RPG.Items
 
         public override bool Equals(object obj) => obj is ItemStack other && Equals(other);
 
-        public override int GetHashCode() => HashCode.Combine(ItemId, Count, AffixId, Socket, Socket2, Socket3, Socket4);
+        public override int GetHashCode() => HashCode.Combine(ItemId, Count, AffixId, Socket, Socket2, Socket3, Socket4, Empower);
     }
 }

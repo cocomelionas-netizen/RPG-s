@@ -196,14 +196,20 @@ namespace RPG.Items
         public string Describe(ItemStack stack, string className)
         {
             ItemDefinition item = Definition(stack);
-            return item != null ? item.Describe(className, Affix(stack), SocketText(stack), SellPrice(stack)) : "";
+            if (item == null) return "";
+            string text = item.Describe(className, Affix(stack), SocketText(stack), SellPrice(stack));
+            if (!item.IsEquippable || (stack.EmpowerSteps == 0 && stack.EmpowerSpent == 0)) return text;
+            int points = ItemDefinition.EmpowerPoints(Quality(stack));
+            return text + $"\n<color=#c8a0ff>Empowered +{stack.EmpowerSteps} (item level {item.itemLevel + stack.EmpowerSteps}), "
+                        + $"{Mathf.Max(0, points - stack.EmpowerSpent)} of {points} empowerment points left</color>";
         }
 
         /// <summary>The item's name with its affix, for example "Iron Sword of the Bear".</summary>
         public string DisplayName(ItemStack stack)
         {
             ItemDefinition item = Definition(stack);
-            return item != null ? item.NameWith(Affix(stack)) : "";
+            if (item == null) return "";
+            return stack.EmpowerSteps > 0 ? $"{item.NameWith(Affix(stack))} +{stack.EmpowerSteps}" : item.NameWith(Affix(stack));
         }
 
         public ItemRarity Quality(ItemStack stack)
@@ -233,6 +239,7 @@ namespace RPG.Items
             if (!IsServer || gemBagIndex < 0 || gemBagIndex >= bag.Count || health.IsDead) return false;
             ItemStack gemStack = bag[gemBagIndex];
             ItemDefinition gem = Definition(gemStack);
+            if (gem != null && gem.use == ItemUse.Empower) return ServerEmpower(gemBagIndex, intoEquipment, targetIndex);
             if (gem == null || !gem.isGem) return false;
 
             NetworkList<ItemStack> list = intoEquipment ? equipment : bag;
@@ -250,6 +257,61 @@ namespace RPG.Items
             bag[gemBagIndex] = gemStack.Count > 1 ? gemStack.WithCount(gemStack.Count - 1) : ItemStack.Empty;
             // The item the gem went into travels in the affix field.
             MessageRpc(InventoryMessage.GemSocketed, gemStack.ItemId, target.ItemId);
+            return true;
+        }
+
+        /// <summary>
+        /// Server: uses an orb from the bag on a worn item or one in the bag. It must be gear of the orb's kind with an
+        /// empowerment point left (its quality's number: <see cref="ItemDefinition.EmpowerPoints"/>); the orb is used up
+        /// either way. Success (<see cref="ItemDefinition.EmpowerChance"/>) adds a step: +1 item level and
+        /// <see cref="ItemDefinition.EmpowerShare"/> more damage or armor (accessories: +1 to each main attribute); failure
+        /// only uses up the point. Arcane orbs always work, need no point, and add up to
+        /// <see cref="ItemDefinition.EmpowerBeyondSteps"/> steps beyond.
+        /// </summary>
+        public bool ServerEmpower(int orbBagIndex, bool intoEquipment, int targetIndex)
+        {
+            if (!IsServer || orbBagIndex < 0 || orbBagIndex >= bag.Count || health.IsDead) return false;
+            ItemStack orbStack = bag[orbBagIndex];
+            ItemDefinition orb = Definition(orbStack);
+            if (orb == null || orb.use != ItemUse.Empower) return false;
+            NetworkList<ItemStack> list = intoEquipment ? equipment : bag;
+            if (targetIndex < 0 || targetIndex >= list.Count || (!intoEquipment && targetIndex == orbBagIndex)) return false;
+            ItemStack target = list[targetIndex];
+            ItemDefinition gear = Definition(target);
+            if (gear == null || !gear.IsEquippable || !orb.CanEmpower(gear.slot))
+            {
+                MessageRpc(InventoryMessage.CannotEmpower, orbStack.ItemId, 0);
+                return false;
+            }
+            int points = ItemDefinition.EmpowerPoints(Quality(target));
+            int steps = target.EmpowerSteps;
+            int spent = target.EmpowerSpent;
+            bool success;
+            if (orb.empowerBeyond)
+            {
+                if (spent < points || steps >= points + ItemDefinition.EmpowerBeyondSteps)
+                {
+                    MessageRpc(InventoryMessage.NoEmpowerPoints, target.ItemId, 1);
+                    return false;
+                }
+                success = true;
+                steps++;
+            }
+            else
+            {
+                if (spent >= points)
+                {
+                    MessageRpc(InventoryMessage.NoEmpowerPoints, target.ItemId, 0);
+                    return false;
+                }
+                success = UnityEngine.Random.value < ItemDefinition.EmpowerChance(orb.empowerPower);
+                if (success) steps++;
+                spent++;
+            }
+            list[targetIndex] = target.WithEmpower(steps, spent);
+            bag[orbBagIndex] = orbStack.Count > 1 ? orbStack.WithCount(orbStack.Count - 1) : ItemStack.Empty;
+            // The empowered item travels in the item field, its new step count in the affix field.
+            MessageRpc(success ? InventoryMessage.Empowered : InventoryMessage.EmpowerFailed, target.ItemId, steps);
             return true;
         }
 
@@ -372,6 +434,20 @@ namespace RPG.Items
                 armor += item.armor;
                 manaBonus += item.manaBonus;
                 attributes += item.attributes;
+
+                // Orb empowerment: a share more of the item's own damage and armor a step (at least 1), or attributes.
+                int steps = equipment[i].EmpowerSteps;
+                if (steps > 0)
+                {
+                    if (item.damageBonus > 0) damage += Mathf.Max(steps, Mathf.RoundToInt(item.damageBonus * ItemDefinition.EmpowerShare * steps));
+                    if (item.armor > 0) armor += Mathf.Max(steps, Mathf.RoundToInt(item.armor * ItemDefinition.EmpowerShare * steps));
+                    if (item.slot == ItemSlot.Neck || item.slot == ItemSlot.Waist || item.slot == ItemSlot.Ring)
+                    {
+                        AttributeSet boost = default;
+                        boost.strength = boost.agility = boost.intelligence = boost.vitality = boost.willpower = steps;
+                        attributes += boost;
+                    }
+                }
 
                 for (int socket = 0; socket < ItemStack.MaxSockets; socket++)
                 {
@@ -692,6 +768,27 @@ namespace RPG.Items
                         ItemDefinition.RarityColor(item.rarity));
                     break;
                 }
+                case InventoryMessage.Empowered:
+                    if (item == null) break;
+                    CombatTextLayer.ShowText(above, $"Empowered +{affixId}", new Color(0.8f, 0.6f, 1f), 0.9f);
+                    MessageLog.Add($"You successfully empowered [{item.displayName}] (+{affixId}).", new Color(0.8f, 0.6f, 1f));
+                    break;
+                case InventoryMessage.EmpowerFailed:
+                    CombatTextLayer.ShowText(above, "Empowering failed", new Color(1f, 0.4f, 0.3f), 0.8f);
+                    MessageLog.Add($"Your attempt to empower [{(item != null ? item.displayName : "the item")}] was unsuccessful: an empowerment point is used up.",
+                        MessageLog.WarningColor);
+                    break;
+                case InventoryMessage.CannotEmpower:
+                    CombatTextLayer.ShowText(above, "Wrong kind of item", new Color(1f, 0.4f, 0.3f), 0.8f);
+                    MessageLog.Add(item != null ? $"[{item.displayName}] cannot empower that item." : "That orb cannot empower that item.",
+                        MessageLog.WarningColor);
+                    break;
+                case InventoryMessage.NoEmpowerPoints:
+                    CombatTextLayer.ShowText(above, "Cannot be empowered further", new Color(1f, 0.4f, 0.3f), 0.8f);
+                    MessageLog.Add(affixId == 1
+                        ? "An Arcane orb works only on gear whose empowerment points are all used, a few times."
+                        : $"[{(item != null ? item.displayName : "That item")}] has no empowerment points left.", MessageLog.WarningColor);
+                    break;
                 case InventoryMessage.NoEmptySocket:
                     CombatTextLayer.ShowText(above, "No empty socket there", new Color(1f, 0.4f, 0.3f), 0.8f);
                     MessageLog.Add(item != null ? $"[{item.displayName}] has no empty socket." : "That item has no empty socket.",
@@ -881,6 +978,8 @@ namespace RPG.Items
             if (item.use == ItemUse.Return) return ServerStartReturn(item);
             if (item.use == ItemUse.Food) return ServerEat(bagIndex, stack, item);
             if (item.use == ItemUse.Buff) return ServerReadBuff(bagIndex, stack, item);
+            // Orbs are used on an item (ServerEmpower), not on their own.
+            if (item.use == ItemUse.Empower) return false;
             if (item.use == ItemUse.RestoreMana && mana == null) return false;
             if (progress != null && !item.CanBeUsedAtLevel(progress.Level))
             {
@@ -1252,6 +1351,12 @@ namespace RPG.Items
             Returned,
             /// <summary>Food cannot be eaten in combat.</summary>
             InCombat,
+            /// <summary>An orb empowered an item (it travels in the item id field, its new steps in the affix field).</summary>
+            Empowered,
+            EmpowerFailed,
+            CannotEmpower,
+            /// <summary>No empowerment point left (affix field 1: an Arcane orb on gear that still has points, or at its limit).</summary>
+            NoEmpowerPoints,
         }
     }
 }

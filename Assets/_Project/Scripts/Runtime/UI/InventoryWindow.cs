@@ -242,10 +242,14 @@ namespace RPG.UI
             }
 
             ItemDefinition item = inventory.Definition(inventory.GetBagSlot(index));
-            if (item != null && item.isGem)
+            if (item != null && (item.isGem || item.use == ItemUse.Empower))
             {
+                // Gems and orbs both wait for the item they go on.
                 pendingGem = index;
-                MessageLog.Add($"Click the item to set [{item.displayName}] into, in the bag or on the character sheet (C) (Esc to cancel).", ItemDefinition.RarityColor(item.rarity));
+                MessageLog.Add(item.isGem
+                    ? $"Click the item to set [{item.displayName}] into, in the bag or on the character sheet (C) (Esc to cancel)."
+                    : $"Click the item to empower with [{item.displayName}], in the bag or on the character sheet (C) (Esc to cancel).",
+                    ItemDefinition.RarityColor(item.rarity));
                 return;
             }
             inventory.RequestActivate(index);
@@ -291,7 +295,7 @@ namespace RPG.UI
             if (pendingGem >= 0)
             {
                 ItemDefinition gem = inventory.Definition(inventory.GetBagSlot(pendingGem));
-                if (gem == null || !gem.isGem) pendingGem = -1;
+                if (gem == null || (!gem.isGem && gem.use != ItemUse.Empower)) pendingGem = -1;
             }
 
             // The slots and stats are redrawn when the bag changed (or the gem being set, or gold), and now and then
@@ -344,7 +348,7 @@ namespace RPG.UI
             string maxHealth = health != null ? health.Max.ToString() : "-";
             ItemDefinition gem = pendingGem >= 0 ? inventory.Definition(inventory.GetBagSlot(pendingGem)) : null;
             statsText.text = gem != null
-                ? $"<color=#ffff66>Click the item to set {gem.displayName} into (Esc to cancel)</color>"
+                ? $"<color=#ffff66>Click the item to {(gem.isGem ? "set" : "empower with")} {gem.displayName}{(gem.isGem ? " into" : "")} (Esc to cancel)</color>"
                 : $"Damage {damage}   Health {maxHealth}   Armor {inventory.Armor}   Gold {inventory.Gold}";
         }
 

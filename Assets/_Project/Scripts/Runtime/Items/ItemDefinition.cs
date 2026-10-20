@@ -70,6 +70,22 @@ namespace RPG.Items
         /// Buff Seconds, not in combat, one of each attribute at a time; used up.
         /// </summary>
         Buff,
+        /// <summary>
+        /// An orb (the source game's Accessory, Armor and Weapon orbs): used on a piece of gear of its kind, it tries to
+        /// empower it (+1 item level, more damage, armor or attributes); a failure uses up one of its empowerment points.
+        /// </summary>
+        Empower,
+    }
+
+    /// <summary>The gear an orb empowers.</summary>
+    public enum EmpowerTarget
+    {
+        /// <summary>Weapons and shields (the source game's weapon, offhand and ranged slots).</summary>
+        Weapon,
+        /// <summary>Head, chest, legs, feet and hands.</summary>
+        Armor,
+        /// <summary>Necklaces, belts and rings.</summary>
+        Accessory,
     }
 
     /// <summary>One kind of item: its slot, rarity, stats and use. Players' bags refer to it by catalog index.</summary>
@@ -126,6 +142,10 @@ namespace RPG.Items
         public RPG.Progression.Attribute buffAttribute;
         [Min(0)] public int buffAmount;
         [Min(0f)] public float buffSeconds = 300f;
+        [Tooltip("Empower: the gear it works on, its power (the source game's Minor 2 ... Divine 6) and whether it goes beyond the limit (Arcane).")]
+        public EmpowerTarget empowerTarget;
+        [Range(0, 6)] public int empowerPower;
+        public bool empowerBeyond;
         [Tooltip("Return scrolls: seconds of standing still before it works (the source game: 2).")]
         [Min(0f)] public float castSeconds;
         [Tooltip("Return scrolls and food: seconds before another can be used (the source game: 300 and 30).")]
@@ -172,6 +192,31 @@ namespace RPG.Items
         }
 
         /// <summary>Whether a player of <paramref name="playerLevel"/> may drink it (potions have a level like gear).</summary>
+        /// <summary>Empowerment points of gear of a quality: how many orbs it can take (white 1 ... orange 5).</summary>
+        public static int EmpowerPoints(ItemRarity quality) => Mathf.Max(1, (int)quality);
+
+        /// <summary>Steps an Arcane orb can add beyond the points.</summary>
+        public const int EmpowerBeyondSteps = 3;
+
+        /// <summary>Chance an orb of this power empowers (Minor 54% ... Divine always).</summary>
+        public static float EmpowerChance(int power) => Mathf.Clamp01(0.3f + 0.12f * power);
+
+        /// <summary>Damage or armor gained per empowerment step, as a share of the item's own.</summary>
+        public const float EmpowerShare = 0.1f;
+
+        /// <summary>Whether this orb works on gear of a slot.</summary>
+        public bool CanEmpower(ItemSlot gearSlot)
+        {
+            switch (empowerTarget)
+            {
+                case EmpowerTarget.Weapon: return gearSlot == ItemSlot.Weapon || gearSlot == ItemSlot.Shield;
+                case EmpowerTarget.Armor:
+                    return gearSlot == ItemSlot.Head || gearSlot == ItemSlot.Chest || gearSlot == ItemSlot.Legs || gearSlot == ItemSlot.Feet
+                           || gearSlot == ItemSlot.Hands;
+                default: return gearSlot == ItemSlot.Neck || gearSlot == ItemSlot.Waist || gearSlot == ItemSlot.Ring;
+            }
+        }
+
         /// <summary>An attribute's name as players see it (the source game's: Courage, Intellect).</summary>
         public static string AttributeName(RPG.Progression.Attribute attribute) =>
             attribute == RPG.Progression.Attribute.Vitality ? "Courage"
@@ -273,6 +318,14 @@ namespace RPG.Items
             {
                 text.AppendLine("Use: returns you to St. Revere");
                 if (castSeconds > 0f) text.AppendLine($"{castSeconds:0.#} sec cast, {Mathf.RoundToInt(useCooldown / 60f)} min cooldown");
+            }
+            else if (use == ItemUse.Empower)
+            {
+                string gear = empowerTarget == EmpowerTarget.Weapon ? "a weapon or shield" : empowerTarget == EmpowerTarget.Armor ? "armor" : "a necklace, belt or ring";
+                text.AppendLine(empowerBeyond
+                    ? $"Use: empowers {gear} beyond its limit (+1 item level), up to {EmpowerBeyondSteps} times more"
+                    : $"Use: tries to empower {gear} (+1 item level, more {(empowerTarget == EmpowerTarget.Accessory ? "attributes" : "damage or armor")}), {Mathf.RoundToInt(EmpowerChance(empowerPower) * 100f)}% chance; a failure uses up an empowerment point");
+                text.AppendLine("Click, then click the item");
             }
             else if (use == ItemUse.Buff)
             {

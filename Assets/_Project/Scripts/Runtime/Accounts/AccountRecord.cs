@@ -50,6 +50,8 @@ namespace RPG.Accounts
         public int socket2;
         public int socket3;
         public int socket4;
+        /// <summary>Orb empowerment (ItemStack.Empower); 0 in saves made before it existed.</summary>
+        public int empower;
 
         public ItemRecord(int id, int count, int affix, int socket = 0, int socket2 = 0, int socket3 = 0, int socket4 = 0)
         {
@@ -60,6 +62,7 @@ namespace RPG.Accounts
             this.socket2 = socket2;
             this.socket3 = socket3;
             this.socket4 = socket4;
+            empower = 0;
         }
     }
 }

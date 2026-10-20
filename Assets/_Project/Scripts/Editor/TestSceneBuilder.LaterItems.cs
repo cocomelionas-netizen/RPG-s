@@ -89,6 +89,25 @@ namespace RPG.EditorTools
             LaterItems.Add(treasure);
         }
 
+        /// <summary>
+        /// Every orb of the catalog (these and the dungeons' Major and Divine orbs) empowers gear of its kind with its
+        /// tier's power (the source game's spell data1: Minor 2, Lesser 3, Greater 4, Major 5, Divine 6; Arcane goes beyond).
+        /// </summary>
+        private static void ConfigureOrbs(IEnumerable<ItemDefinition> items)
+        {
+            foreach (ItemDefinition item in items)
+            {
+                if (item == null || !item.displayName.EndsWith(" Orb")) continue;
+                string name = item.displayName;
+                item.use = ItemUse.Empower;
+                item.empowerTarget = name.Contains("Weapon") ? EmpowerTarget.Weapon : name.Contains("Armor") ? EmpowerTarget.Armor : EmpowerTarget.Accessory;
+                item.empowerPower = name.StartsWith("Minor") ? 2 : name.StartsWith("Lesser") ? 3 : name.StartsWith("Greater") ? 4
+                    : name.StartsWith("Major") ? 5 : 6;
+                item.empowerBeyond = name.StartsWith("Arcane");
+                UnityEditor.EditorUtility.SetDirty(item);
+            }
+        }
+
         private static ItemDefinition Orb(string tier, string kind, int quality, int sell, int ratio, Color color)
         {
             ItemDefinition orb = CreateItem($"Later/{tier}{kind}Orb", $"{tier} {kind} Orb", ItemSlot.None, SourceQuality(quality), 0, 0, 0,

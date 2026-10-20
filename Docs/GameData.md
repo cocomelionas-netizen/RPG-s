@@ -251,7 +251,13 @@ shields and mana as they are, damage half the formula × `LevelCurve.DamageGrowt
 
 - **Orbs**: every tier of the source game's Accessory, Armor and Weapon orbs (Minor, Lesser, Greater, Major, Divine,
   Arcane; `item_template` 924-935, 1128-1130, 1140-1142) with its sell price and buy cost ratio. They are transmutation
-  ingredients for now; using them to empower gear comes later.
+  ingredients, and used on gear (click the orb, then the item, like a gem) they **empower** it, as the source game's
+  ApplyOrbEnchant (spells 129-140: power Minor 2 ... Divine 6, gear mask by orb kind): Weapon orbs on weapons and
+  shields, Armor orbs on head/chest/legs/feet/hands, Accessory orbs on necklaces, belts and rings. Each try uses one of
+  the item's empowerment points (its quality: white 1 ... orange 5); it works with 30% + 12% per power (Divine always)
+  and then adds a step: +1 item level and 10% more of the item's damage or armor (accessories +1 to each main
+  attribute). Arcane orbs always work, need no point, on gear whose points are used up, up to 3 steps beyond. The
+  source game keeps the exact chance and gain on its server, so these numbers are this project's.
 - **Attribute scrolls** I-V of Strength, Agility, Intellect, Willpower and Courage (1085-1109, spells 246-270): +4, 7,
   11, 14 and 21 of the attribute in the source game (twice that here, like the gems) for 5 minutes, levels 4/8/14/18/23,
   not in combat, one of each attribute at a time (`ItemUse.Buff`). Vendors that stock them sell them; Balagos drops the V

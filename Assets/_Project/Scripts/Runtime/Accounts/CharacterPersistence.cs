@@ -142,7 +142,8 @@ namespace RPG.Accounts
             var stacks = new List<ItemStack>();
             if (records == null) return stacks;
             foreach (ItemRecord record in records)
-                stacks.Add(new ItemStack(record.id, record.count, record.affix, record.socket, record.socket2, record.socket3, record.socket4));
+                stacks.Add(new ItemStack(record.id, record.count, record.affix, record.socket, record.socket2, record.socket3, record.socket4)
+                    { Empower = record.empower });
             return stacks;
         }
 
@@ -151,7 +152,7 @@ namespace RPG.Accounts
             var records = new ItemRecord[stacks.Length];
             for (int i = 0; i < stacks.Length; i++)
                 records[i] = new ItemRecord(stacks[i].ItemId, stacks[i].Count, stacks[i].AffixId, stacks[i].Socket, stacks[i].Socket2,
-                    stacks[i].Socket3, stacks[i].Socket4);
+                    stacks[i].Socket3, stacks[i].Socket4) { empower = stacks[i].Empower };
             return records;
         }
     }

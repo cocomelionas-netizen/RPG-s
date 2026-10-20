@@ -710,6 +710,7 @@ namespace RPG.EditorTools
                     if (!allItems.Contains(tome)) allItems.Add(tome);
             items.items = allItems.ToArray();
             EditorUtility.SetDirty(items);
+            ConfigureOrbs(items.items);
             AssignItemIcons(items.items);
             AssignSpellIcons(warriorSpells);
             AssignSpellIcons(rangerSpells);
