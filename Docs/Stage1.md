@@ -12,7 +12,7 @@
   - left mouse button – click-to-move; holding the button makes the character follow the cursor;
   - the keyboard always cancels a mouse target;
   - if the character is blocked by an obstacle for more than 0.25 s, the mouse target is cancelled.
-- **Camera** (`CameraFollow`). Orthographic, follows the player smoothly (SmoothDamp); the mouse wheel zooms from 2.5 to 8.
+- **Camera** (`CameraFollow`). Orthographic, follows the player smoothly (SmoothDamp); a fixed zoom like the source game's (the mouse wheel zooms only with `allowZoom` on).
 - **Global Light 2D** and **EventSystem**. The EventSystem is needed so that clicks on the UI do not move the character.
 
 ## Files
@@ -37,7 +37,7 @@
 4. **Hold the mouse button** and move it – the character follows the cursor.
 5. **Click behind a rock** – the character bumps into it, stands briefly and the target is cancelled (it does not walk "into the wall" forever).
 6. **Walk up to the little rock wall** (right of and above the start) from above and from below. From above the character must be covered by the rock, from below it must be in front of it.
-7. **Mouse wheel** – zooms in and out.
+7. **Mouse wheel** – no zoom: the camera keeps its distance, like the source game's.
 8. **Console** – no red errors. The message "GPUResidentDrawer Disabled…" is normal with the 2D Renderer.
 
 ### Automatic tests

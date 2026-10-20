@@ -49,7 +49,7 @@ python -m http.server 8080
 Then open http://localhost:8080.
 
 ## Controls in the browser
-The same as on the computer: WASD / mouse, Tab, F, Esc, mouse wheel. In the browser Esc also leaves full-screen mode. The login window (middle of the screen, F1) shows only **Play offline** and **Join**, because a browser cannot be a server.
+The same as on the computer: WASD / mouse, Tab, F, Esc. In the browser Esc also leaves full-screen mode. The login window (middle of the screen, F1) shows only **Play offline** and **Join**, because a browser cannot be a server.
 
 ## Multiplayer in the browser (later)
 A browser can only connect through **WebSocket**, and the game page is `https`, so the server will need:

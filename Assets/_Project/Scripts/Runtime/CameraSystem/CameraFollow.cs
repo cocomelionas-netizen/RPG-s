@@ -4,7 +4,8 @@ using UnityEngine;
 namespace RPG.CameraSystem
 {
     /// <summary>
-    /// Smoothly follows a target with an orthographic camera and zooms with the mouse wheel.
+    /// Smoothly follows a target with an orthographic camera at a fixed zoom, like the source game's (the mouse wheel zooms
+    /// only when <c>allowZoom</c> is on).
     /// </summary>
     [RequireComponent(typeof(Camera))]
     public class CameraFollow : MonoBehaviour
@@ -16,6 +17,8 @@ namespace RPG.CameraSystem
         [SerializeField] private Vector2 offset = new Vector2(0f, 0.3f);
 
         [Header("Zoom")]
+        [Tooltip("Off: the camera keeps its distance, like the source game's.")]
+        [SerializeField] private bool allowZoom;
         [SerializeField, Min(0.1f)] private float zoomStep = 0.75f;
         [SerializeField, Min(0.1f)] private float minZoom = 2.5f;
         [SerializeField, Min(0.1f)] private float maxZoom = 8f;
@@ -48,7 +51,7 @@ namespace RPG.CameraSystem
 
             transform.position = Vector3.SmoothDamp(transform.position, DesiredPosition(), ref velocity, smoothTime);
 
-            if (input != null && input.ZoomDelta != 0f && !input.IsPointerOverUI)
+            if (allowZoom && input != null && input.ZoomDelta != 0f && !input.IsPointerOverUI)
                 targetZoom = Mathf.Clamp(targetZoom - input.ZoomDelta * zoomStep, minZoom, maxZoom);
 
             cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, targetZoom, 1f - Mathf.Exp(-zoomSpeed * Time.deltaTime));
