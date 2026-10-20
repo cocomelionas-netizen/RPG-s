@@ -22,6 +22,14 @@ namespace RPG.Characters
 
         public Direction8 Direction { get; private set; } = Direction8.South;
         public string CurrentClip => currentClip;
+        /// <summary>The frame of <see cref="CurrentClip"/> shown now (an index into its frames for <see cref="Direction"/>).</summary>
+        public int CurrentFrame { get; private set; }
+
+        /// <summary>
+        /// Turns a one-shot clip asked for into the clip played (a hero's Attack becomes the swing, shot or cast of its
+        /// weapon); null plays clips as asked.
+        /// </summary>
+        public System.Func<string, string> ClipAlias { get; set; }
 
         public CharacterAnimationSet AnimationSet
         {
@@ -48,7 +56,7 @@ namespace RPG.Characters
         /// <summary>Plays a non-looping clip once, then returns to Idle/Walk.</summary>
         public void PlayOneShot(string clipId)
         {
-            oneShotClip = clipId;
+            oneShotClip = ClipAlias != null ? ClipAlias(clipId) : clipId;
             currentClip = null;
         }
 
@@ -93,6 +101,7 @@ namespace RPG.Characters
                     oneShotClip = null;
             }
 
+            CurrentFrame = frame;
             spriteRenderer.sprite = frames[frame];
             spriteRenderer.flipX = flipX;
         }

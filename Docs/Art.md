@@ -27,6 +27,18 @@ The world, heroes and monsters are drawn with art from the open game **Flare** (
 - **Heroes** (8 directions: idle, run, attack): Flare's male avatar layers drawn together in Flare's layer order per
   direction: the warrior in plate with longsword and kite shield, the ranger in leather with a longbow (attack: shoot),
   the mage in robes with a staff (attack: cast).
+- **Hero layers** (`Tools/Art/avatar.py <flare-game checkout>` → `Art/Flare/Avatar/<Gender>_<slot>.png` and
+  `Scripts/Editor/FlareAvatarData.cs`): Flare's male and female hero drawn in layers (head, chest, legs, feet, hands,
+  weapon, shield) in Flare's order per direction (`engine/hero_layers.txt`). Kept looks per gender: the hair, the leather
+  hood, chain coif, plate helm and mage hood; the bare body and the cloth, leather, chain, plate and mage pieces of
+  chest, legs, feet and hands; dagger, short and long sword, battle axe, mace, short and long bow, wand, staff; buckler
+  and kite shield. Armor has Idle, Walk, Swing, Shoot and Cast; a weapon Idle, Walk and its own attack. The builder
+  (`TestSceneBuilder.Avatar.cs`) makes one animation set per look into `AvatarCatalog` and gives every piece of gear its
+  look (`ItemDefinition.appearance`: armor by kind and slot, weapons by type and level, shields by level; a cloth hat
+  leaves the hair). In the game `HeroAppearance` draws the player's layers from the worn gear and the gender chosen
+  with a new character (saved with it), plays the weapon's attack (bows shoot, staves and wands cast, the rest swing)
+  and builds the portrait from the layers. The three put-together heroes above stay as the classes' looks for players
+  without the layers (tests).
 - **Monsters** (8 directions: idle, run, attack): goblin, goblin elite, skeleton, skeleton mage, skeleton archer,
   zombie, minotaur, antlion, small antlion, fire ant, ice ant, wyvern, fire wyvern. Each source-game monster gets a look
   by its name (`TestSceneBuilder.MonsterLook`: ants and bugs, wyrms and drakes, the undead, zombies and lost souls,

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using RPG.Characters;
 using RPG.Combat;
 using RPG.Items;
 using RPG.Navigation;
@@ -28,6 +29,7 @@ namespace RPG.Accounts
         private WaystoneTraveller waystones;
         private Spellbook spellbook;
         private Health health;
+        private HeroAppearance appearance;
         private PlayerNetworkMovement networkMovement;
         private AccountService accounts;
         private AccountRecord account;
@@ -44,6 +46,7 @@ namespace RPG.Accounts
             waystones = GetComponent<WaystoneTraveller>();
             spellbook = GetComponent<Spellbook>();
             health = GetComponent<Health>();
+            appearance = GetComponent<HeroAppearance>();
             networkMovement = GetComponent<PlayerNetworkMovement>();
         }
 
@@ -88,6 +91,7 @@ namespace RPG.Accounts
         private void Load(CharacterRecord saved)
         {
             health.ServerSetDisplayName(account.username);
+            if (appearance != null) appearance.ServerSetFemale(saved.female);
             progress.ServerLoad(saved.classIndex, saved.level, saved.experience, saved.spentPoints, saved.experienceToSpend);
             if (!saved.hasBeenSaved) return;
 
@@ -111,6 +115,7 @@ namespace RPG.Accounts
 
             CharacterRecord record = account.character;
             record.classIndex = progress.ClassIndex;
+            if (appearance != null) record.female = appearance.IsFemale;
             record.level = progress.Level;
             record.experience = progress.Experience;
             record.gold = inventory.Gold;

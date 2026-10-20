@@ -23,6 +23,8 @@ namespace RPG.Networking
         private string password = "";
         private bool createCharacter;
         private int classIndex;
+        private bool female;
+        private static readonly string[] Genders = { "Man", "Woman" };
         private bool visible = true;
         private string[] classNames;
 
@@ -86,10 +88,13 @@ namespace RPG.Networking
 
             createCharacter = GUILayout.Toggle(createCharacter, " New character");
             if (createCharacter && classNames != null && classNames.Length > 0)
+            {
                 classIndex = GUILayout.Toolbar(Mathf.Clamp(classIndex, 0, classNames.Length - 1), classNames);
+                female = GUILayout.Toolbar(female ? 1 : 0, Genders) == 1;
+            }
 
             GUILayout.Space(6f);
-            var login = new LoginRequest { username = username.Trim(), password = password, createCharacter = createCharacter, classIndex = classIndex };
+            var login = new LoginRequest { username = username.Trim(), password = password, createCharacter = createCharacter, classIndex = classIndex, female = female };
 
             if (GUILayout.Button("Play offline (single player)", GUILayout.Height(32f)))
                 Connect(login, () => bootstrap.StartOffline());

@@ -19,6 +19,8 @@ namespace RPG.Accounts
     public class CharacterRecord
     {
         public int classIndex;
+        /// <summary>A woman (drawn as Flare's heroine) or a man.</summary>
+        public bool female;
         public int level = 1;
         public int experience;
         public int gold;

@@ -3,7 +3,8 @@
 The images in this folder (`Tiles.png`, `Characters/*.png`) are cut, scaled and packed by `Tools/Art/flare.py` from the
 open game **Flare** (flare-game, https://github.com/flareteam/flare-game, its `mods/fantasycore` images). The heroes are
 Flare's male avatar layers drawn together (plate armor with longsword and kite shield, leather armor with longbow, mage
-robes with staff).
+robes with staff). `Avatar/*.png` are Flare's male and female hero layers kept apart (heads, armor of each kind,
+weapons and shields), packed by `Tools/Art/avatar.py`, so a hero is drawn from the gear it wears.
 
 ## License
 

@@ -368,7 +368,9 @@ namespace RPG.Progression
                 Mathf.RoundToInt((definition.MaxDamageAt(currentLevel) + damageBonus) * skill),
                 definition.attackInterval, definition.attackRange, CritChance, definition.projectileColor);
             autoAttack.DamageScale = LevelCurve.DamageGrowth(currentLevel);
-            if (characterAnimator != null && definition.animations != null)
+            // A hero drawn in layers looks like its gear, not its class.
+            if (characterAnimator != null && definition.animations != null
+                && !(TryGetComponent(out HeroAppearance appearance) && appearance.HasLayers))
                 characterAnimator.AnimationSet = definition.animations;
             if (IsServer && IsSpawned)
             {

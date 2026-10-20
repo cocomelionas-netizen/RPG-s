@@ -13,6 +13,8 @@ namespace RPG.Accounts
         public bool createCharacter;
         /// <summary>Class of the new character (only used with <see cref="createCharacter"/>).</summary>
         public int classIndex;
+        /// <summary>Whether the new character is a woman (only used with <see cref="createCharacter"/>).</summary>
+        public bool female;
 
         public byte[] ToBytes() => Encoding.UTF8.GetBytes(JsonUtility.ToJson(this));
 

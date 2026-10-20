@@ -99,6 +99,8 @@ namespace RPG.Items
         public ItemRarity rarity = ItemRarity.Common;
         [Tooltip("For weapons: which weapon skill raises its damage.")]
         public WeaponType weaponType = WeaponType.None;
+        [Tooltip("How a hero wearing it looks: the Flare layer of its slot (plate_helm, leather_boots, longsword...); empty: bare.")]
+        public string appearance;
 
         [Header("Stats while equipped")]
         [Tooltip("Added to auto-attack (and so ability) damage.")]

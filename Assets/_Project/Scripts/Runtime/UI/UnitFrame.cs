@@ -47,6 +47,12 @@ namespace RPG.UI
         private RectTransform manaFill;
         private Text manaLabel;
         private Image face;
+        // A hero drawn in layers (HeroAppearance) shows each layer in its portrait.
+        private HeroAppearance hero;
+        private Health heroOf;
+        private readonly List<Sprite> heroLayers = new List<Sprite>();
+        private readonly List<Sprite> shownLayers = new List<Sprite>();
+        private readonly List<Image> layerImages = new List<Image>();
 
         public UnitFrameRole Role => role;
 
@@ -254,6 +260,18 @@ namespace RPG.UI
         /// <summary>Shows the unit standing and facing the viewer, zoomed on the head; it does not animate.</summary>
         private void UpdateFace()
         {
+            if (heroOf != bound)
+            {
+                heroOf = bound;
+                hero = bound.GetComponent<HeroAppearance>();
+            }
+            if (hero != null && hero.HasLayers)
+            {
+                UpdateLayeredFace();
+                return;
+            }
+            ShowLayers(0);
+
             Sprite sprite = PortraitSprite(bound);
             face.enabled = sprite != null;
             if (sprite == null) return;
@@ -266,6 +284,60 @@ namespace RPG.UI
                 face.rectTransform.sizeDelta = new Vector2(height * aspect, height);
             }
             face.color = bound.IsDead ? new Color(0.5f, 0.5f, 0.5f) : Color.white;
+        }
+
+        /// <summary>The hero's layers standing and facing the viewer, lined up at the feet and zoomed like a single sprite.</summary>
+        private void UpdateLayeredFace()
+        {
+            face.enabled = false;
+            hero.PortraitLayers(heroLayers);
+            bool same = heroLayers.Count == shownLayers.Count;
+            for (int i = 0; same && i < heroLayers.Count; i++) same = heroLayers[i] == shownLayers[i];
+            if (!same)
+            {
+                shownLayers.Clear();
+                shownLayers.AddRange(heroLayers);
+                ShowLayers(heroLayers.Count);
+                if (heroLayers.Count == 0) return;
+
+                // Bounds of all layers around the feet, in units.
+                float minX = float.MaxValue, maxX = float.MinValue, minY = float.MaxValue, maxY = float.MinValue;
+                foreach (Sprite sprite in heroLayers)
+                {
+                    Bounds b = sprite.bounds;
+                    minX = Mathf.Min(minX, b.min.x); maxX = Mathf.Max(maxX, b.max.x);
+                    minY = Mathf.Min(minY, b.min.y); maxY = Mathf.Max(maxY, b.max.y);
+                }
+                float scale = portraitSize * FaceZoom / Mathf.Max(0.01f, maxY - minY);
+                // The point 72% up the figure sits at the disc's centre, like a single sprite's (face pivot).
+                var feet = new Vector2(-(minX + maxX) * 0.5f * scale, -(minY + (maxY - minY) * 0.72f) * scale);
+                for (int i = 0; i < heroLayers.Count; i++)
+                {
+                    Sprite sprite = heroLayers[i];
+                    RectTransform rect = layerImages[i].rectTransform;
+                    layerImages[i].sprite = sprite;
+                    rect.pivot = sprite.pivot / sprite.rect.size;
+                    rect.sizeDelta = sprite.rect.size / sprite.pixelsPerUnit * scale;
+                    rect.anchoredPosition = feet;
+                }
+            }
+            Color color = bound.IsDead ? new Color(0.5f, 0.5f, 0.5f) : Color.white;
+            for (int i = 0; i < shownLayers.Count; i++) layerImages[i].color = color;
+        }
+
+        /// <summary>Shows the first <paramref name="count"/> layer images (made as needed), hides the rest.</summary>
+        private void ShowLayers(int count)
+        {
+            if (count == 0) shownLayers.Clear();
+            while (layerImages.Count < count)
+            {
+                Image image = UIFactory.CreateImage("Layer", face.transform.parent, Color.white);
+                image.raycastTarget = false;
+                image.rectTransform.anchorMin = image.rectTransform.anchorMax = new Vector2(0.5f, 0.5f);
+                layerImages.Add(image);
+            }
+            for (int i = 0; i < layerImages.Count; i++)
+                if (layerImages[i].gameObject.activeSelf != i < count) layerImages[i].gameObject.SetActive(i < count);
         }
 
         /// <summary>The first idle frame facing south; units without animations show their sprite as it is.</summary>

@@ -392,6 +392,8 @@ namespace RPG.EditorTools
             player.AddComponent<PlayerMovement>();
             player.AddComponent<CharacterAnimator>().AnimationSet = animations;
             player.AddComponent<NetworkObject>();
+            // Drawn from the gear it wears (Flare's hero layers, man or woman).
+            player.AddComponent<HeroAppearance>().Catalog = CreateAvatarCatalog();
             player.AddComponent<PlayerNetworkMovement>();
 
             AddHealth(player, "Player", true, Faction.Player, 100);
@@ -713,6 +715,7 @@ namespace RPG.EditorTools
             EditorUtility.SetDirty(items);
             ConfigureOrbs(items.items);
             AssignItemIcons(items.items);
+            AssignAppearances(items.items);
             AssignSpellIcons(warriorSpells);
             AssignSpellIcons(rangerSpells);
             AssignSpellIcons(mageSpells);

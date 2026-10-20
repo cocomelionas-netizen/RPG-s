@@ -55,6 +55,8 @@ Scroll of Returning (back to St. Revere), food, M world map with the source map'
 Art: Flare's (CC-BY-SA 3.0, `Assets/_Project/Art/Flare/CREDITS.md`): grassland tiles, lakes, trees, heroes and
 monsters in 8 directions, chests, packed by `Tools/Art/flare.py` (`Docs/Art.md`); item and spell icons (Flare, Painterly
 Spell Icons, game-icons.net; `Tools/Art/icons.py`). Line of sight: walls block attacks and spells.
+Heroes: man or woman (chosen with a new character), drawn in Flare's layers from the worn gear (`HeroAppearance`,
+`Tools/Art/avatar.py`): hair or helmet, armor of each kind, weapon and shield change as gear is put on.
 Stats: all source stats bought with experience (C: GENERAL / COMBAT / SKILLS tabs with the worn gear on both sides; SPEND EXP → CONFIRM/CANCEL; class-only weapon skills). Equipment: the source's 11 slots (weapon, helm, chest,
 feet, necklace, belt, legs, hands, two rings, shield), up to 4 sockets by quality, class gear (bows ranger, staves mage,
 plate warrior, robes mage). Items: source gear by level and material, dropped

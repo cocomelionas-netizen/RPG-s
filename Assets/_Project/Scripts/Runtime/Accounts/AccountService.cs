@@ -94,7 +94,7 @@ namespace RPG.Accounts
                     username = name,
                     salt = salt,
                     passwordHash = PasswordHasher.Hash(request.password, salt),
-                    character = new CharacterRecord { classIndex = Mathf.Max(0, request.classIndex) },
+                    character = new CharacterRecord { classIndex = Mathf.Max(0, request.classIndex), female = request.female },
                 };
                 return null;
             }
