@@ -15,7 +15,8 @@ Generated data lives in `Scripts/Editor/*Data.cs` (`StartAreaData`, `GearData`, 
   (`Tools/GameData/island.py`).
 - **Ground** – cell by cell from the source game's `maps/fanadin.map` (`Tools/GameData/world.py` →
   `Scripts/Editor/WorldMapData.cs`): its walls, fences and rock walls (flag 0x20) are rocks here, its trees and other
-  blocked objects (0x60) are trees (one drawn per little clump, every cell of it blocks), everything else is grass.
+  blocked objects (0x60) are trees (tiles of the obstacle tilemap, not objects: one drawn per clump, no two closer than
+  three cells, every cell of it blocks; the rocks and trees block as one merged static collider), everything else is grass.
   Cells the file does not list are open ground. So the towns, the walls of St. Revere and its houses, the fences and the
   woods stand where the source game has them. From the start, 863 of the island's 870 NPC and object spots can be walked
   to; the rest stand in fenced pens (a few pigs), as in the source game.

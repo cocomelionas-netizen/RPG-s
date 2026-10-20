@@ -114,11 +114,13 @@ namespace RPG.EditorTools
             Tile rockTile = CreateTile("Rock", PlaceholderArtGenerator.Rock("Rock", 5), Tile.ColliderType.Grid);
             Tile blockedTile = CreateTile("Blocked", null, Tile.ColliderType.Grid);
             Sprite treeSprite = PlaceholderArtGenerator.Tree("Tree", 6);
+            Tile treeTile = CreateTile("Tree", treeSprite, Tile.ColliderType.Grid);
             Sprite markerSprite = PlaceholderArtGenerator.GroundRing("ClickMarker", new Color(1f, 0.85f, 0.4f, 0.9f));
             CharacterAnimationSet playerAnimations = CreateCharacterAnimationSet("Player", PlayerArtFolder, PlayerAnimationSetPath, new Color(0.2f, 0.32f, 0.62f), null);
             CharacterAnimationSet goblinAnimations = CreateCharacterAnimationSet("Goblin", GoblinArtFolder, GoblinAnimationSetPath,
                 new Color(0.42f, 0.27f, 0.16f), new Color(0.45f, 0.62f, 0.27f));
-            GameObject treePrefab = CreateTreePrefab(treeSprite);
+            // The tree prefab is kept for hand-made scenes; the world draws its trees as tiles (PlaceTrees).
+            CreateTreePrefab(treeSprite);
             Sprite barSprite = PlaceholderArtGenerator.BarPixel("BarPixel");
             Sprite targetRingSprite = PlaceholderArtGenerator.GroundRing("TargetRing", new Color(0.95f, 0.2f, 0.15f, 0.9f));
             GameObject dummyPrefab = CreateDummyPrefab(PlaceholderArtGenerator.TrainingDummy("TrainingDummy"), barSprite);
@@ -171,9 +173,21 @@ namespace RPG.EditorTools
             Grid grid = CreateGrid();
             Tilemap ground = CreateTilemap(grid, "Ground", -100, TilemapRenderer.Mode.Chunk);
             Tilemap obstacles = CreateTilemap(grid, "Obstacles", 0, TilemapRenderer.Mode.Individual);
-            obstacles.gameObject.AddComponent<TilemapCollider2D>();
             PaintTestMap(ground, obstacles, grassTiles, pathTile, rockTile, blockedTile);
-            PlaceTrees(grid, treePrefab);
+            PlaceTrees(obstacles, treeTile);
+            // The rocks and trees block as one merged static shape rather than tens of thousands of tile boxes.
+            var obstacleBody = obstacles.gameObject.AddComponent<Rigidbody2D>();
+            obstacleBody.bodyType = RigidbodyType2D.Static;
+            var obstacleCollider = obstacles.gameObject.AddComponent<TilemapCollider2D>();
+            // Collider2D.compositeOperation = Merge (Unity 6), set through its serialized field.
+            var colliderObject = new SerializedObject(obstacleCollider);
+            SerializedProperty composite = colliderObject.FindProperty("m_CompositeOperation");
+            SerializedProperty usedByComposite = colliderObject.FindProperty("m_UsedByComposite");
+            if (composite != null) composite.intValue = 1;
+            else if (usedByComposite != null) usedByComposite.boolValue = true;
+            else Debug.LogWarning("[TestScene] The obstacle collider could not be merged.");
+            colliderObject.ApplyModifiedPropertiesWithoutUndo();
+            obstacles.gameObject.AddComponent<CompositeCollider2D>().geometryType = CompositeCollider2D.GeometryType.Polygons;
             var navigation = grid.gameObject.AddComponent<WorldNavigation>();
             navigation.Configure(grid, ground, obstacles);
             navigation.ZoneName = "Fanadin";
@@ -502,25 +516,23 @@ namespace RPG.EditorTools
         }
 
         /// <summary>
-        /// A tree on the source game's tree cells: one per little clump (no two closer than two cells), so a wood looks like
-        /// a wood and not a wall of trunks. The cells block through their tiles; the trees' own trunks are not needed.
+        /// A tree on the source game's tree cells: one per clump (no two closer than three cells), so a wood looks like a
+        /// wood and not a wall of trunks. Trees are tiles of the obstacle tilemap (drawn and sorted one by one with the
+        /// characters), not objects of their own: the island has tens of thousands of tree cells. Every tree cell blocks.
         /// </summary>
-        private static void PlaceTrees(Grid grid, GameObject treePrefab)
+        private static void PlaceTrees(Tilemap obstacles, Tile treeTile)
         {
-            var props = new GameObject("Props").transform;
+            const int spacing = 2;
             var drawn = new HashSet<Vector3Int>();
             foreach (Vector3Int cell in TreeCells.OrderBy(c => c.y).ThenBy(c => c.x))
             {
                 bool crowded = false;
-                for (int dx = -1; dx <= 1 && !crowded; dx++)
-                for (int dy = -1; dy <= 1 && !crowded; dy++)
+                for (int dx = -spacing; dx <= spacing && !crowded; dx++)
+                for (int dy = -spacing; dy <= spacing && !crowded; dy++)
                     crowded = (dx != 0 || dy != 0) && drawn.Contains(new Vector3Int(cell.x + dx, cell.y + dy, 0));
                 if (crowded) continue;
                 drawn.Add(cell);
-                var tree = (GameObject)PrefabUtility.InstantiatePrefab(treePrefab, props);
-                tree.transform.position = grid.GetCellCenterWorld(cell);
-                // The cell already blocks; a trunk collider would only make paths around it tighter.
-                foreach (Collider2D trunk in tree.GetComponents<Collider2D>()) UnityEngine.Object.DestroyImmediate(trunk);
+                obstacles.SetTile(cell, treeTile);
             }
         }
 
