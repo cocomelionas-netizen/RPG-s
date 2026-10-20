@@ -41,6 +41,13 @@ namespace RPG.Networking
                 home = player.transform.position;
             }
 
+            // Dead: presses Respawn like a player would.
+            if (movement.TryGetComponent(out RPG.Combat.Health health) && health.IsDead)
+            {
+                if (Time.time >= nextMoveTime && movement.TryGetComponent(out RPG.Combat.PlayerRespawn respawn)) respawn.RequestRespawn();
+                nextMoveTime = Time.time + 2f;
+                return;
+            }
             if (movement.Destination.HasValue || Time.time < nextMoveTime) return;
 
             Vector2 offset = Random.insideUnitCircle * wanderRadius;

@@ -29,3 +29,10 @@ F8 (not F3: browsers search the page with it) shows frames per second, the slowe
 spawned units and monsters and the managed memory, updated once a second and when it opens (`UI/PerformanceOverlay.cs`,
 its own canvas, under the minimap). Use it to check a change against a target such as a steady 60 FPS: walk the same
 route before and after.
+
+## Death panel
+
+When the local player dies, a panel says "You have died." (the source game's "You have died. Respawn?") with a Respawn
+button (`UI/DeathPanel.cs`): after 1.5 sec it brings the player back at the spawn point with full health and mana
+(`PlayerRespawn.WaitForChoice`). Until then a friend's Redemption can revive them where they fell. Test bots press it
+themselves.
