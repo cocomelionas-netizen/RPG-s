@@ -74,17 +74,21 @@ namespace RPG.EditorTools
             PlayerSettings.WebGL.decompressionFallback = true;
             PlayerSettings.WebGL.dataCaching = true;
 
-            // Build speed over peak runtime speed: this is a small 2D game and builds run on every push.
+            // The smallest download: code generated for size, unused managed code stripped (Medium; Assets/_Project/link.xml
+            // keeps the game's own and Netcode's), and WebAssembly optimized for size (a slower build, a smaller and quicker
+            // to load game).
             PlayerSettings.SetIl2CppCodeGeneration(NamedBuildTarget.WebGL, Il2CppCodeGeneration.OptimizeSize);
-            SetWasmCodeOptimizationForBuildTimes();
+            PlayerSettings.SetManagedStrippingLevel(NamedBuildTarget.WebGL, ManagedStrippingLevel.Medium);
+            PlayerSettings.stripEngineCode = true;
+            SetWasmCodeOptimization("DiskSize");
         }
 
         /// <summary>
-        /// WebGL "Code Optimization: Shorter Build Time". It lives in the WebGL module's editor assembly and is
+        /// WebGL "Code Optimization" (BuildTimes, RuntimeSpeed, DiskSize...). It lives in the WebGL module's editor assembly and is
         /// stored per machine, not in the project, so set it before every build (reflection keeps this file
         /// compiling where the WebGL module is not installed).
         /// </summary>
-        private static void SetWasmCodeOptimizationForBuildTimes()
+        private static void SetWasmCodeOptimization(string value)
         {
             foreach (System.Reflection.Assembly assembly in System.AppDomain.CurrentDomain.GetAssemblies())
             {
@@ -92,7 +96,13 @@ namespace RPG.EditorTools
                 System.Type optimization = assembly.GetType("UnityEditor.WebGL.WasmCodeOptimization");
                 if (settings == null || optimization == null) continue;
 
-                settings.GetProperty("codeOptimization")?.SetValue(null, System.Enum.Parse(optimization, "BuildTimes"));
+                if (!System.Enum.IsDefined(optimization, value))
+                {
+                    Debug.LogWarning($"[Build] No WebGL code optimization {value}; using the default.");
+                    return;
+                }
+                settings.GetProperty("codeOptimization")?.SetValue(null, System.Enum.Parse(optimization, value));
+                Debug.Log($"[Build] WebGL code optimization: {value}.");
                 return;
             }
             Debug.LogWarning("[Build] WebGL code optimization setting not found; using the default.");
