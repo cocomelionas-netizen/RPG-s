@@ -33,7 +33,8 @@ Players test the WebGL build at https://cocomelionas-netizen.github.io/RPG-s/ (O
 - **Map fidelity**: the world must match the source game's layout; check changes against the source data (and its
   world map picture) before building on them: `python3 -I Tools/GameData/verify_map.py <source data> out.png`.
 - **Performance**: when the world or the number of objects grows, keep only what is near players active (monster
-  spawners' activation range), draw props as tiles, give moving HUD layers their own canvases, and rewrite UI texts
+  spawners' activation range), draw props as tiles, give moving HUD layers their own canvases (or put labels that stand over
+  world objects on small world-space canvases, like `NpcNameplates`, so walking redraws nothing), and rewrite UI texts
   only when their values change. Measure with the in-game F8 overlay (FPS, slowest frame) before and after.
 
 ## Source data

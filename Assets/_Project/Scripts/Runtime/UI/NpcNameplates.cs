@@ -8,12 +8,12 @@ using UnityEngine.UI;
 namespace RPG.UI
 {
     /// <summary>
-    /// Names (and what they sell) above the vendor NPCs, the names (and titles) of townsfolk, the names of chests, and of dungeon portals (with who may
-    /// enter), drawn on the HUD canvas.
+    /// Names (and what they sell) above the vendor NPCs, the names (and titles) of townsfolk, the names of chests, and of
+    /// dungeon portals (with who may enter). Each plate is a small world-space canvas standing over its NPC or object, so
+    /// nothing is redrawn while the camera moves (screen-space plates had to be moved and their canvas rebuilt every frame
+    /// of walking, which grew slow with the townsfolk). The plates are as big as HUD text and follow the camera's zoom;
+    /// far ones are hidden a few times a second. Place it anywhere (it keeps its own lists).
     /// </summary>
-    // After the camera has moved this frame; otherwise the plates use last frame's camera and drift while walking.
-    [DefaultExecutionOrder(1000)]
-    [RequireComponent(typeof(RectTransform))]
     public class NpcNameplates : MonoBehaviour
     {
         [SerializeField] private float heightAboveFeet = 0.85f;
@@ -21,120 +21,104 @@ namespace RPG.UI
         [SerializeField, Min(1f)] private float visibleDistance = 12f;
 
         private static readonly Color NameColor = new Color(1f, 0.85f, 0.45f);
-        private readonly Dictionary<Vendor, Text> plates = new Dictionary<Vendor, Text>();
-        private readonly Dictionary<Townsperson, Text> personPlates = new Dictionary<Townsperson, Text>();
         private static readonly Color PersonColor = new Color(0.65f, 0.95f, 0.55f);
-        private readonly Dictionary<LootChest, Text> chestPlates = new Dictionary<LootChest, Text>();
-        private readonly List<LootChest> goneChests = new List<LootChest>();
-        private readonly Dictionary<Portal, Text> portalPlates = new Dictionary<Portal, Text>();
-        private readonly List<Portal> gonePortals = new List<Portal>();
         private static readonly Color PortalColor = new Color(0.85f, 0.7f, 1f);
-        private const float PortalNameHeight = 1f;
         // Off-white, as the source game writes container names.
         private static readonly Color ChestColor = new Color32(0xE8, 0xED, 0xE1, 0xFF);
+        private const float PortalNameHeight = 1f;
         private const float ChestNameHeight = 0.55f;
-        private Canvas canvas;
+        /// <summary>The HUD's reference height: a plate's text is as big as HUD text of the same size.</summary>
+        private const float ReferenceHeight = 1080f;
+        private const float CheckInterval = 0.25f;
+        /// <summary>World-space canvases draw over the world's sprites.</summary>
+        private const int PlateSortingOrder = 1000;
 
-        private void Awake()
-        {
-            canvas = GetComponentInParent<Canvas>();
-        }
+        private readonly Dictionary<Object, GameObject> plates = new Dictionary<Object, GameObject>();
+        private readonly List<Object> gone = new List<Object>();
+        private float nextCheck;
+        private float scale;
 
         private void LateUpdate()
         {
             Camera cam = Camera.main;
+            if (cam == null) return;
+            float wanted = 2f * cam.orthographicSize / ReferenceHeight;
+            bool rescale = Mathf.Abs(wanted - scale) > scale * 0.01f;
+            if (rescale) scale = wanted;
+            if (!rescale && Time.unscaledTime < nextCheck) return;
+            nextCheck = Time.unscaledTime + CheckInterval;
+            Vector2 center = cam.transform.position;
+
             foreach (Vendor vendor in Vendor.All)
             {
-                if (!plates.TryGetValue(vendor, out Text plate))
-                {
-                    plate = UIFactory.CreateText(vendor.name, transform, 16, TextAnchor.LowerCenter);
-                    plate.rectTransform.sizeDelta = new Vector2(240f, 44f);
-                    plate.rectTransform.pivot = new Vector2(0.5f, 0f);
-                    plate.color = NameColor;
-                    string title = vendor.Definition != null ? vendor.Definition.title : "";
-                    plate.text = string.IsNullOrEmpty(title) ? vendor.DisplayName : $"{vendor.DisplayName}\n<size=13>{title}</size>";
-                    plates[vendor] = plate;
-                }
-
-                bool show = cam != null && Vector2.Distance(cam.transform.position, vendor.transform.position) <= visibleDistance;
-                if (plate.gameObject.activeSelf != show) plate.gameObject.SetActive(show);
-                if (show)
-                    plate.rectTransform.position = cam.WorldToScreenPoint(vendor.transform.position + Vector3.up * heightAboveFeet);
+                string title = vendor.Definition != null ? vendor.Definition.title : "";
+                Show(vendor, vendor.transform, center, heightAboveFeet, 16, NameColor,
+                    () => string.IsNullOrEmpty(title) ? vendor.DisplayName : $"{vendor.DisplayName}\n<size=13>{title}</size>", rescale);
             }
-
             foreach (Townsperson person in Townsperson.All)
-            {
-                if (!personPlates.TryGetValue(person, out Text plate))
-                {
-                    plate = UIFactory.CreateText(person.name, transform, 15, TextAnchor.LowerCenter);
-                    plate.rectTransform.sizeDelta = new Vector2(240f, 44f);
-                    plate.rectTransform.pivot = new Vector2(0.5f, 0f);
-                    plate.color = PersonColor;
-                    plate.text = string.IsNullOrEmpty(person.Title) ? person.DisplayName : $"{person.DisplayName}\n<size=12>{person.Title}</size>";
-                    personPlates[person] = plate;
-                }
-
-                bool show = cam != null && Vector2.Distance(cam.transform.position, person.transform.position) <= visibleDistance;
-                if (plate.gameObject.activeSelf != show) plate.gameObject.SetActive(show);
-                if (show)
-                    plate.rectTransform.position = cam.WorldToScreenPoint(person.transform.position + Vector3.up * heightAboveFeet);
-            }
-
+                Show(person, person.transform, center, heightAboveFeet, 15, PersonColor,
+                    () => string.IsNullOrEmpty(person.Title) ? person.DisplayName : $"{person.DisplayName}\n<size=12>{person.Title}</size>", rescale);
             foreach (LootChest chest in LootChest.All)
             {
-                if (!chestPlates.TryGetValue(chest, out Text plate))
-                {
-                    plate = UIFactory.CreateText(chest.name, transform, 14, TextAnchor.LowerCenter);
-                    plate.rectTransform.sizeDelta = new Vector2(220f, 40f);
-                    plate.rectTransform.pivot = new Vector2(0.5f, 0f);
-                    plate.color = ChestColor;
-                    plate.text = chest.Locked
+                if (!chest.IsSpawned) continue;
+                Show(chest, chest.transform, center, ChestNameHeight, 14, ChestColor,
+                    () => chest.Locked
                         ? $"{chest.Label}\n<size=12><color=#b5a07a>Locked (Lockpicking {chest.RequiredLockpicking})</color></size>"
-                        : chest.Label;
-                    chestPlates[chest] = plate;
-                }
-
-                bool show = cam != null && Vector2.Distance(cam.transform.position, chest.transform.position) <= visibleDistance;
-                if (plate.gameObject.activeSelf != show) plate.gameObject.SetActive(show);
-                if (show)
-                    plate.rectTransform.position = cam.WorldToScreenPoint(chest.transform.position + Vector3.up * ChestNameHeight);
+                        : chest.Label, rescale);
             }
-
             foreach (Portal portal in Portal.Portals)
-            {
-                if (!portalPlates.TryGetValue(portal, out Text plate))
-                {
-                    plate = UIFactory.CreateText(portal.name, transform, 14, TextAnchor.LowerCenter);
-                    plate.rectTransform.sizeDelta = new Vector2(260f, 40f);
-                    plate.rectTransform.pivot = new Vector2(0.5f, 0f);
-                    plate.color = PortalColor;
-                    plate.text = PortalText(portal);
-                    portalPlates[portal] = plate;
-                }
+                if (portal != null && portal.isActiveAndEnabled)
+                    Show(portal, portal.transform, center, PortalNameHeight, 14, PortalColor, () => PortalText(portal), rescale);
 
-                bool show = cam != null && Vector2.Distance(cam.transform.position, portal.transform.position) <= visibleDistance;
-                if (plate.gameObject.activeSelf != show) plate.gameObject.SetActive(show);
-                if (show)
-                    plate.rectTransform.position = cam.WorldToScreenPoint(portal.transform.position + Vector3.up * PortalNameHeight);
-            }
-            gonePortals.Clear();
-            foreach (KeyValuePair<Portal, Text> entry in portalPlates)
-                if (entry.Key == null || !entry.Key.isActiveAndEnabled) gonePortals.Add(entry.Key);
-            foreach (Portal portal in gonePortals)
+            // Opened chests and closed portals lose their plates.
+            gone.Clear();
+            foreach (KeyValuePair<Object, GameObject> entry in plates)
             {
-                if (portalPlates[portal] != null) Destroy(portalPlates[portal].gameObject);
-                portalPlates.Remove(portal);
+                bool alive = entry.Key != null && entry.Value != null
+                             && (!(entry.Key is LootChest chest) || chest.IsSpawned)
+                             && (!(entry.Key is Portal portal) || portal.isActiveAndEnabled);
+                if (!alive) gone.Add(entry.Key);
             }
+            foreach (Object owner in gone)
+            {
+                if (plates[owner] != null) Destroy(plates[owner]);
+                plates.Remove(owner);
+            }
+        }
 
-            // Chests that were opened.
-            goneChests.Clear();
-            foreach (KeyValuePair<LootChest, Text> entry in chestPlates)
-                if (entry.Key == null || !entry.Key.IsSpawned) goneChests.Add(entry.Key);
-            foreach (LootChest chest in goneChests)
+        /// <summary>Makes the plate of <paramref name="owner"/> once, then only shows or hides it by distance (and rescales on zoom).</summary>
+        private void Show(Object owner, Transform target, Vector2 center, float height, int fontSize, Color color, System.Func<string> text,
+            bool rescale)
+        {
+            bool near = Vector2.Distance(center, target.position) <= visibleDistance;
+            if (!plates.TryGetValue(owner, out GameObject plate) || plate == null)
             {
-                if (chestPlates[chest] != null) Destroy(chestPlates[chest].gameObject);
-                chestPlates.Remove(chest);
+                if (!near) return;
+                plate = CreatePlate(target, height, fontSize, color, text());
+                plates[owner] = plate;
             }
+            if (plate.activeSelf != near) plate.SetActive(near);
+            if (rescale || plate.transform.localScale.x != scale) plate.transform.localScale = Vector3.one * scale;
+        }
+
+        private GameObject CreatePlate(Transform target, float height, int fontSize, Color color, string content)
+        {
+            var root = new GameObject("Nameplate", typeof(RectTransform));
+            var rect = (RectTransform)root.transform;
+            rect.SetParent(target, false);
+            rect.localPosition = Vector3.up * height;
+            rect.localScale = Vector3.one * scale;
+            rect.sizeDelta = new Vector2(260f, 48f);
+            rect.pivot = new Vector2(0.5f, 0f);
+            var plateCanvas = root.AddComponent<Canvas>();
+            plateCanvas.renderMode = RenderMode.WorldSpace;
+            plateCanvas.sortingOrder = PlateSortingOrder;
+
+            Text label = UIFactory.CreateText("Name", rect, fontSize, TextAnchor.LowerCenter);
+            UIFactory.Stretch(label.rectTransform);
+            label.color = color;
+            label.text = content;
+            return root;
         }
 
         /// <summary>"Decrepit Tower" over "Level 25 · Tower Key · up to 4 players"; "Exit" or "Exit to St. Revere".</summary>
