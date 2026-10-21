@@ -36,3 +36,12 @@ When the local player dies, a panel says "You have died." (the source game's "Yo
 button (`UI/DeathPanel.cs`): after 1.5 sec it brings the player back at the spawn point with full health and mana
 (`PlayerRespawn.WaitForChoice`). Until then a friend's Redemption can revive them where they fell. Test bots press it
 themselves.
+
+## Cheats (F9)
+
+For testing, `Cheats` (on the player) and `CheatWindow` (F9). Only the host's own character may use them (offline
+single player, or the one hosting); the server checks it. Buttons: Level +1, Level 25, +5000 XP, +10000 gold, Heal + mana
+(and harmful effects removed), Kill around (monsters within 8 units), God mode (no damage, health and mana kept full),
+Fast (Haste +200 %), All spells (every spell of the class learned), Potions and food (10 of each), Gems (3 of each), Orbs,
+keys and scrolls (1 of each), Gear of my level (one piece of the class's gear per slot), Empty the bag, All waypoints,
+and a Teleport button for every waypoint.

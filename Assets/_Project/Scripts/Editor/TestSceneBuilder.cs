@@ -119,7 +119,8 @@ namespace RPG.EditorTools
             CreateTreePrefab(treeSprite);
             Sprite barSprite = PlaceholderArtGenerator.BarPixel("BarPixel");
             Sprite targetRingSprite = PlaceholderArtGenerator.GroundRing("TargetRing", new Color(0.95f, 0.2f, 0.15f, 0.9f));
-            GameObject dummyPrefab = CreateDummyPrefab(PlaceholderArtGenerator.TrainingDummy("TrainingDummy"), barSprite);
+            // The training dummy is kept for the tests; the world has none (the source game has none).
+            CreateDummyPrefab(PlaceholderArtGenerator.TrainingDummy("TrainingDummy"), barSprite);
             CharacterAnimationSet bruteAnimations = FlareAnimationSet("GoblinElite");
             CharacterAnimationSet orcAnimations = FlareAnimationSet("Minotaur");
             ItemCatalog items = CreateItems(out ItemDefinition potion, out ItemDefinition manaPotion);
@@ -211,7 +212,6 @@ namespace RPG.EditorTools
             CreateClickMarker(markerSprite, null);
             CreateTargetIndicator(targetRingSprite);
             new GameObject("Combat Effects").AddComponent<CombatEffects>().Configure(projectileSprite, effectRingSprite, GroundRingRadius);
-            PlaceDummies(grid, dummyPrefab);
             PlaceMonsters(grid, obstacles);
             PlaceChests(grid, obstacles, chests);
             PlaceEdgeMonsters(grid, obstacles);
@@ -425,6 +425,8 @@ namespace RPG.EditorTools
             player.AddComponent<DungeonTraveller>();
             player.AddComponent<WaystoneTraveller>();
             player.AddComponent<Conversation>();
+            // F9 cheats for testing: only the host's own character (offline single player).
+            player.AddComponent<Cheats>();
             float height = BodyHeight(animations);
             AddHealthPresenter(player, barSprite, height + 0.08f);
             AddHitbox(player, new Vector2(0.36f, height * 0.85f), new Vector2(0f, height * 0.45f));
@@ -1751,19 +1753,6 @@ namespace RPG.EditorTools
             }
         }
 
-        private static void PlaceDummies(Grid grid, GameObject dummyPrefab)
-        {
-            Vector3Int start = StartCell;
-            // Right and left of the start, on grass inside the cleared start area.
-            var cells = new[] { new Vector3Int(start.x + 2, start.y - 2, 0), new Vector3Int(start.x - 3, start.y - 1, 0) };
-            var parent = new GameObject("Training Dummies").transform;
-            foreach (Vector3Int cell in cells)
-            {
-                var dummy = (GameObject)PrefabUtility.InstantiatePrefab(dummyPrefab, parent);
-                dummy.transform.position = grid.GetCellCenterWorld(cell);
-            }
-        }
-
         private static void CreateTargetIndicator(Sprite ringSprite)
         {
             var go = new GameObject("Target Indicator");
@@ -1856,6 +1845,11 @@ namespace RPG.EditorTools
             gossipWindow.transform.SetParent(canvasObject.transform, false);
             Stretch((RectTransform)gossipWindow.transform);
             gossipWindow.AddComponent<GossipWindow>();
+
+            var cheatWindow = new GameObject("Cheat Window", typeof(RectTransform));
+            cheatWindow.transform.SetParent(canvasObject.transform, false);
+            Stretch((RectTransform)cheatWindow.transform);
+            cheatWindow.AddComponent<CheatWindow>();
 
             var characterWindow = new GameObject("Character Window", typeof(RectTransform));
             characterWindow.transform.SetParent(canvasObject.transform, false);
