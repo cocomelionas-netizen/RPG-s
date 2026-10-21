@@ -63,3 +63,8 @@ A browser in full screen draws at the screen's real pixels (4K and more on high-
 stutter. `RenderResolution` (builds only) draws the world at most about 1080 pixels high and stretches it (URP render
 scale), while the HUD stays sharp at the full size, and turns HDR off. F8 shows the screen size and the share the world
 is drawn at.
+
+## Download size
+The big atlases (Flare's heroes, monsters, tiles and the avatar layers, thousands of pixels wide) are crunched DXT
+(`FlareAtlas`, quality 70): the browser downloads several times less than with plain DXT; the icons keep plain block
+compression. Measure the download with the files under `Build/` (their Content-Length).

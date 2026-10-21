@@ -23,7 +23,7 @@ namespace RPG.EditorTools
         private static void LoadIcons()
         {
             IconSprites.Clear();
-            Texture2D atlas = FlareAtlas(IconArtData.Atlas);
+            Texture2D atlas = FlareAtlas(IconArtData.Atlas, crunch: false);
             var set = LoadOrCreateAsset<IconSet>(IconSetPath);
             RemoveSubSprites(set);
             var all = new List<Sprite>();
