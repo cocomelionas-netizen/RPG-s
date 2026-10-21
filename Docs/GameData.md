@@ -356,3 +356,12 @@ gem 100 %, gold × 3), in the caves Elm / Aspen / Copper.
 **Boss loot** – the source's `loot` tables (identical rows count once) and their quality chances (`loot_blue/gold/
 purple_chance`, e.g. Lord Zargan – purple 100 %). Orbs, Magic Dust, Arcane Essence can only be sold for now (the source
 price); the source's amethysts and stat scrolls are left out (we have none); Refined → our plain gem, Flawless → Flawless gem.
+
+## Buffs and debuffs on the unit frames
+
+From `spell_template.aura_description` (`Tools/GameData/auras.py` → `Scripts/Editor/AuraData.cs`, 140 texts by spell name),
+put by the scene builder into `Resources/StatusInfo.asset` (`StatusInfo`) with icons: a spell's or item's own icon,
+else one for the kind of effect (stun, root, slow, damage over time by school: bleeding, frost, fire, shadow, holy...).
+The player's and the target's frames show each effect as an icon (red frame: debuff, green: buff) with its seconds
+left and stacks; the pointer over one shows its name, Buff or Debuff, the source text ("Reduces fire resistance."),
+what it does with its numbers ("Takes 45 fire damage over its duration.", "Moves 30% slower."), stacks and time left.

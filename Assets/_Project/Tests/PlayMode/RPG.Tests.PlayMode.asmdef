@@ -4,6 +4,7 @@
     "references": [
         "RPG.Runtime",
         "Unity.Netcode.Runtime",
+        "Unity.Collections",
         "UnityEngine.UI",
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner"

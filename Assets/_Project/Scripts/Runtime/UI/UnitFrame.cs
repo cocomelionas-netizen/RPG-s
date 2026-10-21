@@ -105,7 +105,7 @@ namespace RPG.UI
             UIFactory.Place(manaBackground.rectTransform, barAnchor, new Vector2(barsX, -14f), new Vector2(barWidth, 16f));
             manaBar = manaBackground.gameObject;
 
-            // Buffs and debuffs under the bars: a coloured square each, its initials and seconds left.
+            // Buffs and debuffs under the bars: an icon each, its seconds left and stacks; the pointer over one shows what it is.
             effectsRow = UIFactory.CreateRect("Effects", panel.transform);
             UIFactory.Place(effectsRow, barAnchor, new Vector2(barsX, -42f), new Vector2(barWidth, EffectIconSize));
             effectsMirrored = mirrored;
@@ -149,7 +149,12 @@ namespace RPG.UI
         {
             bool show = bound != null && bound.IsSpawned;
             if (panel.activeSelf != show) panel.SetActive(show);
-            if (!show) return;
+            if (!show)
+            {
+                hoveredEffect = null;
+                if (effectTooltip != null && effectTooltip.gameObject.activeSelf) effectTooltip.gameObject.SetActive(false);
+                return;
+            }
 
             // Texts are rewritten only when what they show changed (a new unit, its health or mana), the name and the
             // effect timers a few times a second.
@@ -199,6 +204,7 @@ namespace RPG.UI
                 nextEffectsRefresh = Time.unscaledTime + 0.25f;
                 UpdateEffects();
             }
+            PlaceEffectTooltip();
         }
 
         private Health shownUnit;
@@ -210,11 +216,55 @@ namespace RPG.UI
         private float nextNameRefresh;
         private float nextEffectsRefresh;
 
-        private const float EffectIconSize = 26f;
+        private const float EffectIconSize = 30f;
         private const int MaxEffectIcons = 10;
+        private static readonly Color DebuffBorder = new Color(0.9f, 0.2f, 0.15f);
+        private static readonly Color BuffBorder = new Color(0.3f, 0.85f, 0.35f);
         private RectTransform effectsRow;
         private bool effectsMirrored;
-        private readonly List<(Image icon, Outline border, Text label)> effectIcons = new List<(Image, Outline, Text)>();
+
+        /// <summary>One buff or debuff icon: its picture (or its colour), the time left and stacks, and what it shows.</summary>
+        private class EffectIcon
+        {
+            public GameObject Root;
+            public Image Background;
+            public Image Picture;
+            public Outline Border;
+            public Text Time;
+            public Text Stacks;
+            public StatusView View;
+        }
+
+        private readonly List<EffectIcon> effectIcons = new List<EffectIcon>();
+        private EffectIcon hoveredEffect;
+        private RectTransform effectTooltip;
+        private Text effectTooltipText;
+
+        private EffectIcon CreateEffectIcon(int index)
+        {
+            var icon = new EffectIcon();
+            icon.Background = UIFactory.CreateImage("Effect", effectsRow, new Color(0.05f, 0.05f, 0.05f, 0.95f));
+            icon.Root = icon.Background.gameObject;
+            Vector2 corner = effectsMirrored ? new Vector2(1f, 0.5f) : new Vector2(0f, 0.5f);
+            float x = index * (EffectIconSize + 4f) * (effectsMirrored ? -1f : 1f);
+            UIFactory.Place(icon.Background.rectTransform, corner, new Vector2(x, 0f), new Vector2(EffectIconSize, EffectIconSize));
+            icon.Border = icon.Root.AddComponent<Outline>();
+            icon.Border.effectDistance = new Vector2(2f, -2f);
+            icon.Picture = UIFactory.CreateIcon(icon.Background.transform, 1f);
+            icon.Time = UIFactory.CreateText("Time", icon.Background.transform, 11, TextAnchor.LowerCenter);
+            UIFactory.Place(icon.Time.rectTransform, new Vector2(0.5f, 0f), new Vector2(0f, -15f), new Vector2(EffectIconSize + 16f, 16f));
+            icon.Stacks = UIFactory.CreateText("Stacks", icon.Background.transform, 11, TextAnchor.UpperRight);
+            UIFactory.Stretch(icon.Stacks.rectTransform);
+            icon.Stacks.rectTransform.offsetMax = new Vector2(-1f, 1f);
+            // The pointer over it shows what it is.
+            HoverArea hover = icon.Root.AddComponent<HoverArea>();
+            hover.Entered += _ => hoveredEffect = icon;
+            hover.Exited += _ =>
+            {
+                if (hoveredEffect == icon) hoveredEffect = null;
+            };
+            return icon;
+        }
 
         private void UpdateEffects()
         {
@@ -226,35 +276,78 @@ namespace RPG.UI
                 foreach (StatusView view in effects.Views)
                 {
                     if (shown >= MaxEffectIcons) break;
-                    if (shown == effectIcons.Count)
-                    {
-                        Image icon = UIFactory.CreateImage("Effect", effectsRow, Color.white);
-                        icon.raycastTarget = false;
-                        Vector2 corner = effectsMirrored ? new Vector2(1f, 0.5f) : new Vector2(0f, 0.5f);
-                        float x = shown * (EffectIconSize + 3f) * (effectsMirrored ? -1f : 1f);
-                        UIFactory.Place(icon.rectTransform, corner, new Vector2(x, 0f), new Vector2(EffectIconSize, EffectIconSize));
-                        Outline border = icon.gameObject.AddComponent<Outline>();
-                        border.effectDistance = new Vector2(2f, -2f);
-                        Text label = UIFactory.CreateText("Label", icon.transform, 10, TextAnchor.MiddleCenter);
-                        UIFactory.Stretch(label.rectTransform);
-                        effectIcons.Add((icon, border, label));
-                    }
-                    (Image image, Outline outline, Text text) = effectIcons[shown];
-                    image.gameObject.SetActive(true);
+                    if (shown == effectIcons.Count) effectIcons.Add(CreateEffectIcon(shown));
+                    EffectIcon icon = effectIcons[shown];
+                    if (!icon.Root.activeSelf) icon.Root.SetActive(true);
+                    icon.View = view;
+                    // Its picture (a spell's own, else one for its kind); without one, its colour.
+                    bool pictured = UIFactory.SetIcon(icon.Picture, StatusInfo.IconOf(view), Color.white);
                     Color color = view.Color;
-                    image.color = new Color(color.r * 0.6f, color.g * 0.6f, color.b * 0.6f, 0.95f);
+                    icon.Background.color = pictured ? new Color(0.05f, 0.05f, 0.05f, 0.95f) : new Color(color.r * 0.6f, color.g * 0.6f, color.b * 0.6f, 0.95f);
                     // Red frame for debuffs, green for buffs.
-                    outline.effectColor = view.Harmful ? new Color(0.9f, 0.2f, 0.15f) : new Color(0.3f, 0.85f, 0.35f);
+                    icon.Border.effectColor = view.Harmful ? DebuffBorder : BuffBorder;
+                    double left = view.EndsAt - now;
+                    string time = left < 60 ? $"{System.Math.Ceiling(System.Math.Max(0, left)):0}" : left < 3600 ? $"{System.Math.Ceiling(left / 60):0}m" : "";
+                    if (icon.Time.text != time) icon.Time.text = time;
                     string name = view.Name.ToString();
-                    string initials = name.Length > 0 ? name.Substring(0, Mathf.Min(2, name.Length)) : "?";
-                    int seconds = Mathf.CeilToInt((float)(view.EndsAt - now));
-                    string stacks = view.Stacks > 1 ? $"x{view.Stacks}" : "";
-                    text.text = seconds < 100 ? $"{initials}{stacks}\n{seconds}" : $"{initials}{stacks}";
+                    string stacks = view.Stacks > 1 ? view.Stacks.ToString() : pictured ? "" : name.Substring(0, Mathf.Min(2, name.Length));
+                    if (icon.Stacks.text != stacks) icon.Stacks.text = stacks;
                     shown++;
                 }
             }
             for (int i = shown; i < effectIcons.Count; i++)
-                if (effectIcons[i].icon.gameObject.activeSelf) effectIcons[i].icon.gameObject.SetActive(false);
+                if (effectIcons[i].Root.activeSelf)
+                {
+                    effectIcons[i].Root.SetActive(false);
+                    if (hoveredEffect == effectIcons[i]) hoveredEffect = null;
+                }
+            UpdateEffectTooltip(now);
+        }
+
+        /// <summary>The hovered effect's name, the source game's text for it, what it does and the time left, by the pointer.</summary>
+        private void UpdateEffectTooltip(double now)
+        {
+            if (hoveredEffect == null || !hoveredEffect.Root.activeSelf)
+            {
+                if (effectTooltip != null && effectTooltip.gameObject.activeSelf) effectTooltip.gameObject.SetActive(false);
+                return;
+            }
+            if (effectTooltip == null)
+            {
+                Canvas root = GetComponentInParent<Canvas>();
+                Image background = UIFactory.CreateImage("Effect Tooltip", root != null ? root.rootCanvas.transform : transform, new Color(0f, 0f, 0f, 0.92f));
+                UIFactory.StyleBox(background);
+                UIFactory.MakeTopmost(background.gameObject);
+                background.raycastTarget = false;
+                effectTooltip = background.rectTransform;
+                effectTooltip.anchorMin = effectTooltip.anchorMax = Vector2.zero;
+                effectTooltip.pivot = new Vector2(0f, 1f);
+                effectTooltipText = UIFactory.CreateText("Text", effectTooltip, 15, TextAnchor.UpperLeft);
+                UIFactory.Stretch(effectTooltipText.rectTransform);
+                effectTooltipText.rectTransform.offsetMin = new Vector2(12f, 8f);
+                effectTooltipText.rectTransform.offsetMax = new Vector2(-12f, -8f);
+            }
+            if (!effectTooltip.gameObject.activeSelf) effectTooltip.gameObject.SetActive(true);
+            string text = StatusInfo.Tooltip(hoveredEffect.View, now);
+            if (effectTooltipText.text != text)
+            {
+                effectTooltipText.text = text;
+                const float width = 300f;
+                effectTooltip.sizeDelta = new Vector2(width, 40f);
+                effectTooltip.sizeDelta = new Vector2(width, Mathf.Ceil(effectTooltipText.preferredHeight) + 18f);
+            }
+            PlaceEffectTooltip();
+        }
+
+        private void PlaceEffectTooltip()
+        {
+            if (effectTooltip == null || !effectTooltip.gameObject.activeSelf || hoveredEffect == null) return;
+            Canvas root = effectTooltip.GetComponentInParent<Canvas>().rootCanvas;
+            float scale = root != null ? root.scaleFactor : 1f;
+            Vector2 pointer = UnityEngine.InputSystem.Mouse.current != null
+                ? UnityEngine.InputSystem.Mouse.current.position.ReadValue()
+                : (Vector2)hoveredEffect.Root.transform.position;
+            effectTooltip.anchoredPosition = UIFactory.KeepOnScreen(effectTooltip, pointer / scale + new Vector2(14f, -14f), scale);
         }
 
         /// <summary>Shows the unit standing and facing the viewer, zoomed on the head; it does not animate.</summary>

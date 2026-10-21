@@ -46,7 +46,7 @@ Client files come from `https://github.com/DreadmystRPG/steam` (blobless clone i
 ids/costs), `maps/*.map`. What was taken and how it maps is documented in `Docs/GameData.md`. Generated data lives in
 `Scripts/Editor/*Data.cs` (`StartAreaData`, `GearData`, `AffixData`, `DungeonData`) and `TestSceneBuilder.Spells.cs`;
 generators are in `Tools/GameData/` (`island.py` → `StartAreaData` (whole island, zones, map labels), `dungeons.py`, `recipes.py`, `world.py` → `WorldMapData`/`VendorData`, `gear.py` →
-`GearSourceData`, `townsfolk.py` → `TownsfolkData` (townsfolk, gossip), `monsters.py` → `MonsterData` (monster names, junk), `.map` reader
+`GearSourceData`, `townsfolk.py` → `TownsfolkData` (townsfolk, gossip), `auras.py` → `AuraData` (buff/debuff texts), `monsters.py` → `MonsterData` (monster names, junk), `.map` reader
 `map_file.py`).
 
 ## What exists (short)
@@ -72,7 +72,8 @@ plate warrior, robes mage). Items: source gear by level and material, dropped
 finished by monsters/chests and sold by the merchants; 7145 affixes; potions/serums; the source's gems (5 kinds, Rough →
 plain → Refined); loot window with sparkles.
 Chests: crates (gold), locked chests (Lockpicking 2 × level). Spells: Paladin/Ranger/Mage spells to level 20,
-Tomes at trainers (Halfrid, Kelda, Gyldan), ranks for experience, ABILITIES window (P; opens beside the character sheet on SPEND EXP), status effects (`StatusEffects`).
+Tomes at trainers (Halfrid, Kelda, Gyldan), ranks for experience, ABILITIES window (P; opens beside the character sheet on SPEND EXP), status effects (`StatusEffects`; icons
+on the unit frames with a tooltip: the source's aura text and what the effect does, `StatusInfo`).
 Action bar: 12 slots (keys 1-9, 0, -, =) holding Attack, spells and items, arranged by drag and drop.
 Transmutation (the source game's crafting): Reginald's TRANSMUTE window (4 × 3 grid + Confirm) makes the source game's
 recipes (`Tools/GameData/recipes.py` → `RecipeData.cs`): potion tiers, gems, orbs, keys. No gear crafting.

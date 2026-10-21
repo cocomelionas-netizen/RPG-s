@@ -170,6 +170,8 @@ namespace RPG.EditorTools
             CharacterAnimationSet rangerAnimations = FlareAnimationSet("HeroRanger");
             CharacterAnimationSet mageAnimations = FlareAnimationSet("HeroMage");
             ClassCatalog classes = CreateClasses(playerAnimations, rangerAnimations, mageAnimations, items);
+            // What the buffs and debuffs are, for the unit frames' tooltips (after the spells and items have their icons).
+            CreateStatusInfo(classes, items);
             Sprite projectileSprite = PlaceholderArtGenerator.Orb("Projectile");
             Sprite effectRingSprite = PlaceholderArtGenerator.GroundRing("EffectRing", Color.white);
 
