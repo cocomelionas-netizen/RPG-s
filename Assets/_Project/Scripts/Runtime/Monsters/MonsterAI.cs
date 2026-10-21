@@ -25,9 +25,10 @@ namespace RPG.Monsters
     /// - Idle: wanders near home; a hostile player coming within the aggro radius (or hitting it) starts a fight.
     /// - Chase: keeps a threat table (damage dealt to it, plus a little for being seen), attacks the top entry
     ///   with <see cref="AutoAttack"/> and calls nearby idle monsters to help.
-    /// - Leash: it chases up to <see cref="LeashRadius"/> from where the fight started, and every hit it lands
-    ///   moves that point to where it hit, so a monster that keeps hitting you keeps following you.
-    /// - Give up: when it has not landed a hit for <see cref="ChaseTimeout"/> seconds (the player keeps running).
+    /// - Leash (like the source game's leash range): it chases up to <see cref="LeashRadius"/> from home, never further,
+    ///   however the fight goes; a player who runs that far gets rid of it.
+    /// - Give up: when for <see cref="ChaseTimeout"/> seconds neither it hit its target nor anyone hit it (the player
+    ///   ran away); hitting it keeps it in the fight.
     /// - Evade: when pulled past the leash, when it gave up, when its targets are dead or gone, or when it cannot reach them,
     ///   it walks home ignoring damage and returns to full health (no kiting monsters across the map).
     /// - Dead: every living player that fought it gets experience; the corpse is removed after a short while
@@ -64,10 +65,10 @@ namespace RPG.Monsters
         [SerializeField, Min(0f)] private float aggroRadius = 3f;
         [Tooltip("Idle monsters this close join the fight when this one is pulled.")]
         [SerializeField, Min(0f)] private float assistRadius = 2.5f;
-        [Tooltip("Gives up the chase this far from home, or from where it last hit its target.")]
-        [SerializeField, Min(1f)] private float leashRadius = 25f;
-        [Tooltip("Gives up and walks home when it has not hit its target for this many seconds.")]
-        [SerializeField, Min(1f)] private float chaseTimeout = 12f;
+        [Tooltip("Gives up the chase this far from home (the source game's leash range).")]
+        [SerializeField, Min(1f)] private float leashRadius = 15f;
+        [Tooltip("Gives up and walks home when for this many seconds it has neither hit its target nor been hit.")]
+        [SerializeField, Min(1f)] private float chaseTimeout = 6f;
         [Tooltip("Walks home when it cannot find a way to its target for this long.")]
         [SerializeField, Min(0.5f)] private float giveUpSeconds = 3f;
 
@@ -108,7 +109,6 @@ namespace RPG.Monsters
         private float pathFailedSince = -1f;
         private float removeAt;
         private float evadeStartedAt;
-        private Vector2 leashAnchor;
         private float lastHitTime;
 
         /// <summary>Server only.</summary>
@@ -118,8 +118,8 @@ namespace RPG.Monsters
         public Health CurrentTarget { get; private set; }
 
         /// <summary>
-        /// Where it spawned and returns to. Set it before spawning to choose another point;
-        /// setting it also measures the leash of a fight in progress from there.
+        /// Where it spawned and returns to (and where its leash is measured from). Set it before spawning to choose
+        /// another point.
         /// </summary>
         public Vector2 Home
         {
@@ -128,7 +128,6 @@ namespace RPG.Monsters
             {
                 home = value;
                 hasHome = true;
-                leashAnchor = value;
             }
         }
 
@@ -250,8 +249,8 @@ namespace RPG.Monsters
             set => wanderRadius = Mathf.Max(0f, value);
         }
 
-        /// <summary>Server only: where the leash is measured from (home, or where it last hit its target).</summary>
-        public Vector2 LeashAnchor => State == MonsterState.Chase ? leashAnchor : home;
+        /// <summary>Server only: where the leash is measured from: home.</summary>
+        public Vector2 LeashAnchor => home;
 
         public float ChaseTimeout
         {
@@ -345,14 +344,10 @@ namespace RPG.Monsters
             CurrentTarget = TopThreat();
             if (CurrentTarget != null)
             {
-                if (State != MonsterState.Chase)
-                {
-                    leashAnchor = home;
-                    lastHitTime = Time.time;
-                }
+                if (State != MonsterState.Chase) lastHitTime = Time.time;
                 State = MonsterState.Chase;
 
-                // The player got away: no hit for a while.
+                // The player got away: no hit either way for a while.
                 if (Time.time - lastHitTime >= chaseTimeout)
                 {
                     StartEvade();
@@ -412,15 +407,16 @@ namespace RPG.Monsters
 
         private void OnHitLanded(Health target, int damage)
         {
-            // Still in the fight: it may follow its target another leash length from here.
-            if (State != MonsterState.Chase) return;
-            leashAnchor = Position;
-            lastHitTime = Time.time;
+            // Still in the fight.
+            if (State == MonsterState.Chase) lastHitTime = Time.time;
         }
 
         private void OnDamageTaken(Health attacker, int amount)
         {
-            if (attacker != null) AddThreat(attacker, amount, true);
+            if (attacker == null) return;
+            AddThreat(attacker, amount, true);
+            // Being hit keeps it in the fight too (within its leash).
+            if (State == MonsterState.Chase) lastHitTime = Time.time;
         }
 
         private Health TopThreat()
