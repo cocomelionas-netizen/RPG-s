@@ -57,3 +57,9 @@ A browser can only connect through **WebSocket**, and the game page is `https`, 
 - WebSocket with TLS (`wss://`), a domain and a certificate.
 
 The client side is ready: in WebGL `Client` connects through WebSocket automatically. The server side comes when it is time.
+
+## Full screen and big screens
+A browser in full screen draws at the screen's real pixels (4K and more on high-DPI screens), which made the game
+stutter. `RenderResolution` (builds only) draws the world at most about 1080 pixels high and stretches it (URP render
+scale), while the HUD stays sharp at the full size, and turns HDR off. F8 shows the screen size and the share the world
+is drawn at.

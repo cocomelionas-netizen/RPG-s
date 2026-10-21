@@ -22,3 +22,4 @@ namespace Unity.Netcode {
   }
 }
 namespace UnityEngine.InputSystem { public class Mouse { public static Mouse current; public PosCtl position; } public class PosCtl { public Vector2 ReadValue()=>default; } public class Keyboard { public static Keyboard current; public KeyCtl f3Key, f8Key, f9Key; } public class KeyCtl { public bool wasPressedThisFrame; } }
+namespace UnityEngine.Rendering.Universal { public class UniversalRenderPipelineAsset : UnityEngine.Rendering.RenderPipelineAsset { public float renderScale; public bool supportsHDR; public override UnityEngine.Rendering.RenderPipeline CreatePipeline() => null; } }

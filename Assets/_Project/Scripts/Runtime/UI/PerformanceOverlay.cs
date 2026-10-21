@@ -6,7 +6,7 @@ namespace RPG.UI
 {
     /// <summary>
     /// F8 shows how the game runs: frames per second, the slowest frame of the last second, how many units and monsters
-    /// are spawned, and the managed memory in use. For checking a change against a target ("steady 60 FPS"). (F8, not
+    /// are spawned, the managed memory in use, and the screen size with the share of it the world is drawn at. For checking a change against a target ("steady 60 FPS"). (F8, not
     /// F3: browsers use F3 for searching the page.) It has its own canvas, so rewriting it does not rebuild the HUD.
     /// </summary>
     [RequireComponent(typeof(RectTransform))]
@@ -60,7 +60,8 @@ namespace RPG.UI
                 if (unit.Faction == Faction.Monster) monsters++;
             }
             text.text = $"FPS {frames / Mathf.Max(elapsed, 0.001f):0}   slowest frame {worst * 1000f:0} ms\n" +
-                        $"units {units}   monsters {monsters}   memory {System.GC.GetTotalMemory(false) / (1024 * 1024)} MB";
+                        $"units {units}   monsters {monsters}   memory {System.GC.GetTotalMemory(false) / (1024 * 1024)} MB\n" +
+                        $"screen {Screen.width}x{Screen.height}   world drawn at {RPG.CameraSystem.RenderResolution.CurrentScale * 100f:0}%";
         }
     }
 }

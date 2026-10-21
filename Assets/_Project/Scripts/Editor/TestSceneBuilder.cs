@@ -1827,7 +1827,7 @@ namespace RPG.EditorTools
             inventoryWindow.AddComponent<InventoryWindow>();
 
             // F8: frames per second and what is running, under the minimap and the session panel.
-            CreateHudElement<PerformanceOverlay>(canvasObject.transform, "Performance", new Vector2(1f, 1f), new Vector2(1f, 1f), new Vector2(-20f, -380f), new Vector2(380f, 44f));
+            CreateHudElement<PerformanceOverlay>(canvasObject.transform, "Performance", new Vector2(1f, 1f), new Vector2(1f, 1f), new Vector2(-20f, -380f), new Vector2(380f, 64f));
             CreateHudElement<DeathPanel>(canvasObject.transform, "Death Panel", new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(0f, 60f), new Vector2(360f, 150f));
             CreateHudElement<ZoneBanner>(canvasObject.transform, "Zone Banner", new Vector2(0.5f, 1f), new Vector2(0.5f, 1f), new Vector2(0f, -150f), new Vector2(800f, 60f));
 

@@ -35,7 +35,8 @@ Players test the WebGL build at https://cocomelionas-netizen.github.io/RPG-s/ (O
 - **Performance**: when the world or the number of objects grows, keep only what is near players active (monster
   spawners' activation range), draw props as tiles, give moving HUD layers their own canvases (or put labels that stand over
   world objects on small world-space canvases, like `NpcNameplates`, so walking redraws nothing), and rewrite UI texts
-  only when their values change. Measure with the in-game F8 overlay (FPS, slowest frame) before and after.
+  only when their values change. The world is drawn at most ~1080 px high (`RenderResolution`,
+  URP render scale; the HUD stays full size). Measure with the in-game F8 overlay (FPS, slowest frame) before and after.
 
 ## Source data
 

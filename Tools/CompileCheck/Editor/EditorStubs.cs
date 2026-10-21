@@ -3,7 +3,6 @@
 namespace UnityEngine.Rendering.Universal
 {
     public class Renderer2DData : UnityEngine.ScriptableObject {}
-    public class UniversalRenderPipelineAsset : UnityEngine.ScriptableObject {}
     public class UniversalAdditionalCameraData : UnityEngine.MonoBehaviour {}
     public class Light2D : UnityEngine.MonoBehaviour { public enum LightType { Global } public LightType lightType; public float intensity; }
 }
