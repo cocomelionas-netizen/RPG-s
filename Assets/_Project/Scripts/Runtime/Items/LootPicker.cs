@@ -11,8 +11,8 @@ using UnityEngine;
 namespace RPG.Items
 {
     /// <summary>
-    /// Owner: clicking a loot bag, a portal, a vendor, a waystone or a chest walks to it and then picks the loot up,
-    /// uses the portal, opens the vendor's or waystone's window, or opens the chest.
+    /// Owner: clicking a loot bag, a portal, a vendor, a townsperson, a waystone or a chest walks to it and then picks the
+    /// loot up, uses the portal, opens the vendor's, gossip or waystone window, or opens the chest.
     /// WASD or another click cancels.
     /// Runs before <see cref="PlayerMovement"/> so the click on the bag does not also become a move elsewhere.
     /// </summary>
@@ -27,6 +27,7 @@ namespace RPG.Items
         private LootBag pending;
         private Portal pendingPortal;
         private Vendor pendingVendor;
+        private Townsperson pendingPerson;
         private Waystone pendingWaystone;
         private LootChest pendingChest;
         private DungeonTraveller traveller;
@@ -54,11 +55,15 @@ namespace RPG.Items
                 pending = LootUnderPointer();
                 pendingPortal = pending == null && traveller != null ? PortalUnderPointer() : null;
                 pendingVendor = pending == null && pendingPortal == null ? VendorUnderPointer() : null;
-                pendingWaystone = pending == null && pendingPortal == null && pendingVendor == null ? UnderPointer<Waystone>() : null;
-                pendingChest = pending == null && pendingPortal == null && pendingVendor == null && pendingWaystone == null
+                pendingPerson = pending == null && pendingPortal == null && pendingVendor == null ? UnderPointer<Townsperson>() : null;
+                if (pendingPerson != null && !pendingPerson.CanTalk) pendingPerson = null;
+                pendingWaystone = pending == null && pendingPortal == null && pendingVendor == null && pendingPerson == null
+                    ? UnderPointer<Waystone>() : null;
+                pendingChest = pending == null && pendingPortal == null && pendingVendor == null && pendingPerson == null && pendingWaystone == null
                     ? UnderPointer<LootChest>() : null;
                 if (pendingChest != null && !pendingChest.IsSpawned) pendingChest = null;
-                if (pending != null || pendingPortal != null || pendingVendor != null || pendingWaystone != null || pendingChest != null)
+                if (pending != null || pendingPortal != null || pendingVendor != null || pendingPerson != null || pendingWaystone != null
+                    || pendingChest != null)
                     movement.SuppressClickMoveUntilRelease();
             }
             if (input.MoveInput.sqrMagnitude > 0.01f)
@@ -66,6 +71,7 @@ namespace RPG.Items
                 pending = null;
                 pendingPortal = null;
                 pendingVendor = null;
+                pendingPerson = null;
                 pendingWaystone = null;
                 pendingChest = null;
             }
@@ -82,6 +88,11 @@ namespace RPG.Items
             if (pendingVendor != null)
             {
                 UpdateVendor();
+                return;
+            }
+            if (pendingPerson != null)
+            {
+                UpdatePerson();
                 return;
             }
             if (pendingPortal != null)
@@ -143,6 +154,20 @@ namespace RPG.Items
             if (movement.Destination.HasValue) movement.Stop();
             VendorWindow.Open(pendingVendor);
             pendingVendor = null;
+        }
+
+        private void UpdatePerson()
+        {
+            Vector2 target = pendingPerson.transform.position;
+            if (Vector2.Distance(transform.position, target) > pendingPerson.TalkRange * 0.8f)
+            {
+                movement.SetDestination(target);
+                return;
+            }
+
+            if (movement.Destination.HasValue) movement.Stop();
+            GossipWindow.Open(pendingPerson);
+            pendingPerson = null;
         }
 
         private void UpdateChest()

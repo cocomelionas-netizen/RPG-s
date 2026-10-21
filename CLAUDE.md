@@ -44,7 +44,7 @@ Client files come from `https://github.com/DreadmystRPG/steam` (blobless clone i
 ids/costs), `maps/*.map`. What was taken and how it maps is documented in `Docs/GameData.md`. Generated data lives in
 `Scripts/Editor/*Data.cs` (`StartAreaData`, `GearData`, `AffixData`, `DungeonData`) and `TestSceneBuilder.Spells.cs`;
 generators are in `Tools/GameData/` (`island.py` → `StartAreaData` (whole island, zones, map labels), `dungeons.py`, `recipes.py`, `world.py` → `WorldMapData`/`VendorData`, `gear.py` →
-`GearSourceData`, `monsters.py` → `MonsterData` (monster names, junk), `.map` reader
+`GearSourceData`, `townsfolk.py` → `TownsfolkData` (townsfolk, gossip), `monsters.py` → `MonsterData` (monster names, junk), `.map` reader
 `map_file.py`).
 
 ## What exists (short)
@@ -52,6 +52,9 @@ generators are in `Tools/GameData/` (`island.py` → `StartAreaData` (whole isla
 World: the source game's whole island, north up like its map (`island.py`: source (x, y) → cell (597 − y, 688 − x)): its
 ground from `fanadin.map` (walls, woods), its zones (13 × 13 blocks, `ZoneMap`), its monsters (source names, junk loot by model)/chests, free waypoints, all its vendors at their spots with their stock (random-quality gear merchants),
 Scroll of Returning (back to St. Revere), food, M world map with the source map's labels and level ranges.
+Townsfolk: the source's friendly NPCs that are not vendors (guards, priests, council...) at their spots, dressed in Flare
+hero layers after their source model like the vendors; clicking one opens the gossip window (the source's gossip menus,
+replies, conditions and scripts: `townsfolk.py` → `TownsfolkData`, `GossipCatalog`, `GossipWindow`, `Conversation`).
 Art: Flare's (CC-BY-SA 3.0, `Assets/_Project/Art/Flare/CREDITS.md`): grassland tiles, lakes, trees, heroes and
 monsters in 8 directions, chests, packed by `Tools/Art/flare.py` (`Docs/Art.md`); item and spell icons (Flare, Painterly
 Spell Icons, game-icons.net; `Tools/Art/icons.py`). Line of sight: walls block attacks and spells.

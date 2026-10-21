@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using RPG.Characters;
 using RPG.Items;
 using RPG.Vendors;
 using UnityEditor;
@@ -77,8 +78,8 @@ namespace RPG.EditorTools
             return created;
         }
 
-        /// <summary>The source game's vendors in the region, with where each stands (same order).</summary>
-        private static VendorDefinition[] CreateVendors(ItemCatalog catalog, out Vector3Int[] cells)
+        /// <summary>The source game's vendors in the region, with where each stands and its model (same order).</summary>
+        private static VendorDefinition[] CreateVendors(ItemCatalog catalog, out Vector3Int[] cells, out string[] models)
         {
             var byName = new Dictionary<string, ItemDefinition>();
             foreach (ItemDefinition item in catalog.items)
@@ -86,6 +87,7 @@ namespace RPG.EditorTools
 
             var vendors = new List<VendorDefinition>();
             var places = new List<Vector3Int>();
+            var looks = new List<string>();
             foreach (VendorData.Vendor source in VendorData.Vendors)
             {
                 var vendor = LoadOrCreateAsset<VendorDefinition>($"{VendorsFolder}/{source.name}.asset");
@@ -142,8 +144,10 @@ namespace RPG.EditorTools
                 EditorUtility.SetDirty(vendor);
                 vendors.Add(vendor);
                 places.Add(source.cell);
+                looks.Add(source.model);
             }
             cells = places.ToArray();
+            models = looks.ToArray();
             return vendors.ToArray();
         }
 
@@ -217,7 +221,8 @@ namespace RPG.EditorTools
             }
         }
 
-        private static void PlaceVendors(Grid grid, VendorDefinition[] vendors, Vector3Int[] cells, AffixCatalog affixes)
+        private static void PlaceVendors(Grid grid, VendorDefinition[] vendors, Vector3Int[] cells, string[] models, AffixCatalog affixes,
+            AvatarCatalog avatars)
         {
             var parent = new GameObject("Vendors").transform;
             for (int i = 0; i < vendors.Length; i++)
@@ -226,13 +231,16 @@ namespace RPG.EditorTools
                 npc.transform.SetParent(parent, false);
                 npc.transform.position = grid.GetCellCenterWorld(cells[i]);
 
-                // A cloak colour of its own, the same every build.
-                var random = new System.Random(vendors[i].displayName.Aggregate(17, (hash, c) => hash * 31 + c));
-                var cloak = Color.HSVToRGB((float)random.NextDouble(), 0.45f + 0.3f * (float)random.NextDouble(), 0.45f + 0.3f * (float)random.NextDouble());
-                var spriteRenderer = npc.AddComponent<SpriteRenderer>();
-                spriteRenderer.sprite = PlaceholderArtGenerator.CharacterFrame(VendorArtFolder, $"Vendor_{vendors[i].displayName}", cloak,
-                    Vector2.down, 0f, 0f);
-                spriteRenderer.spriteSortPoint = SpriteSortPoint.Pivot;
+                // Dressed after its source model (TestSceneBuilder.Townsfolk.cs); without art, a cloak colour of its own.
+                if (!DressNpc(npc, models[i], avatars))
+                {
+                    var random = new System.Random(vendors[i].displayName.Aggregate(17, (hash, c) => hash * 31 + c));
+                    var cloak = Color.HSVToRGB((float)random.NextDouble(), 0.45f + 0.3f * (float)random.NextDouble(), 0.45f + 0.3f * (float)random.NextDouble());
+                    var spriteRenderer = npc.AddComponent<SpriteRenderer>();
+                    spriteRenderer.sprite = PlaceholderArtGenerator.CharacterFrame(VendorArtFolder, $"Vendor_{vendors[i].displayName}", cloak,
+                        Vector2.down, 0f, 0f);
+                    spriteRenderer.spriteSortPoint = SpriteSortPoint.Pivot;
+                }
 
                 // Clicked to trade; does not block walking.
                 var box = npc.AddComponent<BoxCollider2D>();

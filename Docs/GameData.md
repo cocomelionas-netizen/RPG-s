@@ -68,6 +68,34 @@ the world, with Reginald.
 - Prices: the source game's buy price (sell price × its buy cost ratio), e.g. Scroll of Returning 300, Minor Life Potion 15,
   Ruby 1500, Treasury Gold 39920; vendors pay the source sell price (100, 5, 250, 499).
 - Not placed: Boltar (Cleric) only sells Cleric Tomes, Vikram (Jeweler) only necklaces and rings – neither exists here.
+- Vendors are dressed like the townsfolk below, after their source model.
+
+## Townsfolk and gossip
+
+From `npc`, `npc_template`, `npc_models`, `gossip`, `gossip_option`, `scripts`, `world_texts` and `spell_template`
+(`Tools/GameData/townsfolk.py` → `Scripts/Editor/TownsfolkData.cs`, `Data/World/GossipCatalog.asset`):
+
+- **Townsfolk:** every friendly NPC of the island (faction 1) that is not a vendor – 33 of them in 38 spots (the Guard
+  stands in 6): guards (Donal, Falgur, Lamuel, Julius, Tyrel, Regal), Laudrus at the start, Vincent, Azralus The Pure,
+  the town council, Cinaed the brewer, Junkies the arena master, Cragen the town crier... Horses, pigs and boars are left
+  out (no art). Each has its name and subname over its head (green; vendors are gold).
+- **Looks:** dressed in Flare's hero layers after the source model: `knight` in plate with a longsword and kite shield,
+  `LuxHighPriestNpc` and the old men in robes and hoods, `OldWitch` in robes with a wand, nobles in robes, peasants and
+  traders in cloth and leather (`FemalePeasant*` are women); `peddler_goblin` (Junkies, Jipples) is Flare's goblin.
+- **Gossip window** (click a townsperson): its menu's text and replies. A menu has several texts; the first whose
+  conditions are met is said. Conditions (type, value, true/false): 1 has the quest, 2 turned it in, 3 has it finished in
+  the log, 7 has a spell's aura, 12 has or did the quest, 15 level above. Quests do not exist yet (they count as never
+  taken); a quest log will answer them through `IQuestFacts`.
+- **Placeholders:** `$PLAYER$` / `$N` (name), `$NPC$`, `$class$` / `$CLASS$` (class, lower case / as written),
+  `$G=his:her$` (man / woman). Narration in angle brackets (`<Vincent hesitates.>`) is shown in grey italics. The source
+  game's own name in a text becomes "the island".
+- **Replies** open another menu (or close the window) and may run a script (checked by the server: the player stands at
+  the NPC, the reply belongs to its menus, its conditions are met). Script commands: 1 cast a spell on the player (Drunk
+  from Cinaed's beer: an aura of 10 s, with no effect here – "You've had enough" while it lasts), 2 talk credit for an
+  NPC (for quests), 3 the NPC says a world text, 10 points the way to an NPC (the guards' "I need directions.": marked on
+  the minimap – at its edge while far – and the world map, and named with its heading in the messages). Replies whose
+  scripts open the bank (11), respec (12) or the arena (13), or Reginald's "item transmutation" (−2), are hidden until
+  those exist.
 
 ## Scroll of Returning and food
 

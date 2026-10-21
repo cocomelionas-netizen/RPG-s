@@ -69,6 +69,8 @@ namespace RPG.Combat
         WillpowerBonus,
         /// <summary>Courage (vitality) raised by Value points (Scroll of Courage).</summary>
         CourageBonus,
+        /// <summary>Does nothing of its own; it is only shown and asked about (Drunk, from Cinaed's beer).</summary>
+        Flavor,
     }
 
     /// <summary>One effect as everyone sees it (for icons): the server keeps the rest.</summary>

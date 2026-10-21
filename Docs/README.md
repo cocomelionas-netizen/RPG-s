@@ -46,7 +46,7 @@ Assets/_Project/
       Player/          PlayerMovement
       UI/              UnitFrame, CombatTextLayer, AbilityBar, ExperienceBar, InventoryWindow, VendorWindow, NpcNameplates
       Vendors/         vendors (Vendor, VendorDefinition)
-      World/           ClickMarker, chests, waystones, zones
+      World/           ClickMarker, chests, waystones, zones, townsfolk and gossip (Townsperson, GossipCatalog, Conversation)
       Core/            reserved for later stages
     Editor/            editor tools (RPG menu), the scene builder and its generated data (*Data.cs), art import rules, build menu
   Tests/

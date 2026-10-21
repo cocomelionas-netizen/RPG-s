@@ -11,7 +11,8 @@ namespace RPG.UI
 {
     /// <summary>
     /// The zone name and a square map around the local player: walkable ground, obstacles, and dots for
-    /// players, monsters, vendors, portals, waystones and chests. The picture comes from <see cref="MapPicture"/>.
+    /// players, monsters, vendors, portals, waystones, chests and the
+    /// marked place (<see cref="MapPin"/>). The picture comes from <see cref="MapPicture"/>.
     /// Builds its own UI; place it on a RectTransform about 240 x 270 in the top right of the HUD canvas.
     /// </summary>
     [RequireComponent(typeof(RectTransform))]
@@ -100,17 +101,25 @@ namespace RPG.UI
                 if (unit.Faction == Faction.Player) Dot(unit.transform.position, center, scale, PlayerColor, 8f);
                 else if (unit.Faction == Faction.Monster) Dot(unit.transform.position, center, scale, MonsterColor, 6f);
             }
+            // A marked place (a guard's directions): at the edge, pointing the way, while it is off the map.
+            MapPin.CheckReached(center);
+            if (MapPin.Active) Dot(MapPin.Position, center, scale, MapPin.PinColor, 11f, true);
             Dot(center, center, scale, SelfColor, 10f);
 
             for (int i = usedDots; i < dots.Count; i++)
                 if (dots[i].gameObject.activeSelf) dots[i].gameObject.SetActive(false);
         }
 
-        private void Dot(Vector2 position, Vector2 center, float scale, Color color, float size)
+        private void Dot(Vector2 position, Vector2 center, float scale, Color color, float size, bool keepAtEdge = false)
         {
             Vector2 offset = (position - center) * scale;
             float half = mapSize * 0.5f;
-            if (Mathf.Abs(offset.x) > half || Mathf.Abs(offset.y) > half) return;
+            if (Mathf.Abs(offset.x) > half || Mathf.Abs(offset.y) > half)
+            {
+                if (!keepAtEdge) return;
+                float inside = half - size * 0.5f;
+                offset *= inside / Mathf.Max(Mathf.Abs(offset.x), Mathf.Abs(offset.y));
+            }
 
             if (usedDots == dots.Count)
             {

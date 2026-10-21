@@ -156,6 +156,11 @@ namespace RPG.UI
                 foreach (Health unit in Health.Spawned)
                     if (unit != null && unit != self && unit.Faction == Faction.Player && map.Contains(unit.transform.position))
                         Dot(ToMap(unit.transform.position), PlayerColor, 9f);
+                if (MapPin.Active && map.Contains(MapPin.Position))
+                {
+                    Dot(ToMap(MapPin.Position), MapPin.PinColor, 14f);
+                    Label(ToMap(MapPin.Position) + new Vector2(0f, 18f), MapPin.Label, MapPin.PinColor, 13);
+                }
                 // You, last so you are on top.
                 Dot(ToMap(position), Color.white, 14f);
                 Label(ToMap(position) + new Vector2(0f, 18f), "You", Color.white, 13);

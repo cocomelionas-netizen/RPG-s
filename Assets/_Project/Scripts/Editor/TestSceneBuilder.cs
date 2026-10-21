@@ -216,8 +216,10 @@ namespace RPG.EditorTools
             PlaceChests(grid, obstacles, chests);
             PlaceEdgeMonsters(grid, obstacles);
             PlaceDungeons(grid, obstacles, dungeons);
-            VendorDefinition[] vendors = CreateVendors(items, out Vector3Int[] vendorCells);
-            PlaceVendors(grid, vendors, vendorCells, affixes);
+            AvatarCatalog avatars = playerPrefab.GetComponent<HeroAppearance>().Catalog;
+            VendorDefinition[] vendors = CreateVendors(items, out Vector3Int[] vendorCells, out string[] vendorModels);
+            PlaceVendors(grid, vendors, vendorCells, vendorModels, affixes, avatars);
+            PlaceTownsfolk(grid, CreateGossipCatalog(), avatars);
             PlaceZonesAndWaystones(grid, obstacles, PlaceholderArtGenerator.Waystone("Waystone"));
             CreateHud();
 
@@ -422,6 +424,7 @@ namespace RPG.EditorTools
             player.AddComponent<CharacterPersistence>();
             player.AddComponent<DungeonTraveller>();
             player.AddComponent<WaystoneTraveller>();
+            player.AddComponent<Conversation>();
             float height = BodyHeight(animations);
             AddHealthPresenter(player, barSprite, height + 0.08f);
             AddHitbox(player, new Vector2(0.36f, height * 0.85f), new Vector2(0f, height * 0.45f));
@@ -1848,6 +1851,11 @@ namespace RPG.EditorTools
             waystoneWindow.transform.SetParent(canvasObject.transform, false);
             Stretch((RectTransform)waystoneWindow.transform);
             waystoneWindow.AddComponent<WaystoneWindow>();
+
+            var gossipWindow = new GameObject("Gossip Window", typeof(RectTransform));
+            gossipWindow.transform.SetParent(canvasObject.transform, false);
+            Stretch((RectTransform)gossipWindow.transform);
+            gossipWindow.AddComponent<GossipWindow>();
 
             var characterWindow = new GameObject("Character Window", typeof(RectTransform));
             characterWindow.transform.SetParent(canvasObject.transform, false);

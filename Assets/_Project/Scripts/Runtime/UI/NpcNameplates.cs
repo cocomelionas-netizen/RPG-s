@@ -8,7 +8,7 @@ using UnityEngine.UI;
 namespace RPG.UI
 {
     /// <summary>
-    /// Names (and what they sell) above the vendor NPCs, the names of chests, and of dungeon portals (with who may
+    /// Names (and what they sell) above the vendor NPCs, the names (and titles) of townsfolk, the names of chests, and of dungeon portals (with who may
     /// enter), drawn on the HUD canvas.
     /// </summary>
     // After the camera has moved this frame; otherwise the plates use last frame's camera and drift while walking.
@@ -22,6 +22,8 @@ namespace RPG.UI
 
         private static readonly Color NameColor = new Color(1f, 0.85f, 0.45f);
         private readonly Dictionary<Vendor, Text> plates = new Dictionary<Vendor, Text>();
+        private readonly Dictionary<Townsperson, Text> personPlates = new Dictionary<Townsperson, Text>();
+        private static readonly Color PersonColor = new Color(0.65f, 0.95f, 0.55f);
         private readonly Dictionary<LootChest, Text> chestPlates = new Dictionary<LootChest, Text>();
         private readonly List<LootChest> goneChests = new List<LootChest>();
         private readonly Dictionary<Portal, Text> portalPlates = new Dictionary<Portal, Text>();
@@ -58,6 +60,24 @@ namespace RPG.UI
                 if (plate.gameObject.activeSelf != show) plate.gameObject.SetActive(show);
                 if (show)
                     plate.rectTransform.position = cam.WorldToScreenPoint(vendor.transform.position + Vector3.up * heightAboveFeet);
+            }
+
+            foreach (Townsperson person in Townsperson.All)
+            {
+                if (!personPlates.TryGetValue(person, out Text plate))
+                {
+                    plate = UIFactory.CreateText(person.name, transform, 15, TextAnchor.LowerCenter);
+                    plate.rectTransform.sizeDelta = new Vector2(240f, 44f);
+                    plate.rectTransform.pivot = new Vector2(0.5f, 0f);
+                    plate.color = PersonColor;
+                    plate.text = string.IsNullOrEmpty(person.Title) ? person.DisplayName : $"{person.DisplayName}\n<size=12>{person.Title}</size>";
+                    personPlates[person] = plate;
+                }
+
+                bool show = cam != null && Vector2.Distance(cam.transform.position, person.transform.position) <= visibleDistance;
+                if (plate.gameObject.activeSelf != show) plate.gameObject.SetActive(show);
+                if (show)
+                    plate.rectTransform.position = cam.WorldToScreenPoint(person.transform.position + Vector3.up * heightAboveFeet);
             }
 
             foreach (LootChest chest in LootChest.All)

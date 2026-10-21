@@ -10,8 +10,8 @@ mapquester_map.png, pixel = (614 + 0.855 (x - y), 16 + 0.4275 (x + y))): blue th
 .map file does not make the cell walkable; specks smaller than 30 cells are left out.
 
 VendorData: every vendor NPC of the island where the source game stands it (npc), with its name, subname and what it
-sells (npc_vendor: item names, limits, restock; npc_vendor_random: the kinds of gear and the quality chances), and the
-transmuter (subname "Transmutation").
+sells (npc_vendor: item names, limits, restock; npc_vendor_random: the kinds of gear and the quality chances), its model
+(npc_models: how it is dressed here), and the transmuter (subname "Transmutation").
 
 Cells: island.cell_of, like StartAreaData.
 """
@@ -119,15 +119,16 @@ def read_vendors(db):
         random[npc].append(tuple(kind))
 
     vendors = []
-    for entry, name, subname, x, y in q('select t.entry, t.name, t.subname, n.position_x, n.position_y from npc n '
-                                        'join npc_template t on t.entry = n.entry where n.map = 1 order by n.guid'):
+    for entry, name, subname, model, x, y in q('select t.entry, t.name, t.subname, m.name, n.position_x, n.position_y from npc n '
+                                               'join npc_template t on t.entry = n.entry left join npc_models m on m.id = t.model_id '
+                                               'where n.map = 1 order by n.guid'):
         # Vendors, and the transmuter (Reginald, "Transmutation"), who sells nothing but makes the crafting recipes.
         transmuter = (subname or '').strip() == 'Transmutation'
         if not on_island(x, y) or (entry not in fixed and entry not in random and not transmuter):
             continue
         kinds = sorted(set(random.get(entry, [])))
         vendors.append({
-            'entry': entry, 'name': name, 'title': (subname or '').strip(), 'cell': cell_of(x, y),
+            'entry': entry, 'name': name, 'title': (subname or '').strip(), 'model': model or '', 'cell': cell_of(x, y),
             'items': fixed.get(entry, []), 'gear': kinds,
         })
     return vendors
@@ -255,14 +256,14 @@ def write_vendors(path, vendors):
         f.write('                this.equip = equip; this.weapon = weapon; this.armor = armor;\n')
         f.write('                this.green = green; this.blue = blue; this.gold = gold; this.purple = purple;\n')
         f.write('                this.minLevel = minLevel; this.maxLevel = maxLevel;\n            }\n        }\n\n')
-        f.write('        public struct Vendor\n        {\n            public int entry;\n            public string name, title;\n')
+        f.write('        public struct Vendor\n        {\n            public int entry;\n            public string name, title, model;\n')
         f.write('            public Vector3Int cell;\n            /// <summary>Item names, how many it holds (0: unlimited), restock seconds (0: none given), the source game\'s\n')
         f.write('            /// sell price and buy price (sell price times its buy cost ratio).</summary>\n')
         f.write('            public (string item, int limit, int restock, int sell, int buy)[] items;\n            public GearKind[] gear;\n        }\n\n')
         f.write('        public static readonly Vendor[] Vendors =\n        {\n')
         for v in vendors:
             f.write('            new Vendor\n            {\n')
-            f.write(f'                entry = {v["entry"]}, name = {cs(v["name"])}, title = {cs(v["title"])},\n')
+            f.write(f'                entry = {v["entry"]}, name = {cs(v["name"])}, title = {cs(v["title"])}, model = {cs(v["model"])},\n')
             f.write(f'                cell = new Vector3Int({v["cell"][0]}, {v["cell"][1]}, 0),\n')
             if v['items']:
                 items = ', '.join(f'({cs(n)}, {limit}, {restock // 1000}, {sell}, {sell * ratio})'
