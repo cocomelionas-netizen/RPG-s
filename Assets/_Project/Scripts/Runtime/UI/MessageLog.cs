@@ -44,8 +44,9 @@ namespace RPG.UI
 
             text = UIFactory.CreateText("Lines", panel.transform, 15, TextAnchor.LowerLeft);
             UIFactory.Stretch(text.rectTransform);
-            text.rectTransform.offsetMin = new Vector2(10f, 8f);
-            text.rectTransform.offsetMax = new Vector2(-10f, -6f);
+            // Inside the window's steel frame.
+            text.rectTransform.offsetMin = new Vector2(18f, 14f);
+            text.rectTransform.offsetMax = new Vector2(-18f, -14f);
             text.verticalOverflow = VerticalWrapMode.Truncate;
 
             if (Lines.Count == 0)
