@@ -64,6 +64,18 @@ dragging show the icon (counts and mana costs over it); anything without one sti
 
 ## UI frames
 
-Windows get an ornate gold frame (border only) and coloured labelled buttons a cut-corner shape (slots and list rows stay square) from Kenney's **Fantasy UI Borders** (CC0,
+Windows, buttons, item slots, tooltips and bars use **RPG UI 1** by System G6 / Qoma (CC0,
+https://opengameart.org/content/rpg-ui-1), cut by `Tools/Art/ui.py <extracted rpg_ui folder>` into
+`Assets/_Project/Resources/UI/Rpg` (the scene builder sets their nine-slice borders in `ImportUiFrames`):
+
+- windows: grey stone with a steel frame (`UIFactory.AddFrame`); what NPCs say is on parchment with dark ink
+  (`UIFactory.AddParchment`, the gossip window);
+- buttons: steel, golden under the pointer (`UIFactory.CreateButton`); X, +, -, < and > are square steel buttons;
+- item slots: a steel frame over the slot's colour (`UIFactory.MakeSlot`); empty equipment slots show a silhouette
+  (helm, chest, feet...);
+- tooltips and list rows (vendor goods, waypoints, replies): a dark box with a thin steel frame (`UIFactory.StyleBox`);
+- bars (health, mana, experience...): a steel frame around a shaded fill of the bar's colour (`UIFactory.CreateBar`).
+
+Without that art the older look is used: windows get an ornate gold frame (border only) and coloured labelled buttons a cut-corner shape (slots and list rows stay square) from Kenney's **Fantasy UI Borders** (CC0,
 `Assets/_Project/Resources/UI`, credits there), tinted in code (`UIFactory.AddFrame`, `UIFactory.CreateButton`); the
 builder sets their nine-slice borders (`ImportUiFrames`).

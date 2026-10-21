@@ -17,7 +17,7 @@ namespace RPG.UI
     [RequireComponent(typeof(RectTransform))]
     public class VendorWindow : MonoBehaviour
     {
-        [SerializeField, Min(20f)] private float rowHeight = 46f;
+        [SerializeField, Min(20f)] private float rowHeight = 56f;
         [SerializeField, Min(100f)] private float width = 470f;
 
         private static readonly Color PanelColor = new Color(0.07f, 0.06f, 0.05f, 0.95f);
@@ -49,6 +49,8 @@ namespace RPG.UI
         private int lastGold = -1;
         private int lastLevel = -1;
         private const float RefreshSeconds = 0.25f;
+        /// <summary>Where the goods start, under the title and the gold.</summary>
+        private const float ListTop = -104f;
         private int pageCount = 1;
         private RectTransform pager;
         private Text pageText;
@@ -101,7 +103,7 @@ namespace RPG.UI
 
             title = AddText(rect, 22, TextAnchor.UpperLeft, new Vector2(14f, -10f), new Vector2(width - 60f, 54f));
             title.fontStyle = FontStyle.Bold;
-            goldText = AddText(rect, 16, TextAnchor.UpperLeft, new Vector2(14f, -62f), new Vector2(width - 28f, 22f));
+            goldText = AddText(rect, 16, TextAnchor.UpperLeft, new Vector2(16f, -60f), new Vector2(width - 32f, 40f));
             goldText.color = GoldColor;
 
             Button close = UIFactory.CreateButton("Close", rect, new Color(0.4f, 0.12f, 0.1f, 0.95f), "X", 18);
@@ -132,7 +134,7 @@ namespace RPG.UI
 
             list = UIFactory.CreateRect("Goods", rect);
             list.anchorMin = list.anchorMax = list.pivot = new Vector2(0f, 1f);
-            list.anchoredPosition = new Vector2(14f, -92f);
+            list.anchoredPosition = new Vector2(16f, ListTop);
             list.sizeDelta = new Vector2(width - 28f, 10f);
 
             window.SetActive(false);
@@ -177,7 +179,7 @@ namespace RPG.UI
 
             bool paged = pageCount > 1;
             pager.gameObject.SetActive(paged);
-            pager.anchoredPosition = new Vector2(14f, -92f - StockRows * (rowHeight + 4f) - 4f);
+            pager.anchoredPosition = new Vector2(16f, ListTop - StockRows * (rowHeight + 4f) - 4f);
             pageText.text = $"Page {page + 1} / {pageCount}";
 
             bool transmutes = definition != null && definition.Transmutes;
@@ -190,7 +192,7 @@ namespace RPG.UI
                 return;
             }
             craftButton.gameObject.SetActive(transmutes);
-            float height = 92f + StockRows * (rowHeight + 4f) + 16f + (paged ? 38f : 0f) + (transmutes ? 46f : 0f);
+            float height = -ListTop + StockRows * (rowHeight + 4f) + 16f + (paged ? 38f : 0f) + (transmutes ? 46f : 0f);
             ((RectTransform)window.transform).sizeDelta = new Vector2(width * stockColumns, height);
             window.SetActive(true);
             if (!fresh) return;
@@ -222,23 +224,30 @@ namespace RPG.UI
             return row;
         }
 
+        private const float PriceWidth = 84f;
+
         private Row CreateRowAt(float top, Color color, out Button button, float left = 0f)
         {
             button = UIFactory.CreateButton("Item", list, color, null, 0);
+            UIFactory.StyleBox((Image)button.targetGraphic);
             var rect = (RectTransform)button.transform;
             rect.anchorMin = rect.anchorMax = rect.pivot = new Vector2(0f, 1f);
             rect.anchoredPosition = new Vector2(left, top);
-            rect.sizeDelta = new Vector2(width - 28f, rowHeight);
+            rect.sizeDelta = new Vector2(width - 32f, rowHeight);
 
             var row = new Row { Root = button.gameObject };
             // The item's picture on the left, the texts beside it.
             RectTransform iconBox = UIFactory.CreateRect("Icon Box", rect);
-            UIFactory.Place(iconBox, new Vector2(0f, 1f), new Vector2(4f, -4f), new Vector2(rowHeight - 8f, rowHeight - 8f));
+            UIFactory.Place(iconBox, new Vector2(0f, 1f), new Vector2(6f, -6f), new Vector2(rowHeight - 12f, rowHeight - 12f));
             row.Icon = UIFactory.CreateIcon(iconBox, 0f);
+            // Name on one line, the details on up to two under it, the price (and how many are left) on the right.
             float textLeft = rowHeight;
-            row.Name = AddText(rect, 16, TextAnchor.UpperLeft, new Vector2(textLeft, -3f), new Vector2(width - 168f - textLeft, 22f));
-            row.Details = AddText(rect, 12, TextAnchor.UpperLeft, new Vector2(textLeft, -24f), new Vector2(width - 168f - textLeft, 20f));
-            row.Price = AddText(rect, 16, TextAnchor.MiddleRight, new Vector2(width - 172f, 0f), new Vector2(136f, rowHeight));
+            float textWidth = width - 32f - PriceWidth - textLeft - 8f;
+            row.Name = AddText(rect, 15, TextAnchor.UpperLeft, new Vector2(textLeft, -5f), new Vector2(textWidth, 20f));
+            row.Name.horizontalOverflow = HorizontalWrapMode.Overflow;
+            row.Details = AddText(rect, 12, TextAnchor.UpperLeft, new Vector2(textLeft, -24f), new Vector2(textWidth, 30f));
+            row.Details.lineSpacing = 0.9f;
+            row.Price = AddText(rect, 16, TextAnchor.MiddleRight, new Vector2(width - 32f - PriceWidth - 8f, 0f), new Vector2(PriceWidth, rowHeight));
             return row;
         }
 
@@ -274,7 +283,7 @@ namespace RPG.UI
             lastLevel = level;
             nextRefresh = Time.unscaledTime + RefreshSeconds;
 
-            goldText.text = $"Your gold: {inventory.Gold}      Click an item to buy. While this is open, click items in your bag to sell them.";
+            goldText.text = $"Your gold: {inventory.Gold}\n<size=13><color=#c8c0b0>Click an item to buy. Click items in your bag to sell them.</color></size>";
             ItemDefinition[] stock = shown.Definition.stock;
             AffixCatalog affixCatalog = inventory.Affixes;
             foreach (Row row in rows)
@@ -285,14 +294,14 @@ namespace RPG.UI
                 AffixDefinition affix = affixCatalog != null ? affixCatalog.Get(shown.KnownAffix(i)) : null;
                 string itemName = item.NameWith(affix);
                 int left = shown.KnownRemaining(i);
-                row.Name.text = left == Vendor.Unlimited ? itemName
-                    : left > 0 ? $"{itemName}  <size=13><color=#bbbbbb>({left} left)</color></size>"
-                    : $"{itemName}  <size=13><color=#ff6655>(sold out)</color></size>";
+                row.Name.text = itemName;
                 row.Name.color = ItemDefinition.RarityColor(item.QualityWith(affix));
                 UIFactory.SetIcon(row.Icon, item.icon, left == 0 ? item.iconTint * 0.4f : item.iconTint);
                 row.Details.text = Summary(item, progress, affix);
                 int price = inventory.BuyPrice(item, affix);
-                row.Price.text = $"{price} g";
+                row.Price.text = left == Vendor.Unlimited ? $"{price} g"
+                    : left > 0 ? $"{price} g\n<size=12><color=#bbbbbb>{left} left</color></size>"
+                    : $"{price} g\n<size=12><color=#ff6655>sold out</color></size>";
                 row.Price.color = inventory.Gold >= price && left != 0 ? GoldColor : Unaffordable;
             }
         }

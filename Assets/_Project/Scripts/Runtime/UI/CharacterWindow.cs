@@ -324,6 +324,24 @@ namespace RPG.UI
             costText.color = ValueColor;
         }
 
+        /// <summary>The silhouette an empty equipment slot shows (UI art Slot&lt;Part&gt;).</summary>
+        private static string SilhouetteOf(int slot)
+        {
+            switch (slot == RangedSlot ? "Ranged" : SlotNames[slot])
+            {
+                case "Helm": return "Head";
+                case "Chest": return "Chest";
+                case "Feet": return "Feet";
+                case "Necklace": return "Neck";
+                case "Belt": return "Shoulders";
+                case "Legs": return "Legs";
+                case "Hands": return "Hands";
+                case "Ring": return "Wrist";
+                case "Offhand": return "Shield";
+                default: return "Weapon";
+            }
+        }
+
         private static string SlotName(int equipIndex) => equipIndex == RangedSlot ? "Ranged" : SlotNames[equipIndex];
 
         private ItemSlotView CreateEquipmentSlot(RectTransform parent, int slot, Vector2 topLeft)
@@ -331,10 +349,12 @@ namespace RPG.UI
             // The Ranged slot shows the worn bow, which is the weapon here.
             int equipIndex = slot == RangedSlot ? 0 : slot;
             Button button = UIFactory.CreateButton(SlotName(slot), parent, EmptySlotColor, null, 0);
+            Image placeholder = UIFactory.MakeSlot(button, SilhouetteOf(slot));
             var rect = (RectTransform)button.transform;
             UIFactory.Place(rect, new Vector2(0f, 1f), topLeft, new Vector2(SlotSize, SlotSize));
             ItemSlotView view = button.gameObject.AddComponent<ItemSlotView>();
             view.Background = (Image)button.targetGraphic;
+            view.Placeholder = placeholder;
             view.Border = button.gameObject.AddComponent<Outline>();
             view.Border.effectDistance = new Vector2(2f, -2f);
             view.Icon = UIFactory.CreateIcon(rect, 4f);
@@ -517,6 +537,7 @@ namespace RPG.UI
         private void BuildTooltip()
         {
             Image background = UIFactory.CreateImage("Stat Tooltip", transform, TooltipColor);
+            UIFactory.StyleBox(background);
             UIFactory.MakeTopmost(background.gameObject);
             background.raycastTarget = false;
             background.gameObject.AddComponent<Outline>().effectColor = TooltipBorder;

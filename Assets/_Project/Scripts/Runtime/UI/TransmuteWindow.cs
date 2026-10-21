@@ -96,6 +96,7 @@ namespace RPG.UI
             {
                 int index = i;
                 Button slot = UIFactory.CreateButton("Slot", rect, SlotColor, null, 0);
+                UIFactory.MakeSlot(slot);
                 var slotRect = (RectTransform)slot.transform;
                 UIFactory.Place(slotRect, new Vector2(0f, 1f),
                     new Vector2(14f + i % Columns * (SlotSize + Spacing), -80f - i / Columns * (SlotSize + Spacing)), new Vector2(SlotSize, SlotSize));

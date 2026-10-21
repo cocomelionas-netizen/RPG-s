@@ -13,6 +13,8 @@ namespace RPG.UI
     public class ItemSlotView : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         public Image Background;
+        /// <summary>An empty equipment slot's silhouette (optional): shown only while the slot is empty.</summary>
+        public Image Placeholder;
         /// <summary>The item's picture (hidden for none: the name shows instead).</summary>
         public Image Icon;
         public Outline Border;
@@ -25,6 +27,7 @@ namespace RPG.UI
         /// </summary>
         public void Show(ItemDefinition item, string displayName, Color rarity, Color empty)
         {
+            if (Placeholder != null && Placeholder.enabled != (item == null)) Placeholder.enabled = item == null;
             if (item == null)
             {
                 Background.color = empty;

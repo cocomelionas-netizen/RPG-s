@@ -339,6 +339,7 @@ namespace RPG.UI
         private void BuildTooltip()
         {
             Image background = UIFactory.CreateImage("Rank Tooltip", transform, TooltipColor);
+            UIFactory.StyleBox(background);
             UIFactory.MakeTopmost(background.gameObject);
             background.raycastTarget = false;
             tooltip = background.rectTransform;

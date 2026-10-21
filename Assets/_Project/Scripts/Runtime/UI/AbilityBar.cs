@@ -127,6 +127,7 @@ namespace RPG.UI
         private Slot CreateSlot(int index, string key, float x)
         {
             Button button = UIFactory.CreateButton($"Slot {index + 1}", transform, EmptyColor, null, 0);
+            UIFactory.MakeSlot(button);
             var rect = (RectTransform)button.transform;
             rect.anchorMin = rect.anchorMax = new Vector2(0.5f, 0f);
             rect.pivot = new Vector2(0f, 0f);

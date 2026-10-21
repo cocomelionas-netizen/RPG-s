@@ -92,6 +92,7 @@ namespace RPG.UI
         private (Button, Text, Text, Waystone) CreateRow(int index, Waystone stone)
         {
             Button button = UIFactory.CreateButton("Stone", list, RowColor, null, 0);
+            UIFactory.StyleBox((Image)button.targetGraphic);
             UIFactory.Place((RectTransform)button.transform, new Vector2(0f, 1f), new Vector2(0f, -index * (rowHeight + 4f)), new Vector2(width - 28f, rowHeight));
             button.onClick.AddListener(() => Travel(stone));
 

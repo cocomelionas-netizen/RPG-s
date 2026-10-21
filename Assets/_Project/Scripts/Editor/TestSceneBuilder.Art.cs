@@ -46,7 +46,22 @@ namespace RPG.EditorTools
         /// </summary>
         private static void ImportUiFrames()
         {
-            foreach ((string file, float pixelsPerUnit, int border) in new[] { ("WindowFrame", 100f, 16), ("Button", 200f, 16), ("Divider", 100f, 0) })
+            var frames = new List<(string file, float pixelsPerUnit, int border)> { ("WindowFrame", 100f, 16), ("Button", 200f, 16), ("Divider", 100f, 0) };
+            // "RPG UI 1" (CC0, Tools/Art/ui.py): the windows drawn a little finer than their pixels so their steel frame
+            // is about 13 units wide; the square buttons, slots and the bar fill are not nine-sliced.
+            frames.AddRange(new[]
+            {
+                ("Rpg/Window", 160f, 26), ("Rpg/Parchment", 160f, 26), ("Rpg/Tooltip", 120f, 10), ("Rpg/Button", 100f, 8),
+                ("Rpg/ButtonHover", 100f, 8), ("Rpg/BarFrame", 200f, 12), ("Rpg/BarFill", 100f, 0),
+            });
+            foreach (string square in new[] { "Close", "Left", "Right", "Plus", "Minus" })
+            {
+                frames.Add(($"Rpg/{square}", 100f, 0));
+                frames.Add(($"Rpg/{square}Hover", 100f, 0));
+            }
+            foreach (string slot in new[] { "", "Frame", "Head", "Chest", "Shoulders", "Neck", "Hands", "Wrist", "Feet", "Legs", "Weapon", "Shield" })
+                frames.Add(($"Rpg/Slot{slot}", 100f, 0));
+            foreach ((string file, float pixelsPerUnit, int border) in frames)
             {
                 string path = $"Assets/_Project/Resources/UI/{file}.png";
                 AssetDatabase.ImportAsset(path, ImportAssetOptions.ForceSynchronousImport);

@@ -155,6 +155,7 @@ namespace RPG.UI
         private ItemSlotView CreateSlot(RectTransform parent, Vector2 topLeft)
         {
             Button button = UIFactory.CreateButton("Slot", parent, EmptySlot, null, 0);
+            UIFactory.MakeSlot(button);
             var rect = (RectTransform)button.transform;
             rect.anchorMin = rect.anchorMax = rect.pivot = new Vector2(0f, 1f);
             rect.sizeDelta = new Vector2(slotSize, slotSize);
@@ -194,6 +195,7 @@ namespace RPG.UI
         private void BuildTooltip()
         {
             Image background = UIFactory.CreateImage("Tooltip", transform, new Color(0f, 0f, 0f, 0.9f));
+            UIFactory.StyleBox(background);
             UIFactory.MakeTopmost(background.gameObject);
             background.raycastTarget = false;
             tooltip = background.rectTransform;

@@ -24,6 +24,12 @@ namespace RPG.UI
         private static readonly Color TitleColor = new Color(0.8f, 0.75f, 0.65f);
         private static readonly Color BodyColor = new Color(0.93f, 0.9f, 0.82f);
         private static readonly Color NarrationColor = new Color(0.72f, 0.68f, 0.6f);
+        // On parchment: dark ink.
+        private static readonly Color InkColor = new Color(0.17f, 0.1f, 0.04f);
+        private static readonly Color InkTitleColor = new Color(0.38f, 0.22f, 0.08f);
+        private static readonly Color InkNarrationColor = new Color(0.36f, 0.26f, 0.15f);
+        private Color subtitleColor = TitleColor;
+        private Color narrationColor = NarrationColor;
         private const float WalkAwayDistance = 1.5f;
         private const float Padding = 16f;
         private const float OptionHeight = 34f;
@@ -54,7 +60,7 @@ namespace RPG.UI
             Image panel = UIFactory.CreateImage("Gossip", transform, PanelColor);
             window = panel.gameObject;
             window.AddComponent<OpenWindow>();
-            UIFactory.AddFrame(panel);
+            bool parchment = UIFactory.AddParchment(panel);
             UIFactory.Place(panel.rectTransform, new Vector2(0.5f, 0.5f), new Vector2(-260f, 40f), new Vector2(width, 300f));
 
             title = UIFactory.CreateText("Title", panel.transform, 22, TextAnchor.UpperLeft);
@@ -68,6 +74,16 @@ namespace RPG.UI
             body = UIFactory.CreateText("Text", panel.transform, 16, TextAnchor.UpperLeft);
             UIFactory.Place(body.rectTransform, new Vector2(0f, 1f), new Vector2(Padding, -70f), new Vector2(width - Padding * 2f, 40f));
             body.color = BodyColor;
+            if (parchment)
+            {
+                // Dark ink on the parchment, without the light texts' black outline.
+                title.color = InkColor;
+                body.color = InkColor;
+                title.GetComponent<Outline>().enabled = false;
+                body.GetComponent<Outline>().enabled = false;
+                subtitleColor = InkTitleColor;
+                narrationColor = InkNarrationColor;
+            }
 
             optionList = UIFactory.CreateRect("Replies", panel.transform);
             UIFactory.Place(optionList, new Vector2(0f, 1f), new Vector2(Padding, -120f), new Vector2(width - Padding * 2f, 10f));
@@ -87,7 +103,7 @@ namespace RPG.UI
             GameObject player = LocalPlayerObject();
             title.text = string.IsNullOrEmpty(person.Title)
                 ? person.DisplayName
-                : $"{person.DisplayName}\n<size=14><color=#{ColorUtility.ToHtmlStringRGB(TitleColor)}>{person.Title}</color></size>";
+                : $"{person.DisplayName}\n<size=14><color=#{ColorUtility.ToHtmlStringRGB(subtitleColor)}>{person.Title}</color></size>";
 
             GossipCatalog catalog = person.Gossip;
             GossipText text = catalog.TextFor(menu, player);
@@ -119,6 +135,7 @@ namespace RPG.UI
         private Button CreateOption(string label, float y, out float height)
         {
             Button button = UIFactory.CreateButton("Reply", optionList, OptionColor, null, 0);
+            UIFactory.StyleBox((Image)button.targetGraphic);
             Text text = UIFactory.CreateText("Label", button.transform, 15, TextAnchor.MiddleLeft);
             text.color = OptionTextColor;
             text.supportRichText = false;
@@ -183,8 +200,8 @@ namespace RPG.UI
         }
 
         /// <summary>The source game's narration (&lt;Vincent hesitates.&gt;) in grey italics.</summary>
-        private static string Narration(string text) =>
-            System.Text.RegularExpressions.Regex.Replace(text, "<([^<>]*)>", $"<color=#{ColorUtility.ToHtmlStringRGB(NarrationColor)}><i>$1</i></color>");
+        private string Narration(string text) =>
+            System.Text.RegularExpressions.Regex.Replace(text, "<([^<>]*)>", $"<color=#{ColorUtility.ToHtmlStringRGB(narrationColor)}><i>$1</i></color>");
 
         /// <summary>The way to go, as on a compass (north is up on screen).</summary>
         private static string Heading(Vector2 offset)

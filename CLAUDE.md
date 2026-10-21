@@ -60,7 +60,8 @@ god mode, speed, all spells and waypoints, kill around, potions/gems/orbs/gear, 
 training dummies in the world (the prefab stays for the tests).
 Art: Flare's (CC-BY-SA 3.0, `Assets/_Project/Art/Flare/CREDITS.md`): grassland tiles, lakes, trees, heroes and
 monsters in 8 directions, chests, packed by `Tools/Art/flare.py` (`Docs/Art.md`); item and spell icons (Flare, Painterly
-Spell Icons, game-icons.net; `Tools/Art/icons.py`). Line of sight: walls block attacks and spells.
+Spell Icons, game-icons.net; `Tools/Art/icons.py`). UI: "RPG UI 1" (CC0, `Tools/Art/ui.py` → `Resources/UI/Rpg`): stone
+windows with steel frames, parchment for NPC talk, steel buttons, slot frames and equipment silhouettes, framed bars. Line of sight: walls block attacks and spells.
 Heroes: man or woman (chosen with a new character), drawn in Flare's layers from the worn gear (`HeroAppearance`,
 `Tools/Art/avatar.py`): hair or helmet, armor of each kind, weapon and shield change as gear is put on.
 Stats: all source stats bought with experience (C: GENERAL / COMBAT / SKILLS tabs with the worn gear on both sides; SPEND EXP → CONFIRM/CANCEL; class-only weapon skills). Equipment: the source's 11 slots (weapon, helm, chest,
