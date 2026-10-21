@@ -363,7 +363,11 @@ namespace RPG.UI
             view.Label.rectTransform.offsetMin = new Vector2(2f, 2f);
             view.Label.rectTransform.offsetMax = new Vector2(-2f, -2f);
             button.onClick.AddListener(() => OnSlotClicked(equipIndex));
-            view.PointerEntered += _ => ShowTooltip(() => SlotTooltip(slot));
+            view.PointerEntered += _ =>
+            {
+                ShowTooltip(() => SlotTooltip(slot));
+                hoveredGearSlot = slot;
+            };
             view.PointerExited += _ => HideTooltip();
 
             // Gear dragged from the bag onto its slot is put on.
@@ -556,7 +560,39 @@ namespace RPG.UI
 
         private void ShowTooltip(System.Func<string> content) => tooltipContent = content;
 
-        private void HideTooltip() => tooltipContent = null;
+        private void HideTooltip()
+        {
+            tooltipContent = null;
+            hoveredGearSlot = NoGearSlot;
+        }
+
+        // The worn item under the pointer gets the source game's item tooltip (an empty slot keeps the text one).
+        private const int NoGearSlot = int.MinValue;
+        private int hoveredGearSlot = NoGearSlot;
+        private int shownGearSlot = NoGearSlot;
+        private ItemStack shownGearStack;
+        private ItemTooltip itemTooltip;
+
+        /// <summary>Shows the hovered worn item's tooltip; false when the pointer is not over a worn item.</summary>
+        private bool UpdateGearTooltip()
+        {
+            if (itemTooltip == null) itemTooltip = new ItemTooltip(transform);
+            ItemStack stack = hoveredGearSlot != NoGearSlot && inventory != null ? Shown(hoveredGearSlot) : ItemStack.Empty;
+            if (stack.IsEmpty || inventory.Definition(stack) == null)
+            {
+                shownGearSlot = NoGearSlot;
+                itemTooltip.Hide();
+                return false;
+            }
+            if (hoveredGearSlot != shownGearSlot || !stack.Equals(shownGearStack) || !itemTooltip.Visible)
+            {
+                shownGearSlot = hoveredGearSlot;
+                shownGearStack = stack;
+                itemTooltip.Show(inventory, stack, "Click to take off");
+            }
+            itemTooltip.Follow(GetComponentInParent<Canvas>(), new Vector2(0f, 1f), new Vector2(16f, -12f));
+            return true;
+        }
 
         private Text AddText(RectTransform parent, string content, int size, TextAnchor alignment, Vector2 topLeft, Vector2 boxSize)
         {
@@ -623,6 +659,7 @@ namespace RPG.UI
             {
                 if (window.activeSelf) window.SetActive(false);
                 tooltip.gameObject.SetActive(false);
+                if (itemTooltip != null) itemTooltip.Hide();
                 return;
             }
 
@@ -631,6 +668,7 @@ namespace RPG.UI
             if (!window.activeSelf)
             {
                 tooltip.gameObject.SetActive(false);
+                if (itemTooltip != null) itemTooltip.Hide();
                 return;
             }
 
@@ -669,7 +707,7 @@ namespace RPG.UI
         /// </summary>
         private void UpdateTooltip(bool refresh)
         {
-            bool show = tooltipContent != null;
+            bool show = tooltipContent != null && !UpdateGearTooltip();
             if (tooltip.gameObject.activeSelf != show) tooltip.gameObject.SetActive(show);
             if (!show)
             {

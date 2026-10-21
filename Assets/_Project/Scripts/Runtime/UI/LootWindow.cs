@@ -30,8 +30,7 @@ namespace RPG.UI
         private RectTransform windowRect;
         private RectTransform grid;
         private Button takeAll;
-        private RectTransform tooltip;
-        private Text tooltipText;
+        private ItemTooltip itemTooltip;
         private readonly List<ItemSlotView> slots = new List<ItemSlotView>();
         private ItemSlotView hovered;
 
@@ -74,18 +73,7 @@ namespace RPG.UI
             takeAll.onClick.AddListener(TakeAll);
             windowRect.sizeDelta = new Vector2(width, 120f);
 
-            Image background = UIFactory.CreateImage("Tooltip", transform, new Color(0f, 0f, 0f, 0.92f));
-            UIFactory.StyleBox(background);
-            UIFactory.MakeTopmost(background.gameObject);
-            background.raycastTarget = false;
-            tooltip = background.rectTransform;
-            tooltip.anchorMin = tooltip.anchorMax = Vector2.zero;
-            tooltip.pivot = new Vector2(0f, 0f);
-            tooltipText = UIFactory.CreateText("Text", tooltip, 15, TextAnchor.UpperLeft);
-            UIFactory.Stretch(tooltipText.rectTransform);
-            tooltipText.rectTransform.offsetMin = new Vector2(8f, 6f);
-            tooltipText.rectTransform.offsetMax = new Vector2(-8f, -6f);
-            tooltip.gameObject.SetActive(false);
+            itemTooltip = new ItemTooltip(transform);
 
             window.SetActive(false);
             Inventory.LootContentsReceived += OnContents;
@@ -167,7 +155,7 @@ namespace RPG.UI
         private void Hide()
         {
             window.SetActive(false);
-            tooltip.gameObject.SetActive(false);
+            itemTooltip.Hide();
             hovered = null;
             tooltipIndex = -1;
             lootId = 0;
@@ -208,31 +196,18 @@ namespace RPG.UI
         {
             int index = hovered != null ? slots.IndexOf(hovered) : -1;
             ItemDefinition item = index >= 0 && index < contents.Length ? inventory.Definition(contents[index]) : null;
-            tooltip.gameObject.SetActive(item != null);
             if (item == null)
             {
+                itemTooltip.Hide();
                 tooltipIndex = -1;
                 return;
             }
-
-            if (index != tooltipIndex) DrawTooltip(inventory, index, item);
-            var canvas = GetComponentInParent<Canvas>();
-            float scale = canvas != null ? canvas.scaleFactor : 1f;
-            Vector2 pointer = UnityEngine.InputSystem.Mouse.current != null
-                ? UnityEngine.InputSystem.Mouse.current.position.ReadValue()
-                : (Vector2)hovered.transform.position;
-            tooltip.anchoredPosition = UIFactory.KeepOnScreen(tooltip, pointer / scale + new Vector2(14f, 10f), scale);
-        }
-
-        private void DrawTooltip(Inventory inventory, int index, ItemDefinition item)
-        {
-            tooltipIndex = index;
-            string className = VendorWindow.ClassName(item, inventory.GetComponent<CharacterProgress>());
-            tooltipText.text = inventory.Describe(contents[index], className)
-                .Replace("Click to equip", "").Replace("Click to use", "").Replace("Click, then click the item to set it into", "").TrimEnd()
-                + "\nClick to take";
-            tooltipText.color = ItemDefinition.RarityColor(inventory.Quality(contents[index]));
-            tooltip.sizeDelta = new Vector2(260f, tooltipText.preferredHeight + 14f);
+            if (index != tooltipIndex)
+            {
+                tooltipIndex = index;
+                itemTooltip.Show(inventory, contents[index], "Click to take");
+            }
+            itemTooltip.Follow(GetComponentInParent<Canvas>(), new Vector2(0f, 0f), new Vector2(14f, 10f));
         }
     }
 }

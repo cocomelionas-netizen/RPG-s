@@ -27,8 +27,7 @@ namespace RPG.UI
 
         private GameObject window;
         private GameObject toggleButton;
-        private RectTransform tooltip;
-        private Text tooltipText;
+        private ItemTooltip itemTooltip;
         private Text statsText;
         private readonly List<ItemSlotView> bagSlots = new List<ItemSlotView>();
         private readonly List<ItemSlotView> equipmentSlots = new List<ItemSlotView>();
@@ -194,20 +193,7 @@ namespace RPG.UI
 
         private void BuildTooltip()
         {
-            Image background = UIFactory.CreateImage("Tooltip", transform, new Color(0f, 0f, 0f, 0.9f));
-            UIFactory.StyleBox(background);
-            UIFactory.MakeTopmost(background.gameObject);
-            background.raycastTarget = false;
-            tooltip = background.rectTransform;
-            tooltip.anchorMin = tooltip.anchorMax = new Vector2(0f, 0f);
-            tooltip.pivot = new Vector2(1f, 0f);
-            tooltip.sizeDelta = new Vector2(250f, 175f);
-
-            tooltipText = UIFactory.CreateText("Text", tooltip, 15, TextAnchor.UpperLeft);
-            UIFactory.Stretch(tooltipText.rectTransform);
-            tooltipText.rectTransform.offsetMin = new Vector2(8f, 6f);
-            tooltipText.rectTransform.offsetMax = new Vector2(-8f, -6f);
-            tooltip.gameObject.SetActive(false);
+            itemTooltip = new ItemTooltip(transform);
         }
 
         private void Toggle()
@@ -275,7 +261,7 @@ namespace RPG.UI
             if (!hasPlayer)
             {
                 if (window.activeSelf) window.SetActive(false);
-                tooltip.gameObject.SetActive(false);
+                itemTooltip.Hide();
                 return;
             }
 
@@ -289,7 +275,7 @@ namespace RPG.UI
             else if (input != null && input.enabled && (input.InventoryPressed || OpenWindow.EscapeCloses(input) && window.activeSelf)) Toggle();
             if (!window.activeSelf)
             {
-                tooltip.gameObject.SetActive(false);
+                itemTooltip.Hide();
                 return;
             }
 
@@ -359,18 +345,11 @@ namespace RPG.UI
             if (hovered == null)
             {
                 tooltipFor = null;
-                if (tooltip.gameObject.activeSelf) tooltip.gameObject.SetActive(false);
+                itemTooltip.Hide();
                 return;
             }
             if (hovered != tooltipFor) DrawTooltip();
-            if (!tooltip.gameObject.activeSelf) return;
-
-            var canvas = GetComponentInParent<Canvas>();
-            float scale = canvas != null ? canvas.scaleFactor : 1f;
-            Vector2 pointer = UnityEngine.InputSystem.Mouse.current != null
-                ? UnityEngine.InputSystem.Mouse.current.position.ReadValue()
-                : (Vector2)hovered.transform.position;
-            tooltip.anchoredPosition = UIFactory.KeepOnScreen(tooltip, pointer / scale + new Vector2(-12f, 12f), scale);
+            itemTooltip.Follow(GetComponentInParent<Canvas>(), new Vector2(1f, 0f), new Vector2(-12f, 12f));
         }
 
         private void DrawTooltip()
@@ -381,25 +360,16 @@ namespace RPG.UI
             ItemStack stack = bagIndex >= 0 ? inventory.GetBagSlot(bagIndex)
                 : equipIndex >= 0 ? inventory.GetEquippedAt(equipIndex) : ItemStack.Empty;
             ItemDefinition item = inventory.Definition(stack);
-            string className = VendorWindow.ClassName(item, inventory.GetComponent<CharacterProgress>());
-            string description = inventory.Describe(stack, className);
-            if (item != null && equipIndex >= 0)
-                tooltipText.text = description.Replace("Click to equip", "Click to take off");
-            else if (item != null && TransmuteWindow.IsOpen)
-                tooltipText.text = description.Replace("Click to equip", "").Replace("Click to use", "").Replace("Click, then click the item to set it into", "").TrimEnd()
-                                   + "\nClick to put into the transmuter";
-            else if (item != null && VendorWindow.CurrentVendor != null)
-                tooltipText.text = description.Replace("Click to equip", "").Replace("Click to use", "").Replace("Click, then click the item to set it into", "").TrimEnd()
-                                   + $"\nClick to sell for {inventory.SellPrice(stack)} gold";
-            else if (item != null)
-                tooltipText.text = description;
-
-            tooltip.gameObject.SetActive(item != null);
-            if (item == null) return;
-
-            tooltipText.color = ItemDefinition.RarityColor(inventory.Quality(stack));
-            // The source game's affixes can add many stats: the tooltip grows with its text.
-            tooltip.sizeDelta = new Vector2(250f, Mathf.Max(60f, tooltipText.preferredHeight + 14f));
+            string hint = item == null ? null
+                : equipIndex >= 0 ? "Click to take off"
+                : TransmuteWindow.IsOpen ? "Click to put into the transmuter"
+                : VendorWindow.CurrentVendor != null ? $"Click to sell for {inventory.SellPrice(stack)} gold"
+                : ClickHint(item);
+            itemTooltip.Show(inventory, stack, hint);
         }
+
+        /// <summary>What clicking an item in the bag does.</summary>
+        public static string ClickHint(ItemDefinition item) =>
+            item.IsEquippable ? "Click to equip" : item.use != ItemUse.None ? "Click to use" : item.isGem ? "Click, then click the item to set it into" : null;
     }
 }

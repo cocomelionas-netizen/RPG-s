@@ -301,6 +301,21 @@ namespace RPG.Items
             if (totalArmor > 0) text.AppendLine($"+{totalArmor} armor");
             if (!totalAttributes.IsZero) text.AppendLine(totalAttributes.Describe("\n"));
             if (!string.IsNullOrEmpty(socketLine)) text.AppendLine(socketLine);
+            text.Append(UseText());
+            if (!string.IsNullOrEmpty(className)) text.AppendLine($"{className} only");
+            if (IsEquippable) text.AppendLine($"Requires level {itemLevel}");
+            if (price > 0) text.AppendLine($"Sells for {(sellPrice >= 0 ? sellPrice : SellPriceWith(affix))} gold");
+            text.Append(IsEquippable ? "Click to equip" : use != ItemUse.None ? "Click to use" : isGem ? "Click, then click the item to set it into" : "");
+            return text.ToString().TrimEnd();
+        }
+
+        /// <summary>
+        /// What using the item does and what it is for (a gem, a Tome, a potion, a scroll...), its description and how
+        /// many stack, one line each ending in a line break; empty for plain gear.
+        /// </summary>
+        public string UseText()
+        {
+            var text = new StringBuilder();
             if (isGem) text.AppendLine("Set into gear with an empty socket");
             if (isGem && combinesInto != null) text.AppendLine($"{combineCount} transmute into {combinesInto.displayName}");
             if (use == ItemUse.LearnSpell && teachesSpell != null)
@@ -351,11 +366,7 @@ namespace RPG.Items
             }
             if (!string.IsNullOrEmpty(description)) text.AppendLine(description);
             if (maxStack > 1) text.AppendLine($"Stacks up to {maxStack}");
-            if (!string.IsNullOrEmpty(className)) text.AppendLine($"{className} only");
-            if (IsEquippable) text.AppendLine($"Requires level {itemLevel}");
-            if (price > 0) text.AppendLine($"Sells for {(sellPrice >= 0 ? sellPrice : SellPriceWith(affix))} gold");
-            text.Append(IsEquippable ? "Click to equip" : use != ItemUse.None ? "Click to use" : isGem ? "Click, then click the item to set it into" : "");
-            return text.ToString().TrimEnd();
+            return text.ToString();
         }
     }
 }
