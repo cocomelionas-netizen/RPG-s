@@ -57,6 +57,17 @@ namespace RPG.Tests
         }
 
         [Test]
+        public void BuiltCatalog_LoadsWithTheSourceGossip()
+        {
+            // A ScriptableObject whose class is not in a file of its own name loads as null in a build.
+            var catalog = AssetDatabase.LoadAssetAtPath<GossipCatalog>("Assets/_Project/Data/World/GossipCatalog.asset");
+            Assert.IsNotNull(catalog, "Run RPG > Build Test Scene first.");
+            Assert.Greater(catalog.texts.Length, 100);
+            Assert.Greater(catalog.options.Length, 50);
+            Assert.IsNotNull(catalog.TextFor(1, null), "Laudrus greets a stranger");
+        }
+
+        [Test]
         public void Format_FillsTheSourcePlaceholders()
         {
             Assert.AreEqual("Well met, Ana. A fine Mage, my girl. Ana the mage, says Vincent.",
