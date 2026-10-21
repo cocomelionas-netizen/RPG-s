@@ -169,6 +169,9 @@ namespace RPG.Combat
             return target != null && target.IsSpawned && !target.IsDead && !health.IsDead && health.IsHostileTo(target);
         }
 
+        /// <summary>Server: while this says so, no swings (a spell being cast). Set by the unit's spell caster.</summary>
+        public Func<bool> SwingBlocked { get; set; }
+
         private void Update()
         {
             if (!IsServer || serverTarget == null) return;
@@ -181,8 +184,9 @@ namespace RPG.Combat
 
             double now = NetworkManager.ServerTime.Time;
             if (now < nextAttackTime) return;
-            // Stunned or incapacitated units cannot swing.
+            // Stunned or incapacitated units cannot swing, nor anyone casting a spell.
             if (health.Effects != null && health.Effects.IsPacified) return;
+            if (SwingBlocked != null && SwingBlocked()) return;
 
             Vector2 from = ServerPosition(this);
             Vector2 to = ServerPosition(serverTarget);

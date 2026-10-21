@@ -164,6 +164,14 @@ namespace RPG.Combat
 
             Vector2 self = transform.position;
             Vector2 target = LocalTarget.transform.position;
+            // Casting a spell: stand still (walking would interrupt it); the swings wait too.
+            if (caster == null) caster = GetComponent<RPG.Progression.AbilityCaster>();
+            if (caster != null && caster.CastBusy)
+            {
+                if (movement.Destination.HasValue) movement.Stop();
+                movement.FaceTowards(target - self);
+                return;
+            }
             // Too far, or a wall in between: walk (around the wall) until the target is in reach and in sight.
             if (Vector2.Distance(self, target) > autoAttack.Range * 0.9f || !RPG.Navigation.WorldNavigation.LineOfSight(self, target))
             {
@@ -175,6 +183,8 @@ namespace RPG.Combat
                 movement.FaceTowards(target - self);
             }
         }
+
+        private RPG.Progression.AbilityCaster caster;
 
         private void OnServerStoppedAttack()
         {

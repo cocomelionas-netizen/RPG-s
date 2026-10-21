@@ -128,7 +128,18 @@ namespace RPG.Progression
             characterAnimator = GetComponent<CharacterAnimator>();
             movement = GetComponent<PlayerMovement>();
             input = GetComponent<PlayerInputReader>();
+            // No weapon swings while a spell is being cast (they would come first and look like the spell).
+            autoAttack.SwingBlocked = () => castingSpell >= 0;
         }
+
+        // Owner: a spell with a cast time was asked for and auto-attack starts once it has been cast (walking up to
+        // swing during the cast would interrupt it).
+        private bool attackAfterCast;
+        private float castRequestedAt = -1f;
+        private const float CastAnswerSeconds = 1f;
+
+        /// <summary>Owner: a cast is under way or was just asked for (the player must not walk up to swing meanwhile).</summary>
+        public bool CastBusy => CastingAbility != null || (castRequestedAt >= 0f && Time.time - castRequestedAt < CastAnswerSeconds);
 
         private void Update()
         {
@@ -295,11 +306,18 @@ namespace RPG.Progression
                 return;
             }
 
-            // Casting needs standing still.
+            // Casting needs standing still; auto-attack follows once the spell is cast.
             if (ability.castTime > 0f && movement != null && movement.Destination.HasValue) movement.Stop();
             RequestCastRpc(slot, true, target.NetworkObject, point);
-            if (TryGetComponent(out PlayerTargeting targeting))
+            if (ability.castTime > 0f)
+            {
+                castRequestedAt = Time.time;
+                attackAfterCast = true;
+            }
+            else if (TryGetComponent(out PlayerTargeting targeting))
+            {
                 targeting.StartAttack();
+            }
         }
 
         private Vector2 PointerWorldPosition()
@@ -325,6 +343,8 @@ namespace RPG.Progression
         [Rpc(SendTo.Owner)]
         private void CastFailedRpc(int slot, CastFailure reason)
         {
+            castRequestedAt = -1f;
+            attackAfterCast = false;
             CastFailed?.Invoke(slot, reason);
         }
 
@@ -486,8 +506,9 @@ namespace RPG.Progression
             {
                 int interrupted = castingSpell;
                 castingSpell = -1;
-                CastEndedRpc();
+                // The failure first: an interrupted cast does not start auto-attack when it ends.
                 CastFailedRpc(spellbook != null ? spellbook.SlotOf(interrupted) : interrupted, CastFailure.Interrupted);
+                CastEndedRpc();
                 return;
             }
             if (Now < castEndsAt) return;
@@ -744,6 +765,7 @@ namespace RPG.Progression
         private void CastStartedRpc(int spell, double start, double end)
         {
             CastingAbility = GetSpell(spell);
+            if (IsOwner) castRequestedAt = -1f;
             castShownStart = start;
             castShownEnd = end;
             if (!IsServer) globalReadyAt = Math.Max(globalReadyAt, start + GlobalCooldown);
@@ -753,6 +775,11 @@ namespace RPG.Progression
         private void CastEndedRpc()
         {
             CastingAbility = null;
+            if (IsOwner && attackAfterCast)
+            {
+                attackAfterCast = false;
+                if (TryGetComponent(out PlayerTargeting targeting)) targeting.StartAttack();
+            }
         }
 
         [Rpc(SendTo.Everyone)]
