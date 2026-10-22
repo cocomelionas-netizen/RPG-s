@@ -79,3 +79,11 @@ https://opengameart.org/content/rpg-ui-1), cut by `Tools/Art/ui.py <extracted rp
 Without that art the older look is used: windows get an ornate gold frame (border only) and coloured labelled buttons a cut-corner shape (slots and list rows stay square) from Kenney's **Fantasy UI Borders** (CC0,
 `Assets/_Project/Resources/UI`, credits there), tinted in code (`UIFactory.AddFrame`, `UIFactory.CreateButton`); the
 builder sets their nine-slice borders (`ImportUiFrames`).
+
+## World map (M)
+
+`Tools/Art/worldmap.py <game-icons.net SVG folder>` (numpy, scipy, Pillow, cairosvg) paints `Resources/UI/Map/World.png`
+(2048 × 1024, exactly the island's world rectangle) from `WorldMapData.cs` and draws the map's round badges
+(`Resources/UI/Map/<Kind>.png`, 64 px: a coloured disc in a golden rim with a white glyph from game-icons.net, CC-BY 3.0,
+credited in `Resources/UI/CREDITS.md`; `Player.png` an arrow, `Pin.png` a marker pin). The builder imports the picture as
+a mipmapped texture (`ImportWorldMapPicture`) and the badges as sprites (`ImportUiFrames`).

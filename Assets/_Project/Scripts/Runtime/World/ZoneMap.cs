@@ -6,7 +6,7 @@ namespace RPG.World
 {
     /// <summary>
     /// Where a map's named areas are, block by block like the source game's zones (13 x 13 cells each), and the labels of
-    /// its world map (M): the places with their level ranges. <see cref="Zone.NameAt"/> asks it first.
+    /// its world map (M): the places with their level ranges and the elites and bosses. <see cref="Zone.NameAt"/> asks it first.
     /// </summary>
     public class ZoneMap : MonoBehaviour
     {
@@ -19,6 +19,8 @@ namespace RPG.World
             public Vector2 position;
             /// <summary>A town: written larger.</summary>
             public bool town;
+            /// <summary>An elite or boss (a skull on the map; <see cref="detail"/> its level).</summary>
+            public bool boss;
         }
 
         [SerializeField] private Grid grid;

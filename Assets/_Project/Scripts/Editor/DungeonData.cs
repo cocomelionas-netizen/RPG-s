@@ -254,43 +254,43 @@ namespace RPG.EditorTools
             (new Vector3Int(309, 402, 0), 31), // Horned Charger
             (new Vector3Int(338, 391, 0), 31), // Horned Charger
             (new Vector3Int(291, 326, 0), 31), // Horned Charger
-            (new Vector3Int(218, 389, 0), 13), // Tantorus the Crusher
-            (new Vector3Int(208, 294, 0), 13), // Fasthorn the Fleshstomper
-            (new Vector3Int(214, 398, 0), 31), // Lesser Wyrm
-            (new Vector3Int(262, 423, 0), 31), // Lesser Wyrm
-            (new Vector3Int(345, 413, 0), 31), // Lesser Wyrm
-            (new Vector3Int(299, 428, 0), 31), // Lesser Wyrm
-            (new Vector3Int(315, 369, 0), 31), // Lesser Wyrm
-            (new Vector3Int(275, 393, 0), 31), // Lesser Wyrm
-            (new Vector3Int(349, 446, 0), 31), // Lesser Wyrm
-            (new Vector3Int(275, 294, 0), 31), // Lesser Wyrm
-            (new Vector3Int(523, 33, 0), 31), // Lesser Wyrm
-            (new Vector3Int(502, 17, 0), 31), // Lesser Wyrm
-            (new Vector3Int(505, 36, 0), 31), // Lesser Wyrm
-            (new Vector3Int(76, 523, 0), 35), // Zhendale Elite
-            (new Vector3Int(52, 560, 0), 35), // Zhendale Elite
-            (new Vector3Int(75, 532, 0), 35), // Zhendale Archer
-            (new Vector3Int(61, 501, 0), 35), // Zhendale Archer
-            (new Vector3Int(56, 526, 0), 35), // Zhendale Brute
-            (new Vector3Int(57, 490, 0), 35), // Zhendale Brute
-            (new Vector3Int(71, 502, 0), 35), // Zhendale Brute
-            (new Vector3Int(55, 548, 0), 35), // Zhendale Brute
-            (new Vector3Int(65, 535, 0), 35), // Zhendale Brute
-            (new Vector3Int(73, 511, 0), 35), // Zhendale Archer
-            (new Vector3Int(65, 514, 0), 35), // Zhendale Archer
-            (new Vector3Int(53, 515, 0), 35), // Zhendale Elite
-            (new Vector3Int(73, 570, 0), 35), // Zhendale Brute
-            (new Vector3Int(78, 585, 0), 35), // Zhendale Archer
-            (new Vector3Int(244, 437, 0), 31), // Lesser Wyrm
-            (new Vector3Int(202, 424, 0), 31), // Lesser Wyrm
-            (new Vector3Int(179, 435, 0), 31), // Lesser Wyrm
-            (new Vector3Int(237, 390, 0), 31), // Lesser Wyrm
-            (new Vector3Int(191, 296, 0), 31), // Lesser Wyrm
-            (new Vector3Int(229, 329, 0), 31), // Lesser Wyrm
-            (new Vector3Int(261, 335, 0), 31), // Lesser Wyrm
-            (new Vector3Int(511, 59, 0), 31), // Lesser Wyrm
-            (new Vector3Int(492, 39, 0), 31), // Lesser Wyrm
-            (new Vector3Int(490, 55, 0), 31), // Lesser Wyrm
+            (new Vector3Int(218, 389, 0), 13), // Gorvanth the Crusher
+            (new Vector3Int(208, 294, 0), 13), // Swifthorn the Gorestomper
+            (new Vector3Int(214, 398, 0), 31), // Lesser Basilisk
+            (new Vector3Int(262, 423, 0), 31), // Lesser Basilisk
+            (new Vector3Int(345, 413, 0), 31), // Lesser Basilisk
+            (new Vector3Int(299, 428, 0), 31), // Lesser Basilisk
+            (new Vector3Int(315, 369, 0), 31), // Lesser Basilisk
+            (new Vector3Int(275, 393, 0), 31), // Lesser Basilisk
+            (new Vector3Int(349, 446, 0), 31), // Lesser Basilisk
+            (new Vector3Int(275, 294, 0), 31), // Lesser Basilisk
+            (new Vector3Int(523, 33, 0), 31), // Lesser Basilisk
+            (new Vector3Int(502, 17, 0), 31), // Lesser Basilisk
+            (new Vector3Int(505, 36, 0), 31), // Lesser Basilisk
+            (new Vector3Int(76, 523, 0), 35), // Korthian Elite
+            (new Vector3Int(52, 560, 0), 35), // Korthian Elite
+            (new Vector3Int(75, 532, 0), 35), // Korthian Archer
+            (new Vector3Int(61, 501, 0), 35), // Korthian Archer
+            (new Vector3Int(56, 526, 0), 35), // Korthian Brute
+            (new Vector3Int(57, 490, 0), 35), // Korthian Brute
+            (new Vector3Int(71, 502, 0), 35), // Korthian Brute
+            (new Vector3Int(55, 548, 0), 35), // Korthian Brute
+            (new Vector3Int(65, 535, 0), 35), // Korthian Brute
+            (new Vector3Int(73, 511, 0), 35), // Korthian Archer
+            (new Vector3Int(65, 514, 0), 35), // Korthian Archer
+            (new Vector3Int(53, 515, 0), 35), // Korthian Elite
+            (new Vector3Int(73, 570, 0), 35), // Korthian Brute
+            (new Vector3Int(78, 585, 0), 35), // Korthian Archer
+            (new Vector3Int(244, 437, 0), 31), // Lesser Basilisk
+            (new Vector3Int(202, 424, 0), 31), // Lesser Basilisk
+            (new Vector3Int(179, 435, 0), 31), // Lesser Basilisk
+            (new Vector3Int(237, 390, 0), 31), // Lesser Basilisk
+            (new Vector3Int(191, 296, 0), 31), // Lesser Basilisk
+            (new Vector3Int(229, 329, 0), 31), // Lesser Basilisk
+            (new Vector3Int(261, 335, 0), 31), // Lesser Basilisk
+            (new Vector3Int(511, 59, 0), 31), // Lesser Basilisk
+            (new Vector3Int(492, 39, 0), 31), // Lesser Basilisk
+            (new Vector3Int(490, 55, 0), 31), // Lesser Basilisk
             (new Vector3Int(307, 378, 0), 31), // Horned Charger
             (new Vector3Int(297, 399, 0), 31), // Horned Charger
             (new Vector3Int(191, 366, 0), 31), // Horned Charger

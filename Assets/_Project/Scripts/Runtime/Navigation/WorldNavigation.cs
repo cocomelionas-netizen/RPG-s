@@ -25,6 +25,8 @@ namespace RPG.Navigation
         [SerializeField, Min(0.01f)] private float propCheckRadius = 0.15f;
         [Tooltip("How far from blocked cells a straight walk must stay (about the radius of a character's feet).")]
         [SerializeField, Min(0f)] private float clearance = 0.1f;
+        [Tooltip("A painted picture of the whole map covering WorldBounds (the world map, M, and the minimap); empty: one is drawn from the grid.")]
+        [SerializeField] private Texture2D picture;
 
         private const float LineSampleStep = 0.08f;
         private const float SightSampleStep = 0.1f;
@@ -50,6 +52,13 @@ namespace RPG.Navigation
         {
             get => zoneName;
             set => zoneName = value;
+        }
+
+        /// <summary>A painted picture of the whole map covering <see cref="WorldBounds"/>, or null.</summary>
+        public Texture2D Picture
+        {
+            get => picture;
+            set => picture = value;
         }
 
         /// <summary>World-space rectangle around every ground cell.</summary>

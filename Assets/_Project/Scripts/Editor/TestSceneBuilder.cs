@@ -200,6 +200,7 @@ namespace RPG.EditorTools
             // Only the walls (rock) block sight; water, woods and bushes do not.
             navigation.Configure(grid, ground, obstacles, worldTiles.Walls);
             navigation.ZoneName = "Halvaren";
+            navigation.Picture = ImportWorldMapPicture();
 
             CreateGlobalLight();
             CreateEventSystem();
@@ -873,13 +874,19 @@ namespace RPG.EditorTools
         {
             // The source game's zones block by block, and its world map's labels.
             var zones = new GameObject("Zones");
-            var labels = new ZoneMap.Label[StartAreaData.MapLabels.Length];
-            for (int i = 0; i < labels.Length; i++)
-            {
-                var label = StartAreaData.MapLabels[i];
-                labels[i] = new ZoneMap.Label { name = label.name, detail = label.detail, position = grid.GetCellCenterWorld(label.cell), town = label.town };
-            }
-            zones.AddComponent<ZoneMap>().Configure(grid, StartAreaData.ZoneBlock, StartAreaData.ZoneNames, StartAreaData.ZoneBlocks, labels);
+            var labels = new List<ZoneMap.Label>();
+            foreach (var label in StartAreaData.MapLabels)
+                labels.Add(new ZoneMap.Label { name = label.name, detail = label.detail, position = grid.GetCellCenterWorld(label.cell), town = label.town });
+            // The elites and bosses out in the world (a skull on the map).
+            foreach (var boss in StartAreaData.Bosses)
+                labels.Add(new ZoneMap.Label
+                {
+                    name = boss.count > 1 ? $"{boss.name} ({boss.count})" : boss.name,
+                    detail = $"Elite, level {boss.level}",
+                    position = grid.GetCellCenterWorld(boss.cell),
+                    boss = true,
+                });
+            zones.AddComponent<ZoneMap>().Configure(grid, StartAreaData.ZoneBlock, StartAreaData.ZoneNames, StartAreaData.ZoneBlocks, labels.ToArray());
 
             var places = StartAreaData.Places;
             var stones = new GameObject("Waystones").transform;

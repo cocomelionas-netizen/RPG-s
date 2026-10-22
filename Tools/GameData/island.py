@@ -79,6 +79,11 @@ def zone_name(name):
     return name.replace('Kandoryrs', 'Kandorys')
 
 
+def plain(text):
+    """A source name in this project's words (for comments)."""
+    return names.rename(text)
+
+
 def cs(text):
     # Every name and text written goes through this project's names (names.py).
     text = names.rename(text)
@@ -117,6 +122,24 @@ def main(root):
         respawn = float(min(n['respawn_time'] or 0, 600))
         monsters.append((cell_of(n['x'], n['y']), n['min_level'], elite, respawn, n['name'].strip()))
     monsters.sort(key=lambda m: m[0])
+
+    # The world map's boss markers: every elite or boss, one marker for each group of the same name standing together
+    # (within 40 cells), at the group's middle, with the group's lowest level.
+    groups = []
+    for cell, level, elite, _, name in monsters:
+        if not elite:
+            continue
+        group = next((g for g in groups if g['name'] == name and any(math.dist(cell, c) < 40 for c in g['cells'])), None)
+        if group is None:
+            groups.append({'name': name, 'level': level, 'cells': [cell]})
+        else:
+            group['cells'].append(cell)
+            group['level'] = min(group['level'], level)
+    bosses = []
+    for g in groups:
+        middle = (sum(c[0] for c in g['cells']) / len(g['cells']), sum(c[1] for c in g['cells']) / len(g['cells']))
+        nearest = min(g['cells'], key=lambda c: math.dist(c, middle))
+        bosses.append((g['name'], g['level'], len(g['cells']), nearest))
 
     chests = []
     for o in db.execute('select o.position_x x, o.position_y y, o.respawn, g.name, g.data3 level, g.data4 from gameobject o '
@@ -170,14 +193,14 @@ def main(root):
     w('        public static readonly (Vector3Int cell, int level, bool elite, float respawn)[] Monsters =')
     w('        {')
     for cell, level, elite, respawn, name in monsters:
-        w(f'            ({v3(cell)}, {level}, {"true" if elite else "false"}, {respawn:g}f), // {name}')
+        w(f'            ({v3(cell)}, {level}, {"true" if elite else "false"}, {respawn:g}f), // {plain(name)}')
     w('        };')
     w('')
     w('        /// <summary>Containers: cell, kind (0 crate or barrel, 1 chest), level, respawn seconds (capped at 10 minutes).</summary>')
     w('        public static readonly (Vector3Int cell, int kind, int level, float respawn)[] Chests =')
     w('        {')
     for cell, kind, level, respawn, name in chests:
-        w(f'            ({v3(cell)}, {kind}, {level}, {respawn:g}f), // {name}')
+        w(f'            ({v3(cell)}, {kind}, {level}, {respawn:g}f), // {plain(name)}')
     w('        };')
     w('')
     w('        /// <summary>')
@@ -210,6 +233,13 @@ def main(root):
     w('        {')
     for title, detail, (x, y), town in labels:
         w(f'            ({cs(title)}, {cs(detail)}, {v3(cell_of(x, y))}, {"true" if town else "false"}),')
+    w('        };')
+    w('')
+    w('        /// <summary>The elites and bosses for the world map: name, level, how many stand there, cell (one of them).</summary>')
+    w('        public static readonly (string name, int level, int count, Vector3Int cell)[] Bosses =')
+    w('        {')
+    for name, level, count, cell in bosses:
+        w(f'            ({cs(name)}, {level}, {count}, {v3(cell)}),')
     w('        };')
     w('    }')
     w('}')

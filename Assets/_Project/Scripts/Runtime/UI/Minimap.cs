@@ -33,6 +33,7 @@ namespace RPG.UI
         private GameObject panel;
         private Text zoneText;
         private RectTransform view;
+        private Image viewBackground;
         private RawImage picture;
         private int usedDots;
 
@@ -58,6 +59,7 @@ namespace RPG.UI
             // The map and its dots move every frame: a canvas of their own keeps that from rebuilding the whole HUD.
             background.gameObject.AddComponent<Canvas>();
             view = background.rectTransform;
+            viewBackground = background;
 
             picture = new GameObject("Map", typeof(RectTransform)).AddComponent<RawImage>();
             picture.transform.SetParent(view, false);
@@ -78,6 +80,8 @@ namespace RPG.UI
             zoneText.text = Zone.NameAt(center);
 
             picture.enabled = map != null;
+            Color around = MapPicture.BackgroundOf(map);
+            if (viewBackground.color != around) viewBackground.color = around;
             if (map != null)
             {
                 Rect bounds = map.WorldBounds;

@@ -16,28 +16,28 @@ namespace RPG.EditorTools
         /// <summary>Monster spots: cell, source-game level, elite (or boss), respawn seconds (capped at 10 minutes).</summary>
         public static readonly (Vector3Int cell, int level, bool elite, float respawn)[] Monsters =
         {
-            (new Vector3Int(52, 218, 0), 8, false, 60f), // Tasloi Warrior
-            (new Vector3Int(52, 560, 0), 25, true, 30f), // Zhendale Elite
+            (new Vector3Int(52, 218, 0), 8, false, 60f), // Skreeg Warrior
+            (new Vector3Int(52, 560, 0), 25, true, 30f), // Korthian Elite
             (new Vector3Int(53, 42, 0), 10, false, 60f), // Grave Horror
-            (new Vector3Int(53, 515, 0), 25, true, 120f), // Zhendale Elite
+            (new Vector3Int(53, 515, 0), 25, true, 120f), // Korthian Elite
             (new Vector3Int(54, 82, 0), 10, false, 60f), // Skeletal Warrior
             (new Vector3Int(54, 162, 0), 10, false, 60f), // Grave Horror
-            (new Vector3Int(55, 548, 0), 25, false, 30f), // Zhendale Brute
-            (new Vector3Int(56, 526, 0), 25, false, 30f), // Zhendale Brute
+            (new Vector3Int(55, 548, 0), 25, false, 30f), // Korthian Brute
+            (new Vector3Int(56, 526, 0), 25, false, 30f), // Korthian Brute
             (new Vector3Int(57, 148, 0), 10, false, 60f), // Crypt Mage
-            (new Vector3Int(57, 490, 0), 25, false, 30f), // Zhendale Brute
-            (new Vector3Int(58, 230, 0), 8, false, 60f), // Tasloi Warrior
-            (new Vector3Int(60, 58, 0), 11, true, 90f), // Tombshiver
+            (new Vector3Int(57, 490, 0), 25, false, 30f), // Korthian Brute
+            (new Vector3Int(58, 230, 0), 8, false, 60f), // Skreeg Warrior
+            (new Vector3Int(60, 58, 0), 11, true, 90f), // Gravechill
             (new Vector3Int(60, 79, 0), 10, false, 60f), // Grave Horror
             (new Vector3Int(60, 265, 0), 1, false, 5f), // Sand Pincer
             (new Vector3Int(61, 183, 0), 10, false, 60f), // Skeletal Warrior
-            (new Vector3Int(61, 501, 0), 25, false, 30f), // Zhendale Archer
+            (new Vector3Int(61, 501, 0), 25, false, 30f), // Korthian Archer
             (new Vector3Int(63, 407, 0), 1, false, 5f), // Sand Pincer
             (new Vector3Int(65, 39, 0), 10, false, 60f), // Skeletal Warrior
-            (new Vector3Int(65, 514, 0), 25, false, 30f), // Zhendale Archer
-            (new Vector3Int(65, 535, 0), 25, false, 30f), // Zhendale Brute
+            (new Vector3Int(65, 514, 0), 25, false, 30f), // Korthian Archer
+            (new Vector3Int(65, 535, 0), 25, false, 30f), // Korthian Brute
             (new Vector3Int(66, 67, 0), 10, false, 60f), // Grave Horror
-            (new Vector3Int(67, 258, 0), 7, false, 60f), // Fire Quazit
+            (new Vector3Int(67, 258, 0), 7, false, 60f), // Fire Impling
             (new Vector3Int(67, 384, 0), 1, false, 5f), // Sand Pincer
             (new Vector3Int(67, 399, 0), 1, false, 5f), // Sand Pincer
             (new Vector3Int(69, 420, 0), 1, false, 5f), // Sand Pincer
@@ -45,53 +45,53 @@ namespace RPG.EditorTools
             (new Vector3Int(71, 174, 0), 10, false, 60f), // Crypt Mage
             (new Vector3Int(71, 267, 0), 1, false, 5f), // Sand Pincer
             (new Vector3Int(71, 395, 0), 1, false, 5f), // Sand Pincer
-            (new Vector3Int(71, 502, 0), 25, false, 30f), // Zhendale Brute
+            (new Vector3Int(71, 502, 0), 25, false, 30f), // Korthian Brute
             (new Vector3Int(72, 148, 0), 10, false, 60f), // Skeletal Warrior
-            (new Vector3Int(72, 227, 0), 6, false, 60f), // Tasloi Mage
+            (new Vector3Int(72, 227, 0), 6, false, 60f), // Skreeg Mage
             (new Vector3Int(72, 414, 0), 1, false, 5f), // Sand Pincer
-            (new Vector3Int(73, 211, 0), 8, false, 60f), // Tasloi Warrior
-            (new Vector3Int(73, 511, 0), 25, false, 30f), // Zhendale Archer
-            (new Vector3Int(73, 570, 0), 25, false, 30f), // Zhendale Brute
+            (new Vector3Int(73, 211, 0), 8, false, 60f), // Skreeg Warrior
+            (new Vector3Int(73, 511, 0), 25, false, 30f), // Korthian Archer
+            (new Vector3Int(73, 570, 0), 25, false, 30f), // Korthian Brute
             (new Vector3Int(74, 164, 0), 10, false, 60f), // Grave Horror
             (new Vector3Int(74, 380, 0), 1, false, 5f), // Sand Pincer
-            (new Vector3Int(75, 420, 0), 7, false, 60f), // Fire Quazit
-            (new Vector3Int(75, 532, 0), 25, false, 30f), // Zhendale Archer
+            (new Vector3Int(75, 420, 0), 7, false, 60f), // Fire Impling
+            (new Vector3Int(75, 532, 0), 25, false, 30f), // Korthian Archer
             (new Vector3Int(76, 369, 0), 1, false, 5f), // Sand Pincer
-            (new Vector3Int(76, 523, 0), 25, true, 30f), // Zhendale Elite
+            (new Vector3Int(76, 523, 0), 25, true, 30f), // Korthian Elite
             (new Vector3Int(77, 76, 0), 10, false, 60f), // Grave Horror
-            (new Vector3Int(77, 221, 0), 8, false, 60f), // Tasloi Warrior
+            (new Vector3Int(77, 221, 0), 8, false, 60f), // Skreeg Warrior
             (new Vector3Int(78, 64, 0), 10, false, 60f), // Crypt Mage
-            (new Vector3Int(78, 585, 0), 25, false, 30f), // Zhendale Archer
+            (new Vector3Int(78, 585, 0), 25, false, 30f), // Korthian Archer
             (new Vector3Int(79, 424, 0), 1, false, 5f), // Sand Pincer
-            (new Vector3Int(82, 250, 0), 7, false, 60f), // Fire Quazit
+            (new Vector3Int(82, 250, 0), 7, false, 60f), // Fire Impling
             (new Vector3Int(82, 268, 0), 1, false, 5f), // Sand Pincer
             (new Vector3Int(82, 359, 0), 1, false, 5f), // Sand Pincer
             (new Vector3Int(83, 367, 0), 1, false, 5f), // Sand Pincer
-            (new Vector3Int(84, 352, 0), 7, false, 60f), // Fire Quazit
-            (new Vector3Int(86, 381, 0), 18, false, 30f), // Atmar Bandit
-            (new Vector3Int(88, 229, 0), 6, false, 60f), // Tasloi Mage
-            (new Vector3Int(88, 376, 0), 18, false, 30f), // Atmar Bandit
+            (new Vector3Int(84, 352, 0), 7, false, 60f), // Fire Impling
+            (new Vector3Int(86, 381, 0), 18, false, 30f), // Ostrimar Bandit
+            (new Vector3Int(88, 229, 0), 6, false, 60f), // Skreeg Mage
+            (new Vector3Int(88, 376, 0), 18, false, 30f), // Ostrimar Bandit
             (new Vector3Int(89, 338, 0), 1, false, 5f), // Sand Pincer
             (new Vector3Int(89, 346, 0), 1, false, 5f), // Sand Pincer
-            (new Vector3Int(90, 241, 0), 7, false, 60f), // Fire Quazit
-            (new Vector3Int(91, 269, 0), 7, false, 60f), // Fire Quazit
+            (new Vector3Int(90, 241, 0), 7, false, 60f), // Fire Impling
+            (new Vector3Int(91, 269, 0), 7, false, 60f), // Fire Impling
             (new Vector3Int(91, 278, 0), 1, false, 5f), // Sand Pincer
             (new Vector3Int(91, 396, 0), 18, false, 30f), // Battle Mage
             (new Vector3Int(91, 441, 0), 1, false, 5f), // Sand Pincer
             (new Vector3Int(94, 410, 0), 18, false, 30f), // Battle Mage
-            (new Vector3Int(94, 423, 0), 18, false, 30f), // Atmar Bandit
+            (new Vector3Int(94, 423, 0), 18, false, 30f), // Ostrimar Bandit
             (new Vector3Int(96, 104, 0), 9, false, 60f), // Dark Servant
-            (new Vector3Int(96, 335, 0), 7, false, 60f), // Fire Quazit
+            (new Vector3Int(96, 335, 0), 7, false, 60f), // Fire Impling
             (new Vector3Int(97, 282, 0), 1, false, 5f), // Sand Pincer
             (new Vector3Int(97, 334, 0), 1, false, 5f), // Sand Pincer
-            (new Vector3Int(97, 393, 0), 18, false, 30f), // Atmar Bandit
+            (new Vector3Int(97, 393, 0), 18, false, 30f), // Ostrimar Bandit
             (new Vector3Int(98, 297, 0), 1, false, 5f), // Sand Pincer
             (new Vector3Int(98, 321, 0), 1, false, 5f), // Sand Pincer
-            (new Vector3Int(99, 290, 0), 7, false, 60f), // Fire Quazit
-            (new Vector3Int(99, 345, 0), 7, false, 60f), // Fire Quazit
+            (new Vector3Int(99, 290, 0), 7, false, 60f), // Fire Impling
+            (new Vector3Int(99, 345, 0), 7, false, 60f), // Fire Impling
             (new Vector3Int(101, 172, 0), 9, false, 60f), // Dark Servant
             (new Vector3Int(101, 304, 0), 1, false, 5f), // Sand Pincer
-            (new Vector3Int(101, 310, 0), 7, false, 60f), // Fire Quazit
+            (new Vector3Int(101, 310, 0), 7, false, 60f), // Fire Impling
             (new Vector3Int(102, 73, 0), 9, false, 60f), // Dark Servant
             (new Vector3Int(102, 447, 0), 1, false, 5f), // Sand Pincer
             (new Vector3Int(103, 315, 0), 1, false, 5f), // Sand Pincer
@@ -99,46 +99,46 @@ namespace RPG.EditorTools
             (new Vector3Int(107, 27, 0), 9, false, 60f), // Dark Servant
             (new Vector3Int(107, 96, 0), 9, false, 60f), // Dark Servant
             (new Vector3Int(107, 116, 0), 9, false, 60f), // Dark Servant
-            (new Vector3Int(107, 229, 0), 5, false, 60f), // Quazit
-            (new Vector3Int(108, 263, 0), 7, false, 60f), // Fire Quazit
+            (new Vector3Int(107, 229, 0), 5, false, 60f), // Impling
+            (new Vector3Int(108, 263, 0), 7, false, 60f), // Fire Impling
             (new Vector3Int(108, 458, 0), 1, false, 5f), // Sand Pincer
             (new Vector3Int(109, 151, 0), 9, false, 60f), // Dark Servant
-            (new Vector3Int(110, 278, 0), 7, false, 60f), // Fire Quazit
-            (new Vector3Int(110, 435, 0), 18, false, 30f), // Stormhowler
+            (new Vector3Int(110, 278, 0), 7, false, 60f), // Fire Impling
+            (new Vector3Int(110, 435, 0), 18, false, 30f), // Stormhound
             (new Vector3Int(111, 189, 0), 9, false, 60f), // Dark Servant
-            (new Vector3Int(112, 297, 0), 18, false, 60f), // Stormhowler
+            (new Vector3Int(112, 297, 0), 18, false, 60f), // Stormhound
             (new Vector3Int(113, 140, 0), 9, false, 60f), // Dark Servant
             (new Vector3Int(115, 469, 0), 1, false, 5f), // Sand Pincer
             (new Vector3Int(118, 124, 0), 9, false, 60f), // Dark Servant
             (new Vector3Int(119, 59, 0), 9, false, 60f), // Dark Servant
             (new Vector3Int(119, 96, 0), 9, false, 60f), // Dark Servant
-            (new Vector3Int(119, 426, 0), 18, false, 30f), // Stormhowler
+            (new Vector3Int(119, 426, 0), 18, false, 30f), // Stormhound
             (new Vector3Int(122, 164, 0), 9, false, 60f), // Dark Servant
             (new Vector3Int(123, 28, 0), 9, false, 60f), // Dark Servant
-            (new Vector3Int(124, 370, 0), 18, false, 30f), // Stormhowler
-            (new Vector3Int(124, 384, 0), 18, false, 30f), // Stormhowler
-            (new Vector3Int(126, 337, 0), 7, false, 60f), // Fire Quazit
+            (new Vector3Int(124, 370, 0), 18, false, 30f), // Stormhound
+            (new Vector3Int(124, 384, 0), 18, false, 30f), // Stormhound
+            (new Vector3Int(126, 337, 0), 7, false, 60f), // Fire Impling
             (new Vector3Int(126, 471, 0), 1, false, 5f), // Sand Pincer
-            (new Vector3Int(128, 416, 0), 18, false, 30f), // Stormhowler
-            (new Vector3Int(129, 305, 0), 18, false, 60f), // Stormhowler
-            (new Vector3Int(133, 327, 0), 8, false, 60f), // Tasloi Warrior
-            (new Vector3Int(133, 398, 0), 18, false, 30f), // Stormhowler
-            (new Vector3Int(137, 250, 0), 5, false, 60f), // Quazit
-            (new Vector3Int(137, 328, 0), 8, false, 60f), // Tasloi Warrior
-            (new Vector3Int(138, 413, 0), 18, false, 30f), // Stormhowler
-            (new Vector3Int(139, 299, 0), 18, false, 60f), // Stormhowler
-            (new Vector3Int(142, 189, 0), 9, true, 90f), // Torb The Uninterred
-            (new Vector3Int(143, 454, 0), 18, false, 30f), // Atmar Bandit
-            (new Vector3Int(145, 608, 0), 1, false, 300f), // Antling
-            (new Vector3Int(146, 469, 0), 18, false, 30f), // Atmar Bandit
-            (new Vector3Int(148, 233, 0), 5, false, 60f), // Tasloi Scout
+            (new Vector3Int(128, 416, 0), 18, false, 30f), // Stormhound
+            (new Vector3Int(129, 305, 0), 18, false, 60f), // Stormhound
+            (new Vector3Int(133, 327, 0), 8, false, 60f), // Skreeg Warrior
+            (new Vector3Int(133, 398, 0), 18, false, 30f), // Stormhound
+            (new Vector3Int(137, 250, 0), 5, false, 60f), // Impling
+            (new Vector3Int(137, 328, 0), 8, false, 60f), // Skreeg Warrior
+            (new Vector3Int(138, 413, 0), 18, false, 30f), // Stormhound
+            (new Vector3Int(139, 299, 0), 18, false, 60f), // Stormhound
+            (new Vector3Int(142, 189, 0), 9, true, 90f), // Grumm The Uninterred
+            (new Vector3Int(143, 454, 0), 18, false, 30f), // Ostrimar Bandit
+            (new Vector3Int(145, 608, 0), 1, false, 300f), // Mandiblet
+            (new Vector3Int(146, 469, 0), 18, false, 30f), // Ostrimar Bandit
+            (new Vector3Int(148, 233, 0), 5, false, 60f), // Skreeg Scout
             (new Vector3Int(150, 56, 0), 8, false, 60f), // The Damned
             (new Vector3Int(151, 156, 0), 8, false, 60f), // The Damned
-            (new Vector3Int(151, 245, 0), 5, false, 60f), // Antipede
+            (new Vector3Int(151, 245, 0), 5, false, 60f), // Crawlspine
             (new Vector3Int(154, 536, 0), 25, false, 30f), // Skeletal Warrior
             (new Vector3Int(155, 119, 0), 8, false, 60f), // The Damned
             (new Vector3Int(156, 172, 0), 8, false, 60f), // Lost Soul
-            (new Vector3Int(156, 235, 0), 5, false, 60f), // Tasloi Scout
+            (new Vector3Int(156, 235, 0), 5, false, 60f), // Skreeg Scout
             (new Vector3Int(157, 37, 0), 8, false, 60f), // Lost Soul
             (new Vector3Int(159, 518, 0), 25, true, 300f), // Forgotten Loyalist
             (new Vector3Int(160, 143, 0), 8, false, 60f), // The Damned
@@ -147,20 +147,20 @@ namespace RPG.EditorTools
             (new Vector3Int(165, 103, 0), 8, false, 60f), // Lost Soul
             (new Vector3Int(167, 130, 0), 8, false, 60f), // Lost Soul
             (new Vector3Int(167, 185, 0), 8, false, 60f), // The Damned
-            (new Vector3Int(167, 251, 0), 5, false, 60f), // Quazit
+            (new Vector3Int(167, 251, 0), 5, false, 60f), // Impling
             (new Vector3Int(168, 422, 0), 20, false, 30f), // Horned Beast
-            (new Vector3Int(169, 144, 0), 9, true, 90f), // Shadowclaw The Eater
+            (new Vector3Int(169, 144, 0), 9, true, 90f), // Gloomclaw The Eater
             (new Vector3Int(170, 311, 0), 20, false, 30f), // Horned Charger
             (new Vector3Int(170, 565, 0), 25, false, 30f), // Skeletal Warrior
             (new Vector3Int(171, 535, 0), 25, false, 30f), // Skeletal Warrior
             (new Vector3Int(177, 67, 0), 8, false, 60f), // Lost Soul
             (new Vector3Int(177, 281, 0), 20, false, 30f), // Horned Beast
             (new Vector3Int(179, 176, 0), 8, false, 60f), // The Damned
-            (new Vector3Int(179, 435, 0), 25, true, 30f), // Lesser Wyrm
+            (new Vector3Int(179, 435, 0), 25, true, 30f), // Lesser Basilisk
             (new Vector3Int(181, 336, 0), 20, false, 30f), // Horned Beast
-            (new Vector3Int(182, 489, 0), 18, false, 30f), // Atmar Bandit
+            (new Vector3Int(182, 489, 0), 18, false, 30f), // Ostrimar Bandit
             (new Vector3Int(183, 193, 0), 8, false, 60f), // Lost Soul
-            (new Vector3Int(183, 246, 0), 5, false, 60f), // Antipede
+            (new Vector3Int(183, 246, 0), 5, false, 60f), // Crawlspine
             (new Vector3Int(184, 444, 0), 20, false, 30f), // Horned Charger
             (new Vector3Int(185, 348, 0), 20, false, 30f), // Horned Charger
             (new Vector3Int(186, 115, 0), 8, false, 60f), // Lost Soul
@@ -168,7 +168,7 @@ namespace RPG.EditorTools
             (new Vector3Int(188, 312, 0), 20, false, 30f), // Horned Beast
             (new Vector3Int(189, 131, 0), 8, false, 60f), // Lost Soul
             (new Vector3Int(190, 430, 0), 20, false, 30f), // Horned Beast
-            (new Vector3Int(191, 296, 0), 25, true, 30f), // Lesser Wyrm
+            (new Vector3Int(191, 296, 0), 25, true, 30f), // Lesser Basilisk
             (new Vector3Int(191, 366, 0), 20, false, 30f), // Horned Charger
             (new Vector3Int(193, 103, 0), 8, false, 60f), // Lost Soul
             (new Vector3Int(195, 160, 0), 8, false, 60f), // The Damned
@@ -177,376 +177,376 @@ namespace RPG.EditorTools
             (new Vector3Int(197, 399, 0), 20, false, 30f), // Horned Beast
             (new Vector3Int(199, 177, 0), 8, false, 60f), // Lost Soul
             (new Vector3Int(201, 307, 0), 20, false, 30f), // Horned Beast
-            (new Vector3Int(202, 424, 0), 25, true, 30f), // Lesser Wyrm
+            (new Vector3Int(202, 424, 0), 25, true, 30f), // Lesser Basilisk
             (new Vector3Int(205, 189, 0), 8, false, 60f), // The Damned
             (new Vector3Int(206, 340, 0), 20, false, 30f), // Horned Beast
-            (new Vector3Int(208, 294, 0), 25, true, 300f), // Fasthorn the Fleshstomper
+            (new Vector3Int(208, 294, 0), 25, true, 300f), // Swifthorn the Gorestomper
             (new Vector3Int(208, 435, 0), 20, false, 30f), // Horned Charger
             (new Vector3Int(210, 162, 0), 8, false, 60f), // Lost Soul
-            (new Vector3Int(210, 257, 0), 5, false, 60f), // Quazit
-            (new Vector3Int(211, 473, 0), 18, false, 30f), // Atmar Bandit
-            (new Vector3Int(212, 539, 0), 11, false, 60f), // Blightchosen Guardsman
+            (new Vector3Int(210, 257, 0), 5, false, 60f), // Impling
+            (new Vector3Int(211, 473, 0), 18, false, 30f), // Ostrimar Bandit
+            (new Vector3Int(212, 539, 0), 11, false, 60f), // Rotsworn Guardsman
             (new Vector3Int(213, 138, 0), 8, false, 60f), // The Damned
-            (new Vector3Int(214, 248, 0), 5, false, 60f), // Antipede
-            (new Vector3Int(214, 398, 0), 25, true, 30f), // Lesser Wyrm
-            (new Vector3Int(214, 620, 0), 11, false, 60f), // Blightchosen Guardsman
+            (new Vector3Int(214, 248, 0), 5, false, 60f), // Crawlspine
+            (new Vector3Int(214, 398, 0), 25, true, 30f), // Lesser Basilisk
+            (new Vector3Int(214, 620, 0), 11, false, 60f), // Rotsworn Guardsman
             (new Vector3Int(215, 328, 0), 20, false, 30f), // Horned Charger
             (new Vector3Int(216, 177, 0), 8, false, 60f), // Lost Soul
             (new Vector3Int(216, 369, 0), 20, false, 30f), // Horned Charger
-            (new Vector3Int(218, 389, 0), 25, true, 300f), // Tantorus the Crusher
+            (new Vector3Int(218, 389, 0), 25, true, 300f), // Gorvanth the Crusher
             (new Vector3Int(219, 190, 0), 8, false, 60f), // Lost Soul
-            (new Vector3Int(220, 91, 0), 1, false, 300f), // Antling
-            (new Vector3Int(220, 547, 0), 11, true, 90f), // Montagar The Hunter
-            (new Vector3Int(220, 627, 0), 11, true, 90f), // Hissabal The Torturer
-            (new Vector3Int(222, 612, 0), 11, false, 60f), // Blightchosen Acolyte
-            (new Vector3Int(223, 259, 0), 5, false, 60f), // Quazit
+            (new Vector3Int(220, 91, 0), 1, false, 300f), // Mandiblet
+            (new Vector3Int(220, 547, 0), 11, true, 90f), // Brakhar The Hunter
+            (new Vector3Int(220, 627, 0), 11, true, 90f), // Skrell The Torturer
+            (new Vector3Int(222, 612, 0), 11, false, 60f), // Rotsworn Acolyte
+            (new Vector3Int(223, 259, 0), 5, false, 60f), // Impling
             (new Vector3Int(224, 416, 0), 20, false, 30f), // Horned Beast
-            (new Vector3Int(224, 536, 0), 11, false, 60f), // Blightchosen Acolyte
+            (new Vector3Int(224, 536, 0), 11, false, 60f), // Rotsworn Acolyte
             (new Vector3Int(228, 428, 0), 20, false, 30f), // Horned Beast
-            (new Vector3Int(229, 329, 0), 25, true, 30f), // Lesser Wyrm
-            (new Vector3Int(230, 235, 0), 5, false, 60f), // Quazit
-            (new Vector3Int(230, 623, 0), 11, false, 60f), // Blightchosen Guardsman
+            (new Vector3Int(229, 329, 0), 25, true, 30f), // Lesser Basilisk
+            (new Vector3Int(230, 235, 0), 5, false, 60f), // Impling
+            (new Vector3Int(230, 623, 0), 11, false, 60f), // Rotsworn Guardsman
             (new Vector3Int(232, 310, 0), 20, false, 30f), // Horned Charger
-            (new Vector3Int(234, 27, 0), 1, false, 300f), // Antling
-            (new Vector3Int(235, 602, 0), 11, false, 60f), // Blightchosen Guardsman
-            (new Vector3Int(237, 390, 0), 25, true, 30f), // Lesser Wyrm
-            (new Vector3Int(237, 549, 0), 11, false, 60f), // Blightchosen Guardsman
-            (new Vector3Int(238, 245, 0), 5, false, 60f), // Antipede
+            (new Vector3Int(234, 27, 0), 1, false, 300f), // Mandiblet
+            (new Vector3Int(235, 602, 0), 11, false, 60f), // Rotsworn Guardsman
+            (new Vector3Int(237, 390, 0), 25, true, 30f), // Lesser Basilisk
+            (new Vector3Int(237, 549, 0), 11, false, 60f), // Rotsworn Guardsman
+            (new Vector3Int(238, 245, 0), 5, false, 60f), // Crawlspine
             (new Vector3Int(240, 335, 0), 20, false, 30f), // Horned Beast
-            (new Vector3Int(242, 492, 0), 11, false, 60f), // Blightchosen Guardsman
+            (new Vector3Int(242, 492, 0), 11, false, 60f), // Rotsworn Guardsman
             (new Vector3Int(243, 301, 0), 20, false, 30f), // Horned Beast
-            (new Vector3Int(244, 437, 0), 25, true, 30f), // Lesser Wyrm
-            (new Vector3Int(244, 576, 0), 11, false, 60f), // Blightchosen Guardsman
+            (new Vector3Int(244, 437, 0), 25, true, 30f), // Lesser Basilisk
+            (new Vector3Int(244, 576, 0), 11, false, 60f), // Rotsworn Guardsman
             (new Vector3Int(248, 348, 0), 20, false, 30f), // Horned Charger
             (new Vector3Int(248, 399, 0), 20, false, 30f), // Horned Charger
             (new Vector3Int(251, 431, 0), 20, false, 30f), // Horned Charger
-            (new Vector3Int(252, 247, 0), 5, false, 60f), // Antipede
+            (new Vector3Int(252, 247, 0), 5, false, 60f), // Crawlspine
             (new Vector3Int(252, 447, 0), 20, false, 30f), // Horned Beast
-            (new Vector3Int(252, 521, 0), 11, false, 60f), // Blightchosen Guardsman
-            (new Vector3Int(253, 541, 0), 11, false, 60f), // Blightchosen Acolyte
-            (new Vector3Int(253, 624, 0), 11, false, 60f), // Blightchosen Guardsman
-            (new Vector3Int(254, 23, 0), 1, false, 300f), // Antling
-            (new Vector3Int(254, 259, 0), 5, false, 60f), // Quazit
+            (new Vector3Int(252, 521, 0), 11, false, 60f), // Rotsworn Guardsman
+            (new Vector3Int(253, 541, 0), 11, false, 60f), // Rotsworn Acolyte
+            (new Vector3Int(253, 624, 0), 11, false, 60f), // Rotsworn Guardsman
+            (new Vector3Int(254, 23, 0), 1, false, 300f), // Mandiblet
+            (new Vector3Int(254, 259, 0), 5, false, 60f), // Impling
             (new Vector3Int(255, 284, 0), 20, false, 30f), // Horned Charger
-            (new Vector3Int(260, 234, 0), 5, false, 60f), // Antipede
-            (new Vector3Int(261, 214, 0), 7, true, 90f), // Shriekevil The Drooling
-            (new Vector3Int(261, 335, 0), 25, true, 30f), // Lesser Wyrm
-            (new Vector3Int(262, 252, 0), 5, false, 60f), // Quazit
+            (new Vector3Int(260, 234, 0), 5, false, 60f), // Crawlspine
+            (new Vector3Int(261, 214, 0), 7, true, 90f), // Wailgrim The Drooling
+            (new Vector3Int(261, 335, 0), 25, true, 30f), // Lesser Basilisk
+            (new Vector3Int(262, 252, 0), 5, false, 60f), // Impling
             (new Vector3Int(262, 392, 0), 20, false, 30f), // Horned Beast
-            (new Vector3Int(262, 423, 0), 25, true, 30f), // Lesser Wyrm
+            (new Vector3Int(262, 423, 0), 25, true, 30f), // Lesser Basilisk
             (new Vector3Int(263, 369, 0), 20, false, 30f), // Horned Beast
-            (new Vector3Int(263, 633, 0), 11, true, 90f), // Dabbuz The Bushwhacker
-            (new Vector3Int(265, 148, 0), 1, false, 300f), // Antling
-            (new Vector3Int(269, 629, 0), 11, false, 60f), // Blightchosen Acolyte
-            (new Vector3Int(270, 572, 0), 11, false, 60f), // Blightchosen Guardsman
+            (new Vector3Int(263, 633, 0), 11, true, 90f), // Gorrak The Bushwhacker
+            (new Vector3Int(265, 148, 0), 1, false, 300f), // Mandiblet
+            (new Vector3Int(269, 629, 0), 11, false, 60f), // Rotsworn Acolyte
+            (new Vector3Int(270, 572, 0), 11, false, 60f), // Rotsworn Guardsman
             (new Vector3Int(271, 383, 0), 20, false, 30f), // Horned Beast
-            (new Vector3Int(272, 122, 0), 1, false, 300f), // Antling
+            (new Vector3Int(272, 122, 0), 1, false, 300f), // Mandiblet
             (new Vector3Int(273, 438, 0), 20, false, 30f), // Horned Beast
-            (new Vector3Int(275, 294, 0), 25, true, 30f), // Lesser Wyrm
-            (new Vector3Int(275, 393, 0), 25, true, 30f), // Lesser Wyrm
+            (new Vector3Int(275, 294, 0), 25, true, 30f), // Lesser Basilisk
+            (new Vector3Int(275, 393, 0), 25, true, 30f), // Lesser Basilisk
             (new Vector3Int(276, 333, 0), 20, false, 30f), // Horned Charger
             (new Vector3Int(279, 305, 0), 20, false, 30f), // Horned Beast
-            (new Vector3Int(282, 240, 0), 5, false, 60f), // Tasloi Scout
-            (new Vector3Int(283, 532, 0), 11, false, 60f), // Blightchosen Guardsman
+            (new Vector3Int(282, 240, 0), 5, false, 60f), // Skreeg Scout
+            (new Vector3Int(283, 532, 0), 11, false, 60f), // Rotsworn Guardsman
             (new Vector3Int(285, 423, 0), 20, false, 30f), // Horned Charger
             (new Vector3Int(287, 297, 0), 20, false, 30f), // Horned Charger
-            (new Vector3Int(287, 616, 0), 11, false, 60f), // Blightchosen Guardsman
+            (new Vector3Int(287, 616, 0), 11, false, 60f), // Rotsworn Guardsman
             (new Vector3Int(288, 390, 0), 20, false, 30f), // Horned Charger
-            (new Vector3Int(288, 473, 0), 12, false, 60f), // Fire Cokatrice
-            (new Vector3Int(289, 247, 0), 5, false, 60f), // Tasloi Scout
+            (new Vector3Int(288, 473, 0), 12, false, 60f), // Fire Gorgonet
+            (new Vector3Int(289, 247, 0), 5, false, 60f), // Skreeg Scout
             (new Vector3Int(291, 326, 0), 20, false, 30f), // Horned Charger
             (new Vector3Int(292, 279, 0), 20, false, 30f), // Horned Beast
-            (new Vector3Int(296, 215, 0), 5, false, 60f), // Antipede
+            (new Vector3Int(296, 215, 0), 5, false, 60f), // Crawlspine
             (new Vector3Int(297, 399, 0), 20, false, 300f), // Horned Charger
             (new Vector3Int(297, 440, 0), 20, false, 30f), // Horned Beast
-            (new Vector3Int(299, 234, 0), 5, false, 60f), // Antipede
-            (new Vector3Int(299, 428, 0), 25, true, 30f), // Lesser Wyrm
-            (new Vector3Int(304, 607, 0), 11, false, 60f), // Blightchosen Guardsman
-            (new Vector3Int(305, 533, 0), 11, false, 60f), // Blightchosen Acolyte
+            (new Vector3Int(299, 234, 0), 5, false, 60f), // Crawlspine
+            (new Vector3Int(299, 428, 0), 25, true, 30f), // Lesser Basilisk
+            (new Vector3Int(304, 607, 0), 11, false, 60f), // Rotsworn Guardsman
+            (new Vector3Int(305, 533, 0), 11, false, 60f), // Rotsworn Acolyte
             (new Vector3Int(307, 378, 0), 20, false, 30f), // Horned Charger
-            (new Vector3Int(309, 190, 0), 1, false, 300f), // Antling
+            (new Vector3Int(309, 190, 0), 1, false, 300f), // Mandiblet
             (new Vector3Int(309, 402, 0), 20, false, 30f), // Horned Charger
             (new Vector3Int(311, 431, 0), 20, false, 30f), // Horned Charger
-            (new Vector3Int(315, 369, 0), 25, true, 30f), // Lesser Wyrm
+            (new Vector3Int(315, 369, 0), 25, true, 30f), // Lesser Basilisk
             (new Vector3Int(317, 332, 0), 20, false, 30f), // Horned Beast
-            (new Vector3Int(319, 244, 0), 5, false, 60f), // Quazit
+            (new Vector3Int(319, 244, 0), 5, false, 60f), // Impling
             (new Vector3Int(320, 316, 0), 20, false, 30f), // Horned Charger
-            (new Vector3Int(321, 621, 0), 11, false, 60f), // Blightchosen Guardsman
+            (new Vector3Int(321, 621, 0), 11, false, 60f), // Rotsworn Guardsman
             (new Vector3Int(322, 384, 0), 20, false, 30f), // Horned Beast
             (new Vector3Int(324, 345, 0), 20, false, 30f), // Horned Beast
             (new Vector3Int(326, 410, 0), 20, false, 30f), // Horned Beast
-            (new Vector3Int(326, 546, 0), 11, false, 60f), // Blightchosen Guardsman
-            (new Vector3Int(327, 288, 0), 12, false, 60f), // Fire Cokatrice
-            (new Vector3Int(327, 633, 0), 11, false, 60f), // Blightchosen Acolyte
-            (new Vector3Int(328, 461, 0), 1, false, 300f), // Antling
-            (new Vector3Int(328, 559, 0), 11, true, 90f), // Shav The Quick
+            (new Vector3Int(326, 546, 0), 11, false, 60f), // Rotsworn Guardsman
+            (new Vector3Int(327, 288, 0), 12, false, 60f), // Fire Gorgonet
+            (new Vector3Int(327, 633, 0), 11, false, 60f), // Rotsworn Acolyte
+            (new Vector3Int(328, 461, 0), 1, false, 300f), // Mandiblet
+            (new Vector3Int(328, 559, 0), 11, true, 90f), // Skeev The Quick
             (new Vector3Int(330, 432, 0), 20, false, 30f), // Horned Beast
-            (new Vector3Int(333, 461, 0), 1, false, 300f), // Antling
-            (new Vector3Int(333, 465, 0), 12, false, 60f), // Fire Antwig
-            (new Vector3Int(333, 636, 0), 12, true, 90f), // Loglan The Overseer
+            (new Vector3Int(333, 461, 0), 1, false, 300f), // Mandiblet
+            (new Vector3Int(333, 465, 0), 12, false, 60f), // Fire Burrowling
+            (new Vector3Int(333, 636, 0), 12, true, 90f), // Grimbald The Overseer
             (new Vector3Int(336, 364, 0), 20, false, 30f), // Horned Beast
             (new Vector3Int(338, 391, 0), 20, false, 30f), // Horned Charger
-            (new Vector3Int(342, 562, 0), 11, false, 60f), // Blightchosen Acolyte
-            (new Vector3Int(342, 628, 0), 11, false, 60f), // Blightchosen Guardsman
-            (new Vector3Int(343, 174, 0), 1, false, 300f), // Antling
-            (new Vector3Int(345, 413, 0), 25, true, 30f), // Lesser Wyrm
+            (new Vector3Int(342, 562, 0), 11, false, 60f), // Rotsworn Acolyte
+            (new Vector3Int(342, 628, 0), 11, false, 60f), // Rotsworn Guardsman
+            (new Vector3Int(343, 174, 0), 1, false, 300f), // Mandiblet
+            (new Vector3Int(345, 413, 0), 25, true, 30f), // Lesser Basilisk
             (new Vector3Int(347, 433, 0), 20, false, 30f), // Horned Charger
-            (new Vector3Int(349, 318, 0), 12, false, 60f), // Fire Cokatrice
-            (new Vector3Int(349, 446, 0), 25, true, 30f), // Lesser Wyrm
-            (new Vector3Int(350, 509, 0), 11, false, 60f), // Blightchosen Guardsman
+            (new Vector3Int(349, 318, 0), 12, false, 60f), // Fire Gorgonet
+            (new Vector3Int(349, 446, 0), 25, true, 30f), // Lesser Basilisk
+            (new Vector3Int(350, 509, 0), 11, false, 60f), // Rotsworn Guardsman
             (new Vector3Int(351, 386, 0), 20, false, 30f), // Horned Charger
-            (new Vector3Int(351, 639, 0), 11, false, 60f), // Blightchosen Guardsman
-            (new Vector3Int(352, 546, 0), 11, false, 60f), // Blightchosen Guardsman
-            (new Vector3Int(352, 615, 0), 11, false, 60f), // Blightchosen Guardsman
+            (new Vector3Int(351, 639, 0), 11, false, 60f), // Rotsworn Guardsman
+            (new Vector3Int(352, 546, 0), 11, false, 60f), // Rotsworn Guardsman
+            (new Vector3Int(352, 615, 0), 11, false, 60f), // Rotsworn Guardsman
             (new Vector3Int(353, 349, 0), 20, false, 30f), // Horned Charger
             (new Vector3Int(353, 372, 0), 20, false, 30f), // Horned Beast
-            (new Vector3Int(353, 626, 0), 11, false, 60f), // Blightchosen Acolyte
+            (new Vector3Int(353, 626, 0), 11, false, 60f), // Rotsworn Acolyte
             (new Vector3Int(354, 361, 0), 20, false, 30f), // Horned Charger
-            (new Vector3Int(359, 487, 0), 12, false, 60f), // Fire Cokatrice
+            (new Vector3Int(359, 487, 0), 12, false, 60f), // Fire Gorgonet
             (new Vector3Int(364, 436, 0), 20, false, 30f), // Horned Beast
-            (new Vector3Int(366, 43, 0), 1, false, 300f), // Antling
-            (new Vector3Int(367, 174, 0), 1, false, 300f), // Antling
-            (new Vector3Int(369, 548, 0), 11, false, 60f), // Blightchosen Guardsman
+            (new Vector3Int(366, 43, 0), 1, false, 300f), // Mandiblet
+            (new Vector3Int(367, 174, 0), 1, false, 300f), // Mandiblet
+            (new Vector3Int(369, 548, 0), 11, false, 60f), // Rotsworn Guardsman
             (new Vector3Int(370, 28, 0), 25, true, 30f), // Flame Serpent
-            (new Vector3Int(371, 140, 0), 1, false, 300f), // Antling
-            (new Vector3Int(374, 306, 0), 12, false, 60f), // Fire Cokatrice
-            (new Vector3Int(376, 16, 0), 1, false, 300f), // Antling
-            (new Vector3Int(377, 590, 0), 11, false, 60f), // Blightchosen Guardsman
-            (new Vector3Int(378, 367, 0), 17, false, 90f), // Yargol Fighter
-            (new Vector3Int(378, 499, 0), 1, false, 300f), // Antling
+            (new Vector3Int(371, 140, 0), 1, false, 300f), // Mandiblet
+            (new Vector3Int(374, 306, 0), 12, false, 60f), // Fire Gorgonet
+            (new Vector3Int(376, 16, 0), 1, false, 300f), // Mandiblet
+            (new Vector3Int(377, 590, 0), 11, false, 60f), // Rotsworn Guardsman
+            (new Vector3Int(378, 367, 0), 17, false, 90f), // Vargul Fighter
+            (new Vector3Int(378, 499, 0), 1, false, 300f), // Mandiblet
             (new Vector3Int(379, 42, 0), 25, true, 30f), // Flame Serpent
-            (new Vector3Int(380, 378, 0), 16, false, 90f), // Yargol Grunt
-            (new Vector3Int(382, 27, 0), 30, true, 30f), // Adult Wyrm
-            (new Vector3Int(383, 498, 0), 12, false, 60f), // Ice Antwig
+            (new Vector3Int(380, 378, 0), 16, false, 90f), // Vargul Grunt
+            (new Vector3Int(382, 27, 0), 30, true, 30f), // Adult Basilisk
+            (new Vector3Int(383, 498, 0), 12, false, 60f), // Ice Burrowling
             (new Vector3Int(384, 15, 0), 25, true, 30f), // Azure Hydra
-            (new Vector3Int(384, 365, 0), 16, false, 90f), // Yargol Grunt
-            (new Vector3Int(384, 503, 0), 1, false, 300f), // Antling
-            (new Vector3Int(387, 353, 0), 17, false, 90f), // Yargol Fighter
-            (new Vector3Int(387, 387, 0), 17, false, 90f), // Yargol Fighter
+            (new Vector3Int(384, 365, 0), 16, false, 90f), // Vargul Grunt
+            (new Vector3Int(384, 503, 0), 1, false, 300f), // Mandiblet
+            (new Vector3Int(387, 353, 0), 17, false, 90f), // Vargul Fighter
+            (new Vector3Int(387, 387, 0), 17, false, 90f), // Vargul Fighter
             (new Vector3Int(387, 475, 0), 5, false, 60f), // Terror Clan Warrior
             (new Vector3Int(389, 59, 0), 25, true, 30f), // Flame Serpent
-            (new Vector3Int(389, 489, 0), 12, false, 60f), // Fire Cokatrice
+            (new Vector3Int(389, 489, 0), 12, false, 60f), // Fire Gorgonet
             (new Vector3Int(390, 37, 0), 25, true, 30f), // Azure Hydra
             (new Vector3Int(390, 425, 0), 20, false, 300f), // Horned Beast
-            (new Vector3Int(391, 380, 0), 16, false, 90f), // Yargol Grunt
+            (new Vector3Int(391, 380, 0), 16, false, 90f), // Vargul Grunt
             (new Vector3Int(393, 467, 0), 5, false, 60f), // Terror Clan Archer
-            (new Vector3Int(394, 323, 0), 2, false, 5f), // Antwig
-            (new Vector3Int(396, 55, 0), 30, true, 30f), // Adult Wyrm
-            (new Vector3Int(396, 331, 0), 1, false, 300f), // Antling
+            (new Vector3Int(394, 323, 0), 2, false, 5f), // Burrowling
+            (new Vector3Int(396, 55, 0), 30, true, 30f), // Adult Basilisk
+            (new Vector3Int(396, 331, 0), 1, false, 300f), // Mandiblet
             (new Vector3Int(397, 435, 0), 20, false, 300f), // Horned Charger
-            (new Vector3Int(398, 322, 0), 1, false, 300f), // Antling
-            (new Vector3Int(399, 495, 0), 1, false, 300f), // Antling
-            (new Vector3Int(400, 386, 0), 16, false, 90f), // Yargol Grunt
+            (new Vector3Int(398, 322, 0), 1, false, 300f), // Mandiblet
+            (new Vector3Int(399, 495, 0), 1, false, 300f), // Mandiblet
+            (new Vector3Int(400, 386, 0), 16, false, 90f), // Vargul Grunt
             (new Vector3Int(402, 69, 0), 25, true, 30f), // Azure Hydra
-            (new Vector3Int(403, 510, 0), 5, false, 60f), // Cokatrice
+            (new Vector3Int(403, 510, 0), 5, false, 60f), // Gorgonet
             (new Vector3Int(404, 474, 0), 5, false, 60f), // Terror Clan Warrior
-            (new Vector3Int(404, 488, 0), 2, false, 5f), // Antwig
-            (new Vector3Int(405, 375, 0), 17, false, 90f), // Yargol Fighter
-            (new Vector3Int(406, 381, 0), 18, true, 90f), // Morgall
+            (new Vector3Int(404, 488, 0), 2, false, 5f), // Burrowling
+            (new Vector3Int(405, 375, 0), 17, false, 90f), // Vargul Fighter
+            (new Vector3Int(406, 381, 0), 18, true, 90f), // Grulmak
             (new Vector3Int(407, 50, 0), 25, true, 30f), // Azure Hydra
             (new Vector3Int(407, 423, 0), 20, false, 300f), // Horned Charger
             (new Vector3Int(409, 39, 0), 25, true, 30f), // Flame Serpent
-            (new Vector3Int(410, 479, 0), 1, false, 300f), // Antling
-            (new Vector3Int(411, 501, 0), 1, false, 300f), // Antling
-            (new Vector3Int(412, 385, 0), 17, false, 90f), // Yargol Fighter
+            (new Vector3Int(410, 479, 0), 1, false, 300f), // Mandiblet
+            (new Vector3Int(411, 501, 0), 1, false, 300f), // Mandiblet
+            (new Vector3Int(412, 385, 0), 17, false, 90f), // Vargul Fighter
             (new Vector3Int(412, 462, 0), 5, false, 60f), // Terror Clan Warrior
             (new Vector3Int(413, 68, 0), 25, true, 30f), // Flame Serpent
             (new Vector3Int(413, 436, 0), 20, false, 300f), // Horned Beast
             (new Vector3Int(415, 471, 0), 5, false, 60f), // Terror Clan Archer
-            (new Vector3Int(415, 496, 0), 4, false, 60f), // Trog Brute
-            (new Vector3Int(418, 186, 0), 1, false, 300f), // Antling
-            (new Vector3Int(420, 47, 0), 30, true, 30f), // Adult Wyrm
+            (new Vector3Int(415, 496, 0), 4, false, 60f), // Grulk Brute
+            (new Vector3Int(418, 186, 0), 1, false, 300f), // Mandiblet
+            (new Vector3Int(420, 47, 0), 30, true, 30f), // Adult Basilisk
             (new Vector3Int(420, 56, 0), 25, true, 30f), // Flame Serpent
-            (new Vector3Int(422, 503, 0), 4, false, 60f), // Trog Brute
-            (new Vector3Int(424, 78, 0), 1, false, 300f), // Antling
-            (new Vector3Int(424, 494, 0), 4, false, 60f), // Trog Brute
-            (new Vector3Int(424, 599, 0), 5, true, 90f), // Drauglyen
+            (new Vector3Int(422, 503, 0), 4, false, 60f), // Grulk Brute
+            (new Vector3Int(424, 78, 0), 1, false, 300f), // Mandiblet
+            (new Vector3Int(424, 494, 0), 4, false, 60f), // Grulk Brute
+            (new Vector3Int(424, 599, 0), 5, true, 90f), // Fenrask
             (new Vector3Int(425, 67, 0), 25, true, 30f), // Azure Hydra
-            (new Vector3Int(425, 518, 0), 4, false, 60f), // Trog Brute
+            (new Vector3Int(425, 518, 0), 4, false, 60f), // Grulk Brute
             (new Vector3Int(426, 448, 0), 20, false, 300f), // Horned Beast
-            (new Vector3Int(429, 486, 0), 5, false, 60f), // Cokatrice
+            (new Vector3Int(429, 486, 0), 5, false, 60f), // Gorgonet
             (new Vector3Int(431, 46, 0), 25, true, 30f), // Flame Serpent
-            (new Vector3Int(431, 502, 0), 4, false, 60f), // Trog Brute
-            (new Vector3Int(431, 506, 0), 4, false, 60f), // Trog Brute
-            (new Vector3Int(431, 532, 0), 4, false, 60f), // Howler
-            (new Vector3Int(432, 357, 0), 2, false, 5f), // Petram Cokatrice
-            (new Vector3Int(432, 583, 0), 4, false, 60f), // Howler
+            (new Vector3Int(431, 502, 0), 4, false, 60f), // Grulk Brute
+            (new Vector3Int(431, 506, 0), 4, false, 60f), // Grulk Brute
+            (new Vector3Int(431, 532, 0), 4, false, 60f), // Gloomhound
+            (new Vector3Int(432, 357, 0), 2, false, 5f), // Ossian Gorgonet
+            (new Vector3Int(432, 583, 0), 4, false, 60f), // Gloomhound
             (new Vector3Int(435, 61, 0), 25, true, 30f), // Azure Hydra
-            (new Vector3Int(435, 77, 0), 30, true, 30f), // Adult Wyrm
+            (new Vector3Int(435, 77, 0), 30, true, 30f), // Adult Basilisk
             (new Vector3Int(436, 478, 0), 3, false, 5f), // Spiderling
-            (new Vector3Int(438, 511, 0), 4, false, 60f), // Trog Brute
+            (new Vector3Int(438, 511, 0), 4, false, 60f), // Grulk Brute
             (new Vector3Int(439, 44, 0), 25, true, 30f), // Azure Hydra
             (new Vector3Int(439, 400, 0), 20, false, 30f), // Horned Beast
             (new Vector3Int(439, 429, 0), 20, false, 300f), // Horned Charger
             (new Vector3Int(441, 497, 0), 3, false, 5f), // Spiderling
-            (new Vector3Int(443, 558, 0), 4, false, 60f), // Howler
-            (new Vector3Int(443, 594, 0), 4, false, 60f), // Howler
-            (new Vector3Int(446, 75, 0), 1, false, 300f), // Antling
+            (new Vector3Int(443, 558, 0), 4, false, 60f), // Gloomhound
+            (new Vector3Int(443, 594, 0), 4, false, 60f), // Gloomhound
+            (new Vector3Int(446, 75, 0), 1, false, 300f), // Mandiblet
             (new Vector3Int(448, 528, 0), 3, false, 5f), // Spiderling
             (new Vector3Int(449, 54, 0), 25, true, 30f), // Azure Hydra
             (new Vector3Int(449, 518, 0), 3, false, 5f), // Spiderling
-            (new Vector3Int(450, 576, 0), 4, false, 60f), // Howler
+            (new Vector3Int(450, 576, 0), 4, false, 60f), // Gloomhound
             (new Vector3Int(451, 394, 0), 20, false, 30f), // Horned Charger
-            (new Vector3Int(453, 336, 0), 7, false, 60f), // Yargol
-            (new Vector3Int(454, 183, 0), 1, false, 300f), // Antling
-            (new Vector3Int(454, 539, 0), 4, false, 60f), // Howler
-            (new Vector3Int(456, 341, 0), 7, false, 60f), // Yargol
-            (new Vector3Int(457, 512, 0), 1, false, 5f), // Antling
-            (new Vector3Int(458, 228, 0), 12, false, 60f), // Fire Cokatrice
-            (new Vector3Int(459, 587, 0), 4, false, 60f), // Howler
-            (new Vector3Int(460, 277, 0), 12, false, 60f), // Fire Cokatrice
-            (new Vector3Int(461, 354, 0), 7, false, 60f), // Yargol
-            (new Vector3Int(466, 523, 0), 2, false, 5f), // Antwig
-            (new Vector3Int(468, 305, 0), 12, false, 60f), // Fire Cokatrice
-            (new Vector3Int(468, 421, 0), 2, false, 5f), // Petram Cokatrice
-            (new Vector3Int(470, 347, 0), 7, false, 60f), // Yargol
-            (new Vector3Int(472, 336, 0), 9, true, 90f), // Argha The Plunderer
-            (new Vector3Int(473, 473, 0), 2, false, 5f), // Petram Cokatrice
-            (new Vector3Int(473, 514, 0), 2, false, 5f), // Petram Cokatrice
-            (new Vector3Int(474, 91, 0), 1, false, 300f), // Antling
-            (new Vector3Int(474, 439, 0), 2, false, 5f), // Petram Cokatrice
-            (new Vector3Int(474, 533, 0), 1, false, 5f), // Antling
-            (new Vector3Int(475, 485, 0), 2, false, 5f), // Antwig
-            (new Vector3Int(480, 83, 0), 15, false, 90f), // Watcher of Atmar
-            (new Vector3Int(480, 220, 0), 15, false, 90f), // Seer of Atmar
-            (new Vector3Int(480, 274, 0), 1, false, 300f), // Antling
-            (new Vector3Int(480, 324, 0), 1, false, 300f), // Antling
+            (new Vector3Int(453, 336, 0), 7, false, 60f), // Vargul
+            (new Vector3Int(454, 183, 0), 1, false, 300f), // Mandiblet
+            (new Vector3Int(454, 539, 0), 4, false, 60f), // Gloomhound
+            (new Vector3Int(456, 341, 0), 7, false, 60f), // Vargul
+            (new Vector3Int(457, 512, 0), 1, false, 5f), // Mandiblet
+            (new Vector3Int(458, 228, 0), 12, false, 60f), // Fire Gorgonet
+            (new Vector3Int(459, 587, 0), 4, false, 60f), // Gloomhound
+            (new Vector3Int(460, 277, 0), 12, false, 60f), // Fire Gorgonet
+            (new Vector3Int(461, 354, 0), 7, false, 60f), // Vargul
+            (new Vector3Int(466, 523, 0), 2, false, 5f), // Burrowling
+            (new Vector3Int(468, 305, 0), 12, false, 60f), // Fire Gorgonet
+            (new Vector3Int(468, 421, 0), 2, false, 5f), // Ossian Gorgonet
+            (new Vector3Int(470, 347, 0), 7, false, 60f), // Vargul
+            (new Vector3Int(472, 336, 0), 9, true, 90f), // Durgha The Plunderer
+            (new Vector3Int(473, 473, 0), 2, false, 5f), // Ossian Gorgonet
+            (new Vector3Int(473, 514, 0), 2, false, 5f), // Ossian Gorgonet
+            (new Vector3Int(474, 91, 0), 1, false, 300f), // Mandiblet
+            (new Vector3Int(474, 439, 0), 2, false, 5f), // Ossian Gorgonet
+            (new Vector3Int(474, 533, 0), 1, false, 5f), // Mandiblet
+            (new Vector3Int(475, 485, 0), 2, false, 5f), // Burrowling
+            (new Vector3Int(480, 83, 0), 15, false, 90f), // Watcher of Ostrimar
+            (new Vector3Int(480, 220, 0), 15, false, 90f), // Seer of Ostrimar
+            (new Vector3Int(480, 274, 0), 1, false, 300f), // Mandiblet
+            (new Vector3Int(480, 324, 0), 1, false, 300f), // Mandiblet
             (new Vector3Int(480, 358, 0), 3, false, 5f), // Spiderling
-            (new Vector3Int(480, 388, 0), 1, false, 300f), // Antling
-            (new Vector3Int(481, 235, 0), 15, false, 90f), // Seer of Atmar
+            (new Vector3Int(480, 388, 0), 1, false, 300f), // Mandiblet
+            (new Vector3Int(481, 235, 0), 15, false, 90f), // Seer of Ostrimar
             (new Vector3Int(482, 291, 0), 12, false, 60f), // Azure Roc
-            (new Vector3Int(482, 377, 0), 12, false, 60f), // Fire Antwig
+            (new Vector3Int(482, 377, 0), 12, false, 60f), // Fire Burrowling
             (new Vector3Int(482, 397, 0), 3, false, 5f), // Spiderling
-            (new Vector3Int(482, 533, 0), 1, false, 5f), // Antling
-            (new Vector3Int(483, 581, 0), 4, false, 60f), // Howler
-            (new Vector3Int(484, 322, 0), 12, false, 60f), // Fire Antwig
-            (new Vector3Int(485, 518, 0), 1, false, 5f), // Antling
-            (new Vector3Int(486, 270, 0), 2, false, 5f), // Antwig
-            (new Vector3Int(486, 527, 0), 2, false, 5f), // Antwig
+            (new Vector3Int(482, 533, 0), 1, false, 5f), // Mandiblet
+            (new Vector3Int(483, 581, 0), 4, false, 60f), // Gloomhound
+            (new Vector3Int(484, 322, 0), 12, false, 60f), // Fire Burrowling
+            (new Vector3Int(485, 518, 0), 1, false, 5f), // Mandiblet
+            (new Vector3Int(486, 270, 0), 2, false, 5f), // Burrowling
+            (new Vector3Int(486, 527, 0), 2, false, 5f), // Burrowling
             (new Vector3Int(487, 429, 0), 3, false, 5f), // Spiderling
             (new Vector3Int(487, 484, 0), 3, false, 5f), // Spiderling
-            (new Vector3Int(488, 103, 0), 15, false, 90f), // Seer of Atmar
-            (new Vector3Int(489, 446, 0), 1, false, 5f), // Antling
-            (new Vector3Int(490, 55, 0), 25, true, 60f), // Lesser Wyrm
-            (new Vector3Int(490, 275, 0), 1, false, 300f), // Antling
-            (new Vector3Int(490, 348, 0), 1, false, 300f), // Antling
-            (new Vector3Int(490, 415, 0), 6, false, 60f), // Lone Howler
-            (new Vector3Int(491, 260, 0), 12, false, 60f), // Ice Antwig
-            (new Vector3Int(491, 268, 0), 1, false, 300f), // Antling
-            (new Vector3Int(492, 39, 0), 25, true, 60f), // Lesser Wyrm
-            (new Vector3Int(492, 356, 0), 12, false, 60f), // Fire Antwig
-            (new Vector3Int(494, 281, 0), 12, false, 60f), // Ice Antwig
-            (new Vector3Int(494, 345, 0), 12, false, 60f), // Ice Antwig
-            (new Vector3Int(495, 81, 0), 15, false, 90f), // Watcher of Atmar
-            (new Vector3Int(495, 292, 0), 12, false, 60f), // Fire Antwig
+            (new Vector3Int(488, 103, 0), 15, false, 90f), // Seer of Ostrimar
+            (new Vector3Int(489, 446, 0), 1, false, 5f), // Mandiblet
+            (new Vector3Int(490, 55, 0), 25, true, 60f), // Lesser Basilisk
+            (new Vector3Int(490, 275, 0), 1, false, 300f), // Mandiblet
+            (new Vector3Int(490, 348, 0), 1, false, 300f), // Mandiblet
+            (new Vector3Int(490, 415, 0), 6, false, 60f), // Lone Gloomhound
+            (new Vector3Int(491, 260, 0), 12, false, 60f), // Ice Burrowling
+            (new Vector3Int(491, 268, 0), 1, false, 300f), // Mandiblet
+            (new Vector3Int(492, 39, 0), 25, true, 60f), // Lesser Basilisk
+            (new Vector3Int(492, 356, 0), 12, false, 60f), // Fire Burrowling
+            (new Vector3Int(494, 281, 0), 12, false, 60f), // Ice Burrowling
+            (new Vector3Int(494, 345, 0), 12, false, 60f), // Ice Burrowling
+            (new Vector3Int(495, 81, 0), 15, false, 90f), // Watcher of Ostrimar
+            (new Vector3Int(495, 292, 0), 12, false, 60f), // Fire Burrowling
             (new Vector3Int(495, 315, 0), 12, false, 60f), // Azure Roc
             (new Vector3Int(496, 392, 0), 3, false, 5f), // Spiderling
-            (new Vector3Int(496, 551, 0), 1, false, 5f), // Antling
-            (new Vector3Int(497, 299, 0), 1, false, 300f), // Antling
-            (new Vector3Int(497, 348, 0), 1, false, 300f), // Antling
-            (new Vector3Int(497, 451, 0), 2, false, 5f), // Petram Cokatrice
-            (new Vector3Int(498, 219, 0), 15, false, 90f), // Watcher of Atmar
-            (new Vector3Int(499, 118, 0), 15, false, 90f), // Seer of Atmar
-            (new Vector3Int(499, 332, 0), 12, false, 60f), // Fire Cokatrice
-            (new Vector3Int(500, 47, 0), 12, false, 60f), // Fire Cokatrice
-            (new Vector3Int(500, 240, 0), 15, false, 90f), // Watcher of Atmar
-            (new Vector3Int(501, 291, 0), 1, false, 300f), // Antling
-            (new Vector3Int(501, 304, 0), 12, false, 60f), // Ice Antwig
-            (new Vector3Int(501, 560, 0), 1, false, 5f), // Antling
-            (new Vector3Int(502, 17, 0), 25, true, 60f), // Lesser Wyrm
-            (new Vector3Int(503, 510, 0), 1, false, 5f), // Antling
-            (new Vector3Int(504, 169, 0), 15, false, 90f), // Watcher of Atmar
-            (new Vector3Int(504, 471, 0), 2, false, 5f), // Antwig
-            (new Vector3Int(505, 36, 0), 25, true, 60f), // Lesser Wyrm
-            (new Vector3Int(506, 89, 0), 15, false, 90f), // Seer of Atmar
+            (new Vector3Int(496, 551, 0), 1, false, 5f), // Mandiblet
+            (new Vector3Int(497, 299, 0), 1, false, 300f), // Mandiblet
+            (new Vector3Int(497, 348, 0), 1, false, 300f), // Mandiblet
+            (new Vector3Int(497, 451, 0), 2, false, 5f), // Ossian Gorgonet
+            (new Vector3Int(498, 219, 0), 15, false, 90f), // Watcher of Ostrimar
+            (new Vector3Int(499, 118, 0), 15, false, 90f), // Seer of Ostrimar
+            (new Vector3Int(499, 332, 0), 12, false, 60f), // Fire Gorgonet
+            (new Vector3Int(500, 47, 0), 12, false, 60f), // Fire Gorgonet
+            (new Vector3Int(500, 240, 0), 15, false, 90f), // Watcher of Ostrimar
+            (new Vector3Int(501, 291, 0), 1, false, 300f), // Mandiblet
+            (new Vector3Int(501, 304, 0), 12, false, 60f), // Ice Burrowling
+            (new Vector3Int(501, 560, 0), 1, false, 5f), // Mandiblet
+            (new Vector3Int(502, 17, 0), 25, true, 60f), // Lesser Basilisk
+            (new Vector3Int(503, 510, 0), 1, false, 5f), // Mandiblet
+            (new Vector3Int(504, 169, 0), 15, false, 90f), // Watcher of Ostrimar
+            (new Vector3Int(504, 471, 0), 2, false, 5f), // Burrowling
+            (new Vector3Int(505, 36, 0), 25, true, 60f), // Lesser Basilisk
+            (new Vector3Int(506, 89, 0), 15, false, 90f), // Seer of Ostrimar
             (new Vector3Int(506, 424, 0), 3, false, 5f), // Spiderling
-            (new Vector3Int(506, 609, 0), 1, false, 5f), // Antling
-            (new Vector3Int(507, 203, 0), 15, false, 90f), // Seer of Atmar
-            (new Vector3Int(507, 365, 0), 1, false, 300f), // Antling
-            (new Vector3Int(507, 524, 0), 2, false, 5f), // Antwig
-            (new Vector3Int(507, 547, 0), 1, false, 5f), // Antling
+            (new Vector3Int(506, 609, 0), 1, false, 5f), // Mandiblet
+            (new Vector3Int(507, 203, 0), 15, false, 90f), // Seer of Ostrimar
+            (new Vector3Int(507, 365, 0), 1, false, 300f), // Mandiblet
+            (new Vector3Int(507, 524, 0), 2, false, 5f), // Burrowling
+            (new Vector3Int(507, 547, 0), 1, false, 5f), // Mandiblet
             (new Vector3Int(508, 386, 0), 3, false, 5f), // Spiderling
-            (new Vector3Int(508, 577, 0), 1, false, 5f), // Antling
-            (new Vector3Int(509, 323, 0), 12, false, 60f), // Ice Antwig
-            (new Vector3Int(510, 302, 0), 1, false, 300f), // Antling
+            (new Vector3Int(508, 577, 0), 1, false, 5f), // Mandiblet
+            (new Vector3Int(509, 323, 0), 12, false, 60f), // Ice Burrowling
+            (new Vector3Int(510, 302, 0), 1, false, 300f), // Mandiblet
             (new Vector3Int(510, 403, 0), 3, false, 5f), // Spiderling
             (new Vector3Int(511, 29, 0), 12, false, 60f), // Azure Roc
-            (new Vector3Int(511, 59, 0), 25, true, 60f), // Lesser Wyrm
-            (new Vector3Int(511, 370, 0), 2, false, 5f), // Antwig
-            (new Vector3Int(512, 297, 0), 12, false, 60f), // Ice Antwig
-            (new Vector3Int(512, 329, 0), 1, false, 300f), // Antling
-            (new Vector3Int(512, 501, 0), 2, false, 5f), // Antwig
+            (new Vector3Int(511, 59, 0), 25, true, 60f), // Lesser Basilisk
+            (new Vector3Int(511, 370, 0), 2, false, 5f), // Burrowling
+            (new Vector3Int(512, 297, 0), 12, false, 60f), // Ice Burrowling
+            (new Vector3Int(512, 329, 0), 1, false, 300f), // Mandiblet
+            (new Vector3Int(512, 501, 0), 2, false, 5f), // Burrowling
             (new Vector3Int(513, 481, 0), 3, false, 5f), // Spiderling
-            (new Vector3Int(513, 589, 0), 1, false, 5f), // Antling
-            (new Vector3Int(514, 236, 0), 15, false, 90f), // Watcher of Atmar
-            (new Vector3Int(514, 322, 0), 1, false, 300f), // Antling
-            (new Vector3Int(515, 335, 0), 12, false, 60f), // Fire Antwig
-            (new Vector3Int(515, 515, 0), 2, false, 5f), // Petram Cokatrice
+            (new Vector3Int(513, 589, 0), 1, false, 5f), // Mandiblet
+            (new Vector3Int(514, 236, 0), 15, false, 90f), // Watcher of Ostrimar
+            (new Vector3Int(514, 322, 0), 1, false, 300f), // Mandiblet
+            (new Vector3Int(515, 335, 0), 12, false, 60f), // Fire Burrowling
+            (new Vector3Int(515, 515, 0), 2, false, 5f), // Ossian Gorgonet
             (new Vector3Int(517, 378, 0), 3, false, 5f), // Spiderling
-            (new Vector3Int(518, 469, 0), 2, false, 5f), // Antwig
-            (new Vector3Int(519, 219, 0), 15, false, 90f), // Seer of Atmar
-            (new Vector3Int(519, 609, 0), 1, false, 5f), // Antling
-            (new Vector3Int(520, 254, 0), 12, false, 60f), // Fire Antwig
-            (new Vector3Int(520, 337, 0), 1, false, 300f), // Antling
+            (new Vector3Int(518, 469, 0), 2, false, 5f), // Burrowling
+            (new Vector3Int(519, 219, 0), 15, false, 90f), // Seer of Ostrimar
+            (new Vector3Int(519, 609, 0), 1, false, 5f), // Mandiblet
+            (new Vector3Int(520, 254, 0), 12, false, 60f), // Fire Burrowling
+            (new Vector3Int(520, 337, 0), 1, false, 300f), // Mandiblet
             (new Vector3Int(520, 430, 0), 3, false, 5f), // Spiderling
-            (new Vector3Int(520, 542, 0), 2, false, 5f), // Petram Cokatrice
-            (new Vector3Int(521, 172, 0), 15, false, 90f), // Seer of Atmar
-            (new Vector3Int(521, 189, 0), 15, false, 90f), // Watcher of Atmar
-            (new Vector3Int(521, 320, 0), 12, false, 60f), // Fire Antwig
-            (new Vector3Int(522, 622, 0), 1, false, 5f), // Antling
-            (new Vector3Int(523, 33, 0), 25, true, 60f), // Lesser Wyrm
-            (new Vector3Int(523, 154, 0), 15, false, 90f), // Watcher of Atmar
-            (new Vector3Int(523, 311, 0), 12, false, 60f), // Fire Cokatrice
+            (new Vector3Int(520, 542, 0), 2, false, 5f), // Ossian Gorgonet
+            (new Vector3Int(521, 172, 0), 15, false, 90f), // Seer of Ostrimar
+            (new Vector3Int(521, 189, 0), 15, false, 90f), // Watcher of Ostrimar
+            (new Vector3Int(521, 320, 0), 12, false, 60f), // Fire Burrowling
+            (new Vector3Int(522, 622, 0), 1, false, 5f), // Mandiblet
+            (new Vector3Int(523, 33, 0), 25, true, 60f), // Lesser Basilisk
+            (new Vector3Int(523, 154, 0), 15, false, 90f), // Watcher of Ostrimar
+            (new Vector3Int(523, 311, 0), 12, false, 60f), // Fire Gorgonet
             (new Vector3Int(523, 349, 0), 3, false, 5f), // Spiderling
-            (new Vector3Int(523, 445, 0), 2, false, 5f), // Petram Cokatrice
-            (new Vector3Int(523, 498, 0), 2, false, 5f), // Petram Cokatrice
-            (new Vector3Int(523, 527, 0), 2, false, 5f), // Antwig
-            (new Vector3Int(524, 102, 0), 15, false, 90f), // Watcher of Atmar
-            (new Vector3Int(524, 578, 0), 1, false, 5f), // Antling
-            (new Vector3Int(525, 456, 0), 2, false, 5f), // Antwig
-            (new Vector3Int(525, 592, 0), 1, false, 5f), // Antling
-            (new Vector3Int(526, 266, 0), 5, false, 60f), // Trog Raider
+            (new Vector3Int(523, 445, 0), 2, false, 5f), // Ossian Gorgonet
+            (new Vector3Int(523, 498, 0), 2, false, 5f), // Ossian Gorgonet
+            (new Vector3Int(523, 527, 0), 2, false, 5f), // Burrowling
+            (new Vector3Int(524, 102, 0), 15, false, 90f), // Watcher of Ostrimar
+            (new Vector3Int(524, 578, 0), 1, false, 5f), // Mandiblet
+            (new Vector3Int(525, 456, 0), 2, false, 5f), // Burrowling
+            (new Vector3Int(525, 592, 0), 1, false, 5f), // Mandiblet
+            (new Vector3Int(526, 266, 0), 5, false, 60f), // Grulk Raider
             (new Vector3Int(526, 389, 0), 3, false, 5f), // Spiderling
-            (new Vector3Int(526, 601, 0), 1, false, 5f), // Antling
-            (new Vector3Int(527, 567, 0), 1, false, 5f), // Antling
-            (new Vector3Int(527, 614, 0), 1, false, 5f), // Antling
-            (new Vector3Int(528, 413, 0), 3, false, 60f), // Trog
+            (new Vector3Int(526, 601, 0), 1, false, 5f), // Mandiblet
+            (new Vector3Int(527, 567, 0), 1, false, 5f), // Mandiblet
+            (new Vector3Int(527, 614, 0), 1, false, 5f), // Mandiblet
+            (new Vector3Int(528, 413, 0), 3, false, 60f), // Grulk
             (new Vector3Int(529, 364, 0), 3, false, 5f), // Spiderling
-            (new Vector3Int(529, 517, 0), 2, false, 5f), // Antwig
-            (new Vector3Int(529, 539, 0), 1, false, 5f), // Antling
-            (new Vector3Int(529, 623, 0), 1, false, 5f), // Antling
-            (new Vector3Int(530, 86, 0), 15, false, 90f), // Seer of Atmar
-            (new Vector3Int(530, 260, 0), 5, false, 60f), // Trog Raider
-            (new Vector3Int(530, 297, 0), 12, false, 60f), // Fire Antwig
-            (new Vector3Int(531, 220, 0), 15, false, 90f), // Watcher of Atmar
-            (new Vector3Int(531, 282, 0), 5, false, 60f), // Cokatrice
+            (new Vector3Int(529, 517, 0), 2, false, 5f), // Burrowling
+            (new Vector3Int(529, 539, 0), 1, false, 5f), // Mandiblet
+            (new Vector3Int(529, 623, 0), 1, false, 5f), // Mandiblet
+            (new Vector3Int(530, 86, 0), 15, false, 90f), // Seer of Ostrimar
+            (new Vector3Int(530, 260, 0), 5, false, 60f), // Grulk Raider
+            (new Vector3Int(530, 297, 0), 12, false, 60f), // Fire Burrowling
+            (new Vector3Int(531, 220, 0), 15, false, 90f), // Watcher of Ostrimar
+            (new Vector3Int(531, 282, 0), 5, false, 60f), // Gorgonet
             (new Vector3Int(532, 333, 0), 12, false, 60f), // Azure Roc
-            (new Vector3Int(532, 610, 0), 1, false, 5f), // Antling
-            (new Vector3Int(533, 423, 0), 3, false, 60f), // Trog
-            (new Vector3Int(533, 514, 0), 1, false, 5f), // Antling
-            (new Vector3Int(533, 548, 0), 2, false, 5f), // Antwig
-            (new Vector3Int(534, 238, 0), 15, false, 90f), // Seer of Atmar
-            (new Vector3Int(534, 480, 0), 3, false, 60f), // Trog
-            (new Vector3Int(536, 179, 0), 15, false, 90f), // Watcher of Atmar
-            (new Vector3Int(536, 443, 0), 3, false, 60f), // Trog
-            (new Vector3Int(536, 501, 0), 2, false, 5f), // Antwig
-            (new Vector3Int(536, 556, 0), 2, false, 5f), // Antwig
-            (new Vector3Int(537, 121, 0), 15, false, 90f), // Seer of Atmar
-            (new Vector3Int(537, 263, 0), 5, false, 60f), // Trog Raider
-            (new Vector3Int(537, 269, 0), 5, false, 60f), // Trog Shaman
+            (new Vector3Int(532, 610, 0), 1, false, 5f), // Mandiblet
+            (new Vector3Int(533, 423, 0), 3, false, 60f), // Grulk
+            (new Vector3Int(533, 514, 0), 1, false, 5f), // Mandiblet
+            (new Vector3Int(533, 548, 0), 2, false, 5f), // Burrowling
+            (new Vector3Int(534, 238, 0), 15, false, 90f), // Seer of Ostrimar
+            (new Vector3Int(534, 480, 0), 3, false, 60f), // Grulk
+            (new Vector3Int(536, 179, 0), 15, false, 90f), // Watcher of Ostrimar
+            (new Vector3Int(536, 443, 0), 3, false, 60f), // Grulk
+            (new Vector3Int(536, 501, 0), 2, false, 5f), // Burrowling
+            (new Vector3Int(536, 556, 0), 2, false, 5f), // Burrowling
+            (new Vector3Int(537, 121, 0), 15, false, 90f), // Seer of Ostrimar
+            (new Vector3Int(537, 263, 0), 5, false, 60f), // Grulk Raider
+            (new Vector3Int(537, 269, 0), 5, false, 60f), // Grulk Shaman
             (new Vector3Int(537, 390, 0), 3, false, 5f), // Spiderling
-            (new Vector3Int(537, 592, 0), 3, true, 90f), // Antling Broodmother
+            (new Vector3Int(537, 592, 0), 3, true, 90f), // Mandiblet Broodmother
             (new Vector3Int(538, 400, 0), 3, false, 5f), // Spiderling
-            (new Vector3Int(538, 414, 0), 3, false, 60f), // Trog
-            (new Vector3Int(538, 463, 0), 2, false, 5f), // Antwig
-            (new Vector3Int(540, 420, 0), 3, false, 60f), // Trog
-            (new Vector3Int(540, 489, 0), 3, false, 60f), // Trog
-            (new Vector3Int(540, 568, 0), 1, false, 5f), // Antling
-            (new Vector3Int(541, 18, 0), 30, true, 600f), // Klauth
-            (new Vector3Int(541, 162, 0), 15, false, 90f), // Seer of Atmar
-            (new Vector3Int(541, 481, 0), 3, false, 60f), // Trog
+            (new Vector3Int(538, 414, 0), 3, false, 60f), // Grulk
+            (new Vector3Int(538, 463, 0), 2, false, 5f), // Burrowling
+            (new Vector3Int(540, 420, 0), 3, false, 60f), // Grulk
+            (new Vector3Int(540, 489, 0), 3, false, 60f), // Grulk
+            (new Vector3Int(540, 568, 0), 1, false, 5f), // Mandiblet
+            (new Vector3Int(541, 18, 0), 30, true, 600f), // Vhorlax
+            (new Vector3Int(541, 162, 0), 15, false, 90f), // Seer of Ostrimar
+            (new Vector3Int(541, 481, 0), 3, false, 60f), // Grulk
             (new Vector3Int(542, 354, 0), 14, true, 90f), // Ghastly Arachnid
-            (new Vector3Int(542, 576, 0), 1, false, 5f), // Antling
+            (new Vector3Int(542, 576, 0), 1, false, 5f), // Mandiblet
         };
 
         /// <summary>Containers: cell, kind (0 crate or barrel, 1 chest), level, respawn seconds (capped at 10 minutes).</summary>
@@ -874,6 +874,42 @@ namespace RPG.EditorTools
             ("Barrow Grounds", "Level 10+", new Vector3Int(30, 70, 0), false),
             ("Emberreach", "Level 25 PvP (Boss)", new Vector3Int(528, 12, 0), false),
             ("Basilisk Copse", "Level 25+ (PvP)", new Vector3Int(371, 22, 0), false),
+        };
+
+        /// <summary>The elites and bosses for the world map: name, level, how many stand there, cell (one of them).</summary>
+        public static readonly (string name, int level, int count, Vector3Int cell)[] Bosses =
+        {
+            ("Korthian Elite", 25, 1, new Vector3Int(52, 560, 0)),
+            ("Korthian Elite", 25, 2, new Vector3Int(53, 515, 0)),
+            ("Gravechill", 11, 1, new Vector3Int(60, 58, 0)),
+            ("Grumm The Uninterred", 9, 1, new Vector3Int(142, 189, 0)),
+            ("Forgotten Loyalist", 25, 2, new Vector3Int(159, 518, 0)),
+            ("Gloomclaw The Eater", 9, 1, new Vector3Int(169, 144, 0)),
+            ("Lesser Basilisk", 25, 5, new Vector3Int(214, 398, 0)),
+            ("Lesser Basilisk", 25, 1, new Vector3Int(191, 296, 0)),
+            ("Swifthorn the Gorestomper", 25, 1, new Vector3Int(208, 294, 0)),
+            ("Gorvanth the Crusher", 25, 1, new Vector3Int(218, 389, 0)),
+            ("Brakhar The Hunter", 11, 1, new Vector3Int(220, 547, 0)),
+            ("Skrell The Torturer", 11, 1, new Vector3Int(220, 627, 0)),
+            ("Lesser Basilisk", 25, 2, new Vector3Int(229, 329, 0)),
+            ("Lesser Basilisk", 25, 3, new Vector3Int(262, 423, 0)),
+            ("Wailgrim The Drooling", 7, 1, new Vector3Int(261, 214, 0)),
+            ("Gorrak The Bushwhacker", 11, 1, new Vector3Int(263, 633, 0)),
+            ("Lesser Basilisk", 25, 1, new Vector3Int(275, 294, 0)),
+            ("Lesser Basilisk", 25, 1, new Vector3Int(315, 369, 0)),
+            ("Skeev The Quick", 11, 1, new Vector3Int(328, 559, 0)),
+            ("Grimbald The Overseer", 12, 1, new Vector3Int(333, 636, 0)),
+            ("Lesser Basilisk", 25, 2, new Vector3Int(345, 413, 0)),
+            ("Flame Serpent", 25, 7, new Vector3Int(409, 39, 0)),
+            ("Adult Basilisk", 30, 4, new Vector3Int(420, 47, 0)),
+            ("Azure Hydra", 25, 8, new Vector3Int(407, 50, 0)),
+            ("Grulmak", 18, 1, new Vector3Int(406, 381, 0)),
+            ("Fenrask", 5, 1, new Vector3Int(424, 599, 0)),
+            ("Durgha The Plunderer", 9, 1, new Vector3Int(472, 336, 0)),
+            ("Lesser Basilisk", 25, 6, new Vector3Int(505, 36, 0)),
+            ("Mandiblet Broodmother", 3, 1, new Vector3Int(537, 592, 0)),
+            ("Vhorlax", 30, 1, new Vector3Int(541, 18, 0)),
+            ("Ghastly Arachnid", 14, 1, new Vector3Int(542, 354, 0)),
         };
     }
 }

@@ -44,6 +44,31 @@ namespace RPG.EditorTools
         /// The UI frames (Kenney's Fantasy UI Borders, CC0, in Resources/UI): sprites with nine-slice borders, loaded by
         /// UIFactory at runtime. The window frame keeps 16 pixel corners, the button shape 8.
         /// </summary>
+        /// <summary>
+        /// The painted island (Resources/UI/Map/World.png, Tools/Art/worldmap.py) for the world map and the minimap: a
+        /// plain texture with mipmaps (it is drawn small on the world map and large on the minimap).
+        /// </summary>
+        private static Texture2D ImportWorldMapPicture()
+        {
+            const string path = "Assets/_Project/Resources/UI/Map/World.png";
+            AssetDatabase.ImportAsset(path, ImportAssetOptions.ForceSynchronousImport);
+            var importer = (TextureImporter)AssetImporter.GetAtPath(path);
+            if (importer == null)
+            {
+                Debug.LogWarning($"[TestScene] Missing world map picture {path}.");
+                return null;
+            }
+            importer.textureType = TextureImporterType.Default;
+            importer.mipmapEnabled = true;
+            importer.wrapMode = TextureWrapMode.Clamp;
+            importer.filterMode = FilterMode.Trilinear;
+            importer.maxTextureSize = 2048;
+            importer.alphaSource = TextureImporterAlphaSource.None;
+            importer.textureCompression = TextureImporterCompression.CompressedHQ;
+            importer.SaveAndReimport();
+            return AssetDatabase.LoadAssetAtPath<Texture2D>(path);
+        }
+
         private static void ImportUiFrames()
         {
             var frames = new List<(string file, float pixelsPerUnit, int border)> { ("WindowFrame", 100f, 16), ("Button", 200f, 16), ("Divider", 100f, 0) };
@@ -59,6 +84,13 @@ namespace RPG.EditorTools
                 frames.Add(($"Rpg/{square}", 100f, 0));
                 frames.Add(($"Rpg/{square}Hover", 100f, 0));
             }
+            // The world map's badges (Tools/Art/worldmap.py).
+            foreach (string badge in new[]
+            {
+                "Town", "Dungeon", "Boss", "Waystone", "Weapons", "Armor", "Potions", "Gems", "Food", "Bank", "Transmute", "Trainer",
+                "Healer", "Goods", "Person", "Place", "Player", "Pin",
+            })
+                frames.Add(($"Map/{badge}", 100f, 0));
             foreach (string slot in new[] { "", "Frame", "Head", "Chest", "Shoulders", "Neck", "Hands", "Wrist", "Feet", "Legs", "Weapon", "Shield" })
                 frames.Add(($"Rpg/Slot{slot}", 100f, 0));
             foreach ((string file, float pixelsPerUnit, int border) in frames)

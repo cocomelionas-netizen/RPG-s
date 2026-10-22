@@ -412,7 +412,7 @@ w('        /// <summary>Outdoor monster spots (cells of StartAreaData.Monsters) 
 w('        public static readonly (Vector3Int cell, int loot)[] KeyDroppers =')
 w('        {')
 for cell, loot_id, name in key_spots:
-    w(f'            ({v3(cell)}, {loot_id}), // {name}')
+    w(f'            ({v3(cell)}, {loot_id}), // {names.rename(name)}')
 w('        };')
 w('')
 w('        /// <summary>')

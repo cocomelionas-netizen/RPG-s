@@ -53,7 +53,7 @@ generators are in `Tools/GameData/` (`island.py` → `StartAreaData` (whole isla
 
 World: the source game's whole island, north up like its map (`island.py`: source (x, y) → cell (597 − y, 688 − x)): its
 ground from `fanadin.map` (walls, woods), its zones (13 × 13 blocks, `ZoneMap`), its monsters (source names, junk loot by model)/chests, free waypoints, all its vendors at their spots with their stock (random-quality gear merchants),
-Scroll of Returning (back to St. Aurelis), food, M world map with the source map's labels and level ranges.
+Scroll of Returning (back to St. Aurelis), food, M world map: our own painted island (`Tools/Art/worldmap.py`) with badges for the town, areas (the source map's labels and level ranges), dungeons, elites/bosses, waystones, merchants, trainers and townsfolk; wheel zoom, drag, tooltips.
 Townsfolk: the source's friendly NPCs that are not vendors (guards, priests, council...) at their spots, dressed in Flare
 hero layers after their source model like the vendors; clicking one opens the gossip window (the source's gossip menus,
 replies, conditions and scripts: `townsfolk.py` → `TownsfolkData`, `GossipCatalog`, `GossipWindow`, `Conversation`).

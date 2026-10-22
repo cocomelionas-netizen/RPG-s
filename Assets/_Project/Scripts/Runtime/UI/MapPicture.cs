@@ -5,8 +5,9 @@ using UnityEngine;
 namespace RPG.UI
 {
     /// <summary>
-    /// A map's ground drawn into a texture from its navigation grid (walkable, blocked, outside), made once per map
-    /// and shared by the minimap and the world map (M).
+    /// A map's picture for the minimap and the world map (M): its painted one (<see cref="WorldNavigation.Picture"/>,
+    /// the island by Tools/Art/worldmap.py) or its ground drawn into a texture from its navigation grid (walkable,
+    /// blocked, outside), made once per map.
     /// </summary>
     public static class MapPicture
     {
@@ -20,12 +21,19 @@ namespace RPG.UI
 
         private static readonly Dictionary<WorldNavigation, Texture2D> Pictures = new Dictionary<WorldNavigation, Texture2D>();
 
+        /// <summary>The sea around the painted island (the edge of its picture).</summary>
+        private static readonly Color32 Sea = new Color32(22, 44, 66, 255);
+
         public static Color OutsideColor => Outside;
+
+        /// <summary>What to show around a map's picture: the sea of a painted one, else the dark of the drawn ones.</summary>
+        public static Color BackgroundOf(WorldNavigation map) => map != null && map.Picture != null ? Sea : Outside;
 
         /// <summary>The picture of a map, covering <see cref="WorldNavigation.WorldBounds"/>.</summary>
         public static Texture2D Of(WorldNavigation map)
         {
             if (map == null) return null;
+            if (map.Picture != null) return map.Picture;
             if (Pictures.TryGetValue(map, out Texture2D texture) && texture != null) return texture;
             ForgetRemovedMaps();
 

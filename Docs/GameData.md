@@ -49,7 +49,14 @@ tomes) keep their old ids so existing assets and `.meta` files stay valid; only 
 - **M** – the map of the whole island like the source game's: its places with their level ranges where its map has
   them (Gloomhound's Valley Level 5+, Grulk Cave Level 3+, ... Emberreach Level 25 PvP (Boss); from `mapquester_map.png`,
   pixel = (614 + 0.855 (x − y), 16 + 0.4275 (x + y))), St. Aurelis in large letters, the waypoints (greyed until
-  discovered), the dungeon entrances, other players and you.
+  discovered), the dungeon entrances, other players and you. The island is our own painting of its ground
+  (`Tools/Art/worldmap.py` → `Resources/UI/Map/World.png`: meadows with a soft relief, woods, lakes, walls, a ragged
+  coast and the sea), also under the minimap. Every marker is a round badge (town, area, dungeon, elite/boss,
+  waystone, each kind of merchant, trainer, townsfolk, a pin, you as an arrow the way you walk); the elites and bosses
+  out in the world come from `npc_template.bool_elite`/`bool_boss` (`island.py` → `StartAreaData.Bosses`, one badge per
+  group of the same name). The mouse wheel zooms in on the pointer (merchants from 2x, townsfolk and boss names from
+  3x), dragging moves the map, + / − / Find Me buttons, and the pointer over a badge tells what it is (a dungeon: who
+  may enter, its key and bosses).
 
 ## Vendors
 
