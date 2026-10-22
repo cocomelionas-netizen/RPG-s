@@ -205,7 +205,7 @@ namespace RPG.UI
             if (index != tooltipIndex)
             {
                 tooltipIndex = index;
-                itemTooltip.Show(inventory, contents[index], "Click to take");
+                itemTooltip.Show(inventory, contents[index], "Click to take", compare: true);
             }
             itemTooltip.Follow(GetComponentInParent<Canvas>(), new Vector2(0f, 0f), new Vector2(14f, 10f));
         }

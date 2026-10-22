@@ -184,6 +184,9 @@ namespace RPG.Tests
             Assert.AreEqual(WeaponType.Staff, weapon.weaponType);
             Assert.AreEqual(1, weapon.itemLevel);
             Assert.IsTrue(inventory.GetEquipped(ItemSlot.Shield).IsEmpty, "Only the warrior starts with a shield.");
+            foreach ((ItemSlot slot, string name) in new[] { (ItemSlot.Chest, "Shirt"), (ItemSlot.Legs, "Pants"), (ItemSlot.Feet, "Shoes"), (ItemSlot.Hands, "Handwraps") })
+                Assert.AreEqual(name, inventory.Definition(inventory.GetEquipped(slot))?.displayName, $"A new character wears {name}.");
+            Assert.AreEqual(4, inventory.Armor, "The clothes give 1 armor each.");
 
             Assert.IsTrue(store.TryLoad("Newbie", out AccountRecord saved));
             Assert.IsTrue(saved.character.hasBeenSaved);
@@ -205,6 +208,14 @@ namespace RPG.Tests
                 Assert.AreEqual(1, weapon.item.itemLevel);
             }
             Assert.IsTrue(System.Array.Exists(inventory.StartingGear, gear => gear.classIndex == 0 && gear.item != null && gear.item.slot == ItemSlot.Shield));
+            for (int classIndex = 0; classIndex < 3; classIndex++)
+                foreach (ItemSlot slot in new[] { ItemSlot.Chest, ItemSlot.Legs, ItemSlot.Feet, ItemSlot.Hands })
+                {
+                    Inventory.ClassGear clothes = System.Array.Find(inventory.StartingGear,
+                        gear => gear.classIndex == classIndex && gear.item != null && gear.item.slot == slot);
+                    Assert.IsNotNull(clothes.item, $"Class {classIndex} starts without {slot} clothes.");
+                    Assert.IsTrue(clothes.item.CanBeUsedByClass(classIndex), "Every class may wear the starting clothes.");
+                }
         }
 
         [UnityTest]

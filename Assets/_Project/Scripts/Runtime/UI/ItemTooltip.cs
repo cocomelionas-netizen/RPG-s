@@ -12,6 +12,8 @@ namespace RPG.UI
     /// stats; "Magical gem sockets" with each socket's gem or "Empty Slot", two to a row; what using it does; empowerment;
     /// "Requires level N" (red when too low); "Sell Price: Ng"; and a hint of what a click does. A dark, thinly framed box
     /// as tall as its lines, drawn over every window. Used by the bag, the character sheet and the loot window.
+    /// Gear from the bag or the loot can be compared with what is worn: the worn piece (both rings) shows beside it under
+    /// "Equipped", and the tooltip lists what would change if it were worn instead (green better, red worse).
     /// </summary>
     public class ItemTooltip
     {
@@ -20,6 +22,7 @@ namespace RPG.UI
         private const int FontSize = 15;
         private const int TitleSize = 18;
         private const float SocketIcon = 18f;
+        private const float Gap = 6f;
 
         private static readonly Color Background = new Color(0.07f, 0.09f, 0.12f, 0.94f);
         private static readonly Color Edge = new Color(0.36f, 0.42f, 0.5f, 0.9f);
@@ -29,8 +32,13 @@ namespace RPG.UI
         private static readonly Color Grey = new Color(0.62f, 0.64f, 0.66f);
         private static readonly Color UseColor = new Color(0.55f, 0.95f, 0.55f);
         private static readonly Color Empower = new Color(0.78f, 0.63f, 1f);
+        private static readonly Color Better = new Color(0.4f, 0.95f, 0.4f);
 
         private readonly RectTransform panel;
+        private readonly Transform parent;
+        private readonly bool comparison;
+        private ItemTooltip[] compared;
+        private int comparedShown;
         private readonly List<GameObject> rows = new List<GameObject>();
         private float height;
 
@@ -47,8 +55,14 @@ namespace RPG.UI
             public bool Icons;
         }
 
-        public ItemTooltip(Transform parent)
+        public ItemTooltip(Transform parent) : this(parent, false)
         {
+        }
+
+        private ItemTooltip(Transform parent, bool comparison)
+        {
+            this.parent = parent;
+            this.comparison = comparison;
             Image box = UIFactory.CreateImage("Item Tooltip", parent, Background);
             box.raycastTarget = false;
             box.gameObject.AddComponent<Outline>().effectColor = Edge;
@@ -64,10 +78,14 @@ namespace RPG.UI
         public void Hide()
         {
             if (panel.gameObject.activeSelf) panel.gameObject.SetActive(false);
+            HideCompared(0);
         }
 
-        /// <summary>Shows an item of the player's (or one they may take or buy) with a hint of what a click does.</summary>
-        public void Show(Inventory inventory, ItemStack stack, string hint)
+        /// <summary>
+        /// Shows an item of the player's (or one they may take or buy) with a hint of what a click does; with
+        /// <paramref name="compare"/>, gear also shows the worn piece beside it and what wearing this one would change.
+        /// </summary>
+        public void Show(Inventory inventory, ItemStack stack, string hint, bool compare = false)
         {
             ItemDefinition item = inventory != null ? inventory.Definition(stack) : null;
             if (item == null)
@@ -75,8 +93,67 @@ namespace RPG.UI
                 Hide();
                 return;
             }
-            Build(Lines(inventory, stack, item, hint));
+            List<Line> lines = Lines(inventory, stack, item);
+            if (comparison) lines.Insert(0, new Line { Left = "Equipped", LeftColor = Grey, Size = 13 });
+            int shownWorn = 0;
+            if (compare && item.IsEquippable)
+            {
+                ItemStack first = ItemStack.Empty;
+                foreach (int index in WornIndexes(item.slot))
+                {
+                    ItemStack worn = inventory.GetEquippedAt(index);
+                    if (worn.IsEmpty) continue;
+                    if (first.IsEmpty) first = worn;
+                    if (compared == null) compared = new[] { new ItemTooltip(parent, true), new ItemTooltip(parent, true) };
+                    compared[shownWorn++].Show(inventory, worn, null);
+                }
+                lines.AddRange(Differences(inventory, stack, first));
+            }
+            HideCompared(shownWorn);
+            comparedShown = shownWorn;
+            if (!string.IsNullOrEmpty(hint)) lines.Add(new Line { Left = hint, LeftColor = Grey, Size = 13 });
+            Build(lines);
             panel.gameObject.SetActive(true);
+        }
+
+        private void HideCompared(int from)
+        {
+            if (compared == null) return;
+            for (int i = from; i < compared.Length; i++) compared[i].Hide();
+        }
+
+        /// <summary>The equipment indexes gear of a slot would go to (both rings for a ring).</summary>
+        private static IEnumerable<int> WornIndexes(ItemSlot slot)
+        {
+            int index = Inventory.IndexOf(slot);
+            if (index < 0) yield break;
+            yield return index;
+            if (slot == ItemSlot.Ring && Inventory.SlotAt(index + 1) == ItemSlot.Ring) yield return index + 1;
+        }
+
+        /// <summary>What wearing <paramref name="stack"/> instead of <paramref name="worn"/> would change.</summary>
+        private static IEnumerable<Line> Differences(Inventory inventory, ItemStack stack, ItemStack worn)
+        {
+            Inventory.GearBonus mine = inventory.BonusOf(stack);
+            Inventory.GearBonus theirs = inventory.BonusOf(worn);
+            var changes = new List<Line>();
+            void Change(int difference, string name)
+            {
+                if (difference == 0) return;
+                changes.Add(Text(difference > 0 ? $"+{difference} {name}" : $"-{-difference} {name}", difference > 0 ? Better : Red));
+            }
+            Change(mine.Damage - theirs.Damage, "Weapon Value");
+            Change(mine.Armor - theirs.Armor, "Armor Value");
+            Change(mine.Health - theirs.Health, "Health");
+            Change(mine.Mana - theirs.Mana, "Mana");
+            for (int i = 0; i < AttributeSet.Count; i++)
+            {
+                var attribute = (RPG.Progression.Attribute)i;
+                Change(mine.Attributes[attribute] - theirs.Attributes[attribute], ItemDefinition.AttributeName(attribute));
+            }
+            yield return Text(worn.IsEmpty ? "If worn (the slot is empty):" : "If worn instead:", Gold);
+            if (changes.Count == 0) yield return Text("No change", Grey);
+            foreach (Line change in changes) yield return change;
         }
 
         /// <summary>Puts the tooltip by the pointer (canvas units, kept on the screen); <paramref name="pivot"/> picks the side.</summary>
@@ -87,9 +164,30 @@ namespace RPG.UI
             Vector2 pointer = UnityEngine.InputSystem.Mouse.current != null ? UnityEngine.InputSystem.Mouse.current.position.ReadValue() : Vector2.zero;
             panel.pivot = pivot;
             panel.anchoredPosition = UIFactory.KeepOnScreen(panel, pointer / scale + offset, scale);
+            if (comparedShown == 0 || compared == null) return;
+
+            // The worn pieces beside it, on the side away from the pointer (the other side when that is off the screen).
+            Vector2 size = panel.sizeDelta;
+            Vector2 min = panel.anchoredPosition - Vector2.Scale(panel.pivot, size);
+            float top = min.y + size.y;
+            float screenWidth = Screen.width / Mathf.Max(0.0001f, scale);
+            float wornWidth = comparedShown * (Width + Gap);
+            bool left = pivot.x >= 0.5f ? min.x - wornWidth >= 0f : min.x + size.x + wornWidth > screenWidth;
+            float x = left ? min.x - Gap : min.x + size.x + Gap;
+            for (int i = 0; i < comparedShown; i++)
+            {
+                compared[i].PlaceAt(new Vector2(x, top), left, scale);
+                x += left ? -(Width + Gap) : Width + Gap;
+            }
         }
 
-        private static List<Line> Lines(Inventory inventory, ItemStack stack, ItemDefinition item, string hint)
+        private void PlaceAt(Vector2 topCorner, bool leftOfIt, float scale)
+        {
+            panel.pivot = new Vector2(leftOfIt ? 1f : 0f, 1f);
+            panel.anchoredPosition = UIFactory.KeepOnScreen(panel, topCorner, scale);
+        }
+
+        private static List<Line> Lines(Inventory inventory, ItemStack stack, ItemDefinition item)
         {
             var lines = new List<Line>();
             var progress = inventory.GetComponent<CharacterProgress>();
@@ -174,7 +272,6 @@ namespace RPG.UI
             if (!string.IsNullOrEmpty(className)) lines.Add(Text($"{className} only", classOk ? Grey : Red));
             if (item.IsEquippable) lines.Add(Text($"Requires level {item.itemLevel}", item.itemLevel > level ? Red : Plain));
             if (item.price > 0) lines.Add(Text($"Sell Price: {inventory.SellPrice(stack)}g", Plain));
-            if (!string.IsNullOrEmpty(hint)) lines.Add(new Line { Left = hint, LeftColor = Grey, Size = 13 });
             return lines;
         }
 

@@ -36,8 +36,10 @@ tomes) keep their old ids so existing assets and `.meta` files stay valid; only 
 - **Start** – Wayfarer's Haven (its `start` teleport 17, 106): new characters appear here, and after death.
 - **Starting gear** – like the source game's `player_create_item`, a new character starts with its class's plain
   level 1 weapon in hand: the warrior a Copper Hewer and a Barricade shield, the ranger a Shortbow, the mage a Stave
-  (the builder picks the cheapest level 1 source piece of the class; `Inventory.startingGear`,
-  `CharacterPersistence` puts it on). Characters saved before keep what they have.
+  (the builder picks the cheapest level 1 source piece of the class), and everyone the source's starting clothes
+  (item_template 13-16: Shirt, Pants, Shoes, Handwraps; cloth anyone may wear, 1 armor each, at the catalog's end,
+  `Data/Items/Starter`). `Inventory.startingGear`; `CharacterPersistence` puts it on. Characters saved before keep
+  what they have.
 - **Main town** – St. Aurelis (524, 250).
 - **Vendors** – every vendor of the island where the source game stands it (see "Vendors" below).
 - **Monsters** – all 531 hostile NPCs of the island at their spots, with their levels (1–30) and respawn times (up to

@@ -365,7 +365,7 @@ namespace RPG.UI
                 : TransmuteWindow.IsOpen ? "Click to put into the transmuter"
                 : VendorWindow.CurrentVendor != null ? $"Click to sell for {inventory.SellPrice(stack)} gold"
                 : ClickHint(item);
-            itemTooltip.Show(inventory, stack, hint);
+            itemTooltip.Show(inventory, stack, hint, compare: bagIndex >= 0);
         }
 
         /// <summary>What clicking an item in the bag does.</summary>

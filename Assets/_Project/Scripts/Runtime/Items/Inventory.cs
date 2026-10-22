@@ -448,52 +448,75 @@ namespace RPG.Items
             Changed?.Invoke();
         }
 
+        /// <summary>What a piece adds when worn: its own stats, orb empowerment, its gems and its affix.</summary>
+        public struct GearBonus
+        {
+            public int Damage;
+            public int Health;
+            public int Armor;
+            public int Mana;
+            public AttributeSet Attributes;
+        }
+
+        /// <summary>Everything an item stack would add worn (nothing for items that are not gear).</summary>
+        public GearBonus BonusOf(ItemStack stack)
+        {
+            var bonus = new GearBonus();
+            ItemDefinition item = Definition(stack);
+            if (item == null || !item.IsEquippable) return bonus;
+            bonus.Damage += item.damageBonus;
+            bonus.Health += item.healthBonus;
+            bonus.Armor += item.armor;
+            bonus.Mana += item.manaBonus;
+            bonus.Attributes += item.attributes;
+
+            // Orb empowerment: a share more of the item's own damage and armor a step (at least 1), or attributes.
+            int steps = stack.EmpowerSteps;
+            if (steps > 0)
+            {
+                if (item.damageBonus > 0) bonus.Damage += Mathf.Max(steps, Mathf.RoundToInt(item.damageBonus * ItemDefinition.EmpowerShare * steps));
+                if (item.armor > 0) bonus.Armor += Mathf.Max(steps, Mathf.RoundToInt(item.armor * ItemDefinition.EmpowerShare * steps));
+                if (item.slot == ItemSlot.Neck || item.slot == ItemSlot.Waist || item.slot == ItemSlot.Ring)
+                {
+                    AttributeSet boost = default;
+                    boost.strength = boost.agility = boost.intelligence = boost.vitality = boost.willpower = steps;
+                    bonus.Attributes += boost;
+                }
+            }
+
+            for (int socket = 0; socket < ItemStack.MaxSockets; socket++)
+            {
+                ItemDefinition gem = GemAt(stack, socket);
+                if (gem == null) continue;
+                bonus.Damage += gem.damageBonus;
+                bonus.Health += gem.healthBonus;
+                bonus.Armor += gem.armor;
+                bonus.Mana += gem.manaBonus;
+                bonus.Attributes += gem.attributes;
+            }
+
+            AffixDefinition affix = Affix(stack);
+            if (affix == null) return bonus;
+            bonus.Damage += affix.damageBonus;
+            bonus.Health += affix.healthBonus;
+            bonus.Armor += affix.armor;
+            bonus.Mana += affix.manaBonus;
+            bonus.Attributes += affix.attributes;
+            return bonus;
+        }
+
         private void RecalculateBonuses()
         {
             int damage = 0, healthBonus = 0, armor = 0, manaBonus = 0;
             AttributeSet attributes = default;
             for (int i = 0; i < equipment.Count; i++)
             {
-                ItemDefinition item = Definition(equipment[i]);
-                if (item == null) continue;
-                damage += item.damageBonus;
-                healthBonus += item.healthBonus;
-                armor += item.armor;
-                manaBonus += item.manaBonus;
-                attributes += item.attributes;
-
-                // Orb empowerment: a share more of the item's own damage and armor a step (at least 1), or attributes.
-                int steps = equipment[i].EmpowerSteps;
-                if (steps > 0)
-                {
-                    if (item.damageBonus > 0) damage += Mathf.Max(steps, Mathf.RoundToInt(item.damageBonus * ItemDefinition.EmpowerShare * steps));
-                    if (item.armor > 0) armor += Mathf.Max(steps, Mathf.RoundToInt(item.armor * ItemDefinition.EmpowerShare * steps));
-                    if (item.slot == ItemSlot.Neck || item.slot == ItemSlot.Waist || item.slot == ItemSlot.Ring)
-                    {
-                        AttributeSet boost = default;
-                        boost.strength = boost.agility = boost.intelligence = boost.vitality = boost.willpower = steps;
-                        attributes += boost;
-                    }
-                }
-
-                for (int socket = 0; socket < ItemStack.MaxSockets; socket++)
-                {
-                    ItemDefinition gem = GemAt(equipment[i], socket);
-                    if (gem == null) continue;
-                    damage += gem.damageBonus;
-                    healthBonus += gem.healthBonus;
-                    armor += gem.armor;
-                    manaBonus += gem.manaBonus;
-                    attributes += gem.attributes;
-                }
-
-                AffixDefinition affix = Affix(equipment[i]);
-                if (affix == null) continue;
-                damage += affix.damageBonus;
-                healthBonus += affix.healthBonus;
-                armor += affix.armor;
-                manaBonus += affix.manaBonus;
-                attributes += affix.attributes;
+                GearBonus bonus = BonusOf(equipment[i]);
+                damage += bonus.Damage;
+                healthBonus += bonus.Health;
+                armor += bonus.Armor;
+                manaBonus += bonus.Mana;
+                attributes += bonus.Attributes;
             }
             DamageBonus = damage;
             HealthBonus = healthBonus;

@@ -20,6 +20,9 @@ the zone name comes from `WorldNavigation.ZoneName`.
   when no window is open (or closing) does it drop the target and cancel a cast (`UI/OpenWindow.cs`). With a gem being
   set into an item, Esc cancels that and keeps the bag open.
 - Tooltips are drawn over every window (a canvas of their own sorted on top) and kept on the screen.
+- Gear in the bag or the loot window is compared with what is worn (`ItemTooltip`, `Inventory.BonusOf`): the worn piece
+  (both rings) shows beside the tooltip under "Equipped", and the tooltip lists "If worn instead:" what would change
+  (weapon value, armor, health, mana, every attribute; green better, red worse).
 - The HUD texts are rewritten only when what they show changes (the action bar, nameplates, frames, the bag, the
   character sheet, the vendor list a few times a second), to keep WebGL frames smooth.
 

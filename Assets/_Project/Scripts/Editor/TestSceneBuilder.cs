@@ -423,7 +423,7 @@ namespace RPG.EditorTools
             for (int i = 0; i < startingItems.arraySize; i++)
                 startingItems.GetArrayElementAtIndex(i).objectReferenceValue = i < 3 ? startingPotion : startingManaPotion;
             // The source game's starting gear (player_create_item): the paladin's sword and shield, the ranger's bow, the
-            // mage's staff; here the cheapest level 1 source piece of the
+            // mage's staff, and everyone's clothes; here the cheapest level 1 source piece of the
             // class (Copper Hewer, Barricade, the first wood's Shortbow and Stave).
             var startingGear = new List<(int classIndex, ItemDefinition item)>();
             foreach (int classIndex in new[] { WarriorClass, RangerClass, MageClass })
@@ -439,6 +439,10 @@ namespace RPG.EditorTools
                     else Debug.LogWarning($"[TestScene] No starting {slot} for class {classIndex}.");
                 }
             }
+            // And the clothes every class starts in.
+            foreach (int classIndex in new[] { WarriorClass, RangerClass, MageClass })
+                foreach (ItemDefinition clothes in StarterClothes)
+                    startingGear.Add((classIndex, clothes));
             SerializedProperty gearProperty = inventoryObject.FindProperty("startingGear");
             gearProperty.arraySize = startingGear.Count;
             for (int i = 0; i < startingGear.Count; i++)
@@ -744,6 +748,9 @@ namespace RPG.EditorTools
             foreach ((AbilityDefinition[] spells, int classIndex) in new[] { (warriorSpells, WarriorClass), (rangerSpells, RangerClass), (mageSpells, MageClass) })
                 foreach (ItemDefinition tome in CreateTomes(spells, classIndex, firstLevel: true))
                     if (!allItems.Contains(tome)) allItems.Add(tome);
+            // Then the clothes every new character starts in.
+            foreach (ItemDefinition clothes in CreateStarterClothes())
+                if (!allItems.Contains(clothes)) allItems.Add(clothes);
             items.items = allItems.ToArray();
             EditorUtility.SetDirty(items);
             ConfigureOrbs(items.items);
@@ -1133,6 +1140,32 @@ namespace RPG.EditorTools
         /// wear. Stats grow with the source game's sell price of the piece, the drop weight is its material chance: monsters,
         /// chests and merchants give these pieces. The old materials stay in the catalog.
         /// </summary>
+        /// <summary>The clothes every new character starts in (made by <see cref="CreateStarterClothes"/>).</summary>
+        private static readonly List<ItemDefinition> StarterClothes = new List<ItemDefinition>();
+
+        /// <summary>
+        /// The source game's starting clothes (player_create_item, item_template 13-16): Shirt, Pants, Shoes and
+        /// Handwraps, level 1 cloth anyone may wear (unlike the mage's cloth gear), 1 armor each, its sell prices; not dropped.
+        /// </summary>
+        private static List<ItemDefinition> CreateStarterClothes()
+        {
+            StarterClothes.Clear();
+            foreach ((string name, ItemSlot slot, int sell) in new[]
+                     {
+                         ("Shirt", ItemSlot.Chest, 3), ("Pants", ItemSlot.Legs, 3), ("Shoes", ItemSlot.Feet, 2), ("Handwraps", ItemSlot.Hands, 2),
+                     })
+            {
+                ItemDefinition piece = CreateItem($"Starter/{name}", name, slot, ItemRarity.Common, 0, 0, 1, ArmorColor(1), sell * 3, -1, 1);
+                piece.sellValue = sell;
+                piece.classMask = 0;
+                piece.dropWeight = 0f;
+                GearArmorKinds[piece] = GearData.ArmorKind.Cloth;
+                EditorUtility.SetDirty(piece);
+                StarterClothes.Add(piece);
+            }
+            return StarterClothes;
+        }
+
         /// <summary>The source game's plain gear made by <see cref="CreateGearData"/> and <see cref="CreateMoreGear"/>.</summary>
         private static readonly HashSet<ItemDefinition> SourceGear = new HashSet<ItemDefinition>();
 
