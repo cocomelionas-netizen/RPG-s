@@ -495,6 +495,9 @@ namespace RPG.Networking
             }
             serverRow.SetActive(mode != Mode.Offline);
             addressField.gameObject.SetActive(mode == Mode.Join);
+            // As tall as what it shows: the server's address and port only when not playing offline.
+            var panel = (RectTransform)loginPanel.transform;
+            panel.sizeDelta = new Vector2(panel.sizeDelta.x, mode == Mode.Offline ? 530f : 600f);
         }
 
         private void RefreshCharacters()
