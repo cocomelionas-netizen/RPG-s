@@ -48,14 +48,14 @@ namespace RPG.EditorTools
         {
             ("TowerKey", "Tower Key", "Epic", 0, 20, "An ancient iron key unlocking the archduke's tower that's in poor condition and will only work once.", false),
             ("KeysToTheBarracks", "Keys to the Barracks", "Rare", 0, 5, "They're fragile and won't work more than once.", false),
-            ("UndercourseKey", "Undercourse Key", "Epic", 20155, 5, "Blackened brass key humming softly, opening the Undercourse beneath the Dale.", false),
-            ("DepletedKey", "Depleted Key", "Epic", 0, 5, "A blackened brass key, though it appears damaged. Search the Dale for an item to restore this key.", true),
+            ("UndercourseKey", "Underhalls Key", "Epic", 20155, 5, "Blackened brass key humming softly, opening the Underhalls beneath the Dale.", false),
+            ("DepletedKey", "Spent Key", "Epic", 0, 5, "A blackened brass key, though it appears damaged. Search the Dale for an item to restore this key.", true),
             ("DaleGem", "Dale Gem", "Rare", 0, 5, "", true),
-            ("DemiplaneKey", "Demiplane Key", "Legendary", 0, 1, "Demiplanes are said to be created by archmages bending reality. The symbols bear the mark of Kandorys.", false),
+            ("DemiplaneKey", "Netherplane Key", "Legendary", 0, 1, "Netherplanes are said to be created by archmages bending reality. The symbols bear the mark of Karthmoor.", false),
             ("SanctumKey", "Sanctum Key", "Legendary", 0, 20, "...haec loca minora a sagis potentissimis realitatem flectentibus creari dicuntur...", false),
-            ("InactiveDemiplaneKey", "Inactive Demiplane Key", "Legendary", 0, 1, "The key is inert, though demiplanes are said to be created by archmages bending reality.", true),
-            ("SalmastersKey", "Salmaster's Key", "Legendary", 0, 1, "The key glows with faint energy and malevolence. It won't work more than once.", false),
-            ("KeysToStRevere", "Keys to St. Revere", "Legendary", 15350, 5, "They're fragile and won't work more than once.", false),
+            ("InactiveDemiplaneKey", "Dormant Netherplane Key", "Legendary", 0, 1, "The key is inert, though demiplanes are said to be created by archmages bending reality.", true),
+            ("SalmastersKey", "Corvalis's Key", "Legendary", 0, 1, "The key glows with faint energy and malevolence. It won't work more than once.", false),
+            ("KeysToStRevere", "Keys to St. Aurelis", "Legendary", 15350, 5, "They're fragile and won't work more than once.", false),
             ("DivineAccessoryOrb", "Divine Accessory Orb", "Legendary", 6000, 5, "", false),
             ("DivineArmorOrb", "Divine Armor Orb", "Legendary", 6000, 5, "", false),
             ("DivineWeaponOrb", "Divine Weapon Orb", "Legendary", 6000, 5, "", false),
@@ -63,7 +63,7 @@ namespace RPG.EditorTools
             ("MajorArmorOrb", "Major Armor Orb", "Epic", 2532, 5, "", false),
             ("MagicDust", "Magic Dust", "Rare", 0, 20, "This fine magical dust is used in crafting, experiments, and transmutation to reshape matter.", false),
             ("ArcaneEssence", "Arcane Essence", "Legendary", 5000, 5, "Condensed spellpower dropped by a fallen Archwizard, this essence fuels epic crafting, grand rituals, and ancient enchantments.", false),
-            ("MajorTreasuryGold", "Major Treasury Gold", "Common", 6000, 1, "A compact fortune of gleaming gold bars, prized by merchants and alchemists alike, spendable as wealth or consumed in powerful transmutation rituals.", false),
+            ("MajorTreasuryGold", "Major Vault Gold", "Common", 6000, 1, "A compact fortune of gleaming gold bars, prized by merchants and alchemists alike, spendable as wealth or consumed in powerful transmutation rituals.", false),
         };
 
         /// <summary>Recipes: the result and every item it takes (one of each).</summary>
@@ -184,7 +184,7 @@ namespace RPG.EditorTools
         /// <summary>Outdoor monsters (by name) with a loot table of their own besides junk (not keys).</summary>
         public static readonly Dictionary<string, int> OutdoorLoot = new Dictionary<string, int>
         {
-            ["Adult Wyrm"] = 60,
+            ["Adult Basilisk"] = 60,
             ["Azure Hydra"] = 61,
             ["Flame Serpent"] = 61,
         };
@@ -308,22 +308,22 @@ namespace RPG.EditorTools
         {
             new Dungeon
             {
-                Id = "WolfsDen", Name = "Wolf's Den", Map = "wolf_cave_1",
+                Id = "WolfsDen", Name = "Wolf's Lair", Map = "wolf_cave_1",
                 MinLevel = 1, MaxPlayers = 4, Key = null,
                 WorldEntrance = new Vector3Int(430, 611, 0), MovedToEdge = false,
                 Arrival = new Vector3Int(14, 23, 0),
                 Exits = new[]
                 {
-                    (new Vector3Int(12, 20, 0), new Vector3Int(430, 611, 0), "Wolf's Den"),
+                    (new Vector3Int(12, 20, 0), new Vector3Int(430, 611, 0), "Wolf's Lair"),
                 },
                 Monsters = new[]
                 {
-                    (new Vector3Int(15, 34, 0), "Cave Howler", 5, true, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
-                    (new Vector3Int(59, 55, 0), "Cave Howler", 5, true, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
-                    (new Vector3Int(55, 38, 0), "Cave Howler", 5, true, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
+                    (new Vector3Int(15, 34, 0), "Cave Gloomhound", 5, true, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
+                    (new Vector3Int(59, 55, 0), "Cave Gloomhound", 5, true, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
+                    (new Vector3Int(55, 38, 0), "Cave Gloomhound", 5, true, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
                     (new Vector3Int(68, 29, 0), "Risen Miner", 5, true, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
                     (new Vector3Int(75, 30, 0), "Risen Miner", 5, true, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
-                    (new Vector3Int(55, 70, 0), "Cave Howler", 5, true, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
+                    (new Vector3Int(55, 70, 0), "Cave Gloomhound", 5, true, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
                     (new Vector3Int(40, 64, 0), "Risen Miner", 5, true, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
                     (new Vector3Int(34, 29, 0), "Risen Miner", 5, true, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
                 },
@@ -422,23 +422,23 @@ namespace RPG.EditorTools
             },
             new Dungeon
             {
-                Id = "TrogCave", Name = "Trog Cave", Map = "goblin_cave",
+                Id = "TrogCave", Name = "Grulk Cave", Map = "goblin_cave",
                 MinLevel = 1, MaxPlayers = 4, Key = null,
                 WorldEntrance = new Vector3Int(543, 449, 0), MovedToEdge = false,
                 Arrival = new Vector3Int(3, 29, 0),
                 Exits = new[]
                 {
-                    (new Vector3Int(0, 27, 0), new Vector3Int(543, 449, 0), "Trog Cave"),
+                    (new Vector3Int(0, 27, 0), new Vector3Int(543, 449, 0), "Grulk Cave"),
                 },
                 Monsters = new[]
                 {
-                    (new Vector3Int(9, 42, 0), "Cave Trog", 3, false, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
-                    (new Vector3Int(14, 27, 0), "Cave Trog", 3, false, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
-                    (new Vector3Int(20, 19, 0), "Cave Trog", 3, false, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
-                    (new Vector3Int(24, 40, 0), "Cave Trog", 3, false, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
-                    (new Vector3Int(31, 34, 0), "Cave Trog", 3, false, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
-                    (new Vector3Int(41, 45, 0), "Cave Trog", 3, false, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
-                    (new Vector3Int(40, 15, 0), "Cave Trog", 3, false, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
+                    (new Vector3Int(9, 42, 0), "Cave Grulk", 3, false, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
+                    (new Vector3Int(14, 27, 0), "Cave Grulk", 3, false, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
+                    (new Vector3Int(20, 19, 0), "Cave Grulk", 3, false, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
+                    (new Vector3Int(24, 40, 0), "Cave Grulk", 3, false, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
+                    (new Vector3Int(31, 34, 0), "Cave Grulk", 3, false, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
+                    (new Vector3Int(41, 45, 0), "Cave Grulk", 3, false, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
+                    (new Vector3Int(40, 15, 0), "Cave Grulk", 3, false, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
                 },
                 Chests = new[]
                 {
@@ -501,18 +501,18 @@ namespace RPG.EditorTools
             },
             new Dungeon
             {
-                Id = "TheLowerGarrison", Name = "The Lower Garrison", Map = "stormrock_ruins",
+                Id = "TheLowerGarrison", Name = "The Sunken Garrison", Map = "stormrock_ruins",
                 MinLevel = 25, MaxPlayers = 4, Key = null,
                 WorldEntrance = new Vector3Int(169, 633, 0), MovedToEdge = false,
                 Arrival = new Vector3Int(3, 52, 0),
                 Exits = new[]
                 {
-                    (new Vector3Int(2, 53, 0), new Vector3Int(169, 633, 0), "The Lower Garrison"),
-                    (new Vector3Int(12, 63, 0), new Vector3Int(169, 633, 0), "The Lower Garrison"),
+                    (new Vector3Int(2, 53, 0), new Vector3Int(169, 633, 0), "The Sunken Garrison"),
+                    (new Vector3Int(12, 63, 0), new Vector3Int(169, 633, 0), "The Sunken Garrison"),
                 },
                 Monsters = new[]
                 {
-                    (new Vector3Int(31, 87, 0), "Melchon", 28, true, true, 15.337f, 0f, 15f, 30, 0f, 1f, 0.1f),
+                    (new Vector3Int(31, 87, 0), "Thalgor", 28, true, true, 15.337f, 0f, 15f, 30, 0f, 1f, 0.1f),
                     (new Vector3Int(20, 56, 0), "Forgotten Guard", 25, true, false, 0f, 0f, 0.5f, 0, 0f, 0f, 0f),
                     (new Vector3Int(20, 47, 0), "Forgotten Guard", 25, true, false, 0f, 0f, 0.5f, 0, 0f, 0f, 0f),
                     (new Vector3Int(22, 52, 0), "Forgotten Loyalist", 25, true, false, 0f, 0f, 0.5f, 0, 0f, 0f, 0f),
@@ -656,13 +656,13 @@ namespace RPG.EditorTools
             },
             new Dungeon
             {
-                Id = "AbandonedBarracks", Name = "Abandoned Barracks", Map = "fort_nasu",
+                Id = "AbandonedBarracks", Name = "Forsaken Barracks", Map = "fort_nasu",
                 MinLevel = 25, MaxPlayers = 1, Key = "KeysToTheBarracks",
                 WorldEntrance = new Vector3Int(378, 423, 0), MovedToEdge = false,
                 Arrival = new Vector3Int(34, 4, 0),
                 Exits = new[]
                 {
-                    (new Vector3Int(33, 2, 0), new Vector3Int(378, 423, 0), "Abandoned Barracks"),
+                    (new Vector3Int(33, 2, 0), new Vector3Int(378, 423, 0), "Forsaken Barracks"),
                 },
                 Monsters = new[]
                 {
@@ -693,7 +693,7 @@ namespace RPG.EditorTools
                     (new Vector3Int(61, 44, 0), "Skeletal Warrior", 25, false, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
                     (new Vector3Int(76, 56, 0), "Skeletal Warrior", 25, false, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
                     (new Vector3Int(81, 76, 0), "Skeletal Warrior", 25, false, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
-                    (new Vector3Int(94, 80, 0), "Sarloch the Betrayer", 25, true, true, 2.522f, 1.5f, 3f, 33, 1f, 0.25f, 0f),
+                    (new Vector3Int(94, 80, 0), "Vorlash the Betrayer", 25, true, true, 2.522f, 1.5f, 3f, 33, 1f, 0.25f, 0f),
                 },
                 Chests = new[]
                 {
@@ -820,13 +820,13 @@ namespace RPG.EditorTools
             },
             new Dungeon
             {
-                Id = "DecrepitTower", Name = "Decrepit Tower", Map = "fort_amir",
+                Id = "DecrepitTower", Name = "Crumbling Tower", Map = "fort_amir",
                 MinLevel = 25, MaxPlayers = 4, Key = "TowerKey",
                 WorldEntrance = new Vector3Int(145, 614, 0), MovedToEdge = false,
                 Arrival = new Vector3Int(3, 68, 0),
                 Exits = new[]
                 {
-                    (new Vector3Int(2, 69, 0), new Vector3Int(145, 614, 0), "Decrepit Tower"),
+                    (new Vector3Int(2, 69, 0), new Vector3Int(145, 614, 0), "Crumbling Tower"),
                 },
                 Monsters = new[]
                 {
@@ -848,8 +848,8 @@ namespace RPG.EditorTools
                     (new Vector3Int(47, 68, 0), "Sorcerer", 25, true, false, 0f, 0f, 0.75f, 0, 0f, 0f, 0f),
                     (new Vector3Int(20, 67, 0), "Sorcerer", 25, true, false, 0f, 0f, 0.75f, 0, 0f, 0f, 0f),
                     (new Vector3Int(19, 62, 0), "Undead Horror", 25, true, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
-                    (new Vector3Int(24, 40, 0), "Lord Zargan", 30, true, true, 25.501f, 4.688f, 20f, 36, 0f, 0f, 1f),
-                    (new Vector3Int(65, 72, 0), "Tchazzar", 30, true, true, 14.631f, 0f, 17.5f, 34, 0f, 1f, 0.25f),
+                    (new Vector3Int(24, 40, 0), "Lord Valdrek", 30, true, true, 25.501f, 4.688f, 20f, 36, 0f, 0f, 1f),
+                    (new Vector3Int(65, 72, 0), "Xalthuun", 30, true, true, 14.631f, 0f, 17.5f, 34, 0f, 1f, 0.25f),
                     (new Vector3Int(46, 35, 0), "Forgotten Loyalist", 25, true, false, 0f, 0f, 0.5f, 0, 0f, 0f, 0f),
                     (new Vector3Int(44, 35, 0), "Forgotten Loyalist", 25, true, false, 0f, 0f, 0.5f, 0, 0f, 0f, 0f),
                     (new Vector3Int(45, 39, 0), "Forgotten Guard", 25, true, false, 0f, 0f, 0.5f, 0, 0f, 0f, 0f),
@@ -987,14 +987,14 @@ namespace RPG.EditorTools
             },
             new Dungeon
             {
-                Id = "KandorysUndercourse", Name = "Kandorys Undercourse", Map = "dilapidated_sewers",
+                Id = "KandorysUndercourse", Name = "Karthmoor Underhalls", Map = "dilapidated_sewers",
                 MinLevel = 25, MaxPlayers = 1, Key = "UndercourseKey",
                 WorldEntrance = new Vector3Int(68, 600, 0), MovedToEdge = false,
                 Arrival = new Vector3Int(7, 57, 0),
                 Exits = new[]
                 {
                     (new Vector3Int(70, 19, 0), new Vector3Int(137, 609, 0), "Leave"),
-                    (new Vector3Int(9, 59, 0), new Vector3Int(68, 600, 0), "Kandorys Undercourse"),
+                    (new Vector3Int(9, 59, 0), new Vector3Int(68, 600, 0), "Karthmoor Underhalls"),
                 },
                 Monsters = new[]
                 {
@@ -1007,15 +1007,15 @@ namespace RPG.EditorTools
                     (new Vector3Int(24, 39, 0), "Undead Horror", 25, true, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
                     (new Vector3Int(47, 63, 0), "Undead Horror", 25, true, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
                     (new Vector3Int(45, 64, 0), "Undead Horror", 25, true, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
-                    (new Vector3Int(54, 43, 0), "Kandorys Centurion", 25, true, false, 0f, 0f, 0.3f, 0, 0f, 0f, 0f),
-                    (new Vector3Int(48, 43, 0), "Kandorys Centurion", 25, true, false, 0f, 0f, 0.3f, 0, 0f, 0f, 0f),
+                    (new Vector3Int(54, 43, 0), "Karthmoor Centurion", 25, true, false, 0f, 0f, 0.3f, 0, 0f, 0f, 0f),
+                    (new Vector3Int(48, 43, 0), "Karthmoor Centurion", 25, true, false, 0f, 0f, 0.3f, 0, 0f, 0f, 0f),
                     (new Vector3Int(73, 56, 0), "Undead Horror", 25, true, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
                     (new Vector3Int(52, 20, 0), "Dishonored Sorcerer", 25, true, false, 0f, 0f, 0.3f, 0, 0f, 0f, 0f),
                     (new Vector3Int(61, 65, 0), "Undead Horror", 25, true, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
                     (new Vector3Int(52, 24, 0), "Undead Horror", 25, true, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
                     (new Vector3Int(73, 60, 0), "Undead Horror", 25, true, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
                     (new Vector3Int(37, 19, 0), "Undead Horror", 25, true, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
-                    (new Vector3Int(71, 8, 0), "Knight Maximus", 28, true, true, 2.818f, 1.5f, 5f, 32, 1f, 1f, 0.15f),
+                    (new Vector3Int(71, 8, 0), "Knight Valerian", 28, true, true, 2.818f, 1.5f, 5f, 32, 1f, 1f, 0.15f),
                 },
                 Chests = new[]
                 {
@@ -1110,7 +1110,7 @@ namespace RPG.EditorTools
             },
             new Dungeon
             {
-                Id = "TelamontsDemiplane", Name = "Telamont's Demiplane", Map = "wizards_tower_2",
+                Id = "TelamontsDemiplane", Name = "Mirethane's Netherplane", Map = "wizards_tower_2",
                 MinLevel = 25, MaxPlayers = 4, Key = "DemiplaneKey",
                 WorldEntrance = new Vector3Int(297, 320, 0), MovedToEdge = false,
                 Arrival = new Vector3Int(39, 97, 0),
@@ -1120,38 +1120,38 @@ namespace RPG.EditorTools
                 },
                 Monsters = new[]
                 {
-                    (new Vector3Int(23, 41, 0), "Kandoryrs Knight", 30, true, false, 9.288f, 7.5f, 1f, 0, 0f, 0f, 0f),
-                    (new Vector3Int(22, 37, 0), "Conjured Frostmite", 30, true, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
-                    (new Vector3Int(28, 40, 0), "Conjured Firemite", 30, true, false, 0f, 0f, 0.75f, 0, 0f, 0f, 0f),
-                    (new Vector3Int(24, 73, 0), "Kandoryrs Knight", 30, true, false, 9.288f, 7.5f, 1f, 0, 0f, 0f, 0f),
-                    (new Vector3Int(28, 73, 0), "Kandoryrs Knight", 30, true, false, 9.288f, 7.5f, 1f, 0, 0f, 0f, 0f),
-                    (new Vector3Int(33, 59, 0), "Kandoryrs Knight", 30, true, false, 9.288f, 7.5f, 1f, 0, 0f, 0f, 0f),
-                    (new Vector3Int(32, 63, 0), "Conjured Frostmite", 30, true, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
-                    (new Vector3Int(28, 59, 0), "Conjured Firemite", 30, true, false, 0f, 0f, 0.75f, 0, 0f, 0f, 0f),
-                    (new Vector3Int(75, 97, 0), "Kandoryrs Knight", 30, true, false, 9.288f, 7.5f, 1f, 0, 0f, 0f, 0f),
-                    (new Vector3Int(75, 90, 0), "Kandoryrs Knight", 30, true, false, 9.288f, 7.5f, 1f, 0, 0f, 0f, 0f),
-                    (new Vector3Int(79, 94, 0), "Conjured Firemite", 30, true, false, 0f, 0f, 0.75f, 0, 0f, 0f, 0f),
-                    (new Vector3Int(44, 40, 0), "Conjured Frostmite", 30, true, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
-                    (new Vector3Int(40, 30, 0), "Conjured Frostmite", 30, true, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
-                    (new Vector3Int(47, 38, 0), "Conjured Frostmite", 30, true, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
-                    (new Vector3Int(89, 44, 0), "Conjured Firemite", 30, true, false, 0f, 0f, 0.75f, 0, 0f, 0f, 0f),
-                    (new Vector3Int(85, 43, 0), "Conjured Firemite", 30, true, false, 0f, 0f, 0.75f, 0, 0f, 0f, 0f),
-                    (new Vector3Int(87, 39, 0), "Conjured Firemite", 30, true, false, 0f, 0f, 0.75f, 0, 0f, 0f, 0f),
-                    (new Vector3Int(25, 86, 0), "Telamont's Watcher", 30, true, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
-                    (new Vector3Int(19, 20, 0), "Telamont's Watcher", 30, true, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
-                    (new Vector3Int(18, 93, 0), "Telamont's Watcher", 30, true, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
-                    (new Vector3Int(2, 45, 0), "Telamont's Watcher", 30, true, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
-                    (new Vector3Int(73, 36, 0), "Telamont's Watcher", 30, true, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
-                    (new Vector3Int(73, 39, 0), "Telamont's Watcher", 30, true, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
-                    (new Vector3Int(91, 85, 0), "Telamont's Watcher", 30, true, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
-                    (new Vector3Int(88, 85, 0), "Telamont's Watcher", 30, true, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
-                    (new Vector3Int(16, 51, 0), "Telamont's Watcher", 30, true, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
-                    (new Vector3Int(18, 51, 0), "Telamont's Watcher", 30, true, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
-                    (new Vector3Int(53, 69, 0), "Demiplanar Guardian", 30, true, true, 72.155f, 11.25f, 50f, 50, 0f, 0f, 1f),
-                    (new Vector3Int(45, 32, 0), "Telamont's Watcher", 30, true, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
-                    (new Vector3Int(89, 38, 0), "Telamont's Watcher", 30, true, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
-                    (new Vector3Int(87, 19, 0), "Telamont's Watcher", 30, true, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
-                    (new Vector3Int(21, 89, 0), "Conjured Firemite", 30, true, false, 0f, 0f, 0.75f, 0, 0f, 0f, 0f),
+                    (new Vector3Int(23, 41, 0), "Karthmoor Knight", 30, true, false, 9.288f, 7.5f, 1f, 0, 0f, 0f, 0f),
+                    (new Vector3Int(22, 37, 0), "Conjured Rimeling", 30, true, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
+                    (new Vector3Int(28, 40, 0), "Conjured Cinderling", 30, true, false, 0f, 0f, 0.75f, 0, 0f, 0f, 0f),
+                    (new Vector3Int(24, 73, 0), "Karthmoor Knight", 30, true, false, 9.288f, 7.5f, 1f, 0, 0f, 0f, 0f),
+                    (new Vector3Int(28, 73, 0), "Karthmoor Knight", 30, true, false, 9.288f, 7.5f, 1f, 0, 0f, 0f, 0f),
+                    (new Vector3Int(33, 59, 0), "Karthmoor Knight", 30, true, false, 9.288f, 7.5f, 1f, 0, 0f, 0f, 0f),
+                    (new Vector3Int(32, 63, 0), "Conjured Rimeling", 30, true, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
+                    (new Vector3Int(28, 59, 0), "Conjured Cinderling", 30, true, false, 0f, 0f, 0.75f, 0, 0f, 0f, 0f),
+                    (new Vector3Int(75, 97, 0), "Karthmoor Knight", 30, true, false, 9.288f, 7.5f, 1f, 0, 0f, 0f, 0f),
+                    (new Vector3Int(75, 90, 0), "Karthmoor Knight", 30, true, false, 9.288f, 7.5f, 1f, 0, 0f, 0f, 0f),
+                    (new Vector3Int(79, 94, 0), "Conjured Cinderling", 30, true, false, 0f, 0f, 0.75f, 0, 0f, 0f, 0f),
+                    (new Vector3Int(44, 40, 0), "Conjured Rimeling", 30, true, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
+                    (new Vector3Int(40, 30, 0), "Conjured Rimeling", 30, true, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
+                    (new Vector3Int(47, 38, 0), "Conjured Rimeling", 30, true, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
+                    (new Vector3Int(89, 44, 0), "Conjured Cinderling", 30, true, false, 0f, 0f, 0.75f, 0, 0f, 0f, 0f),
+                    (new Vector3Int(85, 43, 0), "Conjured Cinderling", 30, true, false, 0f, 0f, 0.75f, 0, 0f, 0f, 0f),
+                    (new Vector3Int(87, 39, 0), "Conjured Cinderling", 30, true, false, 0f, 0f, 0.75f, 0, 0f, 0f, 0f),
+                    (new Vector3Int(25, 86, 0), "Mirethane's Watcher", 30, true, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
+                    (new Vector3Int(19, 20, 0), "Mirethane's Watcher", 30, true, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
+                    (new Vector3Int(18, 93, 0), "Mirethane's Watcher", 30, true, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
+                    (new Vector3Int(2, 45, 0), "Mirethane's Watcher", 30, true, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
+                    (new Vector3Int(73, 36, 0), "Mirethane's Watcher", 30, true, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
+                    (new Vector3Int(73, 39, 0), "Mirethane's Watcher", 30, true, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
+                    (new Vector3Int(91, 85, 0), "Mirethane's Watcher", 30, true, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
+                    (new Vector3Int(88, 85, 0), "Mirethane's Watcher", 30, true, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
+                    (new Vector3Int(16, 51, 0), "Mirethane's Watcher", 30, true, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
+                    (new Vector3Int(18, 51, 0), "Mirethane's Watcher", 30, true, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
+                    (new Vector3Int(53, 69, 0), "Netherplanar Guardian", 30, true, true, 72.155f, 11.25f, 50f, 50, 0f, 0f, 1f),
+                    (new Vector3Int(45, 32, 0), "Mirethane's Watcher", 30, true, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
+                    (new Vector3Int(89, 38, 0), "Mirethane's Watcher", 30, true, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
+                    (new Vector3Int(87, 19, 0), "Mirethane's Watcher", 30, true, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
+                    (new Vector3Int(21, 89, 0), "Conjured Cinderling", 30, true, false, 0f, 0f, 0.75f, 0, 0f, 0f, 0f),
                 },
                 Chests = new[]
                 {
@@ -1284,17 +1284,17 @@ namespace RPG.EditorTools
             },
             new Dungeon
             {
-                Id = "DesecratedAltar", Name = "Desecrated Altar", Map = "st_maria_1",
+                Id = "DesecratedAltar", Name = "Defiled Altar", Map = "st_maria_1",
                 MinLevel = 25, MaxPlayers = 1, Key = "KeysToStRevere",
                 WorldEntrance = new Vector3Int(426, 182, 0), MovedToEdge = false,
                 Arrival = new Vector3Int(3, 30, 0),
                 Exits = new[]
                 {
-                    (new Vector3Int(1, 34, 0), new Vector3Int(404, 171, 0), "St. Revere"),
+                    (new Vector3Int(1, 34, 0), new Vector3Int(404, 171, 0), "St. Aurelis"),
                 },
                 Monsters = new[]
                 {
-                    (new Vector3Int(58, 61, 0), "Ebondeath", 30, true, true, 4.306f, 0.75f, 8.5f, 37, 0f, 1f, 0.75f),
+                    (new Vector3Int(58, 61, 0), "Nightbane", 30, true, true, 4.306f, 0.75f, 8.5f, 37, 0f, 1f, 0.75f),
                     (new Vector3Int(17, 32, 0), "Fallen Guard", 25, true, false, 2.663f, 1.5f, 1f, 0, 0f, 0f, 0f),
                     (new Vector3Int(36, 64, 0), "Fallen Guard", 25, true, false, 2.663f, 1.5f, 1f, 0, 0f, 0f, 0f),
                     (new Vector3Int(45, 64, 0), "Fallen Guard", 25, true, false, 2.663f, 1.5f, 1f, 0, 0f, 0f, 0f),
@@ -1409,17 +1409,17 @@ namespace RPG.EditorTools
             },
             new Dungeon
             {
-                Id = "TelamontsSanctuary", Name = "Telamont's Sanctuary", Map = "st_maria_3",
+                Id = "TelamontsSanctuary", Name = "Mirethane's Sanctuary", Map = "st_maria_3",
                 MinLevel = 25, MaxPlayers = 4, Key = "SanctumKey",
                 Parent = "TelamontsDemiplane", ParentCell = new Vector3Int(66, 102, 0),
                 Arrival = new Vector3Int(12, 52, 0),
                 Exits = new[]
                 {
-                    (new Vector3Int(11, 56, 0), new Vector3Int(297, 320, 0), "Telamont's Demiplane"),
+                    (new Vector3Int(11, 56, 0), new Vector3Int(297, 320, 0), "Mirethane's Netherplane"),
                 },
                 Monsters = new[]
                 {
-                    (new Vector3Int(54, 42, 0), "Prince Telamont", 30, true, true, 44.153f, 0f, 60f, 51, 0f, 0f, 1f),
+                    (new Vector3Int(54, 42, 0), "Prince Mirethane", 30, true, true, 44.153f, 0f, 60f, 51, 0f, 0f, 1f),
                 },
                 Chests = System.Array.Empty<(Vector3Int cell, int kind, int level, string name)>(),
                 Rows = new[]
@@ -1488,17 +1488,17 @@ namespace RPG.EditorTools
             },
             new Dungeon
             {
-                Id = "SalmastersDescent", Name = "Salmaster's Descent", Map = "temple_of_mez_1",
+                Id = "SalmastersDescent", Name = "Corvalis's Descent", Map = "temple_of_mez_1",
                 MinLevel = 25, MaxPlayers = 1, Key = "SalmastersKey",
                 Parent = "DesecratedAltar", ParentCell = new Vector3Int(51, 32, 0),
                 Arrival = new Vector3Int(45, 2, 0),
                 Exits = new[]
                 {
-                    (new Vector3Int(47, 1, 0), new Vector3Int(404, 171, 0), "St. Revere"),
+                    (new Vector3Int(47, 1, 0), new Vector3Int(404, 171, 0), "St. Aurelis"),
                 },
                 Monsters = new[]
                 {
-                    (new Vector3Int(65, 66, 0), "Balagos", 30, true, true, 5.344f, 1.875f, 8.5f, 39, 0f, 1f, 0.75f),
+                    (new Vector3Int(65, 66, 0), "Morvagos", 30, true, true, 5.344f, 1.875f, 8.5f, 39, 0f, 1f, 0.75f),
                     (new Vector3Int(11, 30, 0), "Corrupt Cleric", 25, true, false, 2.663f, 0.75f, 1f, 0, 0f, 0f, 0f),
                     (new Vector3Int(13, 31, 0), "Skeletal Mage", 25, false, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
                     (new Vector3Int(13, 28, 0), "Skeletal Mage", 25, false, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
@@ -1509,17 +1509,17 @@ namespace RPG.EditorTools
                     (new Vector3Int(9, 10, 0), "Undead Horror", 25, true, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
                     (new Vector3Int(26, 9, 0), "Undead Horror", 25, true, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
                     (new Vector3Int(26, 36, 0), "Undead Horror", 25, true, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
-                    (new Vector3Int(50, 64, 0), "Salmaster", 30, true, true, 5.492f, 1.125f, 9.5f, 38, 0f, 0f, 1f),
-                    (new Vector3Int(20, 56, 0), "Salmaster's Watcher", 30, true, false, 1.614f, 1.125f, 1f, 0, 0f, 0f, 0f),
-                    (new Vector3Int(20, 71, 0), "Salmaster's Watcher", 30, true, false, 1.614f, 1.125f, 1f, 0, 0f, 0f, 0f),
+                    (new Vector3Int(50, 64, 0), "Corvalis", 30, true, true, 5.492f, 1.125f, 9.5f, 38, 0f, 0f, 1f),
+                    (new Vector3Int(20, 56, 0), "Corvalis's Watcher", 30, true, false, 1.614f, 1.125f, 1f, 0, 0f, 0f, 0f),
+                    (new Vector3Int(20, 71, 0), "Corvalis's Watcher", 30, true, false, 1.614f, 1.125f, 1f, 0, 0f, 0f, 0f),
                     (new Vector3Int(34, 64, 0), "Undead Horror", 25, true, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
-                    (new Vector3Int(51, 23, 0), "Salmaster's Watcher", 30, true, false, 1.614f, 1.125f, 1f, 0, 0f, 0f, 0f),
-                    (new Vector3Int(39, 23, 0), "Salmaster's Watcher", 30, true, false, 1.614f, 1.125f, 1f, 0, 0f, 0f, 0f),
-                    (new Vector3Int(67, 14, 0), "Lesser Wyrm", 25, true, false, 0f, 0f, 1f, 31, 0f, 0f, 0f),
+                    (new Vector3Int(51, 23, 0), "Corvalis's Watcher", 30, true, false, 1.614f, 1.125f, 1f, 0, 0f, 0f, 0f),
+                    (new Vector3Int(39, 23, 0), "Corvalis's Watcher", 30, true, false, 1.614f, 1.125f, 1f, 0, 0f, 0f, 0f),
+                    (new Vector3Int(67, 14, 0), "Lesser Basilisk", 25, true, false, 0f, 0f, 1f, 31, 0f, 0f, 0f),
                     (new Vector3Int(35, 49, 0), "Fallen Guard", 25, true, false, 2.663f, 1.5f, 1f, 0, 0f, 0f, 0f),
                     (new Vector3Int(67, 47, 0), "Fallen Guard", 25, true, false, 2.663f, 1.5f, 1f, 0, 0f, 0f, 0f),
                     (new Vector3Int(75, 39, 0), "Fallen Guard", 25, true, false, 2.663f, 1.5f, 1f, 0, 0f, 0f, 0f),
-                    (new Vector3Int(66, 20, 0), "Lesser Wyrm", 25, true, false, 0f, 0f, 1f, 31, 0f, 0f, 0f),
+                    (new Vector3Int(66, 20, 0), "Lesser Basilisk", 25, true, false, 0f, 0f, 1f, 31, 0f, 0f, 0f),
                     (new Vector3Int(56, 38, 0), "Undead Horror", 25, true, false, 0f, 0f, 1f, 0, 0f, 0f, 0f),
                 },
                 Chests = new[]

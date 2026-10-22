@@ -46,14 +46,14 @@ Client files come from `https://github.com/DreadmystRPG/steam` (blobless clone i
 ids/costs), `maps/*.map`. What was taken and how it maps is documented in `Docs/GameData.md`. Generated data lives in
 `Scripts/Editor/*Data.cs` (`StartAreaData`, `GearData`, `AffixData`, `DungeonData`) and `TestSceneBuilder.Spells.cs`;
 generators are in `Tools/GameData/` (`island.py` → `StartAreaData` (whole island, zones, map labels), `dungeons.py`, `recipes.py`, `world.py` → `WorldMapData`/`VendorData`, `gear.py` →
-`GearSourceData`, `townsfolk.py` → `TownsfolkData` (townsfolk, gossip), `auras.py` → `AuraData` (buff/debuff texts), `monsters.py` → `MonsterData` (monster names, junk), `.map` reader
+`GearSourceData`, `townsfolk.py` → `TownsfolkData` (townsfolk, gossip), `auras.py` → `AuraData` (buff/debuff texts), `monsters.py` → `MonsterData` (monster names, junk), `names.py` (our own names for every source name: all generators use it; St. Aurelis, Halvaren...), `.map` reader
 `map_file.py`).
 
 ## What exists (short)
 
 World: the source game's whole island, north up like its map (`island.py`: source (x, y) → cell (597 − y, 688 − x)): its
 ground from `fanadin.map` (walls, woods), its zones (13 × 13 blocks, `ZoneMap`), its monsters (source names, junk loot by model)/chests, free waypoints, all its vendors at their spots with their stock (random-quality gear merchants),
-Scroll of Returning (back to St. Revere), food, M world map with the source map's labels and level ranges.
+Scroll of Returning (back to St. Aurelis), food, M world map with the source map's labels and level ranges.
 Townsfolk: the source's friendly NPCs that are not vendors (guards, priests, council...) at their spots, dressed in Flare
 hero layers after their source model like the vendors; clicking one opens the gossip window (the source's gossip menus,
 replies, conditions and scripts: `townsfolk.py` → `TownsfolkData`, `GossipCatalog`, `GossipWindow`, `Conversation`).
@@ -72,14 +72,14 @@ plate warrior, robes mage). Items: source gear by level and material, dropped
 finished by monsters/chests and sold by the merchants; 7145 affixes; potions/serums; the source's gems (5 kinds, Rough →
 plain → Refined); loot window with sparkles.
 Chests: crates (gold), locked chests (Lockpicking 2 × level). Spells: Paladin/Ranger/Mage spells to level 20,
-Tomes at trainers (Halfrid, Kelda, Gyldan), ranks for experience, ABILITIES window (P; opens beside the character sheet on SPEND EXP), status effects (`StatusEffects`; icons
+Tomes at trainers (Osric, Sigrun, Ithrin), ranks for experience, ABILITIES window (P; opens beside the character sheet on SPEND EXP), status effects (`StatusEffects`; icons
 on the unit frames with a tooltip: the source's aura text and what the effect does, `StatusInfo`).
 Action bar: 12 slots (keys 1-9, 0, -, =) holding Attack, spells and items, arranged by drag and drop.
-Transmutation (the source game's crafting): Reginald's TRANSMUTE window (4 × 3 grid + Confirm) makes the source game's
+Transmutation (the source game's crafting): Mortimer's TRANSMUTE window (4 × 3 grid + Confirm) makes the source game's
 recipes (`Tools/GameData/recipes.py` → `RecipeData.cs`): potion tiers, gems, orbs, keys. No gear crafting.
-Dungeons: all 10 source dungeons reachable from this region, laid out from their `.map` files (Wolf's Den, Trog Cave,
-Lower Garrison, Decrepit Tower, Abandoned Barracks, Kandorys Undercourse, Desecrated Altar, Salmaster's Descent,
-Telamont's Demiplane and Sanctuary) with their monsters, bosses, containers, entry rules and the key chain.
+Dungeons: all 10 source dungeons reachable from this region, laid out from their `.map` files (Wolf's Lair, Grulk Cave,
+Sunken Garrison, Crumbling Tower, Forsaken Barracks, Karthmoor Underhalls, Defiled Altar, Corvalis's Descent,
+Mirethane's Netherplane and Sanctuary) with their monsters, bosses, containers, entry rules and the key chain.
 
 ## Possible next steps (owner picks)
 

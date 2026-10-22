@@ -18,7 +18,7 @@ namespace RPG.Tests
     public class AttributeAndManaTests
     {
         private const string PlayerPrefabPath = "Assets/_Project/Prefabs/Characters/Player.prefab";
-        private const string WarriorVendorPath = "Assets/_Project/Data/Vendors/Aedis.asset";
+        private const string WarriorVendorPath = "Assets/_Project/Data/Vendors/Maelis.asset";
         private const string ItemsFolder = "Assets/_Project/Data/Items";
         private const string AffixCatalogPath = "Assets/_Project/Data/Items/Affixes/AffixCatalog.asset";
         private const string DummyPrefabPath = "Assets/_Project/Prefabs/World/TrainingDummy.prefab";

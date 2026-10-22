@@ -24,9 +24,9 @@ namespace RPG.Tests
         [Test]
         public void MonsterHealth_FollowsTheSourceGamesNormalMonsters()
         {
-            Assert.AreEqual(60f, RPG.Monsters.MonsterAI.SourceHealthAt(1), 0.5f, "Antling");
-            Assert.AreEqual(7340f, RPG.Monsters.MonsterAI.SourceHealthAt(25), 1f, "Zhendale Brute");
-            Assert.AreEqual(3f, RPG.Monsters.MonsterAI.EliteHealthScale, "Zhendale Elite 22025 / Brute 7340");
+            Assert.AreEqual(60f, RPG.Monsters.MonsterAI.SourceHealthAt(1), 0.5f, "Mandiblet");
+            Assert.AreEqual(7340f, RPG.Monsters.MonsterAI.SourceHealthAt(25), 1f, "Korthian Brute");
+            Assert.AreEqual(3f, RPG.Monsters.MonsterAI.EliteHealthScale, "Korthian Elite 22025 / Brute 7340");
             for (int level = 2; level <= 30; level++)
                 Assert.Greater(RPG.Monsters.MonsterAI.SourceHealthAt(level), RPG.Monsters.MonsterAI.SourceHealthAt(level - 1));
         }

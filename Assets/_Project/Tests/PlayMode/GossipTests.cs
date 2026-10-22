@@ -64,15 +64,15 @@ namespace RPG.Tests
             Assert.IsNotNull(catalog, "Run RPG > Build Test Scene first.");
             Assert.Greater(catalog.texts.Length, 100);
             Assert.Greater(catalog.options.Length, 50);
-            Assert.IsNotNull(catalog.TextFor(1, null), "Laudrus greets a stranger");
+            Assert.IsNotNull(catalog.TextFor(1, null), "Halvard greets a stranger");
         }
 
         [Test]
         public void Format_FillsTheSourcePlaceholders()
         {
-            Assert.AreEqual("Well met, Ana. A fine Mage, my girl. Ana the mage, says Vincent.",
-                GossipCatalog.Format("Well met, $PLAYER$. A fine $CLASS$, my $G=boy:girl$. $N the $class$, says $NPC$.", "Ana", "Vincent", "Mage", true));
-            Assert.AreEqual("my good sir", GossipCatalog.Format("$G=my good sir:my lady$", "Bo", "Billings", "Warrior", false));
+            Assert.AreEqual("Well met, Ana. A fine Mage, my girl. Ana the mage, says Aldric.",
+                GossipCatalog.Format("Well met, $PLAYER$. A fine $CLASS$, my $G=boy:girl$. $N the $class$, says $NPC$.", "Ana", "Aldric", "Mage", true));
+            Assert.AreEqual("my good sir", GossipCatalog.Format("$G=my good sir:my lady$", "Bo", "Pennywhit", "Warrior", false));
         }
 
         [Test]
@@ -85,7 +85,7 @@ namespace RPG.Tests
                 FakeQuests quests = player.AddComponent<FakeQuests>();
                 Assert.AreEqual(1, catalog.TextFor(1, player).entry, "A stranger is greeted");
                 quests.Taken.Add(20);
-                Assert.AreEqual(25, catalog.TextFor(1, player).entry, "With the quest, Laudrus points down the road");
+                Assert.AreEqual(25, catalog.TextFor(1, player).entry, "With the quest, Halvard points down the road");
                 quests.Taken.Clear();
                 quests.TurnedIn.Add(20);
                 Assert.IsNull(catalog.TextFor(1, player), "Done with it: neither text");
@@ -109,7 +109,7 @@ namespace RPG.Tests
                 CollectionAssert.AreEqual(new[] { 16, 17 }, options.ConvertAll(o => o.entry), "No bank and no transmuting from gossip");
 
                 Assert.IsTrue(catalog.Reaches(26, catalog.Option(16)));
-                Assert.IsFalse(catalog.Reaches(1, catalog.Option(16)), "Laudrus' menu does not lead to the beer");
+                Assert.IsFalse(catalog.Reaches(1, catalog.Option(16)), "Halvard' menu does not lead to the beer");
             }
             finally
             {
@@ -149,7 +149,7 @@ namespace RPG.Tests
 
                 brewerObject.transform.position = player.transform.position + new Vector3(30f, 0f, 0f);
                 Townsperson brewer = brewerObject.AddComponent<Townsperson>();
-                brewer.Configure(162, "Cinaed", "Brewer", 26, catalog);
+                brewer.Configure(162, "Breda", "Brewer", 26, catalog);
                 yield return null;
                 Assert.IsFalse(conversation.ServerChoose(brewer, 16), "Too far away");
 

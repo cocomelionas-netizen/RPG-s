@@ -21,6 +21,7 @@ import sqlite3
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import names  # noqa: E402
 from island import cell_of, on_island  # noqa: E402
 from world import read_vendors  # noqa: E402
 
@@ -108,6 +109,8 @@ def main(root):
 
 
 def cs(text):
+    # Every name and text written goes through this project's names (names.py).
+    text = names.rename(text)
     return '"' + text.replace('\\', '\\\\').replace('"', '\\"').replace('\n', '\\n').replace('\t', '\\t') + '"'
 
 

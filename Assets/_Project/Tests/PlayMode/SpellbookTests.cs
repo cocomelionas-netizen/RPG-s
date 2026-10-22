@@ -114,7 +114,7 @@ namespace RPG.Tests
             inventory.ServerAddItem(tome, 1, false);
             yield return null;
 
-            Assert.IsFalse(inventory.ServerUse(FindInBag(tome)), "Hammer of Might is a level 2 spell.");
+            Assert.IsFalse(inventory.ServerUse(FindInBag(tome)), "Hammer of Prowess is a level 2 spell.");
             Assert.IsFalse(spellbook.Knows(spell));
 
             progress.ServerLoad(0, tome.itemLevel, 0, default, 0);

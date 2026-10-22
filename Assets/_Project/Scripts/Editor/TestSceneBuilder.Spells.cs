@@ -145,22 +145,22 @@ namespace RPG.EditorTools
             {
                 Spell("MightyBlow", "Mighty Blow", "An instant strike that causes 134% weapon damage.", AbilityKind.TargetDamage, 1,
                     DamageSchool.Physical, 7000, 1, 0.5f, 0, 130, SteelColor).Weapon(134f, 1f),
-                Spell("HolyWrath", "Holy Wrath", "A bolt of divine energy from the sky: Holy damage, and more over 3 sec.", AbilityKind.TargetDamage, 1,
+                Spell("HolyWrath", "Holy Ire", "A bolt of divine energy from the sky: Holy damage, and more over 3 sec.", AbilityKind.TargetDamage, 1,
                     DamageSchool.Holy, 10000, 2, 1f, 1000, 610, HolyColor)
                     .Power(12f, 5f, 115f, Courage, Attribute.Intelligence, 1f)
                     .With(Effect(StatusKind.DamageOverTime, 5f, 3000, 1f, 1000, school: DamageSchool.Holy)),
-                Spell("Radiance", "Radiance", "Heals a friendly target (or you), and more over 6 sec.", AbilityKind.FriendlyTarget, 1,
+                Spell("Radiance", "Luminance", "Heals a friendly target (or you), and more over 6 sec.", AbilityKind.FriendlyTarget, 1,
                     DamageSchool.Holy, 10000, 2, 1f, 1000, 610, HealColor)
                     .Power(10f, 8f, 100f, Courage, Attribute.Intelligence, 1f, heal: true)
                     .With(Effect(StatusKind.HealOverTime, 7f, 6000, 1f, 2000)),
-                Spell("HammerOfMight", "Hammer of Might", "Hurls a magical hammer: Holy damage and a 2 sec stun.", AbilityKind.TargetDamage, 2,
+                Spell("HammerOfMight", "Hammer of Prowess", "Hurls a magical hammer: Holy damage and a 2 sec stun.", AbilityKind.TargetDamage, 2,
                     DamageSchool.Holy, 30000, 2, 1.5f, 0, 510, HolyColor)
                     .Power(15f, 20f, 85f, Courage, Attribute.Strength, 0.1f)
                     .With(Effect(StatusKind.Stun, 0f, 2000)),
                 Spell("Charge", "Charge", "Rush towards an enemy and stun it for 1.5 sec.", AbilityKind.Charge, 3,
                     DamageSchool.Physical, 12000, 1, 0.5f, 0, 500, SteelColor)
                     .With(Effect(StatusKind.Stun, 0f, 1500)),
-                Spell("BlessingOfChampions", "Blessing of Champions", "Raises a friendly target's attributes by 5% (+1% a rank) for 5 min.",
+                Spell("BlessingOfChampions", "Benediction of Heroes", "Raises a friendly target's attributes by 5% (+1% a rank) for 5 min.",
                         AbilityKind.FriendlyTarget, 4, DamageSchool.Holy, 10000, 1, 0.5f, 0, 610, HolyColor)
                     .With(Effect(StatusKind.Attributes, 5f, 300000, 1f)),
                 Spell("DivineStrike", "Divine Strike", "82% weapon damage as Holy; the target takes 1% more damage, up to 10 times.",
@@ -169,11 +169,11 @@ namespace RPG.EditorTools
                     .With(Effect(StatusKind.DamageTaken, 1f, 10000, maxStacks: 10)),
                 MarkCleanse(Spell("Cleanse", "Cleanse", "Cleanses a friendly target (or you) of one harmful effect.", AbilityKind.FriendlyTarget, 6,
                     DamageSchool.Holy, 3000, 1, 0.5f, 0, 610, HealColor)),
-                Spell("VengeanceAura", "Vengeance Aura", "Friends near you deal 2% (+1% a rank) more damage for 15 sec.", AbilityKind.FriendlyArea, 7,
+                Spell("VengeanceAura", "Reckoning Aura", "Friends near you deal 2% (+1% a rank) more damage for 15 sec.", AbilityKind.FriendlyArea, 7,
                         DamageSchool.Holy, 60000, 2, 1.5f, 0, 0, HolyColor)
                     .WithRadius(4f)
                     .With(Effect(StatusKind.DamageDealt, 2f, 15000, 1f)),
-                Spell("BlessingOfDefense", "Blessing of Defense", "A friendly target dodges 4% (+1% a rank) more often for 5 min.",
+                Spell("BlessingOfDefense", "Benediction of Defense", "A friendly target dodges 4% (+1% a rank) more often for 5 min.",
                         AbilityKind.FriendlyTarget, 8, DamageSchool.Holy, 10000, 1, 0.5f, 0, 610, SteelColor)
                     .With(Effect(StatusKind.Dodge, 4f, 300000, 1f)),
                 HealToFull(Spell("TouchOfSalvation", "Touch of Salvation", "Heals a friendly target (or you) to full health.",
@@ -182,24 +182,24 @@ namespace RPG.EditorTools
                         DamageSchool.Holy, 60000, 2, 1.5f, 0, 0, HolyColor)
                     .WithRadius(4f)
                     .With(Effect(StatusKind.DamageTaken, -10f, 15000, -1f, magicOnly: true)),
-                Spell("Retribution", "Retribution", "107% weapon damage; the target cannot swing its weapon for 3 sec.", AbilityKind.TargetDamage, 12,
+                Spell("Retribution", "Reprisal", "107% weapon damage; the target cannot swing its weapon for 3 sec.", AbilityKind.TargetDamage, 12,
                         DamageSchool.Physical, 30000, 2, 1f, 0, 130, SteelColor)
                     .Weapon(107f, 3f)
                     .With(Effect(StatusKind.Pacify, 0f, 3000)),
-                Spell("RighteousStorm", "Righteous Storm", "All your damage 20% higher for 9 sec.", AbilityKind.Self, 13,
+                Spell("RighteousStorm", "Hallowed Storm", "All your damage 20% higher for 9 sec.", AbilityKind.Self, 13,
                         DamageSchool.Holy, 60000, 2, 1.5f, 0, 0, HolyColor)
                     .With(Effect(StatusKind.DamageDealt, 20f, 9000)),
-                Spell("FortificationAura", "Fortification Aura", "Friends near you take 18% (+2% a rank) less physical damage for 15 sec.",
+                Spell("FortificationAura", "Bastion Aura", "Friends near you take 18% (+2% a rank) less physical damage for 15 sec.",
                         AbilityKind.FriendlyArea, 14, DamageSchool.Holy, 60000, 2, 1.5f, 0, 0, SteelColor)
                     .WithRadius(4f)
                     .With(Effect(StatusKind.DamageTaken, -18f, 15000, -2f, school: DamageSchool.Physical, anySchool: false)),
-                FreeFromControl(Spell("WingsOfFreedom", "Wings of Freedom", "Frees a friendly target (or you) from stuns, roots and slows, immune to stuns for 1 sec.",
+                FreeFromControl(Spell("WingsOfFreedom", "Pinions of Liberty", "Frees a friendly target (or you) from stuns, roots and slows, immune to stuns for 1 sec.",
                         AbilityKind.FriendlyTarget, 15, DamageSchool.Holy, 60000, 2, 1f, 0, 610, HolyColor)
                     .With(Effect(StatusKind.StunImmunity, 1f, 1000))),
-                Spell("AegisOfValor", "Aegis of Valor", "Take 32% (+3% a rank) less damage for 15 sec.", AbilityKind.Self, 16,
+                Spell("AegisOfValor", "Rampart of Valor", "Take 32% (+3% a rank) less damage for 15 sec.", AbilityKind.Self, 16,
                         DamageSchool.Holy, 120000, 3, 2.5f, 0, 0, SteelColor)
                     .With(Effect(StatusKind.DamageTaken, -32f, 15000, -3f)),
-                Spell("Redemption", "Redemption", "Brings the nearest fallen friend back where they fell, with 40% health and 20% mana.",
+                Spell("Redemption", "Deliverance", "Brings the nearest fallen friend back where they fell, with 40% health and 20% mana.",
                     AbilityKind.Revive, 18, DamageSchool.Holy, 1800000, 6, 4.5f, 3000, 370, HealColor),
                 Spell("ShieldBlock", "Shield Block", "Block rating higher by your Strength for 10 sec.", AbilityKind.Self, 19,
                         DamageSchool.Physical, 10000, 2, 1f, 400, 0, SteelColor)
@@ -216,9 +216,9 @@ namespace RPG.EditorTools
         {
             return new[]
             {
-                Spell("SinisterStrike", "Sinister Strike", "A strong melee attack: 175% weapon damage.", AbilityKind.TargetDamage, 1,
+                Spell("SinisterStrike", "Treacherous Strike", "A strong melee attack: 175% weapon damage.", AbilityKind.TargetDamage, 1,
                     DamageSchool.Physical, 24000, 1, 1f, 0, 130, SteelColor).Weapon(175f, 5f),
-                Spell("EntanglingShot", "Entangling Shot", "117% ranged damage and 40% slower movement for 3 sec.", AbilityKind.TargetDamage, 1,
+                Spell("EntanglingShot", "Ensnaring Shot", "117% ranged damage and 40% slower movement for 3 sec.", AbilityKind.TargetDamage, 1,
                         DamageSchool.Physical, 10000, 2, 2f, 300, 610, NatureColor)
                     .Weapon(117f, 3f)
                     .With(Effect(StatusKind.Slow, 40f, 3000)),
@@ -235,38 +235,38 @@ namespace RPG.EditorTools
                 Spell("FocusedEvasion", "Focused Evasion", "Evade the next hostile attack within 5 sec.", AbilityKind.Self, 4,
                         DamageSchool.Physical, 10000, 2, 2f, 0, 0, SteelColor)
                     .With(Effect(StatusKind.Evade, 1f, 5000)),
-                Spell("Blindside", "Blindside", "Hurls a dagger, incapacitating the enemy for 4 sec. Any damage ends it.", AbilityKind.TargetDamage, 5,
+                Spell("Blindside", "Ambush", "Hurls a dagger, incapacitating the enemy for 4 sec. Any damage ends it.", AbilityKind.TargetDamage, 5,
                         DamageSchool.Physical, 15000, 2, 3f, 0, 260, ShadowColor)
                     .With(Effect(StatusKind.Incapacitate, 0f, 4000)),
-                Spell("KidneyShot", "Kidney Shot", "195% ranged damage and a 2 sec stun. Only on incapacitated targets.", AbilityKind.TargetDamage, 6,
+                Spell("KidneyShot", "Spine Shot", "195% ranged damage and a 2 sec stun. Only on incapacitated targets.", AbilityKind.TargetDamage, 6,
                         DamageSchool.Physical, 10000, 4, 6f, 1000, 610, ShadowColor)
                     .Weapon(195f, 5f)
                     .Requires(StatusKind.Incapacitate)
                     .With(Effect(StatusKind.Stun, 0f, 2000)),
-                Spell("Vanish", "Vanish", "Sneak around unseen by monsters for 20 sec, 30% slower. Attacking or being hit ends it.",
+                Spell("Vanish", "Fade", "Sneak around unseen by monsters for 20 sec, 30% slower. Attacking or being hit ends it.",
                         AbilityKind.Self, 7, DamageSchool.Physical, 60000, 4, 6f, 500, 0, ShadowColor)
                     .With(Effect(StatusKind.Stealth, 1f, 20000), Effect(StatusKind.Slow, 30f, 20000)),
-                OutOfCombat(Spell("Sabotage", "Sabotage", "Incapacitates a monster not yet fighting for 6 sec. Any damage ends it.",
+                OutOfCombat(Spell("Sabotage", "Mischief", "Incapacitates a monster not yet fighting for 6 sec. Any damage ends it.",
                         AbilityKind.TargetDamage, 8, DamageSchool.Physical, 6000, 1, 1f, 0, 160, ShadowColor)
                     .With(Effect(StatusKind.Incapacitate, 0f, 6000))),
                 Unavoidable(Spell("AimedShot", "Aimed Shot", "115% ranged damage that cannot be dodged or blocked and ignores armor.",
                         AbilityKind.TargetDamage, 9, DamageSchool.Physical, 8000, 2, 2f, 800, 610, NatureColor)
                     .Weapon(115f, 5f)),
-                Spell("Devotion", "Devotion", "Physical damage 28% (+2% a rank) higher for 5 sec; then 20% mana back.", AbilityKind.Self, 10,
+                Spell("Devotion", "Fervor", "Physical damage 28% (+2% a rank) higher for 5 sec; then 20% mana back.", AbilityKind.Self, 10,
                         DamageSchool.Holy, 30000, 2, 2f, 0, 0, HolyColor)
                     .With(Effect(StatusKind.DamageDealt, 28f, 5000, 2f, school: DamageSchool.Physical, anySchool: false),
                         Effect(StatusKind.ManaOnExpire, 20f, 5000)),
                 Spell("SleepArrow", "Sleep Arrow", "The enemy falls asleep for 8 sec. Any damage wakes it.", AbilityKind.TargetDamage, 11,
                         DamageSchool.Physical, 30000, 5, 8f, 300, 610, ShadowColor)
                     .With(Effect(StatusKind.Incapacitate, 0f, 8000)),
-                Spell("Hamstring", "Hamstring", "148% melee damage and 29% (+1% a rank) slower movement for 8 sec.", AbilityKind.TargetDamage, 12,
+                Spell("Hamstring", "Hobble", "148% melee damage and 29% (+1% a rank) slower movement for 8 sec.", AbilityKind.TargetDamage, 12,
                         DamageSchool.Physical, 12000, 1, 1f, 0, 130, SteelColor)
                     .Weapon(148f, 2f)
                     .With(Effect(StatusKind.Slow, 29f, 8000, 1f)),
-                FreeFromControl(Spell("TacticalRetreat", "Tactical Retreat", "Leap away from the enemy, free of stuns and slows, 34% faster for 5 sec.",
+                FreeFromControl(Spell("TacticalRetreat", "Strategic Retreat", "Leap away from the enemy, free of stuns and slows, 34% faster for 5 sec.",
                         AbilityKind.Retreat, 14, DamageSchool.Physical, 45000, 2, 3f, 0, 130, NatureColor)
                     .With(Effect(StatusKind.Haste, 34f, 5000, 1f))),
-                Spell("EtherealSting", "Ethereal Sting", "Burns the enemy's mana every 2 sec for 8 sec; it receives 50% less healing.", AbilityKind.TargetDamage, 15,
+                Spell("EtherealSting", "Spectral Sting", "Burns the enemy's mana every 2 sec for 8 sec; it receives 50% less healing.", AbilityKind.TargetDamage, 15,
                         DamageSchool.Physical, 18000, 2, 2f, 300, 610, ArcaneColor)
                     .With(Effect(StatusKind.ManaBurn, 20f, 8000, 4f, 2000).ScaledBy(Attribute.Intelligence, 0.5f),
                         Effect(StatusKind.HealingTaken, -50f, 8000)),
@@ -278,10 +278,10 @@ namespace RPG.EditorTools
                         AbilityKind.TargetDamage, 18, DamageSchool.Fire, 3000, 2, 2f, 300, 610, FireColor)
                     .Weapon(97f, 3f)
                     .Requires(StatusKind.DamageTaken, "Flame Arrow")),
-                Spell("EyeGouge", "Eye Gouge", "Blinds the enemy: it deals 30% (+5% a rank) less damage for 10 sec.", AbilityKind.TargetDamage, 19,
+                Spell("EyeGouge", "Eye Rake", "Blinds the enemy: it deals 30% (+5% a rank) less damage for 10 sec.", AbilityKind.TargetDamage, 19,
                         DamageSchool.Physical, 120000, 3, 5f, 0, 500, ShadowColor)
                     .With(Effect(StatusKind.DamageDealt, -30f, 10000, -5f)),
-                Spell("ArrowFlurry", "Arrow Flurry", "Your attacks come twice as fast for 10 sec.", AbilityKind.Self, 20,
+                Spell("ArrowFlurry", "Arrow Barrage", "Your attacks come twice as fast for 10 sec.", AbilityKind.Self, 20,
                         DamageSchool.Holy, 60000, 0, 1f, 0, 0, NatureColor)
                     .With(Effect(StatusKind.AttackSpeed, 50f, 10000)),
                 Sleep(),
@@ -306,7 +306,7 @@ namespace RPG.EditorTools
                         DamageSchool.Frost, 8000, 2, 2f, 1000, 610, FrostColor)
                     .Power(0f, 8f, 85f, Attribute.Intelligence, Attribute.Willpower, 0.5f)
                     .With(Effect(StatusKind.Slow, 40f, 10000)),
-                Spell("Scorch", "Scorch", "Inflicts Fire damage.", AbilityKind.TargetDamage, 2,
+                Spell("Scorch", "Sear", "Inflicts Fire damage.", AbilityKind.TargetDamage, 2,
                         DamageSchool.Fire, 1000, 2, 2f, 1500, 610, FireColor)
                     .Power(4f, 8f, 95f, Attribute.Intelligence, Courage, 0.5f),
                 Spell("IceShard", "Ice Shard", "Frost damage and a 2 sec stun. Only on targets slowed by Chains of Ice.", AbilityKind.TargetDamage, 3,
@@ -314,7 +314,7 @@ namespace RPG.EditorTools
                     .Power(0f, 8f, 100f, Attribute.Intelligence, Attribute.Willpower, 0.5f)
                     .Requires(StatusKind.Slow)
                     .With(Effect(StatusKind.Stun, 0f, 2000)),
-                Spell("BoonOfClairvoyance", "Boon of Clairvoyance", "Spell critical rating up by Willpower x 5 for 8 sec.", AbilityKind.Self, 4,
+                Spell("BoonOfClairvoyance", "Gift of Foresight", "Spell critical rating up by Willpower x 5 for 8 sec.", AbilityKind.Self, 4,
                         DamageSchool.Holy, 40000, 3, 5f, 0, 0, ArcaneColor)
                     .With(Effect(StatusKind.SpellCritical, 0f, 8000).ScaledBy(Attribute.Willpower, 5f)),
                 Spell("IceBlast", "Ice Blast", "Frost damage to up to five enemies around the target, frozen in place for 3 sec.", AbilityKind.TargetArea, 5,
@@ -325,13 +325,13 @@ namespace RPG.EditorTools
                 Spell("VimOfWisdom", "Vim of Wisdom", "Raises a friendly target's Intelligence (by Willpower) for 5 min.", AbilityKind.FriendlyTarget, 6,
                         DamageSchool.Holy, 10000, 2, 2f, 0, 610, ArcaneColor)
                     .With(Effect(StatusKind.Intellect, 1f, 300000, 1f).ScaledBy(Attribute.Willpower, 0.3f)),
-                Spell("BindSpirit", "Bind Spirit", "Banishes an enemy for 6 sec. Any damage ends it.", AbilityKind.TargetDamage, 7,
+                Spell("BindSpirit", "Shackle Spirit", "Banishes an enemy for 6 sec. Any damage ends it.", AbilityKind.TargetDamage, 7,
                         DamageSchool.Shadow, 10000, 2, 2f, 1500, 500, ShadowColor)
                     .With(Effect(StatusKind.Incapacitate, 0f, 6000)),
-                Spell("BoonOfProtection", "Boon of Protection", "Absorbs damage (Willpower x 30) and grants immunity to stuns for 2 sec.",
+                Spell("BoonOfProtection", "Gift of Protection", "Absorbs damage (Willpower x 30) and grants immunity to stuns for 2 sec.",
                         AbilityKind.Self, 8, DamageSchool.Holy, 10000, 1, 1f, 0, 0, ArcaneColor)
                     .With(Effect(StatusKind.Absorb, 0f, 2000).ScaledBy(Attribute.Willpower, 30f), Effect(StatusKind.StunImmunity, 1f, 2000)),
-                Spell("Warmth", "Warmth", "Fire damage dealt 9% (+1% a rank) higher and Fire damage taken lower for 15 sec.", AbilityKind.Self, 9,
+                Spell("Warmth", "Kindling", "Fire damage dealt 9% (+1% a rank) higher and Fire damage taken lower for 15 sec.", AbilityKind.Self, 9,
                         DamageSchool.Fire, 50000, 2, 5f, 0, 0, FireColor)
                     .With(Effect(StatusKind.DamageDealt, 9f, 15000, 1f, school: DamageSchool.Fire, anySchool: false),
                         Effect(StatusKind.DamageTaken, -9f, 15000, -1f, school: DamageSchool.Fire, anySchool: false)),
@@ -340,20 +340,20 @@ namespace RPG.EditorTools
                 Spell("DeepFreeze", "Deep Freeze", "Encases the enemy in ice for 8 sec: it cannot act, and nothing can hurt it.", AbilityKind.TargetDamage, 11,
                         DamageSchool.Frost, 45000, 2, 2f, 500, 610, FrostColor)
                     .With(Effect(StatusKind.Stun, 0f, 8000), Effect(StatusKind.Immune, 1f, 8000)),
-                Spell("MagicalAmplification", "Magical Amplification", "A friendly target deals 2% (+1% a rank) more magic damage for 5 min.",
+                Spell("MagicalAmplification", "Magical Empowerment", "A friendly target deals 2% (+1% a rank) more magic damage for 5 min.",
                         AbilityKind.FriendlyTarget, 12, DamageSchool.Holy, 10000, 2, 2f, 0, 610, ArcaneColor)
                     .With(Effect(StatusKind.DamageDealt, 2f, 300000, 1f, magicOnly: true)),
-                RestoresMana(Spell("WisdomOfLazarus", "Wisdom of Lazarus", "Restores 39% (+1% a rank) of your mana at once, and more over 3 sec.",
+                RestoresMana(Spell("WisdomOfLazarus", "Wisdom of the Anointed", "Restores 39% (+1% a rank) of your mana at once, and more over 3 sec.",
                         AbilityKind.Self, 14, DamageSchool.Holy, 300000, 0, 0f, 0, 0, ArcaneColor)
                     .With(Effect(StatusKind.ManaOverTime, 10f, 3000, 2f, 1000).ScaledBy(Attribute.Willpower, 2f)), 39f, 1f),
-                Spell("IllusionGate", "Illusion Gate", "After 10 sec of casting, takes you to St. Revere.", AbilityKind.Recall, 15,
+                Spell("IllusionGate", "Mirage Gate", "After 10 sec of casting, takes you to St. Aurelis.", AbilityKind.Recall, 15,
                     DamageSchool.Shadow, 1200000, 6, 10f, 10000, 0, ArcaneColor),
                 MarkCleanse(Spell("RemoveCurse", "Remove Curse", "Removes one harmful effect from a friendly target (or you).", AbilityKind.FriendlyTarget, 16,
                     DamageSchool.Holy, 1000, 1, 1f, 0, 610, ArcaneColor)),
-                Spell("MagicalDampening", "Magical Dampening", "A friendly target takes 5% (+1% a rank) less magic damage for 5 min.",
+                Spell("MagicalDampening", "Magical Muting", "A friendly target takes 5% (+1% a rank) less magic damage for 5 min.",
                         AbilityKind.FriendlyTarget, 18, DamageSchool.Holy, 10000, 2, 2f, 0, 610, ArcaneColor)
                     .With(Effect(StatusKind.DamageTaken, -5f, 300000, -1f, magicOnly: true)),
-                Spell("Antimagic", "Antimagic", "Interrupts the enemy and keeps it from casting for 4 sec.", AbilityKind.TargetDamage, 19,
+                Spell("Antimagic", "Spellward", "Interrupts the enemy and keeps it from casting for 4 sec.", AbilityKind.TargetDamage, 19,
                         DamageSchool.Shadow, 24000, 1, 1f, 0, 610, ShadowColor)
                     .With(Effect(StatusKind.Silence, 0f, 4000)),
                 Spell("Inferno", "Inferno", "Hurls an immense fiery boulder for great Fire damage.", AbilityKind.TargetDamage, 20,

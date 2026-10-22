@@ -27,8 +27,8 @@ namespace RPG.Tests
         [Test]
         public void Tooltip_NamesIt_SaysBuffOrDebuff_AndTheTimeLeft()
         {
-            string tooltip = StatusInfo.Tooltip(View(StatusKind.Haste, "Wings", 50f, false), 2.0);
-            StringAssert.Contains("Wings", tooltip);
+            string tooltip = StatusInfo.Tooltip(View(StatusKind.Haste, "Pinions", 50f, false), 2.0);
+            StringAssert.Contains("Pinions", tooltip);
             StringAssert.Contains("Buff", tooltip);
             StringAssert.Contains("Moves 50% faster.", tooltip);
             StringAssert.Contains("10 s left", tooltip);

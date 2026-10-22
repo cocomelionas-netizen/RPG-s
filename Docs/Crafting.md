@@ -3,20 +3,20 @@
 ## Transmutation (the source game's way)
 
 The source game has no crafting of gear: gear drops finished from monsters and chests and is sold by the merchants. What
-it has is **transmutation** at **Reginald** ("Transmutation", in St. Revere where the source game stands him):
+it has is **transmutation** at **Mortimer** ("Transmutation", in St. Aurelis where the source game stands him):
 
 | Part | What it does |
 |---|---|
 | The grid | 4 × 3 slots, like the source game's TRANSMUTE window. Drag items from the bag onto it, or click them in the bag while it is open; click a slot to take it out |
 | The line under it | "Makes: Lesser Life Potion" when the items match a recipe, "These items make nothing together" otherwise |
 | Confirm | Makes it: one batch is used up (the rest of a bigger stack stays), the result goes into the bag |
-| Recipes | The list of what Reginald knows (the source game's `crafting_recipes` whose items exist here) |
+| Recipes | The list of what Mortimer knows (the source game's `crafting_recipes` whose items exist here) |
 
 - A recipe matches when the grid holds exactly its kinds of items, at least as many of each (5 Minor Life Potions →
-  Lesser Life Potion; 5 Rough Rubies → Ruby; 5 Rubies + Treasury Coins → Refined Ruby; 5 Major orbs + Treasury Gold → a
-  Divine orb; Magic Dust + Inactive Demiplane Key + Major Treasury Gold → Demiplane Key...).
-  Recipes: `Tools/GameData/recipes.py` → `Scripts/Editor/RecipeData.cs`; Reginald: `Tools/GameData/world.py`.
-- The server checks everything: standing at Reginald, the items really in those bag slots, a recipe, room in the bag
+  Lesser Life Potion; 5 Rough Rubies → Ruby; 5 Rubies + Vault Coins → Refined Ruby; 5 Major orbs + Vault Gold → a
+  Divine orb; Magic Dust + Dormant Netherplane Key + Major Vault Gold → Netherplane Key...).
+  Recipes: `Tools/GameData/recipes.py` → `Scripts/Editor/RecipeData.cs`; Mortimer: `Tools/GameData/world.py`.
+- The server checks everything: standing at Mortimer, the items really in those bag slots, a recipe, room in the bag
   (`Inventory.ServerTransmute`). No fee.
 - The old crafting materials (ingots, logs, hides, cloth) no longer drop and only sell to vendors.
 

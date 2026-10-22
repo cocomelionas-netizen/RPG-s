@@ -34,7 +34,7 @@ namespace RPG.World
         }
 
         /// <summary>The name of the main town, where Scrolls of Returning and Illusion Gate lead.</summary>
-        public const string MainTownName = "St. Revere";
+        public const string MainTownName = "St. Aurelis";
 
         /// <summary>The main town's stone (the first stone when there is none of that name; null without stones).</summary>
         public static Waystone MainTown

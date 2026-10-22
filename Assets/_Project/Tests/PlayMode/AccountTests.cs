@@ -37,7 +37,7 @@ namespace RPG.Tests
             string hash = PasswordHasher.Hash("secret", salt);
             Assert.IsTrue(PasswordHasher.Verify("secret", salt, hash));
             Assert.IsFalse(PasswordHasher.Verify("Secret", salt, hash));
-            Assert.AreNotEqual(hash, PasswordHasher.Hash("secret", PasswordHasher.NewSalt()), "Different salts, different hashes.");
+            Assert.AreNotEqual(hash, PasswordHasher.Hash("secret", PasswordHasher.NewSalt()), "Distinct salts, different hashes.");
         }
 
         [Test]

@@ -211,7 +211,7 @@ namespace RPG.Tests
                 StringAssert.DoesNotContain("Titanium", low.Item.displayName);
 
                 Assert.IsTrue(LootDrop.PickGear(catalog, null, 25, ItemRarity.Legendary, out LootItem high));
-                StringAssert.DoesNotContain("Bronze Slicer", high.Item.displayName, "Bronze weapons stop at level 5.");
+                StringAssert.DoesNotContain("Bronze Hewer", high.Item.displayName, "Bronze weapons stop at level 5.");
             }
         }
 

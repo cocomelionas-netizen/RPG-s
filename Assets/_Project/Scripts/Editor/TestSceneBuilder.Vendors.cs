@@ -40,7 +40,7 @@ namespace RPG.EditorTools
             scroll.useCooldown = 300f;
             scroll.maxStack = 5;
             scroll.canHaveAffix = false;
-            scroll.description = "Returns you to St. Revere. The scroll is consumed when used.";
+            scroll.description = "Returns you to St. Aurelis. The scroll is consumed when used.";
             scroll.sellValue = 100;
             created.Add(scroll);
 
@@ -63,8 +63,8 @@ namespace RPG.EditorTools
 
             foreach ((string name, int sell, int ratio, string description) in new[]
                      {
-                         ("Treasury Gold", 499, 80, "One golden bar, prized by merchants and alchemists alike."),
-                         ("Treasury Coins", 100, 40, "Coins of St. Revere used by merchants and alchemists alike."),
+                         ("Vault Gold", 499, 80, "One golden bar, prized by merchants and alchemists alike."),
+                         ("Vault Coins", 100, 40, "Coins of St. Aurelis used by merchants and alchemists alike."),
                      })
             {
                 // The banker asks the source game's buy price (sell price times its buy cost ratio) and pays the sell price.

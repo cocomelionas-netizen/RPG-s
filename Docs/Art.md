@@ -16,7 +16,7 @@ The world, heroes and monsters are drawn with art from the open game **Flare** (
 
 ## What is used
 
-- **Ground**: Flare's grassland: 16 grass tiles, 12 paved tiles (the squares of St. Revere and the start, dungeon
+- **Ground**: Flare's grassland: 16 grass tiles, 12 paved tiles (the squares of St. Aurelis and the start, dungeon
   floors), 16 water tiles (lakes), rock pillars (the source map's walls and fences, dungeon walls), bushes and ferns
   between the trees, tall grass and reeds here and there on open ground (no collider), 12 trees.
 - **Lakes**: the source map has no water; `Tools/GameData/world.py` takes it from the source game's world map picture

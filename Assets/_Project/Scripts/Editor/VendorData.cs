@@ -35,177 +35,177 @@ namespace RPG.EditorTools
         {
             new Vendor
             {
-                entry = 103, name = "Huldria", title = "Witch", model = "OldWitch",
+                entry = 103, name = "Morwen", title = "Witch", model = "OldWitch",
                 cell = new Vector3Int(416, 196, 0),
                 items = new (string, int, int, int, int)[] { ("Minor Life Potion", 0, 0, 5, 15), ("Minor Mana Potion", 0, 0, 5, 15) },
                 gear = System.Array.Empty<GearKind>(),
             },
             new Vendor
             {
-                entry = 105, name = "Aedis", title = "Innkeeper", model = "guild_man1",
+                entry = 105, name = "Maelis", title = "Innkeeper", model = "guild_man1",
                 cell = new Vector3Int(334, 156, 0),
                 items = new (string, int, int, int, int)[] { ("Life Potion", 0, 0, 60, 180), ("Mana Potion", 0, 0, 60, 180), ("Fresh Apple Pie", 0, 0, 17, 51), ("Scroll of Returning", 0, 0, 100, 300) },
                 gear = System.Array.Empty<GearKind>(),
             },
             new Vendor
             {
-                entry = 115, name = "Karl", title = "Heavy Armor Merchant", model = "MalePeasant1",
+                entry = 115, name = "Otto", title = "Heavy Armor Trader", model = "MalePeasant1",
                 cell = new Vector3Int(349, 167, 0),
                 items = System.Array.Empty<(string, int, int, int, int)>(),
                 gear = new[] { new GearKind(1, 0, 2, 100, 50, 5, 1, 0, 0), new GearKind(3, 0, 2, 100, 50, 5, 1, 0, 0), new GearKind(5, 0, 2, 100, 50, 5, 1, 0, 0), new GearKind(6, 0, 2, 100, 50, 5, 1, 0, 0), new GearKind(7, 0, 2, 100, 50, 5, 1, 0, 0) },
             },
             new Vendor
             {
-                entry = 108, name = "Helbred", title = "Healer", model = "OldManGrey",
+                entry = 108, name = "Wenna", title = "Healer", model = "OldManGrey",
                 cell = new Vector3Int(469, 134, 0),
                 items = new (string, int, int, int, int)[] { ("Minor Life Potion", 0, 0, 5, 15), ("Minor Mana Potion", 0, 0, 5, 15) },
                 gear = System.Array.Empty<GearKind>(),
             },
             new Vendor
             {
-                entry = 111, name = "Argas", title = "Butcher", model = "MalePeasant2",
+                entry = 111, name = "Brannoc", title = "Butcher", model = "MalePeasant2",
                 cell = new Vector3Int(338, 154, 0),
                 items = new (string, int, int, int, int)[] { ("Gourmet Ham Sandwich", 0, 0, 37, 111), ("Oven Baked Turkey", 0, 0, 67, 201), ("Roasted Pork", 0, 0, 105, 315) },
                 gear = System.Array.Empty<GearKind>(),
             },
             new Vendor
             {
-                entry = 116, name = "Robin", title = "Cloth Armor Merchant", model = "FemalePeasant4",
+                entry = 116, name = "Willa", title = "Cloth Armor Trader", model = "FemalePeasant4",
                 cell = new Vector3Int(357, 168, 0),
                 items = System.Array.Empty<(string, int, int, int, int)>(),
                 gear = new[] { new GearKind(1, 0, 1, 100, 50, 5, 1, 0, 0), new GearKind(3, 0, 1, 100, 50, 5, 1, 0, 0), new GearKind(5, 0, 1, 100, 50, 5, 1, 0, 0), new GearKind(6, 0, 1, 100, 50, 5, 1, 0, 0), new GearKind(7, 0, 1, 100, 50, 5, 1, 0, 0) },
             },
             new Vendor
             {
-                entry = 118, name = "Dragos", title = "Staves and Wands Merchant", model = "guild_man1",
+                entry = 118, name = "Vasil", title = "Staves and Wands Trader", model = "guild_man1",
                 cell = new Vector3Int(362, 168, 0),
                 items = System.Array.Empty<(string, int, int, int, int)>(),
                 gear = new[] { new GearKind(9, 5, 0, 100, 50, 5, 1, 0, 0), new GearKind(9, 7, 0, 100, 50, 5, 1, 0, 0) },
             },
             new Vendor
             {
-                entry = 119, name = "Hezakoth", title = "Blades Merchant", model = "NoblemanBlue",
+                entry = 119, name = "Zarrimon", title = "Blades Trader", model = "NoblemanBlue",
                 cell = new Vector3Int(362, 163, 0),
                 items = System.Array.Empty<(string, int, int, int, int)>(),
                 gear = new[] { new GearKind(9, 4, 0, 100, 50, 5, 1, 0, 0), new GearKind(9, 6, 0, 100, 50, 5, 1, 0, 0) },
             },
             new Vendor
             {
-                entry = 120, name = "Lowe", title = "Axe & Mace Merchant", model = "MalePeasant2",
+                entry = 120, name = "Bertram", title = "Axe & Mace Trader", model = "MalePeasant2",
                 cell = new Vector3Int(346, 160, 0),
                 items = System.Array.Empty<(string, int, int, int, int)>(),
                 gear = new[] { new GearKind(9, 1, 0, 100, 50, 5, 1, 0, 0), new GearKind(9, 3, 0, 100, 50, 5, 1, 0, 0) },
             },
             new Vendor
             {
-                entry = 121, name = "Selena", title = "Ranged & Shield Merchant", model = "guild_man1",
+                entry = 121, name = "Liora", title = "Ranged & Shield Trader", model = "guild_man1",
                 cell = new Vector3Int(362, 159, 0),
                 items = System.Array.Empty<(string, int, int, int, int)>(),
                 gear = new[] { new GearKind(10, 0, 0, 100, 50, 5, 1, 0, 0), new GearKind(11, 2, 0, 100, 50, 5, 1, 0, 0) },
             },
             new Vendor
             {
-                entry = 122, name = "Ruth", title = "", model = "FemalePeasant3",
+                entry = 122, name = "Greta", title = "", model = "FemalePeasant3",
                 cell = new Vector3Int(465, 135, 0),
                 items = new (string, int, int, int, int)[] { ("Minor Life Potion", 0, 0, 5, 15), ("Minor Mana Potion", 0, 0, 5, 15) },
                 gear = System.Array.Empty<GearKind>(),
             },
             new Vendor
             {
-                entry = 128, name = "Vikram", title = "Jeweler", model = "NoblemanBlue",
+                entry = 128, name = "Ishan", title = "Jeweler", model = "NoblemanBlue",
                 cell = new Vector3Int(353, 167, 0),
                 items = System.Array.Empty<(string, int, int, int, int)>(),
                 gear = new[] { new GearKind(2, 0, 0, 100, 50, 5, 1, 0, 0), new GearKind(8, 0, 0, 100, 50, 5, 1, 0, 0) },
             },
             new Vendor
             {
-                entry = 131, name = "Osraed", title = "Alchemist", model = "FemalePeasant4",
+                entry = 131, name = "Faelan", title = "Alchemist", model = "FemalePeasant4",
                 cell = new Vector3Int(294, 134, 0),
-                items = new (string, int, int, int, int)[] { ("Minor Life Potion", 0, 60, 5, 15), ("Lesser Life Potion", 0, 60, 25, 75), ("Life Potion", 0, 60, 60, 180), ("Minor Life Serum", 0, 60, 7, 21), ("Lesser Life Serum", 0, 60, 37, 111), ("Life Serum", 0, 60, 90, 270), ("Minor Mana Potion", 0, 60, 5, 15), ("Lesser Mana Potion", 0, 60, 25, 75), ("Mana Potion", 0, 60, 60, 180), ("Minor Mana Serum", 0, 60, 7, 21), ("Lesser Mana Serum", 0, 60, 37, 111), ("Mana Serum", 0, 60, 90, 270), ("Greater Life Potion", 0, 60, 90, 270), ("Major Life Potion", 0, 60, 120, 360), ("Greater Life Serum", 0, 60, 135, 405), ("Major Life Serum", 0, 60, 180, 540), ("Greater Mana Potion", 0, 60, 90, 270), ("Major Mana Potion", 0, 60, 120, 360), ("Greater Mana Serum", 0, 60, 135, 405), ("Major Mana Serum", 0, 60, 180, 540), ("Elixir of Indomitability", 0, 0, 50, 1250) },
+                items = new (string, int, int, int, int)[] { ("Minor Life Potion", 0, 60, 5, 15), ("Lesser Life Potion", 0, 60, 25, 75), ("Life Potion", 0, 60, 60, 180), ("Minor Life Serum", 0, 60, 7, 21), ("Lesser Life Serum", 0, 60, 37, 111), ("Life Serum", 0, 60, 90, 270), ("Minor Mana Potion", 0, 60, 5, 15), ("Lesser Mana Potion", 0, 60, 25, 75), ("Mana Potion", 0, 60, 60, 180), ("Minor Mana Serum", 0, 60, 7, 21), ("Lesser Mana Serum", 0, 60, 37, 111), ("Mana Serum", 0, 60, 90, 270), ("Greater Life Potion", 0, 60, 90, 270), ("Major Life Potion", 0, 60, 120, 360), ("Greater Life Serum", 0, 60, 135, 405), ("Major Life Serum", 0, 60, 180, 540), ("Greater Mana Potion", 0, 60, 90, 270), ("Major Mana Potion", 0, 60, 120, 360), ("Greater Mana Serum", 0, 60, 135, 405), ("Major Mana Serum", 0, 60, 180, 540), ("Elixir of Steadfastness", 0, 0, 50, 1250) },
                 gear = System.Array.Empty<GearKind>(),
             },
             new Vendor
             {
-                entry = 140, name = "Gyldan", title = "Mage", model = "OldWitch",
+                entry = 140, name = "Ithrin", title = "Mage", model = "OldWitch",
                 cell = new Vector3Int(284, 139, 0),
-                items = new (string, int, int, int, int)[] { ("Tome of Ignite", 0, 0, 5, 5), ("Tome of Fireball", 0, 0, 5, 5), ("Tome of Chains of Ice", 0, 0, 5, 5), ("Tome of Scorch", 0, 0, 10, 20), ("Tome of Warmth", 0, 0, 45, 405), ("Tome of Boon of Protection", 0, 0, 40, 320), ("Tome of Ice Blast", 0, 0, 25, 125), ("Tome of Remove Curse", 0, 0, 80, 1280), ("Tome of Bind Spirit", 0, 0, 35, 245), ("Tome of Boon of Clairvoyance", 0, 0, 20, 80), ("Tome of Ice Shard", 0, 0, 15, 45), ("Tome of Teleport", 0, 0, 50, 500), ("Tome of Deep Freeze", 0, 0, 55, 605), ("Tome of Magical Amplification", 0, 0, 60, 720), ("Tome of Wisdom of Lazarus", 0, 0, 70, 980), ("Tome of Illusion Gate", 0, 0, 75, 1125), ("Tome of Vim of Wisdom", 0, 0, 30, 180), ("Tome of Magical Dampening", 0, 0, 90, 1620), ("Tome of Antimagic", 0, 0, 95, 1805), ("Tome of Inferno", 0, 0, 100, 2000) },
+                items = new (string, int, int, int, int)[] { ("Tome of Ignite", 0, 0, 5, 5), ("Tome of Fireball", 0, 0, 5, 5), ("Tome of Chains of Ice", 0, 0, 5, 5), ("Tome of Sear", 0, 0, 10, 20), ("Tome of Kindling", 0, 0, 45, 405), ("Tome of Gift of Protection", 0, 0, 40, 320), ("Tome of Ice Blast", 0, 0, 25, 125), ("Tome of Remove Curse", 0, 0, 80, 1280), ("Tome of Shackle Spirit", 0, 0, 35, 245), ("Tome of Gift of Foresight", 0, 0, 20, 80), ("Tome of Ice Shard", 0, 0, 15, 45), ("Tome of Teleport", 0, 0, 50, 500), ("Tome of Deep Freeze", 0, 0, 55, 605), ("Tome of Magical Empowerment", 0, 0, 60, 720), ("Tome of Wisdom of the Anointed", 0, 0, 70, 980), ("Tome of Mirage Gate", 0, 0, 75, 1125), ("Tome of Vim of Wisdom", 0, 0, 30, 180), ("Tome of Magical Muting", 0, 0, 90, 1620), ("Tome of Spellward", 0, 0, 95, 1805), ("Tome of Inferno", 0, 0, 100, 2000) },
                 gear = System.Array.Empty<GearKind>(),
             },
             new Vendor
             {
-                entry = 141, name = "Boltar", title = "Cleric", model = "OldManGrey",
+                entry = 141, name = "Garrand", title = "Cleric", model = "OldManGrey",
                 cell = new Vector3Int(382, 158, 0),
-                items = new (string, int, int, int, int)[] { ("Tome of Holy Bolt", 0, 0, 5, 5), ("Tome of Rejuvenation", 0, 0, 5, 5), ("Tome of Plague", 0, 0, 5, 5), ("Tome of Greater Heal", 0, 0, 10, 20), ("Tome of Blessing of Health", 0, 0, 15, 45), ("Tome of Smite", 0, 0, 20, 80), ("Tome of Satanic Madness", 0, 0, 25, 125), ("Tome of Dispel Magic", 0, 0, 30, 180), ("Tome of Harrowing Strike", 0, 0, 35, 245), ("Tome of Desperate Prayer", 0, 0, 40, 320), ("Tome of Heal", 0, 0, 45, 405), ("Tome of Discipline", 0, 0, 50, 500), ("Tome of Penance", 0, 0, 55, 605), ("Tome of Resurrection", 0, 0, 60, 720), ("Tome of Spark of Light", 0, 0, 70, 980), ("Tome of Reincarnation", 0, 0, 65, 845), ("Tome of Blessed Shield", 0, 0, 80, 1280), ("Tome of Dark Resolve", 0, 0, 90, 1620), ("Tome of Lesser Heal", 0, 0, 95, 1805), ("Tome of Inner Strength", 0, 0, 100, 2000) },
+                items = new (string, int, int, int, int)[] { ("Tome of Holy Bolt", 0, 0, 5, 5), ("Tome of Rejuvenation", 0, 0, 5, 5), ("Tome of Plague", 0, 0, 5, 5), ("Tome of Greater Heal", 0, 0, 10, 20), ("Tome of Benediction of Health", 0, 0, 15, 45), ("Tome of Chastise", 0, 0, 20, 80), ("Tome of Infernal Madness", 0, 0, 25, 125), ("Tome of Dispel Magic", 0, 0, 30, 180), ("Tome of Haunting Strike", 0, 0, 35, 245), ("Tome of Desperate Prayer", 0, 0, 40, 320), ("Tome of Heal", 0, 0, 45, 405), ("Tome of Discipline", 0, 0, 50, 500), ("Tome of Atonement", 0, 0, 55, 605), ("Tome of Resurrection", 0, 0, 60, 720), ("Tome of Spark of Light", 0, 0, 70, 980), ("Tome of Rebirth", 0, 0, 65, 845), ("Tome of Blessed Shield", 0, 0, 80, 1280), ("Tome of Dark Resolve", 0, 0, 90, 1620), ("Tome of Lesser Heal", 0, 0, 95, 1805), ("Tome of Inner Strength", 0, 0, 100, 2000) },
                 gear = System.Array.Empty<GearKind>(),
             },
             new Vendor
             {
-                entry = 146, name = "Harold", title = "Banker", model = "wandering_trader2",
+                entry = 146, name = "Gilbert", title = "Banker", model = "wandering_trader2",
                 cell = new Vector3Int(450, 158, 0),
-                items = new (string, int, int, int, int)[] { ("Major Treasury Gold", 0, 0, 6000, 1380000), ("Treasury Gold", 0, 0, 499, 39920), ("Treasury Coins", 0, 0, 100, 4000) },
+                items = new (string, int, int, int, int)[] { ("Major Vault Gold", 0, 0, 6000, 1380000), ("Vault Gold", 0, 0, 499, 39920), ("Vault Coins", 0, 0, 100, 4000) },
                 gear = System.Array.Empty<GearKind>(),
             },
             new Vendor
             {
-                entry = 148, name = "Reginald", title = "Transmutation", model = "guild_man2",
+                entry = 148, name = "Mortimer", title = "Transmutation", model = "guild_man2",
                 cell = new Vector3Int(395, 154, 0),
                 items = System.Array.Empty<(string, int, int, int, int)>(),
                 gear = System.Array.Empty<GearKind>(),
             },
             new Vendor
             {
-                entry = 164, name = "Earnest", title = "", model = "MalePeasant2",
+                entry = 164, name = "Aldous", title = "", model = "MalePeasant2",
                 cell = new Vector3Int(458, 177, 0),
                 items = new (string, int, int, int, int)[] { ("Minor Life Potion", 0, 0, 5, 15), ("Minor Mana Potion", 0, 0, 5, 15) },
                 gear = System.Array.Empty<GearKind>(),
             },
             new Vendor
             {
-                entry = 214, name = "Clive", title = "Soldier", model = "knight",
+                entry = 214, name = "Edric", title = "Soldier", model = "knight",
                 cell = new Vector3Int(499, 505, 0),
-                items = new (string, int, int, int, int)[] { ("Military Ration", 0, 0, 5, 15), ("Scroll of Courage I", 5, 60, 55, 165), ("Tome of Charge", 0, 0, 15, 45), ("Tome of Ice Shard", 0, 0, 15, 45), ("Tome of Stunning Shot", 0, 0, 15, 45), ("Tome of Blessing of Health", 0, 0, 15, 45) },
+                items = new (string, int, int, int, int)[] { ("Military Ration", 0, 0, 5, 15), ("Scroll of Courage I", 5, 60, 55, 165), ("Tome of Charge", 0, 0, 15, 45), ("Tome of Ice Shard", 0, 0, 15, 45), ("Tome of Stunning Shot", 0, 0, 15, 45), ("Tome of Benediction of Health", 0, 0, 15, 45) },
                 gear = System.Array.Empty<GearKind>(),
             },
             new Vendor
             {
-                entry = 225, name = "Stefan", title = "Explorer", model = "MalePeasant2",
+                entry = 225, name = "Anton", title = "Explorer", model = "MalePeasant2",
                 cell = new Vector3Int(469, 490, 0),
-                items = new (string, int, int, int, int)[] { ("Tome of Stunning Shot", 0, 0, 15, 45), ("Tome of Charge", 0, 0, 15, 45), ("Tome of Ice Shard", 0, 0, 15, 45), ("Tome of Blessing of Health", 0, 0, 15, 45) },
+                items = new (string, int, int, int, int)[] { ("Tome of Stunning Shot", 0, 0, 15, 45), ("Tome of Charge", 0, 0, 15, 45), ("Tome of Ice Shard", 0, 0, 15, 45), ("Tome of Benediction of Health", 0, 0, 15, 45) },
                 gear = new[] { new GearKind(2, 0, 0, 100, 100, 0, 0, 1, 1) },
             },
             new Vendor
             {
-                entry = 114, name = "Calder", title = "Gems", model = "MalePeasant2",
+                entry = 114, name = "Tamsin", title = "Gems", model = "MalePeasant2",
                 cell = new Vector3Int(343, 154, 0),
                 items = new (string, int, int, int, int)[] { ("Rough Emerald", 3, 60, 62, 372), ("Rough Topaz", 3, 60, 62, 372), ("Rough Sapphire", 3, 60, 62, 372), ("Rough Amethyst", 3, 60, 62, 372), ("Ruby", 3, 60, 250, 1500), ("Emerald", 3, 60, 250, 1500), ("Topaz", 3, 60, 250, 1500), ("Sapphire", 3, 60, 250, 1500), ("Amethyst", 3, 60, 250, 1500), ("Minor Accessory Orb", 3, 60, 62, 372), ("Lesser Accessory Orb", 3, 60, 260, 1560), ("Greater Accessory Orb", 3, 60, 975, 5850), ("Minor Armor Orb", 3, 60, 62, 372), ("Lesser Armor Orb", 3, 60, 260, 1560), ("Greater Armor Orb", 3, 60, 975, 5850), ("Minor Weapon Orb", 3, 60, 62, 372), ("Lesser Weapon Orb", 3, 60, 260, 1560), ("Greater Weapon Orb", 3, 60, 975, 5850), ("Major Accessory Orb", 2, 60, 2532, 126600), ("Major Armor Orb", 2, 60, 2532, 126600), ("Major Weapon Orb", 2, 60, 2532, 126600), ("Divine Accessory Orb", 1, 60, 6000, 450000), ("Divine Armor Orb", 1, 60, 6000, 450000), ("Divine Weapon Orb", 1, 60, 6000, 450000) },
                 gear = System.Array.Empty<GearKind>(),
             },
             new Vendor
             {
-                entry = 56, name = "Emitt", title = "Paymaster", model = "wandering_trader1",
+                entry = 56, name = "Bram", title = "Paymaster", model = "wandering_trader1",
                 cell = new Vector3Int(502, 435, 0),
-                items = new (string, int, int, int, int)[] { ("Tome of Charge", 0, 0, 15, 45), ("Tome of Blessing of Health", 0, 0, 15, 45), ("Tome of Stunning Shot", 0, 0, 15, 45), ("Tome of Boon of Clairvoyance", 0, 0, 20, 80), ("Tome of Kidney Shot", 0, 0, 30, 180), ("Tome of Blessing of Champions", 0, 0, 20, 80), ("Tome of Focused Evasion", 0, 0, 20, 80), ("Tome of Satanic Madness", 0, 0, 25, 125), ("Tome of Ice Blast", 0, 0, 25, 125), ("Tome of Dispel Magic", 0, 0, 30, 180), ("Tome of Blindside", 0, 0, 25, 125), ("Tome of Vim of Wisdom", 0, 0, 30, 180), ("Minor Life Potion", 0, 0, 5, 15), ("Minor Mana Potion", 0, 0, 5, 15), ("Tome of Ice Shard", 0, 0, 15, 45), ("Tome of Divine Strike", 0, 0, 25, 125), ("Tome of Cleanse", 0, 0, 30, 180), ("Tome of Smite", 0, 0, 20, 80), ("Military Ration", 0, 0, 5, 15), ("Scroll of Courage I", 0, 0, 55, 165) },
+                items = new (string, int, int, int, int)[] { ("Tome of Charge", 0, 0, 15, 45), ("Tome of Benediction of Health", 0, 0, 15, 45), ("Tome of Stunning Shot", 0, 0, 15, 45), ("Tome of Gift of Foresight", 0, 0, 20, 80), ("Tome of Spine Shot", 0, 0, 30, 180), ("Tome of Benediction of Heroes", 0, 0, 20, 80), ("Tome of Focused Evasion", 0, 0, 20, 80), ("Tome of Infernal Madness", 0, 0, 25, 125), ("Tome of Ice Blast", 0, 0, 25, 125), ("Tome of Dispel Magic", 0, 0, 30, 180), ("Tome of Ambush", 0, 0, 25, 125), ("Tome of Vim of Wisdom", 0, 0, 30, 180), ("Minor Life Potion", 0, 0, 5, 15), ("Minor Mana Potion", 0, 0, 5, 15), ("Tome of Ice Shard", 0, 0, 15, 45), ("Tome of Divine Strike", 0, 0, 25, 125), ("Tome of Cleanse", 0, 0, 30, 180), ("Tome of Chastise", 0, 0, 20, 80), ("Military Ration", 0, 0, 5, 15), ("Scroll of Courage I", 0, 0, 55, 165) },
                 gear = new[] { new GearKind(5, 0, 1, 100, 0, 0, 0, 2, 3), new GearKind(5, 0, 2, 100, 0, 0, 0, 2, 3), new GearKind(7, 0, 1, 100, 0, 0, 0, 2, 3), new GearKind(7, 0, 2, 100, 0, 0, 0, 2, 3), new GearKind(8, 0, 0, 100, 0, 0, 0, 2, 5), new GearKind(9, 5, 0, 100, 0, 0, 0, 3, 4) },
             },
             new Vendor
             {
-                entry = 139, name = "Kelda", title = "Ranger", model = "NoblemanBlue",
+                entry = 139, name = "Sigrun", title = "Ranger", model = "NoblemanBlue",
                 cell = new Vector3Int(339, 139, 0),
-                items = new (string, int, int, int, int)[] { ("Tome of Aimed Shot", 0, 0, 45, 405), ("Tome of Sinister Strike", 0, 0, 5, 5), ("Tome of Mark Target", 0, 0, 5, 5), ("Tome of Entangling Shot", 0, 0, 5, 5), ("Tome of Multi-Shot", 0, 0, 10, 20), ("Tome of Focused Evasion", 0, 0, 20, 80), ("Tome of Flame Arrow", 0, 0, 80, 1280), ("Tome of Vanish", 0, 0, 35, 245), ("Tome of Hamstring", 0, 0, 60, 720), ("Tome of Arrow Flurry", 0, 0, 100, 2000), ("Tome of Explosive Arrow", 0, 0, 90, 1620), ("Tome of Blindside", 0, 0, 25, 125), ("Tome of Tactical Retreat", 0, 0, 70, 980), ("Tome of Sabotage", 0, 0, 40, 320), ("Tome of Ethereal Sting", 0, 0, 75, 1125), ("Tome of Sleep Arrow", 0, 0, 55, 605), ("Tome of Eye Gouge", 0, 0, 95, 1805), ("Tome of Stunning Shot", 0, 0, 15, 45), ("Tome of Devotion", 0, 0, 50, 500), ("Tome of Kidney Shot", 0, 0, 30, 180) },
+                items = new (string, int, int, int, int)[] { ("Tome of Aimed Shot", 0, 0, 45, 405), ("Tome of Treacherous Strike", 0, 0, 5, 5), ("Tome of Mark Target", 0, 0, 5, 5), ("Tome of Ensnaring Shot", 0, 0, 5, 5), ("Tome of Multi-Shot", 0, 0, 10, 20), ("Tome of Focused Evasion", 0, 0, 20, 80), ("Tome of Flame Arrow", 0, 0, 80, 1280), ("Tome of Fade", 0, 0, 35, 245), ("Tome of Hobble", 0, 0, 60, 720), ("Tome of Arrow Barrage", 0, 0, 100, 2000), ("Tome of Explosive Arrow", 0, 0, 90, 1620), ("Tome of Ambush", 0, 0, 25, 125), ("Tome of Strategic Retreat", 0, 0, 70, 980), ("Tome of Mischief", 0, 0, 40, 320), ("Tome of Spectral Sting", 0, 0, 75, 1125), ("Tome of Sleep Arrow", 0, 0, 55, 605), ("Tome of Eye Rake", 0, 0, 95, 1805), ("Tome of Stunning Shot", 0, 0, 15, 45), ("Tome of Fervor", 0, 0, 50, 500), ("Tome of Spine Shot", 0, 0, 30, 180) },
                 gear = System.Array.Empty<GearKind>(),
             },
             new Vendor
             {
-                entry = 138, name = "Halfrid", title = "Paladin", model = "guild_man1",
+                entry = 138, name = "Osric", title = "Paladin", model = "guild_man1",
                 cell = new Vector3Int(382, 165, 0),
-                items = new (string, int, int, int, int)[] { ("Tome of Holy Wrath", 0, 0, 5, 5), ("Tome of Mighty Blow", 0, 0, 5, 5), ("Tome of Righteous Storm", 0, 0, 65, 845), ("Tome of Radiance", 0, 0, 5, 5), ("Tome of Charge", 0, 0, 15, 45), ("Tome of Shield Block", 0, 0, 95, 1805), ("Tome of Divine Strike", 0, 0, 25, 125), ("Tome of Cleanse", 0, 0, 30, 180), ("Tome of Redemption", 0, 0, 90, 1620), ("Tome of Blessing of Defense", 0, 0, 40, 320), ("Tome of Hammer of Might", 0, 0, 10, 20), ("Tome of Touch of Salvation", 0, 0, 50, 500), ("Tome of Salvation Aura", 0, 0, 55, 605), ("Tome of Retribution", 0, 0, 60, 720), ("Tome of Fortification Aura", 0, 0, 70, 980), ("Tome of Wings of Freedom", 0, 0, 75, 1125), ("Tome of Aegis of Valor", 0, 0, 80, 1280), ("Tome of Vengeance Aura", 0, 0, 35, 245), ("Tome of Blessing of Champions", 0, 0, 20, 80), ("Tome of Divine Protection", 0, 0, 100, 2000) },
+                items = new (string, int, int, int, int)[] { ("Tome of Holy Ire", 0, 0, 5, 5), ("Tome of Mighty Blow", 0, 0, 5, 5), ("Tome of Hallowed Storm", 0, 0, 65, 845), ("Tome of Luminance", 0, 0, 5, 5), ("Tome of Charge", 0, 0, 15, 45), ("Tome of Shield Block", 0, 0, 95, 1805), ("Tome of Divine Strike", 0, 0, 25, 125), ("Tome of Cleanse", 0, 0, 30, 180), ("Tome of Deliverance", 0, 0, 90, 1620), ("Tome of Benediction of Defense", 0, 0, 40, 320), ("Tome of Hammer of Prowess", 0, 0, 10, 20), ("Tome of Touch of Salvation", 0, 0, 50, 500), ("Tome of Salvation Aura", 0, 0, 55, 605), ("Tome of Reprisal", 0, 0, 60, 720), ("Tome of Bastion Aura", 0, 0, 70, 980), ("Tome of Pinions of Liberty", 0, 0, 75, 1125), ("Tome of Rampart of Valor", 0, 0, 80, 1280), ("Tome of Reckoning Aura", 0, 0, 35, 245), ("Tome of Benediction of Heroes", 0, 0, 20, 80), ("Tome of Divine Protection", 0, 0, 100, 2000) },
                 gear = System.Array.Empty<GearKind>(),
             },
             new Vendor
             {
-                entry = 337, name = "Jipples", title = "Traveling Merchant", model = "peddler_goblin",
+                entry = 337, name = "Nibbets", title = "Traveling Trader", model = "peddler_goblin",
                 cell = new Vector3Int(397, 14, 0),
-                items = new (string, int, int, int, int)[] { ("Draconic Treasure", 1, 300, 1500, 1500000), ("Roasted Pork", 1, 30, 105, 315), ("Major Mana Potion", 1, 30, 120, 360), ("Major Life Potion", 1, 30, 120, 360) },
+                items = new (string, int, int, int, int)[] { ("Dragonforged Treasure", 1, 300, 1500, 1500000), ("Roasted Pork", 1, 30, 105, 315), ("Major Mana Potion", 1, 30, 120, 360), ("Major Life Potion", 1, 30, 120, 360) },
                 gear = System.Array.Empty<GearKind>(),
             },
         };

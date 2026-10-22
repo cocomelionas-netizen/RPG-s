@@ -34,7 +34,7 @@ route before and after.
 
 When the local player dies, a panel says "You have died." (the source game's "You have died. Respawn?") with a Respawn
 button (`UI/DeathPanel.cs`): after 1.5 sec it brings the player back at the spawn point with full health and mana
-(`PlayerRespawn.WaitForChoice`). Until then a friend's Redemption can revive them where they fell. Test bots press it
+(`PlayerRespawn.WaitForChoice`). Until then a friend's Deliverance can revive them where they fell. Test bots press it
 themselves.
 
 ## Cheats (F9)

@@ -339,7 +339,7 @@ namespace RPG.UI
                     parts.Add($"{item.restoreAmount} health and mana, out of combat");
                     break;
                 case ItemUse.Return:
-                    parts.Add("returns you to St. Revere");
+                    parts.Add("returns you to St. Aurelis");
                     break;
                 case ItemUse.Buff:
                     parts.Add($"+{item.buffAmount} {ItemDefinition.AttributeName(item.buffAttribute)} for {Mathf.RoundToInt(item.buffSeconds / 60f)} min");

@@ -141,7 +141,7 @@ namespace RPG.Tests
             Assert.AreEqual(25, dungeon.minLevel);
             Assert.AreEqual(4, dungeon.maxPlayers);
             Assert.AreEqual("Tower Key", dungeon.key.displayName);
-            Assert.IsNull(garrison.key, "The Lower Garrison needs no key.");
+            Assert.IsNull(garrison.key, "The Sunken Garrison needs no key.");
 
             var barracks = AssetDatabase.LoadAssetAtPath<DungeonDefinition>(DungeonsFolder + "/AbandonedBarracks.asset");
             Assert.IsNotNull(barracks);
@@ -170,7 +170,7 @@ namespace RPG.Tests
             Assert.AreEqual(dungeon.chests.Length, instance.Chests.Count, "Every container of the plan.");
             foreach (NetworkObject monster in instance.Monsters)
                 Assert.IsTrue(instance.Contains(monster.transform.position));
-            Assert.AreEqual(2, instance.BossesLeft, "Lord Zargan and Tchazzar.");
+            Assert.AreEqual(2, instance.BossesLeft, "Lord Valdrek and Xalthuun.");
         }
 
         [UnityTest]
@@ -180,7 +180,7 @@ namespace RPG.Tests
             yield return null;
             DungeonInstance instance = manager.Instances[0];
 
-            NetworkObject zargan = instance.Monsters.Find(m => m.GetComponent<Health>().DisplayName == "Lord Zargan");
+            NetworkObject zargan = instance.Monsters.Find(m => m.GetComponent<Health>().DisplayName == "Lord Valdrek");
             Assert.IsNotNull(zargan);
             Assert.AreEqual(30, zargan.GetComponent<MonsterAI>().Level);
             NetworkObject horror = instance.Monsters.Find(m => m.GetComponent<Health>().DisplayName == "Undead Horror");
@@ -275,7 +275,7 @@ namespace RPG.Tests
             DungeonInstance instance = manager.Instances[0];
             Assert.AreEqual(garrison, instance.Definition);
 
-            NetworkObject melchon = instance.Monsters.Find(m => m.GetComponent<Health>().DisplayName == "Melchon");
+            NetworkObject melchon = instance.Monsters.Find(m => m.GetComponent<Health>().DisplayName == "Thalgor");
             Assert.IsNotNull(melchon);
             Vector2 at = melchon.transform.position;
             melchon.GetComponent<Health>().ApplyDamage(10000000, false, playerHealth);
@@ -286,7 +286,7 @@ namespace RPG.Tests
                 if (Vector2.Distance(bag.transform.position, at) < 1f)
                     foreach (LootItem item in bag.Contents)
                         if (item.Item == dungeon.key) towerKeys += item.Count;
-            Assert.AreEqual(10, towerKeys, "Melchon drops 10 Tower Keys, like in the source game.");
+            Assert.AreEqual(10, towerKeys, "Thalgor drops 10 Tower Keys, like in the source game.");
         }
 
         [UnityTest]

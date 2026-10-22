@@ -22,11 +22,11 @@ namespace RPG.Tests
         private const string GoblinPrefabPath = "Assets/_Project/Prefabs/Monsters/Goblin.prefab";
         // The source game's vendors: the paladin (warrior) trainer sells Tomes, the innkeeper potions, food and the Scroll
         // of Returning, the gem trader has limited stock, the heavy armor merchant random qualities, Reginald transmutes.
-        private const string WarriorVendorPath = "Assets/_Project/Data/Vendors/Halfrid.asset";
-        private const string TransmuterPath = "Assets/_Project/Data/Vendors/Reginald.asset";
-        private const string InnkeeperPath = "Assets/_Project/Data/Vendors/Aedis.asset";
-        private const string GemTraderPath = "Assets/_Project/Data/Vendors/Calder.asset";
-        private const string ArmorMerchantPath = "Assets/_Project/Data/Vendors/Karl.asset";
+        private const string WarriorVendorPath = "Assets/_Project/Data/Vendors/Osric.asset";
+        private const string TransmuterPath = "Assets/_Project/Data/Vendors/Mortimer.asset";
+        private const string InnkeeperPath = "Assets/_Project/Data/Vendors/Maelis.asset";
+        private const string GemTraderPath = "Assets/_Project/Data/Vendors/Tamsin.asset";
+        private const string ArmorMerchantPath = "Assets/_Project/Data/Vendors/Otto.asset";
         private const string ItemsFolder = "Assets/_Project/Data/Items";
 
         private GameObject cameraObject;
@@ -329,7 +329,7 @@ namespace RPG.Tests
         public IEnumerator Transmuter_FiveMinorPotions_MakeALesserOne()
         {
             UseVendor(TransmuterPath);
-            Assert.IsTrue(vendor.Definition.Transmutes, "Reginald makes the source game's crafting recipes.");
+            Assert.IsTrue(vendor.Definition.Transmutes, "Mortimer makes the source game's crafting recipes.");
             ItemDefinition minor = Item("HealingPotion");
             inventory.ServerAddItem(minor, 6 - inventory.CountOf(minor), false);
             yield return null;

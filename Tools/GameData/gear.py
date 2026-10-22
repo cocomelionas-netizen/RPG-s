@@ -11,6 +11,9 @@ import os
 import sqlite3
 import sys
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import names  # noqa: E402
+
 # Weapon types this project's classes use: 4 swords (warrior), 2 bows (ranger), 5 staves (mage).
 WEAPON_TYPES = (2, 4, 5)
 
@@ -44,7 +47,7 @@ def main(root):
         f.write('        /// </summary>\n')
         f.write('        public static readonly (int equip, int weapon, int key, int level, string name, float sell)[] Pieces =\n        {\n')
         for p in pieces:
-            f.write(f'            ({p[0]}, {p[1]}, {p[2]}, {p[3]}, "{p[4]}", {p[5]}f),\n')
+            f.write(f'            ({p[0]}, {p[1]}, {p[2]}, {p[3]}, "{names.rename(p[4])}", {p[5]}f),\n')
         f.write('        };\n    }\n}\n')
     print(f'{len(pieces)} pieces')
 

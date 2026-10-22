@@ -66,7 +66,7 @@ namespace RPG.EditorTools
             }
 
             // Flawless (+4 in the source game) and Draconic (+5) gems, twice that here; made by transmutation (and dropped).
-            foreach ((string tier, ItemRarity rarity, int amount, int sell) in new[] { ("Flawless", ItemRarity.Epic, 8, 750), ("Draconic", ItemRarity.Legendary, 10, 1000) })
+            foreach ((string tier, ItemRarity rarity, int amount, int sell) in new[] { ("Flawless", ItemRarity.Epic, 8, 750), ("Dragonforged", ItemRarity.Legendary, 10, 1000) })
             {
                 foreach ((string gemName, Attribute attribute, Color color) in GemKinds)
                 {
@@ -79,7 +79,7 @@ namespace RPG.EditorTools
             }
 
             // Draconic Treasure (1237): the wyrms' rare drop, Jipples's ware and a Draconic gem ingredient.
-            ItemDefinition treasure = CreateItem("Later/DraconicTreasure", "Draconic Treasure", ItemSlot.None, ItemRarity.Rare, 0, 0, 0,
+            ItemDefinition treasure = CreateItem("Later/DraconicTreasure", "Dragonforged Treasure", ItemSlot.None, ItemRarity.Rare, 0, 0, 0,
                 new Color(0.95f, 0.45f, 0.2f), 1500 * 1000, -1, 25);
             treasure.sellValue = 1500;
             treasure.maxStack = 5;

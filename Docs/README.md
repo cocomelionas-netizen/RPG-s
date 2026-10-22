@@ -93,6 +93,6 @@ The latest version is built and published automatically after every push to `mai
 | + | World, monster and chest layout, balance, gear, affixes, spells and dungeons from the source game's data | ✅ [GameData.md](GameData.md) |
 | + | Crafting window (Throne and Liberty style), 12-slot action bar with drag and drop | ✅ [Crafting.md](Crafting.md) |
 | + | The source game's ground (walls, woods), all its vendors and their stock, free waypoints, Scroll of Returning, food | ✅ [GameData.md](GameData.md#vendors) |
-| + | The source game's transmutation (Reginald) instead of crafting, gear drops finished, its five gems | ✅ [Crafting.md](Crafting.md), [Gems.md](Gems.md) |
+| + | The source game's transmutation (Mortimer) instead of crafting, gear drops finished, its five gems | ✅ [Crafting.md](Crafting.md), [Gems.md](Gems.md) |
 
 Multiplayer was planned early (stage 3) on purpose. Combat, monsters and items are written server-authoritative from the start, so they do not need rewriting later.

@@ -25,6 +25,7 @@ import zipfile
 from PIL import Image
 
 sys.path.insert(0, os.path.dirname(__file__))
+import names  # noqa: E402
 import map_file  # noqa: E402
 from island import HEIGHT, WIDTH, cell_of, on_island, source_of  # noqa: E402
 
@@ -241,6 +242,8 @@ def write_map(path, rows):
 
 
 def cs(text):
+    # Every name and text written goes through this project's names (names.py).
+    text = names.rename(text)
     return '"' + text.replace('\\', '\\\\').replace('"', '\\"') + '"'
 
 

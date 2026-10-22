@@ -35,7 +35,7 @@ namespace RPG.Tests
         {
             var item = ScriptableObject.CreateInstance<ItemDefinition>();
             created.Add(item);
-            item.displayName = "Bronze Slicer";
+            item.displayName = "Bronze Hewer";
             item.icon = icon;
             return item;
         }
@@ -49,15 +49,15 @@ namespace RPG.Tests
             created.Add(sprite);
             ItemSlotView view = CreateSlot();
 
-            view.Show(CreateItem(sprite), "Bronze Slicer", Color.green, Color.black);
+            view.Show(CreateItem(sprite), "Bronze Hewer", Color.green, Color.black);
             Assert.IsTrue(view.Icon.enabled);
             Assert.AreEqual(sprite, view.Icon.sprite);
             Assert.AreEqual("", view.Label.text);
             Assert.AreEqual(Color.green, view.Border.effectColor);
 
-            view.Show(CreateItem(null), "Bronze Slicer", Color.green, Color.black);
+            view.Show(CreateItem(null), "Bronze Hewer", Color.green, Color.black);
             Assert.IsFalse(view.Icon.enabled);
-            Assert.AreEqual("Bronze Slicer", view.Label.text);
+            Assert.AreEqual("Bronze Hewer", view.Label.text);
 
             view.Show(null, "", Color.white, Color.black);
             Assert.IsFalse(view.Icon.enabled);

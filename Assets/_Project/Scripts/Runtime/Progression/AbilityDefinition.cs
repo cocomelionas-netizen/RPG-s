@@ -41,7 +41,7 @@ namespace RPG.Progression
         public float value;
         [Tooltip("Added for every rank above the first.")]
         public float valuePerRank;
-        [Tooltip("Adds an attribute of the caster times Stat Factor (Boon of Clairvoyance: Willpower x 5).")]
+        [Tooltip("Adds an attribute of the caster times Stat Factor (Gift of Foresight: Willpower x 5).")]
         public bool scalesWithStat;
         public Attribute stat;
         public float statFactor;
@@ -131,16 +131,16 @@ namespace RPG.Progression
         public bool removesHarmful;
         [Tooltip("Frees the caster from stuns and roots (Teleport).")]
         public bool breaksControl;
-        [Tooltip("Only on targets that have this effect (Ice Shard: slowed by Chains of Ice; Kidney Shot: incapacitated).")]
+        [Tooltip("Only on targets that have this effect (Ice Shard: slowed by Chains of Ice; Spine Shot: incapacitated).")]
         public bool requiresTargetEffect;
         public StatusKind requiredEffect;
         [Tooltip("And with this name (Explosive Arrow: Flame Arrow's mark); empty: any of the kind.")]
         public string requiredEffectName = "";
-        [Tooltip("Only on monsters not fighting yet (Sabotage).")]
+        [Tooltip("Only on monsters not fighting yet (Mischief).")]
         public bool requiresTargetOutOfCombat;
         [Tooltip("The caster must be out of combat (Sleep).")]
         public bool requiresCasterOutOfCombat;
-        [Tooltip("Percent of max mana restored at once (Wisdom of Lazarus), plus this per rank.")]
+        [Tooltip("Percent of max mana restored at once (Wisdom of the Anointed), plus this per rank.")]
         [Min(0f)] public float restoreManaPercent;
         [Min(0f)] public float restoreManaPerRank;
         [Tooltip("How far a Retreat leaps; how much health and mana (shares) a Revive brings back.")]

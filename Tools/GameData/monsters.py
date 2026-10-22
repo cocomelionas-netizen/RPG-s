@@ -15,10 +15,13 @@ import sqlite3
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import names  # noqa: E402
 import island  # noqa: E402
 
 
 def cs(text):
+    # Every name and text written goes through this project's names (names.py).
+    text = names.rename(text)
     return '"' + text.replace('\\', '\\\\').replace('"', '\\"') + '"'
 
 

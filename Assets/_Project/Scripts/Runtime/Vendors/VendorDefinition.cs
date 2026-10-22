@@ -16,7 +16,7 @@ namespace RPG.Vendors
         public int[] stockLimits = Array.Empty<int>();
         [Tooltip("Seconds between restocks: limited items are refilled to their limit.")]
         [Min(10f)] public float restockSeconds = 300f;
-        [Tooltip("A transmuter (the source game's Reginald): items put into its grid together make these recipes' results.")]
+        [Tooltip("A transmuter (the source game's Mortimer): items put into its grid together make these recipes' results.")]
         public Recipe[] recipes = Array.Empty<Recipe>();
 
         [Header("Random quality (the source game's merchants)")]

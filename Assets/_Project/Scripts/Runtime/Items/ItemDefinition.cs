@@ -333,7 +333,7 @@ namespace RPG.Items
             }
             else if (use == ItemUse.Return)
             {
-                text.AppendLine("Use: returns you to St. Revere");
+                text.AppendLine("Use: returns you to St. Aurelis");
                 if (castSeconds > 0f) text.AppendLine($"{castSeconds:0.#} sec cast, {Mathf.RoundToInt(useCooldown / 60f)} min cooldown");
             }
             else if (use == ItemUse.Empower)

@@ -1,12 +1,12 @@
 # Stage 10 – dungeons (instances)
 
-> The single hand-made "Goblin Den" of this stage has since been replaced by the ten dungeons laid out from the
+> The single hand-made "Goblin Lair" of this stage has since been replaced by the ten dungeons laid out from the
 > source game's data (see [GameData.md](GameData.md#dungeons)). The instance system below (copies per group, portals,
 > closing empty copies, the boss slam) is what they run on.
 
 ## What we did
 
-- **The "Goblin Den" dungeon.**
+- **The "Goblin Lair" dungeon.**
   - The entrance is a purple portal a little south-west of the start.
   - Click the portal: the character walks up, and **all living players within 3 units of the portal** (your group) are moved together into a new copy of the dungeon.
   - Other groups that enter later get **their own copy**, so monsters and loot are not shared between groups.
@@ -60,7 +60,7 @@ Changed files:
 
 https://cocomelionas-netizen.github.io/RPG-s/ (if it shows an old version, reload with Ctrl+F5)
 
-1. Log in. Next to the start, a little lower and to the left, stands a **purple portal**. Click it: the character walks up, "Entering Goblin Den" shows, and you are in a dark dungeon.
+1. Log in. Next to the start, a little lower and to the left, stands a **purple portal**. Click it: the character walks up, "Entering Goblin Lair" shows, and you are in a dark dungeon.
 2. Go right through the corridors. Monsters attack by themselves when you come close. Being at least level ~4–5 with potions is advised.
 3. The **Goblin King** waits in the last room. Watch the **red ring** under it and get out of it in time.
 4. Once the boss is beaten, loot drops and the exit portal at the end of the boss room opens (no longer faded). Click it: you return to the entrance in the world.
@@ -92,11 +92,11 @@ https://cocomelionas-netizen.github.io/RPG-s/ (if it shows an old version, reloa
 
 ## Entry requirements
 
-- `DungeonDefinition.minLevel` (Goblin Den: 3), `key` (Den Key) and `maxPlayers` (4).
+- `DungeonDefinition.minLevel` (Goblin Lair: 3), `key` (Lair Key) and `maxPlayers` (4).
 - The player who clicks the portal must be of the required level and carry the key — one key is used up.
   Other players at the portal go along if they meet the level (they need no key), up to `maxPlayers`.
-- The reason for a refusal is shown above the head and in the message log ("You need a Den Key to enter Goblin Den").
-- Den Keys drop from monsters: Goblin 4%, Goblin Brute 25%, Orc 35%.
+- The reason for a refusal is shown above the head and in the message log ("You need a Lair Key to enter Goblin Lair").
+- Lair Keys drop from monsters: Goblin 4%, Goblin Brute 25%, Orc 35%.
 
 ## Limited vendor stock
 

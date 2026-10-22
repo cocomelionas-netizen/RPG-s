@@ -199,7 +199,7 @@ namespace RPG.EditorTools
             var navigation = grid.gameObject.AddComponent<WorldNavigation>();
             // Only the walls (rock) block sight; water, woods and bushes do not.
             navigation.Configure(grid, ground, obstacles, worldTiles.Walls);
-            navigation.ZoneName = "Fanadin";
+            navigation.ZoneName = "Halvaren";
 
             CreateGlobalLight();
             CreateEventSystem();
@@ -980,7 +980,7 @@ namespace RPG.EditorTools
                 CreateJunk("OrcFang", "Orc Fang", new Color(0.8f, 0.78f, 0.65f), 40),
                 CreateJunk("CrownShard", "Crown Shard", new Color(0.85f, 0.7f, 0.2f), 200),
                 manaPotion,
-                CreateKey("DenKey", "Den Key", new Color(0.85f, 0.65f, 0.25f), 20),
+                CreateKey("DenKey", "Lair Key", new Color(0.85f, 0.65f, 0.25f), 20),
             };
             // The source game's gems: Rough, plain and Refined, five of a kind transmute into the next tier. The files keep
             // their old names (Chipped, Flawless) so item ids stay; Amethyst came later and is at the end of the catalog.

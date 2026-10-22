@@ -9,12 +9,17 @@ import os
 import sqlite3
 import sys
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import names as game_names  # noqa: E402
+
 db = sqlite3.connect(os.path.join(sys.argv[1], 'game.db'))
 db.row_factory = sqlite3.Row
 names = {row['entry']: row['name'] for row in db.execute('select entry, name from item_template')}
 
 
 def cs(text):
+    # Every name and text written goes through this project's names (names.py).
+    text = game_names.rename(text)
     return '"' + text.replace('\\', '\\\\').replace('"', '\\"') + '"'
 
 

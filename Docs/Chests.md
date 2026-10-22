@@ -5,8 +5,8 @@
 | Chest | Level | Gold | Inside | Comes back |
 |---|---|---|---|---|
 | Wooden Crate | 2 | 3–8 | potions, junk, plain items | after 2 min |
-| Oak Chest | 4 | 10–25 | Uncommon items, Chipped gems, Den Key | after 4 min |
-| Iron Strongbox | 6 | 30–60 | Rare/Epic items, gems, Den Key | after 7 min |
+| Oak Chest | 4 | 10–25 | Uncommon items, Chipped gems, Lair Key | after 4 min |
+| Iron Strongbox | 6 | 30–60 | Rare/Epic items, gems, Lair Key | after 7 min |
 
 - 8 crates by the goblin camps and around the town, 2 chests in Brute Hills, 2 strongboxes in Orc Marsh.
 - Clicking walks up and opens it: the gold goes straight to the purse, items into a loot bag (with affixes and sockets).

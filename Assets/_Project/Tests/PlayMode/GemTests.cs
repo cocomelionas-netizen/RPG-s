@@ -18,7 +18,7 @@ namespace RPG.Tests
     public class GemTests
     {
         private const string PlayerPrefabPath = "Assets/_Project/Prefabs/Characters/Player.prefab";
-        private const string JewelerPath = "Assets/_Project/Data/Vendors/Calder.asset";
+        private const string JewelerPath = "Assets/_Project/Data/Vendors/Tamsin.asset";
         private const string ItemsFolder = "Assets/_Project/Data/Items";
 
         private GameObject cameraObject;
