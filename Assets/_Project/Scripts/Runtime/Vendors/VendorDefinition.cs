@@ -14,8 +14,10 @@ namespace RPG.Vendors
         public ItemDefinition[] stock = Array.Empty<ItemDefinition>();
         [Tooltip("How many of each stock item the vendor has, in the same order as Stock. 0 (or missing) means unlimited.")]
         public int[] stockLimits = Array.Empty<int>();
-        [Tooltip("Seconds between restocks: limited items are refilled to their limit.")]
+        [Tooltip("Seconds between restocks of a stock item without its own time: it is refilled to its limit (gear rerolls its quality).")]
         [Min(10f)] public float restockSeconds = 300f;
+        [Tooltip("Each stock item's own seconds between restocks, in the same order as Stock. 0 (or missing): Restock Seconds.")]
+        public float[] restockTimes = Array.Empty<float>();
         [Tooltip("A transmuter (the source game's Mortimer): items put into its grid together make these recipes' results.")]
         public Recipe[] recipes = Array.Empty<Recipe>();
 
@@ -42,6 +44,10 @@ namespace RPG.Vendors
 
         /// <summary>The most of a stock item the vendor holds (0 for unlimited).</summary>
         public int LimitOf(int index) => index >= 0 && index < stockLimits.Length ? Mathf.Max(0, stockLimits[index]) : 0;
+
+        /// <summary>Seconds between restocks of a stock item: its own time, or the vendor's.</summary>
+        public float RestockOf(int index) =>
+            Mathf.Max(10f, index >= 0 && index < restockTimes.Length && restockTimes[index] > 0f ? restockTimes[index] : restockSeconds);
 
         public bool Sells(ItemDefinition item) => item != null && Array.IndexOf(stock, item) >= 0;
     }

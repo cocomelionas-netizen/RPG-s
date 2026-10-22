@@ -51,6 +51,9 @@ namespace RPG.UI
         private int lastGold = -1;
         private int lastLevel = -1;
         private const float RefreshSeconds = 0.25f;
+        // While the window is open the stock is asked for again now and then: items restock on their own times.
+        private const float StockRequestSeconds = 3f;
+        private float nextStockRequest;
         /// <summary>Where the goods start, under the title and the gold.</summary>
         private const float ListTop = -104f;
         private int pageCount = 1;
@@ -338,6 +341,11 @@ namespace RPG.UI
             }
 
             UpdateTooltip(inventory);
+            if (Time.unscaledTime >= nextStockRequest)
+            {
+                nextStockRequest = Time.unscaledTime + StockRequestSeconds;
+                inventory.RequestVendorStock(shown);
+            }
             var progress = inventory.GetComponent<CharacterProgress>();
             int level = progress != null ? progress.Level : 0;
             if (inventory.Gold == lastGold && level == lastLevel && Time.unscaledTime < nextRefresh) return;
@@ -363,9 +371,17 @@ namespace RPG.UI
                 int price = inventory.BuyPrice(item, affix);
                 row.Price.text = left == Vendor.Unlimited ? $"{price} g"
                     : left > 0 ? $"{price} g\n<size=12><color=#bbbbbb>{left} left</color></size>"
-                    : $"{price} g\n<size=12><color=#ff6655>sold out</color></size>";
+                    : $"{price} g\n<size=12><color=#ff6655>{SoldOut(shown.KnownSecondsLeft(i))}</color></size>";
                 row.Price.color = inventory.Gold >= price && left != 0 ? GoldColor : Unaffordable;
             }
+        }
+
+        /// <summary>"sold out", with the time until it is back when known ("back in 2:05").</summary>
+        private static string SoldOut(float secondsLeft)
+        {
+            if (secondsLeft < 0f) return "sold out";
+            int seconds = Mathf.CeilToInt(secondsLeft);
+            return $"back in {seconds / 60}:{seconds % 60:00}";
         }
 
         /// <summary>One line: slot, bonuses (with an affix's) and which class may use it.</summary>

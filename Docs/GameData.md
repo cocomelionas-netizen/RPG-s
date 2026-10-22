@@ -83,8 +83,16 @@ the world, with Mortimer.
 | Morwen, Wenna, Greta, Aldous | around | Minor Life and Mana Potions |
 | Otto (Heavy Armor), Willa (Cloth Armor), Zarrimon (Blades), Bertram (Axe & Mace), Liora (Ranged & Shield), Vasil (Staves and Wands) | St. Aurelis | gear of their kind for every second level: chain and plate / leather and robes (head, chest, feet), swords (also for axes and maces: the warrior's weapon here), bows, staves |
 
-- The gear merchants hold one of each piece; at every restock (5 min) each piece gets a **random quality** with the source
-  game's chances (green 100 %, blue 50 %, gold 5 %, purple 1 %, best first), shown with its affix and a higher price.
+- The gear merchants hold one of each piece; at its restock (every 5 min, each piece on its own clock) a piece gets a
+  **random quality** with the source game's chances (green 100 %, blue 50 %, gold 5 %, purple 1 %, best first), shown
+  with its affix and a higher price.
+- **Restocks**: every stock item has its own time (`VendorDefinition.restockTimes`): the source game's `restock_cooldown`
+  (60 s for most, Nibbets' food and potions 30 s and Dragonforged Treasure 5 min), **5 minutes for orbs and gems** (the
+  gem trader's Divine, Major, Greater... orbs and gems; slower than the source game's minute) and for the merchants'
+  gear. The vendor window says when a sold-out item is back ("back in 2:05") and asks the server again every 3 s while
+  open. What is left and when each item restocks are saved in real time (`VendorSaves`: PlayerPrefs in a browser, JSON
+  files on a computer), so logging out or closing the game stops no clock: an item whose time came meanwhile is restocked
+  when the world starts again, and keeps its rhythm.
 - Prices: the source game's buy price (sell price × its buy cost ratio), e.g. Scroll of Returning 300, Minor Life Potion 15,
   Ruby 1500, Vault Gold 39920; vendors pay the source sell price (100, 5, 250, 499).
 - Not placed: Garrand (Cleric) only sells Cleric Tomes, Ishan (Jeweler) only necklaces and rings – neither exists here.
@@ -133,7 +141,7 @@ From `npc`, `npc_template`, `npc_models`, `gossip`, `gossip_option`, `scripts`, 
 | Normal monster HP: 60 at level 1 (Mandiblet), 7340 at 25 (Korthian Brute), a power curve through both (the server works out the rest) | `npc_template` | `MonsterAI.SourceHealthAt` |
 | Elite HP ×3 (Korthian Elite 22025 / Brute 7340); bosses their own HP (Vorlash 18515, Lord Valdrek 245750...) | `npc_template` | `MonsterAI.EliteHealthScale`, `DungeonData` |
 | Elites: more gear rolls; boss: a guaranteed gold piece + 25 % purple | `npc_template` loot chances | `MonsterAI`, `LootDrop`, `AffixCatalog.RollQuality` |
-| Vendors: Rare 1, Uncommon 3, restock every 60 s | `npc_vendor` | `VendorDefinition` |
+| Vendors: Rare 1, Uncommon 3, each item restocks on its own time (60 s; orbs and gems 5 min) | `npc_vendor` | `VendorDefinition` |
 | Attribute prices in XP | client executable | `AttributeRules.PointCost` |
 | Class attributes and HP/mana at level 1 (warrior 75/30, ranger 60/45, mage 40/70; attributes and gear add more) | `player_class_stats` | `CharacterClassDefinition` |
 | HP and mana grow × level, from level 21 another ×1.5 | `player_class_stats` | `LevelCurve.HealthGrowth` |

@@ -50,6 +50,8 @@ namespace RPG.Networking
             offlineTransport = GetComponent<OfflineTransport>();
             accounts = GetComponent<AccountService>();
             if (offlineTransport == null) offlineTransport = gameObject.AddComponent<OfflineTransport>();
+            // The game keeps the vendors' stock between sessions (tests, without accounts, do not).
+            RPG.Vendors.VendorSaves.Enabled = accounts != null;
 
             // Servers and clients must keep running while their window is in the background.
             Application.runInBackground = true;
@@ -61,8 +63,14 @@ namespace RPG.Networking
             network.OnServerStopped += OnServerStopped;
         }
 
+        private void OnApplicationQuit()
+        {
+            if (network != null && network.IsServer) RPG.Vendors.VendorSaves.SaveAll();
+        }
+
         private void OnDestroy()
         {
+            RPG.Vendors.VendorSaves.Enabled = false;
             if (network == null) return;
             network.ConnectionApprovalCallback = null;
             network.OnClientConnectedCallback -= OnClientConnected;
@@ -248,6 +256,7 @@ namespace RPG.Networking
 
         private void OnServerStopped(bool wasHost)
         {
+            RPG.Vendors.VendorSaves.SaveAll();
             if (accounts != null) accounts.LogOutEveryone();
         }
 

@@ -637,14 +637,18 @@ namespace RPG.Items
         {
             Vendor vendor = Vendor.Get(vendorIndex);
             if (rpcParams.Receive.SenderClientId == OwnerClientId && vendor != null && vendor.Definition != null)
-                VendorStockRpc(vendorIndex, vendor.ServerStockSnapshot(), vendor.ServerAffixSnapshot());
+                SendStock(vendor);
         }
 
+        /// <summary>Server: tells the owner a vendor's stock, its qualities and the time to each restock.</summary>
+        private void SendStock(Vendor vendor) =>
+            VendorStockRpc(vendor.Index, vendor.ServerStockSnapshot(), vendor.ServerAffixSnapshot(), vendor.ServerSecondsLeftSnapshot());
+
         [Rpc(SendTo.Owner)]
-        private void VendorStockRpc(int vendorIndex, int[] counts, int[] affixIds)
+        private void VendorStockRpc(int vendorIndex, int[] counts, int[] affixIds, float[] secondsLeft)
         {
             Vendor vendor = Vendor.Get(vendorIndex);
-            if (vendor != null) vendor.SetKnownStock(counts, affixIds);
+            if (vendor != null) vendor.SetKnownStock(counts, affixIds, secondsLeft);
         }
 
         public void RequestSell(Vendor vendor, int bagIndex)
@@ -1266,13 +1270,13 @@ namespace RPG.Items
             if (vendor.ServerRemaining(stockIndex) == 0)
             {
                 MessageRpc(InventoryMessage.SoldOut, 0, 0);
-                VendorStockRpc(vendor.Index, vendor.ServerStockSnapshot(), vendor.ServerAffixSnapshot());
+                SendStock(vendor);
                 return false;
             }
             int affixId = vendor.ServerAffix(stockIndex);
             if (expectedAffix >= 0 && expectedAffix != affixId)
             {
-                VendorStockRpc(vendor.Index, vendor.ServerStockSnapshot(), vendor.ServerAffixSnapshot());
+                SendStock(vendor);
                 return false;
             }
             AffixDefinition affix = affixes != null ? affixes.Get(affixId) : null;
@@ -1287,7 +1291,7 @@ namespace RPG.Items
             if (ServerAddItemWithSockets(item, 1, true, bought, LootDrop.RollSockets(item, affixes, bought)) <= 0) return false;
             gold.Value -= price;
             vendor.ServerTake(stockIndex);
-            VendorStockRpc(vendor.Index, vendor.ServerStockSnapshot(), vendor.ServerAffixSnapshot());
+            SendStock(vendor);
             return true;
         }
 

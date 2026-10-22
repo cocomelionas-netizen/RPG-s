@@ -22,6 +22,8 @@ namespace RPG.EditorTools
         private const float MerchantRestockSeconds = 300f;
         /// <summary>Shops restock this often when the source game gives no time.</summary>
         private const float ShopRestockSeconds = 60f;
+        /// <summary>Orbs and gems (the gem trader's Divine, Major... orbs) restock this often, slower than the source game's minute.</summary>
+        private const float OrbAndGemRestockSeconds = 300f;
 
         /// <summary>
         /// The source game's town supplies that were missing (item_template and their spells): the Scroll of Returning
@@ -99,6 +101,8 @@ namespace RPG.EditorTools
 
                 var stock = new List<ItemDefinition>();
                 var limits = new List<int>();
+                // Each item restocks on its own time: the source game's, 5 minutes for orbs, gems and the merchants' gear.
+                var times = new List<float>();
                 float restock = 0f;
                 foreach ((string itemName, int limit, int restockSeconds, int _, int _) in source.items)
                 {
@@ -110,6 +114,8 @@ namespace RPG.EditorTools
                     if (stock.Contains(item)) continue;
                     stock.Add(item);
                     limits.Add(limit);
+                    bool orbOrGem = item.isGem || item.displayName.EndsWith(" Orb");
+                    times.Add(orbOrGem ? OrbAndGemRestockSeconds : restockSeconds > 0 ? restockSeconds : ShopRestockSeconds);
                     restock = Mathf.Max(restock, restockSeconds);
                 }
 
@@ -125,14 +131,16 @@ namespace RPG.EditorTools
                         if (!stock.Contains(piece))
                         {
                             stock.Add(piece);
-                            // One of each: it comes back with a new quality at the next restock.
+                            // One of each: it comes back with a new quality at its next restock.
                             limits.Add(1);
+                            times.Add(MerchantRestockSeconds);
                         }
                     restock = MerchantRestockSeconds;
                 }
 
                 vendor.stock = stock.ToArray();
                 vendor.stockLimits = limits.ToArray();
+                vendor.restockTimes = times.ToArray();
                 vendor.restockSeconds = restock > 0f ? Mathf.Max(10f, restock) : ShopRestockSeconds;
                 EditorUtility.SetDirty(vendor);
 

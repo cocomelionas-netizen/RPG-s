@@ -10,8 +10,11 @@ namespace RPG.Vendors
     /// A vendor NPC standing in the world (the same on every peer). Players click it to trade; the trade itself
     /// is checked by the server in <see cref="RPG.Items.Inventory"/>. Vendors are told apart over the network by
     /// their index in <see cref="All"/>, which is sorted by name so it is the same everywhere.
-    /// The server keeps how many of each limited item are left and restocks them; clients learn the counts
-    /// when they open the window and after buying (<see cref="KnownRemaining"/>).
+    /// The server keeps how many of each limited item are left and restocks each on its own time
+    /// (<see cref="VendorDefinition.RestockOf"/>): refilled to its limit, gear with a new random quality. Clients learn the
+    /// counts and the time to each restock when they open the window, while it is open and after buying
+    /// (<see cref="KnownRemaining"/>, <see cref="KnownSecondsLeft"/>). What is left and the restock times are kept between
+    /// sessions (<see cref="VendorSaves"/>), as real time: logging out does not stop the clocks.
     /// </summary>
     public class Vendor : MonoBehaviour
     {
@@ -28,9 +31,12 @@ namespace RPG.Vendors
 
         private int[] remaining;
         private int[] affixIds;
-        private float nextRestock;
+        /// <summary>When each stock item restocks next (Time.time).</summary>
+        private float[] nextRestock;
         private int[] known;
         private int[] knownAffixes;
+        private float[] knownSecondsLeft;
+        private float knownAt;
 
         public VendorDefinition Definition => definition;
         public float TradeRange => tradeRange;
@@ -86,7 +92,17 @@ namespace RPG.Vendors
             if (left == Unlimited) return true;
             if (left <= 0) return false;
             remaining[index] = left - 1;
+            Save();
             return true;
+        }
+
+        /// <summary>Server: seconds until each stock item restocks, for sending to a client.</summary>
+        public float[] ServerSecondsLeftSnapshot()
+        {
+            EnsureStock();
+            var left = new float[nextRestock.Length];
+            for (int i = 0; i < left.Length; i++) left[i] = Mathf.Max(0f, nextRestock[i] - Time.time);
+            return left;
         }
 
         /// <summary>Server: every stock count, for sending to a client.</summary>
@@ -97,11 +113,19 @@ namespace RPG.Vendors
         }
 
         /// <summary>Client: stores the counts the server sent.</summary>
-        public void SetKnownStock(int[] counts, int[] affixesInStock = null)
+        public void SetKnownStock(int[] counts, int[] affixesInStock = null, float[] secondsLeft = null)
         {
             known = counts;
             knownAffixes = affixesInStock;
+            knownSecondsLeft = secondsLeft;
+            knownAt = Time.unscaledTime;
         }
+
+        /// <summary>Client: seconds until a stock item restocks, as last heard from the server (negative when unknown).</summary>
+        public float KnownSecondsLeft(int index) =>
+            knownSecondsLeft != null && index >= 0 && index < knownSecondsLeft.Length
+                ? Mathf.Max(0f, knownSecondsLeft[index] - (Time.unscaledTime - knownAt))
+                : -1f;
 
         /// <summary>Client: how many are left as last heard from the server (<see cref="Unlimited"/> when unlimited or unknown).</summary>
         public int KnownRemaining(int index)
@@ -116,20 +140,70 @@ namespace RPG.Vendors
             if (remaining != null && remaining.Length == count) return;
             remaining = new int[count];
             affixIds = new int[count];
-            Restock();
-            // The vendors do not all restock in the same frame: the first restock comes after a random part of the time.
-            nextRestock = Time.time + UnityEngine.Random.Range(0.3f, 1f) * (definition != null ? definition.restockSeconds : 300f);
+            nextRestock = new float[count];
+            for (int i = 0; i < count; i++)
+            {
+                RestockItem(i);
+                // The items do not all restock in the same frame: each first restock comes after a random part of its time.
+                nextRestock[i] = Time.time + UnityEngine.Random.Range(0.3f, 1f) * definition.RestockOf(i);
+            }
+            Load();
         }
 
-        private void Restock()
+        /// <summary>Refills one stock item to its limit (gear gets a new random quality) and sets its next restock.</summary>
+        private void RestockItem(int index)
         {
-            for (int i = 0; i < remaining.Length; i++)
+            int limit = definition.LimitOf(index);
+            remaining[index] = limit > 0 ? limit : Unlimited;
+            affixIds[index] = RollAffix(definition.stock[index]);
+            nextRestock[index] = Time.time + definition.RestockOf(index);
+        }
+
+        /// <summary>The key this vendor is saved under: its definition's asset name (the same in every build).</summary>
+        private string SaveKey => definition != null ? definition.name : name;
+
+        /// <summary>Server: writes what is left and when each item restocks (as real time) to <see cref="VendorSaves"/>.</summary>
+        public void Save()
+        {
+            if (!VendorSaves.Enabled || remaining == null) return;
+            double now = VendorSaves.Now;
+            var state = new VendorSaves.State
+            {
+                remaining = (int[])remaining.Clone(),
+                affixes = (int[])affixIds.Clone(),
+                restockAt = new double[nextRestock.Length],
+            };
+            for (int i = 0; i < nextRestock.Length; i++) state.restockAt[i] = now + (nextRestock[i] - Time.time);
+            VendorSaves.Save(SaveKey, state);
+        }
+
+        /// <summary>
+        /// Takes back what was left last time. An item whose restock came while nobody played restocks now, and its next
+        /// restock keeps the rhythm (the first one due after now).
+        /// </summary>
+        private void Load()
+        {
+            if (!VendorSaves.Enabled || !VendorSaves.TryLoad(SaveKey, out VendorSaves.State state)) return;
+            int count = remaining.Length;
+            if (state.remaining == null || state.remaining.Length != count || state.affixes == null || state.affixes.Length != count
+                || state.restockAt == null || state.restockAt.Length != count)
+                return;
+            double now = VendorSaves.Now;
+            for (int i = 0; i < count; i++)
             {
                 int limit = definition.LimitOf(i);
-                remaining[i] = limit > 0 ? limit : Unlimited;
-                affixIds[i] = RollAffix(definition.stock[i]);
+                remaining[i] = limit > 0 ? Mathf.Clamp(state.remaining[i], 0, limit) : Unlimited;
+                affixIds[i] = state.affixes[i];
+                double due = state.restockAt[i];
+                float interval = definition.RestockOf(i);
+                if (due <= now)
+                {
+                    RestockItem(i);
+                    double missed = Math.Floor((now - due) / interval) + 1;
+                    due += missed * interval;
+                }
+                nextRestock[i] = Time.time + (float)Math.Min(due - now, interval);
             }
-            nextRestock = Time.time + (definition != null ? definition.restockSeconds : 300f);
         }
 
         /// <summary>A random quality for a piece in stock (0 for plain or when the vendor has none).</summary>
@@ -147,7 +221,8 @@ namespace RPG.Vendors
             NetworkManager network = NetworkManager.Singleton;
             if (network == null || !network.IsServer || definition == null) return;
             EnsureStock();
-            if (Time.time >= nextRestock) Restock();
+            for (int i = 0; i < nextRestock.Length; i++)
+                if (Time.time >= nextRestock[i]) RestockItem(i);
         }
 
         private void OnEnable()
