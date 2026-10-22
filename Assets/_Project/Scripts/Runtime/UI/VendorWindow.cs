@@ -5,6 +5,7 @@ using RPG.Items;
 using RPG.Progression;
 using RPG.Vendors;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 namespace RPG.UI
@@ -12,7 +13,8 @@ namespace RPG.UI
     /// <summary>
     /// The window of the vendor the local player is talking to: its goods with prices (click to buy), a Transmute button
     /// that opens its <see cref="TransmuteWindow"/> when it transmutes, and the player's gold. While it is open,
-    /// clicking items in the bag sells them. Closes on Esc, the X button, or when the player walks away. Builds its own UI; place it on a RectTransform that fills the HUD canvas.
+    /// clicking items in the bag sells them. The pointer over a row shows the item's tooltip, gear compared with what is
+    /// worn (<see cref="ItemTooltip"/>). Closes on Esc, the X button, or when the player walks away. Builds its own UI; place it on a RectTransform that fills the HUD canvas.
     /// </summary>
     [RequireComponent(typeof(RectTransform))]
     public class VendorWindow : MonoBehaviour
@@ -54,6 +56,10 @@ namespace RPG.UI
         private int pageCount = 1;
         private RectTransform pager;
         private Text pageText;
+        private ItemTooltip itemTooltip;
+        // What the tooltip was built for: rebuilt only when the row, its affix, the gold or the worn gear changes.
+        private Row tooltipRow;
+        private int tooltipSignature;
 
         private class Row
         {
@@ -137,6 +143,7 @@ namespace RPG.UI
             list.anchoredPosition = new Vector2(16f, ListTop);
             list.sizeDelta = new Vector2(width - 28f, 10f);
 
+            itemTooltip = new ItemTooltip(transform);
             window.SetActive(false);
         }
 
@@ -167,6 +174,7 @@ namespace RPG.UI
 
             foreach (Row row in rows) Destroy(row.Root);
             rows.Clear();
+            HideTooltip();
             ItemDefinition[] stock = definition != null ? definition.stock : Array.Empty<ItemDefinition>();
             pageCount = Mathf.Max(1, (stock.Length + PageSize - 1) / PageSize);
             page = Mathf.Clamp(page, 0, pageCount - 1);
@@ -212,6 +220,59 @@ namespace RPG.UI
         {
             window.SetActive(false);
             shown = null;
+            HideTooltip();
+        }
+
+        private void HideTooltip()
+        {
+            tooltipRow = null;
+            if (itemTooltip != null) itemTooltip.Hide();
+        }
+
+        /// <summary>The tooltip of the row under the pointer, compared with the worn gear.</summary>
+        private void UpdateTooltip(Inventory inventory)
+        {
+            Row over = null;
+            Mouse mouse = Mouse.current;
+            Canvas canvas = GetComponentInParent<Canvas>();
+            if (mouse != null)
+            {
+                Vector2 pointer = mouse.position.ReadValue();
+                Camera eventCamera = canvas != null && canvas.renderMode != RenderMode.ScreenSpaceOverlay ? canvas.worldCamera : null;
+                foreach (Row row in rows)
+                    if (RectTransformUtility.RectangleContainsScreenPoint((RectTransform)row.Root.transform, pointer, eventCamera))
+                    {
+                        over = row;
+                        break;
+                    }
+            }
+            ItemDefinition[] stock = shown.Definition != null ? shown.Definition.stock : Array.Empty<ItemDefinition>();
+            ItemDefinition item = over != null && over.StockIndex < stock.Length ? stock[over.StockIndex] : null;
+            if (item == null || inventory.Catalog == null)
+            {
+                HideTooltip();
+                return;
+            }
+
+            int affixId = shown.KnownAffix(over.StockIndex);
+            var stack = new ItemStack(inventory.Catalog.IdOf(item), 1, affixId);
+            int signature = affixId * 7919 + inventory.Gold;
+            int wornIndex = Inventory.IndexOf(item.slot);
+            for (int i = wornIndex; i >= 0 && i < wornIndex + 2; i++)
+            {
+                ItemStack worn = inventory.GetEquippedAt(i);
+                signature = signature * 31 + worn.ItemId * 17 + worn.AffixId + worn.EmpowerSteps;
+            }
+            if (over != tooltipRow || signature != tooltipSignature)
+            {
+                tooltipRow = over;
+                tooltipSignature = signature;
+                int price = inventory.BuyPrice(item, inventory.Affixes != null ? inventory.Affixes.Get(affixId) : null);
+                string hint = shown.KnownRemaining(over.StockIndex) == 0 ? "Sold out"
+                    : inventory.Gold < price ? $"Costs {price} gold: not enough gold" : $"Click to buy for {price} gold";
+                itemTooltip.Show(inventory, stack, hint, compare: true);
+            }
+            itemTooltip.Follow(canvas, new Vector2(0f, 1f), new Vector2(16f, -12f));
         }
 
         private Row CreateRow(int position, int stockIndex)
@@ -276,6 +337,7 @@ namespace RPG.UI
                 return;
             }
 
+            UpdateTooltip(inventory);
             var progress = inventory.GetComponent<CharacterProgress>();
             int level = progress != null ? progress.Level : 0;
             if (inventory.Gold == lastGold && level == lastLevel && Time.unscaledTime < nextRefresh) return;
