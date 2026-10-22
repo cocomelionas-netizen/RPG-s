@@ -58,7 +58,7 @@ and a Teleport button for every waypoint.
   (address and port) or Host (not in a browser); **Run a Server** starts a dedicated server. Enter logs in, Tab moves
   between the fields. The account name and the choice are remembered on the device; the password never is.
 - **Characters** – up to 6 per account (`AccountService.MaxCharacters`), each a card drawn in the gear it wears
-  (`HeroPreview`, the idle animation facing the viewer), the chosen one large in the middle with its level and class.
+  (`HeroPreview`, the idle animation turned three quarters to the viewer, so a bow or staff shows), the chosen one large in the middle with its level and class.
   **Enter World** (Enter, or a second click on the card), **New Character**, **Delete Character** (asks first), **Log Out**.
 - **New Character** – a name (unique in the account), a class (Warrior, Ranger, Mage, with a line about each) and Man or
   Woman; the preview wears the class's starting gear.

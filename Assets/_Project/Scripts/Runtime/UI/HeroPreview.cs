@@ -7,13 +7,18 @@ using UnityEngine.UI;
 namespace RPG.UI
 {
     /// <summary>
-    /// A hero drawn on the UI in its layers (<see cref="AvatarCatalog"/>), breathing in its idle animation and facing the
-    /// viewer: the character screens show each character with the looks of the gear it wears. Its feet stand at the bottom
+    /// A hero drawn on the UI in its layers (<see cref="AvatarCatalog"/>), breathing in its idle animation and turned three
+    /// quarters to the viewer: the character screens show each character with the looks of the gear it wears. Its feet stand at the bottom
     /// middle of its RectTransform; the figure is as tall as the rect.
     /// </summary>
     public class HeroPreview : MonoBehaviour
     {
         private static readonly AvatarSlot[] Slots = (AvatarSlot[])Enum.GetValues(typeof(AvatarSlot));
+
+        /// <summary>
+        /// Turned a little aside (three quarters): facing the viewer straight, the hero holds a bow or staff behind the body.
+        /// </summary>
+        private const Direction8 Facing = Direction8.SouthWest;
 
         private AvatarCatalog catalog;
         private readonly List<Image> images = new List<Image>();
@@ -55,11 +60,11 @@ namespace RPG.UI
             shownFrame = -1;
             if (catalog != null)
             {
-                foreach (AvatarSlot slot in catalog.OrderFor(Direction8.South))
+                foreach (AvatarSlot slot in catalog.OrderFor(Facing))
                 {
                     string look = looks != null && (int)slot < looks.Length ? looks[(int)slot] : null;
                     CharacterAnimationSet set = HeroAppearance.LookOf(catalog, female, slot, look);
-                    if (set == null || !set.TryGetFrames(CharacterAnimationSet.IdleClip, Direction8.South, out DirectionalClip clip,
+                    if (set == null || !set.TryGetFrames(CharacterAnimationSet.IdleClip, Facing, out DirectionalClip clip,
                             out Sprite[] clipFrames, out bool flipX) || clipFrames.Length == 0)
                         continue;
                     frames.Add(clipFrames);
