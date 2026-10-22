@@ -64,7 +64,8 @@ stutter. `RenderResolution` (builds only) draws the world at most about 1080 pix
 scale), while the HUD stays sharp at the full size, and turns HDR off. F8 shows the screen size and the share the world
 is drawn at.
 
-## Download size
-The big atlases (Flare's heroes, monsters, tiles and the avatar layers, thousands of pixels wide) are crunched DXT
-(`FlareAtlas`, quality 70): the browser downloads several times less than with plain DXT; the icons keep plain block
-compression. Measure the download with the files under `Build/` (their Content-Length).
+## Download size and speed
+Quality and smooth play come first. The atlases are plain high-quality block compression (crunching them made the
+download about 15 MB smaller but left blocky artifacts); WebAssembly is optimized for runtime speed (optimizing it for
+size made the game stutter). Unused managed code is stripped at Medium (`Assets/_Project/link.xml` keeps the game's own
+assembly, Netcode, its transport and the Input System), which only makes the download smaller.

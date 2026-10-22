@@ -74,13 +74,13 @@ namespace RPG.EditorTools
             PlayerSettings.WebGL.decompressionFallback = true;
             PlayerSettings.WebGL.dataCaching = true;
 
-            // The smallest download: code generated for size, unused managed code stripped (Medium; Assets/_Project/link.xml
-            // keeps the game's own and Netcode's), and WebAssembly optimized for size (a slower build, a smaller and quicker
-            // to load game).
-            PlayerSettings.SetIl2CppCodeGeneration(NamedBuildTarget.WebGL, Il2CppCodeGeneration.OptimizeSize);
+            // Smooth play first: WebAssembly optimized for runtime speed (optimizing for size made the game stutter);
+            // unused managed code is stripped (Medium; Assets/_Project/link.xml keeps the game's own and Netcode's),
+            // which makes the download smaller without slowing anything.
+            PlayerSettings.SetIl2CppCodeGeneration(NamedBuildTarget.WebGL, Il2CppCodeGeneration.OptimizeSpeed);
             PlayerSettings.SetManagedStrippingLevel(NamedBuildTarget.WebGL, ManagedStrippingLevel.Medium);
             PlayerSettings.stripEngineCode = true;
-            SetWasmCodeOptimization("DiskSize");
+            SetWasmCodeOptimization("RuntimeSpeed");
         }
 
         /// <summary>

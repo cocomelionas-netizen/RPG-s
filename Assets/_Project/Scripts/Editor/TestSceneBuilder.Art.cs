@@ -87,15 +87,11 @@ namespace RPG.EditorTools
             }
         }
 
-        /// <summary>Crunch quality of the big atlases (0-100): what the browser downloads shrinks several times.</summary>
-        private const int AtlasCrunchQuality = 70;
-
         /// <summary>
-        /// Imports an atlas of Flare's (or the icons'): block-compressed, and crunched unless <paramref name="crunch"/> is
-        /// false (the heroes' and monsters' atlases are thousands of pixels wide: crunched, the WebGL download is several
-        /// times smaller; small, sharp icons keep plain block compression).
+        /// Imports an atlas of Flare's (or the icons'): block-compressed at high quality. Not crunched: crunching made the
+        /// download smaller but left blocky artifacts on the heroes and monsters.
         /// </summary>
-        private static Texture2D FlareAtlas(string path, bool crunch = true)
+        private static Texture2D FlareAtlas(string path)
         {
             AssetDatabase.ImportAsset(path, ImportAssetOptions.ForceSynchronousImport);
             var importer = (TextureImporter)AssetImporter.GetAtPath(path);
@@ -110,9 +106,8 @@ namespace RPG.EditorTools
             importer.wrapMode = TextureWrapMode.Clamp;
             importer.maxTextureSize = 4096;
             importer.npotScale = TextureImporterNPOTScale.None;
-            importer.textureCompression = crunch ? TextureImporterCompression.Compressed : TextureImporterCompression.CompressedHQ;
-            importer.crunchedCompression = crunch;
-            importer.compressionQuality = AtlasCrunchQuality;
+            importer.textureCompression = TextureImporterCompression.CompressedHQ;
+            importer.crunchedCompression = false;
             importer.SaveAndReimport();
             return AssetDatabase.LoadAssetAtPath<Texture2D>(path);
         }
