@@ -3,7 +3,7 @@ using RPG.Progression;
 
 namespace RPG.Accounts
 {
-    /// <summary>A stored account: login data and its character. Saved as JSON.</summary>
+    /// <summary>A stored account: login data and its characters. Saved as JSON.</summary>
     [Serializable]
     public class AccountRecord
     {
@@ -11,13 +11,30 @@ namespace RPG.Accounts
         /// <summary>Base64 salt and PBKDF2 hash of the password; the password itself is never stored.</summary>
         public string salt;
         public string passwordHash;
+        /// <summary>The account's characters (up to <see cref="AccountService.MaxCharacters"/>).</summary>
+        public CharacterRecord[] characters = Array.Empty<CharacterRecord>();
+        /// <summary>
+        /// The one character of accounts saved before an account could have several (named like the account); moved into
+        /// <see cref="characters"/> when the account is loaded (<see cref="AccountService"/>).
+        /// </summary>
         public CharacterRecord character = new CharacterRecord();
+
+        /// <summary>The character with this name (not case sensitive), or null.</summary>
+        public CharacterRecord Find(string name)
+        {
+            string key = AccountService.NormalizeName(name);
+            foreach (CharacterRecord record in characters ?? Array.Empty<CharacterRecord>())
+                if (record != null && AccountService.NormalizeName(record.name) == key) return record;
+            return null;
+        }
     }
 
     /// <summary>Everything that is kept about a character between sessions.</summary>
     [Serializable]
     public class CharacterRecord
     {
+        /// <summary>The character's name, shown over its head.</summary>
+        public string name;
         public int classIndex;
         /// <summary>A woman (drawn as Flare's heroine) or a man.</summary>
         public bool female;

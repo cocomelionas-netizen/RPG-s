@@ -115,8 +115,7 @@ namespace RPG.Characters
             {
                 AvatarSlot slot = Slots[i];
                 ItemDefinition item = Worn(slot);
-                string look = item != null && !string.IsNullOrEmpty(item.appearance) ? item.appearance : AvatarCatalog.BareLook(slot);
-                looks[i] = catalog.Find(isFemale, slot, look) ?? catalog.Find(isFemale, slot, AvatarCatalog.BareLook(slot));
+                looks[i] = LookOf(catalog, isFemale, slot, item != null ? item.appearance : null);
             }
             attackClip = AttackClipOf(Worn(AvatarSlot.MainHand));
             CharacterAnimationSet chest = looks[(int)AvatarSlot.Chest];
@@ -126,18 +125,30 @@ namespace RPG.Characters
         private ItemDefinition Worn(AvatarSlot slot)
         {
             if (inventory == null || inventory.Catalog == null) return null;
-            ItemSlot itemSlot;
+            return inventory.Catalog.Get(inventory.GetEquipped(ItemSlotOf(slot)).ItemId);
+        }
+
+        /// <summary>The equipment slot a layer shows.</summary>
+        public static ItemSlot ItemSlotOf(AvatarSlot slot)
+        {
             switch (slot)
             {
-                case AvatarSlot.Head: itemSlot = ItemSlot.Head; break;
-                case AvatarSlot.Chest: itemSlot = ItemSlot.Chest; break;
-                case AvatarSlot.Legs: itemSlot = ItemSlot.Legs; break;
-                case AvatarSlot.Feet: itemSlot = ItemSlot.Feet; break;
-                case AvatarSlot.Hands: itemSlot = ItemSlot.Hands; break;
-                case AvatarSlot.MainHand: itemSlot = ItemSlot.Weapon; break;
-                default: itemSlot = ItemSlot.Shield; break;
+                case AvatarSlot.Head: return ItemSlot.Head;
+                case AvatarSlot.Chest: return ItemSlot.Chest;
+                case AvatarSlot.Legs: return ItemSlot.Legs;
+                case AvatarSlot.Feet: return ItemSlot.Feet;
+                case AvatarSlot.Hands: return ItemSlot.Hands;
+                case AvatarSlot.MainHand: return ItemSlot.Weapon;
+                default: return ItemSlot.Shield;
             }
-            return inventory.Catalog.Get(inventory.GetEquipped(itemSlot).ItemId);
+        }
+
+        /// <summary>A layer's look: the worn item's <paramref name="appearance"/>, or the bare look when it has none.</summary>
+        public static CharacterAnimationSet LookOf(AvatarCatalog catalog, bool female, AvatarSlot slot, string appearance)
+        {
+            if (catalog == null) return null;
+            string look = !string.IsNullOrEmpty(appearance) ? appearance : AvatarCatalog.BareLook(slot);
+            return catalog.Find(female, slot, look) ?? catalog.Find(female, slot, AvatarCatalog.BareLook(slot));
         }
 
         /// <summary>The attack a weapon plays: bows shoot, staves and wands cast, the rest (and bare hands) swing.</summary>

@@ -41,8 +41,8 @@ Assets/_Project/
       Navigation/      NavGrid (A*), WorldNavigation (pathfinding on the tilemap)
       Progression/     classes, abilities, levels and experience (CharacterProgress, AbilityCaster, LevelCurve)
       Controls/        PlayerInputReader
-      Accounts/        accounts, login, saving characters (AccountService, CharacterPersistence)
-      Networking/      NetworkBootstrap, PlayerNetworkMovement, MovementValidator, OfflineTransport, DevConnectionPanel, DevBot
+      Accounts/        accounts with up to 6 characters, login, saving characters (AccountService, AccountReply, CharacterPersistence)
+      Networking/      NetworkBootstrap, PlayerNetworkMovement, MovementValidator, OfflineTransport, DevConnectionPanel (the login screens), DevBot
       Player/          PlayerMovement
       UI/              UnitFrame, CombatTextLayer, AbilityBar, ExperienceBar, InventoryWindow, VendorWindow, NpcNameplates
       Vendors/         vendors (Vendor, VendorDefinition)

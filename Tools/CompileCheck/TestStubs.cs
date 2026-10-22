@@ -21,5 +21,5 @@ namespace Unity.Netcode {
     public void Add(T v){} public void Clear(){} public void RemoveAt(int i){} public int Count => 0; public T this[int i] { get => default; set {} }
   }
 }
-namespace UnityEngine.InputSystem { public class Mouse { public static Mouse current; public PosCtl position, scroll; public KeyCtl leftButton; } public class PosCtl { public Vector2 ReadValue()=>default; } public class Keyboard { public static Keyboard current; public KeyCtl f3Key, f8Key, f9Key; } public class KeyCtl { public bool wasPressedThisFrame, isPressed; } }
+namespace UnityEngine.InputSystem { public class Mouse { public static Mouse current; public PosCtl position, scroll; public KeyCtl leftButton; } public class PosCtl { public Vector2 ReadValue()=>default; } public class Keyboard { public static Keyboard current; public KeyCtl f3Key, f8Key, f9Key, enterKey, numpadEnterKey, escapeKey, tabKey; } public class KeyCtl { public bool wasPressedThisFrame, isPressed; } }
 namespace UnityEngine.Rendering.Universal { public class UniversalRenderPipelineAsset : UnityEngine.Rendering.RenderPipelineAsset { public float renderScale; public bool supportsHDR; public override UnityEngine.Rendering.RenderPipeline CreatePipeline() => null; } }

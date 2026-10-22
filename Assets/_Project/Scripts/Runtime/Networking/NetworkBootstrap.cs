@@ -37,6 +37,12 @@ namespace RPG.Networking
         /// <summary>Message from the last failed or closed connection, shown by the connection panel.</summary>
         public string LastDisconnectReason { get; private set; }
 
+        /// <summary>Waits for a remote server's answer to an account action (<see cref="RequestAccount"/>).</summary>
+        private System.Action<AccountReply> pendingReply;
+
+        /// <summary>True while a remote account action waits for its answer.</summary>
+        public bool AwaitingReply => pendingReply != null;
+
         private void Awake()
         {
             network = GetComponent<NetworkManager>();
@@ -95,6 +101,35 @@ namespace RPG.Networking
         public void SetLogin(LoginRequest login)
         {
             network.NetworkConfig.ConnectionData = login != null ? login.ToBytes() : System.Array.Empty<byte>();
+        }
+
+        /// <summary>
+        /// An account action other than playing (create the account, list, create or delete a character): answered at once
+        /// by this game's own accounts (offline and hosting), or by the server at <paramref name="address"/> when
+        /// <paramref name="remote"/> (it refuses the connection with the <see cref="AccountReply"/> as the reason).
+        /// </summary>
+        public void RequestAccount(LoginRequest request, bool remote, string address, ushort port, System.Action<AccountReply> done)
+        {
+            if (!remote)
+            {
+                done(accounts != null ? accounts.Handle(request) : AccountReply.Failed("This game has no accounts."));
+                return;
+            }
+            if (network.IsListening || network.ShutdownInProgress || pendingReply != null)
+            {
+                done(AccountReply.Failed("Still busy with the server, try again."));
+                return;
+            }
+            pendingReply = done;
+            SetLogin(request);
+            if (!StartClient(address, port)) AnswerPending(AccountReply.Failed("Could not reach the server."));
+        }
+
+        private void AnswerPending(AccountReply reply)
+        {
+            System.Action<AccountReply> done = pendingReply;
+            pendingReply = null;
+            done?.Invoke(reply);
         }
 
         /// <summary>
@@ -175,7 +210,16 @@ namespace RPG.Networking
         {
             if (accounts != null)
             {
-                string error = accounts.LogIn(LoginRequest.FromBytes(request.Payload), request.ClientNetworkId);
+                LoginRequest login = LoginRequest.FromBytes(request.Payload);
+                if (login != null && login.action != AccountAction.Play)
+                {
+                    // An account action: answered in the refusal, nobody enters the world.
+                    response.Approved = false;
+                    response.Reason = accounts.Handle(login).ToReason();
+                    response.Pending = false;
+                    return;
+                }
+                string error = accounts.LogIn(login, request.ClientNetworkId);
                 if (error != null)
                 {
                     response.Approved = false;
@@ -211,6 +255,12 @@ namespace RPG.Networking
         {
             if (network.IsServer)
                 Debug.Log($"[Server] Client {clientId} connected. Players online: {network.ConnectedClientsIds.Count}.");
+            else if (clientId == network.LocalClientId && pendingReply != null)
+            {
+                // An older server let an account action in: leave again.
+                network.Shutdown();
+                AnswerPending(AccountReply.Failed("The server does not know character lists."));
+            }
             else if (clientId == network.LocalClientId)
                 Debug.Log("[Client] Connected.");
         }
@@ -224,6 +274,14 @@ namespace RPG.Networking
                 return;
             }
 
+            AccountReply reply = AccountReply.FromReason(network.DisconnectReason);
+            if (pendingReply != null)
+            {
+                LastDisconnectReason = null;
+                AnswerPending(reply ?? AccountReply.Failed(string.IsNullOrEmpty(network.DisconnectReason)
+                    ? "Could not reach the server." : network.DisconnectReason));
+                return;
+            }
             LastDisconnectReason = string.IsNullOrEmpty(network.DisconnectReason) ? "Disconnected from server." : network.DisconnectReason;
             Debug.Log($"[Client] {LastDisconnectReason}");
         }

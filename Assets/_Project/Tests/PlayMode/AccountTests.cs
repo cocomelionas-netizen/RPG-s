@@ -49,18 +49,99 @@ namespace RPG.Tests
                 var service = go.AddComponent<AccountService>();
                 service.UseStore(new MemoryAccountStore());
 
-                Assert.IsNull(service.LogIn(Request("Hero", "secret", true), 1));
+                Assert.IsNull(service.LogIn(Request("Hero", "secret", true), 1), "Quick start: account and character at once.");
                 Assert.IsTrue(service.IsOnline("hero"));
-                Assert.IsNotNull(service.Check(Request("Hero", "secret", false)), "Already in the game.");
+                Assert.IsNotNull(service.Check(Play("Hero", "secret", "Hero")), "Already in the game.");
 
                 service.LogOut(1);
-                Assert.IsNull(service.Check(Request("hero", "secret", false)), "Names are not case sensitive.");
-                Assert.IsNotNull(service.Check(Request("Hero", "wrong", false)), "Wrong password.");
-                Assert.IsNotNull(service.Check(Request("Nobody", "secret", false)), "No such account.");
-                Assert.IsNotNull(service.Check(Request("Hero", "secret", true)), "Name taken.");
-                Assert.IsNotNull(service.Check(Request("ab", "secret", true)), "Name too short.");
-                Assert.IsNotNull(service.Check(Request("bad name!", "secret", true)), "Invalid characters.");
-                Assert.IsNotNull(service.Check(Request("Other", "123", true)), "Password too short.");
+                Assert.IsNull(service.Check(Play("hero", "secret", "HERO")), "Names are not case sensitive.");
+                Assert.IsNotNull(service.Check(Play("Hero", "wrong", "Hero")), "Wrong password.");
+                Assert.IsNotNull(service.Check(Play("Nobody", "secret", "Nobody")), "No such account.");
+                Assert.IsNotNull(service.Check(Play("Hero", "secret", "Nobody")), "No such character.");
+                Assert.IsNotNull(service.Handle(Action("Hero", "secret", AccountAction.Register)).error, "Name taken.");
+                Assert.IsNotNull(service.Handle(Action("ab", "secret", AccountAction.Register)).error, "Name too short.");
+                Assert.IsNotNull(service.Handle(Action("bad name!", "secret", AccountAction.Register)).error, "Invalid characters.");
+                Assert.IsNotNull(service.Handle(Action("Other", "123", AccountAction.Register)).error, "Password too short.");
+            }
+            finally
+            {
+                Object.DestroyImmediate(go);
+            }
+        }
+
+        [Test]
+        public void Account_HoldsSeveralCharacters_CreatedAndDeleted()
+        {
+            var go = new GameObject("Accounts");
+            try
+            {
+                var service = go.AddComponent<AccountService>();
+                service.UseStore(new MemoryAccountStore());
+
+                AccountReply reply = service.Handle(Action("Player", "secret", AccountAction.Register));
+                Assert.IsNull(reply.error);
+                Assert.AreEqual(0, reply.characters.Length);
+                Assert.IsNotNull(service.Check(Play("Player", "secret", "")), "No character to play yet.");
+
+                LoginRequest create = Action("Player", "secret", AccountAction.CreateCharacter);
+                create.character = "Aldric";
+                create.classIndex = 2;
+                create.female = true;
+                reply = service.Handle(create);
+                Assert.IsNull(reply.error);
+                create.character = "Brakka";
+                create.classIndex = 0;
+                create.female = false;
+                reply = service.Handle(create);
+                Assert.AreEqual(2, reply.characters.Length);
+                Assert.AreEqual("Aldric", reply.characters[0].name);
+                Assert.AreEqual(2, reply.characters[0].classIndex);
+                Assert.IsTrue(reply.characters[0].female);
+                Assert.AreEqual(1, reply.characters[1].level);
+                Assert.IsNotNull(service.Handle(create).error, "Names are unique in an account.");
+
+                var wrong = Action("Player", "wrong", AccountAction.List);
+                Assert.IsNotNull(service.Handle(wrong).error, "The list needs the password.");
+
+                Assert.IsNull(service.LogIn(Play("Player", "secret", "brakka"), 7));
+                Assert.IsTrue(service.TryGetCharacter(7, out _, out CharacterRecord playing));
+                Assert.AreEqual("Brakka", playing.name);
+                service.LogOut(7);
+
+                LoginRequest delete = Action("Player", "secret", AccountAction.DeleteCharacter);
+                delete.character = "Aldric";
+                reply = service.Handle(delete);
+                Assert.IsNull(reply.error);
+                Assert.AreEqual(1, reply.characters.Length);
+                Assert.AreEqual("Brakka", reply.characters[0].name);
+                Assert.AreEqual(1, service.Handle(Action("Player", "secret", AccountAction.List)).characters.Length);
+            }
+            finally
+            {
+                Object.DestroyImmediate(go);
+            }
+        }
+
+        [Test]
+        public void OldAccount_ItsCharacterJoinsTheList()
+        {
+            var go = new GameObject("Accounts");
+            try
+            {
+                var service = go.AddComponent<AccountService>();
+                var memory = new MemoryAccountStore();
+                service.UseStore(memory);
+                string salt = PasswordHasher.NewSalt();
+                memory.Save(new AccountRecord
+                {
+                    username = "Veteran", salt = salt, passwordHash = PasswordHasher.Hash("secret", salt),
+                    character = new CharacterRecord { classIndex = 1, level = 9, hasBeenSaved = true },
+                });
+
+                AccountReply reply = service.Handle(Action("Veteran", "secret", AccountAction.List));
+                Assert.AreEqual(1, reply.characters.Length);
+                Assert.AreEqual("Veteran", reply.characters[0].name);
+                Assert.AreEqual(9, reply.characters[0].level);
             }
             finally
             {
@@ -126,6 +207,7 @@ namespace RPG.Tests
                 username = "Hero",
                 salt = salt,
                 passwordHash = PasswordHasher.Hash("secret", salt),
+                // Saved before accounts held several characters: it becomes the account's character "Hero".
                 character = new CharacterRecord
                 {
                     classIndex = 1,
@@ -140,7 +222,7 @@ namespace RPG.Tests
                 },
             });
 
-            bootstrap.SetLogin(Request("Hero", "secret", false));
+            bootstrap.SetLogin(Play("Hero", "secret", "Hero"));
             Assert.IsTrue(bootstrap.StartHost((ushort)Random.Range(20000, 40000)));
             yield return WaitForPlayer();
 
@@ -160,11 +242,12 @@ namespace RPG.Tests
             player.GetComponent<CharacterPersistence>().ServerSave();
 
             Assert.IsTrue(store.TryLoad("hero", out AccountRecord saved));
-            Assert.AreEqual(4, saved.character.level);
-            Assert.AreEqual(1, saved.character.classIndex);
-            Assert.AreEqual(40 + LevelCurve.ExperienceToNext(3), saved.character.experienceToSpend, "Earned experience is also there to spend.");
-            Assert.AreEqual(3, saved.character.bag[0].affix, "The affix is saved with the item.");
-            Assert.AreEqual(0b101, saved.character.waystones);
+            CharacterRecord savedHero = saved.Find("Hero");
+            Assert.AreEqual(4, savedHero.level);
+            Assert.AreEqual(1, savedHero.classIndex);
+            Assert.AreEqual(40 + LevelCurve.ExperienceToNext(3), savedHero.experienceToSpend, "Earned experience is also there to spend.");
+            Assert.AreEqual(3, savedHero.bag[0].affix, "The affix is saved with the item.");
+            Assert.AreEqual(0b101, savedHero.waystones);
         }
 
         [UnityTest]
@@ -189,9 +272,10 @@ namespace RPG.Tests
             Assert.AreEqual(4, inventory.Armor, "The clothes give 1 armor each.");
 
             Assert.IsTrue(store.TryLoad("Newbie", out AccountRecord saved));
-            Assert.IsTrue(saved.character.hasBeenSaved);
-            Assert.AreEqual(2, saved.character.classIndex);
-            Assert.IsTrue(System.Array.Exists(saved.character.equipment, record => record.id == inventory.Catalog.IdOf(weapon)),
+            CharacterRecord newbie = saved.Find("Newbie");
+            Assert.IsTrue(newbie.hasBeenSaved);
+            Assert.AreEqual(2, newbie.classIndex);
+            Assert.IsTrue(System.Array.Exists(newbie.equipment, record => record.id == inventory.Catalog.IdOf(weapon)),
                 "The starting weapon is saved with the character.");
         }
 
@@ -225,7 +309,7 @@ namespace RPG.Tests
             string salt = PasswordHasher.NewSalt();
             store.Save(new AccountRecord { username = "Hero", salt = salt, passwordHash = PasswordHasher.Hash("secret", salt) });
 
-            bootstrap.SetLogin(Request("Hero", "wrong", false));
+            bootstrap.SetLogin(Play("Hero", "wrong", "Hero"));
             Assert.IsFalse(bootstrap.StartHost((ushort)Random.Range(20000, 40000)));
             Assert.IsFalse(network.IsListening);
             Assert.IsFalse(string.IsNullOrEmpty(bootstrap.LastDisconnectReason));
@@ -235,6 +319,12 @@ namespace RPG.Tests
         {
             return new LoginRequest { username = name, password = password, createCharacter = create };
         }
+
+        private static LoginRequest Play(string name, string password, string character) =>
+            new LoginRequest { username = name, password = password, character = character };
+
+        private static LoginRequest Action(string name, string password, AccountAction action) =>
+            new LoginRequest { username = name, password = password, action = action };
 
         private IEnumerator ShutdownNetwork()
         {

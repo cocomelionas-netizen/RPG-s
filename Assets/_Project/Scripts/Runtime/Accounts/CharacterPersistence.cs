@@ -33,6 +33,7 @@ namespace RPG.Accounts
         private PlayerNetworkMovement networkMovement;
         private AccountService accounts;
         private AccountRecord account;
+        private CharacterRecord character;
         private float nextAutosave;
         private float saveChangesAt = -1f;
 
@@ -56,9 +57,13 @@ namespace RPG.Accounts
             if (!IsServer) return;
 
             accounts = NetworkManager.GetComponent<AccountService>();
-            if (accounts == null || !accounts.TryGetAccount(OwnerClientId, out account)) return;
+            if (accounts == null || !accounts.TryGetCharacter(OwnerClientId, out account, out character))
+            {
+                account = null;
+                return;
+            }
 
-            Load(account.character);
+            Load(character);
             progress.Changed += OnCharacterChanged;
             inventory.Changed += OnCharacterChanged;
             if (spellbook != null) spellbook.Changed += OnCharacterChanged;
@@ -90,7 +95,7 @@ namespace RPG.Accounts
 
         private void Load(CharacterRecord saved)
         {
-            health.ServerSetDisplayName(account.username);
+            health.ServerSetDisplayName(saved.name);
             if (appearance != null) appearance.ServerSetFemale(saved.female);
             progress.ServerLoad(saved.classIndex, saved.level, saved.experience, saved.spentPoints, saved.experienceToSpend);
             if (!saved.hasBeenSaved)
@@ -110,7 +115,7 @@ namespace RPG.Accounts
             bool inDungeon = RPG.Dungeons.DungeonManager.Instance != null && RPG.Dungeons.DungeonManager.Instance.InstanceAt(position) != null;
             bool safe = navigation != null && navigation.IsWalkable(position) && !inDungeon;
             if (safe && networkMovement != null) networkMovement.ServerTeleport(position);
-            Debug.Log($"[Accounts] Loaded {account.username}: level {saved.level} {progress.ClassName}.");
+            Debug.Log($"[Accounts] Loaded {saved.name} ({account.username}): level {saved.level} {progress.ClassName}.");
         }
 
         /// <summary>Server: writes the character to its account now.</summary>
@@ -118,7 +123,7 @@ namespace RPG.Accounts
         {
             if (!IsServer || account == null) return;
 
-            CharacterRecord record = account.character;
+            CharacterRecord record = character;
             record.classIndex = progress.ClassIndex;
             if (appearance != null) record.female = appearance.IsFemale;
             record.level = progress.Level;

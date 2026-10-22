@@ -48,3 +48,23 @@ single player, or the one hosting); the server checks it. Buttons: Level +1, Lev
 Fast (Haste +200 %), All spells (every spell of the class learned), Potions and food (10 of each), Gems (3 of each), Orbs,
 keys and scrolls (1 of each), Gear of my level (one piece of the class's gear per slot), Empty the bag, All waypoints,
 and a Teleport button for every waypoint.
+
+## Login and characters
+
+`DevConnectionPanel` (on the NetworkManager) draws the login screens on a canvas of its own over the painted island
+(`Resources/UI/Map/World.png`, drifting slowly):
+
+- **Log In** – account name and password, **Log In** or **Create Account**, and where to play: Offline, Join Server
+  (address and port) or Host (not in a browser); **Run a Server** starts a dedicated server. Enter logs in, Tab moves
+  between the fields. The account name and the choice are remembered on the device; the password never is.
+- **Characters** – up to 6 per account (`AccountService.MaxCharacters`), each a card drawn in the gear it wears
+  (`HeroPreview`, the idle animation facing the viewer), the chosen one large in the middle with its level and class.
+  **Enter World** (Enter, or a second click on the card), **New Character**, **Delete Character** (asks first), **Log Out**.
+- **New Character** – a name (unique in the account), a class (Warrior, Ranger, Mage, with a line about each) and Man or
+  Woman; the preview wears the class's starting gear.
+- While playing only a small bar under the minimap stays: where you play and **Log Out**, which returns to Characters.
+
+Account actions are `LoginRequest.action` (Register, List, CreateCharacter, DeleteCharacter, Play): offline and when
+hosting `AccountService.Handle` answers at once; a remote server answers by refusing the connection with the
+`AccountReply` as its reason (`NetworkBootstrap.RequestAccount`). Only Play enters the world. Accounts saved before
+they held several characters keep their character, named like the account (`AccountService.Upgrade`).

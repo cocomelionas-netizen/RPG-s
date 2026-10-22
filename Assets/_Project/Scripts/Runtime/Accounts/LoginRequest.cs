@@ -4,16 +4,41 @@ using UnityEngine;
 
 namespace RPG.Accounts
 {
-    /// <summary>What a client sends when it connects (the connection payload): log in, or create an account and character.</summary>
+    /// <summary>What a login asks for.</summary>
+    public enum AccountAction
+    {
+        /// <summary>Enter the world as <see cref="LoginRequest.character"/>.</summary>
+        Play,
+        /// <summary>Create the account (no characters yet).</summary>
+        Register,
+        /// <summary>Check the password and list the account's characters.</summary>
+        List,
+        /// <summary>Add a character (<see cref="LoginRequest.character"/>, class, gender).</summary>
+        CreateCharacter,
+        /// <summary>Delete the character <see cref="LoginRequest.character"/>.</summary>
+        DeleteCharacter,
+    }
+
+    /// <summary>
+    /// What a client sends when it connects (the connection payload): an account action. Only <see cref="AccountAction.Play"/>
+    /// enters the world; the others are answered with an <see cref="AccountReply"/> (as the refusal's reason).
+    /// </summary>
     [Serializable]
     public class LoginRequest
     {
         public string username = "";
         public string password = "";
+        public AccountAction action;
+        /// <summary>The character to play, create or delete.</summary>
+        public string character = "";
+        /// <summary>
+        /// Quick start (bots, tests): with <see cref="AccountAction.Play"/>, creates the account and a character named like it
+        /// when they do not exist yet.
+        /// </summary>
         public bool createCharacter;
-        /// <summary>Class of the new character (only used with <see cref="createCharacter"/>).</summary>
+        /// <summary>Class of a new character.</summary>
         public int classIndex;
-        /// <summary>Whether the new character is a woman (only used with <see cref="createCharacter"/>).</summary>
+        /// <summary>Whether a new character is a woman.</summary>
         public bool female;
 
         public byte[] ToBytes() => Encoding.UTF8.GetBytes(JsonUtility.ToJson(this));
