@@ -121,7 +121,7 @@ namespace RPG.UI
             return root;
         }
 
-        /// <summary>"Decrepit Tower" over "Level 25 · Tower Key · up to 4 players"; "Exit" or "Exit to St. Revere".</summary>
+        /// <summary>"Crumbling Tower" over "Level 25 · Tower Key · up to 4 players"; "Exit" or "Exit to St. Aurelis".</summary>
         private static string PortalText(Portal portal)
         {
             if (portal.Kind == PortalKind.DungeonExit)

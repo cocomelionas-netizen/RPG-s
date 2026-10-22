@@ -29,7 +29,7 @@ namespace RPG.Tests
             public bool TurnedInQuest(int quest) => TurnedIn.Contains(quest);
         }
 
-        /// <summary>Laudrus' menu (1) and the beer menu (26) as the source game has them, and a bank reply.</summary>
+        /// <summary>Halvard' menu (1) and the beer menu (26) as the source game has them, and a bank reply.</summary>
         private static GossipCatalog Catalog()
         {
             var catalog = ScriptableObject.CreateInstance<GossipCatalog>();

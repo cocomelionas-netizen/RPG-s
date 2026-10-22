@@ -26,7 +26,7 @@ namespace RPG.Tests
         private const string LootBagPrefabPath = "Assets/_Project/Prefabs/World/LootBag.prefab";
         private const string DungeonsFolder = "Assets/_Project/Data/Dungeons";
         private const string ItemsFolder = "Assets/_Project/Data/Items";
-        // The source game's Decrepit Tower: level 25, a Tower Key, two bosses, many containers.
+        // The source game's Crumbling Tower: level 25, a Tower Key, two bosses, many containers.
         private const string TowerPath = DungeonsFolder + "/DecrepitTower.asset";
         private const string GarrisonPath = DungeonsFolder + "/TheLowerGarrison.asset";
 

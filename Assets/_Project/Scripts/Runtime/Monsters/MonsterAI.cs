@@ -158,7 +158,7 @@ namespace RPG.Monsters
         /// <summary>Monsters go above the players' top level: the source game's dungeon bosses are 28 and 30.</summary>
         public const int MaxLevel = 30;
 
-        // The source game's normal monsters: 60 health at level 1 (Antling) and 7340 at level 25 (Zhendale Brute); its
+        // The source game's normal monsters: 60 health at level 1 (Mandiblet) and 7340 at level 25 (Korthian Brute); its
         // server works out the rest, so between and beyond those a power curve through both. Their damage grows as fast as
         // players' health does (LevelCurve.HealthGrowth, the source game's), so a monster of your level is as dangerous
         // at 25 as at 1.
@@ -184,7 +184,7 @@ namespace RPG.Monsters
 
         // ---------- Elites ----------
 
-        // The source game's elites have three times the health of normal monsters (Zhendale Elite 22025, Brute 7340).
+        // The source game's elites have three times the health of normal monsters (Korthian Elite 22025, Brute 7340).
         public const float EliteHealthScale = 3f;
         public const float EliteDamageScale = 1.5f;
         public const int EliteRewardScale = 3;
@@ -375,7 +375,7 @@ namespace RPG.Monsters
                 NetworkObject player = client.PlayerObject;
                 if (player == null || !player.TryGetComponent(out Health playerHealth)) continue;
                 if (playerHealth.IsDead || !health.IsHostileTo(playerHealth)) continue;
-                // Stealthed (Vanish) players are not noticed.
+                // Stealthed (Fade) players are not noticed.
                 if (playerHealth.Effects != null && playerHealth.Effects.IsStealthed) continue;
 
                 // Only players it can see: not through walls.

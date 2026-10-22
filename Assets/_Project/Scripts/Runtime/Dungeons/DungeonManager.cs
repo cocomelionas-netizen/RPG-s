@@ -307,7 +307,7 @@ namespace RPG.Dungeons
 
         /// <summary>
         /// The entrance in the world that opens <paramref name="dungeon"/>; for a dungeon entered through a door inside
-        /// another (Salmaster's Descent, Telamont's Sanctuary) the outer dungeon's entrance; any world entrance only when
+        /// another (Corvalis's Descent, Mirethane's Sanctuary) the outer dungeon's entrance; any world entrance only when
         /// there is none at all.
         /// </summary>
         private Portal WorldEntranceOf(DungeonDefinition dungeon)

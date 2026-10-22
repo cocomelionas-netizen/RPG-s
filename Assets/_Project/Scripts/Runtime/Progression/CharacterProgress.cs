@@ -97,7 +97,7 @@ namespace RPG.Progression
             }
         }
 
-        /// <summary>What buffs add: a share of the main attributes (Blessing of Champions), Intelligence, spell critical.</summary>
+        /// <summary>What buffs add: a share of the main attributes (Benediction of Heroes), Intelligence, spell critical.</summary>
         private AttributeSet EffectBonus(AttributeSet total)
         {
             var bonus = new AttributeSet();

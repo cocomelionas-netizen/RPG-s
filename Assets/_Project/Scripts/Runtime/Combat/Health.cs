@@ -207,7 +207,7 @@ namespace RPG.Combat
         public void Heal(int amount, bool announce = false)
         {
             if (!IsServer || IsDead || amount <= 0) return;
-            // Healing reductions (Ethereal Sting) and boosts.
+            // Healing reductions (Spectral Sting) and boosts.
             if (effects != null) amount = Mathf.RoundToInt(amount * effects.HealingTakenMultiplier);
             if (amount <= 0) return;
             int healed = Mathf.Min(max.Value, current.Value + amount) - current.Value;
@@ -224,7 +224,7 @@ namespace RPG.Combat
             else current.Value = Mathf.Min(current.Value, max.Value);
         }
 
-        /// <summary>Server only: brings a dead unit back with some health (Redemption).</summary>
+        /// <summary>Server only: brings a dead unit back with some health (Deliverance).</summary>
         public void ServerRevive(int amount)
         {
             if (!IsServer || !IsDead) return;

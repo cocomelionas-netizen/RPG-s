@@ -11,7 +11,7 @@ namespace RPG.World
     /// <summary>
     /// On the player: runs the scripts of the gossip replies it picks (<see cref="GossipCatalog"/>). The server checks
     /// that the player stands at the townsperson, that the reply is one of its menus' and that its conditions are met,
-    /// then casts the script's spells on the player (Cinaed's beer), gives talk credit (for quests) and has the NPC speak.
+    /// then casts the script's spells on the player (Breda's beer), gives talk credit (for quests) and has the NPC speak.
     /// Pointing the way to an NPC is done by the window itself.
     /// </summary>
     [RequireComponent(typeof(Health))]

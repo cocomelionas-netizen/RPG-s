@@ -87,3 +87,12 @@ builder sets their nine-slice borders (`ImportUiFrames`).
 (`Resources/UI/Map/<Kind>.png`, 64 px: a coloured disc in a golden rim with a white glyph from game-icons.net, CC-BY 3.0,
 credited in `Resources/UI/CREDITS.md`; `Player.png` an arrow, `Pin.png` a marker pin). The builder imports the picture as
 a mipmapped texture (`ImportWorldMapPicture`) and the badges as sprites (`ImportUiFrames`).
+
+## Lakes
+
+`Tools/Art/water.py` (numpy, Pillow) paints `Assets/_Project/Art/Water/Water.png`: 256 isometric water tiles (128 × 64,
+16 × 16 in the atlas), this project's own. Each lake cell is drawn on the **Water** tilemap over a grass tile, its tile
+chosen by which neighbours are land (`WaterMask`: land edges 1 x + 1, 2 y + 1, 4 x − 1, 8 y − 1, plus land corners whose
+two edges are water, 16 / 32 / 64 / 128): water deeper away from the shore, and toward land a bank of wet sand and foam
+that fades into the grass, its corners rounded. Ripples and the shore's wobble repeat with the cell lattice, so the
+tiles meet without seams. (Flare's own water tiles were only the dark lake bed.)

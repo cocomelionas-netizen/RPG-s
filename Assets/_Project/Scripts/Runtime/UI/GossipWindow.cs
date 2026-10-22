@@ -199,7 +199,7 @@ namespace RPG.UI
             }
         }
 
-        /// <summary>The source game's narration (&lt;Vincent hesitates.&gt;) in grey italics.</summary>
+        /// <summary>The source game's narration (&lt;Aldric hesitates.&gt;) in grey italics.</summary>
         private string Narration(string text) =>
             System.Text.RegularExpressions.Regex.Replace(text, "<([^<>]*)>", $"<color=#{ColorUtility.ToHtmlStringRGB(narrationColor)}><i>$1</i></color>");
 

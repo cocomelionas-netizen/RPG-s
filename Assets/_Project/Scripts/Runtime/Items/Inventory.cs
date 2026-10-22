@@ -1164,7 +1164,7 @@ namespace RPG.Items
 
         /// <summary>
         /// Server: puts an item together with the ones it combines with (one of each) into its result, like the source game's
-        /// Dale Gem on a Depleted Key. Nothing is used up when one is missing or there is no room.
+        /// Dale Gem on a Spent Key. Nothing is used up when one is missing or there is no room.
         /// </summary>
         public bool ServerCombineFrom(ItemDefinition item)
         {

@@ -85,7 +85,7 @@ namespace RPG.EditorTools
         private const float MonsterActivationRange = 22f;
         private const int MapWidth = StartAreaData.Width;
         private const int MapHeight = StartAreaData.Height;
-        // New characters start in Pilgrim's Refuge; the main town with the vendors is St. Revere, like in the source game.
+        // New characters start in Wayfarer's Haven; the main town with the vendors is St. Aurelis, like in the source game.
         private static Vector3Int StartCell => StartAreaData.Start;
         private static Vector3Int TownCell => StartAreaData.Town;
         // Paved squares, and areas without rocks or trees, around both.
@@ -181,7 +181,9 @@ namespace RPG.EditorTools
             Tilemap ground = CreateTilemap(grid, "Ground", -100, TilemapRenderer.Mode.Chunk);
             Tilemap obstacles = CreateTilemap(grid, "Obstacles", 0, TilemapRenderer.Mode.Individual);
             Tilemap decor = CreateTilemap(grid, "Decor", 0, TilemapRenderer.Mode.Individual);
-            PaintTestMap(ground, obstacles, decor, worldTiles, blockedTile);
+            // The lakes over the grass: their banks fade into it.
+            Tilemap water = CreateTilemap(grid, "Water", -99, TilemapRenderer.Mode.Chunk);
+            PaintTestMap(ground, water, obstacles, decor, worldTiles, blockedTile);
             PlaceTrees(obstacles, worldTiles);
             // The rocks and trees block as one merged static shape rather than tens of thousands of tile boxes.
             var obstacleBody = obstacles.gameObject.AddComponent<Rigidbody2D>();
@@ -316,14 +318,16 @@ namespace RPG.EditorTools
 
         /// <summary>
         /// The source game's ground (<see cref="WorldMapData"/>, from its fanadin.map) in Flare's art: grass everywhere, its
-        /// walls, fences and rocks as rock pillars, its lakes as water (blocked by an invisible tile), its trees and other
-        /// blocked objects as tree cells (drawn by <see cref="PlaceTrees"/>), a paved square in the middle of St. Revere and
+        /// walls, fences and rocks as rock pillars, its lakes as water with sandy banks over the grass (blocked by an invisible tile), its trees and other
+        /// blocked objects as tree cells (drawn by <see cref="PlaceTrees"/>), a paved square in the middle of St. Aurelis and
         /// at the start, and here and there tall grass and reeds on open ground.
         /// </summary>
-        private static void PaintTestMap(Tilemap ground, Tilemap obstacles, Tilemap decor, WorldTiles tiles, Tile blockedTile)
+        private static void PaintTestMap(Tilemap ground, Tilemap water, Tilemap obstacles, Tilemap decor, WorldTiles tiles, Tile blockedTile)
         {
             var random = new System.Random(Seed);
             T Any<T>(T[] options) => options[random.Next(options.Length)];
+            bool IsWater(int cx, int cy) => cy >= 0 && cy < MapHeight && cx >= 0 && cx < WorldMapData.Rows[cy].Length && cx < MapWidth
+                                            && WorldMapData.Rows[cy][cx] == WorldMapData.Water;
             TreeCells.Clear();
             for (int y = 0; y < MapHeight; y++)
             {
@@ -335,7 +339,8 @@ namespace RPG.EditorTools
                     bool square = Within(cell, TownCell, TownSquareRadius) || Within(cell, StartCell, StartSquareRadius);
                     if (kind == WorldMapData.Water)
                     {
-                        ground.SetTile(cell, Any(tiles.Water));
+                        ground.SetTile(cell, Any(tiles.Grass));
+                        water.SetTile(cell, tiles.Water[WaterMask(IsWater, x, y)]);
                         obstacles.SetTile(cell, blockedTile);
                         continue;
                     }
@@ -1729,7 +1734,7 @@ namespace RPG.EditorTools
                 spawner.Configure(prefab, 1, 0.6f, respawn);
                 spawner.EliteChance = elite ? 1f : 0f;
                 spawner.Level = level;
-                // The source game's name, and its junk; horned beasts and Lesser Wyrms sometimes drop Keys to the Barracks.
+                // The source game's name, and its junk; horned beasts and Lesser Basilisks sometimes drop Keys to the Barracks.
                 if (!string.IsNullOrEmpty(sourceName)) spawner.DisplayName = sourceName;
                 // Like the source game: neutral kinds fight only when attacked, some spots stand still, bosses shrug off stuns.
                 spawner.Passive = Array.IndexOf(MonsterData.Passive, sourceName) >= 0;
@@ -1737,7 +1742,7 @@ namespace RPG.EditorTools
                 spawner.ControlImmune = Array.IndexOf(MonsterData.ControlImmune, sourceName) >= 0;
                 spawner.Spells = MonsterSpellsFor(sourceName);
                 int keyLoot = KeyDropperLoot(cell);
-                // ... and the wyrms Draconic Treasure and Flawless gems (DungeonData.OutdoorLoot).
+                // ... and the wyrms Dragonforged Treasure and Flawless gems (DungeonData.OutdoorLoot).
                 int ownLoot = !string.IsNullOrEmpty(sourceName) && DungeonData.OutdoorLoot.TryGetValue(sourceName, out int loot) ? loot : 0;
                 spawner.BonusLoot = JunkLoot(sourceName, level).Concat(keyLoot > 0 ? DungeonLoot(keyLoot) : Array.Empty<LootEntry>())
                     .Concat(ownLoot > 0 ? DungeonLoot(ownLoot) : Array.Empty<LootEntry>()).ToArray();

@@ -10,7 +10,7 @@ using UnityEngine.UI;
 namespace RPG.UI
 {
     /// <summary>
-    /// The source game's TRANSMUTE window at a transmuter (Reginald): a 4 x 3 grid and Confirm. Items are put in by
+    /// The source game's TRANSMUTE window at a transmuter (Mortimer): a 4 x 3 grid and Confirm. Items are put in by
     /// dragging them from the bag or clicking them in the bag, and taken out by clicking the grid slot. When what is in the
     /// grid makes a recipe, its result is shown and Confirm makes it (the server checks it again,
     /// <see cref="Inventory.ServerTransmute"/>). "Recipes" lists what the transmuter knows. Closes on Esc, the X button, or

@@ -24,11 +24,11 @@ namespace RPG.Progression
         Charge,
         /// <summary>Moves the caster to the point under the pointer.</summary>
         Teleport,
-        /// <summary>Leaps the caster away from its target (Tactical Retreat).</summary>
+        /// <summary>Leaps the caster away from its target (Strategic Retreat).</summary>
         Retreat,
-        /// <summary>Takes the caster to St. Revere (Illusion Gate).</summary>
+        /// <summary>Takes the caster to St. Aurelis (Mirage Gate).</summary>
         Recall,
-        /// <summary>Brings the nearest fallen friendly player in range back (Redemption).</summary>
+        /// <summary>Brings the nearest fallen friendly player in range back (Deliverance).</summary>
         Revive,
     }
 

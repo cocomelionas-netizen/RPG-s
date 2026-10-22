@@ -13,7 +13,7 @@ namespace RPG.EditorTools
     /// The source game's vendors (<see cref="VendorData"/>): every vendor NPC of the region where it stands, with its name,
     /// subname and stock. Shopkeepers sell their npc_vendor items (matched by name); the merchants with random stock
     /// (npc_vendor_random) sell the gear of their kind for every second level, and each piece gets a random quality at
-    /// every restock with their chances. Reginald, the transmuter, makes the source game's crafting recipes. Also the town supplies the source game sells that had no item here yet:
+    /// every restock with their chances. Mortimer, the transmuter, makes the source game's crafting recipes. Also the town supplies the source game sells that had no item here yet:
     /// the Scroll of Returning, food and treasury gold.
     /// </summary>
     public static partial class TestSceneBuilder
@@ -25,7 +25,7 @@ namespace RPG.EditorTools
 
         /// <summary>
         /// The source game's town supplies that were missing (item_template and their spells): the Scroll of Returning
-        /// (2 s cast, 5 min cooldown, back to St. Revere), food (health and mana at once, out of combat, 30 s cooldown)
+        /// (2 s cast, 5 min cooldown, back to St. Aurelis), food (health and mana at once, out of combat, 30 s cooldown)
         /// and treasury gold (sold back for the source price). At the end
         /// of the catalog.
         /// </summary>
@@ -93,7 +93,7 @@ namespace RPG.EditorTools
                 var vendor = LoadOrCreateAsset<VendorDefinition>($"{VendorsFolder}/{source.name}.asset");
                 vendor.displayName = source.name;
                 vendor.title = source.title;
-                // The source game's transmuter (Reginald) makes its crafting recipes.
+                // The source game's transmuter (Mortimer) makes its crafting recipes.
                 vendor.recipes = source.title == "Transmutation" ? CreateRecipes(catalog) : Array.Empty<Recipe>();
                 vendor.randomQuality = false;
 

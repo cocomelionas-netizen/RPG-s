@@ -7,7 +7,7 @@ namespace RPG.Combat
     /// <summary>
     /// Server: a dead player comes back at the spawn point with full health and mana: after a delay, or (Wait For Choice,
     /// like the source game's "You have died. Respawn?") when the player presses Respawn (<see cref="RequestRespawn"/>),
-    /// which a Redemption can beat.
+    /// which a Deliverance can beat.
     /// </summary>
     [RequireComponent(typeof(Health), typeof(PlayerNetworkMovement))]
     public class PlayerRespawn : NetworkBehaviour
@@ -66,7 +66,7 @@ namespace RPG.Combat
             Debug.Log($"[Server] {health.DisplayName} died.");
         }
 
-        /// <summary>Server: brought back where it fell (Redemption) with shares of health and mana; no respawn then.</summary>
+        /// <summary>Server: brought back where it fell (Deliverance) with shares of health and mana; no respawn then.</summary>
         public void ServerRevive(float healthShare, float manaShare)
         {
             if (!IsServer || !health.IsDead) return;

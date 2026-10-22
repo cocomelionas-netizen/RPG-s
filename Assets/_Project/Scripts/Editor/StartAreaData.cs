@@ -8,9 +8,9 @@ namespace RPG.EditorTools
     {
         public const int Width = 569;
         public const int Height = 690;
-        /// <summary>Where new characters start: the source game's "start" teleport in Pilgrim's Refuge (17, 106).</summary>
+        /// <summary>Where new characters start: the source game's "start" teleport in Wayfarer's Haven (17, 106).</summary>
         public static readonly Vector3Int Start = new Vector3Int(491, 671, 0);
-        /// <summary>The main town, St. Revere: the middle of its market (524, 250).</summary>
+        /// <summary>The main town, St. Aurelis: the middle of its market (524, 250).</summary>
         public static readonly Vector3Int Town = new Vector3Int(347, 164, 0);
 
         /// <summary>Monster spots: cell, source-game level, elite (or boss), respawn seconds (capped at 10 minutes).</summary>

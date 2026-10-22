@@ -26,6 +26,7 @@ namespace RPG.EditorTools
         {
             public Tile[] Grass;
             public Tile[] Path;
+            /// <summary>The lakes' water by the land around a cell (Tools/Art/water.py): index = land edges + land corners.</summary>
             public Tile[] Water;
             /// <summary>Rock pillars: the walls, fences and rocks of the source map.</summary>
             public Tile[] Walls;
@@ -195,7 +196,7 @@ namespace RPG.EditorTools
             {
                 Grass = Kind("Grass", Tile.ColliderType.None),
                 Path = Kind("Path", Tile.ColliderType.None),
-                Water = Kind("Water", Tile.ColliderType.None),
+                Water = CreateWaterTiles(),
                 // Rock0-3 are boulders, Rock4-7 tall pillars.
                 Walls = Kind("Rock", Tile.ColliderType.Grid, i => i >= 4),
                 Boulders = Kind("Rock", Tile.ColliderType.Grid, i => i < 4),
@@ -205,6 +206,51 @@ namespace RPG.EditorTools
                 Decor = Kind("Plant", Tile.ColliderType.None, i => i >= 6),
                 Containers = Kind("Prop", Tile.ColliderType.None),
             };
+        }
+
+        private const string WaterAtlas = "Assets/_Project/Art/Water/Water.png";
+
+        /// <summary>
+        /// The lakes' 256 water tiles (Tools/Art/water.py): water with banks of sand and foam toward the land around it,
+        /// drawn over the grass. Tile index = land edges (1 x + 1, 2 y + 1, 4 x - 1, 8 y - 1) + land corners whose two
+        /// edges are water (16 x + 1 y + 1, 32 x - 1 y + 1, 64 x - 1 y - 1, 128 x + 1 y - 1).
+        /// </summary>
+        private static Tile[] CreateWaterTiles()
+        {
+            Texture2D atlas = FlareAtlas(WaterAtlas);
+            string folder = $"{TilesFolder}/Water";
+            System.IO.Directory.CreateDirectory(folder);
+            var tiles = new Tile[256];
+            for (int mask = 0; mask < tiles.Length; mask++)
+            {
+                string path = $"{folder}/Water_{mask}.asset";
+                var tile = AssetDatabase.LoadAssetAtPath<Tile>(path);
+                if (tile == null)
+                {
+                    tile = ScriptableObject.CreateInstance<Tile>();
+                    AssetDatabase.CreateAsset(tile, path);
+                }
+                RemoveSubSprites(tile);
+                // Tile 0 at the bottom left of the atlas, 16 to a row.
+                var rect = new Rect(mask % 16 * 128f, mask / 16 * 64f, 128f, 64f);
+                tile.sprite = AtlasSprite(tile, atlas, $"Water_{mask}", rect, new Vector2(0.5f, 0.5f), FlareArtData.TilePixelsPerUnit);
+                tile.colliderType = Tile.ColliderType.None;
+                EditorUtility.SetDirty(tile);
+                tiles[mask] = tile;
+            }
+            return tiles;
+        }
+
+        /// <summary>The water tile of a lake cell: which of its neighbours are land (see <see cref="CreateWaterTiles"/>).</summary>
+        private static int WaterMask(Func<int, int, bool> isWater, int x, int y)
+        {
+            bool ne = !isWater(x + 1, y), nw = !isWater(x, y + 1), sw = !isWater(x - 1, y), se = !isWater(x, y - 1);
+            int mask = (ne ? 1 : 0) | (nw ? 2 : 0) | (sw ? 4 : 0) | (se ? 8 : 0);
+            if (!ne && !nw && !isWater(x + 1, y + 1)) mask |= 16;
+            if (!nw && !sw && !isWater(x - 1, y + 1)) mask |= 32;
+            if (!sw && !se && !isWater(x - 1, y - 1)) mask |= 64;
+            if (!se && !ne && !isWater(x + 1, y - 1)) mask |= 128;
+            return mask;
         }
 
         /// <summary>An animation set from a Flare look (<see cref="FlareArtData.Looks"/>): Idle, Walk and Attack in eight directions.</summary>
@@ -271,7 +317,7 @@ namespace RPG.EditorTools
         {
             string n = (name ?? "").ToLowerInvariant();
             bool Has(params string[] words) => words.Any(w => n.Contains(w));
-            // Whole camps look alike: the source game's Blightchosen cultists and the Zhendale raiders.
+            // Whole camps look alike: the source game's Rotsworn cultists and the Korthian raiders.
             if (Has("blightchosen")) return Has("acolyte") ? "SkeletonMage" : "GoblinElite";
             if (Has("zhendale")) return Has("archer") ? "SkeletonArcher" : "Minotaur";
             if (Has("fire antwig", "firemite")) return "FireAnt";

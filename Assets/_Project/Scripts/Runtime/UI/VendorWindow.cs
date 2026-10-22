@@ -191,7 +191,7 @@ namespace RPG.UI
             pageText.text = $"Page {page + 1} / {pageCount}";
 
             bool transmutes = definition != null && definition.Transmutes;
-            // A transmuter with nothing to sell (the source game's Reginald) opens its transmute window at once.
+            // A transmuter with nothing to sell (the source game's Mortimer) opens its transmute window at once.
             if (transmutes && stock.Length == 0)
             {
                 TransmuteWindow.Open(vendor);

@@ -33,7 +33,7 @@ namespace RPG.World
             return null;
         }
 
-        /// <summary>The name of the main town, where Scrolls of Returning and Illusion Gate lead.</summary>
+        /// <summary>The name of the main town, where Scrolls of Returning and Mirage Gate lead.</summary>
         public const string MainTownName = "St. Aurelis";
 
         /// <summary>The main town's stone (the first stone when there is none of that name; null without stones).</summary>

@@ -21,7 +21,7 @@ namespace RPG.Tests
         private const string PlayerPrefabPath = "Assets/_Project/Prefabs/Characters/Player.prefab";
         private const string GoblinPrefabPath = "Assets/_Project/Prefabs/Monsters/Goblin.prefab";
         // The source game's vendors: the paladin (warrior) trainer sells Tomes, the innkeeper potions, food and the Scroll
-        // of Returning, the gem trader has limited stock, the heavy armor merchant random qualities, Reginald transmutes.
+        // of Returning, the gem trader has limited stock, the heavy armor merchant random qualities, Mortimer transmutes.
         private const string WarriorVendorPath = "Assets/_Project/Data/Vendors/Osric.asset";
         private const string TransmuterPath = "Assets/_Project/Data/Vendors/Mortimer.asset";
         private const string InnkeeperPath = "Assets/_Project/Data/Vendors/Maelis.asset";

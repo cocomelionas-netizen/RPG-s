@@ -6,7 +6,7 @@ namespace RPG.UI
 {
     /// <summary>
     /// The source game's "You have died. Respawn?": shown while the local player is dead, its Respawn button brings them
-    /// back at the spawn point (<see cref="PlayerRespawn.RequestRespawn"/>); a friend's Redemption can come first. Builds
+    /// back at the spawn point (<see cref="PlayerRespawn.RequestRespawn"/>); a friend's Deliverance can come first. Builds
     /// its own UI on its RectTransform.
     /// </summary>
     [RequireComponent(typeof(RectTransform))]

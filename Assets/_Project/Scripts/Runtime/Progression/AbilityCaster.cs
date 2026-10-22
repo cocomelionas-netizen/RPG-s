@@ -24,7 +24,7 @@ namespace RPG.Progression
         NoMana,
         /// <summary>Stunned or incapacitated.</summary>
         Disabled,
-        /// <summary>The target lacks what the spell needs (Ice Shard: Chains of Ice; Kidney Shot: incapacitated).</summary>
+        /// <summary>The target lacks what the spell needs (Ice Shard: Chains of Ice; Spine Shot: incapacitated).</summary>
         Requirement,
         /// <summary>Already casting something.</summary>
         Casting,
@@ -612,7 +612,7 @@ namespace RPG.Progression
                     }
                     break;
             }
-            // Teleport frees the caster; Wings of Freedom (a friendly spell) frees its target.
+            // Teleport frees the caster; Pinions of Liberty (a friendly spell) frees its target.
             if (ability.breaksControl && ability.kind != AbilityKind.FriendlyTarget && health.Effects != null)
                 health.Effects.ServerFreeFromControl();
 

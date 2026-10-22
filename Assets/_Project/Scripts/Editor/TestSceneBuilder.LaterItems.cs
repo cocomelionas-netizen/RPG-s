@@ -7,7 +7,7 @@ namespace RPG.EditorTools
 {
     /// <summary>
     /// The source game's items added after the catalog's first order (players keep item ids, so these go at its end):
-    /// the other orb tiers, the attribute scrolls, Flawless and Draconic gems, Draconic Treasure, and the level 1 Tomes.
+    /// the other orb tiers, the attribute scrolls, Flawless and Dragonforged gems, Dragonforged Treasure, and the level 1 Tomes.
     /// Made with the other items (the dungeon loot refers to them by file, Data/Items/Later), put into the catalog after
     /// the Tomes (CreateClasses).
     /// </summary>
@@ -65,7 +65,7 @@ namespace RPG.EditorTools
                 }
             }
 
-            // Flawless (+4 in the source game) and Draconic (+5) gems, twice that here; made by transmutation (and dropped).
+            // Flawless (+4 in the source game) and Dragonforged (+5) gems, twice that here; made by transmutation (and dropped).
             foreach ((string tier, ItemRarity rarity, int amount, int sell) in new[] { ("Flawless", ItemRarity.Epic, 8, 750), ("Dragonforged", ItemRarity.Legendary, 10, 1000) })
             {
                 foreach ((string gemName, Attribute attribute, Color color) in GemKinds)
@@ -78,7 +78,7 @@ namespace RPG.EditorTools
                 }
             }
 
-            // Draconic Treasure (1237): the wyrms' rare drop, Jipples's ware and a Draconic gem ingredient.
+            // Dragonforged Treasure (1237): the wyrms' rare drop, Nibbets's ware and a Dragonforged gem ingredient.
             ItemDefinition treasure = CreateItem("Later/DraconicTreasure", "Dragonforged Treasure", ItemSlot.None, ItemRarity.Rare, 0, 0, 0,
                 new Color(0.95f, 0.45f, 0.2f), 1500 * 1000, -1, 25);
             treasure.sellValue = 1500;

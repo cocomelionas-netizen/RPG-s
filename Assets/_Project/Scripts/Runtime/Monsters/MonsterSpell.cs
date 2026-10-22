@@ -19,7 +19,7 @@ namespace RPG.Monsters
         Heal,
         /// <summary>Rushes at the target.</summary>
         Charge,
-        /// <summary>Only its effects, on the caster (Enrage, Determination).</summary>
+        /// <summary>Only its effects, on the caster (Enrage, Tenacity).</summary>
         Self,
         /// <summary>Only its effects, on the target (Rend, Blight, Silence).</summary>
         Hex,

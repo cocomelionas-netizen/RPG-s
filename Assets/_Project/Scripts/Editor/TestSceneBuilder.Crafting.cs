@@ -10,7 +10,7 @@ namespace RPG.EditorTools
     {
         /// <summary>
         /// The recipes of <see cref="RecipeData"/> whose result and items are all in the catalog (by name): potion
-        /// tiers and serums, gem tiers, Divine orbs, the Demiplane Key. The transmuter makes them.
+        /// tiers and serums, gem tiers, Divine orbs, the Netherplane Key. The transmuter makes them.
         /// </summary>
         private static Recipe[] CreateRecipes(ItemCatalog catalog)
         {

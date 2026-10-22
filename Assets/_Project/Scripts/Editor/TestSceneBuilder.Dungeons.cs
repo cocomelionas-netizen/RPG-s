@@ -23,7 +23,7 @@ namespace RPG.EditorTools
 
         /// <summary>
         /// The source game's dungeon keys and treasures, sold back for the source game's price. The items clicked to put a recipe
-        /// together (Dale Gem on a Depleted Key, an Inactive Demiplane Key with Magic Dust and Major Treasury Gold) combine.
+        /// together (Dale Gem on a Spent Key, an Dormant Netherplane Key with Magic Dust and Major Vault Gold) combine.
         /// They go at the end of the catalog (item ids are saved with characters).
         /// </summary>
         private static List<ItemDefinition> CreateDungeonItems()
@@ -180,7 +180,7 @@ namespace RPG.EditorTools
                 all.Add(dungeon);
             }
 
-            // Salmaster's Descent opens inside the Desecrated Altar, Telamont's Sanctuary inside the Demiplane.
+            // Corvalis's Descent opens inside the Defiled Altar, Mirethane's Sanctuary inside the Netherplane.
             foreach (DungeonData.Dungeon data in DungeonData.All)
             {
                 if (data.Parent == null) continue;
@@ -237,7 +237,7 @@ namespace RPG.EditorTools
 
         /// <summary>
         /// Outdoor key droppers the source game has beyond this world's edge (DungeonData.EdgeMonsters). The world is the whole
-        /// island now, so there are none: the Zhendale camp, Tantorus and Fasthorn are ordinary spots (KeyDroppers).
+        /// island now, so there are none: the Korthian camp, Gorvanth and Swifthorn are ordinary spots (KeyDroppers).
         /// </summary>
         private static void PlaceEdgeMonsters(Grid grid, Tilemap obstacles)
         {

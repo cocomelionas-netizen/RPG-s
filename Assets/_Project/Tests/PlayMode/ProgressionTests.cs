@@ -15,7 +15,7 @@ namespace RPG.Tests
 {
     /// <summary>
     /// Levels, experience, classes and abilities on a real host. Needs the prefabs and class assets
-    /// from RPG > Build Test Scene (Warrior: the source game's Paladin spells, on the bar Mighty Blow, Holy Wrath, Radiance;
+    /// from RPG > Build Test Scene (Warrior: the source game's Paladin spells, on the bar Mighty Blow, Holy Ire, Luminance;
     /// Ranger is class 1).
     /// </summary>
     public class ProgressionTests
@@ -171,7 +171,7 @@ namespace RPG.Tests
         [UnityTest]
         public IEnumerator SpellWithCastTime_LandsAfterTheCast_AndLeavesItsDamageOverTime()
         {
-            // Holy Wrath: 1 sec cast, Holy damage, more over 3 sec.
+            // Holy Ire: 1 sec cast, Holy damage, more over 3 sec.
             Health dummy = Spawn(dummyPrefab, new Vector2(2f, 0f)).GetComponent<Health>();
             yield return null;
             AbilityDefinition holyWrath = caster.GetAbility(2);
@@ -188,7 +188,7 @@ namespace RPG.Tests
         [UnityTest]
         public IEnumerator FriendlySpell_WithoutAFriend_HealsTheCaster()
         {
-            // Radiance: heals a friendly target, or the caster.
+            // Luminance: heals a friendly target, or the caster.
             playerHealth.ApplyDamage(60, false);
             int hurt = playerHealth.Current;
             yield return null;

@@ -43,23 +43,23 @@ namespace RPG.Combat
         ManaOnExpire,
         /// <summary>Cannot be stunned.</summary>
         StunImmunity,
-        /// <summary>Cannot swing its weapon (Retribution).</summary>
+        /// <summary>Cannot swing its weapon (Reprisal).</summary>
         Pacify,
         /// <summary>Moves Value percent faster.</summary>
         Haste,
         /// <summary>Takes no damage and no harmful effects (Divine Protection, Deep Freeze).</summary>
         Immune,
-        /// <summary>Loses Value mana in all, split into ticks (Ethereal Sting).</summary>
+        /// <summary>Loses Value mana in all, split into ticks (Spectral Sting).</summary>
         ManaBurn,
         /// <summary>Receives Value percent more (or less, negative) healing.</summary>
         HealingTaken,
-        /// <summary>Attacks Value percent faster (Arrow Flurry).</summary>
+        /// <summary>Attacks Value percent faster (Arrow Barrage).</summary>
         AttackSpeed,
-        /// <summary>Regains Value mana in all, split into ticks (Wisdom of Lazarus).</summary>
+        /// <summary>Regains Value mana in all, split into ticks (Wisdom of the Anointed).</summary>
         ManaOverTime,
         /// <summary>Block rating raised by Value (Shield Block).</summary>
         BlockRating,
-        /// <summary>Cannot cast spells (Antimagic).</summary>
+        /// <summary>Cannot cast spells (Spellward).</summary>
         Silence,
         /// <summary>Strength raised by Value points (Scroll of Strength).</summary>
         StrengthBonus,
@@ -69,7 +69,7 @@ namespace RPG.Combat
         WillpowerBonus,
         /// <summary>Courage (vitality) raised by Value points (Scroll of Courage).</summary>
         CourageBonus,
-        /// <summary>Does nothing of its own; it is only shown and asked about (Drunk, from Cinaed's beer).</summary>
+        /// <summary>Does nothing of its own; it is only shown and asked about (Drunk, from Breda's beer).</summary>
         Flavor,
     }
 
@@ -332,7 +332,7 @@ namespace RPG.Combat
         private static bool IsOverTime(StatusKind kind) =>
             kind == StatusKind.DamageOverTime || kind == StatusKind.HealOverTime || kind == StatusKind.ManaBurn || kind == StatusKind.ManaOverTime;
 
-        /// <summary>Server: removes the effects that take control away (stuns, roots, slows); for Wings of Freedom and Teleport.</summary>
+        /// <summary>Server: removes the effects that take control away (stuns, roots, slows); for Pinions of Liberty and Teleport.</summary>
         public void ServerFreeFromControl()
         {
             if (!IsServer) return;
