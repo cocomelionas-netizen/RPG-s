@@ -93,7 +93,12 @@ namespace RPG.Accounts
             health.ServerSetDisplayName(account.username);
             if (appearance != null) appearance.ServerSetFemale(saved.female);
             progress.ServerLoad(saved.classIndex, saved.level, saved.experience, saved.spentPoints, saved.experienceToSpend);
-            if (!saved.hasBeenSaved) return;
+            if (!saved.hasBeenSaved)
+            {
+                // A new character: its class's plain weapon in hand, like the source game's.
+                inventory.ServerEquipStartingGear(progress.ClassIndex);
+                return;
+            }
 
             if (spellbook != null) spellbook.ServerLoad(saved.spellRanks, saved.spellBar);
             inventory.ServerLoad(ToStacks(saved.bag), ToStacks(saved.equipment));

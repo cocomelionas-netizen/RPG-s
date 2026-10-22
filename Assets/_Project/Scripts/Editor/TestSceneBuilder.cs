@@ -422,6 +422,31 @@ namespace RPG.EditorTools
             startingItems.arraySize = 5;
             for (int i = 0; i < startingItems.arraySize; i++)
                 startingItems.GetArrayElementAtIndex(i).objectReferenceValue = i < 3 ? startingPotion : startingManaPotion;
+            // The source game's starting gear (player_create_item): the paladin's sword and shield, the ranger's bow, the
+            // mage's staff; here the cheapest level 1 source piece of the
+            // class (Copper Hewer, Barricade, the first wood's Shortbow and Stave).
+            var startingGear = new List<(int classIndex, ItemDefinition item)>();
+            foreach (int classIndex in new[] { WarriorClass, RangerClass, MageClass })
+            {
+                foreach (ItemSlot slot in classIndex == WarriorClass ? new[] { ItemSlot.Weapon, ItemSlot.Shield } : new[] { ItemSlot.Weapon })
+                {
+                    ItemDefinition best = null;
+                    foreach (ItemDefinition item in items.items)
+                        if (SourceGear.Contains(item) && item.slot == slot && item.itemLevel <= 1 && item.requiredClass == classIndex
+                            && item.rarity == ItemRarity.Common && (best == null || item.price < best.price))
+                            best = item;
+                    if (best != null) startingGear.Add((classIndex, best));
+                    else Debug.LogWarning($"[TestScene] No starting {slot} for class {classIndex}.");
+                }
+            }
+            SerializedProperty gearProperty = inventoryObject.FindProperty("startingGear");
+            gearProperty.arraySize = startingGear.Count;
+            for (int i = 0; i < startingGear.Count; i++)
+            {
+                SerializedProperty element = gearProperty.GetArrayElementAtIndex(i);
+                element.FindPropertyRelative("classIndex").intValue = startingGear[i].classIndex;
+                element.FindPropertyRelative("item").objectReferenceValue = startingGear[i].item;
+            }
             inventoryObject.ApplyModifiedPropertiesWithoutUndo();
             player.AddComponent<LootPicker>();
             player.AddComponent<CharacterPersistence>();
@@ -1108,9 +1133,13 @@ namespace RPG.EditorTools
         /// wear. Stats grow with the source game's sell price of the piece, the drop weight is its material chance: monsters,
         /// chests and merchants give these pieces. The old materials stay in the catalog.
         /// </summary>
+        /// <summary>The source game's plain gear made by <see cref="CreateGearData"/> and <see cref="CreateMoreGear"/>.</summary>
+        private static readonly HashSet<ItemDefinition> SourceGear = new HashSet<ItemDefinition>();
+
         private static List<ItemDefinition> CreateGearData(out List<ItemDefinition> materials)
         {
             GearArmorKinds.Clear();
+            SourceGear.Clear();
             var gear = new List<ItemDefinition>();
             materials = new List<ItemDefinition>();
             var ingots = new ItemDefinition[GearData.Metals.Length];
@@ -1149,6 +1178,7 @@ namespace RPG.EditorTools
                 item.manaBonus = mana;
                 item.dropWeight = chance / 100f;
                 into.Add(item);
+                SourceGear.Add(item);
                 return item;
             }
 
@@ -1247,6 +1277,7 @@ namespace RPG.EditorTools
                     piece.dropWeight = 0.5f;
                     if (shield) piece.weaponType = WeaponType.Shield;
                     gear.Add(piece);
+                    SourceGear.Add(piece);
                 }
             }
             return gear;

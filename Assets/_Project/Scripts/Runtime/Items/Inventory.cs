@@ -43,6 +43,8 @@ namespace RPG.Items
         [SerializeField, Min(1)] private int bagSize = 20;
         [Tooltip("Given to every new character.")]
         [SerializeField] private ItemDefinition[] startingItems = Array.Empty<ItemDefinition>();
+        [Tooltip("Worn by a new character of a class, like the source game's starting gear: its plain weapon (and the warrior's shield).")]
+        [SerializeField] private ClassGear[] startingGear = Array.Empty<ClassGear>();
         [Tooltip("Seconds between potions (shared by all of them); the source game: 60.")]
         [SerializeField, Min(0f)] private float potionCooldown = 60f;
         [Tooltip("How close the player must be to pick up loot (the server allows a little more).")]
@@ -123,6 +125,31 @@ namespace RPG.Items
         {
             bag.OnListChanged -= OnListChanged;
             equipment.OnListChanged -= OnListChanged;
+        }
+
+        /// <summary>A piece a new character of a class starts wearing.</summary>
+        [Serializable]
+        public struct ClassGear
+        {
+            public int classIndex;
+            public ItemDefinition item;
+        }
+
+        /// <summary>The pieces new characters start wearing, by class.</summary>
+        public ClassGear[] StartingGear => startingGear;
+
+        /// <summary>Server: a new character puts on its class's starting gear (only into empty slots).</summary>
+        public void ServerEquipStartingGear(int classIndex)
+        {
+            if (!IsServer || catalog == null) return;
+            foreach (ClassGear gear in startingGear)
+            {
+                if (gear.classIndex != classIndex || gear.item == null || !gear.item.IsEquippable) continue;
+                int index = IndexOf(gear.item.slot);
+                int id = catalog.IdOf(gear.item);
+                if (index < 0 || index >= equipment.Count || id <= 0 || !equipment[index].IsEmpty) continue;
+                equipment[index] = new ItemStack(id, 1, 0);
+            }
         }
 
         public ItemStack GetBagSlot(int index) => index >= 0 && index < bag.Count ? bag[index] : ItemStack.Empty;

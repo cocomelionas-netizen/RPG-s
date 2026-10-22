@@ -177,11 +177,34 @@ namespace RPG.Tests
 
             NetworkObject player = network.LocalClient.PlayerObject;
             Assert.AreEqual("Mage", player.GetComponent<CharacterProgress>().ClassName);
-            Assert.Greater(player.GetComponent<Inventory>().BagSnapshot().Length, 0);
+            var inventory = player.GetComponent<Inventory>();
+            Assert.Greater(inventory.BagSnapshot().Length, 0);
+            ItemDefinition weapon = inventory.Definition(inventory.GetEquipped(ItemSlot.Weapon));
+            Assert.IsNotNull(weapon, "A new character starts with its class's weapon in hand.");
+            Assert.AreEqual(WeaponType.Staff, weapon.weaponType);
+            Assert.AreEqual(1, weapon.itemLevel);
+            Assert.IsTrue(inventory.GetEquipped(ItemSlot.Shield).IsEmpty, "Only the warrior starts with a shield.");
 
             Assert.IsTrue(store.TryLoad("Newbie", out AccountRecord saved));
             Assert.IsTrue(saved.character.hasBeenSaved);
             Assert.AreEqual(2, saved.character.classIndex);
+            Assert.IsTrue(System.Array.Exists(saved.character.equipment, record => record.id == inventory.Catalog.IdOf(weapon)),
+                "The starting weapon is saved with the character.");
+        }
+
+        [Test]
+        public void EveryClass_HasAStartingWeapon_TheWarriorAShieldToo()
+        {
+            var inventory = AssetDatabase.LoadAssetAtPath<GameObject>(PlayerPrefabPath).GetComponent<Inventory>();
+            for (int classIndex = 0; classIndex < 3; classIndex++)
+            {
+                Inventory.ClassGear weapon = System.Array.Find(inventory.StartingGear,
+                    gear => gear.classIndex == classIndex && gear.item != null && gear.item.slot == ItemSlot.Weapon);
+                Assert.IsNotNull(weapon.item, $"Class {classIndex} has no starting weapon.");
+                Assert.IsTrue(weapon.item.CanBeUsedByClass(classIndex));
+                Assert.AreEqual(1, weapon.item.itemLevel);
+            }
+            Assert.IsTrue(System.Array.Exists(inventory.StartingGear, gear => gear.classIndex == 0 && gear.item != null && gear.item.slot == ItemSlot.Shield));
         }
 
         [UnityTest]
