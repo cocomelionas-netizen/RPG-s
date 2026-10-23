@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using RPG.Characters;
 using RPG.Combat;
 using RPG.Dungeons;
@@ -37,6 +38,10 @@ namespace RPG.EditorTools
             public Tile[] Plants;
             /// <summary>Grass tufts and flowers on open ground (no collider).</summary>
             public Tile[] Decor;
+            /// <summary>Buildings and props by art key (BuildingArtData; a prop's variants are key_0, key_1...): no collider.</summary>
+            public Dictionary<string, Tile[]> Props;
+            /// <summary>How wall cells are drawn, by PropData style (fences, iron fences, rubble): blocking.</summary>
+            public Dictionary<char, Tile[]> WallStyles;
             /// <summary>Containers from Flare's dungeon tiles (their sprites draw the chests): crate, barrel, chest, strongbox.</summary>
             public Tile[] Containers;
         }
@@ -205,6 +210,61 @@ namespace RPG.EditorTools
                 // Plant6-13: reeds and tall grass, drawn on open ground without blocking.
                 Decor = Kind("Plant", Tile.ColliderType.None, i => i >= 6),
                 Containers = Kind("Prop", Tile.ColliderType.None),
+                Props = CreateBuildingTiles(Tile.ColliderType.None, "Buildings"),
+                WallStyles = WallStyleTiles(CreateBuildingTiles(Tile.ColliderType.Grid, "WallParts")),
+            };
+        }
+
+        /// <summary>
+        /// The island's buildings and props (Tools/Art/buildings.py, BuildingArtData): one tile per sprite, its pivot the spot
+        /// that stands on its cell, grouped by art key (a prop's variants key_0, key_1... under key).
+        /// </summary>
+        private static Dictionary<string, Tile[]> CreateBuildingTiles(Tile.ColliderType collider, string folderName)
+        {
+            var atlases = new Dictionary<int, Texture2D>();
+            string folder = $"{TilesFolder}/{folderName}";
+            System.IO.Directory.CreateDirectory(folder);
+            var groups = new Dictionary<string, List<Tile>>();
+            foreach (var entry in BuildingArtData.Sprites)
+            {
+                if (!atlases.TryGetValue(entry.page, out Texture2D atlas))
+                    atlases[entry.page] = atlas = FlareAtlas($"{BuildingArtData.Folder}/Buildings{entry.page}.png");
+                string path = $"{folder}/{entry.name}.asset";
+                var tile = AssetDatabase.LoadAssetAtPath<Tile>(path);
+                if (tile == null)
+                {
+                    tile = ScriptableObject.CreateInstance<Tile>();
+                    AssetDatabase.CreateAsset(tile, path);
+                }
+                RemoveSubSprites(tile);
+                tile.sprite = AtlasSprite(tile, atlas, entry.name, new Rect(entry.x, entry.y, entry.w, entry.h),
+                    new Vector2(entry.pivotX, entry.pivotY), entry.pixelsPerUnit);
+                tile.colliderType = collider;
+                // Mirrored placements set their own transform.
+                tile.flags = TileFlags.None;
+                EditorUtility.SetDirty(tile);
+                Match variant = Regex.Match(entry.name, @"^(.*)_(\d)$");
+                string key = variant.Success && !BuildingKeys.Contains(entry.name) ? variant.Groups[1].Value : entry.name;
+                if (!groups.TryGetValue(key, out List<Tile> list)) groups[key] = list = new List<Tile>();
+                list.Add(tile);
+            }
+            var result = new Dictionary<string, Tile[]>();
+            foreach (var group in groups) result[group.Key] = group.Value.ToArray();
+            return result;
+        }
+
+        /// <summary>The building keys of the map (their names may end in _0.._9 without being a prop's variants).</summary>
+        private static readonly HashSet<string> BuildingKeys = new HashSet<string>(
+            PropData.Placements.Where(p => p.building).Select(p => p.key));
+
+        /// <summary>The blocking tiles of each wall style (PropData.WallStyles).</summary>
+        private static Dictionary<char, Tile[]> WallStyleTiles(Dictionary<string, Tile[]> parts)
+        {
+            Tile[] Of(string key) => parts.TryGetValue(key, out Tile[] tiles) ? tiles : Array.Empty<Tile>();
+            return new Dictionary<char, Tile[]>
+            {
+                [PropData.FenceX] = Of("fence_x"), [PropData.FenceY] = Of("fence_y"),
+                [PropData.IronX] = Of("iron_x"), [PropData.IronY] = Of("iron_y"), [PropData.Rubble] = Of("rubble"),
             };
         }
 

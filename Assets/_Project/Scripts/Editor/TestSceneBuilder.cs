@@ -184,6 +184,8 @@ namespace RPG.EditorTools
             // The lakes over the grass: their banks fade into it.
             Tilemap water = CreateTilemap(grid, "Water", -99, TilemapRenderer.Mode.Chunk);
             PaintTestMap(ground, water, obstacles, decor, worldTiles, blockedTile);
+            // The source game's houses, tents, wells... where it has them.
+            PlaceBuildings(CreateTilemap(grid, "Buildings", 0, TilemapRenderer.Mode.Individual), worldTiles);
             PlaceTrees(obstacles, worldTiles);
             // The rocks and trees block as one merged static shape rather than tens of thousands of tile boxes.
             var obstacleBody = obstacles.gameObject.AddComponent<Rigidbody2D>();
@@ -345,7 +347,7 @@ namespace RPG.EditorTools
                         continue;
                     }
                     ground.SetTile(cell, square && kind == WorldMapData.Walkable ? Any(tiles.Path) : Any(tiles.Grass));
-                    if (kind == WorldMapData.Wall) obstacles.SetTile(cell, Any(tiles.Walls));
+                    if (kind == WorldMapData.Wall) obstacles.SetTile(cell, WallTile(x, y, tiles, blockedTile, Any));
                     else if (kind == WorldMapData.Tree)
                     {
                         // Blocked by an invisible tile; trees and bushes are drawn on some of these cells.
@@ -355,6 +357,46 @@ namespace RPG.EditorTools
                     else if (!square && random.NextDouble() < 0.025) decor.SetTile(cell, Any(tiles.Decor));
                 }
             }
+        }
+
+        /// <summary>
+        /// A wall cell drawn like the source game's object on it (PropData.WallStyles): nothing under a building, a fence or
+        /// iron fence along its line, low rubble, a low bush where the source game has only an invisible block, else a
+        /// rock pillar (rock walls, ruin walls, cliffs).
+        /// </summary>
+        private static Tile WallTile(int x, int y, WorldTiles tiles, Tile blockedTile, Func<Tile[], Tile> any)
+        {
+            char style = y < PropData.WallStyles.Length && x < PropData.WallStyles[y].Length ? PropData.WallStyles[y][x] : '.';
+            if (style == PropData.Covered) return blockedTile;
+            if (style == PropData.Bush && tiles.Plants.Length > 0) return any(tiles.Plants);
+            if (tiles.WallStyles.TryGetValue(style, out Tile[] parts) && parts.Length > 0) return any(parts);
+            return any(tiles.Walls);
+        }
+
+        /// <summary>
+        /// The source game's buildings and props at their cells (PropData.Placements, BuildingArtData), on a tilemap of their
+        /// own sorted with the characters; mirrored where the source game mirrors them. Their cells block already.
+        /// </summary>
+        private static void PlaceBuildings(Tilemap buildings, WorldTiles tiles)
+        {
+            int placed = 0;
+            foreach (var placement in PropData.Placements)
+            {
+                if (!tiles.Props.TryGetValue(placement.key, out Tile[] options) || options.Length == 0)
+                {
+                    Debug.LogWarning($"[TestScene] No art for {placement.key}.");
+                    continue;
+                }
+                Vector3Int cell = placement.cell;
+                // A building wins over a small prop on the same cell.
+                if (buildings.HasTile(cell) && !placement.building) continue;
+                Tile tile = options[Mathf.Abs(cell.x * 31 + cell.y * 17) % options.Length];
+                buildings.SetTile(cell, tile);
+                buildings.SetTileFlags(cell, TileFlags.None);
+                buildings.SetTransformMatrix(cell, placement.flip ? Matrix4x4.Scale(new Vector3(-1f, 1f, 1f)) : Matrix4x4.identity);
+                placed++;
+            }
+            Debug.Log($"[TestScene] {placed} buildings and props placed.");
         }
 
         private static bool Within(Vector3Int cell, Vector3Int center, int radius) =>

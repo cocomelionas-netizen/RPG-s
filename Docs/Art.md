@@ -96,3 +96,24 @@ chosen by which neighbours are land (`WaterMask`: land edges 1 x + 1, 2 y + 1, 4
 two edges are water, 16 / 32 / 64 / 128): water deeper away from the shore, and toward land a bank of wet sand and foam
 that fades into the grass, its corners rounded. Ripples and the shore's wobble repeat with the cell lattice, so the
 tiles meet without seams. (Flare's own water tiles were only the dark lake bed.)
+
+## Buildings and props
+
+The source game's island map puts objects on cells (the third layer of `maps/fanadin.map`: a picture and a scale,
+negative when mirrored), and the source game's `sprite_hotspot` says which pixel of each picture stands on its cell.
+`Tools/GameData/props.py` reads them (`PropData.cs`):
+
+- **Placements** – 38 buildings and ~190 props at their cells. Many of the source game's buildings are free pictures:
+  rubberduck's CC0 medieval buildings, Bleed's tavern, timbered house, Galata tower and outpost (CC-BY). Those keep the
+  same frame; the church, the green house, the medieval houses and the cabins get rubberduck stand-ins of the same size.
+  Tents, wells, anvils, signposts, campfires, wood piles, stumps, graves and statues are Flare's.
+- **WallStyles** – how each wall cell (`#`) is drawn: under a building nothing (the building is drawn there), fences
+  and iron fences along their line, low rubble for brick and stone wall pieces, rock pillars only for rock walls, ruin
+  walls and cliffs, and low bushes where the source game has only an invisible block (no more tall pillars hiding NPCs).
+
+`Tools/Art/buildings.py <downloads> <flare-game> <source data>` packs the pictures into `Art/Buildings/Buildings0.png`
+(4096 × 2048, MaxRects): each building trimmed and as wide as the source game draws it (its image size there at 64
+pixels a cell, kept at up to 96 pixels a cell), its pivot the source game's hotspot; Flare's props at Flare's size
+(192 pixels a cell) with Flare's tile offset. Credits: `Art/Buildings/CREDITS.md`. The builder draws the buildings on a
+**Buildings** tilemap (Individual, sorted with the characters, mirrored where the source game mirrors them) and the wall
+styles on the obstacles tilemap (blocking; only rock pillars block sight).
