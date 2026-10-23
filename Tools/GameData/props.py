@@ -10,9 +10,12 @@ This writes where this project draws its own art for them (Tools/Art/buildings.p
   whether it is mirrored. Buildings whose free original the source game used (rubberduck's CC0 buildings, Bleed's
   tavern, timbered house, Galata tower, outpost and Medieval Building 06) keep the source game's own frame; the others
   get a stand-in of about the same size.
-- WallStyles: how each blocked wall cell ('#' in WorldMapData) is drawn: under a building or prop (nothing: it is
-  drawn there), a wooden or iron fence along x or y, low rubble (brick and stone wall pieces), a tall stone pillar
-  (the source game's ruin walls, rock walls and cliffs) or a low bush (blocked cells with nothing on them).
+- WallStyles: how each blocked cell is drawn, so that every cell that blocks shows something. Wall cells ('#' in
+  WorldMapData): under a building or prop (nothing: its picture is drawn there; only cells under its opaque pixels,
+  read from Tools/Art/buildings.py's atlas, so run that first), a wooden or iron fence along x or y, low rubble (brick
+  and stone wall pieces), a tall stone pillar (the source game's ruin walls, rock walls and cliffs) or a bush (blocked
+  cells with nothing on them). Woods ('T'): 't' where the source game has a tree, ',' elsewhere (the builder fills
+  them with trees and bushes).
 - Sources: for every building key, the source game's image size and hotspot (sprite_hotspot: the pixel that stands on
   the cell), so the art is drawn as big and as placed as the source game draws it. Only sizes are read, never pixels.
 """
@@ -24,7 +27,6 @@ import sqlite3
 import struct
 import sys
 import zipfile
-from collections import deque
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from island import HEIGHT, WIDTH, cell_of  # noqa: E402
@@ -32,8 +34,14 @@ from island import HEIGHT, WIDTH, cell_of  # noqa: E402
 OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'Assets', '_Project', 'Scripts', 'Editor',
                    'PropData.cs')
 
-# Wall styles.
+ART = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'Assets', '_Project', 'Scripts', 'Editor',
+                   'BuildingArtData.cs')
+
+# Wall styles; woods with and without a source tree.
 COVERED, FENCE_X, FENCE_Y, IRON_X, IRON_Y, RUBBLE, PILLAR, BUSH = 'x', 'f', 'g', 'i', 'j', 'r', 'p', 'b'
+TREE, WOODS = 't', ','
+TREE_WORDS = re.compile(r'tree|pine|oak|tilia|conifer|ulmus|carpinus|linden|poplar|alder|olive|guava|avicennia|'
+                        r'eucalyptus|hornbeam|rosewood|almond|sakura|acacia|robinia|cherry|evergreen|cupress', re.I)
 
 
 def building_key(texture):
@@ -140,6 +148,7 @@ def main(root):
 
     ours = {}
     walls = {}
+    objects = {}
     placements = []
     sources = {}
     for x, y, flag, layers in cells:
@@ -150,6 +159,8 @@ def main(root):
         for layer, texture, scale in layers:
             if layer == 0:
                 continue
+            if layer == 2:
+                objects.setdefault((cx, cy), []).append(texture)
             key = building_key(texture)
             if key:
                 placements.append((key, cx, cy, scale < 0, True))
@@ -170,29 +181,8 @@ def main(root):
         flag = ours.get(c, 0)
         return bool(flag & 0x20) and not flag & 0x40
 
-    # The blocked cells a building stands on: reached from its cell through blocked cells, as far as its picture is wide.
-    covered = set()
-    for key, cx, cy, _, building in placements:
-        if not building or key not in sources:
-            continue
-        _, w, _, _, _ = sources[key]
-        reach = max(2, int(w / 64 / 1.2))
-        start = [(cx + dx, cy + dy) for dx in range(-1, 2) for dy in range(-1, 2) if is_wall((cx + dx, cy + dy))]
-        seen = set(start)
-        queue = deque(start)
-        while queue:
-            c = queue.popleft()
-            covered.add(c)
-            for d in ((1, 0), (-1, 0), (0, 1), (0, -1)):
-                n = (c[0] + d[0], c[1] + d[1])
-                if n not in seen and is_wall(n) and abs(n[0] - cx) <= reach and abs(n[1] - cy) <= reach:
-                    seen.add(n)
-                    queue.append(n)
-
-    # A small prop is drawn on its own cell and the blocked cells next to it.
-    for key, cx, cy, _, building in placements:
-        if not building:
-            covered.update((cx + dx, cy + dy) for dx in range(-1, 2) for dy in range(-1, 2) if is_wall((cx + dx, cy + dy)))
+    covered = art_cover(placements)
+    trees = {cell for cell, textures in objects.items() if any(TREE_WORDS.search(t) for t in textures)}
 
     def style(c):
         kind = walls.get(c)
@@ -210,12 +200,18 @@ def main(root):
             return PILLAR
         return BUSH
 
+    def is_woods(c):
+        # As WorldMapData's 'T': blocked, a tree or another object.
+        flag = ours.get(c, 0)
+        return bool(flag & 0x20) and bool(flag & 0x40)
+
     rows = []
     for cy in range(HEIGHT):
-        rows.append(''.join(style((cx, cy)) if is_wall((cx, cy)) else '.' for cx in range(WIDTH)))
+        rows.append(''.join(style((cx, cy)) if is_wall((cx, cy)) else (TREE if (cx, cy) in trees else WOODS)
+                            if is_woods((cx, cy)) else '.' for cx in range(WIDTH)))
 
     write(placements, rows, sources)
-    counts = {s: sum(r.count(s) for r in rows) for s in (COVERED, FENCE_X, FENCE_Y, IRON_X, IRON_Y, RUBBLE, PILLAR, BUSH)}
+    counts = {s: sum(r.count(s) for r in rows) for s in (COVERED, FENCE_X, FENCE_Y, IRON_X, IRON_Y, RUBBLE, PILLAR, BUSH, TREE, WOODS)}
     print(f'{sum(1 for p in placements if p[4])} buildings, {sum(1 for p in placements if not p[4])} props; walls {counts}')
 
 
@@ -225,17 +221,55 @@ def write(placements, rows, sources):
         f.write('// where its buildings, props and walls are, drawn with this project\'s own art (Tools/Art/buildings.py).\n')
         f.write('using UnityEngine;\n\nnamespace RPG.EditorTools\n{\n    internal static class PropData\n    {\n')
         f.write('        public const char Covered = \'x\', FenceX = \'f\', FenceY = \'g\', IronX = \'i\', IronY = \'j\', Rubble = \'r\', '
-                'Pillar = \'p\', Bush = \'b\';\n\n')
+                'Pillar = \'p\', Bush = \'b\', Tree = \'t\', Woods = \',\';\n\n')
         f.write('        /// <summary>Buildings and props: art key (BuildingArtData), cell, mirrored, a building.</summary>\n')
         f.write('        public static readonly (string key, Vector3Int cell, bool flip, bool building)[] Placements =\n        {\n')
         for key, cx, cy, flip, building in sorted(placements, key=lambda p: (p[2], p[1])):
             f.write(f'            ("{key}", new Vector3Int({cx}, {cy}, 0), {str(flip).lower()}, {str(building).lower()}),\n')
         f.write('        };\n\n')
-        f.write('        /// <summary>How each wall cell is drawn: WallStyles[y][x], \'.\' for cells that are no wall.</summary>\n')
+        f.write('        /// <summary>How each blocked cell is drawn: WallStyles[y][x]; woods: a source tree or not; \'.\' open ground.</summary>\n')
         f.write('        public static readonly string[] WallStyles =\n        {\n')
         for row in rows:
             f.write(f'            "{row}",\n')
         f.write('        };\n    }\n}\n')
+
+
+def art_cover(placements):
+    """The cells whose middle lies on an opaque pixel of a building or prop as the scene builder draws it
+    (BuildingArtData: the same variant pick, pivot and mirroring as TestSceneBuilder.PlaceBuildings)."""
+    from PIL import Image
+    text = open(ART).read()
+    sprites = re.findall(r'\("([^"]+)", (\d+), (\d+), (\d+), (\d+), (\d+), ([\d.]+)f, ([\d.]+)f, ([\d.]+)f\)', text)
+    building_keys = {p[0] for p in placements if p[4]}
+    groups = {}
+    for name, *numbers in sprites:
+        match = re.fullmatch(r'(.*)_(\d)', name)
+        key = match.group(1) if match and name not in building_keys else name
+        groups.setdefault(key, []).append([int(v) for v in numbers[:5]] + [float(v) for v in numbers[5:]])
+    pages = {}
+    world = lambda x, y: ((x - y) / 2, (x + y + 1) / 4)  # noqa: E731
+    drawn = {}
+    for key, cx, cy, flip, building in placements:
+        if key in groups and ((cx, cy) not in drawn or building):
+            drawn[(cx, cy)] = (key, flip)
+    covered = set()
+    for (cx, cy), (key, flip) in drawn.items():
+        options = groups[key]
+        page, x, y, w, h, pivot_x, pivot_y, ppu = options[abs(cx * 31 + cy * 17) % len(options)]
+        if page not in pages:
+            pages[page] = Image.open(os.path.join(os.path.dirname(ART), '..', '..', 'Art', 'Buildings',
+                                                  f'Buildings{page}.png')).convert('RGBA')
+        atlas = pages[page]
+        bx, by = world(cx, cy)
+        reach = int(max(w, h) / ppu * 4) + 2
+        for dx in range(-reach, reach + 1):
+            for dy in range(-reach, reach + 1):
+                wx, wy = world(cx + dx, cy + dy)
+                u = (wx - bx) * ppu * (-1 if flip else 1) + pivot_x * w
+                v = (wy - by) * ppu + pivot_y * h
+                if 0 <= u < w and 0 <= v < h and atlas.getpixel((x + int(u), atlas.height - 1 - (y + int(v))))[3] > 128:
+                    covered.add((cx + dx, cy + dy))
+    return covered
 
 
 def building_sources(root):

@@ -34,9 +34,9 @@ namespace RPG.EditorTools
             /// <summary>Boulders, for dungeon walls.</summary>
             public Tile[] Boulders;
             public Tile[] Trees;
-            /// <summary>Bushes, ferns and tall grass (they block like the wood they stand in).</summary>
-            public Tile[] Plants;
-            /// <summary>Grass tufts and flowers on open ground (no collider).</summary>
+            /// <summary>Bushes and broad-leaved plants: blocked cells (woods, invisible walls) that show they block.</summary>
+            public Tile[] Shrubs;
+            /// <summary>Reeds and grass tufts on open ground (no collider; never the bushes, which mean "blocked").</summary>
             public Tile[] Decor;
             /// <summary>Buildings and props by art key (BuildingArtData; a prop's variants are key_0, key_1...): no collider.</summary>
             public Dictionary<string, Tile[]> Props;
@@ -206,9 +206,10 @@ namespace RPG.EditorTools
                 Walls = Kind("Rock", Tile.ColliderType.Grid, i => i >= 4),
                 Boulders = Kind("Rock", Tile.ColliderType.Grid, i => i < 4),
                 Trees = Kind("Tree", Tile.ColliderType.Grid),
-                Plants = Kind("Plant", Tile.ColliderType.Grid),
-                // Plant6-13: reeds and tall grass, drawn on open ground without blocking.
-                Decor = Kind("Plant", Tile.ColliderType.None, i => i >= 6),
+                // Plant0, 1, 8, 9 bushes, Plant4, 5 broad leaves: they block.
+                Shrubs = Kind("Plant", Tile.ColliderType.Grid, i => i <= 1 || i == 4 || i == 5 || i == 8 || i == 9),
+                // Plant6, 7 thin reeds, Plant10-13 tall grass: drawn on open ground without blocking.
+                Decor = Kind("Plant", Tile.ColliderType.None, i => i == 6 || i == 7 || i >= 10),
                 Containers = Kind("Prop", Tile.ColliderType.None),
                 Props = CreateBuildingTiles(Tile.ColliderType.None, "Buildings"),
                 WallStyles = WallStyleTiles(CreateBuildingTiles(Tile.ColliderType.Grid, "WallParts")),

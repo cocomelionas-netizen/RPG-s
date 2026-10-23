@@ -320,9 +320,11 @@ namespace RPG.EditorTools
 
         /// <summary>
         /// The source game's ground (<see cref="WorldMapData"/>, from its fanadin.map) in Flare's art: grass everywhere, its
-        /// walls, fences and rocks as rock pillars, its lakes as water with sandy banks over the grass (blocked by an invisible tile), its trees and other
-        /// blocked objects as tree cells (drawn by <see cref="PlaceTrees"/>), a paved square in the middle of St. Aurelis and
-        /// at the start, and here and there tall grass and reeds on open ground.
+        /// walls, fences and rocks as PropData styles them (<see cref="WallTile"/>), its lakes as water with sandy banks over
+        /// the grass (blocked by an invisible tile), its trees and other blocked objects as woods (trees and bushes, drawn by
+        /// <see cref="PlaceTrees"/>), a paved square in the middle of St. Aurelis and at the start, and here and there tall
+        /// grass and reeds on open ground. Every cell that blocks shows something; open ground shows nothing that looks
+        /// like it blocks.
         /// </summary>
         private static void PaintTestMap(Tilemap ground, Tilemap water, Tilemap obstacles, Tilemap decor, WorldTiles tiles, Tile blockedTile)
         {
@@ -350,8 +352,7 @@ namespace RPG.EditorTools
                     if (kind == WorldMapData.Wall) obstacles.SetTile(cell, WallTile(x, y, tiles, blockedTile, Any));
                     else if (kind == WorldMapData.Tree)
                     {
-                        // Blocked by an invisible tile; trees and bushes are drawn on some of these cells.
-                        obstacles.SetTile(cell, blockedTile);
+                        // A tree or a bush (PlaceTrees).
                         TreeCells.Add(cell);
                     }
                     else if (!square && random.NextDouble() < 0.025) decor.SetTile(cell, Any(tiles.Decor));
@@ -361,14 +362,14 @@ namespace RPG.EditorTools
 
         /// <summary>
         /// A wall cell drawn like the source game's object on it (PropData.WallStyles): nothing under a building, a fence or
-        /// iron fence along its line, low rubble, a low bush where the source game has only an invisible block, else a
+        /// iron fence along its line, low rubble, a bush where the source game has only an invisible block, else a
         /// rock pillar (rock walls, ruin walls, cliffs).
         /// </summary>
         private static Tile WallTile(int x, int y, WorldTiles tiles, Tile blockedTile, Func<Tile[], Tile> any)
         {
             char style = y < PropData.WallStyles.Length && x < PropData.WallStyles[y].Length ? PropData.WallStyles[y][x] : '.';
             if (style == PropData.Covered) return blockedTile;
-            if (style == PropData.Bush && tiles.Plants.Length > 0) return any(tiles.Plants);
+            if (style == PropData.Bush && tiles.Shrubs.Length > 0) return any(tiles.Shrubs);
             if (tiles.WallStyles.TryGetValue(style, out Tile[] parts) && parts.Length > 0) return any(parts);
             return any(tiles.Walls);
         }
@@ -620,29 +621,34 @@ namespace RPG.EditorTools
         }
 
         /// <summary>
-        /// A tree on the source game's tree cells: one per clump (no two closer than three cells), so a wood looks like a
-        /// wood and not a wall of trunks, and bushes and ferns on a third of the cells between them. They are tiles of the
-        /// obstacle tilemap (drawn and sorted one by one with the characters), not objects of their own: the island has tens
-        /// of thousands of tree cells. Every tree cell blocks.
+        /// The woods (the source game's blocked tree cells) drawn so that every cell that blocks shows it: a tree where the
+        /// source game has one (PropData.Tree; no other tree on the cells around it), more trees between them where no
+        /// tree is within two cells, and a bush on every other cell. They are tiles of the obstacle tilemap (drawn and
+        /// sorted one by one with the characters), not objects of their own: the island has tens of thousands of tree cells.
         /// </summary>
         private static void PlaceTrees(Tilemap obstacles, WorldTiles tiles)
         {
-            const int spacing = 2;
             var random = new System.Random(Seed + 1);
             var drawn = new HashSet<Vector3Int>();
-            foreach (Vector3Int cell in TreeCells.OrderBy(c => c.y).ThenBy(c => c.x))
+            bool Crowded(Vector3Int cell, int spacing)
             {
-                bool crowded = false;
-                for (int dx = -spacing; dx <= spacing && !crowded; dx++)
-                for (int dy = -spacing; dy <= spacing && !crowded; dy++)
-                    crowded = (dx != 0 || dy != 0) && drawn.Contains(new Vector3Int(cell.x + dx, cell.y + dy, 0));
-                if (crowded)
-                {
-                    if (random.NextDouble() < 0.33) obstacles.SetTile(cell, tiles.Plants[random.Next(tiles.Plants.Length)]);
-                    continue;
-                }
-                drawn.Add(cell);
-                obstacles.SetTile(cell, tiles.Trees[random.Next(tiles.Trees.Length)]);
+                for (int dx = -spacing; dx <= spacing; dx++)
+                for (int dy = -spacing; dy <= spacing; dy++)
+                    if ((dx != 0 || dy != 0) && drawn.Contains(new Vector3Int(cell.x + dx, cell.y + dy, 0))) return true;
+                return false;
+            }
+            bool SourceTree(Vector3Int cell) => cell.y < PropData.WallStyles.Length && cell.x < PropData.WallStyles[cell.y].Length
+                                                && PropData.WallStyles[cell.y][cell.x] == PropData.Tree;
+
+            List<Vector3Int> cells = TreeCells.OrderBy(c => c.y).ThenBy(c => c.x).ToList();
+            foreach (Vector3Int cell in cells)
+                if (SourceTree(cell) && !Crowded(cell, 1)) drawn.Add(cell);
+            foreach (Vector3Int cell in cells)
+                if (!drawn.Contains(cell) && !Crowded(cell, 2)) drawn.Add(cell);
+            foreach (Vector3Int cell in cells)
+            {
+                Tile[] kind = drawn.Contains(cell) ? tiles.Trees : tiles.Shrubs;
+                obstacles.SetTile(cell, kind[random.Next(kind.Length)]);
             }
         }
 

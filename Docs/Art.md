@@ -17,8 +17,10 @@ The world, heroes and monsters are drawn with art from the open game **Flare** (
 ## What is used
 
 - **Ground**: Flare's grassland: 16 grass tiles, 12 paved tiles (the squares of St. Aurelis and the start, dungeon
-  floors), 16 water tiles (lakes), rock pillars (the source map's walls and fences, dungeon walls), bushes and ferns
-  between the trees, tall grass and reeds here and there on open ground (no collider), 12 trees.
+  floors), 16 water tiles (lakes), rock pillars (the source map's rock walls, dungeon walls), bushes and broad
+  leaves (Plant0, 1, 4, 5, 8, 9) on every blocked cell of the woods without a tree and on invisible walls, thin reeds
+  and tall grass (Plant6, 7, 10-13) here and there on open ground (no collider), 12 trees. Bushes always block, so open
+  ground never shows one.
 - **Lakes**: the source map has no water; `Tools/GameData/world.py` takes it from the source game's world map picture
   (blue there, not walkable in the `.map` file, groups of 30 cells or more). Where a lake would cut off a spot players
   can reach in the source game, the fewest water cells to it are opened, three wide (its fords).
@@ -107,11 +109,15 @@ negative when mirrored), and the source game's `sprite_hotspot` says which pixel
   rubberduck's CC0 medieval buildings, Bleed's tavern, timbered house, Galata tower and outpost (CC-BY). Those keep the
   same frame; the church, the green house, the medieval houses and the cabins get rubberduck stand-ins of the same size.
   Tents, wells, anvils, signposts, campfires, wood piles, stumps, graves and statues are Flare's.
-- **WallStyles** – how each wall cell (`#`) is drawn: under a building nothing (the building is drawn there), fences
-  and iron fences along their line, low rubble for brick and stone wall pieces, rock pillars only for rock walls, ruin
-  walls and cliffs, and low bushes where the source game has only an invisible block (no more tall pillars hiding NPCs).
+- **WallStyles** – how each blocked cell is drawn, so that every cell that blocks shows something. Wall cells (`#`):
+  nothing only where a building's or prop's opaque pixels lie over the cell's middle (read from the packed atlas, so
+  `buildings.py` runs first), fences and iron fences along their line, low rubble for brick and stone wall pieces,
+  rock pillars only for rock walls, ruin walls and cliffs, and bushes where the source game has only an invisible block
+  (no more tall pillars hiding NPCs). Woods (`T`): `t` where the source game has a tree, `,` elsewhere; the builder
+  (`PlaceTrees`) puts a tree on every source tree with no tree next to it, more trees where none is within two cells,
+  and a bush on every other cell.
 
-`Tools/Art/buildings.py <downloads> <flare-game> <source data>` packs the pictures into `Art/Buildings/Buildings0.png`
+Run `Tools/Art/buildings.py` before `props.py`. `Tools/Art/buildings.py <downloads> <flare-game> <source data>` packs the pictures into `Art/Buildings/Buildings0.png`
 (4096 × 2048, MaxRects): each building trimmed and as wide as the source game draws it (its image size there at 64
 pixels a cell, kept at up to 96 pixels a cell), its pivot the source game's hotspot; Flare's props at Flare's size
 (192 pixels a cell) with Flare's tile offset. Credits: `Art/Buildings/CREDITS.md`. The builder draws the buildings on a
