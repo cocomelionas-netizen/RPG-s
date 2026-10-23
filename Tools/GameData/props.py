@@ -10,7 +10,7 @@ This writes where this project draws its own art for them (Tools/Art/buildings.p
   whether it is mirrored. Buildings whose free original the source game used (rubberduck's CC0 buildings, Bleed's
   tavern, timbered house, Galata tower, outpost and Medieval Building 06) keep the source game's own frame; the others
   get a stand-in of about the same size.
-- WallStyles: how each blocked wall cell ('#' in WorldMapData) is drawn: under a building (nothing: the building is
+- WallStyles: how each blocked wall cell ('#' in WorldMapData) is drawn: under a building or prop (nothing: it is
   drawn there), a wooden or iron fence along x or y, low rubble (brick and stone wall pieces), a tall stone pillar
   (the source game's ruin walls, rock walls and cliffs) or a low bush (blocked cells with nothing on them).
 - Sources: for every building key, the source game's image size and hotspot (sprite_hotspot: the pixel that stands on
@@ -162,11 +162,13 @@ def main(root):
                 placements.append((key, cx, cy, scale < 0, False))
                 continue
             kind = wall_kind(texture)
-            if kind and flag == 0x20 and (cx, cy) not in walls:
+            if kind and flag & 0x20 and not flag & 0x40 and (cx, cy) not in walls:
                 walls[(cx, cy)] = kind
 
     def is_wall(c):
-        return ours.get(c) == 0x20
+        # As WorldMapData's '#' (world.py): blocked, not a tree.
+        flag = ours.get(c, 0)
+        return bool(flag & 0x20) and not flag & 0x40
 
     # The blocked cells a building stands on: reached from its cell through blocked cells, as far as its picture is wide.
     covered = set()
@@ -186,6 +188,11 @@ def main(root):
                 if n not in seen and is_wall(n) and abs(n[0] - cx) <= reach and abs(n[1] - cy) <= reach:
                     seen.add(n)
                     queue.append(n)
+
+    # A small prop is drawn on its own cell and the blocked cells next to it.
+    for key, cx, cy, _, building in placements:
+        if not building:
+            covered.update((cx + dx, cy + dy) for dx in range(-1, 2) for dy in range(-1, 2) if is_wall((cx + dx, cy + dy)))
 
     def style(c):
         kind = walls.get(c)
