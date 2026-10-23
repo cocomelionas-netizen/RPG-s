@@ -60,7 +60,7 @@ Townsfolk: the source's friendly NPCs that are not vendors (guards, priests, cou
 hero layers after their source model like the vendors; clicking one opens the gossip window (the source's gossip menus,
 replies, conditions and scripts: `townsfolk.py` → `TownsfolkData`, `GossipCatalog`, `GossipWindow`, `Conversation`).
 Testing: F9 cheats window (`Cheats`, `CheatWindow`; only the host's own character, i.e. offline): levels, XP, gold, heal,
-god mode, speed, all spells and waypoints, kill around, potions/gems/orbs/gear, empty bag, teleport to any waypoint. No
+god mode, speed, all spells and waypoints, kill around, potions/gems/orbs/gear, dungeon keys, empty bag, teleport to any waypoint. No
 training dummies in the world (the prefab stays for the tests).
 Art: Flare's (CC-BY-SA 3.0, `Assets/_Project/Art/Flare/CREDITS.md`): grassland tiles, lakes, trees, heroes and
 monsters in 8 directions, chests, packed by `Tools/Art/flare.py` (`Docs/Art.md`); item and spell icons (Flare, Painterly

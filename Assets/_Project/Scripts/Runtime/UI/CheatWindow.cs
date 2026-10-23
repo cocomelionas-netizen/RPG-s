@@ -37,7 +37,7 @@ namespace RPG.UI
             window = panel.gameObject;
             window.AddComponent<OpenWindow>();
             UIFactory.AddFrame(panel);
-            UIFactory.Place(panel.rectTransform, new Vector2(1f, 0.5f), new Vector2(-240f, 0f), new Vector2(Width, 600f));
+            UIFactory.Place(panel.rectTransform, new Vector2(1f, 0.5f), new Vector2(-240f, 0f), new Vector2(Width, 650f));
 
             Text title = UIFactory.CreateText("Title", panel.transform, 22, TextAnchor.UpperLeft);
             UIFactory.Place(title.rectTransform, new Vector2(0f, 1f), new Vector2(14f, -10f), new Vector2(Width - 60f, 30f));
@@ -56,8 +56,9 @@ namespace RPG.UI
             Text[] toggles = Row(("God mode", CheatCommand.God), ("Fast", CheatCommand.Speed), ("All spells", CheatCommand.LearnSpells));
             godLabel = toggles[0];
             fastLabel = toggles[1];
-            Row(("Potions, food", CheatCommand.Potions), ("Gems", CheatCommand.Gems), ("Orbs, keys, scrolls", CheatCommand.Orbs));
+            Row(("Potions, food", CheatCommand.Potions), ("Gems", CheatCommand.Gems), ("Orbs, scrolls", CheatCommand.Orbs));
             Row(("Gear of my level", CheatCommand.Gear), ("Empty the bag", CheatCommand.ClearBag), ("All waypoints", CheatCommand.DiscoverWaystones));
+            Row(("Dungeon keys", CheatCommand.Keys));
 
             Text teleport = UIFactory.CreateText("Teleport", content, 16, TextAnchor.LowerLeft);
             UIFactory.Place(teleport.rectTransform, new Vector2(0f, 1f), new Vector2(0f, -y), new Vector2(Width - 28f, 24f));

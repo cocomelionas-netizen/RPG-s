@@ -45,9 +45,11 @@ themselves.
 For testing, `Cheats` (on the player) and `CheatWindow` (F9). Only the host's own character may use them (offline
 single player, or the one hosting); the server checks it. Buttons: Level +1, Level 25, +5000 XP, +10000 gold, Heal + mana
 (and harmful effects removed), Kill around (monsters within 8 units), God mode (no damage, health and mana kept full),
-Fast (Haste +200 %), All spells (every spell of the class learned), Potions and food (10 of each), Gems (3 of each), Orbs,
-keys and scrolls (1 of each), Gear of my level (one piece of the class's gear per slot), Empty the bag, All waypoints,
-and a Teleport button for every waypoint.
+Fast (Haste +200 %), All spells (every spell of the class learned), Potions and food (10 of each), Gems (3 of each), Orbs
+and scrolls (1 of each, with the key chain's parts such as the Dale Gem), Gear of my level (one piece of the class's gear
+per slot), Empty the bag, All waypoints, Dungeon keys (2 of every key a dungeon asks for: Keys to the Barracks, Tower Key,
+Underhalls Key, Keys to St. Aurelis, Corvalis's Key, Netherplane Key, Sanctum Key), and a Teleport button for every
+waypoint.
 
 ## Login and characters
 

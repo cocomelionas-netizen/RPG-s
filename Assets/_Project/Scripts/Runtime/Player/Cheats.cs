@@ -29,6 +29,7 @@ namespace RPG.Player
         Gear,
         Orbs,
         ClearBag,
+        Keys,
     }
 
     /// <summary>
@@ -147,6 +148,8 @@ namespace RPG.Player
                     return GiveGear();
                 case CheatCommand.ClearBag:
                     return ClearBag();
+                case CheatCommand.Keys:
+                    return GiveKeys();
                 default:
                     return false;
             }
@@ -210,6 +213,17 @@ namespace RPG.Player
             }
             Say(given > 0 ? $"Gave {given} kinds of items" : "The bag is full");
             return given > 0;
+        }
+
+        /// <summary>Gives two of every key a dungeon asks for (Keys to the Barracks, Tower Key, Underhalls Key...).</summary>
+        private bool GiveKeys()
+        {
+            RPG.Dungeons.DungeonManager dungeons = RPG.Dungeons.DungeonManager.Instance;
+            if (inventory == null || dungeons == null) return false;
+            var keys = new HashSet<ItemDefinition>();
+            foreach (RPG.Dungeons.DungeonDefinition dungeon in dungeons.Dungeons)
+                if (dungeon != null && dungeon.key != null) keys.Add(dungeon.key);
+            return Give(keys.Contains, 2);
         }
 
         /// <summary>Gives one piece of the class's gear of the player's level (or the nearest below) for every slot.</summary>
