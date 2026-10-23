@@ -136,6 +136,9 @@ From `npc`, `npc_template`, `npc_models`, `gossip`, `gossip_option`, `scripts`, 
 
 ## Balance
 
+What these numbers make of a fight, a level and an hour of play, level by level: [Balance.md](Balance.md)
+(`Tools/Balance/model.py`).
+
 | What | Source | Where |
 |---|---|---|
 | XP per level (1→2: 100, 10→11: 1087, 24→25: 97 380) and per kill (level 1: 20 … 25: 2389) | `player_exp_levels` | `LevelCurve` |
@@ -147,10 +150,10 @@ From `npc`, `npc_template`, `npc_models`, `gossip`, `gossip_option`, `scripts`, 
 | Class attributes and HP/mana at level 1 (warrior 75/30, ranger 60/45, mage 40/70; attributes and gear add more) | `player_class_stats` | `CharacterClassDefinition` |
 | HP and mana grow × level, from level 21 another ×1.5 | `player_class_stats` | `LevelCurve.HealthGrowth` |
 | Monster damage grows like player HP (a monster of your level is as dangerous at 1 as at 25) | – | `MonsterAI.DamageScaleBetween` |
-| Player damage (weapons, abilities, spell damage, damage over time) × 1.5 at level 1 … 12.7 at 25, so fights last as long against the source game's monster health (its server formulas are not in the client) | – | `LevelCurve.DamageGrowth` |
+| Player damage (weapons, abilities, spell damage, damage over time) × 2 at level 1 … 16.5 at 25, so a fight with a monster of your level lasts about 10–15 s of auto-attacks against the source game's monster health (its server formulas are not in the client; see [Balance.md](Balance.md)) | – | `LevelCurve.DamageGrowth` |
 | Spells: the source game's formulas (`effect*_scale_formula`): healing, shields and mana as they are; damage half the formula × the damage growth | `spell_template` | `AbilityDefinition.SpellPowerAt`, `SpellDamageScale` |
 | Prices: vendors ask the source game's buy price (sell price × buy cost ratio: potions and gear ×3, gems ×6, Tomes × their level) and pay its sell price | `item_template` | `ItemDefinition.price`, `sellValue` |
-| Monster gold grows with its level (goblin 3–6 at level 2, an orc 20–30 at 6, the same orc at 25: 83–125) | – | `MonsterAI.ServerOverrideLevel` |
+| Monster gold by its level: 3.2–4.8 × level (3–5 at level 1, 32–48 at 10, 80–120 at 25), whatever it is; elites × 3 | – | `MonsterAI.GoldAt` |
 | Affixes ("of the Novice", "of Magical Vim"...) with their level ranges and stats | `affix_template` | `AffixData`, `AffixCatalog` |
 | Potions: Minor/Lesser/–/Greater/Major Life and Mana Potion (levels 1, 5, 12, 18, 24, over 20 s) and Serum (at once), a shared 60 s cooldown, 5 → 1 at the transmuter | `item_template`, `spell_template`, `crafting_recipes` | `TestSceneBuilder.CreatePotions`, `Inventory` |
 
@@ -184,7 +187,8 @@ the client – we use our own, stepped like its bosses'.
   the way the source game picks it (`material_chance_*`): from 3 levels below to 1 above, most often its own level
   (`LootDrop.LevelWeight`, `LootDrop.PickGear`). E.g. a level 1 monster – Bronze Sword, Aspen Bow, Leather Cap, Linen
   Hood; Mythril only from level 6. A piece may have a random affix (green or better) and the sockets of its quality.
-- A piece drops with a 12 % chance per roll (the source game keeps its drop chances on its server). Elites roll twice + 3
+- A piece drops with a 20 % chance per roll (the source game keeps its drop chances on its server); 60 % of the pieces are
+  picked among what the class of one of the killers can use (`LootDrop.ClassGearShare`), the rest is any gear (to sell). Elites roll twice + 3
   extra rolls, bosses + 6 extra and a guaranteed gold piece (+25 % purple). Chests: see "Chests" below.
 - The gear merchants of St. Aurelis sell the same pieces with random qualities (see "Vendors"). There is no gear
   crafting; Mortimer transmutes potions, gems, orbs and keys ([Crafting.md](Crafting.md)).
@@ -241,7 +245,7 @@ colour), so resists matter.
   "Notable Hoof" at 25), sold for the source price (1 … 49 gold). 60 % per kill (the source game rolls it on its
   server). The old Goblin Ears, Brute Tusks and Orc Fangs no longer drop.
 - What the client does not have (it lives on the source game's server): the ordinary monsters' chances of gear, its
-  quality and of junk, and the affix chance; ours are documented above (gear 12 % per roll, affix 60 %, junk 60 %).
+  quality and of junk, and the affix chance; ours are documented above (gear 20 % per roll, affix 60 %, junk 60 %).
   The world-loot buff scrolls (Scroll of Strength I–V...) do not exist here yet.
 - Sparkles show where a monster left loot. Clicking walks up and opens a small loot window: the items with their
   descriptions; clicking an item takes it, "Take all" takes everything. An empty bag disappears. Stacks show "x10".

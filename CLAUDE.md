@@ -47,7 +47,8 @@ ids/costs), `maps/*.map`. What was taken and how it maps is documented in `Docs/
 `Scripts/Editor/*Data.cs` (`StartAreaData`, `GearData`, `AffixData`, `DungeonData`) and `TestSceneBuilder.Spells.cs`;
 generators are in `Tools/GameData/` (`island.py` → `StartAreaData` (whole island, zones, map labels), `dungeons.py`, `recipes.py`, `world.py` → `WorldMapData`/`VendorData`, `gear.py` →
 `GearSourceData`, `townsfolk.py` → `TownsfolkData` (townsfolk, gossip), `auras.py` → `AuraData` (buff/debuff texts), `monsters.py` → `MonsterData` (monster names, junk), `names.py` (our own names for every source name: all generators use it; St. Aurelis, Halvaren...), `.map` reader
-`map_file.py`).
+`map_file.py`). Balance: `Tools/Balance/model.py` → `Docs/Balance.md` (fight length, health lost, minutes a level, gear
+and gold by level); keep its constants in step with the code and run it after balance changes.
 
 ## What exists (short)
 

@@ -34,8 +34,8 @@ namespace RPG.Tests
         [Test]
         public void PlayerDamage_GrowsWithLevel()
         {
-            Assert.AreEqual(1.54f, LevelCurve.DamageGrowth(1), 0.01f);
-            Assert.AreEqual(12.7f, LevelCurve.DamageGrowth(25), 0.1f);
+            Assert.AreEqual(2f, LevelCurve.DamageGrowth(1), 0.01f);
+            Assert.AreEqual(16.5f, LevelCurve.DamageGrowth(25), 0.1f);
             Assert.AreEqual(2812, UnityEngine.Mathf.RoundToInt(75 * LevelCurve.HealthGrowth(25)), "A warrior's health at 25 in the source game.");
         }
     }

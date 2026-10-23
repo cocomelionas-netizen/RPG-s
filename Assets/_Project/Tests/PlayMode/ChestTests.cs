@@ -227,6 +227,28 @@ namespace RPG.Tests
             }
         }
 
+        [Test]
+        public void GearForAClass_IsGearThatClassCanUse()
+        {
+            var catalog = AssetDatabase.LoadAssetAtPath<ItemCatalog>("Assets/_Project/Data/Items/ItemCatalog.asset");
+            for (int classIndex = 0; classIndex < 3; classIndex++)
+            for (int level = 1; level <= 25; level += 4)
+            for (int i = 0; i < 30; i++)
+            {
+                Assert.IsTrue(LootDrop.PickGear(catalog, null, level, ItemRarity.Common, out LootItem drop, classIndex));
+                Assert.IsTrue(drop.Item.CanBeUsedByClass(classIndex), $"Class {classIndex} got {drop.Item.displayName}.");
+            }
+        }
+
+        [Test]
+        public void MonsterGold_GrowsWithItsLevel()
+        {
+            Assert.AreEqual(new Vector2Int(3, 5), RPG.Monsters.MonsterAI.GoldAt(1));
+            Assert.AreEqual(new Vector2Int(80, 120), RPG.Monsters.MonsterAI.GoldAt(25));
+            for (int level = 2; level <= 30; level++)
+                Assert.Greater(RPG.Monsters.MonsterAI.GoldAt(level).y, RPG.Monsters.MonsterAI.GoldAt(level - 1).y);
+        }
+
         [UnityTest]
         public IEnumerator EliteMonster_IsTougherAndNamedSo()
         {

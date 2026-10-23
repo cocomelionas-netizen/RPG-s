@@ -141,18 +141,23 @@ namespace RPG.Monsters
 
         /// <summary>
         /// Server, before spawning: gives this monster another level (a source-game spawn spot's), with the experience
-        /// a kill of that level is worth and gold in proportion to the level.
+        /// a kill of that level is worth and the gold of that level (<see cref="GoldAt"/>).
         /// </summary>
         public void ServerOverrideLevel(int newLevel)
         {
-            int previous = Mathf.Max(1, level);
             level = Mathf.Clamp(newLevel, 1, MaxLevel);
             experienceReward = LevelCurve.KillExperienceFor(level);
-            if (level != previous && goldReward.y > 0)
-            {
-                float scale = level / (float)previous;
-                GoldReward = new Vector2Int(Mathf.Max(1, Mathf.RoundToInt(goldReward.x * scale)), Mathf.Max(1, Mathf.RoundToInt(goldReward.y * scale)));
-            }
+            if (goldReward.y > 0) GoldReward = GoldAt(level);
+        }
+
+        /// <summary>
+        /// The gold a monster of <paramref name="monsterLevel"/> gives (elites 3 times, dungeon spots their own share):
+        /// 3-5 at level 1, 32-48 at 10, 80-120 at 25 (Docs/Balance.md).
+        /// </summary>
+        public static Vector2Int GoldAt(int monsterLevel)
+        {
+            int clamped = Mathf.Clamp(monsterLevel, 1, MaxLevel);
+            return new Vector2Int(Mathf.RoundToInt(3.2f * clamped), Mathf.RoundToInt(4.8f * clamped));
         }
 
         /// <summary>Monsters go above the players' top level: the source game's dungeon bosses are 28 and 30.</summary>
@@ -463,8 +468,21 @@ namespace RPG.Monsters
             int extraGearRolls = (IsElite ? EliteGearRolls : 0) + (boss ? BossGearRolls : 0);
             var bonus = new List<LootItem>();
             LootDrop.RollEntries(bonusLoot, level, affixes, bonus);
-            LootDrop.Spawn(lootBagPrefab, transform.position, loot, gear, affixes, level, IsElite ? 2 : 1,
+            LootDrop.SpawnFor(KillerClass(), lootBagPrefab, transform.position, loot, gear, affixes, level, IsElite ? 2 : 1,
                 extraGearRolls, bonus, guaranteed.ToArray());
+        }
+
+        /// <summary>The class of one of the players who fought it (picked at random), or -1.</summary>
+        private int KillerClass()
+        {
+            int found = 0, picked = -1;
+            foreach (Health fighter in threat.Keys)
+            {
+                if (fighter == null || !fighter.TryGetComponent(out CharacterProgress progress)) continue;
+                found++;
+                if (Random.Range(0, found) == 0) picked = progress.ClassIndex;
+            }
+            return picked;
         }
 
         /// <summary>

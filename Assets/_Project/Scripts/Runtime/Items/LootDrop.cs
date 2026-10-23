@@ -12,10 +12,13 @@ namespace RPG.Items
     public static class LootDrop
     {
         /// <summary>
-        /// Chance per roll that a piece of gear drops (the source game keeps its own drop chances on its server; this is
-        /// about as much gear as the old crafting materials made).
+        /// Chance per roll that a piece of gear drops (the source game keeps its own drop chances on its server): about one
+        /// piece in five kills (Docs/Balance.md).
         /// </summary>
-        public const float GearChance = 0.12f;
+        public const float GearChance = 0.2f;
+
+        /// <summary>Share of gear drops picked among what the killer's class can use (the rest is any gear, to sell).</summary>
+        public const float ClassGearShare = 0.6f;
 
         /// <summary>
         /// How many sockets a piece of a quality has, like the source game's gear (item_template num_sockets): plain none,
@@ -74,13 +77,22 @@ namespace RPG.Items
         /// A piece of gear of <paramref name="quality"/> around <paramref name="level"/>, with the sockets of its quality: an item no better than that
         /// quality, weighted by <see cref="LevelWeight"/> and its <see cref="ItemDefinition.dropWeight"/>, raised to the quality with an affix when it is plainer.
         /// When nothing fits the level window, the highest-level gear below it is used. False when there is no gear.
+        /// With <paramref name="forClass"/>, only gear that class can use, unless there is none.
         /// </summary>
         public static bool PickGear(ItemCatalog catalog, AffixCatalog affixes, int level, ItemRarity quality,
-            out LootItem drop)
+            out LootItem drop, int forClass = -1)
         {
             drop = default;
             if (catalog == null) return false;
+            if (forClass >= 0 && PickGearOf(catalog, affixes, level, quality, forClass, out drop)) return true;
+            return PickGearOf(catalog, affixes, level, quality, -1, out drop);
+        }
 
+        /// <summary><see cref="PickGear"/> among the gear <paramref name="onlyClass"/> can use (-1: any).</summary>
+        private static bool PickGearOf(ItemCatalog catalog, AffixCatalog affixes, int level, ItemRarity quality, int onlyClass,
+            out LootItem drop)
+        {
+            drop = default;
             Pool.Clear();
             Weights.Clear();
             float total = 0f;
@@ -88,6 +100,7 @@ namespace RPG.Items
             foreach (ItemDefinition item in catalog.items)
             {
                 if (item == null || !item.IsEquippable || item.rarity > quality || item.dropWeight <= 0f) continue;
+                if (onlyClass >= 0 && !item.CanBeUsedByClass(onlyClass)) continue;
                 float weight = LevelWeight(item.itemLevel, level) * item.dropWeight;
                 if (weight > 0f)
                 {
@@ -103,7 +116,7 @@ namespace RPG.Items
                 foreach (ItemDefinition item in catalog.items)
                 {
                     if (item == null || !item.IsEquippable || item.rarity > quality || item.dropWeight <= 0f
-                        || item.itemLevel != bestFallbackLevel) continue;
+                        || item.itemLevel != bestFallbackLevel || (onlyClass >= 0 && !item.CanBeUsedByClass(onlyClass))) continue;
                     Pool.Add(item);
                     Weights.Add(item.dropWeight);
                     total += item.dropWeight;
@@ -166,21 +179,31 @@ namespace RPG.Items
             int level, int rolls = 1, int extraGearRolls = 0, List<LootItem> extra = null,
             params ItemRarity[] guaranteed)
         {
+            return SpawnFor(-1, bagPrefab, position, entries, gear, affixes, level, rolls, extraGearRolls, extra, guaranteed);
+        }
+
+        /// <summary>
+        /// <see cref="Spawn"/> for a killer of class <paramref name="forClass"/> (-1: none): <see cref="ClassGearShare"/>
+        /// of the gear is gear that class can use.
+        /// </summary>
+        public static bool SpawnFor(int forClass, GameObject bagPrefab, Vector2 position, LootEntry[] entries, ItemCatalog gear,
+            AffixCatalog affixes, int level, int rolls, int extraGearRolls, List<LootItem> extra, ItemRarity[] guaranteed)
+        {
             if (bagPrefab == null) return false;
             Drops.Clear();
             for (int roll = 0; roll < rolls; roll++)
             {
                 RollEntries(entries, level, affixes, Drops);
-                RollGear(gear, affixes, level);
+                RollGear(gear, affixes, level, forClass);
             }
             if (extra != null) Drops.AddRange(extra);
 
             for (int roll = 0; roll < extraGearRolls; roll++)
-                RollGear(gear, affixes, level);
+                RollGear(gear, affixes, level, forClass);
 
             if (guaranteed != null)
                 foreach (ItemRarity quality in guaranteed)
-                    if (PickGear(gear, affixes, level, quality, out LootItem drop))
+                    if (PickGear(gear, affixes, level, quality, out LootItem drop, ForClass(forClass)))
                         Drops.Add(drop);
             if (Drops.Count == 0) return false;
 
@@ -218,10 +241,13 @@ namespace RPG.Items
         }
 
         /// <summary>A piece of gear at <see cref="GearChance"/>: around the level, maybe with an affix (its usual chance) and sockets.</summary>
-        private static void RollGear(ItemCatalog gear, AffixCatalog affixes, int level)
+        private static void RollGear(ItemCatalog gear, AffixCatalog affixes, int level, int forClass)
         {
-            if (Random.value < GearChance && PickGear(gear, affixes, level, ItemRarity.Common, out LootItem piece))
+            if (Random.value < GearChance && PickGear(gear, affixes, level, ItemRarity.Common, out LootItem piece, ForClass(forClass)))
                 Drops.Add(piece);
         }
+
+        /// <summary>The class a piece is picked for: <paramref name="forClass"/> at <see cref="ClassGearShare"/>, else none.</summary>
+        private static int ForClass(int forClass) => forClass >= 0 && Random.value < ClassGearShare ? forClass : -1;
     }
 }
