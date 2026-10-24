@@ -30,6 +30,8 @@ Players test the WebGL build at https://cocomelionas-netizen.github.io/RPG-s/ (O
 - **Unity 6.6**: CI builds with Unity 6000.6.4f1 and fails on APIs obsolete there (for example `GetInstanceID`), while
   the reference DLLs of the compile checks still accept them. `check.sh` also runs `Tools/CompileCheck/deprecations.sh`
   (a Stop hook in `.claude/settings.json` runs it too); add newly found obsolete APIs to that script.
+  The compile checks also cannot see package assemblies: a runtime script using a package type needs that assembly in
+  `RPG.Runtime.asmdef` (e.g. `Light2D` is in `Unity.RenderPipelines.Universal.2D.Runtime`).
 - **Map fidelity**: the world must match the source game's layout; check changes against the source data (and its
   world map picture) before building on them: `python3 -I Tools/GameData/verify_map.py <source data> out.png`.
 - **Performance**: when the world or the number of objects grows, keep only what is near players active (monster
