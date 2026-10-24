@@ -794,6 +794,46 @@ namespace RPG.EditorTools
             "Drifter's Forest",
         };
 
+        /// <summary>
+        /// How dark each zone gets at night (zone_template night_pct, 0-1; dungeons are this dark all the time), by
+        /// zone name as shown here; "" for the island outside every zone.
+        /// </summary>
+        public static readonly (string zone, float night)[] ZoneNights =
+        {
+            ("", 0.2f),
+            ("Barrow Grounds", 0.45f),
+            ("Cemetery Of The Forlorn", 0.3f),
+            ("Copse of Basilisks", 0.3f),
+            ("Copse of the Drifter", 0.1f),
+            ("Corvalis's Descent", 0.4f),
+            ("Crumbling Tower", 0.4f),
+            ("Defiled Altar", 0.4f),
+            ("Drifter's Forest", 0.2f),
+            ("Emberreach", 0.2f),
+            ("Forsaken Barracks", 0.4f),
+            ("Gloomhound's Valley", 0.25f),
+            ("Grulk Cave", 0.45f),
+            ("Grulmak's Camp", 0.1f),
+            ("Karthmoor Beach", 0f),
+            ("Karthmoor Castle", 0.1f),
+            ("Karthmoor Crossing", 0.3f),
+            ("Karthmoor Outerward", 0.1f),
+            ("Karthmoor Underhalls", 0.5f),
+            ("Mirethane's Netherplane", 0.4f),
+            ("Mirethane's Sanctuary", 0.4f),
+            ("Ostrimar's Fall", 0.25f),
+            ("Ruins of Ostrimar", 0.3f),
+            ("Sandmere Arena", 0.15f),
+            ("St. Aurelis", 0.1f),
+            ("The Barren Fields", 0.2f),
+            ("The Sunken Garrison", 0.4f),
+            ("Trader's Road", 0.05f),
+            ("Wayfarer's Haven", 0.1f),
+            ("Wendmark's Stand", 0.2f),
+            ("Wildwood of Treachery", 0.15f),
+            ("Wolf's Lair", 0.45f),
+        };
+
         /// <summary>Zone blocks of 13 x 13 cells: ZoneBlocks[y / 13][x / 13], 'A' the first of ZoneNames, '.' none.</summary>
         public const int ZoneBlock = 13;
         public static readonly string[] ZoneBlocks =

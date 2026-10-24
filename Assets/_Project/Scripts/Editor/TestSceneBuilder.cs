@@ -206,7 +206,8 @@ namespace RPG.EditorTools
             navigation.ZoneName = "Halvaren";
             navigation.Picture = ImportWorldMapPicture();
 
-            CreateGlobalLight();
+            // Day and night: the global light, a light around the player and the map's lights (PropData.Lights).
+            CreateDayNight(grid, dungeons);
             CreateEventSystem();
 
             // Players are not placed in the scene: the server spawns one per connection at the spawn point.
@@ -425,11 +426,42 @@ namespace RPG.EditorTools
         private static bool IsCleared(Vector3Int cell, int shrink) =>
             Within(cell, TownCell, TownClearRadius - shrink) || Within(cell, StartCell, StartClearRadius - shrink);
 
-        private static void CreateGlobalLight()
+        private static void CreateDayNight(Grid grid, DungeonDefinition[] dungeons)
         {
-            var light = new GameObject("Global Light 2D").AddComponent<Light2D>();
-            light.lightType = Light2D.LightType.Global;
-            light.intensity = 1f;
+            var global = new GameObject("Global Light 2D").AddComponent<Light2D>();
+            global.lightType = Light2D.LightType.Global;
+            global.intensity = 1f;
+
+            var aroundPlayer = new GameObject("Player Light").AddComponent<Light2D>();
+            aroundPlayer.lightType = Light2D.LightType.Point;
+            aroundPlayer.pointLightOuterRadius = 4.5f;
+            aroundPlayer.pointLightInnerRadius = 0.5f;
+            aroundPlayer.falloffIntensity = 0.6f;
+            aroundPlayer.color = new Color(1f, 0.85f, 0.65f);
+            aroundPlayer.enabled = false;
+
+            // The source game's lights: a campfire's light reaches about 2.5 cells; offsets are source pixels (64 a cell).
+            var lightsRoot = new GameObject("Map Lights").transform;
+            var lights = new List<Light2D>();
+            foreach (var spot in PropData.Lights)
+            {
+                var light = new GameObject("Light").AddComponent<Light2D>();
+                light.transform.SetParent(lightsRoot, false);
+                light.transform.position = grid.GetCellCenterWorld(spot.cell) + (Vector3)(spot.offset / 64f);
+                light.lightType = Light2D.LightType.Point;
+                light.pointLightOuterRadius = Mathf.Max(0.8f, 2.5f * spot.size);
+                light.pointLightInnerRadius = 0.15f * light.pointLightOuterRadius;
+                light.falloffIntensity = 0.7f;
+                Color32 c = spot.color;
+                light.color = new Color32(c.r, c.g, c.b, 255);
+                light.intensity = 1.2f * c.a / 255f;
+                light.enabled = false;
+                lights.Add(light);
+            }
+
+            var cycle = global.gameObject.AddComponent<DayNight>();
+            cycle.Configure(global, aroundPlayer, lights.ToArray(), StartAreaData.ZoneNights,
+                dungeons.Where(d => d != null).Select(d => d.displayName).ToArray());
         }
 
         private static void CreateEventSystem()

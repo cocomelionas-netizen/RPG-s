@@ -220,6 +220,22 @@ def main(root):
         w(f'            {cs(name)},')
     w('        };')
     w('')
+    w('        /// <summary>')
+    w('        /// How dark each zone gets at night (zone_template night_pct, 0-1; dungeons are this dark all the time), by')
+    w('        /// zone name as shown here; "" for the island outside every zone.')
+    w('        /// </summary>')
+    w('        public static readonly (string zone, float night)[] ZoneNights =')
+    w('        {')
+    nights = {}
+    for name, night in db.execute('select name, night_pct from zone_template'):
+        shown = zone_name(name)
+        key = plain(shown) if shown else ('' if name and name.endswith(' Island') else None)
+        if key is not None and key not in nights and night is not None:
+            nights[key] = float(night)
+    for key, night in sorted(nights.items()):
+        w(f'            ({cs(key)}, {night:g}f),')
+    w('        };')
+    w('')
     w(f'        /// <summary>Zone blocks of {BLOCK} x {BLOCK} cells: ZoneBlocks[y / {BLOCK}][x / {BLOCK}], \'A\' the first of ZoneNames, \'.\' none.</summary>')
     w(f'        public const int ZoneBlock = {BLOCK};')
     w('        public static readonly string[] ZoneBlocks =')

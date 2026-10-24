@@ -123,3 +123,14 @@ pixels a cell, kept at up to 96 pixels a cell), its pivot the source game's hots
 (192 pixels a cell) with Flare's tile offset. Credits: `Art/Buildings/CREDITS.md`. The builder draws the buildings on a
 **Buildings** tilemap (Individual, sorted with the characters, mirrored where the source game mirrors them) and the wall
 styles on the obstacles tilemap (blocking; only rock pillars block sight).
+
+## Day and night
+
+`DayNight` (on the Global Light 2D): a day and night of 40 real minutes, from the real clock, so every player sees the
+same hour (24 minutes of day, 3 of dusk, 10 of night, 3 of dawn). At night the global light dims and turns blue, as dark
+as the source game makes the zone the local player stands in (`zone_template.night_pct`, `StartAreaData.ZoneNights`
+from `Tools/GameData/island.py`: roads 0.05, St. Aurelis 0.1, graveyards and caves 0.45); dungeons are that dark all day.
+The source game's light-giving pictures (`sprite_light`: campfires, street lights, torches, grave lanterns, fireflies;
+`PropData.Lights` from `props.py`, with their colour and size) get point lights that come on at dusk, and a soft warm
+light follows the local player. Unlit things stay bright: the HUD, nameplates and the glow of empowered weapons
+(`RPG/SpriteGlow`). F9 → Day / night jumps this screen to the night and back.

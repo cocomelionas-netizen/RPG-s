@@ -56,7 +56,9 @@ World: the source game's whole island, north up like its map (`island.py`: sourc
 ground from `fanadin.map` (walls, woods), its zones (13 × 13 blocks, `ZoneMap`), its monsters (source names, junk loot by model)/chests, free waypoints, all its vendors at their spots with their stock (random-quality gear merchants),
 Scroll of Returning (back to St. Aurelis), food, M world map: our own painted island (`Tools/Art/worldmap.py`) with badges for the town, areas (the source map's labels and level ranges), dungeons, elites/bosses, waystones, merchants, trainers and townsfolk; wheel zoom, drag, tooltips.
 Buildings: the source game's houses, tavern, towers, tents, wells... at their cells with its hotspots (`props.py` →
-`PropData`, `Tools/Art/buildings.py`: rubberduck CC0, Bleed CC-BY, Flare props); walls drawn as fences, rubble, bushes.
+`PropData`, `Tools/Art/buildings.py`: rubberduck CC0, Bleed CC-BY, Flare props); walls drawn as fences, rubble, bushes;
+every blocked cell shows something (woods: trees and bushes). Day and night (`DayNight`, 40 min, zone darkness, the
+source's lights); empowered weapons glow from +3 (`HeroAppearance.GlowOf`).
 Accounts: up to 6 characters each; login screens over the painted island (`DevConnectionPanel`: Log In, Characters
 with `HeroPreview` cards, New Character, delete), offline or on a server (`AccountService.Handle`, `AccountReply`).
 Townsfolk: the source's friendly NPCs that are not vendors (guards, priests, council...) at their spots, dressed in Flare
