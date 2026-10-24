@@ -194,6 +194,9 @@ def main(root):
 
     covered = art_cover(placements)
     trees = {cell for cell, textures in objects.items() if any(TREE_WORDS.search(t) for t in textures)}
+    # The blocked cells around a small prop (a statue, a well) are its own: a low bush there, never a pillar.
+    beside_props = {(cx + dx, cy + dy) for _key, cx, cy, _flip, building in placements if not building
+                    for dx in range(-1, 2) for dy in range(-1, 2)}
 
     def style(c):
         kind = walls.get(c)
@@ -207,7 +210,7 @@ def main(root):
             return (FENCE_X if x_line else FENCE_Y) if kind == 'fence' else (IRON_X if x_line else IRON_Y)
         if kind == 'rubble':
             return RUBBLE
-        if kind == 'pillar':
+        if kind == 'pillar' and c not in beside_props:
             return PILLAR
         return BUSH
 

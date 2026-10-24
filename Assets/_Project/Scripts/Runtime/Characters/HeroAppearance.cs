@@ -34,7 +34,9 @@ namespace RPG.Characters
             new Vector2(1f, 0f), new Vector2(-1f, 0f), new Vector2(0f, 1f), new Vector2(0f, -1f),
             new Vector2(0.7f, 0.7f), new Vector2(-0.7f, 0.7f), new Vector2(0.7f, -0.7f), new Vector2(-0.7f, -0.7f),
         };
-        private const float GlowRadius = 0.018f;
+        // An inner ring of copies close to the weapon and an outer, fainter one: a halo like an enchanted weapon's.
+        private static readonly float[] GlowRings = { 0.022f, 0.05f };
+        private static readonly float[] GlowRingStrength = { 0.7f, 0.35f };
 
         private readonly NetworkVariable<bool> female = new NetworkVariable<bool>(
             false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
@@ -92,12 +94,12 @@ namespace RPG.Characters
             }
             if (glowMaterial != null)
             {
-                glow = new SpriteRenderer[GlowOffsets.Length];
+                glow = new SpriteRenderer[GlowOffsets.Length * GlowRings.Length];
                 for (int i = 0; i < glow.Length; i++)
                 {
                     var copy = new GameObject("WeaponGlow").AddComponent<SpriteRenderer>();
                     copy.transform.SetParent(root.transform, false);
-                    copy.transform.localPosition = GlowOffsets[i] * GlowRadius;
+                    copy.transform.localPosition = GlowOffsets[i % GlowOffsets.Length] * GlowRings[i / GlowOffsets.Length];
                     copy.sharedMaterial = glowMaterial;
                     copy.enabled = false;
                     glow[i] = copy;
@@ -256,9 +258,11 @@ namespace RPG.Characters
             bool on = glowColor.a > 0f && weapon.sprite != null && (body == null || body.color.a > 0.5f);
             // A slow pulse, quicker and deeper the stronger the glow.
             float pulse = 0.75f + 0.25f * Mathf.Sin(Time.time * (2f + glowColor.a * 3f));
-            Color color = new Color(glowColor.r, glowColor.g, glowColor.b, glowColor.a * pulse / 3f);
-            foreach (SpriteRenderer copy in glow)
+            for (int i = 0; i < glow.Length; i++)
             {
+                SpriteRenderer copy = glow[i];
+                Color color = new Color(glowColor.r, glowColor.g, glowColor.b,
+                    glowColor.a * pulse * GlowRingStrength[i / GlowOffsets.Length]);
                 copy.enabled = on;
                 if (!on) continue;
                 copy.sprite = weapon.sprite;
