@@ -43,12 +43,17 @@ namespace RPG.Tests
         [Test]
         public void EmpoweredWeapon_GlowsFromPlusThree()
         {
-            Assert.AreEqual(0f, RPG.Characters.HeroAppearance.GlowOf(2).a, "No glow below +3.");
-            for (int steps = 4; steps <= RPG.Player.Cheats.MaxWeaponGlowSteps; steps++)
-                Assert.Greater(RPG.Characters.HeroAppearance.GlowOf(steps).a, RPG.Characters.HeroAppearance.GlowOf(steps - 1).a,
-                    $"+{steps} glows more than +{steps - 1}.");
-            Assert.AreEqual(RPG.Player.Cheats.MaxWeaponGlowSteps,
-                ItemDefinition.EmpowerPoints(ItemRarity.Legendary) + ItemDefinition.EmpowerBeyondSteps, "The most an orb gives.");
+            Assert.AreEqual(0f, RPG.Characters.HeroAppearance.GlowOf(3).a, "No glow below +4.");
+            for (int steps = 5; steps <= RPG.Player.Cheats.MaxWeaponGlowSteps; steps++)
+                if (steps != 7 && steps != 10)
+                    Assert.Greater(RPG.Characters.HeroAppearance.GlowOf(steps).a, RPG.Characters.HeroAppearance.GlowOf(steps - 1).a,
+                        $"+{steps} glows more than +{steps - 1}.");
+            Color white = RPG.Characters.HeroAppearance.GlowOf(5), blue = RPG.Characters.HeroAppearance.GlowOf(8),
+                orange = RPG.Characters.HeroAppearance.GlowOf(11);
+            Assert.Greater(white.g, 0.9f, "+4 to +6: white.");
+            Assert.Greater(blue.b, blue.r + 0.3f, "+7 to +9: blue.");
+            Assert.Greater(orange.r, orange.b + 0.4f, "+10 to +12: orange.");
+            Assert.AreEqual(12, ItemDefinition.MaxEmpowerSteps, "Up to +12.");
         }
     }
 }

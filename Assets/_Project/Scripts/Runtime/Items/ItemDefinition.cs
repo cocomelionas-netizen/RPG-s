@@ -197,8 +197,8 @@ namespace RPG.Items
         /// <summary>Empowerment points of gear of a quality: how many orbs it can take (white 1 ... orange 5).</summary>
         public static int EmpowerPoints(ItemRarity quality) => Mathf.Max(1, (int)quality);
 
-        /// <summary>Steps an Arcane orb can add beyond the points.</summary>
-        public const int EmpowerBeyondSteps = 3;
+        /// <summary>The most steps an item can have: Arcane orbs add steps beyond the points up to this (+12).</summary>
+        public const int MaxEmpowerSteps = 12;
 
         /// <summary>Chance an orb of this power empowers (Minor 54% ... Divine always).</summary>
         public static float EmpowerChance(int power) => Mathf.Clamp01(0.3f + 0.12f * power);
@@ -340,7 +340,7 @@ namespace RPG.Items
             {
                 string gear = empowerTarget == EmpowerTarget.Weapon ? "a weapon or shield" : empowerTarget == EmpowerTarget.Armor ? "armor" : "a necklace, belt or ring";
                 text.AppendLine(empowerBeyond
-                    ? $"Use: empowers {gear} beyond its limit (+1 item level), up to {EmpowerBeyondSteps} times more"
+                    ? $"Use: empowers {gear} beyond its limit (+1 item level), up to +{MaxEmpowerSteps}"
                     : $"Use: tries to empower {gear} (+1 item level, more {(empowerTarget == EmpowerTarget.Accessory ? "attributes" : "damage or armor")}), {Mathf.RoundToInt(EmpowerChance(empowerPower) * 100f)}% chance; a failure uses up an empowerment point");
                 text.AppendLine("Click, then click the item");
             }

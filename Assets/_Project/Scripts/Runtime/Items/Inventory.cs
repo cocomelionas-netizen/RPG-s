@@ -292,8 +292,8 @@ namespace RPG.Items
         /// empowerment point left (its quality's number: <see cref="ItemDefinition.EmpowerPoints"/>); the orb is used up
         /// either way. Success (<see cref="ItemDefinition.EmpowerChance"/>) adds a step: +1 item level and
         /// <see cref="ItemDefinition.EmpowerShare"/> more damage or armor (accessories: +1 to each main attribute); failure
-        /// only uses up the point. Arcane orbs always work, need no point, and add up to
-        /// <see cref="ItemDefinition.EmpowerBeyondSteps"/> steps beyond.
+        /// only uses up the point. Arcane orbs always work, need no point, and add steps beyond up to
+        /// <see cref="ItemDefinition.MaxEmpowerSteps"/>.
         /// </summary>
         public bool ServerEmpower(int orbBagIndex, bool intoEquipment, int targetIndex)
         {
@@ -316,7 +316,7 @@ namespace RPG.Items
             bool success;
             if (orb.empowerBeyond)
             {
-                if (spent < points || steps >= points + ItemDefinition.EmpowerBeyondSteps)
+                if (spent < points || steps >= ItemDefinition.MaxEmpowerSteps)
                 {
                     MessageRpc(InventoryMessage.NoEmpowerPoints, target.ItemId, 1);
                     return false;

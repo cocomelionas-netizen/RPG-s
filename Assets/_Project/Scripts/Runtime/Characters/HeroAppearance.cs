@@ -12,8 +12,8 @@ namespace RPG.Characters
     /// look of the worn item (<see cref="ItemDefinition.appearance"/>) or the bare body, for the hero's gender, in Flare's
     /// layer order for the direction it faces. The layers play the frame the <see cref="CharacterAnimator"/> plays (it runs
     /// the chest layer's clips); an attack plays the weapon's swing, shot or cast. Gender is the server's, seen by all.
-    /// An empowered weapon glows, like an enchanted weapon in Lineage-style games: from +3, blue, then purple, then red,
-    /// stronger with every step (<see cref="GlowOf"/>). Without a catalog the hero keeps its single sprite.
+    /// An empowered weapon glows along its edges, like an enchanted weapon in Lineage-style games: white from +4, blue from
+    /// +7, orange from +10 to +12, brighter every step and shimmering (<see cref="GlowOf"/>). Without a catalog the hero keeps its single sprite.
     /// </summary>
     [RequireComponent(typeof(CharacterAnimator))]
     public class HeroAppearance : NetworkBehaviour
@@ -34,9 +34,10 @@ namespace RPG.Characters
             new Vector2(1f, 0f), new Vector2(-1f, 0f), new Vector2(0f, 1f), new Vector2(0f, -1f),
             new Vector2(0.7f, 0.7f), new Vector2(-0.7f, 0.7f), new Vector2(0.7f, -0.7f), new Vector2(-0.7f, -0.7f),
         };
-        // An inner ring of copies close to the weapon and an outer, fainter one: a halo like an enchanted weapon's.
-        private static readonly float[] GlowRings = { 0.022f, 0.05f };
-        private static readonly float[] GlowRingStrength = { 0.7f, 0.35f };
+        // A bright, nearly white edge right on the weapon, its colour around it and a faint halo farther out.
+        private static readonly float[] GlowRings = { 0.009f, 0.02f, 0.042f };
+        private static readonly float[] GlowRingStrength = { 0.85f, 0.6f, 0.3f };
+        private static readonly float[] GlowRingWhiteness = { 0.6f, 0.1f, 0f };
 
         private readonly NetworkVariable<bool> female = new NetworkVariable<bool>(
             false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
@@ -189,19 +190,22 @@ namespace RPG.Characters
         }
 
         /// <summary>
-        /// The glow of a weapon empowered <paramref name="steps"/> times (alpha 0: none): none below +3, then blue (+3, +4),
-        /// light blue (+5), purple (+6), red (+7) and crimson gold (+8, the most an orb can give), brighter each step.
+        /// The glow of a weapon empowered <paramref name="steps"/> times (alpha: how strong, 0 none): none below +4, white at
+        /// +4 to +6, blue at +7 to +9 (deeper each step), orange at +10 to +12, brighter each step.
         /// </summary>
         public static Color GlowOf(int steps)
         {
-            switch (Mathf.Clamp(steps, 0, 8))
+            switch (Mathf.Clamp(steps, 0, ItemDefinition.MaxEmpowerSteps))
             {
-                case 3: return new Color(0.3f, 0.5f, 1f, 0.3f);
-                case 4: return new Color(0.3f, 0.55f, 1f, 0.45f);
-                case 5: return new Color(0.35f, 0.8f, 1f, 0.55f);
-                case 6: return new Color(0.75f, 0.35f, 1f, 0.65f);
-                case 7: return new Color(1f, 0.25f, 0.3f, 0.75f);
-                case 8: return new Color(1f, 0.55f, 0.15f, 0.9f);
+                case 4: return new Color(1f, 1f, 1f, 0.35f);
+                case 5: return new Color(1f, 1f, 1f, 0.5f);
+                case 6: return new Color(1f, 1f, 1f, 0.65f);
+                case 7: return new Color(0.65f, 0.8f, 1f, 0.6f);
+                case 8: return new Color(0.4f, 0.55f, 1f, 0.75f);
+                case 9: return new Color(0.25f, 0.4f, 1f, 0.9f);
+                case 10: return new Color(1f, 0.62f, 0.22f, 0.75f);
+                case 11: return new Color(1f, 0.52f, 0.12f, 0.88f);
+                case 12: return new Color(1f, 0.45f, 0.06f, 1f);
                 default: return Color.clear;
             }
         }
@@ -256,13 +260,15 @@ namespace RPG.Characters
             if (glow == null) return;
             SpriteRenderer weapon = layers[(int)AvatarSlot.MainHand];
             bool on = glowColor.a > 0f && weapon.sprite != null && (body == null || body.color.a > 0.5f);
-            // A slow pulse, quicker and deeper the stronger the glow.
-            float pulse = 0.75f + 0.25f * Mathf.Sin(Time.time * (2f + glowColor.a * 3f));
+            // A slow pulse, and a shimmer that runs along the blade (each copy flickers on its own).
+            float pulse = 0.8f + 0.2f * Mathf.Sin(Time.time * (2f + glowColor.a * 3f));
             for (int i = 0; i < glow.Length; i++)
             {
                 SpriteRenderer copy = glow[i];
-                Color color = new Color(glowColor.r, glowColor.g, glowColor.b,
-                    glowColor.a * pulse * GlowRingStrength[i / GlowOffsets.Length]);
+                int ring = i / GlowOffsets.Length;
+                float shimmer = 0.7f + 0.3f * Mathf.PerlinNoise(Time.time * 6f, i * 1.7f);
+                Color tint = Color.Lerp(glowColor, Color.white, GlowRingWhiteness[ring]);
+                Color color = new Color(tint.r, tint.g, tint.b, glowColor.a * pulse * shimmer * GlowRingStrength[ring]);
                 copy.enabled = on;
                 if (!on) continue;
                 copy.sprite = weapon.sprite;
