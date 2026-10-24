@@ -1,4 +1,5 @@
-// Additive sprite, unlit: the glow of empowered weapons (HeroAppearance) and of lights, bright by day and by night.
+// Additive sprite, unlit: the glow of empowered weapons (HeroAppearance), bright by day and by night. Only the sprite's
+// solid pixels glow (alpha above about a half): not the soft shadow Flare's layers draw on the ground.
 Shader "RPG/SpriteGlow"
 {
     Properties
@@ -47,7 +48,7 @@ Shader "RPG/SpriteGlow"
             fixed4 frag(v2f i) : SV_Target
             {
                 fixed4 c = i.color;
-                c.a *= tex2D(_MainTex, i.uv).a;
+                c.a *= smoothstep(0.5, 0.85, tex2D(_MainTex, i.uv).a);
                 return c;
             }
             ENDCG

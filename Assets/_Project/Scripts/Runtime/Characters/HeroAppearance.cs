@@ -34,9 +34,11 @@ namespace RPG.Characters
             new Vector2(1f, 0f), new Vector2(-1f, 0f), new Vector2(0f, 1f), new Vector2(0f, -1f),
             new Vector2(0.7f, 0.7f), new Vector2(-0.7f, 0.7f), new Vector2(0.7f, -0.7f), new Vector2(-0.7f, -0.7f),
         };
-        // A bright, nearly white edge right on the weapon, its colour around it and a faint halo farther out.
+        // Behind the weapon: a bright, nearly white edge right around it, its colour farther out and a faint halo, so the
+        // weapon itself stays seen with a glowing outline; over it only a light sheen of the colour.
         private static readonly float[] GlowRings = { 0.009f, 0.02f, 0.042f };
-        private static readonly float[] GlowRingStrength = { 0.85f, 0.6f, 0.3f };
+        private static readonly float[] GlowRingStrength = { 0.45f, 0.28f, 0.14f };
+        private const float SheenStrength = 0.3f;
         private static readonly float[] GlowRingWhiteness = { 0.6f, 0.1f, 0f };
 
         private readonly NetworkVariable<bool> female = new NetworkVariable<bool>(
@@ -95,12 +97,15 @@ namespace RPG.Characters
             }
             if (glowMaterial != null)
             {
-                glow = new SpriteRenderer[GlowOffsets.Length * GlowRings.Length];
+                // The rings' copies, then the sheen (the last one, on the weapon itself).
+                glow = new SpriteRenderer[GlowOffsets.Length * GlowRings.Length + 1];
                 for (int i = 0; i < glow.Length; i++)
                 {
                     var copy = new GameObject("WeaponGlow").AddComponent<SpriteRenderer>();
                     copy.transform.SetParent(root.transform, false);
-                    copy.transform.localPosition = GlowOffsets[i % GlowOffsets.Length] * GlowRings[i / GlowOffsets.Length];
+                    copy.transform.localPosition = i < glow.Length - 1
+                        ? (Vector3)(GlowOffsets[i % GlowOffsets.Length] * GlowRings[i / GlowOffsets.Length])
+                        : Vector3.zero;
                     copy.sharedMaterial = glowMaterial;
                     copy.enabled = false;
                     glow[i] = copy;
@@ -230,7 +235,7 @@ namespace RPG.Characters
             if (orderedFor != direction)
             {
                 AvatarSlot[] order = catalog.OrderFor(direction);
-                // Every other order, so the weapon's glow goes right over the weapon.
+                // Every other order, so the weapon's glow fits right under the weapon and its sheen right over it.
                 for (int k = 0; k < order.Length; k++)
                     layers[(int)order[k]].sortingOrder = k * 2;
                 orderedFor = direction;
@@ -265,15 +270,17 @@ namespace RPG.Characters
             for (int i = 0; i < glow.Length; i++)
             {
                 SpriteRenderer copy = glow[i];
-                int ring = i / GlowOffsets.Length;
+                bool sheen = i == glow.Length - 1;
+                int ring = sheen ? 0 : i / GlowOffsets.Length;
                 float shimmer = 0.7f + 0.3f * Mathf.PerlinNoise(Time.time * 6f, i * 1.7f);
-                Color tint = Color.Lerp(glowColor, Color.white, GlowRingWhiteness[ring]);
-                Color color = new Color(tint.r, tint.g, tint.b, glowColor.a * pulse * shimmer * GlowRingStrength[ring]);
+                Color tint = sheen ? glowColor : Color.Lerp(glowColor, Color.white, GlowRingWhiteness[ring]);
+                Color color = new Color(tint.r, tint.g, tint.b,
+                    glowColor.a * pulse * shimmer * (sheen ? SheenStrength : GlowRingStrength[ring]));
                 copy.enabled = on;
                 if (!on) continue;
                 copy.sprite = weapon.sprite;
                 copy.flipX = weapon.flipX;
-                copy.sortingOrder = weapon.sortingOrder + 1;
+                copy.sortingOrder = sheen ? weapon.sortingOrder + 1 : weapon.sortingOrder - 1;
                 copy.color = color;
             }
         }

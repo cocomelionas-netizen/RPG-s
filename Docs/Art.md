@@ -148,3 +148,8 @@ loot, gems and empowerment, a failed empowerment, crafting, reading a Tome, erro
 kind has a few variants (`Audio/Sfx/<Kind><n>.ogg`) and a slightly random pitch, and sounds fade with the distance from
 the camera (silent beyond 14 units). The HUD's **Sound** button mutes everything (remembered on the computer).
 
+## Weapon glow preview
+
+`python3 -I Tools/Art/glow_preview.py out.png` draws every weapon look (dagger, short sword, long sword, battle axe,
+mace, short bow, long bow, wand, staff) in the hero's hand at +0, +6, +9 and +12, the way `HeroAppearance` draws the glow
+(rings of additive copies behind the weapon, the weapon, a sheen over it): a quick check after changing the glow.

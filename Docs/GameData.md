@@ -321,7 +321,8 @@ shields and mana as they are, damage half the formula × `LevelCurve.DamageGrowt
   source game keeps the exact chance and gain on its server, so these numbers are this project's.
 - **Weapon glow**: like an enchanted weapon in Lineage-style games, an empowered weapon glows along its edges on the
   hero, seen by every player (`HeroAppearance.GlowOf`, the additive `RPG/SpriteGlow` shader: a near-white edge on the
-  weapon, its colour around it and a faint halo, pulsing and shimmering): none below +4, white at +4 to +6, blue at +7 to
+  weapon, its colour around it and a faint halo, all behind the weapon so it shows with a glowing outline, and a light
+  sheen over it, pulsing and shimmering; Flare's soft ground shadows do not glow): none below +4, white at +4 to +6, blue at +7 to
   +9 (deeper each step), orange at +10 to +12.
 - **Attribute scrolls** I-V of Strength, Agility, Intellect, Willpower and Courage (1085-1109, spells 246-270): +4, 7,
   11, 14 and 21 of the attribute in the source game (twice that here, like the gems) for 5 minutes, levels 4/8/14/18/23,
