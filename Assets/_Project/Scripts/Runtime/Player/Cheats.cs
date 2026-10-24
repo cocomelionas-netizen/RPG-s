@@ -30,6 +30,7 @@ namespace RPG.Player
         Orbs,
         ClearBag,
         Keys,
+        EmpowerWeapon,
     }
 
     /// <summary>
@@ -150,6 +151,8 @@ namespace RPG.Player
                     return ClearBag();
                 case CheatCommand.Keys:
                     return GiveKeys();
+                case CheatCommand.EmpowerWeapon:
+                    return EmpowerWeapon();
                 default:
                     return false;
             }
@@ -225,6 +228,17 @@ namespace RPG.Player
                 if (dungeon != null && dungeon.key != null) keys.Add(dungeon.key);
             return Give(keys.Contains, 2);
         }
+
+        /// <summary>The worn weapon one step more empowered (to see its glow), back to +0 after the most an orb gives (+8).</summary>
+        private bool EmpowerWeapon()
+        {
+            if (inventory == null) return false;
+            int steps = inventory.GetEquipped(ItemSlot.Weapon).EmpowerSteps;
+            return inventory.ServerSetWornEmpower(ItemSlot.Weapon, steps >= MaxWeaponGlowSteps ? 0 : steps + 1);
+        }
+
+        /// <summary>The most steps an orb can give (the best quality's points and the Arcane orbs' steps beyond).</summary>
+        public const int MaxWeaponGlowSteps = 8;
 
         /// <summary>Gives one piece of the class's gear of the player's level (or the nearest below) for every slot.</summary>
         private bool GiveGear()

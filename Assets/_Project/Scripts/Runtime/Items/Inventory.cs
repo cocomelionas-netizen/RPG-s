@@ -342,6 +342,15 @@ namespace RPG.Items
             return true;
         }
 
+        /// <summary>Server (cheats): sets how many times the item worn in <paramref name="slot"/> is empowered. False when none is worn.</summary>
+        public bool ServerSetWornEmpower(ItemSlot slot, int steps)
+        {
+            int index = IndexOf(slot);
+            if (!IsServer || index < 0 || index >= equipment.Count || equipment[index].IsEmpty) return false;
+            equipment[index] = equipment[index].WithEmpower(steps, equipment[index].EmpowerSpent);
+            return true;
+        }
+
         /// <summary>Server: takes items out of the bag (keys, quest items). False, and nothing taken, when there are not enough.</summary>
         public bool ServerRemoveItem(ItemDefinition item, int count)
         {

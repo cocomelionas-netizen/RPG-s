@@ -298,6 +298,24 @@ namespace RPG.EditorTools
             return tile;
         }
 
+        private const string GlowMaterialPath = "Assets/_Project/Art/Shaders/SpriteGlow.mat";
+
+        /// <summary>The additive sprite material (RPG/SpriteGlow) of weapon glows and lights.</summary>
+        private static Material GlowMaterial()
+        {
+            var material = AssetDatabase.LoadAssetAtPath<Material>(GlowMaterialPath);
+            if (material != null) return material;
+            Shader shader = Shader.Find("RPG/SpriteGlow");
+            if (shader == null)
+            {
+                Debug.LogWarning("[TestScene] The RPG/SpriteGlow shader is missing: no weapon glow.");
+                return null;
+            }
+            material = new Material(shader) { name = "SpriteGlow" };
+            AssetDatabase.CreateAsset(material, GlowMaterialPath);
+            return material;
+        }
+
         private static Grid CreateGrid()
         {
             var grid = new GameObject("Grid").AddComponent<Grid>();
@@ -446,7 +464,10 @@ namespace RPG.EditorTools
             player.AddComponent<CharacterAnimator>().AnimationSet = animations;
             player.AddComponent<NetworkObject>();
             // Drawn from the gear it wears (Flare's hero layers, man or woman).
-            player.AddComponent<HeroAppearance>().Catalog = CreateAvatarCatalog();
+            var appearance = player.AddComponent<HeroAppearance>();
+            appearance.Catalog = CreateAvatarCatalog();
+            // Empowered weapons glow (+3 and more).
+            appearance.GlowMaterial = GlowMaterial();
             player.AddComponent<PlayerNetworkMovement>();
 
             AddHealth(player, "Player", true, Faction.Player, 100);

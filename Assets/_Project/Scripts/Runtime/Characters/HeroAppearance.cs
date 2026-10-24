@@ -12,7 +12,8 @@ namespace RPG.Characters
     /// look of the worn item (<see cref="ItemDefinition.appearance"/>) or the bare body, for the hero's gender, in Flare's
     /// layer order for the direction it faces. The layers play the frame the <see cref="CharacterAnimator"/> plays (it runs
     /// the chest layer's clips); an attack plays the weapon's swing, shot or cast. Gender is the server's, seen by all.
-    /// Without a catalog the hero keeps its single sprite.
+    /// An empowered weapon glows, like an enchanted weapon in Lineage-style games: from +3, blue, then purple, then red,
+    /// stronger with every step (<see cref="GlowOf"/>). Without a catalog the hero keeps its single sprite.
     /// </summary>
     [RequireComponent(typeof(CharacterAnimator))]
     public class HeroAppearance : NetworkBehaviour
@@ -24,6 +25,16 @@ namespace RPG.Characters
         private static readonly AvatarSlot[] Slots = (AvatarSlot[])Enum.GetValues(typeof(AvatarSlot));
 
         [SerializeField] private AvatarCatalog catalog;
+        [Tooltip("Additive material for the glow of an empowered weapon (RPG/SpriteGlow); none: no glow.")]
+        [SerializeField] private Material glowMaterial;
+
+        /// <summary>Copies of the weapon around it that make its glow.</summary>
+        private static readonly Vector2[] GlowOffsets =
+        {
+            new Vector2(1f, 0f), new Vector2(-1f, 0f), new Vector2(0f, 1f), new Vector2(0f, -1f),
+            new Vector2(0.7f, 0.7f), new Vector2(-0.7f, 0.7f), new Vector2(0.7f, -0.7f), new Vector2(-0.7f, -0.7f),
+        };
+        private const float GlowRadius = 0.018f;
 
         private readonly NetworkVariable<bool> female = new NetworkVariable<bool>(
             false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
@@ -35,6 +46,14 @@ namespace RPG.Characters
         private readonly CharacterAnimationSet[] looks = new CharacterAnimationSet[Slots.Length];
         private string attackClip = SwingClip;
         private Direction8? orderedFor;
+        private SpriteRenderer[] glow;
+        private Color glowColor;
+
+        public Material GlowMaterial
+        {
+            get => glowMaterial;
+            set => glowMaterial = value;
+        }
 
         public bool IsFemale => female.Value;
 
@@ -70,6 +89,19 @@ namespace RPG.Characters
                 var layer = new GameObject(Slots[i].ToString()).AddComponent<SpriteRenderer>();
                 layer.transform.SetParent(root.transform, false);
                 layers[i] = layer;
+            }
+            if (glowMaterial != null)
+            {
+                glow = new SpriteRenderer[GlowOffsets.Length];
+                for (int i = 0; i < glow.Length; i++)
+                {
+                    var copy = new GameObject("WeaponGlow").AddComponent<SpriteRenderer>();
+                    copy.transform.SetParent(root.transform, false);
+                    copy.transform.localPosition = GlowOffsets[i] * GlowRadius;
+                    copy.sharedMaterial = glowMaterial;
+                    copy.enabled = false;
+                    glow[i] = copy;
+                }
             }
             characterAnimator.ClipAlias = clip => clip == AttackClip ? attackClip : clip;
         }
@@ -118,6 +150,9 @@ namespace RPG.Characters
                 looks[i] = LookOf(catalog, isFemale, slot, item != null ? item.appearance : null);
             }
             attackClip = AttackClipOf(Worn(AvatarSlot.MainHand));
+            glowColor = inventory != null && Worn(AvatarSlot.MainHand) != null
+                ? GlowOf(inventory.GetEquipped(ItemSlot.Weapon).EmpowerSteps)
+                : Color.clear;
             CharacterAnimationSet chest = looks[(int)AvatarSlot.Chest];
             if (chest != null) characterAnimator.AnimationSet = chest;
         }
@@ -151,6 +186,24 @@ namespace RPG.Characters
             return catalog.Find(female, slot, look) ?? catalog.Find(female, slot, AvatarCatalog.BareLook(slot));
         }
 
+        /// <summary>
+        /// The glow of a weapon empowered <paramref name="steps"/> times (alpha 0: none): none below +3, then blue (+3, +4),
+        /// light blue (+5), purple (+6), red (+7) and crimson gold (+8, the most an orb can give), brighter each step.
+        /// </summary>
+        public static Color GlowOf(int steps)
+        {
+            switch (Mathf.Clamp(steps, 0, 8))
+            {
+                case 3: return new Color(0.3f, 0.5f, 1f, 0.3f);
+                case 4: return new Color(0.3f, 0.55f, 1f, 0.45f);
+                case 5: return new Color(0.35f, 0.8f, 1f, 0.55f);
+                case 6: return new Color(0.75f, 0.35f, 1f, 0.65f);
+                case 7: return new Color(1f, 0.25f, 0.3f, 0.75f);
+                case 8: return new Color(1f, 0.55f, 0.15f, 0.9f);
+                default: return Color.clear;
+            }
+        }
+
         /// <summary>The attack a weapon plays: bows shoot, staves and wands cast, the rest (and bare hands) swing.</summary>
         public static string AttackClipOf(ItemDefinition weapon)
         {
@@ -171,8 +224,9 @@ namespace RPG.Characters
             if (orderedFor != direction)
             {
                 AvatarSlot[] order = catalog.OrderFor(direction);
+                // Every other order, so the weapon's glow goes right over the weapon.
                 for (int k = 0; k < order.Length; k++)
-                    layers[(int)order[k]].sortingOrder = k;
+                    layers[(int)order[k]].sortingOrder = k * 2;
                 orderedFor = direction;
             }
 
@@ -191,6 +245,26 @@ namespace RPG.Characters
                 layer.sprite = frames[Mathf.Min(frame, frames.Length - 1)];
                 layer.flipX = flipX;
                 layer.color = color;
+            }
+            UpdateGlow();
+        }
+
+        private void UpdateGlow()
+        {
+            if (glow == null) return;
+            SpriteRenderer weapon = layers[(int)AvatarSlot.MainHand];
+            bool on = glowColor.a > 0f && weapon.sprite != null && (body == null || body.color.a > 0.5f);
+            // A slow pulse, quicker and deeper the stronger the glow.
+            float pulse = 0.75f + 0.25f * Mathf.Sin(Time.time * (2f + glowColor.a * 3f));
+            Color color = new Color(glowColor.r, glowColor.g, glowColor.b, glowColor.a * pulse / 3f);
+            foreach (SpriteRenderer copy in glow)
+            {
+                copy.enabled = on;
+                if (!on) continue;
+                copy.sprite = weapon.sprite;
+                copy.flipX = weapon.flipX;
+                copy.sortingOrder = weapon.sortingOrder + 1;
+                copy.color = color;
             }
         }
 

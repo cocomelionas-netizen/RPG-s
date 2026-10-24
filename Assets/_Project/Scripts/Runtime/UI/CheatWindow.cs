@@ -58,7 +58,7 @@ namespace RPG.UI
             fastLabel = toggles[1];
             Row(("Potions, food", CheatCommand.Potions), ("Gems", CheatCommand.Gems), ("Orbs, scrolls", CheatCommand.Orbs));
             Row(("Gear of my level", CheatCommand.Gear), ("Empty the bag", CheatCommand.ClearBag), ("All waypoints", CheatCommand.DiscoverWaystones));
-            Row(("Dungeon keys", CheatCommand.Keys));
+            Row(("Dungeon keys", CheatCommand.Keys), ("Weapon +1 (glow)", CheatCommand.EmpowerWeapon));
 
             Text teleport = UIFactory.CreateText("Teleport", content, 16, TextAnchor.LowerLeft);
             UIFactory.Place(teleport.rectTransform, new Vector2(0f, 1f), new Vector2(0f, -y), new Vector2(Width - 28f, 24f));

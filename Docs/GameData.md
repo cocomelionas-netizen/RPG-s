@@ -319,6 +319,10 @@ shields and mana as they are, damage half the formula × `LevelCurve.DamageGrowt
   and then adds a step: +1 item level and 10% more of the item's damage or armor (accessories +1 to each main
   attribute). Arcane orbs always work, need no point, on gear whose points are used up, up to 3 steps beyond. The
   source game keeps the exact chance and gain on its server, so these numbers are this project's.
+- **Weapon glow**: like an enchanted weapon in Lineage-style games, an empowered weapon glows on the hero, seen by every
+  player (`HeroAppearance.GlowOf`, the additive `RPG/SpriteGlow` shader over the weapon layer, pulsing): none below +3,
+  blue at +3 and +4, light blue +5, purple +6, red +7, crimson gold +8 (the most: an orange piece's 5 points and 3
+  Arcane steps).
 - **Attribute scrolls** I-V of Strength, Agility, Intellect, Willpower and Courage (1085-1109, spells 246-270): +4, 7,
   11, 14 and 21 of the attribute in the source game (twice that here, like the gems) for 5 minutes, levels 4/8/14/18/23,
   not in combat, one of each attribute at a time (`ItemUse.Buff`). Vendors that stock them sell them; Morvagos drops the V

@@ -39,5 +39,16 @@ namespace RPG.Tests
             Assert.Less(ItemDefinition.EmpowerChance(2), ItemDefinition.EmpowerChance(5));
             Assert.AreEqual(1f, ItemDefinition.EmpowerChance(6));
         }
+
+        [Test]
+        public void EmpoweredWeapon_GlowsFromPlusThree()
+        {
+            Assert.AreEqual(0f, RPG.Characters.HeroAppearance.GlowOf(2).a, "No glow below +3.");
+            for (int steps = 4; steps <= RPG.Player.Cheats.MaxWeaponGlowSteps; steps++)
+                Assert.Greater(RPG.Characters.HeroAppearance.GlowOf(steps).a, RPG.Characters.HeroAppearance.GlowOf(steps - 1).a,
+                    $"+{steps} glows more than +{steps - 1}.");
+            Assert.AreEqual(RPG.Player.Cheats.MaxWeaponGlowSteps,
+                ItemDefinition.EmpowerPoints(ItemRarity.Legendary) + ItemDefinition.EmpowerBeyondSteps, "The most an orb gives.");
+        }
     }
 }
