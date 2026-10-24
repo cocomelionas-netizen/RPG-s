@@ -208,6 +208,8 @@ namespace RPG.EditorTools
 
             // Day and night: the global light, a light around the player and the map's lights (PropData.Lights).
             CreateDayNight(grid, dungeons);
+            // Music, ambience and sounds, after the zones' moods of the source game.
+            CreateGameAudio(dungeons);
             CreateEventSystem();
 
             // Players are not placed in the scene: the server spawns one per connection at the spawn point.
@@ -461,6 +463,51 @@ namespace RPG.EditorTools
 
             var cycle = global.gameObject.AddComponent<DayNight>();
             cycle.Configure(global, aroundPlayer, lights.ToArray(), StartAreaData.ZoneNights,
+                dungeons.Where(d => d != null).Select(d => d.displayName).ToArray());
+        }
+
+        private const string AudioFolder = "Assets/_Project/Audio";
+
+        /// <summary>
+        /// Music, ambience and sounds (Assets/_Project/Audio, CC0: see its CREDITS.md) on a GameAudio by the camera, with the
+        /// source game's zone moods (StartAreaData.ZoneSounds). Sounds are the numbered files of each kind (Swing1, Swing2...).
+        /// </summary>
+        private static void CreateGameAudio(DungeonDefinition[] dungeons)
+        {
+            AudioClip Load(string path, bool music)
+            {
+                var importer = AssetImporter.GetAtPath(path) as AudioImporter;
+                if (importer != null)
+                {
+                    AudioImporterSampleSettings settings = importer.defaultSampleSettings;
+                    settings.loadType = music ? AudioClipLoadType.CompressedInMemory : AudioClipLoadType.DecompressOnLoad;
+                    settings.compressionFormat = AudioCompressionFormat.Vorbis;
+                    settings.quality = music ? 0.4f : 0.6f;
+                    importer.defaultSampleSettings = settings;
+                    importer.forceToMono = !music;
+                    importer.SaveAndReimport();
+                }
+                return AssetDatabase.LoadAssetAtPath<AudioClip>(path);
+            }
+
+            GameAudio.Named[] Folder(string folder, bool music) => Directory.Exists($"{AudioFolder}/{folder}")
+                ? Directory.GetFiles($"{AudioFolder}/{folder}", "*.ogg").OrderBy(f => f)
+                    .Select(f => new GameAudio.Named { name = Path.GetFileNameWithoutExtension(f), clip = Load(f.Replace('\\', '/'), music) })
+                    .Where(n => n.clip != null).ToArray()
+                : Array.Empty<GameAudio.Named>();
+
+            GameAudio.Named[] effects = Folder("Sfx", false);
+            var sounds = new List<GameAudio.Sound>();
+            foreach (Sfx kind in Enum.GetValues(typeof(Sfx)))
+            {
+                AudioClip[] clips = effects.Where(e => System.Text.RegularExpressions.Regex.IsMatch(e.name, $"^{kind}\\d+$"))
+                    .Select(e => e.clip).ToArray();
+                if (clips.Length == 0) Debug.LogWarning($"[TestScene] No sound for {kind}.");
+                sounds.Add(new GameAudio.Sound { kind = kind, clips = clips, volume = kind == Sfx.Footstep ? 0.6f : 1f });
+            }
+
+            var audio = new GameObject("Game Audio").AddComponent<GameAudio>();
+            audio.Configure(Folder("Music", true), Folder("Ambience", true), sounds.ToArray(), StartAreaData.ZoneSounds,
                 dungeons.Where(d => d != null).Select(d => d.displayName).ToArray());
         }
 
@@ -2039,6 +2086,11 @@ namespace RPG.EditorTools
             spellbookWindow.transform.SetParent(canvasObject.transform, false);
             Stretch((RectTransform)spellbookWindow.transform);
             spellbookWindow.AddComponent<SpellbookWindow>();
+
+            var soundButton = new GameObject("Sound Toggle", typeof(RectTransform));
+            soundButton.transform.SetParent(canvasObject.transform, false);
+            Stretch((RectTransform)soundButton.transform);
+            soundButton.AddComponent<SoundToggle>();
         }
 
         private static void CreateHudElement<T>(Transform canvas, string elementName, Vector2 anchor, Vector2 pivot, Vector2 position, Vector2 size) where T : Component

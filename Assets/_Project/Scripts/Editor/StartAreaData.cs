@@ -834,6 +834,45 @@ namespace RPG.EditorTools
             ("Wolf's Lair", 0.45f),
         };
 
+        /// <summary>The source game's music and ambience of each zone (zone_template) as a mood: zone, music, ambience.</summary>
+        public static readonly (string zone, string music, string ambience)[] ZoneSounds =
+        {
+            ("", "Forest", "Forest"),
+            ("Barrow Grounds", "Dark", "Night"),
+            ("Brackenmere Dale", "Forest", "Forest"),
+            ("Cemetery Of The Forlorn", "Dark", "Night"),
+            ("Copse of Basilisks", "Forest", "Night"),
+            ("Copse of the Drifter", "Fields", "Forest"),
+            ("Corvalis's Descent", "Dungeon", "Cave"),
+            ("Crumbling Tower", "Dungeon", "Cave"),
+            ("Defiled Altar", "Dungeon", "Cave"),
+            ("Drifter's Forest", "Forest", "Forest"),
+            ("Emberreach", "Dark", "Night"),
+            ("Fields of Slumber", "Fields", "Forest"),
+            ("Forsaken Barracks", "Dungeon", "Cave"),
+            ("Gloomhound's Valley", "Dark", "Night"),
+            ("Grulk Cave", "Dungeon", "Cave"),
+            ("Grulmak's Camp", "Fields", "Forest"),
+            ("Karthmoor Beach", "Fields", "Wind"),
+            ("Karthmoor Castle", "Dark", "Night"),
+            ("Karthmoor Crossing", "Forest", "Night"),
+            ("Karthmoor Outerward", "Dark", "Night"),
+            ("Karthmoor Underhalls", "Dungeon", "Night"),
+            ("Mirethane's Netherplane", "Dungeon", "Cave"),
+            ("Mirethane's Sanctuary", "Dungeon", "Cave"),
+            ("Ostrimar's Fall", "Dark", "Night"),
+            ("Ruins of Ostrimar", "Dark", "Forest"),
+            ("Sandmere Arena", "Fields", "Wind"),
+            ("St. Aurelis", "Town", "Forest"),
+            ("The Barren Fields", "Dark", "Night"),
+            ("The Sunken Garrison", "Dungeon", "Cave"),
+            ("Trader's Road", "Fields", "Forest"),
+            ("Wayfarer's Haven", "Forest", "Forest"),
+            ("Wendmark's Stand", "Dark", "Forest"),
+            ("Wildwood of Treachery", "Dark", "Forest"),
+            ("Wolf's Lair", "Dungeon", "Cave"),
+        };
+
         /// <summary>Zone blocks of 13 x 13 cells: ZoneBlocks[y / 13][x / 13], 'A' the first of ZoneNames, '.' none.</summary>
         public const int ZoneBlock = 13;
         public static readonly string[] ZoneBlocks =

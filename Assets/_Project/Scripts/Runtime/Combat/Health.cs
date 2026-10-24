@@ -120,6 +120,7 @@ namespace RPG.Combat
         public override void OnNetworkSpawn()
         {
             SpawnedUnits.Add(this);
+            current.OnValueChanged += OnCurrentChanged;
             if (!IsServer) return;
 
             max.Value = maxHealth;
@@ -130,6 +131,13 @@ namespace RPG.Combat
         public override void OnNetworkDespawn()
         {
             SpawnedUnits.Remove(this);
+            current.OnValueChanged -= OnCurrentChanged;
+        }
+
+        private void OnCurrentChanged(int previous, int now)
+        {
+            if (previous > 0 && now <= 0)
+                RPG.World.GameAudio.Play(faction == Faction.Player ? RPG.World.Sfx.PlayerDie : RPG.World.Sfx.MonsterDie, transform.position);
         }
 
         public bool IsHostileTo(Health other)
@@ -245,6 +253,10 @@ namespace RPG.Combat
         {
             LastDamageSchool = school;
             Damaged?.Invoke(amount, critical);
+            // Players take heavy hits; monsters grunt now and then.
+            bool player = faction == Faction.Player;
+            RPG.World.GameAudio.Play(player || critical ? RPG.World.Sfx.HitHeavy : RPG.World.Sfx.Hit, transform.position, player ? 0.8f : 0.6f);
+            if (!player && UnityEngine.Random.value < 0.25f) RPG.World.GameAudio.Play(RPG.World.Sfx.MonsterHurt, transform.position, 0.6f);
         }
 
         [Rpc(SendTo.Everyone)]

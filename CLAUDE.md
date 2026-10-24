@@ -58,7 +58,8 @@ Scroll of Returning (back to St. Aurelis), food, M world map: our own painted is
 Buildings: the source game's houses, tavern, towers, tents, wells... at their cells with its hotspots (`props.py` →
 `PropData`, `Tools/Art/buildings.py`: rubberduck CC0, Bleed CC-BY, Flare props); walls drawn as fences, rubble, bushes;
 every blocked cell shows something (woods: trees and bushes). Day and night (`DayNight`, 40 min, zone darkness, the
-source's lights); empowered weapons glow from +3 (`HeroAppearance.GlowOf`).
+source's lights); empowered weapons glow from +3 (`HeroAppearance.GlowOf`). Music, ambience and sounds (`GameAudio`, CC0,
+`Assets/_Project/Audio/CREDITS.md`) by the source game's zone moods; HUD Sound button mutes.
 Accounts: up to 6 characters each; login screens over the painted island (`DevConnectionPanel`: Log In, Characters
 with `HeroPreview` cards, New Character, delete), offline or on a server (`AccountService.Handle`, `AccountReply`).
 Townsfolk: the source's friendly NPCs that are not vendors (guards, priests, council...) at their spots, dressed in Flare

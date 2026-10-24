@@ -208,6 +208,8 @@ namespace RPG.Combat
         {
             if (IsOwner && movement != null) movement.FaceTowards(direction);
             if (characterAnimator != null) characterAnimator.PlayOneShot(AttackClip);
+            RPG.World.GameAudio.Play(projectileColor.a <= 0f ? RPG.World.Sfx.Swing
+                : damageSchool == DamageSchool.Physical ? RPG.World.Sfx.Shot : RPG.World.Sfx.Cast, transform.position);
             if (projectileColor.a > 0f)
                 CombatEffects.Projectile(transform.position, (Vector2)transform.position + direction, projectileColor);
         }

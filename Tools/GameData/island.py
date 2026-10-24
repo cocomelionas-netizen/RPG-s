@@ -236,6 +236,36 @@ def main(root):
         w(f'            ({cs(key)}, {night:g}f),')
     w('        };')
     w('')
+    # The source game's zone music and ambience (zone_template), as the mood of this project's own tracks (GameAudio).
+    def mood(tracks):
+        first = (tracks or '').split(',')[0].strip().lower()
+        for prefix, kind in (('teobomos_hotel', 'Town'), ('teobomos_town', 'Fields'), ('markutan', 'Fields'),
+                             ('the_shifting_sand', 'Fields'), ('dance_of_desert', 'Fields'), ('arabesque', 'Forest'),
+                             ('blue_forest', 'Forest'), ('ice_of_eyes', 'Forest'), ('zorkpf', 'Forest'), ('zork', 'Dungeon'),
+                             ('templeofagr', 'Dungeon'), ('anger_curse', 'Dark'), ('belusran', 'Dark'),
+                             ('bursthonin', 'Dark'), ('reflection', 'Dark')):
+            if first.startswith(prefix):
+                return kind
+        return 'Fields'
+
+    def ambience(sound):
+        sound = (sound or '').lower()
+        return 'Cave' if 'cave' in sound or 'dungeon' in sound else 'Night' if 'night' in sound else \
+            'Wind' if 'wind' in sound else 'Forest'
+
+    w('        /// <summary>The source game\'s music and ambience of each zone (zone_template) as a mood: zone, music, ambience.</summary>')
+    w('        public static readonly (string zone, string music, string ambience)[] ZoneSounds =')
+    w('        {')
+    sounds = {}
+    for name, music, sound in db.execute('select name, music, ambience from zone_template'):
+        shown = zone_name(name)
+        key = plain(shown) if shown else ('' if name and name.endswith(' Island') else None)
+        if key is not None and key not in sounds and music and music.strip():
+            sounds[key] = (mood(music), ambience(sound))
+    for key, (music, sound) in sorted(sounds.items()):
+        w(f'            ({cs(key)}, "{music}", "{sound}"),')
+    w('        };')
+    w('')
     w(f'        /// <summary>Zone blocks of {BLOCK} x {BLOCK} cells: ZoneBlocks[y / {BLOCK}][x / {BLOCK}], \'A\' the first of ZoneNames, \'.\' none.</summary>')
     w(f'        public const int ZoneBlock = {BLOCK};')
     w('        public static readonly string[] ZoneBlocks =')

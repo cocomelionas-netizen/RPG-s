@@ -793,12 +793,36 @@ namespace RPG.Items
             }
         }
 
+        /// <summary>The sound of an inventory message on the owner's screen, or none.</summary>
+        private static RPG.World.Sfx? SoundOf(InventoryMessage message)
+        {
+            switch (message)
+            {
+                case InventoryMessage.Received: return RPG.World.Sfx.Pickup;
+                case InventoryMessage.Gold: return RPG.World.Sfx.Coins;
+                case InventoryMessage.GemSocketed:
+                case InventoryMessage.Empowered: return RPG.World.Sfx.Gem;
+                case InventoryMessage.EmpowerFailed: return RPG.World.Sfx.Fail;
+                case InventoryMessage.Crafted: return RPG.World.Sfx.Craft;
+                case InventoryMessage.LearnedSpell: return RPG.World.Sfx.Book;
+                case InventoryMessage.BagFull:
+                case InventoryMessage.NotReady:
+                case InventoryMessage.WrongClass:
+                case InventoryMessage.NotEnoughGold:
+                case InventoryMessage.LevelTooLow:
+                case InventoryMessage.SoldOut: return RPG.World.Sfx.Error;
+                default: return null;
+            }
+        }
+
         [Rpc(SendTo.Owner)]
         private void MessageRpc(InventoryMessage message, int itemId, int affixId)
         {
             ItemDefinition item = catalog != null ? catalog.Get(itemId) : null;
             AffixDefinition affix = affixes != null ? affixes.Get(affixId) : null;
             Vector3 above = transform.position + Vector3.up * 1.1f;
+            RPG.World.Sfx? sound = SoundOf(message);
+            if (sound.HasValue) RPG.World.GameAudio.Play(sound.Value);
             switch (message)
             {
                 case InventoryMessage.Received:

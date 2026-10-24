@@ -802,6 +802,8 @@ namespace RPG.Progression
                 movement.FaceTowards(offsetToTarget);
             if (!ability.IsFriendly && characterAnimator != null)
                 characterAnimator.PlayOneShot(AutoAttack.AttackClip);
+            RPG.World.GameAudio.Play(ability.school == DamageSchool.Fire ? RPG.World.Sfx.FireCast
+                : ability.weaponPercent > 0f ? RPG.World.Sfx.Swing : RPG.World.Sfx.Cast, transform.position);
 
             switch (ability.kind)
             {

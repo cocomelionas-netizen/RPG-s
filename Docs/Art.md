@@ -134,3 +134,17 @@ The source game's light-giving pictures (`sprite_light`: campfires, street light
 `PropData.Lights` from `props.py`, with their colour and size) get point lights that come on at dusk, and a soft warm
 light follows the local player. Unlit things stay bright: the HUD, nameplates and the glow of empowered weapons
 (`RPG/SpriteGlow`). F9 → Day / night jumps this screen to the night and back.
+
+## Music and sounds
+
+All CC0 (credits: `Assets/_Project/Audio/CREDITS.md`), played by `GameAudio` (made by `CreateGameAudio`), and nothing of
+the source game's own audio. The music and ambience follow the source game's choice for each zone (`zone_template` music
+and ambience, as moods in `StartAreaData.ZoneSounds` from `Tools/GameData/island.py`): its town tune → **Town** (St.
+Aurelis), its village and road tunes → **Fields**, its forest tunes → **Forest**, its grim tunes (graveyards, ruins,
+castles) → **Dark**, its dungeon tunes and every dungeon → **Dungeon**; ambience: birds in fields and woods (quieter at
+night), a cave's drips underground. Tracks crossfade over 2.5 s. Sounds: swings, bow shots and casts (fire spells their
+own), hits (heavier on players and criticals), monster grunts and deaths, a player's death, level up, coins, picking up
+loot, gems and empowerment, a failed empowerment, crafting, reading a Tome, errors, button clicks and footsteps; each
+kind has a few variants (`Audio/Sfx/<Kind><n>.ogg`) and a slightly random pitch, and sounds fade with the distance from
+the camera (silent beyond 14 units). The HUD's **Sound** button mutes everything (remembered on the computer).
+

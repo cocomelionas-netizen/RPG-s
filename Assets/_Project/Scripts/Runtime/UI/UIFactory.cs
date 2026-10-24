@@ -177,6 +177,7 @@ namespace RPG.UI
             Image background = CreateImage(name, parent, color);
             Button button = background.gameObject.AddComponent<Button>();
             button.targetGraphic = background;
+            button.onClick.AddListener(() => RPG.World.GameAudio.Play(RPG.World.Sfx.Click, null, 0.5f));
             // X, +, -, < and > are the square steel buttons; other coloured buttons with a label the long steel one
             // (golden under the pointer); slots and list rows (no label) and clear tabs stay plain.
             string square = label == "X" ? "Close" : label == "+" ? "Plus" : label == "-" ? "Minus" : label == "<" ? "Left"

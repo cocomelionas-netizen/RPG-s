@@ -241,6 +241,7 @@ namespace RPG.Monsters
         private void CastRpc(string spellName, Color color, float seconds)
         {
             CombatTextLayer.ShowText(transform.position + Vector3.up * 1.1f, spellName, color, 0.75f);
+            RPG.World.GameAudio.Play(RPG.World.Sfx.Cast, transform.position);
         }
 
         [Rpc(SendTo.Everyone)]
